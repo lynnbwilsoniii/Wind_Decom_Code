@@ -1,0 +1,2395 @@
+
+$SET DEF [KELLOGG.WIND]
+$WIND_LOGIN
+$FORT/LIST/CHECK/WARN tdspro
+$!FORT/LIST/CHECK/WARN [.develop]tds_phys
+$!LINK tdspro,fixbadtds6,gaussj,bzglitch,wind_minn,tds_phys,wind_lib/lib,MONGO
+$!LINK tdspro,fixbadtds6,gaussj,bzglitch,wind_minn,tds_phys_HPF,wind_lib/lib,MONGO
+$!LINK tdspro,fixbadtds6,gaussj,bzglitch,wind_minn,[.test]tds_phys,wind_lib/lib,MONGO
+$LINK tdspro,fixbadtds6,gaussj,bzglitch,wind_minn,difffk,tds_phys,-
+ wind_lib/lib,MONGO
+$!LINK tdspro,gaussj,wind_minn,tds_physt,[-.UTIL]HUNTMN,wind_lib/lib,MONGO
+$!LINK tdspro,gaussj,wind_minn,[.DEVELOP]tds_phys,FIXBADTDS3,wind_lib/lib,MONGO
+$PURGE tdspro.*
+$!LASER_370A
+$LASER_476a
+$!LASER_378
+$RUN tdspro             ! test tdsvis vs tdspro
+wi_lz_wav_19960815_v*.dat
+ 148
+ 2,39532
+ 4
+$EXIT
+$RUN tdspro             ! test tdsvis vs tdspro
+wi_lz_wav_19941224_v*.dat
+ 1000
+ 2,9969600
+ 4
+$EXIT
+$RUN tdspro             ! test tdsvis vs tdspro
+wi_lz_wav_19941224_v*.dat
+ 1000
+ 2,9969505
+ 4
+$EXIT
+$RUN tdspro             ! test WHISTLER
+wi_lz_wav_19980925_v*.dat
+ 0
+ 2,2015635
+ 4
+$EXIT
+$RUN tdspro		! test WHISTLER
+wi_lz_wav_19941224_v*.dat
+ 1828
+ 2,9997646
+ 4
+$EXIT
+$RUN tdspro		! BIG WHISTLER
+wi_lz_wav_20000410_v*.dat
+ 0246
+ 2,27517509
+ 4
+$EXIT
+$RUN tdspro
+wi_lz_wav_19960819_v*.dat
+ 1700
+ 2,309583
+ 4
+$EXIT
+$RUN tdspro       
+wi_lz_wav_20020402_v*.dat
+ 0754
+ 2,4867472
+ 4
+$EXIT
+$RUN tdspro       
+wi_lz_wav_20020413_v*.dat
+ 0727
+ 2,5030854
+ 4
+$EXIT
+$RUN tdspro       
+wi_lz_wav_19960511_v*.dat
+ 120
+ 2,13904908
+ 4
+$EXIT
+!STEEPENING
+$RUN tdspro       
+wi_lz_wav_19990118_v*.dat
+ 120
+ 2,14067234
+ 1
+$EXIT
+$RUN tdspro       
+wi_lz_wav_20010817_v*.dat
+ 1200
+ 2,623978
+ 1
+$EXIT
+$RUN tdspro       
+wi_lz_wav_20010212_v*.dat
+ 1600
+ 2,252266
+ 4
+$EXIT
+$RUN tdspro       
+wi_lz_wav_19990619_v*.dat
+ 0300
+ 2,32839754
+ 4
+$EXIT
+$RUN tdspro       
+wi_lz_wav_19990702_v*.dat
+ 0530
+ 2,16768
+ 4
+$EXIT
+$RUN tdspro       
+wi_lz_wav_19990702_v*.dat
+ 0930
+ 2,17179
+ 4
+$EXIT
+$RUN tdspro       
+wi_lz_wav_19990702_v*.dat
+ 0530
+ 2,16768
+ 4
+$exit
+$! WEAK DOUBLE LAYER
+$RUN tdspro       
+wi_lz_wav_19960501_v*.dat
+ 1000
+ 2,13388008
+ 4
+$! WEAK DOUBLE LAYER
+$RUN tdspro       
+wi_lz_wav_19960502_v*.dat
+ 2120
+ 2,13433003
+ 4
+$exit
+$!MY STANDARD SPIKE
+$RUN tdspro       
+wi_lz_wav_19960430_v*.dat
+ 1500
+ 2,13356589
+ 4
+$exit
+$! mangeney paper
+$RUN tdspro       
+wi_lz_wav_19950619_v*.dat
+ 0915
+ 2,12046988
+ 4
+$exit
+$DEL TDSPRO.OBJ;*
+$! for monochromatic paper, fig 6
+$RUN tdspro       
+wi_lz_wav_20010224_v*.dat
+ 1310
+ 2,1283701
+ 4
+$exit
+$! for monochromatic paper, fig 5            		 
+$RUN tdspro       
+wi_lz_wav_20010224_v*.dat
+ 0420
+ 2,1280614
+ 4
+$exit
+$! for monochromatic paper, fig 1
+$RUN tdspro                   		 
+wi_lz_wav_20010222_v*.dat
+ 1530
+ 2,1044572
+ 4
+$exit
+$RUN tdspro       
+wi_lz_wav_19960508_v*.dat
+ 0915
+ 2,13639475
+ 4
+$exit
+$RUN tdspro                   		 
+wi_lz_wav_19960429_v*.dat
+ 1000
+ 2,13313074
+ 4
+$RUN tdspro                   		 
+wi_lz_wav_19960429_v*.dat
+ 0230
+ 2,13306907
+ 4
+$EXIT
+$RUN tdspro                   		 
+wi_lz_wav_19960501_v*.dat
+ 2000
+ 2,13396925
+ 4
+$EXIT
+$RUN tdspro                   		 
+wi_lz_wav_19971020_v*.dat
+ 00
+ 2,1603778
+ 4
+$RUN tdspro                   		 
+wi_lz_wav_19971020_v*.dat
+ 00
+ 2,1603720
+ 4
+$EXIT
+$RUN tdspro                   		 
+wi_lz_wav_19990517_v*.dat
+ 0
+ 2,2967182
+ 4
+$EXIT
+$RUN tdspro                   		 
+wi_lz_wav_19960421_v*.dat
+ 0230
+ 2,13058803
+ 4
+$EXIT
+$RUN tdspro                   		 ! tail
+wi_lz_wav_19960418_v*.dat
+ 000
+ 2,12489216
+ 4
+$EXIT
+$RUN tdspro                   		 ! tail
+wi_lz_wav_20010222_v*.dat
+ 0100
+ 2,1040897
+ 4
+$EXIT
+$RUN tdspro                   		 ! tail
+wi_lz_wav_20010222_v*.dat
+ 1056
+ 2,1041292
+ 4
+$RUN tdspro                   		 ! tail
+wi_lz_wav_20010222_v*.dat
+ 1056
+ 2,1041293
+ 4
+$RUN tdspro                   		 ! tail
+wi_lz_wav_20010222_v*.dat
+ 1516
+ 2,1041543
+ 4
+$del tdspro.exe;*
+$exit
+$RUN tdspro                   		 ! FOR PSSLW
+wi_lz_wav_20010912_v*.dat
+ 1100
+ 2,1424409
+ 4
+$delete tdspro.exe;*
+$exit
+$RUN tdspro                   		 ! PSSLW EVOLUTION
+wi_lz_wav_19941128_v*.dat
+ 2300
+ 2,5737225
+ 4
+$RUN tdspro                   		 ! PSSLW EVOLUTION
+wi_lz_wav_19960530_v*.dat
+ 1210
+ 2,14748827
+ 4
+$RUN tdspro                   		 ! PSSLW EVOLUTION
+wi_lz_wav_19970910_v*.dat
+ 0
+ 2,1285848
+ 4
+$DELETE tdspro.EXE;*
+$exit
+$RUN tdspro                   		 ! FOR PSSLW
+wi_lz_wav_19960421_v*.dat
+ 0300
+ 2,13054335
+ 4
+$RUN tdspro                   		 ! FOR PSSLW
+wi_lz_wav_19960421_v*.dat
+ 0400
+ 2,13065617
+ 4
+$RUN tdspro                   		 ! FOR PSSLW
+wi_lz_wav_19960421_v*.dat
+ 0600
+ 2,13073037
+ 4
+$RUN tdspro                   		 ! FOR PSSLW
+wi_lz_wav_19960421_v*.dat
+ 1550
+ 2,13083580
+ 4
+$RUN tdspro                   		 ! FOR PSSLW
+wi_lz_wav_19960422_v*.dat
+ 0420
+ 2,13089001
+ 4
+$RUN tdspro                   		 ! FOR PSSLW
+wi_lz_wav_19960421_v*.dat
+ 0600
+ 2,13073037
+ 4
+$RUN tdspro                   		 ! FOR PSSLW
+wi_lz_wav_19960506_v*.dat
+ 1140
+ 2,13578716
+ 4
+$del tdspro.exe;*
+$exit
+$RUN tdspro                   		 ! largest soliton
+wi_lz_wav_19961119_v*.dat
+ 1900
+ 2,2605587
+ 4
+$DEL TDSPRO.EXE;*
+$EXIT
+$RUN tdspro                   		 ! FOR PSSLW
+wi_lz_wav_19960330_v*.dat
+ 0940
+ 2,11546301
+ 4
+$RUN tdspro                   		 ! FOR PSSLW
+wi_lz_wav_19960330_v*.dat
+ 0940
+ 2,11545858
+ 4
+$RUN tdspro                   		 ! FOR PSSLW
+wi_lz_wav_19960331_v*.dat
+ 2300
+ 2,11637178
+ 4
+$del tdspro.exe;*
+$exit
+$RUN tdspro                   		 ! FOR PSSLW
+wi_lz_wav_19960530_v*.dat
+ 1200
+ 2,14748827
+ 4
+$RUN tdspro                   		 ! FOR PSSLW
+wi_lz_wav_19941210_v*.dat
+ 0840
+ 2,7652001
+ 4
+$RUN tdspro                   		 ! FOR PSSLW
+wi_lz_wav_19941128_v*.dat
+ 2330
+ 2,5737225
+ 4
+$RUN tdspro                   		 ! FOR PSSLW
+wi_lz_wav_19960420_v*.dat
+ 1820
+ 2,13019861
+ 4
+$RUN tdspro                   		 ! FOR PSSLW
+wi_lz_wav_19960420_v*.dat
+ 0420
+ 2,12919922
+ 4
+$DEL TDSPRO.EXE;*
+$EXIT
+$DEL TDSPRO.EXE;*
+$EXIT
+$RUN tdspro                   		 ! FOR PSSLW
+wi_lz_wav_19970701_v*.dat
+ 00
+ 2,3348608
+ 4
+$DEL TDSPRO.EXE;*
+$EXIT
+$RUN tdspro                   		 ! TIII
+wi_lz_wav_19980814_v*.dat
+ 0700
+ 2,2666837
+ 4
+$DEL TDSPRO.EXE;*
+$EXIT
+$RUN tdspro                   		 ! AKR
+wi_lz_wav_20011002_v*.dat
+ 1900
+ 2,2035000
+ 4
+$DEL TDSPRO.EXE;*
+$EXIT
+$RUN tdspro                   		 ! flat, no modulation
+wi_lz_wav_19970723_v*.dat
+ 0
+ 2,4555832
+ 4
+$DEL TDSPRO.EXE;*
+$EXIT
+$RUN tdspro                   		 ! 
+wi_lz_wav_20000409_v*.dat
+ 0600
+ 2,27437535
+ 4
+$DEL TDSPRO.EXE;*
+$EXIT
+$RUN tdspro                   		 ! 
+wi_lz_wav_19981127_v*.dat
+ 0700
+ 2,7118755
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_19981127_v*.dat
+ 0700
+ 2,7118757
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_19981127_v*.dat
+ 0700
+ 2,7118805
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_19981127_v*.dat
+ 0700
+ 2,7118813
+ 4
+$DEL TDSPRO.EXE;*
+$EXIT
+$RUN tdspro                   		 ! 
+wi_lz_wav_19990401_v*.dat
+0100
+ 2,23897529
+ 4
+$DEL TDSPRO.EXE;*
+$EXIT
+$RUN tdspro                   		 ! 
+wi_lz_wav_19990401_v*.dat
+0930
+ 2,23931568
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_19990401_v*.dat
+1000
+ 2,23931029
+ 4
+$DEL TDSPRO.EXE;*
+$EXIT
+$RUN tdspro                   		 ! 
+wi_lz_wav_19990402_v*.dat
+ 00
+ 2,24084091
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_19990402_v*.dat
+ 00
+ 2,2409312
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_19990402_v*.dat
+ 0900
+ 2,24034374
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_19990402_v*.dat
+ 00
+ 2,23953406
+ 4
+$DEL TDSPRO.EXE;*
+$EXIT
+$RUN tdspro                   		 ! 
+wi_lz_wav_19990402_v*.dat
+ 00
+ 2,24048744
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_19970115_v*.dat
+ 0
+ 2,5805777
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_19970115_v*.dat
+ 0
+ 2,5805789
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_19970115_v*.dat
+ 0
+ 2,5805973
+ 4
+$EXIT
+$RUN tdspro                   		 ! 
+wi_lz_wav_20020525_v*.dat
+ 2120
+ 2,5687132
+ 2
+$RUN tdspro                   		 ! 
+wi_lz_wav_20020510_v*.dat
+ 0
+ 2,5388000
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_20020510_v*.dat
+ 0
+ 2,5388132
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_20020510_v*.dat
+ 0
+ 2,5388097
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_20020510_v*.dat
+ 0
+ 2,5388096
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_20020510_v*.dat
+ 0
+ 2,5388622
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_20020510_v*.dat
+ 0
+ 2,5388131
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_20020510_v*.dat
+ 0
+ 2,5388762
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_20020510_v*.dat
+ 0
+ 2,5401359
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_20020510_v*.dat
+ 0
+ 2,5436003
+ 4
+$EXIT
+$RUN tdspro                   		 ! 
+wi_lz_wav_20020525_v*.dat
+ 2120
+ 2,5687132
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_19980714_v*.dat
+ 0445
+ 2,20596531
+ 4
+$EXIT
+$RUN tdspro                   		 ! 
+wi_lz_wav_20020525_v*.dat
+ 2120
+ 2,5687123
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_20020525_v*.dat
+ 2120
+ 2,5687098
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_19980108_v*.dat
+ 0059
+ 2,6042557
+ 4
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19980108_v*.dat
+ 0030
+ 2,6041540
+ 4
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960420_v*.dat
+ 00
+ 2,12874599
+ 4
+$EXIT
+$RUN tdspro                   		 ! 
+wi_lz_wav_19980108_v*.dat
+ 0010
+ 2,6040614
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_19980108_v*.dat
+ 0059
+ 2,6042557
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_19980108_v*.dat
+ 1800
+ 2,6126216
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_19980108_v*.dat
+ 0500
+ 2,6052420
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_19980108_v*.dat
+ 0020
+ 2,6041101
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_19980108_v*.dat
+ 0030
+ 2,6041540
+ 4
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960419_v*.dat
+ 2200
+ 2,12829153
+ 4
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960419_v*.dat
+ 2200
+ 2,12872292
+ 4
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_20000104_v*.dat
+ 1100
+ 2,18897836
+ 4
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_20000104_v*.dat
+ 2100
+ 2,18909195
+ 4
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960420_v*.dat
+ 00
+ 2,12874599
+ 4
+$copy [kellogg]mongo*.ps oneharmonic.ps
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960419_v*.dat
+ 0030
+ 2,12645302
+ 4
+$copy [kellogg]mongo*.ps distorted.ps
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960419_v*.dat
+ 0100
+ 2,12653334
+ 4
+$copy [kellogg]mongo*.ps harmonics.ps
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19980826_v*.dat
+ 0600
+ 2,10421
+ 4
+$exit
+$RUN tdspro                   		 ! presentation to Dean
+wi_lz_wav_19960419_v*.dat
+ 1200
+ 2,12787065
+ 4
+$exit
+$RUN tdspro                   		 ! largest type III ?
+wi_lz_wav_19990613_v*.dat
+ 0600
+ 2,32453262
+ 4
+$exit
+$RUN tdspro                   		 ! Keith wanted this,later
+wi_lz_wav_19990401_v*.dat
+ 0
+ 2,23932165
+ 4
+$exit
+$RUN tdspro                   		 ! Keith wanted this
+wi_lz_wav_19960420_v*.dat
+ 0
+ 2,12919922
+ 4
+$RUN tdspro                   		 ! Keith wanted this
+wi_lz_wav_19960419_v*.dat
+ 0
+ 2,12838551
+ 4
+$RUN tdspro                   		 ! Keith wanted this
+wi_lz_wav_19960409_v*.dat
+ 0
+ 2,12004514
+ 4
+$RUN tdspro                   		 ! Keith wanted this
+wi_lz_wav_19960420_v*.dat
+ 0
+ 2,12972264
+ 4
+$RUN tdspro                   		 ! Keith wanted this
+wi_lz_wav_19960420_v*.dat
+ 0
+ 2,12967723
+ 4
+$EXIT
+$RUN tdspro                   		 ! Keith wanted this
+wi_lz_wav_19941130_v*.dat
+ 2113
+ 1,64
+ 4
+$EXIT
+$RUN tdspro                   		 ! 
+wi_lz_wav_19980112_v*.dat
+ 0
+ 2,6236318
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_19980112_v*.dat
+ 0
+ 2,6444103
+ 4
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19951128_v*.dat
+ 1632
+ 2,6076352
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_19951128_v*.dat
+ 1636
+ 2,6076841
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_19951128_v*.dat
+ 1642
+ 2,6077051
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_19951128_v*.dat
+ 1642
+ 2,6077072
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_19951128_v*.dat
+ 1652
+ 2,6077274
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_19951128_v*.dat
+ 1652
+ 2,6077421
+ 4
+$EXIT
+$RUN tdspro                   		 ! 
+wi_lz_wav_20000402_v*.dat
+ 0
+ 2,26785080
+ 2
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_20000502_v*.dat
+ 0950
+ 2,278474
+ 2
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_20000502_v*.dat
+ 1440
+ 2,291492
+ 2
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19991207_v*.dat
+ 0
+ 2,14856173
+ 4
+$exit
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_20000309_v*.dat
+ 0900
+ 2,25009073
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_20000309_v*.dat
+ 1500
+ 2,25028197
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_20000309_v*.dat
+ 2120
+ 2,25050395
+ 4
+$EXIT
+$RUN tdspro                   		 ! 
+wi_lz_wav_20000202_v*.dat
+ 0
+ 2,22462721
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_20000202_v*.dat
+ 0
+ 2,22471112
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_20000202_v*.dat
+ 0
+ 2,22463159
+ 4
+$exit
+$RUN tdspro                   		 ! RECORD -- 233 HOURS DELAY
+wi_lz_wav_20000207_v*.dat
+ 0
+ 2,22010340
+ 4
+$EXIT
+$RUN tdspro                   		 ! 
+wi_lz_wav_19990703_v*.dat
+ 0
+ 2,22417
+ 4
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19950405_v*.dat
+ 0357
+ 2,6688896
+ 4
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19991105_v*.dat
+ 0
+ 1,4
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_19991015_v*.dat
+ 0
+ 2,8697920
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_19970623_v*.dat
+ 0206
+ 2,3212902
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_19970623_v*.dat
+ 0518
+ 2,3214961
+ 4
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19970504_v*.dat
+ 1108
+ 2,1053185
+ 2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19970504_v*.dat
+ 1108
+ 2,1053198
+ 2
+$exit
+$!LARGEST EVENTS
+$RUN tdspro                   		 ! 
+wi_lz_wav_19980610_v*.dat
+ 0505
+ 2,17600737
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_19980925_v*.dat
+ 0422
+ 2,2031333
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_19990613_v*.dat
+ 0630
+ 2,32453262
+ 4
+$exit
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19990604_v*.dat
+ 0030
+ 1,4
+ 4
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960529_v*.dat
+ 0420
+ 2,14661803
+ 4
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19980119_v*.dat
+ 2240
+ 2,7116125
+ 4
+$EXIT
+$!INTERPLANETARY SHOCK
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960728_v*.dat
+ 1213
+ 2,213920
+ 2
+$EXIT
+$!FOLLOWING ARE ion acoustic FOR stereo 
+$RUN tdspro                		! 
+wind_data:wi_lz_wav_19950711_v*.dat                
+1229
+2,93042
+4
+$exit
+$RUN tdspro                		! 
+wind_data:wi_lz_wav_19960527_v*.dat                
+1152
+2,14577731
+4
+$RUN tdspro                		! 
+wind_data:wi_lz_wav_19960527_v*.dat                
+0646
+2,14577705
+4
+$RUN tdspro                		! 
+wind_data:wi_lz_wav_19970101_v*.dat                
+0229
+2,5052796
+4
+$!FOLLOWING ARE FOR LANG WAVES for sterea
+$RUN tdspro                		! 
+wind_data:wi_lz_wav_19980120_v*.dat                
+0
+2,7118533
+4
+$!FOLLOWING ARE FOR LANG WAVES IN FLUCT WIND
+$RUN tdspro                		! 
+wind_data:wi_lz_wav_19980120_v*.dat                
+0
+2,7118533
+4
+$RUN tdspro                		! 
+wind_data:wi_lz_wav_19980120_v*.dat                
+0
+2,7119493
+4
+$RUN tdspro                		! 
+wind_data:wi_lz_wav_19980120_v*.dat                
+0
+2,7118850
+4
+$EXIT
+$RUN tdspro                		! 
+wind_data:wi_lz_wav_19971104_v*.dat                
+0721
+2,2519413
+4
+$RUN tdspro                		! 
+wind_data:wi_lz_wav_19971104_v*.dat                
+0713
+2,2517893
+4
+$EXIT
+$RUN tdspro                		! 
+wind_data:wi_lz_wav_19980119_v*.dat                
+0354
+2,6991567
+2
+$EXIT
+$RUN tdspro                		! 
+wind_data:wi_lz_wav_19980119_v*.dat                
+2300
+2,7118550
+2
+$EXIT
+$RUN tdspro                		! 
+wind_data:wi_lz_wav_19980119_v*.dat                
+0302
+2,6985233
+2
+$RUN tdspro                		! 
+wind_data:wi_lz_wav_19980119_v*.dat                
+0529
+2,7004236
+2
+$RUN tdspro                		! BZGLITCH STANDARD
+wind_data:wi_lz_wav_19980221_v*.dat                
+0104
+2,9587204
+4
+$exit
+$RUN tdspro                		! 
+wind_data:wi_lz_wav_19980119_v*.dat                
+0226
+2,6980995
+2
+$RUN tdspro                		! 
+wind_data:wi_lz_wav_19980119_v*.dat                
+0330
+2,6988687
+2
+$exit
+$RUN tdspro                		! 
+wind_data:wi_lz_wav_19980110_v*.dat                
+0
+2,5978883
+4
+$exit
+$RUN tdspro                		! 
+wind_data:wi_lz_wav_19980221_v*.dat                
+0130
+2,9588010
+4
+$exit
+$RUN tdspro                		! 
+wind_data:wi_lz_wav_19970703_v*.dat                
+0
+2,3478780
+2
+$exit
+$RUN tdspro                		! 
+wind_data:wi_lz_wav_19970703_v*.dat                
+1252
+2,3551390
+2
+$RUN tdspro                		! 
+wind_data:wi_lz_wav_19971104_v*.dat                
+0720
+2,2519633
+2
+$exit
+$RUN tdspro                		! WATKINS
+wind_data:wi_lz_wav_19950527_v*.dat                
+1620
+2,11377504
+2
+$exit
+$RUN tdspro                
+wind_data:wi_lz_wav_19970703_v*.dat                
+1127
+2,3535562
+2
+$exit
+$RUN tdspro                
+wind_data:wi_lz_wav_19970619_v*.dat                
+0252
+2,3060193
+2
+$exit
+$RUN tdspro                
+wind_data:wi_lz_wav_19970619_v*.dat                
+0000
+2,3057681
+2
+$RUN tdspro                
+wind_data:wi_lz_wav_19960819_v*.dat                
+ 1702						! SCOTT'S THESIS
+2,309583
+2
+$exit
+$RUN tdspro                
+wind_data:wi_lz_wav_19960419_v*.dat
+ 1108
+2,12777678
+2
+$exit
+$RUN tdspro                
+wind_data:wi_lz_wav_19970111_v*.dat
+ 2200
+2,5766425
+4
+$exit
+$RUN tdspro                
+wind_data:wi_lz_wav_19960419_v*.dat
+ 0650
+2,12723148
+2
+$RUN tdspro                
+wind_data:wi_lz_wav_19960419_v*.dat
+ 0720
+2,12728679
+2
+$EXIT
+$RUN tdspro                
+wind_data:wi_lz_wav_19960419_v*.dat
+ 0640
+2,12720398
+2
+$RUN tdspro                
+wind_data:wi_lz_wav_19960419_v*.dat
+ 0730
+2,12731784
+2
+$exit
+$RUN tdspro                
+wind_data:wi_lz_wav_19950425_v*.dat
+ 0022
+2,9875720
+2
+$EXIT
+$RUN tdspro                
+wind_data:wi_lz_wav_19970322_v*.dat
+ 2015
+2,159899
+4
+$EXIT
+$RUN tdspro                		!test of fixbadtds
+wind_data:wi_lz_wav_19960419_v*.dat    
+ 0852
+2,12750039
+4
+$EXIT
+$!used for proposal.nsf
+$RUN tdspro                
+wind_data:wi_lz_wav_19961116_v*.dat
+ 1936
+2,2351715
+2
+$EXIT
+$RUN tdspro                
+wind_data:wi_lz_wav_19961005_v*.dat
+ 0541
+2,888267
+2
+$EXIT
+$RUN tdspro                
+wind_data:wi_lz_wav_19961218_v*.dat
+ 0247
+2,4236733
+4
+$EXIT
+$RUN tdspro                
+wind_data:wi_lz_wav_19970111_v*.dat
+ 2203
+2,5766425
+2
+$EXIT
+$!THE FOLLOWING WERE USED IN TESTING FIXBADTDS3.  12777678 HAD ONLY
+$! 71'S FOLLOWING 58'S, SO NO DOUBLE CORRECTION
+$RUN tdspro                
+wind_data:wi_lz_wav_19970112_v*.dat
+ 0534
+2,5776547
+4
+$EXIT
+$RUN tdspro                
+wind_data:wi_lz_wav_19960419_v*.dat
+ 1108
+2,12777678
+4
+$EXIT
+$!END OF FIXBADTDS3 LIST
+$RUN tdspro                
+wind_data:wi_lz_wav_19960820_v*.dat
+ 0307
+1,8
+2
+$EXIT
+$RUN tdspro                ! marty goldman event
+wind_data:wi_lz_wav_19960419_v*.dat
+ 0850
+2,12750039
+4
+$EXIT
+$RUN tdspro 		
+wi_lz_wav_19941203_v*.dat
+ 1316
+2,6836697
+3
+$exit
+$RUN tdspro 				! SW ION ACOUSTIC
+wi_lz_wav_19970204_v*.dat
+ 0758
+2,66988
+2
+$RUN tdspro 				! april 19 pol
+wi_lz_wav_19960419_v*.dat
+ 0839
+2,12746801
+4
+$RUN tdspro 				! april 19 pol
+wi_lz_wav_19960419_v*.dat
+ 0852
+2,12749945
+4
+$RUN tdspro 				! april 19 pol
+wi_lz_wav_19960419_v*.dat
+ 0852
+2,12750039
+4
+$RUN tdspro 				! april 19 pol
+wi_lz_wav_19960419_v*.dat
+ 0930
+2,12757198
+4
+$RUN tdspro 				! april 19 pol
+wi_lz_wav_19970112_v*.dat
+ 0533
+2,5776548
+4
+$EXIT
+$RUN tdspro 				! dc cal
+wi_lz_wav_19970114_v*.dat
+ 0104
+2,5800725
+2
+$RUN tdspro 				! dc cal
+wi_lz_wav_19970110_v*.dat
+ 0104
+2,5680879
+2
+$RUN tdspro 				! dc cal
+wi_lz_wav_19970106_v*.dat
+ 0104
+2,5482998
+2
+$EXIT
+$RUN tdspro 				! test 71 & 58 fix
+wi_lz_wav_19970112_v*.dat
+ 0533
+2,5776547
+4
+$EXIT
+$RUN tdspro 				! test 71 fix
+wi_lz_wav_19941203_v*.dat
+ 1316
+2,6836697
+4
+$EXIT
+$RUN tdspro 				! NEW FOR MARTY GOLDMAN
+wi_lz_wav_19960419_v*.dat
+ 0850
+2,12757344
+2
+$EXIT
+$RUN tdspro 				! OLD FOR MARTY GOLDMAN
+wi_lz_wav_19960419_v*.dat
+ 0853
+2,12750023
+2
+$exit
+$RUN tdspro 				! BAD DATA STUDY                  		
+wi_lz_wav_19961231_v*.dat
+ 0000
+2,5014701
+2
+$exit
+$RUN tdspro                   		 !   new for marty goldman
+wi_lz_wav_19970107_v*.dat
+ 1145
+2,5619913
+3
+$exit
+$RUN tdspro                   		 !   new for marty goldman
+wi_lz_wav_19970107_v*.dat
+ 1148
+2,5620519
+2
+$RUN tdspro                   		 !   new for marty goldman
+wi_lz_wav_19970107_v*.dat
+ 2111
+2,5632915
+3
+$RUN tdspro                   		 !   new for marty goldman
+wi_lz_wav_19961128_v*.dat
+ 1748
+2,2873862
+2
+$exit
+$!100 percent modulation
+$RUN tdspro               
+wi_lz_wav_19961224_v*.dat
+ 1433
+2,4440902
+4
+$exit
+$RUN tdspro               
+wi_lz_wav_19960520_v*.dat
+ 0648
+2,14406790
+2
+$RUN tdspro               
+wi_lz_wav_19960522_v*.dat
+ 0322
+2,14459531
+4
+$RUN tdspro               
+wi_lz_wav_19961213_v*.dat
+ 1948
+2,4130315
+4
+$EXIT
+$RUN tdspro               
+wi_lz_wav_19961230_v*.dat
+ 0049
+2,4825980
+4
+$RUN tdspro               
+wi_lz_wav_19961230_v*.dat
+ 0033
+2,4821994
+4
+$RUN tdspro               
+wi_lz_wav_19961230_v*.dat
+ 0033
+2,4821987
+4
+$exit
+$RUN tdspro                   		 !   sat event Nov 16
+wi_lz_wav_19961116_v*.dat
+ 1936
+2,2351689
+2
+$RUN tdspro                   		 !   sat event Nov 16
+wi_lz_wav_19961116_v*.dat
+ 1936
+2,2351900
+2
+$RUN tdspro                   		 !   sat event Nov 16
+wi_lz_wav_19961116_v*.dat
+ 1936
+2,2351985
+2
+$EXIT
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960728_v*.dat
+ 1212
+2,213920
+2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960728_v*.dat
+ 1212
+2,213926
+2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960728_v*.dat
+ 1212
+2,213932
+2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960728_v*.dat
+ 1212
+2,213948
+2
+$EXIT
+$RUN tdspro                   		 ! 
+wi_lz_wav_19961202_v*.dat
+ 1740
+2,3307443
+2
+$EXIT
+$RUN tdspro                   		 ! 
+wi_lz_wav_19961005_v*.dat
+ 0535
+2,892063
+2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19961005_v*.dat
+ 0535
+2,892090
+2
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19961202_v*.dat
+ 1655
+1,16
+2
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19941225_v*.dat
+ 0435
+1,8
+2
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19941224_v*.dat
+ 0055
+2,9944890
+4
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960912_v*.dat
+ 0825
+2,1381564
+4
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960912_v*.dat
+ 0815
+2,1377343
+4
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960912_v*.dat
+ 0815
+2,1377174
+4
+$EXIT
+$RUN tdspro                   		 ! 
+wi_lz_wav_19941224_v*.dat
+ 1006
+2,9970616
+2
+$EXIT
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960911_v*.dat
+ 0805
+2,1120434
+2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960911_v*.dat
+ 0935
+2,1144267
+2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960911_v*.dat
+ 1000
+2,1152455
+2
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19961005_v*.dat
+ 0635
+1,64
+2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19961005_v*.dat
+ 0600
+2,896884
+$EXIT
+$RUN tdspro                   		 ! 
+wi_lz_wav_19961005_v*.dat
+ 0600
+2,892068
+2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19941225_v*.dat
+ 0200
+2,10021761
+2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19941225_v*.dat
+ 0240
+2,10023153
+2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19941225_v*.dat
+ 0300
+2,10025549
+2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19941225_v*.dat
+ 0350
+2,10026237
+$RUN tdspro                   		 ! 
+wi_lz_wav_19941225_v*.dat
+ 0540
+2,10033109
+2
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19961005_v*.dat
+ 0602
+1,50
+2
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19961004_v*.dat
+ 0058
+1,40
+ 2
+$EXIT
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960819_v*.dat
+ 2112
+ 1,16
+ 2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960820_v*.dat
+ 0212
+ 1,16
+ 2
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960728_v*.dat
+ 1213
+ 2,213932
+ 2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960728_v*.dat
+ 1213
+ 2,213933
+ 2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960728_v*.dat
+ 1213
+ 2,213946
+ 2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960728_v*.dat
+ 1213
+ 2,213948
+ 2
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960728_v*.dat
+ 1213
+ 2,213947
+ 2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960912_v*.dat
+ 0855
+ 1,40
+ 2
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960819_v*.dat
+ 1148
+ 1,10
+ 2
+$exit
+$!some cals
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960612_v*.dat
+ 0008
+ 1,4
+ 2
+$EXIT
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960706_v*.dat
+ 0008
+ 2,15462560				! A CAL IN TDS SLOW
+ 2
+$EXIT
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960706_v*.dat
+ 0058
+ 1,4
+ 2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960704_v*.dat
+ 0058
+ 1,4
+ 2
+$exit
+$!a list of low freq stuff in sw
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960701_v*.dat
+ 0000
+ 2,15377182
+ 2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960629_v*.dat
+ 0005
+ 2,15323429
+ 2
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960703_v*.dat
+ 0422
+ 2,15434601
+ 2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960702_v*.dat
+ 1924
+ 2,15428939
+ 2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960702_v*.dat
+ 1822
+ 2,15428180
+ 2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960701_v*.dat
+ 1214
+ 2,15343046
+ 2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960627_v*.dat
+ 0532
+ 2,15434601
+ 2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960625_v*.dat
+ 0412
+ 2,15213182
+ 2
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960417_v*.dat
+ 1355
+ 2,12361119
+ 2
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960417_v*.dat
+ 1355
+ 2,12359940
+ 2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960417_v*.dat
+ 1355
+ 2,12360384
+ 2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960417_v*.dat
+ 1355
+ 2,12360386
+ 2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960417_v*.dat
+ 1355
+ 2,12360395
+ 2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960417_v*.dat
+ 1355
+ 2,12361118
+ 2
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19950804_v*.dat
+ 0738
+ 2,1320616
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_19950804_v*.dat
+ 1938
+ 2,1380500
+ 4
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960428_v*.dat
+ 0900
+ 2,13301046
+ 2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960425_v*.dat
+ 1930
+ 2,13226229
+ 2
+$EXIT
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960328_v*.dat
+ 1425
+ 2,11288032
+ 2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960322_v*.dat
+ 1120
+ 2,10754871
+ 2
+$EXIT
+$!early results paper
+$RUN tdspro          
+wind_data:wi_lz_wav_19941203_v01.dat
+1316
+2,6836697
+ 3
+$exit
+$RUN tdspro          
+wind_data:wi_lz_wav_19941130_v01.dat
+1629
+2,6050231
+ 3
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19941210_v*.dat
+ 0846
+ 2,7652001
+ 3
+$EXIT
+$RUN tdspro                   		 ! 
+wi_lz_wav_19941201_v*.dat
+ 1155
+ 2,6394054
+ 2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19941210_v*.dat
+ 0846
+ 2,7652001
+ 3
+$RUN tdspro          
+wind_data:wi_lz_wav_19941203_v01.dat
+1316
+2,6836697
+ 4
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19941116_v*.dat
+ 0234
+ 2,2274301
+ 4
+$RUN tdspro                   		 ! 
+wi_lz_wav_19941130_v*.dat
+ 1629
+ 2,6050231
+ 2
+$!	most collapsed
+$RUN tdspro          
+wind_data:wi_lz_wav_19941203_v01.dat
+1316
+2,6836697
+ 4
+$exit
+$RUN tdspro          
+wind_data:wi_lz_wav_19941226_v01.dat
+1746
+2,10095820
+ 2
+$RUN tdspro          
+wind_data:wi_lz_wav_19941229_v01.dat
+0509
+2,10120559
+ 2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19941202_v*.dat
+ 0000
+ 2,6667100
+ 2
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19950804_v*.dat
+ 0735
+2,1317326
+ 2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19950417_v*.dat
+ 0000
+ 1,10
+ 2
+$exit
+$RUN tdspro                   		 ! 
+wi_lz_wav_19950801_v*.dat
+ 0000
+ 1,2
+ 2
+$RUN tdspro                   		 ! 
+wi_lz_wav_19941225_v*.dat
+ 0400
+ 1,2
+ 2
+$EXIT
+$!RATIO STUDY
+$RUN tdspro                   		 ! big sine wave
+wi_lz_wav_19941130_v*.dat
+ 1629
+ 2,6050231
+ 2
+$EXIT
+$RUN tdspro                   		 ! 
+wi_lz_wav_19960116_v*.dat
+ 0707
+ 2,9194089
+ 2
+$RUN tdspro                   		 ! m'p spikes
+wind_data:wi_lz_wav_19941226_v*.dat
+ 1632
+ 2,10094297
+ 2
+$EXIT
+$RUN tdspro                   		 ! m'p spikes
+wind_data:wi_lz_wav_19951229_v*.dat
+ 2111
+ 2,6261241
+ 2
+$exit
+$RUN tdspro                   		 ! big sine wave
+wind_data:wi_lz_wav_19951220_v01.dat
+ 2000
+ 2,7347829
+ 4
+$RUN tdspro                   		 ! big sine wave
+wind_data:wi_lz_wav_19950915_v01.dat
+ 0945
+ 2,3279231
+ 4
+$RUN tdspro                   		 ! big sine wave
+wind_data:wi_lz_wav_19950818_v01.dat
+ 1420
+ 2,1783443
+ 4
+$EXIT
+$RUN tdspro                   		 ! big sine wave
+wind_data:wi_lz_wav_19950804_v01.dat
+ 0739
+ 2,1317326
+ 3
+$exit
+$!downstream spikes 
+$RUN tdspro                   
+wind_data:wi_lz_wav_19941130_v01.dat
+ 2056
+ 2,6120941
+ 2
+$exit
+$RUN tdspro
+wind_data:wi_lz_wav_19951220_v01.dat
+ 2306
+ 2,7400400
+ 2
+$exit
+$RUN tdspro
+wind_data:wi_lz_wav_19951220_v01.dat
+ 2312
+ 2,7402313
+ 2
+$RUN tdspro
+wind_data:wi_lz_wav_19951220_v01.dat
+ 2308
+ 2,7401068
+ 2
+$RUN tdspro
+wind_data:wi_lz_wav_19951220_v01.dat
+ 2315
+ 2,7403478
+ 2
+$EXIT
+$RUN tdspro
+wind_data:wi_lz_wav_19951220_v01.dat
+ 2343
+ 2,7411641
+ 2
+$RUN tdspro
+wind_data:wi_lz_wav_19951220_v01.dat
+ 2322
+ 2,7405371
+ 2
+$RUN tdspro
+wind_data:wi_lz_wav_19951220_v01.dat
+ 2315
+ 2,7402949
+ 2
+$exit
+$!solar8 paper
+$RUN tdspro
+wind_data:wi_lz_wav_19941116_v02.dat
+ 0235
+ 2,2274301
+ 2
+$RUN tdspro
+wind_data:wi_lz_wav_19941116_v02.dat
+ 0235
+ 2,2274301
+ 3
+$RUN tdspro          
+$RUN tdspro
+wind_data:wi_lz_wav_19941129_v01.dat
+ 0656
+ 2,5841857
+ 4
+$RUN tdspro
+wind_data:wi_lz_wav_19941129_v01.dat
+ 0656
+ 2,5841857
+ 3
+$RUN tdspro          
+$exit
+wind_data:wi_lz_wav_19941226_v01.dat
+1746
+2,10095820
+ 3
+$RUN tdspro          
+wind_data:wi_lz_wav_19941226_v01.dat
+1746
+2,10095820
+ 4
+$Exit
+$RUN tdspro          
+wind_data:wi_lz_wav_19941229_v01.dat
+0506
+2,10120559
+ 2
+$RUN tdspro
+wind_data:wi_lz_wav_19951207_v01.dat
+ 0835
+ 2,6655638
+ 3
+$exit
+$!laser for087.dat
+$exit
+$RUN tdspro
+wind_data:wi_lz_wav_19941203_v01.dat
+ 1317
+ 2,6836697
+ 4
+$!laser for087.dat
+$exit
+$!laser for087.dat
+$!	Langmuir waves from type III
+$RUN tdspro          
+wind_data:wi_lz_wav_19941227_v01.dat
+0000
+1,3
+ 2
+$laser for087.dat
+$exit
+$RUN tdspro
+wind_data:wi_lz_wav_19950402_v01.dat
+ 1720
+  1,2
+ 2
+$laser for087.dat
+$RUN tdspro
+wind_data:wi_lz_wav_19950422_v01.dat
+ 1930
+ 1, 20
+ 2
+$laser for087.dat
+$RUN tdspro
+wind_data:[cdhf.waves]wi_lz_wav_19941227_v01.dat
+ 1200
+ 1,5
+ 2
+$laser for087.dat
+$exit
+$RUN tdspro
+wind_data:[cdhf.waves]wi_lz_wav_19941227_v01.dat
+ 1300
+ 10
+ 2
+$laser for087.dat
+$! end L.W. -- should run to 1215
+$exit
+%!fix for this one in tds_phys
+$RUN tdspro          
+wind_data:wi_lz_wav_19941126_v01.dat
+1903
+2,5415460
+ 4
+$exit
+$RUN tdspro          
+wind_data:wi_lz_wav_19950701_v01.dat
+1300
+1,2
+ 2
+$exit
+$RUN tdspro          
+wind_data:wi_lz_wav_19941126_v01.dat
+2100
+2,5433095
+ 3
+$RUN tdspro          
+wind_data:wi_lz_wav_19941126_v01.dat
+2100
+2,5433725
+ 3
+$!laser for087.dat
+$exit
+$RUN tdspro          
+wind_data:wi_lz_wav_19941214_v01.dat
+ 0009
+ 2,8712223
+ 3
+$exit
+$RUN tdspro          
+wind_data:wi_lz_wav_19941117_v01.dat
+ 1520
+ 2,2940118
+ 3
+$exit
+$RUN tdspro          
+wind_data:wi_lz_wav_19941210_v01.dat
+ 0845
+ 2,7652001
+ 3
+$exit
+$RUN tdspro          
+wind_data:wi_lz_wav_19941116_v02.dat
+ 0240
+ 1,8
+ 3
+$exit
+$RUN tdspro          
+wind_data:wi_lz_wav_19941201_v01.dat
+ 1206
+ 2,6397207
+ 3
+$RUN tdspro          
+wind_data:wi_lz_wav_19950808_v01.dat
+ 2054
+ 2,1515432
+ 3
+$RUN tdspro          
+wind_data:wi_lz_wav_19941212_v01.dat
+ 1405
+ 2,8195188
+ 3
+$RUN tdspro          
+wind_data:wi_lz_wav_19941201_v01.dat
+ 1456
+ 2,6447365
+ 3
+$RUN tdspro          
+wind_data:wi_lz_wav_19950818_v01.dat
+ 1420
+ 2,1783444
+ 3
+$RUN tdspro          
+wind_data:wi_lz_wav_19950921_v01.dat
+ 0952
+ 2,3960453
+ 3
+$RUN tdspro          
+wind_data:wi_lz_wav_19941201_v01.dat
+ 1155
+ 2,6394054
+ 3
+$RUN tdspro          
+wind_data:wi_lz_wav_19941116_v02.dat
+ 0234
+ 2,2274301
+ 3
+$RUN tdspro          
+wind_data:wi_lz_wav_19950921_v01.dat
+ 0951
+ 2,3960453
+ 3
+$!end early results paper
+$exit
+$!moon's wake paper
+$RUN tdspro          
+wind_data:wi_lz_wav_19941227_v01.dat
+ 1435
+ 2,10099039
+ 3
+$RUN tdspro          
+wind_data:wi_lz_wav_19941227_v01.dat
+ 1435
+ 2,10099373
+ 3
+$RUN tdspro          
+wind_data:wi_lz_wav_19941227_v01.dat
+ 1435
+ 2,10100186
+ 3
+$RUN tdspro          
+wind_data:wi_lz_wav_19941227_v01.dat
+ 1435
+ 2,10100858
+ 3
+$RUN tdspro          
+wind_data:wi_lz_wav_19941227_v01.dat
+ 1435
+ 2,10101521
+ 3
+$RUN tdspro          
+wind_data:wi_lz_wav_19941227_v01.dat
+ 1435
+ 2,10102553
+ 3
+$exit
+$!end moon's wake paper
+wind_data:wi_lz_wav_19941116_v02.dat
+ 2115
+ 2,2612746
+ 3
+$RUN tdspro          
+wind_data:wi_lz_wav_19941230_v01.dat
+ 0230
+ 2,10124917
+ 3
+$RUN tdspro          
+wind_data:wi_lz_wav_19941230_v01.dat
+ 0801
+ 2,10125569
+ 3
+$RUN tdspro          
+wind_data:wi_lz_wav_19941229_v01.dat
+ 1003
+ 2,10121556
+ 3
+$RUN tdspro          
+wind_data:wi_lz_wav_19941229_v01.dat
+ 1925
+ 2,10122164
+ 3
+$RUN tdspro          
+wind_data:wi_lz_wav_19941227_v01.dat
+ 1848
+ 2,10105519
+ 3
+$exit
+$RUN tdspro          
+wind_data:wi_lz_wav_19950818_v01.dat
+ 1420
+ 2,1783444
+ 2
+$RUN tdspro          
+wind_data:wi_lz_wav_19950828_v01.dat
+ 1205
+ 2,2637516
+ 2
+$RUN tdspro          
+wind_data:wi_lz_wav_19950828_v01.dat
+ 0909
+ 2,2631987
+ 2
+$EXIT
+$RUN tdspro          
+wind_data:wi_lz_wav_19941222_v01.dat
+ 1655
+ 2,9850834
+ 3
+$RUN tdspro          
+wind_data:wi_lz_wav_19941206_v01.dat
+ 0310
+ 2,7214250
+ 3
+$RUN tdspro          
+wind_data:wi_lz_wav_19950913_v01.dat
+ 2040
+ 2,3232260
+ 3
+$RUN tdspro          
+wind_data:wi_lz_wav_19950831_v01.dat
+ 0605
+ 2,2734662
+ 3
+$exit
+$RUN tdspro          
+wind_data:wi_lz_wav_19950930_v01.dat
+ 1337
+ 3
+ 3
+$RUN tdspro          
+wind_data:wi_lz_wav_19950926_v01.dat
+ 2030
+ 3
+ 3
+$RUN tdspro          
+wind_data:wi_lz_wav_19950923_v01.dat
+ 0819
+ 4
+ 3
+$RUN tdspro          
+wind_data:wi_lz_wav_19950921_v01.dat
+ 1316
+ 5
+ 3
+$exit
+$RUN tdspro            ! test fixbadtds
+wind_data:wi_lz_wav_19941129_v01.dat
+ 0035
+ 3
+ 3
+$exit
+$RUN tdspro            ! test fixbadtds
+wind_data:wi_lz_wav_19941212_v01.dat
+ 1406
+ 2
+ 3
+$exit
+$RUN tdspro
+wind_data:wi_lz_wav_19950808_v01.dat
+ 2055
+ 1
+ 3
+$exit
+$! swt 3-4 oct 1995
+$RUN tdspro
+wind_data:wi_lz_wav_19950804_v01.dat
+ 0730
+ 2
+ 2
+$exit
+$RUN tdspro
+wind_data:wi_lz_wav_19950921_v01.dat
+ 1315
+ 2
+ 2
+$exit        ! end swt
+$RUN tdspro
+wind_data:wi_lz_wav_19941227_v01.dat
+ 1145
+ 20
+ 2
+$!laser for087.dat
+$exit
+$RUN tdspro
+wind_data:wi_lz_wav_19941227_v01.dat
+ 1145
+ 20
+ 2
+$!interplanetary shocks for andre mangeney
+$RUN tdspro
+wind_data:wi_lz_wav_19950407_v01.dat
+ 1855
+ 6
+ 2
+$laser for087.dat
+$RUN tdspro
+wind_data:wi_lz_wav_19950524_v01.dat
+ 0330
+ 6
+ 2
+$laser for087.dat
+$EXIT
+$RUN tdspro
+wind_data:wi_lz_wav_19950312_v01.dat
+ 0226
+ 6
+ 2
+$laser for087.dat
+$EXIT
+$!END INTERPLANETARY SHOCKS
+$RUN tdspro
+wind_data:[cdhf.waves]wi_lz_wav_19941116_v02.dat
+ 0236
+ 1
+ 2
+$EXIT
+$!	shock crossings
+$RUN tdspro
+wind_data:[cdhf.waves]wi_lz_wav_19941116_v02.dat
+ 0240
+ 4
+ 2
+$laser for087.dat
+$RUN tdspro
+wind_data:[cdhf.waves]wi_lz_wav_19941116_v02.dat
+ 2115
+ 4
+ 2
+$laser for087.dat
+$RUN tdspro
+wind_data:[cdhf.waves]wi_lz_wav_19941130_v01.dat
+ 1900
+ 4
+ 2
+$laser for087.dat
+$RUN tdspro
+wind_data:[cdhf.waves]wi_lz_wav_19941201_v01.dat
+ 1130
+ 4
+ 2
+$laser for087.dat
+$EXIT
+$!	end of shock crossing list    
+$RUN tdspro
+wind_data:[cdhf.waves]wi_lz_wav_19941116_v02.dat
+ 0236
+ 1
+ 2
+$EXIT
+$RUN tdspro
+wind_data:[cdhf.waves]wi_lz_wav_19941211_v01.dat
+ 0700
+ 2
+ 2
+$!copy [kellogg]mongo_*.ps dec11combo.ps
+$exit
+$!	the list of big ones
+$RUN tdspro
+wind_data:[cdhf.waves]wi_lz_wav_19941129_v01.dat
+ 0657
+ 2
+ 2
+laser for087.dat
+$exit
+$RUN tdspro
+wind_data:[cdhf.waves]wi_lz_wav_19941116_v02.dat
+ 0235
+ 4
+ 2
+$exit
+$RUN tdspro
+wind_data:[cdhf.waves]wi_lz_wav_19941222_v01.dat
+ 1858
+ 4
+ 2
+$RUN tdspro
+wind_data:[cdhf.waves]wi_lz_wav_19941214_v01.dat
+ 0014
+ 4
+ 2
+$RUN tdspro
+wind_data:[cdhf.waves]wi_lz_wav_19941212_v01.dat
+ 2100
+ 4
+ 2
+$RUN tdspro
+wind_data:[cdhf.waves]wi_lz_wav_19941210_v01.dat
+ 0840
+ 4
+ 2
+$RUN tdspro
+wind_data:[cdhf.waves]wi_lz_wav_19941203_v01.dat
+ 2225
+ 4
+ 2
+$RUN tdspro
+wind_data:[cdhf.waves]wi_lz_wav_19941202_v01.dat
+ 0554
+ 4
+ 2
+$RUN tdspro
+wind_data:[cdhf.waves]wi_lz_wav_19941202_v01.dat
+ 0450
+ 4
+ 2
+$RUN tdspro
+wind_data:[cdhf.waves]wi_lz_wav_19941117_v01.dat
+ 0225
+ 10
+ 2
+$RUN tdspro
+wind_data:[cdhf.waves]wi_lz_wav_19941212_v01.dat
+ 0042
+ 4
+ 2
+$RUN tdspro
+wind_data:[cdhf.waves]wi_lz_wav_19941115_v01.dat
+ 1205
+ 4
+ 2
+$exit
+$!end of the list of big ones
+$!	the list of parametric decay?
+$RUN tdspro
+wind_data:[cdhf.waves]wi_lz_wav_19941117_v01.dat
+ 1500
+ 4
+ 2
+$RUN tdspro
+wind_data:[cdhf.waves]wi_lz_wav_19941129_v01.dat
+ 0030
+ 4
+ 2
+$RUN tdspro
+wind_data:[cdhf.waves]wi_lz_wav_19941206_v01.dat
+ 0313
+ 4
+ 2
+$RUN tdspro
+wind_data:[cdhf.waves]wi_lz_wav_19941129_v01.dat
+ 0658
+ 4
+ 2
+$EXIT
+$!      end of parametric decay list
+$EXIT
+$RUN tdspro
+wind_data:[cdhf.waves]wi_lz_wav_19941126_v01.dat
+ 1850
+ 2
+ 2
+$exit
+$RUN tdspro
+wind_data:[cdhf.waves]wi_lz_wav_19941116_v02.dat
+ 0236
+ 1
+ 2
+$exit
+ 1430  10098986 #2 10099046 #1#2  10099107 #1#2
+ 1501  10100330 #1#2 -858 #1#2  -1659 #1
+ 1505  10100858 #2   -1659 #1#2  -2443 #1#2
+ 1512  10101659 #2   -2443 #1#2  -2565 #3
+ 1522  10102565 -2554 -2552 -2551 -2551
+$RUN tdspro
+wind_data_root:[cdhf.waves]wi_lz_wav_19941227_v01.dat
+ 1439
+ 2
+ 2
+$RUN tdspro
+wind_data_root:[cdhf.waves]wi_lz_wav_19941227_v01.dat
+ 1508
+ 2
+ 2
+$RUN tdspro
+wind_data_root:[cdhf.waves]wi_lz_wav_19941227_v01.dat
+ 1511
+ 2
+ 2
+$RUN tdspro
+wind_data_root:[cdhf.waves]wi_lz_wav_19941227_v01.dat
+ 1517
+ 2
+ 2
+$EXIT
+$RUN tdspro
+wind_data_root:[cdhf.waves]wi_lz_wav_19941128_v01.dat
+ 2341
+ 4
+ 2
+$exit
+$RUN tdspro
+wind_data_root:[cdhf.waves]wi_lz_wav_19941130_v01.dat
+ 1632
+ 4
+ 2
+$RUN tdspro
+wind_data_root:[cdhf.waves]wi_lz_wav_19941125_v01.dat
+ 2339
+$RUN tdspro
+wind_data:[cdhf.waves]wi_lz_wav_19941116_v02.dat
+ 0237
+ 2
+ 2
+$RUN tdspro
+wind_data_root:[cdhf.waves]wi_lz_wav_19941230_v01.dat
+ 0804
+ 6
+ 2
+$RUN tdspro
+wind_data_root:[cdhf.waves]wi_lz_wav_19941229_v01.dat
+ 1007
+ 2
+ 4
+$EXIT
+ 1516            ! TIME
+ 5		 ! NUMBER TO DO
+ 2		 ! PROCESSING LEVEL, 0 = RAW,1=UNCORR.VOLTS,2=FFT,INV.FFT
+

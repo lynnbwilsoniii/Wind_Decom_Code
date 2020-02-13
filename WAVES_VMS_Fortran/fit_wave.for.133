@@ -1,0 +1,1013 @@
+	SUBROUTINE FIT_WAVE(F1,F2,EX1,EY1,EX2,EY2,PH1,PH2,TX1,TY1,
+     1	  TX2,TY2,RMSF)
+C
+C	FITS A PAIR OF WAVES TO THE XYDATA.  INPUTS ARE THE APPARENT
+C	FREQUENCIES OF THE WAVES IN KHZ, F1 = X(1), AND F2 = X(1)+X(2)  
+C	THE X AND Y COMPONENTS OF
+C	THE ELECTRIC VECTORS, X(3) = EX1, EY1, EX2, EY2, AND THEIR PHASES
+C	IN RADIANS, X(7) = PH1, PH2
+C
+	EXTERNAL WAVEFIT,WAVEFIT_T,SUBR
+	COMMON /PARTBLK/ X4DATA(2050,4),XRE,YRE,ZRE,SUNCLOCK,SPINRATE
+	COMMON /WAVFIT/ N1,N2
+	COMMON /SUB_CHOOSE/ NVAR
+	COMMON /FREQ_CHOOSE/ FREQMAX
+	COMMON /HNTBLK/ NHUNT(25)
+	COMMON /XYBLOCK/ XSPECT,YSPECT,DPHASE
+	COMMON /ANGLEBLK/ BANGLE,IAANGLE
+	common /headblk/ major,minor,s_scet
+	COMMON /HEADBL/ PTITLE,EVENT,NUMEVENT,FILE
+	CHARACTER*12 PTITLE(20)
+	CHARACTER*4 EVENT
+	CHARACTER*80 FILE
+	INTEGER*4 SUNCLOCK,S_SCET(2)
+	REAL 	XSPECT(1025),YSPECT(1025),DPHASE(1025)
+	REAL 	X(25),DX(25),Y(25),XS(25),XB(25)
+c
+	DATA XLEN,YLEN,ZLEN /.0411, .00379, .00217/             ! KM, FOR mV
+	DATA TWOPI /6.28318531/
+	DATA SPS /120000./      !***************** WARNING ******
+C
+	print*,'***************,fit_wave called'
+	SECT = 10.84
+	SECT = 8.5
+c	SECT = 1
+	NSECT = SECT + .5
+	N2 = 1
+	DO ISECT = 1,NSECT
+	  N1 = N2
+	  N2 = N1 + (2048./SECT + .5)
+	  N2 = MIN0(N2,2048)
+C
+c	  N2 = 1536
+c	  N1 = 512
+C	  N2 = 2048
+C	  N1 = 844
+C	  N1= 1355
+C	  N1 = 1145
+C	  N1 = 1626
+C
+	  DO N = 3,6
+	    NHUNT(N) = 0
+	    NHUNT(N+6) = 0
+	  ENDDO
+C	  NVAR = 8
+c	  NVAR = 9
+	  NVAR = 12
+C
+	  IF(NVAR.EQ.9) NHUNT(9) = 1
+	  IF(NVAR.GE.10) THEN			! NO NEED OF PHI
+	    NHUNT(7) = 0
+	    NHUNT(8) = 0
+	    X(7) = 0.
+	    X(8) = 0.
+	  ENDIF
+C
+C	  FIND MAXIMUM IN SPECTRUM
+C
+	  SMAX = -1000.
+	  DO N = 10,1022
+	    IF(XSPECT(N).GT.SMAX) THEN
+	      SMAX = XSPECT(N)
+	      NSPMAX = N
+	    ENDIF
+	  ENDDO
+	PRINT*,'X SPECTRUM MAX:N,F,SMAX',NSPMAX,(NSPMAX-1)*SPS/2048.,SMAX
+	  FREQMAX = (NSPMAX-1)*SPS/2048.
+C	  AVERAGE OVER ADJACENT POINTS
+	  FTOT = 0.
+	  STOT = 0.
+	  DO NN = -1,1
+	    FNN = (NSPMAX-1+NN)*SPS/2048.
+	    SNN = 10.**(.1*XSPECT(NSPMAX+NN))
+	    FTOT = FTOT+FNN*SNN
+	    STOT = STOT+SNN
+	  ENDDO
+	  FREQMAX = FTOT/STOT
+	  PRINT*,'INTERPOLATED FREQ',FREQMAX
+	  WRITE(76,*) 'INTERPOLATED FREQ',FREQMAX
+C	  FREQMAX = 4.04*1000.
+C	  X(2) = 37.
+C	  PRINT*,'CHANGE TO ',FREQMAX,'  X(2) =',X(2)
+C
+	  DO N = 10,1022
+	    IF(XSPECT(N).GT.(SMAX-20.)) THEN
+	    PRINT*,'OTHER LARGE SIGS:N,F,SMAX',N,(N-1)*SPS/2048.,XSPECT(N)
+	    WRITE(76,*) 'OTHER LARGE SIGS:N,F,SMAX',N,(N-1)*SPS/2048.,
+     1		XSPECT(N)
+	    ENDIF
+	  ENDDO
+C
+C	  find second largest signal
+C
+	  SMAX2 = -1000.
+	  DO N = 10,1022
+	    IF(XSPECT(N).GT.SMAX2.AND.N.NE.NSPMAX) THEN
+	      SMAX2 = XSPECT(N)
+	      NSPMAX2 = N
+	    ENDIF
+	  ENDDO
+	  PRINT*,'2ND X SPECTRUM MAX:N,F,SMAX',NSPMAX2,
+     1		(NSPMAX2-1)*SPS/2048.,SMAX2
+	nhunt(1) = 0
+	nhunt(2) = 0
+	PRINT*,'FREQMAX',FREQMAX
+	WRITE(76,*) 'FREQMAX',FREQMAX
+	F1 = .001*FREQMAX		! CHANGE TO KHZ
+c	x(2) = .73			! 1592709
+C	x(2) = -.95			! 7118850
+	IF(IABS(NSPMAX-NSPMAX2).GT.1) THEN
+	  x(2) = (NSPMAX2-NSPMAX)*SPS/2048000.
+	ENDIF
+	write(76,*) 'second peak, delta f = X(2) =',x(2)
+C*******
+C	x(2) = .284			! 12304329
+c	x(2) = 1.46			! 12304248 ON 1995 APR 17
+C	x(2) = 1.			! 12304248 ON 1995 APR 17
+C*********
+C
+C	COUNT ZERO CROSSINGS FOR INITIAL FREQUENCY ESTIMATE
+C
+c	NTEST = 0
+c	NZCNT = 0
+c	DO N = 1,2047
+c	  IF(X4DATA(N,1).GT.0..AND.X4DATA(N+1,1).LE.0.) NZCNT = NZCNT+1
+c	ENDDO
+	PRINT*,'INITIAL FREQ',F1
+C
+C	EVALUATE MEAN SQUARE SIGNAL
+C
+	X(1) = F1
+	DO N = 3,12
+	  X(N) = 0.
+	ENDDO
+	print*,'n1,n2,nvar',n1,n2,nvar
+	WRITE(76,*) 'N1,N2',N1,N2
+	WRITE(76,*) 'NVAR',NVAR, '   IN 4-',NVAR-4
+C
+	SUMSQX = 0.
+	SUMSQY = 0.
+	DO N = 1,2048
+	  SUMSQX = SUMSQX + (X4DATA(N,1)/XLEN )**2
+	  SUMSQY = SUMSQY + (X4DATA(N,2)/YLEN )**2
+	ENDDO
+	POWER = SUMSQX + SUMSQY
+	print*,'x',(x(i),i=1,8)
+	RMS = SQRT(POWER/(N2-N1+1-NVAR))
+	WRITE(76,*) 'TOT WAVE POWER,X,Y,TOT,RMS',SUMSQX,SUMSQY,POWER,RMS
+C
+	IF(NVAR.EQ.8) THEN
+C
+C	  FOR NVAR = 8, FIT PHASES
+C
+C**********
+C	  PRELIMINARY ESTIMATES
+C	  FIND MAX AND MIN IN EACH COMPONENT.  AT MAX, SIGNALS ARE
+C	  ASSUMED TO BE IN PHASE, AT MIN TO BE OUT OF PHASE
+C
+	  EXMAX = -1.E6
+	  EXMIN = 1.E6
+	  EYMAX = -1.E6
+	  EYMIN = 1.E6
+	  DO N = N1,N2
+	    IF(ABS(X4DATA(N,1)).GT.EXMAX) THEN
+	      EXMAX = ABS(X4DATA(N,1))
+	      NXMAX = N
+	    ENDIF
+	    IF(ABS(X4DATA(N,2)).GT.EYMAX) THEN
+	      EYMAX = ABS(X4DATA(N,2))
+	      NYMAX = N
+	    ENDIF
+	    IF(ABS(X4DATA(N,1)).LT.EXMIN) THEN
+	      EXMIN = ABS(X4DATA(N,1))
+	      NXMIN = N
+	    ENDIF
+	    IF(ABS(X4DATA(N,2)).LT.EYMIN) THEN
+	      EYMIN = ABS(X4DATA(N,2))
+	      NYMIN = N
+	    ENDIF
+	  ENDDO
+	  PRINT*,'NXMAX, ETC',NXMAX,NXMIN,NYMAX,NYMIN
+C
+C	CHOOSE THE NUMBER OF HALF CYCLES WHICH MOST CLOSELY MATCHES
+C
+	DELT = 1./120.				! MSEC
+	DELN = IABS(NXMAX-NXMIN)
+	DELPHI = TWOPI*ABS(X(2))*DELN*DELT
+	PRINT*,'EXPECTED DELPHI,DELPHI/PI',DELPHI,2.*DELPHI/TWOPI
+C		NO, I DIDNT CHOOSE
+C
+C	PHASE DIFFERENCE 0 AT NXMAX AND BOTH PHASES = PI/2
+C
+	PHI1 = .25*TWOPI - (NXMAX-1)*X(1)*TWOPI*DELT + NXMAX*TWOPI
+	PHI2 = .25*TWOPI - (NXMAX-1)*(X(1)+X(2))*TWOPI*DELT + NXMAX*TWOPI			
+	PHI1 = AMOD(PHI1,TWOPI)
+	PHI2 = AMOD(PHI2,TWOPI)
+	PRINT*,'START PH',PHI1,PHI2
+	X(7) = PHI1
+	X(8) = PHI2
+C**********
+	  DELPHI = PHI2-PHI1
+c	  X(7) = 0.
+	  SUMSQS = 1.E10
+	  DO NN = 1,33
+	    X(7) = X(7) + TWOPI/64.
+	    X(8) = X(7) + DELPHI
+	    CALL SUBR(X,SUMSQ)
+	    IF(SUMSQ.LT.SUMSQS) THEN
+	      PHIB = X(7)
+	      SUMSQS = SUMSQ
+	    ENDIF
+	  ENDDO
+	  X(7) = PHIB
+	  X(8) = X(7) + DELPHI
+	  NHUNT(1) = 0
+	  NHUNT(2) = 0
+	  NHUNT(7) = 1
+	  NHUNT(8) = 1
+	  N1S = N1
+	  N2S = N2
+	  N1 = 1
+	  N2 = 9
+	  PRINT*,'PHASE TEST',(NHUNT(J),J=1,8)
+	  DX(7) = TWOPI/12.
+	  DX(8) = TWOPI/12.
+	  CALL HUNTMN(NVAR,X,DX,Y,SUBR,SUMSQ)
+	  PRINT*,'PHASE TEST 1A',X(7),X(8),SUMSQ
+	  CALL HUNTMN(NVAR,X,DX,Y,SUBR,SUMSQ)
+	  PRINT*,'PHASE TEST 1B',X(7),X(8),SUMSQ
+C	  IF(X(7).LT.0.) X(7) = TWOPI - X(7)
+C	  IF(X(8).LT.0.) X(8) = TWOPI - X(8)
+	  IF(X(7).LT.0.) X(7) = TWOPI + X(7)
+	  IF(X(8).LT.0.) X(8) = TWOPI + X(8)
+	  X(7) = AMOD(X(7),TWOPI)
+	  XB(7) = X(7)
+	  X(8) = AMOD(X(8),TWOPI)
+	  XB(8) = X(8)
+	  CALL HUNTMN(NVAR,X,DX,Y,SUBR,SUMSQ)
+	  PRINT*,'PHASE TEST 2',X(7),X(8),SUMSQ
+	  X(7) = AMOD(X(7)+TWOPI,TWOPI)
+	  X(8) = AMOD(X(8)+TWOPI,TWOPI)
+	  N1 = N1S
+	  N2 = N2S
+	  NHUNT(1) = 1
+	  NHUNT(2) = 1
+	ENDIF
+C
+C	RANDOM EXPLORATION
+C
+C	ISEED = 451621
+	ISEED = 3615315
+	SUMSQS = 1.E8
+c	NRANRUN = 10
+	NRANRUN = 0
+	IF(NRANRUN.LE.1) GO TO 110 
+c	DO N = 1,10000
+	DO N = 1,NRANRUN
+C	  X(1) = F1*(1. + .003*(RAN(ISEED)-.5))
+	  X(1) = F1
+	  X(2) = F1*.01*(RAN(ISEED)-1.)
+	  X(7) = TWOPI*RAN(ISEED)
+	  X(8) = TWOPI*RAN(ISEED)
+	  X(7) = 0.
+	  X(8) = 0.
+	
+	  CALL SUBR(X,SUMSQ)
+C	print 223,(X(I),I=1,9),sumsq
+	  IF(SUMSQ.LT.SUMSQS) THEN
+	    DO J = 1,12
+	      XB(J) = X(J)
+	    ENDDO
+	    SUMSQS = SUMSQ
+	  ENDIF
+	ENDDO			! end of ranrun loop
+	PRINT*,'RANDOM RESULTS',SUMSQS,(XB(N),N=1,NVAR)
+	WRITE(76,*)'RANDOM RESULTS,RUNS',SUMSQS,(XB(N),N=1,NVAR),NRANRUN
+C
+ 110	CONTINUE
+C
+C	LOAD INITIAL PARAMETERS
+C
+	X(1) = F1
+	X(3) = EX1
+	X(4) = EY1
+	X(5) = EX2
+	X(6) = EY2
+C	X(7) = PH1
+C	X(8) = PH2
+C
+	X(7) = AMOD(XB(7)+TWOPI,TWOPI)
+	X(8) = AMOD(XB(8)+TWOPI,TWOPI)
+c	IF(NVAR.GT.8) THEN
+c	  X(9)  = TX1
+c	  X(10) = TY1
+c	  X(11) = TX2
+c	  X(12) = TY2
+c	ELSE
+c	  X(9) = 0.
+c	  X(10) = 0.
+c	  X(11) = 0.
+c	  X(12) = 0.
+c	ENDIF
+C
+	WRITE(76,223)(X(I),I=1,9)
+C
+	IF(NVAR.LE.10) THEN
+	  DX(7) = .78
+	  DX(8) = .78
+	ENDIF
+	IF(NVAR.EQ.9) DX(9) = .2		! X - Y PHASE SHIFT
+C
+	IF(1) GO TO 200
+C
+	DO N = 1,NVAR
+	  DX(N) = .1*X(N)
+	ENDDO
+C
+	DX(1) = .004*X(1)
+	DX(7) = .78
+	DX(8) = .78
+C
+	CALL SUBR(X,SUMSQS)
+	  PRINT*,'INITIAL SUMSQ',SUMSQS
+	NHUNT(1) = 1
+	NHUNT(2) = 1
+	IF(NVAR.EQ.8) THEN
+	  NHUNT(7) = 1
+	  NHUNT(8) = 1
+	ENDIF
+	itotal = 1
+	if(itotal.eq.1) go to 100
+	INTERACT = 0
+	IF(INTERACT.NE.1) GO TO 201
+C
+C****** SPECIAL
+C
+ 101	continue
+c
+	CALL SUBR(X,SUMSQS)
+	print 223,(X(I),I=1,9),sumsqs
+C
+c
+	F1 = X(1)
+	F2 = X(1) + X(2)
+	EX1 = X(3)
+	EY1 = X(4)
+	EX2 = X(5)
+	EY2 = X(6)
+	PH1 = X(7)
+	PH2 = X(8)
+c
+	SUMSQ = 0.
+c	N1 = 1
+c	N2 = 2048
+	DO N = N1,N2
+	  T = (N-1024)*DELT	
+	  EX = EX1*SIN(TWOPI*F1*T + PH1) + EX2*SIN(TWOPI*F2*T + PH2)
+	  EY = EY1*SIN(TWOPI*F1*T + PH1) + EY2*SIN(TWOPI*F2*T + PH2)
+	  SUMSQ = SUMSQ + (X4DATA(N,1)/XLEN - EX)**2
+     1		+ (X4DATA(N,2)/YLEN - EY)**2
+C	OPEN(unit=86,STATUS='NEW')
+C	write(86,*) n,ex,ey,x4data(n,1)/xlen-ex, x4data(n,2)/ylen-ey 
+	ENDDO
+ 	RMS = SQRT(SUMSQ/(N2-N1+1-NVAR))
+	print*,'sumsq,rms',sumsq,rms	
+	print*,'now go plot fit_wave.mgo'
+ 102	read(5,*) nchg,temp
+	ichg = iabs(nchg)
+	x(ichg) = temp
+	if(nchg.lt.0) go to 102
+	close(unit=86)
+	go to 101
+C
+C******** END OF SPECIAL
+C
+ 201	continue
+c	X(2) = F1/64.
+c*****
+c
+	print*,'********error,  got to 201'
+	DX(2) = .5*X(2)
+	N1 = 1024 - 16
+	N2 = 1024 + 16
+	WRITE(76,*) ' '
+	WRITE(76,76) (NHUNT(I),I=1,12)
+ 76	FORMAT(15I4) 
+	DO IT = 1,20
+	  CALL HUNTMN(NVAR,X,DX,Y,SUBR,SUMSQ)
+	  WRITE(76,223)(X(I),I=1,9),SUMSQ
+	  X(7) = AMOD(X(7)+TWOPI,TWOPI)
+	  X(8) = AMOD(X(8)+TWOPI,TWOPI)
+	  IF(SUMSQ.GT..999*SUMSQS) GO TO 10
+	  SUMSQS = SUMSQ
+	ENDDO
+ 10	RMS = SQRT(SUMSQ/(N2-N1+1-NVAR))
+	write(76,*) n1,n2,rms
+	DO N = 1,25
+	  XS(N) = X(N)
+	ENDDO
+	X(2) = F1/256.
+	DX(2) = .5*X(2)
+	N1 = 1024 - 64
+	N2 = 1024 + 64
+	SUMSQS = 1.E8
+	WRITE(76,*) ' '
+	WRITE(76,76) (NHUNT(I),I=1,12)
+	DO IT = 1,20
+	  CALL HUNTMN(NVAR,X,DX,Y,SUBR,SUMSQ)
+	  WRITE(76,223)(X(I),I=1,9),SUMSQ
+	  X(7) = AMOD(X(7)+TWOPI,TWOPI)
+	  X(8) = AMOD(X(8)+TWOPI,TWOPI)
+	  IF(SUMSQ.GT..999*SUMSQS) GO TO 20
+	  SUMSQS = SUMSQ
+	ENDDO
+ 20	RMS = SQRT(SUMSQ/(N2-N1+1-NVAR))
+	write(76,*) n1,n2,rms
+	IF(X(2).LT.0.) THEN
+	  X(1) = X(1) - X(2)
+	  X(2) = -X(2)
+	  TEMP = X(3)
+	  X(3) = X(5)
+	  X(5) = TEMP
+	  TEMP = X(4)
+	  X(4) = X(6)
+	  X(6) = TEMP
+	ENDIF
+C
+	DO N = 1,25
+	  XS(N) = X(N)
+	ENDDO
+	X(2) = F1/512.
+	DX(2) = .5*X(2)
+	N1 = 1024 - 256
+	N2 = 1024 + 256
+	SUMSQS = 1.E8
+	WRITE(76,*) ' '
+	WRITE(76,76) (NHUNT(I),I=1,12)
+	DO IT = 1,20
+	  CALL HUNTMN(NVAR,X,DX,Y,SUBR,SUMSQ)
+	  WRITE(76,223)(X(I),I=1,9),SUMSQ
+	  X(7) = AMOD(X(7)+TWOPI,TWOPI)
+	  X(8) = AMOD(X(8)+TWOPI,TWOPI)
+	  IF(SUMSQ.GT..999*SUMSQS) GO TO 30
+	  SUMSQS = SUMSQ
+	ENDDO
+ 30	RMS = SQRT(SUMSQ/(N2-N1+1-NVAR))
+	write(76,*) n1,n2,rms
+C
+C	DO ONE MORE STEP
+C
+	DO N = 1,8
+	  DX(N) = X(N)-XS(N)
+	ENDDO
+	WRITE(76,*) ' '
+	WRITE(76,76) (NHUNT(I),I=1,12)
+	CALL HUNTMN(NVAR,X,DX,Y,SUBR,SUMSQ)
+ 	RMS = SQRT(SUMSQ/(N2-N1+1-NVAR))
+	WRITE(76,223)(X(I),I=1,9),SUMSQ
+	write(76,*) n1,n2,rms
+C
+	DO N = 1,25
+	  XS(N) = X(N)
+	ENDDO
+	X(2) = F1/1024.
+C	X(1) = 27.4883
+C	X(2) = .0413
+C	X(3) = 8.6
+C	X(4) = 6.7
+C	X(5) = 6.9
+C	X(6) = 7.5
+C	X(7) = 1.4103
+C	X(8) = .6985
+C********
+ 	DX(2) = .5*X(2)
+ 200	CONTINUE
+C
+	print*,'at first huntmn call, x,dx,9=',x(9),dx(9)
+	SUMSQS = 1.E8
+ 100	CONTINUE
+C
+C	DO A SEARCH ON THE FREQUENCY AND FREQUENCYDIFFERENCE
+C
+c	SUMSQB = 1.E6
+c	DO JT = 1,7
+c	  X(1) = F1 + (JT-4)*.01 
+c	  DO IT = 1,41
+c	    X(2) = (IT-21)*.01 
+c	    CALL SUBR(X,SUMSQ)
+c	    IF(SUMSQ.LT.SUMSQB) THEN
+c	      ITSAVE = IT
+c	      JTSAVE = JT
+c	      SUMSQB = SUMSQ
+c	    ENDIF
+c	  ENDDO
+c	ENDDO
+c	X(1) =  F1 + (JTSAVE-4)*.01 
+c	X(2) =  (ITSAVE-21)*.01 
+c	WRITE(76,*) 'F,DEL F SEARCH GAVE DEL F1,DELF=',X(1),X(2)
+c	IF(X(1).LT.0.) THEN
+c	  X(1) = X(1) - X(2)
+c	  X(2) = -X(2)
+c	  TEMP = PH1
+c	ENDIF
+	WRITE(76,*) ' '
+	WRITE(76,76) (NHUNT(I),I=1,12)
+	DO IT = 1,20
+	  CALL HUNTMN(NVAR,X,DX,Y,SUBR,SUMSQ)
+	  WRITE(76,223)(X(I),I=1,9),SUMSQ
+	  X(7) = AMOD(X(7)+TWOPI,TWOPI)
+	  X(8) = AMOD(X(8)+TWOPI,TWOPI)
+	  X(9) = AMOD(X(9)+TWOPI,TWOPI)
+	  IF(SUMSQ.GT..9999*SUMSQS) GO TO 40
+	  SUMSQS = SUMSQ
+	ENDDO
+ 223	FORMAT(6F8.4,3F6.2,E12.4) 
+C
+ 40	RMS = SQRT(SUMSQ/(N2-N1+1.-NVAR))
+	write(76,*) ' at 40',n1,n2,rms
+C
+C	DO ONE MORE STEP
+C
+	nhunt(1) = 1
+	nhunt(2) = 1
+	DO N = 1,NVAR
+	  DX(N) = X(N)-XS(N)
+	ENDDO
+	dx(1) = .015
+	WRITE(76,*) ' '
+	WRITE(76,76) (NHUNT(I),I=1,12)
+	dx(2) = .025
+	DO NIT = 1,10
+	  SUMSQS = SUMSQ
+	  CALL HUNTMN(NVAR,X,DX,Y,SUBR,SUMSQ)
+	  WRITE(76,223)(X(I),I=1,9),SUMSQ
+	  IF(NVAR.LT.10)X(7) = AMOD(X(7)+TWOPI,TWOPI)
+	  IF(NVAR.LT.10)X(8) = AMOD(X(8)+TWOPI,TWOPI)
+	ENDDO
+	WRITE(76,223)(X(I),I=1,9),SUMSQ
+	IF(NVAR.GT.10) WRITE(76,223) (X(I),I=9,12)
+	RMS = SQRT(SUMSQ/(N2-N1+1.-NVAR))
+	write(76,*) n1,n2,rms
+	WRITE(76,*),'END TEST',SUMSQS,SUMSQ,SUMSQ/SUMSQS
+	NTEST = NTEST+1
+	  IF(SUMSQ.GT..9999*SUMSQS.AND.NTEST.LT.5) GO TO 100
+C
+	F1 = X(1)
+	F2 = X(2)
+	EX1 = X(3)
+	EY1 = X(4)
+	EX2 = X(5)
+	EY2 = X(6)
+	PH1 = X(7)
+	PH2 = X(8)
+	TX1 = X(9)
+	TY1 = X(10)
+	TX2 = X(11)
+	TY2 = X(12)
+	RMSF = RMS
+	IF(NVAR.EQ.8) THEN
+	  F2 = X(1)+X(2)
+	  DO N = N1,N2
+	    T = (N-1024)*DELT	
+	    EX = EX1*SIN(TWOPI*F1*T + PH1) + EX2*SIN(TWOPI*F2*T + PH2)
+	    EY = EY1*SIN(TWOPI*F1*T + PH1) + EY2*SIN(TWOPI*F2*T + PH2)
+	    SUMSQ = SUMSQ + (X4DATA(N,1)/XLEN - EX)**2
+     1		+ (X4DATA(N,2)/YLEN - EY)**2
+  	  write(44,*) n,ex,ey, x4data(n,1)/xlen, x4data(n,2)/ylen
+	  ENDDO
+	  F2 = X(2)
+C	  write(44,*) ex1,ey1,ex2,ey2
+C	  write(44,*) 'sumsq=',sumsq
+c	  if(1) stop
+C****
+	ENDIF
+	IF(NVAR.EQ.12) THEN			! RETURN TOTAL POWER
+	  PH1 = SQRT(EX1**2 + EY1**2 + TX1**2 + TY1**2)
+	  PH2 = SQRT(EX2**2 + EY2**2 + TX2**2 + TY2**2)
+	    WRITE(77,224) NVAR,N1,N2,RMS,PH1,PH2
+ 224	  FORMAT(I6,2I5,3E12.3)
+	ENDIF
+	IF(NVAR.EQ.8) THEN
+	    EMAG1 = SQRT(EX1**2 + EY1**2)
+	    EMAG2 = SQRT(EX2**2 + EY2**2)
+	    WRITE(77,224) NVAR,N1,N2,RMS,EMAG1,EMAG2
+	ENDIF
+C
+	WRITE(76,*) ' '
+C
+	   IF(NVAR.LT.10) THEN
+	    OPEN(UNIT=33,FILE='FITWAVE.RESULTS',TYPE='OLD',ACCESS='APPEND')
+	    WRITE(33,233) S_SCET(1),NUMEVENT,F1,F2,EX1,EY1,EX2,EY2,
+     1		PH1,PH2,RMS,n1,n2,bangle,sunclock
+ 233	    FORMAT(2I10,2F7.3,6F7.2,F9.4,2I5,F7.1,I5) 
+	   ELSE
+	    OPEN(UNIT=33,FILE='FITWAVE12.RESULTS',TYPE='OLD',ACCESS='APPEND')
+	    WRITE(33,234)S_SCET(1),NUMEVENT,F1,F2,EX1,EY1,EX2,EY2,
+     1	      TX1,TY1,TX2,TY2,RMS,n1,n2,bangle,sunclock
+ 234	    FORMAT(2I10,2F7.3,4F8.2,4F8.2,F9.4,2I5,F7.1,I5) 
+	   ENDIF
+	   CLOSE(UNIT=33)
+	ENDDO				!  END OF NSECT LOOP
+C
+	RETURN
+	END
+	SUBROUTINE WAVEFIT(X,SUMSQ)
+C
+	COMMON /PARTBLK/ X4DATA(2050,4),XRE,YRE,ZRE,SUNCLOCK,SPINRATE
+	COMMON /WAVFIT/ N1,N2
+	REAL X(25),WTX(2048),WTY(2048),C(4,4),Y(4),W(4),V(4,4),YOUT(4)
+	REAL U(4,4)
+C	DATA XLEN,YLEN,ZLEN /41.1, 3.79, 2.17/
+	DATA XLEN,YLEN,ZLEN /.0411, .00379, .00217/             ! KM, FOR mV
+	DATA TWOPI /6.28318531/
+C
+	SUMSQ = 0.
+C
+	F1 = X(1)
+	F2 = X(1) + X(2)
+	EX1 = X(3)
+	EY1 = X(4)
+	EX2 = X(5)
+	EY2 = X(6)
+	PH1 = X(7)
+	PH2 = X(8)
+	DELT = 1./120.				! MSEC
+C
+	DO I = 1,4
+	  Y(I)= 0.
+	  DO J = 1,4
+	    C(I,J) = 0.
+	  ENDDO
+	ENDDO
+	CONST = 0.
+C
+	DO N = N1,N2
+	  T = (N-1024)*DELT	
+	  S1 = SIN(TWOPI*F1*T + PH1)
+	  S2 = SIN(TWOPI*F2*T + PH2)
+	  CONST = CONST + (X4DATA(N,1)/XLEN)**2 + (X4DATA(N,2)/YLEN)**2
+	  Y(1) = Y(1) + (X4DATA(N,1)/XLEN)*S1
+	  Y(2) = Y(2) + (X4DATA(N,2)/YLEN)*S1
+	  Y(3) = Y(3) + (X4DATA(N,1)/XLEN)*S2
+	  Y(4) = Y(4) + (X4DATA(N,2)/YLEN)*S2
+	  C(1,1) = C(1,1) + S1*S1
+C	  C(1,2) = 0.				! COEFF OF EX1 IN 2ND EQ
+	  C(1,3) = C(1,3) + S1*S2		! COEFF OF EX1 IN 3RD EQ
+	  C(2,2) = C(2,2) + S1*S1		! COEFF OF EY1 IN 2ND EQ
+	  C(2,4) = C(2,4) + S1*S2
+	  C(3,3) = C(3,3) + S2*S2		! COEFF OF EX2 IN 3RD EQ
+	  C(4,4) = C(4,4) + S2*S2
+	ENDDO
+C
+	C(3,1)= C(1,3)
+	C(4,2) = C(2,4)
+c	CALL GAUSSJ(C,4,4,Y,1,1)
+c	print*,'gaussj',y
+C
+	DO I = 1,4
+	  YOUT(I) = Y(I)
+	  DO J = 1,4
+	    U(I,J) = C(I,J)
+	  ENDDO
+	ENDDO
+	CALL SVDCMP(U,4,4,4,4,W,V)
+	CALL SVBKSB(U,W,V,4,4,4,4,Y,YOUT)
+C
+	EX1 = YOUT(1)
+	EY1 = YOUT(2)
+	EX2 = YOUT(3)
+	EY2 = YOUT(4)
+c
+	SUMSQ = 0.
+	DO N = N1,N2
+	  T = (N-1024)*DELT	
+	  EX = EX1*SIN(TWOPI*F1*T + PH1) + EX2*SIN(TWOPI*F2*T + PH2)
+	  EY = EY1*SIN(TWOPI*F1*T + PH1) + EY2*SIN(TWOPI*F2*T + PH2)
+	  SUMSQ = SUMSQ + (X4DATA(N,1)/XLEN - EX)**2
+     1		+ (X4DATA(N,2)/YLEN - EY)**2
+c	write(44,*) n,ex,ey, x4data(n,1)/xlen-ex, x4data(n,2)/ylen-ey
+	ENDDO
+c	write(44,*) ex1,ey1,ex2,ey2
+c	write(44,*) 'sumsq=',sumsq
+c	if(1) stop
+C****
+	
+	DO N = 1,4
+	  X(N+2) = YOUT(N)
+	ENDDO
+C
+	RETURN
+	END	
+	SUBROUTINE WAVEFIT7(X,SUMSQ)
+C
+C	ASSUMES ELECTROSTATIC WAVES WITH A PHASE DIFFERENCE, X(9)
+C		BETWEEN X AND Y DUE TO ELECTRONICS
+C
+	COMMON /PARTBLK/ X4DATA(2050,4),XRE,YRE,ZRE,SUNCLOCK,SPINRATE
+	COMMON /WAVFIT/ N1,N2
+	REAL X(25),WTX(2048),WTY(2048),C(4,4),Y(4),W(4),V(4,4),YOUT(4)
+	REAL U(4,4)
+C	DATA XLEN,YLEN,ZLEN /41.1, 3.79, 2.17/
+	DATA XLEN,YLEN,ZLEN /.0411, .00379, .00217/             ! KM, FOR mV
+	DATA TWOPI /6.28318531/
+C
+	SUMSQ = 0.
+C
+	F1 = X(1)
+	F2 = X(1) + X(2)
+	EX1 = X(3)
+	EY1 = X(4)
+	EX2 = X(5)
+	EY2 = X(6)
+	PH1 = X(7)
+	PH2 = X(8)
+	DELT = 1./120.				! MSEC
+C
+	DO I = 1,4
+	  Y(I)= 0.
+	  DO J = 1,4
+	    C(I,J) = 0.
+	  ENDDO
+	ENDDO
+	CONST = 0.
+C
+	DO N = N1,N2
+	  T = (N-1024)*DELT	
+	  S1 = SIN(TWOPI*F1*T + PH1) - SIN(TWOPI*F2*T + PH2)
+	  SY1 = SIN(TWOPI*F1*T + PH1 + X(9)) - SIN(TWOPI*F2*T + PH2 + X(9))
+	  CONST = CONST + (X4DATA(N,1)/XLEN)**2 + (X4DATA(N,2)/YLEN)**2
+	  Y(1) = Y(1) + (X4DATA(N,1)/XLEN)*S1
+	  Y(2) = Y(2) + (X4DATA(N,2)/YLEN)*SY1
+	  C(1,1) = C(1,1) + S1*S1
+C	  C(1,2) = 0.				! COEFF OF EX1 IN 2ND EQ
+	  C(2,2) = C(2,2) + SY1*SY1		! COEFF OF EY1 IN 2ND EQ
+	ENDDO
+C
+C	DO I = 1,4
+C	  YOUT(I) = Y(I)
+C	  DO J = 1,4
+C	    U(I,J) = C(I,J)
+C	  ENDDO
+C	ENDDO
+C	CALL SVDCMP(U,4,4,4,4,W,V)
+C	CALL SVBKSB(U,W,V,4,4,4,4,Y,YOUT)
+C
+	YOUT(1) = Y(1)/C(1,1)
+	YOUT(2) = Y(2)/C(2,2)
+	EX1 = YOUT(1)
+	EY1 = YOUT(2)
+	EX2 = -EX1
+	EY2 = -EY1
+c
+	SUMSQ = 0.
+	DO N = N1,N2
+	  T = (N-1024)*DELT	
+	  EX = EX1*SIN(TWOPI*F1*T + PH1) + EX2*SIN(TWOPI*F2*T + PH2)
+	  EY = EY1*SIN(TWOPI*F1*T + PH1 + X(9)) + 
+     1		EY2*SIN(TWOPI*F2*T + PH2 + X(9))
+	  SUMSQ = SUMSQ + (X4DATA(N,1)/XLEN - EX)**2
+     1		+ (X4DATA(N,2)/YLEN - EY)**2
+	ENDDO
+	DO N = 1,2
+	  X(N+2) = YOUT(N)
+	  X(N+4) = -YOUT(N)
+	ENDDO
+C
+	RETURN
+	END	
+	SUBROUTINE WAVEFIT_T(X,SUMSQ)
+C
+	COMMON /PARTBLK/ X4DATA(2050,4),XRE,YRE,ZRE,SUNCLOCK,SPINRATE
+	COMMON /WAVFIT/ N1,N2
+	REAL X(25),WTX(2048),WTY(2048)
+	REAL*8 C(8,8),U(8,8),Y(8),V(8,8),W(8),YOUT(8)
+	REAL IY(8)
+C	DATA XLEN,YLEN,ZLEN /41.1, 3.79, 2.17/
+	DATA XLEN,YLEN,ZLEN /.0411, .00379, .00217/             ! KM, FOR mV
+	DATA TWOPI /6.28318531/
+C
+	SUMSQ = 0.
+C
+	F1 = X(1)
+	F2 = X(1) + X(2)
+	EX1 = X(3)
+	EY1 = X(4)
+	EX2 = X(5)
+	EY2 = X(6)
+	PH1 = 0.
+	PH2 = 0.
+	TX1 = X(7)
+	TY1 = X(8)
+	TX2 = X(9)
+	TY2 = X(10)
+	DELT = 1./120.				! MSEC
+C
+	DO I = 1,8
+	  Y(I)= 0.
+	  DO J = 1,8
+	    C(I,J) = 0.
+	  ENDDO
+	ENDDO
+C	CONST = 0.
+C
+	DO N = N1,N2
+	  T = (N-1024)*DELT	
+	  S1 = SIN(TWOPI*F1*T + PH1)
+	  S2 = SIN(TWOPI*F2*T + PH2)
+	  C1 = COS(TWOPI*F1*T + PH1)
+	  C2 = COS(TWOPI*F2*T + PH2)
+	  CONST = CONST + (X4DATA(N,1)/XLEN)**2 + (X4DATA(N,2)/YLEN)**2
+	  Y(1) = Y(1) + (X4DATA(N,1)/XLEN)*S1
+	  Y(2) = Y(2) + (X4DATA(N,2)/YLEN)*S1
+	  Y(3) = Y(3) + (X4DATA(N,1)/XLEN)*S2
+	  Y(4) = Y(4) + (X4DATA(N,2)/YLEN)*S2
+	  Y(5) = Y(5) + (X4DATA(N,1)/XLEN)*C1
+	  Y(6) = Y(6) + (X4DATA(N,2)/YLEN)*C1
+	  Y(7) = Y(7) + (X4DATA(N,1)/XLEN)*C2
+	  Y(8) = Y(8) + (X4DATA(N,2)/YLEN)*C2
+	  C(1,1) = C(1,1) + S1*S1
+C	  C(1,2) = 0.				! COEFF OF EX1 IN 2ND EQ
+	  C(1,3) = C(1,3) + S1*S2		! COEFF OF EX1 IN 3RD EQ
+	  C(1,5) = C(1,5) + S1*C1		! COEFF OF EX1 IN 5TH EQ
+	  C(1,7) = C(1,7) + S1*C2		! COEFF OF EX1 IN 7TH EQ
+	  C(2,2) = C(2,2) + S1*S1		! COEFF OF EY1 IN 2ND EQ
+	  C(2,4) = C(2,4) + S1*S2
+	  C(2,6) = C(2,6) + S1*C1
+	  C(2,8) = C(2,8) + S1*C2
+	  C(3,3) = C(3,3) + S2*S2		! COEFF OF EX2 IN 3RD EQ
+	  C(3,5) = C(3,5) + S2*C1		! COEFF OF EX2 IN 5TH EQ
+	  C(3,7) = C(3,7) + S2*C2		! COEFF OF EX2 IN 7TH EQ
+	  C(4,4) = C(4,4) + S2*S2
+	  C(4,6) = C(4,6) + S2*C1
+	  C(4,8) = C(4,8) + S2*C2
+	  C(5,5) = C(5,5) + C1*C1
+	  C(5,7) = C(5,7) + C1*C2
+	  C(6,6) = C(6,6) + C1*C1
+	  C(6,8) = C(6,8) + C1*C2
+	  C(7,7) = C(7,7) + C2*C2
+	  C(8,8) = C(8,8) + C2*C2
+	ENDDO
+C
+	C(3,1) = C(1,3)
+	C(5,1) = C(1,5)
+	C(7,1) = C(1,7)
+	C(4,2) = C(2,4)
+	C(6,2) = C(2,6)
+	C(8,2) = C(2,8)
+	C(5,3) = C(3,5)
+	C(7,3) = C(3,7)
+	C(6,4) = C(4,6)
+	C(8,4) = C(4,8)
+	C(7,5) = C(5,7)
+	C(8,6) = C(6,8)
+c******test
+c	print*,'c',c(1,1),C(1,3),C(3,3),C(5,5),C(5,7)
+c	call ludcmp(c,8,8,iy,dout)
+c	print*,(c(i,i),i=1,8)
+c	det = 1.
+c	do i = 1,8
+c	  det = det*c(i,i)
+c	enddo
+c	print*,'determinant',det	
+c	if(1) stop
+c******
+C	CALL GAUSSJ(C,8,8,Y,1,1)
+	DO I = 1,8
+	  YOUT(I) = Y(I)
+	  DO J = 1,8
+	    U(I,J) = C(I,J)
+	  ENDDO
+	ENDDO
+	CALL DSVDCMP(U,8,8,8,8,W,V)
+	CALL DSVBKSB(U,W,V,8,8,8,8,Y,YOUT)
+C
+	EX1 = YOUT(1)
+	EY1 = YOUT(2)
+	EX2 = YOUT(3)
+	EY2 = YOUT(4)
+	TX1 = YOUT(5)
+	TY1 = YOUT(6)
+	TX2 = YOUT(7)
+	TY2 = YOUT(8)
+	SUMSQ = 0.
+C
+	DO N = N1,N2
+	  T = (N-1024)*DELT	
+	  EX = EX1*SIN(TWOPI*F1*T + PH1) + EX2*SIN(TWOPI*F2*T + PH2)
+     1	   + TX1*COS(TWOPI*F1*T + PH1) + TX2*COS(TWOPI*F2*T + PH2)
+	  EY = EY1*SIN(TWOPI*F1*T + PH1) + EY2*SIN(TWOPI*F2*T + PH2)
+     1	   + TY1*COS(TWOPI*F1*T + PH1) + TY2*COS(TWOPI*F2*T + PH2)
+	  SUMSQ = SUMSQ + (X4DATA(N,1)/XLEN - EX)**2
+     1		+ (X4DATA(N,2)/YLEN - EY)**2
+	ENDDO
+	DO N = 1,4
+	  X(N+2) = YOUT(N)
+	ENDDO
+	DO N = 5,8
+	  X(N+4) = YOUT(N)
+	ENDDO
+C
+	RETURN
+	END	
+	SUBROUTINE WAVEFITold(X,SUMSQ)
+C
+	COMMON /PARTBLK/ X4DATA(2050,4),XRE,YRE,ZRE,SUNCLOCK,SPINRATE
+	COMMON /WAVFIT/ N1,N2
+	REAL X(25),WTX(2048),WTY(2048)
+C	DATA XLEN,YLEN,ZLEN /41.1, 3.79, 2.17/
+	DATA XLEN,YLEN,ZLEN /.0411, .00379, .00217/             ! KM, FOR mV
+	DATA TWOPI /6.28318531/
+C
+	SUMSQ = 0.
+C
+	F1 = X(1)
+	F2 = X(1) + X(2)
+	EX1 = X(3)
+	EY1 = X(4)
+	EX2 = X(5)
+	EY2 = X(6)
+	PH1 = X(7)
+	PH2 = X(8)
+	DELT = 1./120.				! MSEC
+	DO N = N1,N2
+	  T = (N-1024)*DELT	
+	  EX = EX1*SIN(TWOPI*F1*T + PH1) + EX2*SIN(TWOPI*F2*T + PH2)
+	  EY = EY1*SIN(TWOPI*F1*T + PH1) + EY2*SIN(TWOPI*F2*T + PH2)
+	  SUMSQ = SUMSQ + (X4DATA(N,1)/XLEN - EX)**2
+     1		+ (X4DATA(N,2)/YLEN - EY)**2
+	ENDDO
+	RETURN
+	END	
+	SUBROUTINE WAVEFIT_Told(X,SUMSQ)
+C
+	COMMON /PARTBLK/ X4DATA(2050,4),XRE,YRE,ZRE,SUNCLOCK,SPINRATE
+	COMMON /WAVFIT/ N1,N2
+	REAL X(25),WTX(2048),WTY(2048)
+C	DATA XLEN,YLEN,ZLEN /41.1, 3.79, 2.17/
+	DATA XLEN,YLEN,ZLEN /.0411, .00379, .00217/             ! KM, FOR mV
+	DATA TWOPI /6.28318531/
+C
+	SUMSQ = 0.
+C
+	F1 = X(1)
+	F2 = X(1) + X(2)
+	EX1 = X(3)
+	EY1 = X(4)
+	EX2 = X(5)
+	EY2 = X(6)
+	PH1 = X(7)
+	PH2 = X(8)
+	TX1 = X(9)
+	TY1 = X(10)
+	TX2 = X(11)
+	TY2 = X(12)
+	DELT = 1./120.				! MSEC
+	DO N = N1,N2
+	  T = (N-1024)*DELT	
+	  EX = EX1*SIN(TWOPI*F1*T + PH1) + EX2*SIN(TWOPI*F2*T + PH2)
+     1	   + TX1*COS(TWOPI*F1*T + PH1) + TX2*COS(TWOPI*F2*T + PH2)
+	  EY = EY1*SIN(TWOPI*F1*T + PH1) + EY2*SIN(TWOPI*F2*T + PH2)
+     1	   + TY1*COS(TWOPI*F1*T + PH1) + TY2*COS(TWOPI*F2*T + PH2)
+	  SUMSQ = SUMSQ + (X4DATA(N,1)/XLEN - EX)**2
+     1		+ (X4DATA(N,2)/YLEN - EY)**2
+	ENDDO
+	RETURN
+	END	
+	SUBROUTINE SUBR(X,SUMSQ)
+C
+	COMMON /SUB_CHOOSE/ NVAR
+	REAL X(25)
+C
+	IF(NVAR.EQ.9) THEN
+	  	CALL WAVEFIT7(X,SUMSQ)
+		RETURN
+	ENDIF
+	IF(NVAR.LT.10) THEN
+		CALL WAVEFIT(X,SUMSQ)
+C	print 22,(x(i),i=1,8),sumsq
+C 22	format(6f6.1,2f8.3,e12.3)
+	ELSE
+		CALL WAVEFIT_T(X,SUMSQ)
+	ENDIF
+C
+	RETURN
+	END
+	SUBROUTINE EVCHECK(VMAT,N)
+C
+	REAL VMAT(N,N),EVAL(10),EVECT(10,10)
+C
+	CALL JACOBI(VMAT,N,N,EVAL,EVECT,NROT)
+	WRITE(16,*) 'EIGENVALUES'
+	WRITE(16,1024) (EVAL(I),I=1,N)
+	WRITE(16,*) 'EIGENVECTOR'
+	DO J = 1,N
+	  WRITE(16,1024) (EVECT(J,I),I=1,N)
+ 1024	FORMAT(8E12.3)
+	ENDDO
+C
+C	SORT IN DESCENDING ORDER OF EIGENVALUES
+C
+C	CALL EIGSRT(EVAL,EVECT,3,3)
+C
+	RETURN
+	END

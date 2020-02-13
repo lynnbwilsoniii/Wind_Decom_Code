@@ -1,0 +1,1335 @@
+$SET DEF [KELLOGG.WIND]
+$WIND_LOGIN
+$FORT/LIST/CHECK/WARN=NOUNUSED tdsexey
+$FORT/LIST/CHECK/WARN=NOUNUSED FIT_WAVE
+$FORT/LIST/CHECK/WARN=NOUNUSED FIT_SOL
+$purge FIT_WAVE.*
+$purge FIT_SOL.*
+$!LINK tdsexey,tds_phys,wind_minn,gaussj,wind_lib/lib,MONGO
+$!LINK tdsexey,wind_minn,[.develop]tds_phys,fixbadtds4,wind_lib/lib,MONGO
+$!LINK tdsexey,wind_minn,GAUSSJ,[.develop]tds_phys,wind_lib/lib,MONGO
+$LINK tdsexey,wind_minn,GAUSSJ,JACOBI,FIT_WAVE,tds_phys,-
+ SVDCMP,SVBKSB,fit_sol, bzglitch,FIXBADTDS6,[-.UTIL]HUNTMN,-
+ [KELLOGG]LUDCMP,DSVDCMP,DSVBKSB,DPYTHAG,wind_lib/lib,MONGO
+$!LINK tdsexey,wind_minn,GAUSSJ,[.PUBLIC]tds_phys,fixbadtds,wind_lib/lib,MONGO
+$!LINK tdsexey,wind_minn,GAUSSJ,[.PUBLIC]tds_physt,fixbadtds,wind_lib/lib,MONGO
+$!LINK tdsexey,wind_minn,[.develop]tds_phys,fixbadtds5,wind_lib/lib,MONGO
+$PURGE tdsexey.*
+$purge for067.dat
+$purge for068.dat
+$del tdsexey.obj;*
+$RUN tdsexey                   		 ! WHISTLER??
+wi_lz_wav_20000410_v*.dat
+ 410
+ 2,27528224
+ 4
+$RUN tdsexey                   		 ! WHISTLER??
+wi_lz_wav_20010221_v*.dat
+ 0926
+ 2,1030636
+ 4
+$RUN tdsexey                   		 ! WHISTLER??
+wi_lz_wav_20010908_v*.dat
+ 550
+ 2,884230
+ 4
+$RUN tdsexey                   		 ! WHISTLER??
+wi_lz_wav_20011025_v*.dat
+ 640
+ 2,3688292
+ 4
+$EXIT
+$RUN tdsexey                   		 ! L1
+wi_lz_wav_20040919_v*.dat
+ 1844
+ 2,12752969
+ 4
+$EXIT
+$RUN tdsexey                   		 ! tail
+wi_lz_wav_20010222_v*.dat
+ 0100
+ 2,1040897
+ 4
+$EXIT
+$RUN tdsexey                   		 ! tail
+wi_lz_wav_20000104_v*.dat
+ 0800
+ 2,18870245
+ 4
+$RUN tdsexey                   		 ! tail
+wi_lz_wav_20000104_v*.dat
+ 0800
+ 2,18877614
+ 4
+$RUN tdsexey                   		 ! tail
+wi_lz_wav_20000104_v*.dat
+ 0200
+ 2,18852759
+ 4
+$del tdsexey.exe;*
+$exit
+$RUN tdsexey                   		 ! tail
+wi_lz_wav_20010222_v*.dat
+ 1056
+ 2,1041292
+ 4
+$RUN tdsexey                   		 ! tail
+wi_lz_wav_20010222_v*.dat
+ 1056
+ 2,1041293
+ 4
+$RUN tdsexey                   		 ! tail
+wi_lz_wav_20010222_v*.dat
+ 1516
+ 2,1041543
+ 4
+$del tdsexey.exe;*
+$exit
+$RUN tdsexey                   		 ! shock
+wi_lz_wav_20021101_v*.dat
+ 0224
+ 2,10764915
+ 4
+$RUN tdsexey                   		 ! shock
+wi_lz_wav_20021101_v*.dat
+ 0224
+ 2,10764918
+ 4
+$RUN tdsexey                   		 ! shock
+wi_lz_wav_20021101_v*.dat
+ 0224
+ 2,10764920
+ 4
+$RUN tdsexey                   		 ! shock
+wi_lz_wav_20021101_v*.dat
+ 0224
+ 2,10764926
+ 4
+$RUN tdsexey                   		 ! shock
+wi_lz_wav_20021101_v*.dat
+ 0224
+ 2,10765018
+ 4
+$RUN tdsexey                   		 ! shock
+wi_lz_wav_20021101_v*.dat
+ 0224
+ 2,10766103
+ 4
+$RUN tdsexey                   		 ! shock
+wi_lz_wav_20021101_v*.dat
+ 0224
+ 2,10766124
+ 4
+$RUN tdsexey                   		 ! shock
+wi_lz_wav_20021101_v*.dat
+ 0224
+ 2,10766125
+ 4
+$RUN tdsexey                   		 ! shock
+wi_lz_wav_20021101_v*.dat
+ 0224
+ 2,10766152
+ 4
+$RUN tdsexey                   		 ! shock
+wi_lz_wav_20021101_v*.dat
+ 0224
+ 2,10766156
+ 4
+$del tdsexey.exe;*
+$exit
+$RUN tdsexey                   		 ! shock
+wi_lz_wav_20021101_v*.dat
+ 0224
+ 2,10764859
+ 4
+$RUN tdsexey                   		 ! shock
+wi_lz_wav_20021101_v*.dat
+ 0224
+ 2,10764891
+ 4
+$RUN tdsexey                   		 ! shock
+wi_lz_wav_20021101_v*.dat
+ 0224
+ 2,10764892
+ 4
+$RUN tdsexey                   		 ! shock
+wi_lz_wav_20021101_v*.dat
+ 0224
+ 2,10764900
+ 4
+$RUN tdsexey                   		 ! shock
+wi_lz_wav_20021101_v*.dat
+ 0224
+ 2,10764908
+ 4
+$RUN tdsexey                   		 ! psslw splitting
+wi_lz_wav_20010912_v*.dat
+ 1100
+ 2,1424409
+ 4
+$del tdsexey.exe;*
+$exit
+$RUN tdsexey                   		 ! PSSLW EVOLUTION
+wi_lz_wav_19941128_v*.dat
+ 2300
+ 2,5737225
+ 4
+$DELETE TDSEXEY.EXE;*
+$exit
+$RUN tdsexey                   		 ! PSSLW EVOLUTION
+wi_lz_wav_19960530_v*.dat
+ 1210
+ 2,14748827
+ 4
+$RUN tdsexey                   		 ! PSSLW EVOLUTION
+wi_lz_wav_19970910_v*.dat
+ 0
+ 2,1285848
+ 4
+$RUN tdsexey                   		 ! PSSLW TURBULENCE
+wi_lz_wav_19961230_v*.dat
+ 0230
+ 2,4841121
+ 4
+$RUN tdsexey                   		 ! PSSLW TURBULENCE
+wi_lz_wav_19961230_v*.dat
+ 0230
+ 2,4841133
+ 4
+$RUN tdsexey                   		 ! PSSLW TURBULENCE
+wi_lz_wav_19961230_v*.dat
+ 0230
+ 2,4841147
+ 4
+$RUN tdsexey                   		 ! PSSLW TURBULENCE
+wi_lz_wav_19961230_v*.dat
+ 0230
+ 2,4841329
+ 4
+$del tdsexey.exe;*
+$exit
+$RUN tdsexey                   		 ! PSSLW TURBULENCE
+wi_lz_wav_19961230_v*.dat
+ 0230
+ 2,4841115
+ 4
+$exit
+$RUN tdsexey                   		 ! PSSLW TURBULENCE, not used
+wi_lz_wav_19970703_v*.dat
+ 1200
+ 2,3540559
+ 4
+$RUN tdsexey                   		 ! PSSLW TURBULENCE
+wi_lz_wav_19970703_v*.dat
+ 1200
+ 2,3540567
+ 4
+$RUN tdsexey                   		 ! PSSLW TURBULENCE
+wi_lz_wav_19970703_v*.dat
+ 1200
+ 2,3540734
+ 4
+$RUN tdsexey                   		 ! PSSLW TURBULENCE
+wi_lz_wav_19970703_v*.dat
+ 1200
+ 2,3540735
+ 4
+$RUN tdsexey                   		 ! PSSLW TURBULENCE
+wi_lz_wav_19970703_v*.dat
+ 1200
+ 2,3540821
+ 4
+$del tdsexey.exe;*
+$exit
+$RUN tdsexey                   		 ! 
+wi_lz_wav_19970701_v*.dat
+ 0
+ 2,3348608
+ 4
+$del tdsexey.exe;*
+$exit
+$RUN tdsexey                   		 ! 
+wi_lz_wav_19960419_v*.dat
+ 0
+ 2,12641533
+ 4
+$del tdsexey.exe;*
+$exit
+$RUN tdsexey                   		 ! 
+wi_lz_wav_20000409_v*.dat
+ 0600
+ 2,27437535
+ 4
+$del tdsexey.exe;*
+$exit
+$RUN tdsexey                   		 ! 
+wi_lz_wav_19990401_v*.dat
+ 0300
+ 2,23902153
+ 4
+$del tdsexey.exe;*
+$exit
+$RUN tdsexey                   		 ! 
+wi_lz_wav_19980712_v*.dat
+ 00
+ 2,20459070
+ 4
+$RUN tdsexey                   		 ! 
+wi_lz_wav_19960419_v*.dat
+ 0045
+ 2,12645302
+ 4
+$exit
+$RUN tdsexey               		! 
+wind_data:wi_lz_wav_20000309_v*.dat                
+0330
+2,24992648
+4
+$run waves_directions
+2, 58, 69
+$PURGE WAVES_DIRECTIONS.*
+$exit
+$RUN tdsexey               		! Stuart's list
+wind_data:wi_lz_wav_19960417_v*.dat                
+0907
+2,12304248
+4
+$run waves_directions
+2, 22, 34
+$PURGE WAVES_DIRECTIONS.*
+$exit
+$RUN tdsexey               		! Stuart's list
+wind_data:wi_lz_wav_19960420_v*.dat                
+1200
+2,12972264
+4
+$exit
+$RUN tdsexey               		! Stuart's list
+wind_data:wi_lz_wav_19960417_v*.dat                
+0907
+2,12304366
+4
+$RUN tdsexey               		! Stuart's list
+wind_data:wi_lz_wav_19960417_v*.dat                
+0436
+2,12304248
+4
+$exit
+$RUN tdsexey               		! 
+wind_data:wi_lz_wav_19990613_v*.dat                
+0629
+2,32453262
+4
+$exit
+$RUN tdsexey               		! 
+wind_data:wi_lz_wav_19980120_v*.dat                
+0
+2,7117408
+4
+$exit
+$RUN TDSEXEY                		!
+wind_data:wi_lz_wav_19971104_v*.dat                
+0720
+2,2519413
+4
+$RUN tdsexey                		! 
+wind_data:wi_lz_wav_19971104_v*.dat                
+0713
+2,2517893
+4
+$RUN TDSEXEY                		!
+wind_data:wi_lz_wav_19981205_v*.dat                
+2022
+2,8998878
+4
+$RUN TDSEXEY                		!
+wind_data:wi_lz_wav_19981113_v*.dat                
+0543
+2,5809739
+4
+$RUN TDSEXEY                		!
+wind_data:wi_lz_wav_19981111_v*.dat                
+0
+2,5566290
+4
+$exit
+$!the following three runs had very small widths in terms of debye length
+$RUN TDSEXEY                		!
+wind_data:wi_lz_wav_19960420_v*.dat                
+0300
+2,12919271
+4
+$RUN TDSEXEY                		!
+wind_data:wi_lz_wav_19970907_v*.dat                
+0805
+2,909069
+4
+$RUN TDSEXEY                		!
+wind_data:wi_lz_wav_19970928_v*.dat                
+2129
+2,489286
+4
+$exit
+$RUN TDSEXEY                		!
+wind_data:wi_lz_wav_19980630_v*.dat                
+1959
+2,19288451
+4
+$exit
+$!triple peaked spectrum
+$RUN TDSEXEY                		!
+wind_data:wi_lz_wav_19971016_v*.dat                
+1330
+2,1331178
+4
+$exit
+$RUN TDSEXEY                		!
+wind_data:wi_lz_wav_19971016_v*.dat                
+1337
+2,1331177
+4
+$RUN TDSEXEY                		!
+wind_data:wi_lz_wav_19971014_v*.dat                
+1
+2,1255671
+4
+$RUN TDSEXEY                		!
+wind_data:wi_lz_wav_19980224_v*.dat                
+1740
+2,9818492
+4
+$EXIT
+$RUN TDSEXEY                		!
+wind_data:wi_lz_wav_19980224_v*.dat                
+1726
+2,9818065
+4
+$RUN TDSEXEY                		!
+wind_data:wi_lz_wav_19961228_v*.dat                
+1414
+2,4643879
+4
+$EXIT
+$RUN TDSEXEY                		!
+wind_data:wi_lz_wav_19960519_v*.dat                
+1847
+2,14400944
+4
+$exit
+$RUN TDSEXEY                		!
+wind_data:wi_lz_wav_19970111_v*.dat                
+2202
+2,5766425
+4
+$exit
+$RUN TDSEXEY                		!
+wind_data:wi_lz_wav_19970706_v*.dat                
+0
+2,3865068
+4
+$exit
+$RUN TDSEXEY                		!
+wind_data:wi_lz_wav_19980712_v*.dat                
+0235
+2,20476547
+4
+$exit
+$RUN TDSEXEY                		!
+wind_data:wi_lz_wav_19980216_v*.dat                
+1148
+2,9237151
+4
+$exit
+$RUN TDSEXEY                		!
+wind_data:wi_lz_wav_19970101_v*.dat                
+0
+2,5045108
+4
+$RUN TDSEXEY                		! STUART'S SHOCK
+wind_data:wi_lz_wav_19971020_v*.dat                
+1626
+1,8
+4
+$exit
+$RUN TDSEXEY                		! STUART'S SHOCK
+wind_data:wi_lz_wav_19971020_v*.dat                
+1623
+2,1663419
+4
+$exit
+$RUN TDSEXEY                		! STUART'S SHOCK
+wind_data:wi_lz_wav_19971020_v*.dat                
+1624
+2,1663432
+4
+$RUN TDSEXEY                		! STUART'S SHOCK
+wind_data:wi_lz_wav_19971020_v*.dat                
+1624
+2,1663612
+4
+$RUN TDSEXEY                		! STUART'S SHOCK
+wind_data:wi_lz_wav_19971020_v*.dat                
+1624
+2,1663397
+4
+$RUN TDSEXEY                		! STUART'S SHOCK
+wind_data:wi_lz_wav_19971020_v*.dat                
+1624
+2,1663369
+4
+$RUN TDSEXEY                		! STUART'S SHOCK
+wind_data:wi_lz_wav_19971020_v*.dat                
+1624
+2,1663398
+4
+$EXIT
+$!strong modulation
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19971020_v*.dat
+ 1625
+1,6
+ 4
+$MAIL [KELLOGG]MON*.PS URAP::KELLOGG
+$exit
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19980120_v*.dat
+ 0
+2,7117408
+ 4
+$exit
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19970111_v*.dat
+ 2203
+2,5766425
+ 4
+$exit
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19960522_v*.dat
+ 0322
+2,14459531
+4
+$EXIT
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19960520_v*.dat
+ 0648
+2,14406790
+4
+$EXIT
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19980120_v*.dat
+ 0
+2,7117408
+4
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19960419_v*.dat
+ 0231
+2,12664781
+4
+$exit
+$!for stuart
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19960421_v*.dat
+ 0203
+2,13051261
+4
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19960421_v*.dat
+ 1134
+2,13081159
+4
+$exit
+$!TEST
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19970302_v*.dat
+ 1417
+2,650974
+4
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19971104_v*.dat
+ 0723
+2,2519413
+ 4
+$EXIT
+$!SLOW OR WEAK MODULATION
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19970722_v*.dat
+ 2249
+2,4555828
+ 4
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19970703_v*.dat
+ 1127
+2,3535560
+ 4
+$exit
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19960421_v*.dat
+ 1700
+1,2
+ 2
+$exit
+$!SLOW OR WEAK MODULATION
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19970111_v*.dat
+ 1732
+2,5759011
+ 4
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19970111_v*.dat
+ 1327
+2,5748421
+ 4
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19970111_v*.dat
+ 1645
+2,5663859
+ 4
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19970112_v*.dat
+ 2200
+2,5776547
+ 4
+$EXIT
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19970112_v*.dat
+ 0534
+2,5776548
+ 4
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19970201_v*.dat
+ 2258
+2,54176
+ 4
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19970404_v*.dat
+ 1541
+2,297930
+ 4
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19960502_v*.dat
+ 0100
+2,1047540
+ 4
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19970518_v*.dat
+ 0745
+2,1508983
+ 4
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19970518_v*.dat
+ 0745
+2,1509220
+ 4
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19970518_v*.dat
+ 0745
+2,1508985
+ 4
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19970518_v*.dat
+ 0745
+2,1508982
+ 4
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19970518_v*.dat
+ 0745
+2,1509221
+ 4
+$EXIT
+$!test of better fixbadtds3
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19970107_v*.dat
+ 1802
+2,5629203
+ 4
+$exit
+$!test of better fixbadtds3
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19960419_v*.dat
+ 0839
+2,12746794			! LOTS OF TWOBAD'S
+ 4
+$exit
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19960419_v*.dat
+ 0839
+2,12746794			! LOTS OF TWOBAD'S
+ 4
+$exit
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19960419_v*.dat
+ 0839
+2,12746794			! LOTS OF TWOBAD'S
+ 2
+$EXIT
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19960419_v*.dat
+ 1108
+2,12777678			! monochromatic
+ 4
+$EXIT
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19970111_v*.dat
+ 1734
+2,5759011			! used it a lot
+ 4
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19960420_v*.dat
+ 2240
+2,13043529				! stuart's
+ 4
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19960419_v*.dat
+ 0742
+2,12733666				! bow shock
+ 4
+$exit
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19960419_v*.dat
+ 0800
+2,12737291
+ 3
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19960419_v*.dat
+ 0800
+2,12737292
+ 3
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19960419_v*.dat
+ 0800
+2,12740903
+ 3
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19960419_v*.dat
+ 0800
+2,12743864
+ 3
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19960419_v*.dat
+ 0800
+2,12746801
+ 3
+$exit
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19960419_v*.dat
+ 1147
+2,12779164
+ 3
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19960419_v*.dat
+ 1943
+2,12778551
+ 4
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19970111_v*.dat
+ 1734
+2,5759011
+ 4
+$EXIT
+$!FAST MODULATION
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19970111_v*.dat
+ 1734
+2,5759011
+ 3
+$exit
+$!SLOW OR WEAK MODULATION
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19970518_v*.dat
+ 0745
+2,1508982
+ 4
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19970518_v*.dat
+ 0749
+2,1509221
+ 4
+$exit
+$!FAST MODULATION
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19970111_v*.dat
+ 1410
+2,5752304
+ 2
+$EXIT
+$EXIT
+$RUN tdsexey                			
+wind_data:wi_lz_wav_19970111_v*.dat
+ 2203
+2,5766425
+ 4
+$!ion acoustic
+$RUN tdsexey                			! big unmodulated
+wind_data:wi_lz_wav_19960419_v*.dat
+ 0853
+2,12750147
+ 4
+$EXIT
+$RUN tdsexey                
+wind_data:wi_lz_wav_19960812_v*.dat
+ 0703
+2,470359
+ 4
+$RUN tdsexey                
+wind_data:wi_lz_wav_19960728_v*.dat
+ 1554
+2,237112
+ 4
+$RUN tdsexey                
+wind_data:wi_lz_wav_19960812_v*.dat
+ 0606
+2,467967
+ 4
+$exit
+$RUN tdsexey                
+wind_data:wi_lz_wav_19960419_v*.dat
+ 0842
+2,12747552
+ 4
+$RUN tdsexey                
+wind_data:wi_lz_wav_19960419_v*.dat
+ 0852
+2,12749945
+ 4
+$RUN tdsexey                ! marty goldman event      
+wind_data:wi_lz_wav_19960419_v*.dat
+ 0850
+2,12750039
+ 4
+$RUN tdsexey              
+wind_data:wi_lz_wav_19960419_v*.dat
+ 0930
+2,12757198
+ 4
+$EXIT
+$RUN tdsexey                
+wind_data:wi_lz_wav_19960419_v*.dat
+ 0840
+2,12746801
+ 4
+$RUN tdsexey                
+wind_data:wi_lz_wav_19961230_v*.dat
+ 2330
+2,5014837
+ 4
+$RUN tdsexey                
+wind_data:wi_lz_wav_19960527_v*.dat
+ 1825
+2,14584273
+ 4
+$RUN tdsexey                
+wind_data:wi_lz_wav_19960527_v*.dat
+ 1930
+2,14585049
+ 4
+$RUN tdsexey                
+wind_data:wi_lz_wav_19960527_v*.dat
+ 1922
+2,14584809
+ 4
+$RUN tdsexey                
+wind_data:wi_lz_wav_19970202_v*.dat
+ 0
+2,54177
+4
+$exit
+$RUN tdsexey                
+wind_data:wi_lz_wav_19970111_v*.dat
+ 1732
+2,5759011
+ 2
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19970201_v*.dat
+ 2255
+ 2,54177
+ 2
+$exit
+$EXIT
+$RUN tdsexey                ! calibration
+wind_data:wi_lz_wav_19960819_v*.dat
+ 0104
+2,214144
+1
+$RUN tdsexey                ! calibration
+wind_data:wi_lz_wav_19961209_v*.dat
+ 0104
+2,3953994
+1
+$RUN tdsexey                ! calibration
+wind_data:wi_lz_wav_19961213_v*.dat
+ 0104
+2,4119108
+1
+$RUN tdsexey                ! calibration
+wind_data:wi_lz_wav_19961209_v*.dat
+ 0104
+2,3953993
+1
+$RUN tdsexey                ! calibration
+wind_data:wi_lz_wav_19961207_v*.dat
+ 0104
+2,3866128
+1
+$RUN tdsexey                ! calibration
+wind_data:wi_lz_wav_19961207_v*.dat
+ 0104
+2,3866129
+1
+$RUN tdsexey                ! calibration
+wind_data:wi_lz_wav_19961205_v*.dat
+ 0104
+2,3620600
+1
+$RUN tdsexey                ! calibration
+wind_data:wi_lz_wav_19961205_v*.dat
+ 0104
+2,3620599
+1
+$EXIT
+$mongo
+ input tdsexey.mgo
+ end
+$las for079.dat
+$RUN tdsexey                ! ION ACOUSTIC
+wind_data:wi_lz_wav_19960530_v*.dat
+ 0309
+2,14741735
+2
+$las for079.dat
+$mongo
+ input tdsexey.mgo
+ end
+$exit
+$RUN tdsexey                ! for marty goldman
+wind_data:wi_lz_wav_19961128_v*.dat
+ 1748
+2,2873862
+3
+$las for079.dat
+$mongo
+ input tdsexey.mgo
+ end
+$exit
+$RUN tdsexey                
+wind_data:wi_lz_wav_19960419_v*.dat
+ 1207
+2,572077
+ 2
+$las for079.dat
+$mongo
+ input tdsexey.mgo
+ end
+$exit
+$RUN tdsexey                ! marty goldman event      
+wind_data:wi_lz_wav_19960419_v*.dat
+ 0850
+2,12750039
+ 2
+$!bowshocks
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19961115_v*.dat
+ 0715
+2,2081763
+ 2
+$las for079.dat
+$mongo
+ input tdsexey.mgo
+ end
+$EXIT
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960326_v*.dat
+ 1613
+ 2,11011143
+ 2
+$EXIT
+$!test of directions
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960920_v*.dat
+ 1139
+ 2,186120
+ 4
+$EXIT
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960920_v*.dat
+ 2034
+ 2,190275
+ 2
+$EXIT
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960917_v*.dat
+ 1913
+ 2,144511
+ 2
+$EXIT
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960722_v*.dat
+ 0705
+ 2,108558
+ 3
+$EXIT
+$!INTERPLANETARY SHOCK
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960728_v*.dat
+ 1213
+ 1,14
+ 2
+$EXIT
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960917_v*.dat
+ 1805
+ 2,132928
+ 3
+$EXIT
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960917_v*.dat
+ 1804
+ 2,132767
+ 3
+$EXIT
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960917_v*.dat
+ 1804
+ 2,132784
+ 3
+$exit
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960917_v*.dat
+ 1850
+ 2,141789
+ 3
+$exit
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960917_v*.dat
+ 0411
+ 2,88190
+ 3
+$exit
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960626_v*.dat
+ 0100
+ 2,15224524
+ 2
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960622_v*.dat
+ 0100
+ 2,15159552
+ 2
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960618_v*.dat
+ 0100
+ 2,15102701
+ 2
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960616_v*.dat
+ 00
+ 2,15094824
+ 2
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960616_v*.dat
+ 00
+ 2,15094925
+ 2
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960616_v*.dat
+ 00
+ 2,15094994
+ 2
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960616_v*.dat
+ 00
+ 2,15095027
+ 2
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960614_v*.dat
+ 0100
+ 2,15035211
+ 2
+$mongo
+ input tdsexey.mgo
+ end
+$exit
+$mongo
+ input tdsexey.mgo
+ end
+$EXIT
+
+$!cals
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960610_v*.dat
+ 0100
+ 1,4
+ 2
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960608_v*.dat
+ 0100
+ 1,4
+ 2
+$mongo
+ input tdsexey.mgo
+ end
+$!more cals
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960622_v*.dat
+ 0100
+ 1,4
+ 2
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960620_v*.dat
+ 0100
+ 1,4
+ 2
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960624_v*.dat
+ 0100
+ 2,15201721
+ 2
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960706_v*.dat
+ 0100
+ 1,2
+ 2
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960704_v*.dat
+ 0100
+ 1,4
+ 2
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960624_v*.dat
+ 0100
+ 2,15202146
+ 2
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960630_v*.dat
+ 0058
+ 2,15332883
+ 2
+$mongo
+ input tdsexey.mgo
+ end
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960708_v*.dat
+ 0100
+ 2,15482184
+ 2
+$RUN tdsexey                      !no good
+wind_data:wi_lz_wav_19960612_v*.dat
+ 0100
+ 1,4
+ 2
+$exit
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960702_v*.dat
+ 1900
+ 2,15428939
+ 2
+$mongo
+ input tdsexey.mgo
+ end
+$exit
+$wait 00:05:00
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960702_v*.dat
+ 1800
+ 2,15428180
+ 2
+$mongo
+ input tdsexey.mgo
+ end
+$wait 00:05:00
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960629_v*.dat
+ 1700
+ 2,15323429
+ 2
+$mongo
+ input tdsexey.mgo
+ end
+$exit
+$RUN tdsexey                      
+wind_data:wi_lz_wav_19960629_v*.dat
+ 0000
+ 2,15323429
+ 2
+$mongo
+ input tdsexey.mgo
+ end
+$exit
+$RUN tdsexey                      ! a big cal
+wind_data:wi_lz_wav_19951202_v01.dat
+ 0105
+ 1,2
+ 2
+$mongo
+ input tdsexey.mgo
+ end
+$RUN tdsexey                      ! a big cal
+wind_data:wi_lz_wav_19951210_v01.dat
+ 0105
+ 1,2
+ 2
+$mongo
+ input tdsexey.mgo
+ end
+$RUN tdsexey                      ! a big cal
+wind_data:wi_lz_wav_19951126_v01.dat
+ 0105
+ 1,2
+ 2
+$mongo
+ input tdsexey.mgo
+ end
+$RUN tdsexey                      ! a big cal
+wind_data:wi_lz_wav_19951122_v01.dat
+ 0105
+ 1,2
+ 2
+$mongo
+ input tdsexey.mgo
+ end
+$EXIT
+$RUN tdsexey                      ! a big cal  ex ez 30 khz sps
+wind_data:wi_lz_wav_19941218_v01.dat
+ 0104
+ 2,9407830
+ 2
+$mongo
+ input tdsexey.mgo
+ end
+$RUN tdsexey                      ! a big cal
+wind_data:wi_lz_wav_19941218_v01.dat
+ 0104
+ 2,9407830
+ 4
+$mongo
+ input tdsexey.mgo
+ end
+$EXIT
+$RUN tdsexey                      ! a big cal
+wind_data:wi_lz_wav_19951208_v01.dat
+ 0105
+ 1,2
+ 2
+$mongo
+ input tdsexey.mgo
+ end
+$EXIT
+$RUN tdsexey                      ! a big cal
+wind_data:wi_lz_wav_19941111_v01.dat
+ 0215
+ 2,72555
+ 2
+$mongo
+ input tdsexey.mgo
+ end
+$EXIT
+$RUN tdsexey                      ! a big cal
+wind_data:wi_lz_wav_19951216_v01.dat
+ 0105
+ 2,7047413
+ 4
+$EXIT
+$mongo
+ input tdsexey.mgo
+$RUN tdsexey                      ! a big cal
+wind_data:wi_lz_wav_19951220_v01.dat
+ 0105
+ 1,2
+ 4
+$mongo
+ input tdsexey.mgo
+$RUN tdsexey                      ! a big cal
+wind_data:wi_lz_wav_19951214_v01.dat
+ 0105
+ 1,2
+ 2
+$mongo
+ input tdsexey.mgo
+$RUN tdsexey                      ! a big cal
+wind_data:wi_lz_wav_19951212_v01.dat
+ 0105
+ 1,2
+ 2
+$mongo
+ input tdsexey.mgo
+$RUN tdsexey                      ! a big cal
+wind_data:wi_lz_wav_19951210_v01.dat
+ 0105
+ 1,2
+ 2
+$mongo
+ input tdsexey.mgo
+$RUN tdsexey                      ! a big cal
+wind_data:wi_lz_wav_19951208_v01.dat
+ 0105
+ 1,2
+ 2
+$mongo
+ input tdsexey.mgo
+$RUN tdsexey                      ! a big cal
+wind_data:wi_lz_wav_19951204_v01.dat
+ 0105
+ 1,2
+ 2
+$mongo
+ input tdsexey.mgo
+$EXIT
+$RUN tdsexey                      ! a big sine wave
+wind_data:wi_lz_wav_19951216_v01.dat
+ 0105
+ 2,7047413
+ 2
+$MONGO
+ INPUT TDSEXEY.MGO 
+$EXIT
+$RUN tdsexey                      ! a big sine wave
+wind_data:wi_lz_wav_19951222_v01.dat
+ 0036
+ 2,7643996
+ 2
+$MONGO
+ INPUT TDSEXEY.MGO 
+$EXIT
+$RUN tdsexey                      ! a big sine wave
+wind_data:wi_lz_wav_19950804_v01.dat
+ 0739
+ 2,1317326
+ 2
+$MONGO
+ INPUT TDSEXEY.MGO 
+$EXIT
+$RUN tdsexey
+wind_data:wi_lz_wav_19951220_v01.dat
+ 2303
+ 2,7399705
+ 2
+$EXIT
+$RUN tdsexey
+wind_data:wi_lz_wav_19951220_v01.dat
+ 0705
+ 2,7243550
+ 2
+$EXIT
+$RUN tdsexey
+wind_data:wi_lz_wav_19951220_v01.dat
+ 2303
+ 2,7399705
+ 2
+$EXIT
+$RUN tdsexey
+wind_data:wi_lz_wav_19951220_v01.dat
+ 2315
+ 2,7402949
+ 2
+$exit
+$RUN tdsexey
+wind_data:wi_lz_wav_19941129_v01.dat
+ 0656
+ 2,5841857
+ 2
+$EXIT
+$!RATIO STUDY
+$RUN tdsexey                      ! a big cal
+wind_data:wi_lz_wav_19951226_v01.dat
+ 0105
+ 1,2
+ 2

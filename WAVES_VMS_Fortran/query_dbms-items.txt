@@ -1,0 +1,2578 @@
+Report of wind_items.dat was written on 13-MAY-08
+  No constraint was put on the date of validity
+  No constraint was put on the DPU version number
+  No constraint was put on the FFT version number
+  No constraint was put on the TDS version number
+  No constraint was put on subtype
+
+ Total records selected =         1540
+
+RAD1        
+  CONSTANT  
+    DPU_CLOCK_R4            DPU clock at start of measurement cycle (seconds)  
+    FREQUENCY_STEP          Step in the frequency list                         
+    INSTR_HEADER            Length of instrument header (2nd header)           
+    INSTR_HEADER            Length of instrument header (2nd header)           
+    INSTR_HEADER            Length of instrument header (2nd header)           
+    INSTR_HEADER            Length of instrument header (2nd header)           
+    INTEGRATION_TIME_S_R4   .154, the RAD1 S integration time (seconds)        
+    INTEGRATION_TIME_Z_R4   .308, the RAD1 Z integration time (seconds)        
+    MEASURE_HEADER          Length of measurement header (3rd header)          
+    MEASURE_HEADER          Length of measurement header (3rd header)          
+    MEASURE_HEADER          Length of measurement header (3rd header)          
+    MEASURE_HEADER          Length of measurement header (3rd header)          
+    MEASURE_HEADER          Length of measurement header (3rd header)          
+    NUMBER_MEASURES_IN_SET  Number of measurements in a set                    
+    OFFSET_TO_NEXT_SET_R4   .358, the time between consecutive RAD1 sets (secon
+    OFFSET_WITHIN_SET_R4    Time between measurements in a set (seconds)       
+    PACKET_HEADER           Length of packet header (1st header)               
+    PACKET_ID               Number associated with RAD1 packets in primary head
+    PROGRAM_LIST_CHAR       RAD1 Choice of program table in frequency stepping 
+                                   0 = Solar Survey - 16        
+                                   1 = Planetary Survey - 16    
+                                   2 = Solar Survey - 32        
+                                   3 = Solar Survey SUM/SEP     
+                                   4 = Illegal                  
+                                   5 = Illegal                  
+                                   6 = Illegal                  
+                                   7 = Illegal                  
+                                   8 = 12 step program          
+                                   9 = RAM based                
+                                  10 = RAM based                
+                                  11 = RAM based                
+                                  12 = RAM based                
+                                  13 = RAM based                
+                                  14 = RAM based                
+                                  15 = RAM based                
+    RAD_ID                  Rad number (RAD1)                                  
+                                   1 = RAD1                     
+    START_OFFSET_SPRIME_R4  Time between EVENT start and the start of the first
+    START_OFFSET_ZS_R4      Time between EVENT start and the start of the first
+    SUN_ANGLE               Dummy value of the 4096 sun counter @ event start  
+    SUN_ANGLE_R4            Sun angle @ event start accurate to 0.1 degree     
+    SUN_CLOCK               Dummy 16-bit sun clock which includes both angle an
+    SUN_SPINS               Dummy 4-bit spin counter @ event start             
+    TRANSLATION_CHAR        RAD1 Translation table in frequency stepping mode  
+                                   0 = 16 frequency log         
+                                   1 = 16 frequency linear      
+                                   2 = 16 frequency Ulysses     
+                                   3 = 16 frequency TKR         
+                                   4 = 32 frequency log A       
+                                   5 = 32 frequency log B       
+                                   6 = 32 frequency linear A    
+                                   7 = 32 frequency linear B    
+                                   8 = Reiner 32 frequency log A
+                                   9 = Reiner 32 frequency log B
+                                  10 = Cummer/IMAGE 2 channels  
+                                  11 = RAM based                
+                                  12 = RAM based                
+                                  13 = RAM based                
+                                  14 = RAM based                
+                                  15 = RAM based                
+RAD1        
+  TELEMETRY 
+    ACTUAL_MEAS_CT          Total number of measurements actually in event     
+    ACTUAL_MEAS_CT          Total number of measurements actually in event     
+    ACTUAL_MEAS_CT          Total number of measurements actually in event     
+    ANTENNA_FLAG            Indication of antenna selection                    
+                                   0 = Ex                       
+                                   1 = Ey                       
+    AUTO_MASK               Mask for toggle; after sample, group, cycle, or lis
+    CAL_FLAG                Calibration flag                                   
+                                   0 = Normal                   
+                                   1 = CAL                      
+    CHANNEL_NUMBERS         Step in the frequency list                         
+    DPU_CLOCK               DPU clock at start of measurement cycle (tics)     
+    DPU_MAJOR_FRAME         DPU major frame counter at start of measurement cyc
+    DPU_MAJOR_FRAME         DPU major frame counter at start of measurement cyc
+    DPU_MINOR_FRAME         DPU minor frame at start of measurement cycle, same
+    DPU_MINOR_FRAME         DPU minor frame counter at start of measurement cyc
+    DPU_MINOR_FRAME         DPU minor frame counter at start of measurement cyc
+    END_DPU_MAJOR           DPU Major Frame counter at end of measurement cycle
+    END_DPU_MAJOR           DPU Major Frame counter at end of measurement cycle
+    END_DPU_MINOR           DPU minor frame counter at end of measurement cycle
+    END_DPU_MINOR           DPU minor frame counter at end of measurement cycle
+    EVENT_STATE             Event status indicator (fixed tune, linear sweep, l
+                                   0 = Error                    
+                                   1 = Fixed Tune               
+                                   2 = Linear Sweep             
+                                   3 = List                     
+    EXPECT_MEAS_CT          Expected number of measurements in event           
+    EXPECT_MEAS_CT          Expected number of measurements in event           
+    EXPECT_MEAS_CT          Expected number of measurements in event           
+    FIRST_FREQ_NUM          Channel number for first frequency in event        
+    FIRST_FREQ_NUM          Channel number for first frequency in event        
+    FREQUENCIES             Channel numbers telemetered - old name             
+    FREQUENCY_STEP          Step in frequency table                            
+    FREQUENCY_STEP          Step in the frequency list                         
+    FREQUENCY_STEP          Step in the frequency list                         
+    FREQ_TABLE              Choice of frequency table in frequency stepping (me
+    GROUP_LOOP              Number of times the group of pointer_table elements
+    GROUP_SIZE              Number of pointer-table elements sampled in a logic
+    LAST_FREQ_NUM           Channel number for first frequency in event        
+    PACKET_COUNT            Count of packets in event                          
+    POLAR_FLAG              Polarization flag 1=on                             
+                                   0 = No Polar                 
+                                   1 = Polar                    
+    PROGRAM_LIST            Choice of frequency table in frequency stepping (me
+    PROGRAM_LIST            Pointer table to be employed in stepping through f'
+    S                       Values from S receiver for one measurement cycle   
+    S                       Values from S receiver for one measurement cycle   
+    STEPS                   Total number of steps in the measurement cycle     
+    SUM_FLAG                Flag showing S and Z are summed into S if =0       
+                                   0 = SUM                      
+                                   1 = SEP                      
+    SUM_LOOP                Normally 1, but 2 if a toggle is set for after a wh
+    SUN_ANGLE               Accurate value of the 4096 sun counter @ event star
+    SUN_CLOCK               16-bit sun clock which includes both angle and spin
+    SUN_SPINS               Arbitrary (4-bit) spin counter @ event start       
+    S_PRIME                 Values of S' during one measurement cycle          
+    S_PRIME                 Values of S' during one measurement cycle          
+    TRANSLATION             Number of the translation table (list of frequencie
+    TRANSLATION             Translation table in frequency stepping (measure) m
+    XLATE_TABLE             Translation table in frequency stepping (measure) m
+    XLAT_MASK               15 for 16-element frequency list, 31 for 32-element
+    Z                       Z values from one complete measurement cycle       
+    Z                       Z values from one complete measurement cycle       
+RAD1        
+  FILE      
+    CHANNEL_COVERAGE        Trivial list of channel numbers 0-255              
+    CHANNEL_LIST            frequency/translate lists for list mode (channel #)
+    FREQUENCY_COVERAGE_HZ_R4List of frequencies in ascending order by channel (
+    FREQUENCY_LIST_HZ_R4    Frequency/translate lists for list mode (Hertz)    
+    POINTER_LIST            Pointer lists for list mode                        
+    TM_BACKGROUND_RAD1_SEP  'List by channel of RAD1 S-SEP backgrounds in TM un
+    TM_BACKGROUND_RAD1_SEP  'List by channel of RAD1 S-SEP backgrounds in TM un
+    TM_BACKGROUND_RAD1_SUM  'List by channel of RAD1 S-SUM backgrounds in TM un
+    TM_BACKGROUND_RAD1_SUM  'List by channel of RAD1 S-SUM backgrounds in TM un
+RAD1        
+  FUNCTION  
+    CHANNEL_NUMBERS         Channel numbers                                    
+    CHANNEL_NUMBERS         Channel numbers                                    
+    CHANNEL_NUMBERS         Channel numbers                                    
+    FREQUENCIES             Channel numbers - old name                         
+    FREQUENCIES             Channel numbers - old name                         
+    FREQUENCIES_HZ_R4       Sampled frequencies (Hertz)                        
+    FREQUENCIES_HZ_R4       Sampled frequencies (Hertz)                        
+    S_PRIME_SCET_R8         SCET'S for each S_PRIME measurement (UR8)          
+    S_SCET_R8               SCET'S for each measurement (UR8)                  
+    TOGGLE_LIST             *NONE*                                             
+    Z_SCET_R8               SCET'S for each measurement (UR8)                  
+RAD1        
+  PHYSICAL  
+    SP_DBVOLTS_R4           RAD S Prime values in dB volts                     
+    SP_LOGSFU_R4            RAD S Prime values in log(sfu)                     
+    SP_LOGWATTS_R4          RAD S Prime values in log(Watts/m^2Hz)             
+    SP_MICROVOLTS_R4        RAD S Prime values in microvolts/sqrt(Hz) at preamp
+    SP_SFU_R4               RAD S Prime values in solar flux units(sfu)        
+    SP_WATTS_R4             RAD S Prime values in Watts/m^2Hz                  
+    S_DBVOLTS_R4            RAD S values in dB volts                           
+    S_LOGSFU_R4             RAD S values in log(sfu)                           
+    S_LOGWATTS_R4           RAD S values in log(Watts/m^2Hz)                   
+    S_MICROVOLTS_R4         RAD S values in microvolts/sqrt(Hz) at preamp input
+    S_SFU_R4                RAD S values in solar flux units(sfu)              
+    S_WATTS_R4              RAD S values in Watts/m^2Hz                        
+    Z_DBVOLTS_R4            RAD Z values in dB volts                           
+    Z_LOGSFU_R4             RAD Z values in log(sfu)                           
+    Z_LOGWATTS_R4           RAD Z values in log(Watts/m^2Hz)                   
+    Z_MICROVOLTS_R4         RAD Z values in microvolts/sqrt(Hz) at preamp input
+    Z_SFU_R4                RAD Z values in solar flux units(sfu)              
+    Z_WATTS_R4              RAD Z values in Watts/m^2Hz                        
+RAD2        
+  CONSTANT  
+    ANTENNA_FLAG            Indication of antenna selection (must be Ey)       
+                                   1 = Ey                       
+    DPU_CLOCK_R4            DPU clock at start of measurement cycle (seconds)  
+    FREQUENCY_STEP          Step in the frequency list                         
+    INSTR_HEADER            Length of instrument header (2nd header)           
+    INSTR_HEADER            Length of instrument header (2nd header)           
+    INSTR_HEADER            Length of instrument header (2nd header)           
+    INSTR_HEADER            Length of instrument header (2nd header)           
+    INTEGRATION_TIME_S_R4   .020, the RAD2 S integration time (seconds)        
+    INTEGRATION_TIME_Z_R4   .040, the RAD2 Z integration time (seconds)        
+    MEASURE_HEADER          Length of measurement header (3rd header)          
+    MEASURE_HEADER          Length of measurement header (3rd header)          
+    MEASURE_HEADER          Length of measurement header (3rd header)          
+    MEASURE_HEADER          Length of measurement header (3rd header)          
+    MEASURE_HEADER          Length of measurement header (3rd header)          
+    NUMBER_MEASURES_IN_SET  Number of measurements in a set                    
+    OFFSET_TO_NEXT_SET_R4   .063, the time between consecutive RAD2 sets (secon
+    OFFSET_WITHIN_SET_R4    Time between measurements in a set (seconds)       
+    PACKET_HEADER           Length of packet header (1st header)               
+    PACKET_ID               Fixed value of the packet ID for RAD2 in primary he
+    PROGRAM_LIST_CHAR       RAD2 Choice of program table in frequency stepping 
+                                   0 = Solar Survey - 16        
+                                   1 = Planetary Survey - 16    
+                                   2 = Solar Survey - 12/spin   
+                                   3 = Solar Survey - 12        
+                                   4 = Solar Survey - SUM/SEP   
+                                   5 = Planetary Survey - 12    
+                                   6 = Illegal                  
+                                   7 = Illegal                  
+                                   8 = 12 step program          
+                                   9 = RAM based                
+                                  10 = RAM based                
+                                  11 = RAM based                
+                                  12 = RAM based                
+                                  13 = RAM based                
+                                  14 = RAM based                
+                                  15 = RAM based                
+    RAD_ID                  Rad number (RAD2)                                  
+                                   2 = RAD2                     
+    START_OFFSET_SPRIME_R4  Time between EVENT start and the start of the first
+    START_OFFSET_ZS_R4      Time between EVENT start and the start of the first
+    SUN_ANGLE               Dummy value of the 4096 sun counter @ event start  
+    SUN_ANGLE_R4            Sun angle @ event start accurate to 0.1 degree     
+    SUN_CLOCK               Dummy 16-bit sun clock which includes both angle an
+    SUN_SPINS               Dummy 4-bit spin counter @ event start             
+    TRANSLATION_CHAR        RAD2 Translation table in frequency stepping mode  
+                                   0 = 16 frequency log         
+                                   1 = 16 frequency linear      
+                                   2 = 12 frequency log         
+                                   3 = 12 frequency linear      
+                                   4 = 32 frequency log A       
+                                   5 = 32 frequency log B       
+                                   6 = 32 frequency linear A    
+                                   7 = 32 frequency linear B    
+                                   8 = Rodriguez 2A (2 step)    
+                                   9 = Rodriguez 2B/2C (2 step) 
+                                  10 = Rodriguez 4A (2 step)    
+                                  11 = Rodriguez 4B (2 step)    
+                                  12 = Rodriguez S1 (2 step)    
+                                  13 = Rodriguez 5B (3 step)    
+                                  14 = Rodriguez 7C (3 step)    
+                                  15 = Rodriguez (2 step)       
+    TRANSLATION_CHAR        RAD2 Translation table in frequency stepping mode  
+                                   0 = 16 frequency log         
+                                   1 = 16 frequency linear      
+                                   2 = 12 frequency log         
+                                   3 = 12 frequency linear      
+                                   4 = 32 frequency log A       
+                                   5 = 32 frequency log B       
+                                   6 = 32 frequency linear A    
+                                   7 = 32 frequency linear B    
+                                   8 = Lunar select (4 step)    
+                                   9 = unused                   
+                                  10 = Rodriguez 4A (2 step)    
+                                  11 = unused                   
+                                  12 = unused                   
+                                  13 = unused                   
+                                  14 = unused                   
+                                  15 = unused                   
+RAD2        
+  TELEMETRY 
+    ACTUAL_MEAS_CT          Total number of measurements actually in event     
+    ACTUAL_MEAS_CT          Total number of measurements actually in event     
+    ACTUAL_MEAS_CT          Total number of measurements actually in event     
+    AUTO_MASK               Mask for toggle; after sample, group, cycle, or lis
+    CAL_FLAG                Calibration flag                                   
+                                   0 = Normal                   
+                                   1 = CAL                      
+    CHANNEL_NUMBERS         Step in the frequency list                         
+    DPU_CLOCK               DPU clock at start of measurement cycle (tics)     
+    DPU_MAJOR_FRAME         DPU major frame counter at start of measurement cyc
+    DPU_MAJOR_FRAME         DPU major frame counter at start of measurement cyc
+    DPU_MINOR_FRAME         DPU minor frame at start of measurement cycle, same
+    DPU_MINOR_FRAME         DPU minor frame counter at start of measurement cyc
+    DPU_MINOR_FRAME         DPU minor frame counter at start of measurement cyc
+    END_DPU_MAJOR           DPU Major Frame counter at end of measurement cycle
+    END_DPU_MAJOR           DPU Major Frame counter at end of measurement cycle
+    END_DPU_MINOR           DPU minor frame counter at end of measurement cycle
+    END_DPU_MINOR           DPU minor frame counter at end of measurement cycle
+    EVENT_STATE             Event status indicator (fixed tune, linear sweep, l
+                                   0 = Error                    
+                                   1 = Fixed Tune               
+                                   2 = Linear Sweep             
+                                   3 = List                     
+    EXPECT_MEAS_CT          Expected number of measurements in event           
+    EXPECT_MEAS_CT          Expected number of measurements in event           
+    EXPECT_MEAS_CT          Expected number of measurements in event           
+    FIRST_FREQ_NUM          Channel number for first frequency in event        
+    FIRST_FREQ_NUM          Channel number for first frequency in event        
+    FREQUENCIES             Channel numbers telemetered - old name             
+    FREQUENCY_STEP          Step in frequency table                            
+    FREQUENCY_STEP          Step in the frequency list                         
+    FREQUENCY_STEP          Step in the frequency list                         
+    FREQ_TABLE              Choice of frequency table in frequency stepping (me
+    GROUP_LOOP              Number of times the group of pointer_table elements
+    GROUP_SIZE              Number of pointer-table elements sampled in a logic
+    LAST_FREQ_NUM           Channel number for first frequency in event        
+    PACKET_COUNT            Count of packets in event                          
+    POLAR_FLAG              Polarization flag 1=on                             
+                                   0 = No Polar                 
+                                   1 = Polar                    
+    PROGRAM_LIST            Choice of frequency table in frequency stepping (me
+    PROGRAM_LIST            Pointer table to be employed in stepping through f'
+    S                       Values from S receiver for one measurement cycle   
+    S                       Values from S receiver for one measurement cycle   
+    STEPS                   Total number of steps in the measurement cycle     
+    SUM_FLAG                Flag showing S and Z are summed into S if =0       
+                                   0 = SUM                      
+                                   1 = SEP                      
+    SUM_LOOP                Normally 1, but 2 if a toggle is set for after a wh
+    SUN_ANGLE               Accurate value of the 4096 sun counter @ event star
+    SUN_CLOCK               16-bit sun clock which includes both angle and spin
+    SUN_SPINS               Arbitrary (4-bit) spin counter @ event start       
+    S_PRIME                 Values of S' during one measurement cycle          
+    S_PRIME                 Values of S' during one measurement cycle          
+    TRANSLATION             Number of the translation table (list of frequencie
+    TRANSLATION             Translation table in frequency stepping (measure) m
+    XLATE_TABLE             Translation table in frequency stepping (measure) m
+    XLAT_MASK               15 for 16-element frequency list, 31 for 32-element
+    Z                       Z values from one complete measurement cycle       
+    Z                       Z values from one complete measurement cycle       
+RAD2        
+  FILE      
+    CHANNEL_COVERAGE        Trivial list of channel numbers 0-255              
+    CHANNEL_LIST            frequency/translate lists for list mode (channel #)
+    CHANNEL_LIST            frequency/translate lists for list mode (channel #)
+    FREQUENCY_COVERAGE_HZ_R4List of frequencies in ascending order by channel (
+    FREQUENCY_LIST_HZ_R4    frequency/translate lists for list mode (Hertz)    
+    FREQUENCY_LIST_HZ_R4    frequency/translate lists for list mode (Hertz)    
+    POINTER_LIST            Pointer lists for list mode                        
+    TM_BACKGROUND_RAD2_SEP  'List by channel of RAD2 S-SEP backgrounds in TM un
+    TM_BACKGROUND_RAD2_SEP  'List by channel of RAD2 S-SEP backgrounds in TM un
+    TM_BACKGROUND_RAD2_SUM  'List by channel of RAD2 S-SUM backgrounds in TM un
+    TM_BACKGROUND_RAD2_SUM  'List by channel of RAD2 S-SUM backgrounds in TM un
+RAD2        
+  FUNCTION  
+    CHANNEL_NUMBERS         Channel numbers                                    
+    CHANNEL_NUMBERS         Channel numbers                                    
+    CHANNEL_NUMBERS         Channel numbers                                    
+    FREQUENCIES             Channel numbers - old name                         
+    FREQUENCIES             Channel numbers - old name                         
+    FREQUENCIES_HZ_R4       Sampled frequencies (Hertz)                        
+    FREQUENCIES_HZ_R4       Sampled frequencies (Hertz)                        
+    S_PRIME_SCET_R8         SCET'S for each S_PRIME measurement (UR8)          
+    S_SCET_R8               SCET'S for each measurement (UR8)                  
+    TOGGLE_LIST             *NONE*                                             
+    Z_SCET_R8               SCET'S for each measurement (UR8)                  
+RAD2        
+  PHYSICAL  
+    SP_DBVOLTS_R4           RAD S Prime values in dB volts                     
+    SP_LOGSFU_R4            RAD S Prime values in log(sfu)                     
+    SP_LOGWATTS_R4          RAD S Prime values in log(Watts/m^2Hz)             
+    SP_MICROVOLTS_R4        RAD S Prime values in microvolts/sqrt(Hz) at preamp
+    SP_SFU_R4               RAD S Prime values in solar flux units(sfu)        
+    SP_WATTS_R4             RAD S Prime values in Watts/m^2Hz                  
+    S_DBVOLTS_R4            RAD S values in dB volts                           
+    S_LOGSFU_R4             RAD S values in log(sfu)                           
+    S_LOGWATTS_R4           RAD S values in log(Watts/m^2Hz)                   
+    S_MICROVOLTS_R4         RAD S values in microvolts/sqrt(Hz) at preamp input
+    S_SFU_R4                RAD S values in solar flux units(sfu)              
+    S_WATTS_R4              RAD S values in Watts/m^2Hz                        
+    Z_DBVOLTS_R4            RAD Z values in dB volts                           
+    Z_LOGSFU_R4             RAD Z values in log(sfu)                           
+    Z_LOGWATTS_R4           RAD Z values in log(Watts/m^2Hz)                   
+    Z_MICROVOLTS_R4         RAD Z values in microvolts/sqrt(Hz) at preamp input
+    Z_SFU_R4                RAD Z values in solar flux units(sfu)              
+    Z_WATTS_R4              RAD Z values in Watts/m^2Hz                        
+FFTL        
+  CONSTANT  
+    BOTTOM_FREQUENCY_R4     Bottom frequency for this band (Hertz)             
+    FILTER_FREQUENCY_R4     Low pass filter frequency for FFTl (Hertz)         
+    FUNDAMENTAL_FREQUENCY_R4FFT Fundamental (lowest) frequency (Hertz)         
+    INSTR_HEADER            "LENGTH OF INSTRUMENT HEADER"                      
+    MEASURE_HEADER          !LENGTH OF MEASUREMENT HEADER!                     
+    NUMBER_OF_SAMPLES       Time series sample size (samples)                  
+    NYQUIST_FREQUENCY_R4    Highest resolved frequency (Hertz)                 
+    PACKET_HEADER           "SIZE OF PACKET HEADER"                            
+    PACKET_ID               "Number associated with FFTl packets in primary hea
+    RX_NUMBER               Receiver number for FFTl (3)                       
+    SAMPLE_FILTER           Low pass filter value for FFTs H, M or L           
+                                   1 = 8,900 Hz                 
+                                   2 = 2,225 Hz                 
+                                   3 = 140 Hz                   
+    SAMPLE_FREQUENCY        Time domain sampling frequency for FFTs H, M or L  
+                                   1 = 21,860 S/S               
+                                   2 = 5,465 S/S                
+                                   3 = 341.6 S/S                
+    SAMPLE_FREQUENCY_R4     Time domain sampling frequency for FFTl (samples/se
+    SAMPLE_PERIOD_R4        Time between time series samples (Seconds)         
+    STEP_FREQUENCY_R4       Frequency step size (Hertz)                        
+    TIME_SERIES_PERIOD_R4   Time series collection period (Seconds)            
+    TOP_FREQUENCY_R4        Top frequency for this band (Hertz)                
+FFTL        
+  TELEMETRY 
+    CHANNEL_NUMBER          "CHANNEL NUMBER FOR THIS SPECTRUM"                 
+    DATA                    "32 bit data - KAG"                                
+    DATA                    "32 bit data - KAG"                                
+    DATA                    "8 bit data - KAG"                                 
+    DPU_MAJOR_FRAME         From associated HK of encompassing major frame     
+    DPU_MINOR_FRAME         Minor frame number of first minor frame in 1st pack
+    EXPONENT                "EXPONENT REPRESENTING GAIN"                       
+    MANTISSA                "MEASUREMENT AT THE GIVEN GAIN LEVEL"              
+    PACKET_COUNT            "COUNT OF THIS PACKET WITHIN EVENT"                
+    POWER_SPECTRUM          "ENTIRE POWER SPECTRUM FROM ONE CHANNEL"           
+    SOURCE                  !FFT source antenna!                               
+                                   1 = ExAC                     
+                                   2 = EyAC                     
+                                   3 = EzAC                     
+                                   4 = ExDC                     
+                                   5 = EyDC                     
+                                   6 = EzDC                     
+                                   7 = Bx                       
+                                   8 = By                       
+                                   9 = Bz                       
+    X_AVERAGE               "Subtype 5, 8-bit bundled data - KAG"              
+    X_BUNDLE_COUNT          "Subtype 5, number of bundles - KAG"               
+    X_PEAK                  "Subtype 5, 8-bit bundled data - KAG"              
+    X_PHASE                 "Subtype 5, 8-bit bundled data - KAG"              
+FFTL        
+  FILE      
+    UNBIASING_OFFSETS       A set of 40 integers used for unbiasing FFT data   
+FFTL        
+  PHYSICAL  
+    BX_NT2/HZ               Only the Bx time series is returned (nT*Hz)        
+    BY_NT2/HZ               Only the By time series is returned (nT*Hz)        
+    BZ_NT2/HZ               Only the Bz time series is returned (nT*Hz)        
+    B_NT*HZ                 Any B-field time series is returned (nT*Hz)        
+    B_NT2/HZ                Any B-field time series is returned (nT*Hz)        
+    EXAC_VOLTS/METER        Only the ExAC time series is retured               
+    EXDC_VOLTS/METER        Only the ExDC time series is returned              
+    EYAC_VOLTS/METER        Only the EyAC time series is returned              
+    EYDC_VOLTS/METER        Only the EyDC time series is returned              
+    EZAC_VOLTS/METER        Only the EzAC time series is returned              
+    EZDC_VOLTS/METER        Only the EzDC time series is returned              
+    E_VOLTS/METER           Any E-field time series is returned                
+    SPECTRUM_BX_DBNT        Only the Bx power spectrum is returned             
+    SPECTRUM_BY_DBNT        Only the By power spectrum is returned             
+    SPECTRUM_BZ_DBNT        Only the Bz power spectrum is returned             
+    SPECTRUM_B_DBNT         Any B-field power spectrum is returned             
+    SPECTRUM_DB             Any Power spectrum - B or E is returned            
+    SPECTRUM_EXAC_DBVOLTS   Only the ExAC power spectrum is returned           
+    SPECTRUM_EXDC_DBVOLTS   Only the ExDC power spectrum is returned           
+    SPECTRUM_EYAC_DBVOLTS   Only the EyAC power spectrum is returned           
+    SPECTRUM_EYDC_DBVOLTS   Only the EyDC power spectrum is returned           
+    SPECTRUM_EZAC_DBVOLTS   Only the EzAC power spectrum is returned           
+    SPECTRUM_EZDC_DBVOLTS   Only the EzDC power spectrum is returned           
+    SPECTRUM_E_DBVOLTS      Any E-field power spectrum is returned             
+    VOLTS/METER             Any valid voltage time series is returned          
+FFTM        
+  CONSTANT  
+    BOTTOM_FREQUENCY_R4     Bottom frequency for this band (Hertz)             
+    FILTER_FREQUENCY_R4     Low pass filter frequency for FFTm (Hertz)         
+    FUNDAMENTAL_FREQUENCY_R4FFT Fundamental (lowest) frequency (Hertz)         
+    INSTR_HEADER            "LENGTH OF INSTRUMENT HEADER"                      
+    MEASURE_HEADER          !LENGTH OF MEASUREMENT HEADER!                     
+    NUMBER_OF_SAMPLES       Time series sample size (samples)                  
+    NYQUIST_FREQUENCY_R4    Highest resolved frequency (Hertz)                 
+    PACKET_HEADER           "SIZE OF PACKET HEADER"                            
+    PACKET_ID               "Number associated with FFTm packets in primary hea
+    RX_NUMBER               Receiver number for FFTm (2)                       
+    SAMPLE_FILTER           Low pass filter value for FFTs H, M or L           
+                                   1 = 8,900 Hz                 
+                                   2 = 2,225 Hz                 
+                                   3 = 140 Hz                   
+    SAMPLE_FREQUENCY        Time domain sampling frequency for FFTs H, M or L  
+                                   1 = 21,860 S/S               
+                                   2 = 5,465 S/S                
+                                   3 = 341.6 S/S                
+    SAMPLE_FREQUENCY_R4     Time domain sampling frequency for FFTm (samples/se
+    SAMPLE_PERIOD_R4        Time between time series samples (Seconds)         
+    STEP_FREQUENCY_R4       Frequency step size (Hertz)                        
+    TIME_SERIES_PERIOD_R4   Time series collection period (Seconds)            
+    TOP_FREQUENCY_R4        Top frequency for this band (Hertz)                
+FFTM        
+  TELEMETRY 
+    CHANNEL_NUMBER          "CHANNEL NUMBER FOR THIS SPECTRUM"                 
+    DATA                    "32 bit data - KAG"                                
+    DATA                    "32 bit data - KAG"                                
+    DATA                    "8 bit data - KAG"                                 
+    DPU_MAJOR_FRAME         From associated HK of encompassing major frame     
+    DPU_MINOR_FRAME         Minor frame number of first minor frame in 1st pack
+    EXPONENT                "EXPONENT REPRESENTING GAIN"                       
+    MANTISSA                "MEASUREMENT AT THE GIVEN GAIN LEVEL"              
+    PACKET_COUNT            "COUNT OF THIS PACKET WITHIN EVENT"                
+    POWER_SPECTRUM          "ENTIRE POWER SPECTRUM FROM ONE CHANNEL"           
+    SOURCE                  !FFT source antenna!                               
+                                   1 = ExAC                     
+                                   2 = EyAC                     
+                                   3 = EzAC                     
+                                   4 = ExDC                     
+                                   5 = EyDC                     
+                                   6 = EzDC                     
+                                   7 = Bx                       
+                                   8 = By                       
+                                   9 = Bz                       
+    X_AVERAGE               "Subtype 5, 8-bit bundled data - KAG"              
+    X_BUNDLE_COUNT          "Subtype 5, number of bundles - KAG"               
+    X_PEAK                  "Subtype 5, 8-bit bundled data - KAG"              
+    X_PHASE                 "Subtype 5, 8-bit bundled data - KAG"              
+FFTM        
+  FILE      
+    UNBIASING_OFFSETS       A set of 40 integers used for unbiasing FFT data   
+FFTM        
+  PHYSICAL  
+    BX_NT2/HZ               Only the Bx time series is returned (nT*Hz)        
+    BY_NT2/HZ               Only the By time series is returned (nT*Hz)        
+    BZ_NT2/HZ               Only the Bz time series is returned (nT*Hz)        
+    B_NT*HZ                 Any B-field time series is returned (nT*Hz)        
+    B_NT2/HZ                Any B-field time series is returned (nT*Hz)        
+    EXAC_VOLTS/METER        Only the ExAC time series is retured               
+    EXDC_VOLTS/METER        Only the ExDC time series is returned              
+    EYAC_VOLTS/METER        Only the EyAC time series is returned              
+    EYDC_VOLTS/METER        Only the EyDC time series is returned              
+    EZAC_VOLTS/METER        Only the EzAC time series is returned              
+    EZDC_VOLTS/METER        Only the EzDC time series is returned              
+    E_VOLTS/METER           Any E-field time series is returned                
+    SPECTRUM_BX_DBNT        Only the Bx power spectrum is returned             
+    SPECTRUM_BY_DBNT        Only the By power spectrum is returned             
+    SPECTRUM_BZ_DBNT        Only the Bz power spectrum is returned             
+    SPECTRUM_B_DBNT         Any B-field power spectrum is returned             
+    SPECTRUM_DB             Any Power spectrum - B or E is returned            
+    SPECTRUM_EXAC_DBVOLTS   Only the ExAC power spectrum is returned           
+    SPECTRUM_EXDC_DBVOLTS   Only the ExDC power spectrum is returned           
+    SPECTRUM_EYAC_DBVOLTS   Only the EyAC power spectrum is returned           
+    SPECTRUM_EYDC_DBVOLTS   Only the EyDC power spectrum is returned           
+    SPECTRUM_EZAC_DBVOLTS   Only the EzAC power spectrum is returned           
+    SPECTRUM_EZDC_DBVOLTS   Only the EzDC power spectrum is returned           
+    SPECTRUM_E_DBVOLTS      Any E-field power spectrum is returned             
+    VOLTS/METER             Any valid voltage time series is returned          
+FFTH        
+  CONSTANT  
+    BOTTOM_FREQUENCY_R4     Bottom frequency for this band (Hertz)             
+    FILTER_FREQUENCY_R4     Low pass filter frequency for FFTh (Hertz)         
+    FUNDAMENTAL_FREQUENCY_R4FFT Fundamental (lowest) frequency (Hertz)         
+    INSTR_HEADER            "LENGTH OF INSTRUMENT HEADER"                      
+    MEASURE_HEADER          !LENGTH OF MEASUREMENT HEADER!                     
+    NUMBER_OF_SAMPLES       Time series sample size (samples)                  
+    NYQUIST_FREQUENCY_R4    Highest resolved frequency (Hertz)                 
+    PACKET_HEADER           "SIZE OF PACKET HEADER"                            
+    PACKET_ID               "Number associated with FFTH packets in primary hea
+    RX_NUMBER               Receiver number for FFTh (1)                       
+    SAMPLE_FILTER           Low pass filter value for FFTs H, M or L           
+                                   1 = 8,900 Hz                 
+                                   2 = 2,225 Hz                 
+                                   3 = 140 Hz                   
+    SAMPLE_FREQUENCY        Time domain sampling frequency for FFTs H, M or L  
+                                   1 = 21,860 S/S               
+                                   2 = 5,465 S/S                
+                                   3 = 341.6 S/S                
+    SAMPLE_FREQUENCY_R4     Time domain sampling frequency for FFTh (samples/se
+    SAMPLE_PERIOD_R4        Time between time series samples (Seconds)         
+    STEP_FREQUENCY_R4       Frequency step size (Hertz)                        
+    TIME_SERIES_PERIOD_R4   Time series collection period (Seconds)            
+    TOP_FREQUENCY_R4        Top frequency for this band (Hertz)                
+FFTH        
+  TELEMETRY 
+    CHANNEL_NUMBER          "CHANNEL NUMBER FOR THIS SPECTRUM"                 
+    DATA                    "32 bit data - KAG"                                
+    DATA                    "32 bit data - KAG"                                
+    DATA                    "8 bit data - KAG"                                 
+    DPU_MAJOR_FRAME         From associated HK of encompassing major frame     
+    DPU_MINOR_FRAME         Minor frame number of first minor frame in 1st pack
+    EXPONENT                "EXPONENT REPRESENTING GAIN"                       
+    MANTISSA                "MEASUREMENT AT THE GIVEN GAIN LEVEL"              
+    PACKET_COUNT            "COUNT OF THIS PACKET WITHIN EVENT"                
+    POWER_SPECTRUM          "ENTIRE POWER SPECTRUM FROM ONE CHANNEL"           
+    SOURCE                  !FFT source antenna!                               
+                                   1 = ExAC                     
+                                   2 = EyAC                     
+                                   3 = EzAC                     
+                                   4 = ExDC                     
+                                   5 = EyDC                     
+                                   6 = EzDC                     
+                                   7 = Bx                       
+                                   8 = By                       
+                                   9 = Bz                       
+    X_AVERAGE               "Subtype 5, 8-bit bundled data - KAG"              
+    X_BUNDLE_COUNT          "Subtype 5, number of bundles - KAG"               
+    X_PEAK                  "Subtype 5, 8-bit bundled data - KAG"              
+    X_PHASE                 "Subtype 5, 8-bit bundled data - KAG"              
+FFTH        
+  FILE      
+    UNBIASING_OFFSETS       A set of 40 integers used for unbiasing FFT data   
+FFTH        
+  PHYSICAL  
+    BX_NT2/HZ               Only the Bx time series is returned (nT*Hz)        
+    BY_NT2/HZ               Only the By time series is returned (nT*Hz)        
+    BZ_NT2/HZ               Only the Bz time series is returned (nT*Hz)        
+    B_NT*HZ                 Any B-field time series is returned (nT*Hz)        
+    B_NT2/HZ                Any B-field time series is returned (nT*Hz)        
+    EXAC_VOLTS/METER        Only the ExAC time series is retured               
+    EXDC_VOLTS/METER        Only the ExDC time series is returned              
+    EYAC_VOLTS/METER        Only the EyAC time series is returned              
+    EYDC_VOLTS/METER        Only the EyDC time series is returned              
+    EZAC_VOLTS/METER        Only the EzAC time series is returned              
+    EZDC_VOLTS/METER        Only the EzDC time series is returned              
+    E_VOLTS/METER           Any E-field time series is returned                
+    SPECTRUM_BX_DBNT        Only the Bx power spectrum is returned             
+    SPECTRUM_BY_DBNT        Only the By power spectrum is returned             
+    SPECTRUM_BZ_DBNT        Only the Bz power spectrum is returned             
+    SPECTRUM_B_DBNT         Any B-field power spectrum is returned             
+    SPECTRUM_DB             Any Power spectrum - B or E is returned            
+    SPECTRUM_EXAC_DBVOLTS   Only the ExAC power spectrum is returned           
+    SPECTRUM_EXDC_DBVOLTS   Only the ExDC power spectrum is returned           
+    SPECTRUM_EYAC_DBVOLTS   Only the EyAC power spectrum is returned           
+    SPECTRUM_EYDC_DBVOLTS   Only the EyDC power spectrum is returned           
+    SPECTRUM_EZAC_DBVOLTS   Only the EzAC power spectrum is returned           
+    SPECTRUM_EZDC_DBVOLTS   Only the EzDC power spectrum is returned           
+    SPECTRUM_E_DBVOLTS      Any E-field power spectrum is returned             
+    VOLTS/METER             Any valid voltage time series is returned          
+TNR         
+  CONSTANT  
+    ANTENNA_1               Antenna used for the SPECTRA_1 family              
+                                   1 = Ex                       
+                                   2 = Ey                       
+                                   3 = Ez                       
+    ANTENNA_1               Antenna used for the SPECTRA_1 family              
+                                   1 = Ex                       
+                                   2 = Ey                       
+                                   3 = Ez                       
+    ANTENNA_1               Antenna used for the SPECTRA_1 family              
+                                   1 = Ex                       
+                                   2 = Ey                       
+                                   3 = Ez                       
+    ANTENNA_1               Antenna used for the SPECTRA_1 family              
+                                   1 = Ex                       
+                                   2 = Ey                       
+                                   3 = Ez                       
+    ANTENNA_1               Antenna used for the SPECTRA_1 family              
+                                   1 = Ex                       
+                                   2 = Ey                       
+                                   3 = Ez                       
+    ANTENNA_2               Antenna used for the SPECTRA_2 family              
+                                   0 = None                     
+    ANTENNA_2               Antenna used for the SPECTRA_2 family              
+                                   1 = Ex                       
+                                   2 = Ey                       
+                                   3 = Ez                       
+    ANTENNA_A               Antenna used for TNR_A measurements                
+                                   1 = Ex                       
+    ANTENNA_A               Antenna used for TNR_A measurements                
+                                   2 = Ey                       
+    ANTENNA_B               Antenna used for TNR_B measurements                
+                                   2 = Ey                       
+    ANTENNA_B               Antenna used for TNR_B measurements                
+                                   3 = Ez                       
+    ANTENNA_B               Antenna used for TNR_B measurements                
+                                   3 = Ez                       
+    ANTENNA_B               Antenna used for TNR_B measurements                
+                                   1 = Ex                       
+    ANTENNA_SHORT           Antenna used for the SPECTRA_SHORT family          
+                                   0 = None                     
+    ANTENNA_SHORT           Antenna used for the SPECTRA_SHORT family          
+                                   1 = Ex                       
+                                   2 = Ey                       
+                                   3 = Ez                       
+    CHANS_PER_BAND          Number of channels per spectrum for modes 0 & 1    
+    CHANS_PER_BAND          Number of channels per spectrum for mode 4         
+    CHANS_PER_BAND          Number of channels per spectrum for modes 2 & 3    
+    CHANS_PER_BAND_1        Number of channels per spectrum for modes 0 & 1    
+    CHANS_PER_BAND_1        Number of channels per spectrum for mode 4         
+    CHANS_PER_BAND_1        Number of channels per spectrum for modes 2 & 3    
+    CHANS_PER_BAND_2        Number of channels per spectrum for mode 4         
+    CHANS_PER_BAND_SHORT    Number of channels per spectrum for short spectra  
+    DIAGNOSTIC_MODE         Indicates diagnostic mode sampling - PACKET SUBTYPE
+                                   0 = OFF                      
+    DIAGNOSTIC_MODE         Indicates diagnostic mode sampling - PACKET SUBTYPE
+                                   1 = ON                       
+    EVENT_INTEGRATE_SECS_R4 TNR Integration time (seconds)                     
+    FAST_MODE               Indicates fast mode sampling - PACKET SUBTYPES <> 9
+                                   0 = OFF                      
+    FAST_MODE               Indicates fast mode sampling - PACKET SUBTYPES 9,10
+                                   1 = ON                       
+    INSTR_HEADER            Total length of instrument header                  
+    INT_TIME_R4             Integration time in seconds                        
+    MAJOR_BITS              Number of bits in major frame counter              
+    MEASURE_HEADER          Total length of measurement header (3rd header)    
+    NEGATIVE_INT_TIME_R4    NEGATIVE Integration time in seconds               
+    NORMAL_MODE             Indicates normal mode sampling - PACKET SUBTYPES <>
+                                   0 = OFF                      
+    NORMAL_MODE             Indicates normal mode sampling - PACKET SUBTYPES 5,
+                                   1 = ON                       
+    NUMBER_OF_SPECTRA_1     Actual number of 'HONESTY' spectra_1 in this event 
+    NUMBER_OF_SPECTRA_2     Actual number of 'HONESTY' spectra_2 in this event 
+    NUMBER_OF_SPECTRA_2     Actual number of spectra_2 in this event           
+    NUMBER_OF_SPECTRA_SHORT Actual number of spectra_short in this event       
+    PACKET_HEADER           Number of bits in the packet header                
+    PACKET_ID               Fixed value of TNR ID for the primary header       
+TNR         
+  TELEMETRY 
+    AGC_1                   Automatic gain control value, TM Normal, TNR mode 0
+    AGC_1                   Automatic gain control value, TM Normal, TNR mode 2
+    AGC_1                   Automatic gain control value, TNR A, TM Normal, TNR
+    AGC_1                   Automatic gain control value 'honesty', TM Fast, al
+    AGC_1                   Automatic gain control value                       
+    AGC_1                   Automatic gain control value                       
+    AGC_2                   Automatic gain control value, TNR B, TM Normal, TNR
+    AGC_2                   Automatic gain control value,'HONESTY' TM Fast, TNR
+    AGC_2                   Automatic gain control value                       
+    AGC_SHORT               Automatic gain control value, TM Fast, all modes   
+    ANTENNA                 Antenna used for TNR_A/TNR_B measurements          
+                                   0 = ExEy                     
+                                   1 = ExEz                     
+                                   2 = EyEz                     
+                                   3 = EyEx                     
+    BAND_THIS_SPEC          0=A, 1=B 2=C, 3=D, 4=E, 5=E, 0 is lowest           
+                                   0 = A                        
+                                   1 = B                        
+                                   2 = C                        
+                                   3 = D                        
+                                   4 = E                        
+    BYTES_IN_DATA           Number of bytes including nn_result, agcs and spect
+    CAL_FLAG                Calibration flag                                   
+                                   0 = Calibration off          
+                                   1 = Calibration on           
+    DPU_MAJOR_FRAME         DPU major frame counter (low order 8 bits only) at 
+    DPU_MINOR_FRAME         DPU minor frame count at measurement start         
+    EVENT_BAND              Current choice of band                             
+                                   0 = A                        
+                                   1 = B                        
+                                   2 = C                        
+                                   3 = D                        
+                                   4 = E                        
+    EVENT_INTEGRATE         TNR Integration time (0>1.472 seconds, 1>.736, 2>.3
+                                   0 = 1.472 seconds            
+                                   1 = .736 seconds             
+                                   2 = .368 seconds             
+                                   3 = .184 seconds             
+    EVENT_MODE              TNR mode for whole event                           
+                                   0 = MODE 0, TNR-A ONLY, F=16 
+                                   1 = MODE 1, TNR-B ONLY, F=16 
+                                   2 = MODE 2, TNR-A ONLY, F=32 
+                                   3 = MODE 3, TNR-B ONLY, F=32 
+                                   4 = MODE 4, TNR_A/TNR_B, F=16
+    EVENT_STATE             DPU state controlling TNR - fixed tune, ABCDE, ACE 
+                                   0 = Error                    
+                                   1 = FIXED TUNE               
+                                   2 = ABCDE                    
+                                   3 = ACE                      
+    INTEG_THIS_SPEC         TNR Integration time for each spectrum             
+    MODE_THIS_SPEC          A mode flag for each spectrum in event             
+    NN_CHANNEL_1            TNR NN channel estimate'honesty', TM Fast, all mode
+    NN_CHANNEL_SHORT        TNR NN channel estimate, TM Fast, all modes        
+    NN_QUALITY_1            TNR NN quality estimate 'honesty', TM Fast, TNR mod
+    NN_QUALITY_SHORT        TNR NN quality estimate, TM Fast, all modes        
+    NN_RESULTS              Neural network results (2 for now)                 
+    NN_TUNING               Whether the neural network is controlling the chann
+                                   0 = OFF                      
+                                   1 = ON                       
+    NUMBER_OF_SPECTRA_1     Actual number of spectra_1 in this event           
+    NUMBER_OF_SPECTRA_2     Actual number of spectra_2 in this event           
+    NUMBER_OF_SPECTRA_SHORT Actual number of spectra_short in this event       
+    PACKET_COUNT            Number of this packet within the event             
+    SPECTRA_1               32 spectral values - one spectrum in packet        
+    SPECTRA_1               First spectrum in 16-element pair                  
+    SPECTRA_1               Spectral values for TM Normal, TNR mode 0,1        
+    SPECTRA_1               Spectral values for TM Normal, TNR mode 2,3        
+    SPECTRA_1               Spectral values for TNR A, TM Normal, TNR mode 4   
+    SPECTRA_1               Spectral values for TM Fast 'honesty' spectrum, TNR
+    SPECTRA_1               Spectral values for TM Fast 'honesty spectrum', TNR
+    SPECTRA_1               Spectral values for TM Fast 'honesty' spectrum, TNR
+    SPECTRA_2               Spectral values for TNR B, TM Normal, TNR mode 4   
+    SPECTRA_2               Spectral values for TM Fast 'honesty' spectrum, TNR
+    SPECTRA_2               Second spectrum in 16-element pair                 
+    SPECTRA_SHORT           Spectral values for TM Fast, all modes             
+    SPEC_MINOR_START        Minor frame of the current spectrum START          
+    SPEC_MINOR_START        Minor frame of the current spectrum START          
+    SPEC_MINOR_STOP         Minor frame of the current spectrum END            
+    SPEC_MINOR_STOP         Minor frame of the current spectrum END            
+TNR         
+  FILE      
+    CHANNEL_COVERAGE        List of all 96 channel numbers (0, 1, ... 95)      
+    CHANNEL_NUMBERS         Channel numbers counted 0-96 for one spectrum      
+    CHANNEL_NUMBERS         Channel numbers counted 0-96 for one spectrum      
+    CHANNEL_NUMBERS         Channel numbers counted 0-96 for one spectrum      
+    FREQUENCIES_HZ_R4       Contents of file of frequencies in HZ for 1 spectru
+    FREQUENCIES_HZ_R4       Contents of file of frequencies in HZ for one spect
+    FREQUENCIES_HZ_R4       Frequencies in HZ for one spectrum                 
+    FREQUENCY_COVERAGE_HZ_R4List of all 96 frequencies in Hz (4,000, 4,177, ...
+TNR         
+  FUNCTION  
+    OFFSET_1_HONEST_R8      Elapsed time to beginning of LAST 'honesty' spectru
+    SPECTRA_1_SCET_R8       SCET for spectra_1 item in ALL modes <4 (Ulysses R8
+    SPECTRA_1_SCET_R8       SCET for spectra_1 HONESTY item in FAST TM mode (Ul
+    SPECTRA_2_SCET_R8       SCET for spectra_2 HONESTY item in FAST mode=4 (Uly
+    SPECTRA_2_SCET_R8       TNR SCET'S for SPECTRUM B in mode 4 only (Ulysses R
+    SPECTRA_SHORT_SCET_R8   SCET for spectra_1 item mode 4 only (Ulysses R8)   
+TNR         
+  LOOKUP    
+    EVENT_INTEGRATE_R4      TNR Integration time (seconds)                     
+TNR         
+  PHYSICAL  
+    SPECTRA_1_DBVOLTS_R4    Spectral values for TM Normal in dB Volts          
+    SPECTRA_1_MICROVOLTS_R4 Spectral values for TM Normal in microVolts/root(Hz
+    SPECTRA_2_DBVOLTS_R4    Spectral values for TM Normal in dB Volts          
+    SPECTRA_2_MICROVOLTS_R4 Spectral values for TM Normal in microVolts/root(Hz
+    SPECTRA_SHORT_DBVOLTS_R4Spectral values for TM Normal in dB Volts          
+    SPECTRA_SHORT_MICROVOLTSSpectral values for TM Normal in microVolts/root(Hz
+TDSS        
+  CONSTANT  
+    DATATION_LATENCY_R4     Minimum TDS to DPU message passing latency (seconds
+    DPU_CLOCK_CENTER_R4     DPU clock at center of event - (may be negative)   
+    DPU_CLOCK_END_R4        DPU clock at end of event - (may be negative)      
+    DPU_CLOCK_R4            Datation DPU clock (seconds)                       
+    DPU_CLOCK_START_R4      DPU clock at start of event - (may be negative)    
+    EVENT_CENTER_SCET_R8    The true SCET for the center of the event (UR8)    
+    EVENT_CORRECTION_CENTER_Time from reported EVENT_SCET to center of event (s
+    EVENT_CORRECTION_CENTER_Time from reported EVENT_SCET to center of event (s
+    EVENT_CORRECTION_END_R4 Time from reported EVENT_SCET to end of event (seco
+    EVENT_CORRECTION_END_R8 Time from reported EVENT_SCET to end of event (seco
+    EVENT_CORRECTION_START_RTime from reported EVENT_SCET to start of event (se
+    EVENT_CORRECTION_START_RTime from reported EVENT_SCET to start of event (se
+    EVENT_END_SCET_R8       The true SCET for the end of the event (UR8)       
+    EVENT_START_SCET_R8     The true SCET for the start of the event (UR8)     
+    EVENT_TRUE_SCET_R8      The true SCET for the start of the event (UR8)     
+    FAST_RX_FILTER_R4       Filter value of fast sampler (Hertz)               
+    FAST_RX_FILTER_R4       Filter value of fast sampler (Hertz)               
+    FAST_RX_FILTER_R4       Filter value of fast sampler (Hertz)               
+    FAST_RX_FILTER_R4       Filter value of fast sampler (Hertz)               
+    FAST_RX_INTERVAL_R4     Duration of entire fast event (seconds)            
+    FAST_RX_PERIOD_R4       Sample period of fast sampler (seconds)            
+    FAST_RX_SPEED_R4        Sample speed of fast sampler (samples/second)      
+    FAST_RX_SPEED_R4        Sample speed of fast sampler (samples/second)      
+    FAST_RX_SPEED_R4        Sample speed of fast sampler (samples/second)      
+    FAST_RX_SPEED_R4        Sample speed of fast sampler (samples/second)      
+    FAST_SAMPLER_THRESHOLD  Threshold over which the fast sampler is triggering
+    FAST_SAMPLER_THRESHOLD  Threshold over which the fast sampler is triggering
+    FAST_SAMPLER_TRIGGER    Channel on which the fast sampler is triggering    
+                                   1 = Trigger on Channel 1     
+                                   2 = Trigger on Channel 2     
+    FAST_SAMPLER_TRIGGER    Channel on which the fast sampler is triggering    
+                                   3 = Trigger on Channel 3     
+                                   4 = Trigger on Channel 4     
+                                   5 = Trigger on Channel 5     
+                                   6 = Trigger on Channel 6     
+    FAST_SAMPLER_TRIGGER_MODFast sampler's trigger mode (Reset or Save)        
+                                   0 = Reset MAX                
+                                   1 = Save MAX                 
+    FAST_SAMPLER_TRIGGER_MODFast sampler's trigger mode (Reset or Save)        
+                                   0 = Reset MAX                
+                                   1 = Save MAX                 
+    INSTR_HEADER            Number of bits in instrument header                
+    MAG_ANGLE_CENTER_R4     Mag angle at event center - (may be negative)      
+    MAG_ANGLE_END_R4        Mag angle at event end - (may be negative)         
+    MAG_ANGLE_R4            Magnetic azimuth (degrees from 0 crossing)         
+    MAG_ANGLE_START_R4      Mag angle at event start - (may be negative)       
+    MAJOR_BITS              Number of bits in major frame counter              
+    MAJOR_BITS              Number of bits in major frame counter              
+    MEASURE_HEADER          Number of bits in measurement header               
+    MEASURE_HEADER          Number of bits in measurement header               
+    MYTDSCOUNT              Number of samples in a TDS data block              
+    MYTDSDELAY              Number of samples in TDS delay buffer              
+    PACKET_HEADER           Count of bits in packet header                     
+    PACKET_ID               "Constant value of TDSs ID number in primary header
+    PINGPONG                Event from PING or PONG                            
+                                   0 = Ping/Pong                
+    RX_FILTER               Event's low pass filter selection (3dB point)      
+                                   0 = 50,000 Hz                
+                                   1 = 12,500 Hz                
+                                   2 = 3,125 Hz                 
+                                   3 = 781 Hz                   
+                                   4 = 195 Hz                   
+                                   5 = 49 Hz                    
+    RX_FILTER               Event's low pass filter selection (3dB point)      
+                                   0 = 50,000 Hz                
+                                   1 = 12,500 Hz                
+                                   2 = 3,125 Hz                 
+                                   3 = 781 Hz                   
+                                   4 = 195 Hz                   
+                                   5 = 49 Hz                    
+    RX_FILTER_R4            Event's low pass (3dB) filter selection (Hertz)    
+    RX_FILTER_R4            Event's low pass (3dB) filter selection (Hertz)    
+    RX_INTERVAL_R4          Duration of entire event (seconds)                 
+    RX_INTERVAL_R4          Duration of entire event (seconds)                 
+    RX_PERIOD_R4            Event's Sample period (seconds)                    
+    RX_PERIOD_R4            Event's Sample period (seconds)                    
+    RX_PERIOD_R8            Event's Sample period (seconds)                    
+    RX_SPEED                Event's speed selection                            
+                                   0 = 120,000 S/S              
+                                   1 = 30,000 S/S               
+                                   2 = 7,500 S/S                
+                                   3 = 1,875 S/S                
+                                   4 = 468 S/S                  
+                                   5 = 117 S/S                  
+    RX_SPEED                Event's speed selection                            
+                                   0 = 120,000 S/S              
+                                   1 = 30,000 S/S               
+                                   2 = 7,500 S/S                
+                                   3 = 1,875 S/S                
+                                   4 = 468 S/S                  
+                                   5 = 117 S/S                  
+    RX_SPEED_R4             Event's sampling speed (samples/second)            
+    RX_SPEED_R4             Event's sampling speed (samples/second)            
+    RX_TRIGGER_CHANNEL      Trigger channel for this event (1-6)               
+                                   1 = Trigger on Channel 1     
+                                   2 = Trigger on Channel 2     
+                                   3 = Trigger on Channel 3     
+                                   4 = Trigger on Channel 4     
+                                   5 = Trigger on Channel 5     
+                                   6 = Trigger on Channel 6     
+    RX_TRIGGER_CHANNEL      Trigger channel for this event (1-6)               
+                                   1 = Trigger on Channel 1     
+                                   2 = Trigger on Channel 2     
+                                   3 = Trigger on Channel 3     
+                                   4 = Trigger on Channel 4     
+                                   5 = Trigger on Channel 5     
+                                   6 = Trigger on Channel 6     
+    RX_TRIGGER_MODE         Event's trigger mode                               
+                                   0 = Reset MAX                
+                                   1 = Save MAX                 
+    RX_TRIGGER_MODE         Event's trigger mode                               
+                                   0 = Reset MAX                
+                                   1 = Save MAX                 
+    RX_TRIGGER_THRESHOLD    Trigger threshold for this event (0-127)           
+    RX_TRIGGER_THRESHOLD    Trigger threshold for this event (0-127)           
+    SLOW_RX_FILTER_R4       Filter value of slow sampler (Hertz)               
+    SLOW_RX_FILTER_R4       Filter value of slow sampler (Hertz)               
+    SLOW_RX_FILTER_R4       Filter value of slow sampler (Hertz)               
+    SLOW_RX_FILTER_R4       Filter value of slow sampler (Hertz)               
+    SLOW_RX_INTERVAL_R4     Duration of entire slow event (seconds)            
+    SLOW_RX_PERIOD_R4       Sample period of slow sampler (seconds)            
+    SLOW_RX_SPEED_R4        Sample speed of slow sampler (samples/second)      
+    SLOW_RX_SPEED_R4        Sample speed of slow sampler (samples/second)      
+    SLOW_RX_SPEED_R4        Sample speed of slow sampler (samples/second)      
+    SLOW_RX_SPEED_R4        Sample speed of slow sampler (samples/second)      
+    SLOW_SAMPLER_THRESHOLD  Threshold over which the slow sampler is triggering
+    SLOW_SAMPLER_THRESHOLD  Threshold over which the slow sampler is triggering
+    SLOW_SAMPLER_TRIGGER    Channel on which the slow sampler is triggering    
+                                   1 = Trigger on Channel 1     
+                                   2 = Trigger on Channel 2     
+    SLOW_SAMPLER_TRIGGER    Channel on which the slow sampler is triggering    
+                                   3 = Trigger on Channel 3     
+                                   4 = Trigger on Channel 4     
+                                   5 = Trigger on Channel 5     
+                                   6 = Trigger on Channel 6     
+    SLOW_SAMPLER_TRIGGER_MODSlow sampler's trigger mode (Reset or Save)        
+                                   0 = Reset MAX                
+                                   1 = Save MAX                 
+    SLOW_SAMPLER_TRIGGER_MODSlow sampler's trigger mode (Reset or Save)        
+                                   0 = Reset MAX                
+                                   1 = Save MAX                 
+    SOURCE                  Source antenna translations                        
+                                   1 = ExAC                     
+                                   2 = EyAC                     
+                                   3 = EzAC                     
+                                   4 = ExDC                     
+                                   5 = EyDC                     
+                                   6 = EzDC                     
+                                   7 = Bx                       
+                                   8 = By                       
+                                   9 = Bz                       
+    SOURCE_CHANNEL          *NONE*                                             
+    SOURCE_CHANNEL          *NONE*                                             
+    SOURCE_CHANNEL          *NONE*                                             
+    SOURCE_CHANNEL          *NONE*                                             
+    SOURCE_CHANNEL          *NONE*                                             
+    SOURCE_CHANNEL          *NONE*                                             
+    SOURCE_CHANNEL          *NONE*                                             
+    SOURCE_CHANNEL          *NONE*                                             
+    SOURCE_CHANNEL          *NONE*                                             
+    SOURCE_CHANNEL          *NONE*                                             
+    SOURCE_CHANNEL          *NONE*                                             
+    SOURCE_CHANNEL          *NONE*                                             
+    SOURCE_CHANNEL          *NONE*                                             
+    SOURCE_CHANNEL          *NONE*                                             
+    SUN_ANGLE_CENTER_R4     Sun angle at event center - (may be negative)      
+    SUN_ANGLE_END_R4        Sun angle at event end - (may be negative)         
+    SUN_ANGLE_R4            Datation sun angle - best accuracy 0.1 degree      
+    SUN_ANGLE_START_R4      Sun angle at event start - (may be negative)       
+    TDS_COEFFS_NUM          Number of coefficients for physical units          
+    TDS_COEFFS_VERSION      Version number for physical units coefficients     
+TDSS        
+  TELEMETRY 
+    CHANNEL                 CHANNEL # FOR THIS EVENT                           
+    CHANNEL                 CHANNEL # FOR THIS EVENT                           
+    DATA                    Entire sweep of 2048 data words                    
+    DPU_CLOCK               DPU clock at end of event (ticks)                  
+    DPU_CLOCK               Datation DPU clock (ticks)                         
+    DPU_MAJOR_FRAME         DPU major frame at start of measurement            
+    DPU_MAJOR_FRAME         DPU major frame at start of measurement            
+    DPU_MINOR_FRAME         DPU minor frame at start of measruement            
+    EVENT_MASK              MASK SHOWING CHANNELS IN THIS EVENT                
+                                   0 = No channels on           
+                                   1 = Channel 1 only           
+    EVENT_MASK              MASK SHOWING CHANNELS IN THIS EVENT                
+                                   0 = No channels on           
+                                   1 = Channel 1 only           
+                                   2 = Channel 2 only           
+                                   3 = Channels 1 & 2           
+                                   4 = Channel 3 only           
+                                   5 = Channels 3 & 1           
+                                   6 = Channels 3 & 2           
+                                   7 = Channels 3,2 & 1         
+                                   8 = Channel 4 only           
+                                   9 = Channels 4 & 1           
+                                  10 = Channels 4 & 2           
+                                  11 = Channels 4,2 & 1         
+                                  12 = Channels 4 & 3           
+                                  13 = Channels 4,3 & 1         
+                                  14 = Channels 4,3 & 2         
+                                  15 = Channels 4, 3, 2 & 1     
+                                  16 = Channel 5 only           
+                                  17 = Channels 5 & 1           
+                                  18 = Channels 5 & 2           
+                                  19 = Channels 5,2 & 1         
+                                  20 = Channels 5 & 3           
+                                  21 = Channels 5, 3 & 1        
+                                  22 = Channels 5, 3 & 2        
+                                  23 = Channels 5, 3, 2 & 1     
+                                  24 = Channels 5 & 4           
+                                  25 = Channels 5, 4 & 1        
+                                  26 = Channels 5, 4 & 2        
+                                  27 = Channels 5, 4, 2 & 1     
+                                  28 = Channels 5, 4 & 3        
+                                  29 = Channels 5, 4, 3 & 1     
+                                  30 = Channels 5, 4, 3 & 2     
+                                  31 = Channels 5, 4, 3, 2 & 1  
+                                  32 = Channel 6 only           
+                                  33 = Channels 6 & 1           
+                                  34 = Channels 6 & 2           
+                                  35 = Channels 6, 2 & 1        
+                                  36 = Channels 6 & 3           
+                                  37 = Channels 6, 3 & 1        
+                                  38 = Channels 6, 3 & 2        
+                                  39 = Channels 6, 3, 2 & 1     
+                                  40 = Channels 6 & 4           
+                                  41 = Channels 6, 4 & 1        
+                                  42 = Channels 6, 4 & 2        
+                                  43 = Channels 6, 4, 2 & 1     
+                                  44 = Channels 6, 4 & 3        
+                                  45 = Channels 6, 4, 3 & 1     
+                                  46 = Channels 6, 4, 3 & 2     
+                                  47 = Channels 6, 4, 3, 2 & 1  
+                                  48 = Channels 6 & 5           
+                                  49 = Channels 6, 5 & 1        
+                                  50 = Channels 6, 5 & 2        
+                                  51 = Channels 6, 5, 2 & 1     
+                                  52 = Channels 6, 5 & 3        
+                                  53 = Channels 6, 5, 3 & 1     
+                                  54 = Channels 6, 5, 3 & 2     
+                                  55 = Channels 6, 5, 3, 2 & 1  
+                                  56 = Channels 6, 5 & 4        
+                                  57 = Channels 6, 5, 4 & 1     
+                                  58 = Channels 6, 5, 4 & 2     
+                                  59 = Channels 6, 5, 4, 2 & 1  
+                                  60 = Channels 6, 5, 4 & 3     
+                                  61 = Channels 6, 5, 4, 3 & 1  
+                                  62 = Channels 6, 5, 4, 3 & 2  
+                                  63 = Channels 6, 5, 4, 3, 2, &
+    EVENT_NUMBER            ON BOARD EVENT COUNTER                             
+    EVENT_NUMBER            ON BOARD EVENT COUNTER                             
+    EVENT_SWEEPS            NUMBER OF EVENTS IN THE SWEEP (1 EVENT PER CHANNEL)
+    EVENT_SWEEPS            NUMBER OF EVENTS IN THE SWEEP (1 EVENT PER CHANNEL)
+    FAST_RX_FILTER          FILTER OF FAST RECEIVER                            
+                                   0 = 50,000 Hz                
+                                   1 = 12,500 Hz                
+                                   2 = 3,125 Hz                 
+                                   3 = 781 Hz                   
+    FAST_RX_SPEED           SPEED OF FAST RECEIVER                             
+                                   0 = 120,000 S/S              
+                                   1 = 30,000 S/S               
+                                   2 = 7,500 S/S                
+                                   3 = 1,875 S/S                
+    FAST_RX_TRIGGER         Channel to which the fast trigger is connected     
+                                   0 = Trigger on FAST          
+                                   1 = Trigger on SLOW          
+    FAST_TRIG_CHAN          CHANNEL OF FAST TRIGGER (0=CHANNEL 1, 1 = CHANNEL 2
+                                   0 = Channel 1                
+                                   1 = Channel 2                
+    FAST_TRIG_MODE          0=RESET MAX, 1=SAVE MAX                            
+                                   0 = Reset MAX                
+                                   1 = Save MAX                 
+    FAST_TRIG_THRSH         Threshold for the fast trigger (0-127)             
+    MAG_ANGLE               Magnetic azimuth (count4096 from 0 crossing)       
+    MAG_ELEVATION           Magnetic Elevation (0. - 180. degrees)             
+    MAX_STATE               0=NOMAX OFF, 1=NOMAX ON                            
+                                   0 = NOMAX off                
+                                   1 = NOMAX on                 
+    PACKET_COUNT            COUNT OF THIS PACKET IN THE EVENT                  
+    PINGPONG                Event from PING or PONG                            
+                                   0 = Illegal                  
+                                   1 = Ping                     
+                                   2 = Pong                     
+    QUALITY                 Indicator of quality of data.  Bigger is better    
+    QUALITY                 Indicator of quality of data.  Bigger is better    
+    QUALITY                 Indicator of quality of data.  Bigger is better    
+    SLOW_RX_FILTER          FILTER OF SLOW RECEIVER                            
+                                   0 = 3,125 Hz                 
+                                   1 = 781 Hz                   
+                                   2 = 195 Hz                   
+                                   3 = 49 Hz                    
+    SLOW_RX_SPEED           SPEED OF SLOW RECEIVER, 0=HIGHEST                  
+                                   0 = 7,500 S/S                
+                                   1 = 1,875 S/S                
+                                   2 = 468 S/S                  
+                                   3 = 117 S/S                  
+    SLOW_RX_TRIGGER         0=TRIGGER ON SLOW,  1=TRIGGER ON FAST              
+                                   0 = Trigger on SLOW          
+                                   1 = Trigger on FAST          
+    SLOW_TRIG_CHAN          CHANNEL OF SLOW TRIGGER (0=3,1=4 ETC)              
+                                   0 = Channel 3                
+                                   1 = Channel 4                
+                                   2 = Channel 5                
+                                   3 = Channel 6                
+    SLOW_TRIG_MODE          0=RESET MAX, 1=SAVE MAX                            
+                                   0 = Reset MAX                
+                                   1 = Save MAX                 
+    SLOW_TRIG_THRSH         Threshold for the slow trigger (0-127)             
+    SOURCE_CHAN_1           SOURCE, 0=ExAC, 1=ExDC                             
+                                   0 = ExAC                     
+                                   1 = ExDC                     
+    SOURCE_CHAN_2           SOURCE, 0=ExAc,1=EyAC,2=EzAC,3=EzAC                
+                                   0 = ExAC                     
+                                   1 = EyAC                     
+                                   2 = EzAC                     
+                                   3 = EzAC                     
+    SOURCE_CHAN_3           SOURCE, 0=ExDC,1=EyDC,Z=EyDC,3=EzDC                
+                                   0 = ExDC                     
+                                   1 = EyDC                     
+                                   2 = EzDC                     
+                                   3 = EzDC                     
+    SOURCE_CHAN_4           SOURCE, 0=Bx, 1=ExDC                               
+                                   0 = Bx                       
+                                   1 = ExDC                     
+    SOURCE_CHAN_5           SOURCE, 0=By, 1=EyDC                               
+                                   0 = By                       
+                                   1 = EyDC                     
+    SOURCE_CHAN_6           SOURCE, 0=Bz, 1=EzDC                               
+                                   0 = Bz                       
+                                   1 = EzDC                     
+    SPINS                   Spin number                                        
+    SUN_ANGLE               Datation sun angle (count 4096 from sun)           
+    TANDEM_STATE            0=TRIGGER HIGH AND LOW SEPARATELY, 1=TRIGGER TOGETH
+                                   0 = TANDEM off               
+                                   1 = TANDEM on                
+    ZZ_BIG_INSTR            Diagnostic to get the entire instrument header     
+    ZZ_BIG_MEAS             Diagnostic to get the entire measurement header    
+    ZZ_BIG_MEAS             Diagnostic to get the entire measurement header    
+    ZZ_BIG_PACKET           Diagnostic to get the entire packet header         
+TDSF        
+  CONSTANT  
+    DATATION_LATENCY_R4     Minimum TDS to DPU message passing latency (seconds
+    DPU_CLOCK_CENTER_R4     DPU clock at center of event - (may be negative)   
+    DPU_CLOCK_END_R4        DPU clock at end of event - (may be negative)      
+    DPU_CLOCK_R4            Datation DPU clock (seconds)                       
+    DPU_CLOCK_START_R4      DPU clock at start of event - (may be negative)    
+    EVENT_CENTER_SCET_R8    The true SCET for the center of the event (UR8)    
+    EVENT_CORRECTION_CENTER_Time from reported EVENT_SCET to center of event (s
+    EVENT_CORRECTION_CENTER_Time from reported EVENT_SCET to center of event (s
+    EVENT_CORRECTION_END_R4 Time from reported EVENT_SCET to end of event (seco
+    EVENT_CORRECTION_END_R8 Time from reported EVENT_SCET to end of event (seco
+    EVENT_CORRECTION_START_RTime from reported EVENT_SCET to start of event (se
+    EVENT_CORRECTION_START_RTime from reported EVENT_SCET to start of event (se
+    EVENT_END_SCET_R8       The true SCET for the end of the event (UR8)       
+    EVENT_START_SCET_R8     The true SCET for the start of the event (UR8)     
+    EVENT_TRUE_SCET_R8      The true SCET for the start of the event (UR8)     
+    FAST_RX_FILTER_R4       Filter value of fast sampler (Hertz)               
+    FAST_RX_FILTER_R4       Filter value of fast sampler (Hertz)               
+    FAST_RX_FILTER_R4       Filter value of fast sampler (Hertz)               
+    FAST_RX_FILTER_R4       Filter value of fast sampler (Hertz)               
+    FAST_RX_INTERVAL_R4     Duration of entire fast event (seconds)            
+    FAST_RX_PERIOD_R4       Sample period of fast sampler (seconds)            
+    FAST_RX_SPEED_R4        Sample speed of fast sampler (samples/second)      
+    FAST_RX_SPEED_R4        Sample speed of fast sampler (samples/second)      
+    FAST_RX_SPEED_R4        Sample speed of fast sampler (samples/second)      
+    FAST_RX_SPEED_R4        Sample speed of fast sampler (samples/second)      
+    FAST_SAMPLER_THRESHOLD  Threshold over which the fast sampler is triggering
+    FAST_SAMPLER_THRESHOLD  Threshold over which the fast sampler is triggering
+    FAST_SAMPLER_TRIGGER    Channel on which the fast sampler is triggering    
+                                   1 = Trigger on Channel 1     
+                                   2 = Trigger on Channel 2     
+    FAST_SAMPLER_TRIGGER    Channel on which the fast sampler is triggering    
+                                   3 = Trigger on Channel 3     
+                                   4 = Trigger on Channel 4     
+                                   5 = Trigger on Channel 5     
+                                   6 = Trigger on Channel 6     
+    FAST_SAMPLER_TRIGGER_MODFast sampler's trigger mode (Reset or Save)        
+                                   0 = Reset MAX                
+                                   1 = Save MAX                 
+    FAST_SAMPLER_TRIGGER_MODFast sampler's trigger mode (Reset or Save)        
+                                   0 = Reset MAX                
+                                   1 = Save MAX                 
+    INSTR_HEADER            Number of bits in instrument header                
+    MAG_ANGLE_CENTER_R4     Mag angle at event center - (may be negative)      
+    MAG_ANGLE_END_R4        Mag angle at event end - (may be negative)         
+    MAG_ANGLE_R4            Magnetic azimuth (degrees from 0 crossing)         
+    MAG_ANGLE_START_R4      Mag angle at event start - (may be negative)       
+    MAJOR_BITS              Number of bits in major frame counter              
+    MAJOR_BITS              Number of bits in major frame counter              
+    MEASURE_HEADER          Number of bits in measurement header               
+    MEASURE_HEADER          Number of bits in measurement header               
+    MYTDSCOUNT              Number of samples in a TDS data block              
+    MYTDSDELAY              Number of samples in TDS delay buffer              
+    PACKET_HEADER           Count of bits in packet header                     
+    PACKET_ID               "Constant value of TDSf ID number in primary header
+    PINGPONG                Event from PING or PONG                            
+                                   0 = Ping/Pong                
+    RX_FILTER               Event's low pass filter selection (3dB point)      
+                                   0 = 50,000 Hz                
+                                   1 = 12,500 Hz                
+                                   2 = 3,125 Hz                 
+                                   3 = 781 Hz                   
+                                   4 = 195 Hz                   
+                                   5 = 49 Hz                    
+    RX_FILTER               Event's low pass filter selection (3dB point)      
+                                   0 = 50,000 Hz                
+                                   1 = 12,500 Hz                
+                                   2 = 3,125 Hz                 
+                                   3 = 781 Hz                   
+                                   4 = 195 Hz                   
+                                   5 = 49 Hz                    
+    RX_FILTER_R4            Event's low pass (3dB) filter selection (Hertz)    
+    RX_FILTER_R4            Event's low pass (3dB) filter selection (Hertz)    
+    RX_INTERVAL_R4          Duration of entire event (seconds)                 
+    RX_INTERVAL_R4          Duration of entire event (seconds)                 
+    RX_PERIOD_R4            Event's Sample period (seconds)                    
+    RX_PERIOD_R4            Event's Sample period (seconds)                    
+    RX_PERIOD_R8            Event's Sample period (seconds)                    
+    RX_SPEED                Event's speed selection                            
+                                   0 = 120,000 S/S              
+                                   1 = 30,000 S/S               
+                                   2 = 7,500 S/S                
+                                   3 = 1,875 S/S                
+                                   4 = 468 S/S                  
+                                   5 = 117 S/S                  
+    RX_SPEED                Event's speed selection                            
+                                   0 = 120,000 S/S              
+                                   1 = 30,000 S/S               
+                                   2 = 7,500 S/S                
+                                   3 = 1,875 S/S                
+                                   4 = 468 S/S                  
+                                   5 = 117 S/S                  
+    RX_SPEED_R4             Event's sampling speed (samples/second)            
+    RX_SPEED_R4             Event's sampling speed (samples/second)            
+    RX_TRIGGER_CHANNEL      Trigger channel for this event (1-6)               
+                                   1 = Trigger on Channel 1     
+                                   2 = Trigger on Channel 2     
+                                   3 = Trigger on Channel 3     
+                                   4 = Trigger on Channel 4     
+                                   5 = Trigger on Channel 5     
+                                   6 = Trigger on Channel 6     
+    RX_TRIGGER_CHANNEL      Trigger channel for this event (1-6)               
+                                   1 = Trigger on Channel 1     
+                                   2 = Trigger on Channel 2     
+                                   3 = Trigger on Channel 3     
+                                   4 = Trigger on Channel 4     
+                                   5 = Trigger on Channel 5     
+                                   6 = Trigger on Channel 6     
+    RX_TRIGGER_MODE         Event's trigger mode                               
+                                   0 = Reset MAX                
+                                   1 = Save MAX                 
+    RX_TRIGGER_MODE         Event's trigger mode                               
+                                   0 = Reset MAX                
+                                   1 = Save MAX                 
+    RX_TRIGGER_THRESHOLD    Trigger threshold for this event (0-127)           
+    RX_TRIGGER_THRESHOLD    Trigger threshold for this event (0-127)           
+    SLOW_RX_FILTER_R4       Filter value of slow sampler (Hertz)               
+    SLOW_RX_FILTER_R4       Filter value of slow sampler (Hertz)               
+    SLOW_RX_FILTER_R4       Filter value of slow sampler (Hertz)               
+    SLOW_RX_FILTER_R4       Filter value of slow sampler (Hertz)               
+    SLOW_RX_INTERVAL_R4     Duration of entire slow event (seconds)            
+    SLOW_RX_PERIOD_R4       Sample period of slow sampler (seconds)            
+    SLOW_RX_SPEED_R4        Sample speed of slow sampler (samples/second)      
+    SLOW_RX_SPEED_R4        Sample speed of slow sampler (samples/second)      
+    SLOW_RX_SPEED_R4        Sample speed of slow sampler (samples/second)      
+    SLOW_RX_SPEED_R4        Sample speed of slow sampler (samples/second)      
+    SLOW_SAMPLER_THRESHOLD  Threshold over which the slow sampler is triggering
+    SLOW_SAMPLER_THRESHOLD  Threshold over which the slow sampler is triggering
+    SLOW_SAMPLER_TRIGGER    Channel on which the slow sampler is triggering    
+                                   1 = Trigger on Channel 1     
+                                   2 = Trigger on Channel 2     
+    SLOW_SAMPLER_TRIGGER    Channel on which the slow sampler is triggering    
+                                   3 = Trigger on Channel 3     
+                                   4 = Trigger on Channel 4     
+                                   5 = Trigger on Channel 5     
+                                   6 = Trigger on Channel 6     
+    SLOW_SAMPLER_TRIGGER_MODSlow sampler's trigger mode (Reset or Save)        
+                                   0 = Reset MAX                
+                                   1 = Save MAX                 
+    SLOW_SAMPLER_TRIGGER_MODSlow sampler's trigger mode (Reset or Save)        
+                                   0 = Reset MAX                
+                                   1 = Save MAX                 
+    SOURCE                  Source antenna translations                        
+                                   1 = ExAC                     
+                                   2 = EyAC                     
+                                   3 = EzAC                     
+                                   4 = ExDC                     
+                                   5 = EyDC                     
+                                   6 = EzDC                     
+                                   7 = Bx                       
+                                   8 = By                       
+                                   9 = Bz                       
+    SOURCE_CHANNEL          *NONE*                                             
+    SOURCE_CHANNEL          *NONE*                                             
+    SOURCE_CHANNEL          *NONE*                                             
+    SOURCE_CHANNEL          *NONE*                                             
+    SOURCE_CHANNEL          *NONE*                                             
+    SOURCE_CHANNEL          *NONE*                                             
+    SOURCE_CHANNEL          *NONE*                                             
+    SOURCE_CHANNEL          *NONE*                                             
+    SOURCE_CHANNEL          *NONE*                                             
+    SOURCE_CHANNEL          *NONE*                                             
+    SOURCE_CHANNEL          *NONE*                                             
+    SOURCE_CHANNEL          *NONE*                                             
+    SOURCE_CHANNEL          *NONE*                                             
+    SOURCE_CHANNEL          *NONE*                                             
+    SUN_ANGLE_CENTER_R4     Sun angle at event center - (may be negative)      
+    SUN_ANGLE_END_R4        Sun angle at event end - (may be negative)         
+    SUN_ANGLE_R4            Datation sun angle - best accuracy 0.1 degree      
+    SUN_ANGLE_START_R4      Sun angle at event start - (may be negative)       
+    TDS_COEFFS_NUM          Number of coefficients for physical units          
+    TDS_COEFFS_VERSION      Version number for physical units coefficients     
+TDSF        
+  TELEMETRY 
+    CHANNEL                 CHANNEL # FOR THIS EVENT                           
+    CHANNEL                 CHANNEL # FOR THIS EVENT                           
+    DATA                    Entire sweep of 2048 data words                    
+    DPU_CLOCK               DPU clock at end of event (ticks)                  
+    DPU_CLOCK               Datation DPU clock (ticks)                         
+    DPU_MAJOR_FRAME         DPU major frame at start of measurement            
+    DPU_MAJOR_FRAME         DPU major frame at start of measurement            
+    DPU_MINOR_FRAME         DPU minor frame at start of measruement            
+    EVENT_MASK              MASK SHOWING CHANNELS IN THIS EVENT                
+                                   0 = No channels on           
+                                   1 = Channel 1 only           
+    EVENT_MASK              MASK SHOWING CHANNELS IN THIS EVENT                
+                                   0 = No channels on           
+                                   1 = Channel 1 only           
+                                   2 = Channel 2 only           
+                                   3 = Channels 1 & 2           
+                                   4 = Channel 3 only           
+                                   5 = Channels 3 & 1           
+                                   6 = Channels 3 & 2           
+                                   7 = Channels 3,2 & 1         
+                                   8 = Channel 4 only           
+                                   9 = Channels 4 & 1           
+                                  10 = Channels 4 & 2           
+                                  11 = Channels 4,2 & 1         
+                                  12 = Channels 4 & 3           
+                                  13 = Channels 4,3 & 1         
+                                  14 = Channels 4,3 & 2         
+                                  15 = Channels 4, 3, 2 & 1     
+                                  16 = Channel 5 only           
+                                  17 = Channels 5 & 1           
+                                  18 = Channels 5 & 2           
+                                  19 = Channels 5,2 & 1         
+                                  20 = Channels 5 & 3           
+                                  21 = Channels 5, 3 & 1        
+                                  22 = Channels 5, 3 & 2        
+                                  23 = Channels 5, 3, 2 & 1     
+                                  24 = Channels 5 & 4           
+                                  25 = Channels 5, 4 & 1        
+                                  26 = Channels 5, 4 & 2        
+                                  27 = Channels 5, 4, 2 & 1     
+                                  28 = Channels 5, 4 & 3        
+                                  29 = Channels 5, 4, 3 & 1     
+                                  30 = Channels 5, 4, 3 & 2     
+                                  31 = Channels 5, 4, 3, 2 & 1  
+                                  32 = Channel 6 only           
+                                  33 = Channels 6 & 1           
+                                  34 = Channels 6 & 2           
+                                  35 = Channels 6, 2 & 1        
+                                  36 = Channels 6 & 3           
+                                  37 = Channels 6, 3 & 1        
+                                  38 = Channels 6, 3 & 2        
+                                  39 = Channels 6, 3, 2 & 1     
+                                  40 = Channels 6 & 4           
+                                  41 = Channels 6, 4 & 1        
+                                  42 = Channels 6, 4 & 2        
+                                  43 = Channels 6, 4, 2 & 1     
+                                  44 = Channels 6, 4 & 3        
+                                  45 = Channels 6, 4, 3 & 1     
+                                  46 = Channels 6, 4, 3 & 2     
+                                  47 = Channels 6, 4, 3, 2 & 1  
+                                  48 = Channels 6 & 5           
+                                  49 = Channels 6, 5 & 1        
+                                  50 = Channels 6, 5 & 2        
+                                  51 = Channels 6, 5, 2 & 1     
+                                  52 = Channels 6, 5 & 3        
+                                  53 = Channels 6, 5, 3 & 1     
+                                  54 = Channels 6, 5, 3 & 2     
+                                  55 = Channels 6, 5, 3, 2 & 1  
+                                  56 = Channels 6, 5 & 4        
+                                  57 = Channels 6, 5, 4 & 1     
+                                  58 = Channels 6, 5, 4 & 2     
+                                  59 = Channels 6, 5, 4, 2 & 1  
+                                  60 = Channels 6, 5, 4 & 3     
+                                  61 = Channels 6, 5, 4, 3 & 1  
+                                  62 = Channels 6, 5, 4, 3 & 2  
+                                  63 = Channels 6, 5, 4, 3, 2, &
+    EVENT_NUMBER            ON BOARD EVENT COUNTER                             
+    EVENT_NUMBER            ON BOARD EVENT COUNTER                             
+    EVENT_SWEEPS            NUMBER OF EVENTS IN THE SWEEP (1 EVENT PER CHANNEL)
+    EVENT_SWEEPS            NUMBER OF EVENTS IN THE SWEEP (1 EVENT PER CHANNEL)
+    FAST_RX_FILTER          FILTER OF FAST RECEIVER                            
+                                   0 = 50,000 Hz                
+                                   1 = 12,500 Hz                
+                                   2 = 3,125 Hz                 
+                                   3 = 781 Hz                   
+    FAST_RX_SPEED           SPEED OF FAST RECEIVER                             
+                                   0 = 120,000 S/S              
+                                   1 = 30,000 S/S               
+                                   2 = 7,500 S/S                
+                                   3 = 1,875 S/S                
+    FAST_RX_TRIGGER         Channel to which the fast trigger is connected     
+                                   0 = Trigger on FAST          
+                                   1 = Trigger on SLOW          
+    FAST_TRIG_CHAN          CHANNEL OF FAST TRIGGER (0=CHANNEL 1, 1 = CHANNEL 2
+                                   0 = Channel 1                
+                                   1 = Channel 2                
+    FAST_TRIG_MODE          0=RESET MAX, 1=SAVE MAX                            
+                                   0 = Reset MAX                
+                                   1 = Save MAX                 
+    FAST_TRIG_THRSH         Threshold for the fast trigger (0-127)             
+    MAG_ANGLE               Magnetic azimuth (count4096 from 0 crossing)       
+    MAG_ELEVATION           Magnetic Elevation (0. - 180. degrees)             
+    MAX_STATE               0=NOMAX OFF, 1=NOMAX ON                            
+                                   0 = NOMAX off                
+                                   1 = NOMAX on                 
+    PACKET_COUNT            COUNT OF THIS PACKET IN THE EVENT                  
+    PINGPONG                Event from PING or PONG                            
+                                   0 = Illegal                  
+                                   1 = Ping                     
+                                   2 = Pong                     
+    QUALITY                 Indicator of quality of data.  Bigger is better    
+    QUALITY                 Indicator of quality of data.  Bigger is better    
+    QUALITY                 Indicator of quality of data.  Bigger is better    
+    SLOW_RX_FILTER          FILTER OF SLOW RECEIVER                            
+                                   0 = 3,125 Hz                 
+                                   1 = 781 Hz                   
+                                   2 = 195 Hz                   
+                                   3 = 49 Hz                    
+    SLOW_RX_SPEED           SPEED OF SLOW RECEIVER, 0=HIGHEST                  
+                                   0 = 7,500 S/S                
+                                   1 = 1,875 S/S                
+                                   2 = 468 S/S                  
+                                   3 = 117 S/S                  
+    SLOW_RX_TRIGGER         0=TRIGGER ON SLOW,  1=TRIGGER ON FAST              
+                                   0 = Trigger on SLOW          
+                                   1 = Trigger on FAST          
+    SLOW_TRIG_CHAN          CHANNEL OF SLOW TRIGGER (0=3,1=4 ETC)              
+                                   0 = Channel 3                
+                                   1 = Channel 4                
+                                   2 = Channel 5                
+                                   3 = Channel 6                
+    SLOW_TRIG_MODE          0=RESET MAX, 1=SAVE MAX                            
+                                   0 = Reset MAX                
+                                   1 = Save MAX                 
+    SLOW_TRIG_THRSH         Threshold for the slow trigger (0-127)             
+    SOURCE_CHAN_1           SOURCE, 0=ExAC, 1=ExDC                             
+                                   0 = ExAC                     
+                                   1 = ExDC                     
+    SOURCE_CHAN_2           SOURCE, 0=ExAc,1=EyAC,2=EzAC,3=EzAC                
+                                   0 = ExAC                     
+                                   1 = EyAC                     
+                                   2 = EzAC                     
+                                   3 = EzAC                     
+    SOURCE_CHAN_3           SOURCE, 0=ExDC,1=EyDC,Z=EyDC,3=EzDC                
+                                   0 = ExDC                     
+                                   1 = EyDC                     
+                                   2 = EzDC                     
+                                   3 = EzDC                     
+    SOURCE_CHAN_4           SOURCE, 0=Bx, 1=ExDC                               
+                                   0 = Bx                       
+                                   1 = ExDC                     
+    SOURCE_CHAN_5           SOURCE, 0=By, 1=EyDC                               
+                                   0 = By                       
+                                   1 = EyDC                     
+    SOURCE_CHAN_6           SOURCE, 0=Bz, 1=EzDC                               
+                                   0 = Bz                       
+                                   1 = EzDC                     
+    SPINS                   Spin number                                        
+    SUN_ANGLE               Datation sun angle (count 4096 from sun)           
+    TANDEM_STATE            0=TRIGGER HIGH AND LOW SEPARATELY, 1=TRIGGER TOGETH
+                                   0 = TANDEM off               
+                                   1 = TANDEM on                
+    ZZ_BIG_INSTR            Diagnostic to get the entire instrument header     
+    ZZ_BIG_MEAS             Diagnostic to get the entire measurement header    
+    ZZ_BIG_MEAS             Diagnostic to get the entire measurement header    
+    ZZ_BIG_PACKET           Diagnostic to get the entire packet header         
+GLOBAL      
+  CONSTANT  
+    50KHZ_CLOCK_PERIOD_R4   Period of the 50kHz clock (seconds)                
+    50KHZ_CLOCK_R4          Designed frequency of the 50kHz clock (Hertz)      
+    50KHZ_CLOCK_R4          Measured frequency of the 50kHz clock (Hertz)      
+    BITS_PER_MAJORFRAME     Bits per spacecraft Major Frame (512,000 bits)     
+    BITS_PER_MINORFRAME     Bits per spacecraft minor frame (2,048 bits)       
+    BIT_RATE_R4             Spacecraft low bit rate (5,565 bits/second)        
+    BIT_RATE_R4             Spacecraft high bit rate (11,130 bits/second)      
+    BX_LENGTH               Actual length of Bx antenna (meters)               
+    BX_LENGTH_EFF           Effective length of Bx antenna (meters)            
+    BYTES_PER_MAJORFRAME    Bytes per spacecraft Major Frame (64,000 bytes)    
+    BYTES_PER_MINORFRAME    Bytes per spacecraft minor frame (256 bytes)       
+    BYTE_PERIOD_R4          Spacecraft byte period (seconds/byte)              
+    BYTE_RATE_R4            Spacecraft byte rate (bytes/second)                
+    BY_LENGTH               Actual length of By antenna (meters)               
+    BY_LENGTH_EFF           Effective length of By antenna (meters)            
+    BZ_LENGTH               Actual length of Bz antenna (meters)               
+    BZ_LENGTH_EFF           Effective length of Bz antenna (meters)            
+    C_R4                    Speed of light (m/s)                               
+    DEGREES2RADIANS_R4      Conversion factor - degrees to radians (2pi/360)   
+    DPU_CLOCK_FREQUENCY_R4  Frequency of the DPU clock (Hertz)                 
+    DPU_CLOCK_PERIOD_R4     Period of the DPU clock (seconds)                  
+    EARTH_TO_MOON_R4        Mean distance from Earth to Moon (meters)          
+    EARTH_TO_SUN_R4         An AU - mean distance from Earth to Sun (meters)   
+    EX_LENGTH               Tip to tip length of Ex dipole (meters)            
+    EX_LENGTH_EFF           Effective length of Ex antenna (meters)            
+    EX_MONOPOLE_LENGTH_R4   Length of Ex monopole (meters)                     
+    EY_LENGTH               Tip to tip length of Ey dipole (meters)            
+    EY_LENGTH_EFF           Effective length of Ey antenna (meters)            
+    EY_MONOPOLE_LENGTH_R4   Length of Ey monopole (meters)                     
+    EZ_LENGTH               Tip to tip length of Ez dipole (meters)            
+    EZ_LENGTH               Tip to tip length of Ez dipole (meters)            
+    EZ_LENGTH_EFF           Effective length of Ez antenna (meters)            
+    EZ_LENGTH_EFF           Effective length of Ez antenna (meters)            
+    EZ_MONOPOLE_LENGTH_R4   Length of Ez monopole (meters)                     
+    EZ_MONOPOLE_LENGTH_R4   Length of Ez monopole (meters)                     
+    GEOTAIL_MGF_BX(GSE)_R4  (+) X magnetic field component in GSE (nT)         
+    GEOTAIL_MGF_BY(GSE)_R4  (+) Y magnetic field component in GSE (nT)         
+    GEOTAIL_MGF_BZ(GSE)_R4  (+) Z magnetic field component in GSE (nT)         
+    GEOTAIL_ORBIT_R2_R8     (+) GEOTAIL radial distance squared (km^2)         
+    GEOTAIL_ORBIT_R_R8      (+) GEOTAIL radial distance from earth (km)        
+    GEOTAIL_ORBIT_SPD2_R8   (+) GEOTAIL speed squared (km^2/sec^2)             
+    GEOTAIL_ORBIT_SPD_R8    (+) GEOTAIL speed (km/sec)                         
+    JUPITER_TO_SUN_R4       Mean distance from Jupiter to Sun (meters)         
+    MAJORFRAME_PERIOD_R4    Spacecraft major frame period (seconds/MF)         
+    MAJORFRAME_RATE_R4      Spacecraft major frame rate (MF/second)            
+    METERS2FEET_R4          Conversion factor - meters to feet (feet/meter)    
+    METERS2MILES_R4         Conversion factor - meters to miles (miles/meter)  
+    MINORFRAMES_PER_MAJORFRANumber of minor frames in a major frame (250)      
+    MINORFRAMES_PER_PACKET  Number of minor frames in a WAVES packet (10)      
+    MINORFRAME_PERIOD_R4    Spacecraft minor frame period (seconds/mf)         
+    MINORFRAME_RATE_R4      Spacecraft minor frame rate (mf/second)            
+    PACKET_ID_ARRAY         JK test item for array of xlated items             
+                                   1 = RAD1                     
+                                   2 = RAD2                     
+                                   3 = TNR                      
+                                   4 = FFT                      
+                                   5 = TDSF                     
+                                   6 = TDSS                     
+                                   7 = FFTL                     
+                                   8 = FFTM                     
+                                   9 = FFTH                     
+                                  13 = DUMP                     
+    PACKET_PERIOD_R4        Spacecraft minor frame period (seconds/packet)     
+    PACKET_RATE_R4          Spacecraft minor frame rate (packets/seconds)      
+    PI_R4                   Value of pi - single precision                     
+    PI_R8                   Value of pi - double precision                     
+    POLAR_ORBIT_R2_R8       (+) POLAR radial distance squared (km^2)           
+    POLAR_ORBIT_R_R8        (+) POLAR radial distance from earth (km)          
+    POLAR_ORBIT_SPD2_R8     (+) POLAR speed squared (km^2/sec^2)               
+    POLAR_ORBIT_SPD_R8      (+) POLAR speed (km/sec)                           
+    PRIMARY_HEADER          Current length in bits of primary header           
+    PRIMARY_HEADER          Former length in bits of primary header            
+    RADIANS2DEGREES_R4      Conversion factor - radians to degrees (360/2pi)   
+    RADS2DEGREES_R4         Conversion factor - Radians to degrees (360/2Pi)   
+    REARTH_R4               Equatorial radius of Earth (meters)                
+    RMOON_R4                Mean radius of Moon (meters)                       
+    RSUN_R4                 Mean radius of solar photosphere (meters)          
+    R_EARTH_R4              Equatorial radius of Earth (meters)                
+    R_MOON_R4               Mean radius of Moon (meters)                       
+    R_SUN_R4                Mean radius of solar photosphere (meters)          
+    SECS2UR8_R4             Conversion factor - 1/number of seconds per day    
+    SECS2UR8_R8             Conversion factor - 1/number of seconds per day    
+    STICS2DEGREES_R4        Conversion factor - Spin 4096 tics to degrees (360/
+    TDS_FILL_POINTER        Beginning of TDS fill as offset from packet start  
+    WIND_ORBIT_R2_R8        (+) WIND radial distance squared (km^2)            
+    WIND_ORBIT_R_R8         (+) WIND radial distance from earth (km)           
+    WIND_ORBIT_SPD2_R8      (+) WIND speed squared (km^2/sec^2)                
+    WIND_ORBIT_SPD_R8       (+) WIND speed (km/sec)                            
+GLOBAL      
+  TELEMETRY 
+    BIT_RATE                S/C bit rate: 0=Low, 1=High                        
+                                   0 = Low                      
+                                   1 = High                     
+    CH_EVENT_COUNT          Sum of all events of all types gathered on specifie
+    CONTEXT_SCET_R8         Current Event SCET or most recent w_channel_positio
+    DPU_MAJOR_ERT           Flight software DPU major frame number from HK via 
+    DPU_VERSION             Flight software DPU version number from HK via wind
+    ERT_MAJOR_FRAME         Major frame in which event was telemetered         
+    ERT_MINOR_FRAME         Minor frame in which event was telemetered         
+    EVENT_BOE_R8            SCET of 1st frame of first packet of event (UR8)   
+    EVENT_EOE_R8            SCET of last frame of last packet of event (UR8)   
+    EVENT_POSITION_R8       Current stream position (UR8)                      
+    EVENT_SCET              Spacecraft Event Time in YYYYMMDD HHMMSS format    
+    EVENT_SCET_FRCTN        fractional SCET (milliseconds)                     
+    EVENT_SCET_R8           Current event's spacecraft event time (UR8)        
+    EVENT_TM_SCET_FRCTN_I4  Fractional ERT (milliseconds)                      
+    EVENT_TM_SCET_I4        Earth Receive Time in YYYYMMDD HHMMSS format       
+    FFT_VERSION             Flight software FFT version number from HK via wind
+    FIRST_PACK_FLAG         Flag showing this is the first packet of event (1) 
+    INST_HDR_PRES           Flag showing that instrument header is present (1) 
+    LAST_PACK_FLAG          Flag showing this is last packet of event (1)      
+    MEAS_HDR_PRES           Flag showing the measurement header is present(1) =
+    PACKET_SUBTYPE          Field giving number of packet subtype of event     
+    PACKET_TYPE             Portion of primary header identifying packet type  
+                                   1 = RAD1                     
+                                   2 = RAD2                     
+                                   3 = TNR                      
+                                   4 = FFT                      
+                                   5 = TDSF                     
+                                   6 = TDSS                     
+                                   7 = FFTL                     
+                                   8 = FFTM                     
+                                   9 = FFTH                     
+                                  13 = DUMP                     
+    PACK_HDR_PRES           Flag showing that a packet header is present (1) =4
+    SC_MODE                 S/C telemetry mode using CDHF convention           
+                                   1 = Science 1x               
+                                   3 = Maneuver 1x              
+                                   4 = Contingency 1x           
+                                   5 = Science 2x               
+                                   7 = Maneuver 2x              
+                                   8 = Contingency 2x           
+    SP_STEP_NUMBER          WIND/WAVES Script Player Step Number               
+    SP_TEST_NUMBER          WIND/WAVES Script Player Test Number               
+    STREAM_BOD_R8           Stream Beginning-Of-Day value (UR8)                
+    STREAM_BOF_R8           Stream Beginning-Of-File position value (UR8)      
+    STREAM_BOI_R8           Stream Beginning-Of-Information position value (UR8
+    STREAM_BOT_R8           Stream Beginning-Of-Tomorrow position value (UR8) (
+    STREAM_BOW_R8           Stream Beginning-Of-Window position value (UR8)    
+    STREAM_EOD_R8           Stream End-Of-Day position value (UR8)             
+    STREAM_EOF_R8           Stream End-Of-File position value (UR8)            
+    STREAM_EOI_R8           Stream End-Of-Information position value (UR8)     
+    STREAM_EOW_R8           Stream End-Of-Window position value (UR8)          
+    STREAM_EOY_R8           Stream End-Of-Yesterday value (UR8) (if known)     
+    TDS_FILL_POINTER        Offset to TDS in packet                            
+    TDS_FILL_PTRMSB         Pointer to TDS fill, msb. Part of composite item   
+    TDS_VERSION             Flight software TDS version number from HK via wind
+    WIND_LIB_VERSION_I4     The current WINDlib version (coded integer)        
+    ZZ_BIG_BANANA           Diagnostic for looking at meat of the event        
+GLOBAL      
+  FUNCTION  
+    EVENT_SCET_R8_OLD       Current event's spacecraft event time (UR8)        
+    WIND_LIB_VERSION        The current WINDlib version (string)               
+GLOBAL      
+  CDF       
+    EARTH_POS_HELIOLAT_R8   (N) Earth heliographic latitude (-1.6 to 1.6 rad)  
+    EARTH_POS_HELIOLONG_R8  (N) Earth heliographic longitude (0 to 6.28 rad)   
+    EARTH_POS_SCET_R8       (N) Time values to match EARTH POS values (UR8)    
+    GEOTAIL_MGF_BMAG        (N) Magnetic field vector magnitude (.1 nT)        
+    GEOTAIL_MGF_BX(GSE)     (N) X magnetic field component in GSE (.1 nT)      
+    GEOTAIL_MGF_BY(GSE)     (N) Y magnetic field component in GSE (.1 nT)      
+    GEOTAIL_MGF_BZ(GSE)     (N) Z magnetic field component in GSE (.1 nT)      
+    GEOTAIL_MGF_SCET_R8     (N) Times to match various MGF values (UR8)        
+    GEOTAIL_ORBIT_SCET_R8   (I) Times for GEOTAIL ORBIT values (UR8)           
+    GEOTAIL_ORBIT_VX(GSE)_R8(I) X GEOTAIL velocity in GSE (km/sec)             
+    GEOTAIL_ORBIT_VY(GSE)_R8(I) Y GEOTAIL velocity in GSE (km/sec)             
+    GEOTAIL_ORBIT_VZ(GSE)_R8(I) Z GEOTAIL velocity in GSE (km/sec)             
+    GEOTAIL_ORBIT_X(GCI)_R8 (I) X GEOTAIL position in GCI coordinates (km)     
+    GEOTAIL_ORBIT_X(GSE)_R8 (I) X GEOTAIL position in GSE coordinates (km)     
+    GEOTAIL_ORBIT_X(GSM)_R8 (I) X GEOTAIL position in GSM coordinates (km)     
+    GEOTAIL_ORBIT_Y(GCI)_R8 (I) Y GEOTAIL position in GCI coordinates (km)     
+    GEOTAIL_ORBIT_Y(GSE)_R8 (I) Y GEOTAIL position in GSE coordinates (km)     
+    GEOTAIL_ORBIT_Y(GSM)_R8 (I) Y GEOTAIL position in GSM coordinates (km)     
+    GEOTAIL_ORBIT_Z(GCI)_R8 (I) Z GEOTAIL position in GCI coordinates (km)     
+    GEOTAIL_ORBIT_Z(GSE)_R8 (I) Z GEOTAIL position in GSE coordinates (km)     
+    GEOTAIL_ORBIT_Z(GSM)_R8 (I) Z GEOTAIL position in GSM coordinates (km)     
+    GEOTAIL_POS_HELIOLAT_R8 (N) GEOTAIL heliographic latitude (-1.6 to 1.6 rad)
+    GEOTAIL_POS_HELIOLONG_R8(N) GEOTAIL heliographic longitude (0 to 6.28 rad) 
+    GEOTAIL_POS_SCET_R8     (N) Times for GEOTAIL POS values (UR8)             
+    MOON_ORBIT_SCET_R8      (I) Times to match interpolated WAVes/MOON values (
+    MOON_ORBIT_X(GSE)_R8    (I) X MOON position in GSE coordinates (km)        
+    MOON_ORBIT_XYZ(GSE)_R8  (N) MOON position vector in GSE coordinates (km)   
+    MOON_ORBIT_XYZ_SCET_R8  (N) Times to match WAVes/MOON vector values (UR8)  
+    MOON_ORBIT_Y(GSE)_R8    (I) Y MOON position in GSE coordinates (km)        
+    MOON_ORBIT_Z(GSE)_R8    (I) Z MOON position in GSE coordinates (km)        
+    MOON_ORBIT_Z_ALL(GSE)_R8(I) Z MOON positions in GSE coordinates (km) for en
+    POLAR_ORBIT_LSHELL_R4   (I) POLAR spacecraft L-shell value (Re)            
+    POLAR_ORBIT_SCET_R8     (I) Time values to match POLAR ORBIT values (UR8)  
+    POLAR_ORBIT_VX(GSE)_R8  (I) X POLAR velocity in GSE (km/sec)               
+    POLAR_ORBIT_VY(GSE)_R8  (I) Y POLAR velocity in GSE (km/sec)               
+    POLAR_ORBIT_VZ(GSE)_R8  (I) Z POLAR velocity in GSE (km/sec)               
+    POLAR_ORBIT_X(GCI)_R8   (I) X POLAR position in GCI coordinates (km)       
+    POLAR_ORBIT_X(GSE)_R8   (I) X POLAR position in GSE coordinates (km)       
+    POLAR_ORBIT_X(GSM)_R8   (I) X POLAR position in GSM coordinates (km)       
+    POLAR_ORBIT_Y(GCI)_R8   (I) Y POLAR position in GCI coordinates (km)       
+    POLAR_ORBIT_Y(GSE)_R8   (I) Y POLAR position in GSE coordinates (km)       
+    POLAR_ORBIT_Y(GSM)_R8   (I) Y POLAR position in GSM coordinates (km)       
+    POLAR_ORBIT_Z(GCI)_R8   (I) Z POLAR position in GCI coordinates (km)       
+    POLAR_ORBIT_Z(GSE)_R8   (I) Z POLAR position in GSE coordinates (km)       
+    POLAR_ORBIT_Z(GSM)_R8   (I) Z POLAR position in GSM coordinates (km)       
+    POLAR_POS_HELIOLAT_R8   (N) POLAR heliographic latitude (-1.6 to 1.6 rad)  
+    POLAR_POS_HELIOLONG_R8  (N) POLAR heliographic longitude (0 to 6.28 rad)   
+    POLAR_POS_LSHELL_R4     (N) POLAR spacecraft L-shell value (Re)            
+    POLAR_POS_MAGLAT_R4     (N) POLAR magnetic latitude (-90 to 90 deg)        
+    POLAR_POS_SCET_R8       (N) Times to match POLAR POS times (UR8)           
+    POLAR_SPIN_JITTER_R4    (N) POLAR standard deviation of spin rate (rad/sec)
+    POLAR_SPIN_PHASE_R4     (N) POLAR body spin phase angle (from KP) (rads)   
+    POLAR_SPIN_RATE_R4      (N) POLAR mean body spin rate (from KP) (rad/sec)  
+    POLAR_SPIN_SCET_R8      (N) Times to match POLAR SPIN phase values (UR8)   
+    WIND_3DP_EF_176KEV_R4   (N) Electron flux at 176keV (pfu (1/(cm^2-s-sr-keV)
+    WIND_3DP_EF_1KEV_R4     (N) Electron flux at 1.1keV (pfu (1/(cm^2-s-sr-keV)
+    WIND_3DP_EF_20KEV_R4    (N) Electron flux at 20keV (pfu (1/(cm^2-s-sr-keV))
+    WIND_3DP_EF_250EV_R4    (N) Electron flux at .25keV (pfu (1/(cm^2-s-sr-keV)
+    WIND_3DP_EF_34KEV_R4    (N) Electron flux at 34keV (pfu (1/(cm^2-s-sr-keV))
+    WIND_3DP_EF_5KEV_R4     (N) Electron flux at 5keV (pfu (1/(cm^2-s-sr-keV)) 
+    WIND_3DP_EF_90KEV_R4    (N) Electron flux at 90keV (pfu (1/(cm^2-s-sr-keV))
+    WIND_3DP_E_DENSITY_R4   (N) Electron density at all energies (number/cc)   
+    WIND_3DP_E_QDOTB_R4     (N) Electron heat flux along B (eV/cm^2-s)         
+    WIND_3DP_E_TEMP_R4      (N) Electron temperature (eV)                      
+    WIND_3DP_E_VX(GSE)_R4   (N) X electron velocity in GSE? (km/s)             
+    WIND_3DP_E_VY(GSE)_R4   (N) Y electron velocity in GSE? (km/s)             
+    WIND_3DP_E_VZ(GSE)_R4   (N) Z electron velocity in GSE? (km/s)             
+    WIND_3DP_IONF_140EV_R4  (N) Ion flux at .14keV (pfu (1/(cm^2-s-sr-keV))    
+    WIND_3DP_IONF_19KEV_R4  (N) Ion flux at 19keV (pfu (1/(cm^2-s-sr-keV))     
+    WIND_3DP_IONF_257KEV_R4 (N) Ion flux at 257keV (pfu (1/(cm^2-s-sr-keV))    
+    WIND_3DP_IONF_39KEV_R4  (N) Ion flux at 39keV (pfu (1/(cm^2-s-sr-keV))     
+    WIND_3DP_IONF_4KEV_R4   (N) Ion flux at 4keV (pfu (1/(cm^2-s-sr-keV))      
+    WIND_3DP_IONF_700EV_R4  (N) Ion flux at .7keV (pfu (1/(cm^2-s-sr-keV))     
+    WIND_3DP_IONF_92KEV_R4  (N) Ion flux at 92keV (pfu (1/(cm^2-s-sr-keV))     
+    WIND_3DP_ION_DENSITY_R4 (N) Ion density for all energies (number/cc)       
+    WIND_3DP_ION_TEMP_R4    (N) Ion temperature (eV)                           
+    WIND_3DP_ION_VX(GSE)_R4 (N) X ion velocity component in GSE? (km/s)        
+    WIND_3DP_ION_VY(GSE)_R4 (N) Y ion velocity component in GSE? (km/s)        
+    WIND_3DP_ION_VZ(GSE)_R4 (N) Z ion velocity component in GSE? (km/s)        
+    WIND_3DP_SCET_R8        (N) Time values to match various 3dP values (UR8)  
+    WIND_ATT_DEC(GSE)_R4    (N) WIND declination in GSE from FDF/O&A (rad)     
+    WIND_ATT_RA(GSE)_R4     (N) WIND right ascension in GSE from FDF/O&A (rad) 
+    WIND_ATT_SCET_R8        (N) Time values to match WIND ATTitude values (UR8)
+    WIND_ATT_SPIN_RATE_R4   (N) WIND body spin rate from FDF/O&A (rpm)         
+    WIND_MFI_BMAG_R4        (N) Magnetic (B) field's vector magnitude (nT)     
+    WIND_MFI_BPHI(GSE)_R4   (N) B longitude in spherical GSE (0 to 360 deg)    
+    WIND_MFI_BTHETA(GSE)_R4 (N) B latitude in spherical GSE (-90 to +90 deg)   
+    WIND_MFI_BX(GSE)_R4     (N) X magnetic field component in GSE (nT)         
+    WIND_MFI_BY(GSE)_R4     (N) Y magnetic field component in GSE (nT)         
+    WIND_MFI_BZ(GSE)_R4     (N) Z magnetic field component in GSE (nT)         
+    WIND_MFI_B_RMS_R4       (N) Component RMS (change in magnetic field) (nT)  
+    WIND_MFI_SCET_R8        (N) Time values to match various MFI values (UR8)  
+    WIND_ORBIT_SCET_R8      (I) Time values to match WIND ORBIT values (UR8)   
+    WIND_ORBIT_VX(GSE)_R8   (I) X WIND velocity in GSE (km/sec)                
+    WIND_ORBIT_VY(GSE)_R8   (I) Y WIND velocity in GSE (km/sec)                
+    WIND_ORBIT_VZ(GSE)_R8   (I) Z WIND velocity in GSE (km/sec)                
+    WIND_ORBIT_X(GCI)_R8    (I) X WIND position in GCI coordinates (km)        
+    WIND_ORBIT_X(GSE)_R8    (I) X WIND position in GSE coordinates (km)        
+    WIND_ORBIT_X(GSM)_R8    (I) X WIND position in GSM coordinates (km)        
+    WIND_ORBIT_Y(GCI)_R8    (I) Y WIND position in GCI coordinates (km)        
+    WIND_ORBIT_Y(GSE)_R8    (I) Y WIND position in GSE coordinates (km)        
+    WIND_ORBIT_Y(GSM)_R8    (I) Y WIND position in GSM coordinates (km)        
+    WIND_ORBIT_Z(GCI)_R8    (I) Z WIND position in GCI coordinates (km)        
+    WIND_ORBIT_Z(GSE)_R8    (I) Z WIND position in GSE coordinates (km)        
+    WIND_ORBIT_Z(GSM)_R8    (I) Z WIND position in GSM coordinates (km)        
+    WIND_POS_HELIOLAT_R8    (N) WIND heliographic latitude (-1.6 to 1.6 rad)   
+    WIND_POS_HELIOLONG_R8   (N) WIND heliographic longitude (0 to 6.28 rad)    
+    WIND_POS_SCET_R8        (N) Time values to match the WIND POS values (UR8) 
+    WIND_SA_MAX_AMPS_R4     (N) Maximum Solar Array Current (Amps)             
+    WIND_SA_MIN_AMPS_R4     (N) Minimum Solar Array Current (Amps)             
+    WIND_SA_SCET_R8         (N) Time values to match Solar Array values (UR8)  
+    WIND_SPIN_JITTER_R4     (N) WIND standard deviation of spin rate (rad/sec) 
+    WIND_SPIN_PHASE_R4      (N) WIND body spin phase angle (from KP) (rads)    
+    WIND_SPIN_RATE_R4       (N) WIND average spin rate (from KP) (rad/sec)     
+    WIND_SPIN_SCET_R8       (N) Times to match WIND SPIN phase values (UR8)    
+    WIND_SWE_DENSITY_R4     (N) Solar wind proton number density (number/cc)   
+    WIND_SWE_SCET_R8        (N) Time values to match various SWE values (UR8)  
+    WIND_SWE_THERMAL_SPD_R4 (N) Most likely proton thermal speed (km/s)        
+    WIND_SWE_VMAG_R4        (N) Solar wind (SW) bulk flow speed in GSE (km/s)  
+    WIND_SWE_VX(GSE)_R4     (N) X solar wind velocity in GSE coordinates (km/s)
+    WIND_SWE_VY(GSE)_R4     (N) Y solar wind velocity in GSE coordinates (km/s)
+    WIND_SWE_VZ(GSE)_R4     (N) Z solar wind velocity in GSE coordinates (km/s)
+    WIND_SWE_V_EW(GSE)_R4   (N) SW bulk flow direction +E/W from W of sun (deg)
+    WIND_SWE_V_NS(GSE)_R4   (N) SW bulk flow direction +N/S from S of sun (deg)
+    WIND_WAV_NEQ            (N) Quality of Ne from NN on TNR (0=bad to 255=good
+    WIND_WAV_NE_R4          (N) Electron density from NN on TNR (#/cm^3)       
+    WIND_WAV_SCET_R8        (N) Time values to match various WAVes values (UR8)
+    WIND_WAV_TRANSIENT_R4   (N) Transient electric field from TDS (dB)         
+DUMP        
+  CONSTANT  
+    INSTR_HEADER            "Length of Instrument Header (header #2)"          
+    MEASURE_HEADER          "Length of Measurement Header (header #3)"         
+    PACKET_HEADER           "Length of Packet Header (header #4)"              
+    PACKET_ID               "Number associated with DUMP packets in primary hea
+DUMP        
+  TELEMETRY 
+    CHECKSUM                "Checksum for flight memory dump"                  
+    DATA                    "Flight memory dump, max bytes per packet is 413"  
+    DPU_MAJOR_FRAME         From associated HK of encompassing major frame     
+    DPU_MINOR_FRAME         Minor frame number of first minor frame in packet  
+    ENDING_ADDRESS          "Ending flight memory address of dump data"        
+    NUMBER_OF_BYTES         "Number of bytes in flight memory dump"            
+    PACKET_COUNT            "Packet number of packet within the DUMP event"    
+    STARTING_ADDRESS        "Starting flight memory address of dump data"      
+HK          
+  CONSTANT  
+    APC_X_RESISTANCE        Total X APC resistance (adding 24.8M)              
+                                   8 = Open                     
+    APC_X_STATE             The current value of the X APC resistance          
+                                   8 = Open                     
+    APC_Y_RESISTANCE        Total Y APC resistance (adding 150M)               
+                                   8 = Open                     
+    APC_Y_STATE             The current value of the Y APC resistance          
+                                   8 = Open                     
+    DPU_CLOCK_R4            DPU clock time in seconds (rolls over at 5,368.7!) 
+    DPU_MINOR_FRAME         DPU minor frame number is always 0 for HK event    
+    HK_QUALITY              The good/bad quality of the current HK event       
+                                   1 = Good                     
+    HK_QUALITY              The good/bad quality of the current HK event       
+                                   1 = Bad                      
+    RAD2_ANTENNA            Antenna selected for RAD2 (1 = Y)                  
+                                   1 = Ey                       
+HK          
+  TELEMETRY 
+    3DPLASMA                Value of word received from 3DP experiment - electr
+    3DPLASMA1               Value of word received from 3DP experiment(cont.) -
+    3DP_ACTIVITY            3DP word received this major frame, 1 = Yes        
+                                   0 = Inactive                 
+                                   1 = Active                   
+    ALL_HK_DATA             Gets the entire HK data area                       
+    APC_DAC                 The value of the APC DAC (counts)                  
+    APC_X                   Indicates the state of the X APC relay             
+                                   0 = Enabled                  
+                                   1 = Disabled                 
+    APC_X_RESISTANCE        Total X APC resistance (adding 24.8M)              
+                                   0 = 34.8M                    
+                                   1 = 375M                     
+                                   2 = 34.8M                    
+                                   3 = 1,025M                   
+                                   4 = 124.8M                   
+                                   5 = 375M                     
+                                   6 = 124.8M                   
+                                   7 = 1,025M                   
+    APC_X_RESISTOR          The selected value of the X APC resistance         
+                                   0 = 10MOhm                   
+                                   1 = 350MOhm                  
+                                   2 = 10MOhm                   
+                                   3 = 1,000MOhm                
+                                   4 = 100MOhm                  
+                                   5 = 350MOhm                  
+                                   6 = 100MOhm                  
+                                   7 = 1,000MOhm                
+    APC_X_STATE             The current value of the X APC resistance          
+                                   0 = 10M                      
+                                   1 = 350M                     
+                                   2 = 10M                      
+                                   3 = 1,000M                   
+                                   4 = 100M                     
+                                   5 = 350M                     
+                                   6 = 100M                     
+                                   7 = 1,000M                   
+    APC_Y                   Indicates the state of the Y APC relay             
+                                   0 = Enabled                  
+                                   1 = Disabled                 
+    APC_Y_RESISTANCE        Total Y APC resistance (adding 150M)               
+                                   0 = 200M                     
+                                   1 = 1,650M                   
+                                   2 = 200M                     
+                                   3 = 10,150M                  
+                                   4 = 650M                     
+                                   5 = 1,650M                   
+                                   6 = 650M                     
+                                   7 = 10,150M                  
+    APC_Y_RESISTOR          The selected value of the Y APC resistance         
+                                   0 = 50MOhm                   
+                                   1 = 1,500MOhm                
+                                   2 = 50MOhm                   
+                                   3 = 10,000MOhm               
+                                   4 = 500MOhm                  
+                                   5 = 1,500MOhm                
+                                   6 = 500MOhm                  
+                                   7 = 10,000MOhm               
+    APC_Y_STATE             The current value of the Y APC resistance          
+                                   0 = 50M                      
+                                   1 = 1,500M                   
+                                   2 = 50M                      
+                                   3 = 10,000M                  
+                                   4 = 500M                     
+                                   5 = 1,500M                   
+                                   6 = 500M                     
+                                   7 = 10,000M                  
+    APC_Z                   Indicates the state of the Z APC relay             
+                                   0 = Enabled                  
+                                   1 = Disabled                 
+    APC_Z_RESISTANCE        Total Z APC resistance (adding 50M)                
+                                   0 = 100M                     
+                                   1 = Open                     
+    APC_Z_RESISTOR          The selected value of the Z APC resistance         
+                                   0 = 50MOhm                   
+                                   1 = Open                     
+    APC_Z_STATE             The current value of the Z APC resistance          
+                                   0 = 50M                      
+                                   1 = Open                     
+    APM_ANGLE               The 'angle' at which DC samples are made (0 for now
+    APM_X_DC                The X DC value sampled at 'angle' after the last MF
+    APM_X_PEAK              The X peak value sampled at second 'angle' after th
+    APM_Y_DC                The Y DC value sampled at 'angle' after the last MF
+    APM_Y_PEAK              The Y peak value sampled at second 'angle' after th
+    APM_Z_DC                The Z DC value sampled at 'angle' after the last MF
+    B_CALIBRATE             Indicates the status of the B calibration loop(s)  
+                                   0 = Disabled                 
+                                   1 = Enabled                  
+    CAL_ATTENUATOR          Cal attenuation into PA - higher values = more atte
+                                   0 = TBD dB                   
+                                   1 = TBD dB                   
+                                   2 = TBD dB                   
+                                   3 = TBD dB                   
+                                   4 = TBD dB                   
+                                   5 = TBD dB                   
+                                   6 = TBD dB                   
+                                   7 = TBD dB                   
+    CAL_AUTOMATIC           Automatic CALibration status                       
+                                   0 = Disabled                 
+                                   1 = Enabled                  
+    CAL_COMING              Presages a calibration (reverts to 0 when the cal a
+                                   0 = Not coming               
+                                   1 = Coming                   
+    CAL_CONTROL             The CAL control port mirror (encoded) - see bit-by-
+    CAL_EVER                WAVES has been calibrated since the most recent reb
+                                   0 = Never CAL'ed             
+                                   1 = CAL'ed                   
+    CAL_FREQUENCY           Noise generator clock frequency                    
+                                   0 = Low                      
+                                   1 = High                     
+    CAL_GENERATOR           Internal noise generator status (necessary but not 
+                                   0 = Off                      
+                                   1 = On                       
+    CAL_MF                  CAL is driving the mid receiver stage when = 1     
+                                   0 = Off                      
+                                   1 = On                       
+    CAL_ON                  Indicates internal CALibration sequence is in progr
+                                   0 = Off                      
+                                   1 = On                       
+    CAL_PA                  CAL is driving the pre-amps when = 1               
+                                   0 = Off                      
+                                   1 = On                       
+    CAL_PA_ANTENNA          PA calibration destination                         
+                                   0 = --                       
+                                   1 = -+                       
+                                   2 = +-                       
+                                   3 = ++                       
+    CAL_STATUS              Overall state of the calibration - see bit-by-bit b
+    CAL_TARGET              Indicates where the CAL signal is headed           
+                                   0 = Off                      
+                                   1 = On PA                    
+                                   2 = On MF                    
+                                   3 = On Both - Bad            
+    COMMANDED               0 if no commands have ever been sent (moved, see v4
+    CONVERTER_REDUND        Converter redundancy - Normal = 0, i.e. A and B red
+                                   0 = Normal                   
+                                   1 = B side                   
+                                   2 = A side                   
+                                   3 = Reverse                  
+    CURRENT_A               Current on the A side of the converter             
+    CURRENT_B               Current on the B side of the converter             
+    DPU_ADC_OK              A/D conversion completed this major frame, 1 = Yes 
+                                   0 = ADC BAD!                 
+                                   1 = ADC Ok                   
+    DPU_CLOCK               DPU clock at MF pulse                              
+    DPU_CLOCK               DPU clock at MF pulse                              
+    DPU_CLOCK_2             Second part of DPU clock composite                 
+    DPU_CLOCK_3             Third and final part of DPU clock composite (MSB)  
+    DPU_CLOCK_ON            DPU clock functional when value is 1               
+                                   0 = Off!                     
+                                   1 = On                       
+    DPU_COMMANDED_EVER      0 if no commands have ever been sent               
+                                   0 = Never TC'ed              
+                                   1 = TC'ed                    
+    DPU_COMMANDED_THISMF    The DPU received a TC during the previous MF       
+                                   0 = Not TCed                 
+                                   1 = TCed this MF             
+    DPU_ERRORS              DPU error count (PACK 8 notation)                  
+    DPU_MAJOR1              Second part of DPU major frame composite           
+    DPU_MAJOR2              Last part of DPU major frame composite (MSB)       
+    DPU_MAJOR_FRAME         First part of DPU major frame composite (LSB)      
+    DPU_MAJOR_FRAME_TEST    First part of DPU major frame composite (LSB)      
+    DPU_ML_BAD              DPU memory load finished but did not checksum corre
+                                   0 = Normal                   
+                                   1 = ML Bad!                  
+    DPU_ML_OK               DPU memory load finished.  If checksummed correctly
+                                   0 = Normal                   
+                                   1 = ML Good                  
+                                   2 = ML Bad!                  
+                                   3 = Unused                   
+    DPU_ML_STARTED          DPU memory load in progress, 1 = Yes               
+                                   0 = No ML                    
+                                   1 = In progress              
+    DPU_MODE                Current mode of DPU                                
+    DPU_MODE                HK quality indication - should be 161 (A1 hex)     
+    DPU_RAM_MODIFIED        DPU RAM has been modified by memory load since last
+                                   0 = Unmodified               
+                                   1 = Modified                 
+    DPU_RAM_OK              All DPU RAM tested okay at boot, 1 = Yes           
+                                   0 = RAM Errors!              
+                                   1 = RAM Ok                   
+    DPU_SIG_BLOCKS          Number of DPU signature blocks (ROM & RAM) found, n
+    DPU_STATUS              Status of DPU - see individual entries             
+    DPU_STATUSB             Status of DPU, part B - see individual entries     
+    DPU_SUBSYSTEMS          Status of DPU subsystems - see individual entries  
+    DPU_VERSION             Version of DPU software                            
+    FFT_ACTIVE              FFT was active in the previous major frame when val
+                                   0 = Inactive                 
+                                   1 = Active                   
+    FFT_ADC_OK              A/D conversion completed this major frame, 1 = Yes 
+                                   0 = ADC BAD!                 
+                                   1 = ADC Ok                   
+    FFT_ALU                 ALU was active last major frame                    
+                                   0 = Inactive                 
+                                   1 = Active                   
+    FFT_CHANNEL_1           The antenna to which FFT channel 1 is connected    
+                                   0 = ExDC                     
+                                   1 = ExAC                     
+    FFT_CHANNEL_10          The antenna to which FFT channel 10 is connected   
+                                   0 = EzDC                     
+                                   1 = Bz                       
+    FFT_CHANNEL_2           The antenna to which FFT channel 2 is connected    
+                                   0 = ExAC                     
+                                   1 = EyAC                     
+                                   2 = EzAC                     
+                                   3 = Ground                   
+    FFT_CHANNEL_3           The antenna to which FFT channel 3 is connected    
+                                   0 = ExDC                     
+                                   1 = EyDC                     
+                                   2 = EzDC                     
+                                   3 = Ground                   
+    FFT_CHANNEL_4           The antenna to which FFT channel 4 is connected    
+                                   0 = ExDC                     
+                                   1 = Bx                       
+    FFT_CHANNEL_5           The antenna to which FFT channel 5 is connected    
+                                   0 = EyDC                     
+                                   1 = By                       
+    FFT_CHANNEL_6           The antenna to which FFT channel 6 is connected    
+                                   0 = EzDC                     
+                                   1 = Bz                       
+    FFT_CHANNEL_7           The antenna to which FFT channel 7 is connected    
+                                   0 = ExDC                     
+                                   1 = EyDC                     
+                                   2 = EzDC                     
+                                   3 = Ground                   
+    FFT_CHANNEL_8           The antenna to which FFT channel 8 is connected    
+                                   0 = ExDC                     
+                                   1 = Bx                       
+    FFT_CHANNEL_9           The antenna to which FFT channel 9 is connected    
+                                   0 = EyDC                     
+                                   1 = By                       
+    FFT_CHANNEL_SELECT      FFT channel control word (LSB)                     
+    FFT_CH_SWITCHES1        FFT channel control word (MSB)                     
+    FFT_ERRORS              FFT processor error count (Pack 8 notation)        
+    FFT_HIGH_FIFO           High frequency FIFOs were active last major frame  
+                                   0 = Inactive                 
+                                   1 = Active                   
+    FFT_HK_RECEIVED         A HouseKeeping transfer was received from the FFT s
+                                   0 = No HK!                   
+                                   1 = HK received              
+    FFT_LOW_FIFO            Low frequency FIFOs were active last major frame   
+                                   0 = Inactive                 
+                                   1 = Active                   
+    FFT_MID_FIFO            Middle frequency FIFOs were active last major frame
+                                   0 = Inactive                 
+                                   1 = Active                   
+    FFT_ML_BAD              FFT memory load finished but did not checksum corre
+                                   0 = Normal                   
+                                   1 = ML Bad!                  
+    FFT_ML_LOCKED           A LOCKED FFT memory load is underway (other FFT act
+                                   0 = Normal                   
+                                   1 = Locked ML                
+    FFT_ML_OK               FFT memory load finished.  If checksummed correctly
+                                   0 = Normal                   
+                                   1 = ML Good                  
+                                   2 = ML Bad!                  
+                                   3 = Unused                   
+    FFT_ML_STARTED          FFT memory load in progress, 1 = Yes               
+                                   0 = No ML                    
+                                   1 = In progress              
+    FFT_RAM_MODIFIED        FFT RAM has been modified by memory load (flag for 
+                                   0 = Unmodified               
+                                   1 = Modified                 
+    FFT_RAM_OK              All FFT RAM tested okay at boot, 1 = Yes           
+                                   0 = RAM Errors!              
+                                   1 = RAM Ok                   
+    FFT_RESET_LAST_MF       The FFT was reset during the last major frame      
+                                   0 = Not reset                
+                                   1 = Reset!                   
+    FFT_SIG_BLOCKS          Number of FFT signature blocks (ROM & RAM) found at
+    FFT_SS                  Overall state of FFT processor subsystems - see bit
+    FFT_STATUS              Overall state of the FFT processor - see bit-by-bit
+    FFT_TC_EVER             The FFT received at least one TC since the last reb
+                                   0 = Never TC'ed              
+                                   1 = TC'ed                    
+    FFT_TC_THIS_MF          The FFT received a TC during the last major frame  
+                                   0 = Not TC'ed                
+                                   1 = TC'ed this MF            
+    FFT_TM                  Low, Middle or High TM was active last major frame 
+                                   0 = Inactive                 
+                                   1 = Active                   
+    FFT_VERSION             Version of FFT software                            
+    FRAMES_BAD_FILLED       # of minor frames with fill, for cdhf and cdhf-deri
+    FRAMES_BAD_SYNCH        # minor frames with synch err, for cdhf and cdhf-de
+    MAGAZ                   Temporary MagAz angle in fractional spin counts fro
+    MAGEL                   Temporary MagEl angle in degrees (0 - 90) - calcula
+    MINOR_FRAME_QUALITY     250 element array of minor frame quality words (CDH
+    PACKET_ID_ARRAY         25 element array of 1st byte of packet primary head
+    RAD1_ACTIVE             RAD1 was active in the previous major frame when va
+                                   0 = Inactive                 
+                                   1 = Active                   
+    RAD1_ANTENNA            Antenna selected for RAD1 0 = X, 1 = Y             
+                                   0 = Ex                       
+                                   1 = Ey                       
+    RAD1_CALIBRATE          RAD1 is in calibration mode when =1 (not necessaril
+                                   0 = no CAL                   
+                                   1 = CAL                      
+    RAD1_FREQUENCY          RAD1 frequency number in fixed tune mode only (0-25
+    RAD1_FREQ_TABLE         Choice of frequency table for RAD1 in frequency ste
+    RAD1_HEALTH_S           Representative S value from RAD1 data stream someti
+    RAD1_HEALTH_Z           Representative Z value from RAD1 data stream - some
+    RAD1_MODE               RAD1 encoded mode                                  
+                                   0 = Error                    
+                                   1 = Fixed Tune               
+                                   2 = Linear Sweep             
+                                   3 = List                     
+                                   4 = ??                       
+                                   5 = ??                       
+                                   6 = ??                       
+                                   7 = ??                       
+    RAD1_ON_OFF             RAD1 ON/OFF status,                                
+                                   0 = Off                      
+                                   1 = On                       
+    RAD1_POLARIZATION       RAD1 polarization, 0=   1=                         
+                                   0 = On                       
+                                   1 = Off                      
+    RAD1_STATUS             RAD1 status, see bit-by-bit items                  
+    RAD1_STEP               RAD1 Step size (in frequency number) in linear swee
+    RAD1_SUM                RAD1 summation mode                                
+                                   0 = SUM                      
+                                   1 = SEP                      
+    RAD1_VCO                Voltage of RAD1 Voltage Controlled Oscillator (some
+    RAD1_XLAT_TABLE         RAD1 translation table in frequency stepping mode (
+    RAD2_ACTIVE             RAD2 was active in the previous major frame when va
+                                   0 = Inactive                 
+                                   1 = Active                   
+    RAD2_CALIBRATE          RAD2 is in calibration mode when =1 (not necessaril
+    RAD2_FREQUENCY          RAD2 frequency number in fixed tune mode only (0-25
+    RAD2_FREQ_TABLE         Choice of frequency table for RAD1 in frequency ste
+    RAD2_HEALTH_S           Representative S value from RAD2 data stream (somet
+    RAD2_HEALTH_Z           Representative Z value from RAD1 data stream - some
+    RAD2_MODE               RAD2 encoded mode,                                 
+                                   0 = Error                    
+                                   1 = Fixed Tune               
+                                   2 = Linear Sweep             
+                                   3 = List                     
+                                   4 = ??                       
+                                   5 = ??                       
+                                   6 = ??                       
+                                   7 = ??                       
+    RAD2_ON_OFF             RAD2 ON/OFF status,                                
+    RAD2_POLARIZATION       RAD2 polarization, 0=   1=                         
+    RAD2_STATUS             RAD2 status, see bit-by-bit items                  
+    RAD2_STEP               RAD2 step size (in frequency number) in linear swee
+    RAD2_SUM                RAD2 summation,  0=separated, 1=summed             
+    RAD2_VCO                Voltage of RAD2 Voltage Controlled Oscillator (some
+    RAD2_XLAT_TABLE         RAD2 translation table in frequency stepping mode (
+    SPIN_PULSES_OK          Indicates at least one of Sun, MagAz and MagEl was 
+                                   0 = Bad!                     
+                                   1 = Ok                       
+    SWE                     Value of word received from SWE - electron density 
+    SWE_ACTIVITY            SWE word received this major frame, 1 = Yes        
+                                   0 = Inactive                 
+                                   1 = Active                   
+    TC_BUFFERED             Some TCs are held in the buffer (typical of CAL)   
+                                   0 = No TCs buffered          
+                                   1 = TCs in buffer            
+    TC_COUNT                Telecommand counter (PACK 8 notation)              
+    TC_HELD                 Any TCs will be held until released (typical of CAL
+                                   0 = TCs not held             
+                                   1 = TCs Held                 
+    TC_VERIFICATION         Last received telecommand word (32 bits)           
+    TC_VER_2                Telecommand verification composite                 
+    TC_VER_3                Telecommand verification composite                 
+    TC_VER_4                Telecommand verification comoposite - last byte    
+    TDS_ACTIVE              TDS was active in the previous major frame when val
+                                   0 = Inactive                 
+                                   1 = Active                   
+    TDS_CHANNEL_1           The antenna to which TDS channel 1 is connected    
+                                   0 = ExAC                     
+                                   1 = ExDC                     
+    TDS_CHANNEL_2           The antenna to which TDS channel 2 is connected    
+                                   0 = ExAC                     
+                                   1 = EyAC                     
+                                   2 = EzAC                     
+                                   3 = EzAC                     
+    TDS_CHANNEL_3           The antenna to which TDS channel 3 is connected    
+                                   0 = ExDC                     
+                                   1 = EyDC                     
+                                   2 = EzDC                     
+                                   3 = EzDC                     
+    TDS_CHANNEL_4           The antenna to which TDS channel 4 is connected    
+                                   0 = Bx                       
+                                   1 = ExDC                     
+    TDS_CHANNEL_5           The antenna to which TDS channel 5 is connected    
+                                   0 = By                       
+                                   1 = EyDC                     
+    TDS_CHANNEL_6           The antenna to which TDS channel 6 is connected    
+                                   0 = Bz                       
+                                   1 = EzDC                     
+    TDS_CHANNEL_SELECT      TDS channel word                                   
+    TDS_ERRORS              TDS processor error count (Pack-8 notation)        
+    TDS_FAST_ACTIVE         Indicates TDS fast sampler activity                
+                                   0 = Inactive!                
+                                   1 = Active                   
+    TDS_FAST_MODE           TDS fast sampler MAX next event retention mode     
+                                   0 = Reset                    
+                                   1 = Retain                   
+    TDS_FAST_SAMPLER_TRIGGERThe trigger used for the fast sampler channels     
+                                   0 = Fast                     
+                                   1 = Slow                     
+    TDS_FAST_SCAVENGE       TDS fast sampler memory buffer recovery            
+                                   0 = Normal                   
+                                   1 = Scavenge!                
+    TDS_FAST_THRESHOLD      TDS fast threshold value                           
+    TDS_FAST_TRIGGER        The channel used for the fast trigger              
+                                   0 = Channel 1                
+                                   1 = Channel 2                
+    TDS_FAST_WIGGLED        Indicates TDS fast sampler wiggle status           
+                                   0 = Normal                   
+                                   1 = Wiggled                  
+    TDS_FILTER_FAST         TDS fast sampler filter selection                  
+                                   0 = 50.kHz                   
+                                   1 = 12.5kHz                  
+                                   2 = 3.125kHz                 
+                                   3 = .781kHz                  
+    TDS_FILTER_SLOW         TDS slow sampler filter selection                  
+                                   0 = 3,125Hz                  
+                                   1 = 781Hz                    
+                                   2 = 195Hz                    
+                                   3 = 49Hz                     
+    TDS_HK_RECEIVED         A HouseKeeping transfer was received from the TDS s
+                                   0 = No HK!                   
+                                   1 = HK received              
+    TDS_INT_MAX_CH1         TDS interval max channel 1                         
+    TDS_INT_MAX_CH2         TDS interval max channel 2                         
+    TDS_INT_MAX_CH3         TDS interval max channel 3                         
+    TDS_INT_MAX_CH4         TDS interval max channel 4                         
+    TDS_INT_MAX_CH5         TDS interval max channel 5                         
+    TDS_INT_MAX_CH6         TDS interval max channel 6                         
+    TDS_MALLOC              TDS memory allocation failed for an event (1 = fail
+                                   0 = Ok                       
+                                   1 = Failure!                 
+    TDS_ML_BAD              TDS memory load finished but did not checksum corre
+                                   0 = Normal                   
+                                   1 = ML Bad!                  
+    TDS_ML_LOCKED           A LOCKED TDS memory load is underway (other TDS act
+                                   0 = Normal                   
+                                   1 = Locked ML                
+    TDS_ML_OK               TDS memory load finished.  If checksummed correctly
+                                   0 = Normal                   
+                                   1 = ML Good                  
+                                   2 = ML Bad!                  
+                                   3 = Unused                   
+    TDS_ML_STARTED          TDS memory load in progress, 1 = Yes               
+                                   0 = No ML                    
+                                   1 = In progress              
+    TDS_NOMAX               Indicates TDS fast and slow MAX/NOMAX mode         
+                                   0 = Normal                   
+                                   1 = No MAX                   
+    TDS_RAM_MODIFIED        TDS RAM has been modified by memory load (flag for 
+                                   0 = Unmodified               
+                                   1 = Modified                 
+    TDS_RAM_OK              All TDS RAM tested okay at boot, 1 = Yes           
+                                   0 = RAM Errors!              
+                                   1 = RAM Ok                   
+    TDS_RESET_LAST_MF       The TDS was reset during the last major frame      
+                                   0 = Not reset                
+                                   1 = Reset!                   
+    TDS_SIG_BLOCKS          Number of TDS signature blocks (ROM & RAM) found at
+    TDS_SLOW_ACTIVE         Indicates TDS slow sampler activity                
+                                   0 = Inactive!                
+                                   1 = Active                   
+    TDS_SLOW_MODE           TDS slow sampler MAX next event retention mode     
+                                   0 = Reset                    
+                                   1 = Retain                   
+    TDS_SLOW_SAMPLER_TRIGGERThe trigger used for the slow sampler channels     
+                                   0 = Slow                     
+                                   1 = Fast                     
+    TDS_SLOW_SCAVENGE       TDS slow sampler memory buffer recovery            
+                                   0 = Normal                   
+                                   1 = Scavenge!                
+    TDS_SLOW_THRESHOLD      TDS slow threshold value                           
+    TDS_SLOW_TRIGGER        The channel used for the slow trigger              
+                                   0 = Channel 3                
+                                   1 = Channel 4                
+                                   2 = Channel 5                
+                                   3 = Channel 6                
+    TDS_SLOW_WIGGLED        Indicates TDS slow sampler wiggle status           
+                                   0 = Normal                   
+                                   1 = Wiggled                  
+    TDS_SPEED_FAST          TDS fast sampler speed selection                   
+                                   0 = 120,000s/s               
+                                   1 = 30,000s/s                
+                                   2 = 7,500s/s                 
+                                   3 = 1,875s/s                 
+    TDS_SPEED_SELECT        TDS speed control word                             
+    TDS_SPEED_SLOW          TDS slow sampler speed selection                   
+                                   0 = 7,500s/s                 
+                                   1 = 1,875s/s                 
+                                   2 = 478s/s                   
+                                   3 = 120s/s                   
+    TDS_SS                  Overall state of TDS processor subsystems - see bit
+    TDS_STATUS              Overall state of the TDS processor - see bit-by-bit
+    TDS_TANDEM              Indicates TDS fast and slow TANDEM mode            
+                                   0 = Separate                 
+                                   1 = Tandem                   
+    TDS_TC_EVER             The TDS received at least one TC since the last reb
+                                   0 = Never TC'ed              
+                                   1 = TC'ed                    
+    TDS_TC_THIS_MF          The TDS received a TC during the last major frame  
+                                   0 = Not TC'ed                
+                                   1 = TC'ed this MF            
+    TDS_TRIGGER             TDS trigger control word                           
+    TDS_VERSION             Version of TDS software                            
+    TELEMETRY_OK            The telemetry FIFO was emptied correctly when value
+                                   0 = Bad!                     
+                                   1 = Ok                       
+    TEMP+EX                 Temperature of +Ex antenna motor (valid only in spe
+    TEMP+EY                 Temperature of +Ey antenna motor - INCORRECT NOW (v
+    TEMP+EZ                 Temperature of +Ez antenna motor (valid only in spe
+    TEMP-EX                 Temperature of -Ex antenna motor - INCORRECT NOW (v
+    TEMP-EY                 Temperature of -Ey antenna motor  -INCORRECT NOW (v
+    TEMP-EZ                 Temperature of -Ez antenna motor (valid only in spe
+    TEMP_BX                 Raw temperature of Bx antenna (corrected for harnes
+    TEMP_BY                 Raw temperature of By antenna (corrected for harnes
+    TEMP_BZ                 Raw temperature of Bz antenna (corrected for harnes
+    TEMP_WAVES1             Temperature of WAVES1 stack                        
+    TEMP_WAVES2             Temperature of WAVES2 stack                        
+    TM_BITRATE              The measured TM bit rate                           
+                                   0 = Low                      
+                                   1 = High                     
+    TM_MODE                 Spacecraft telemetry mode (CDHF code convention)   
+                                   1 = Science 1x               
+                                   3 = Maneuver 1x              
+                                   4 = Contingency 1x           
+                                   5 = Science 2x               
+                                   7 = Maneuver 2x              
+                                   8 = Contingency 2x           
+    TNR_ACTIVE              TNR was active in the previous major frame when val
+                                   0 = Inactive                 
+                                   1 = Active                   
+    TNR_ANTENNA             Indicates the antenna selection of the TNR         
+                                   0 = ExEy                     
+                                   1 = ExEz                     
+                                   2 = EyEz                     
+                                   3 = EyEx                     
+    TNR_AUTO_TUNE           Indicates that TNR is in NN auto tuning mode       
+                                   0 = ??                       
+                                   1 = ??                       
+    TNR_CALIBRATE           TNR CAL on or state saved                          
+                                   0 = No CAL                   
+                                   1 = CAL                      
+    TNR_CURRENT_BAND        TNR current band (center frequency)                
+                                   0 = A_8kHz                   
+                                   1 = B_16kHz                  
+                                   2 = C_32kHz                  
+                                   3 = D_64kHz                  
+                                   4 = E_128kHz                 
+                                   5 = Dummy                    
+                                   6 = Dummy                    
+                                   7 = Dummy                    
+    TNR_HEALTH_DATA         TNR health data                                    
+    TNR_INTEGRATE           TNR integration time                               
+                                   0 = A_1472ms                 
+                                   1 = B_736ms                  
+                                   2 = C_368ms                  
+                                   3 = D_184ms                  
+    TNR_MODE                TNR mode number                                    
+    TNR_NN_CHANNEL          TNR neural network channel                         
+    TNR_NN_QUALITY          TNR neural network quality value                   
+    TNR_ON_OFF              Indicates that TNR data collection is enabled      
+                                   0 = Off                      
+                                   1 = On                       
+    TNR_RAM_MODIFIED        Indicates that a TNR memory load may have been done
+                                   0 = Unmodified               
+                                   1 = Modified                 
+    TNR_STATE               Coded word indicating TNR state                    
+                                   0 = Fixed Tune?              
+                                   1 = ABCDE?                   
+                                   2 = ACE?                     
+                                   3 = Auto tune?               
+    TNR_STATUS              TNR status bits, see breakdown of bits in following
+    VOLTAGE_TNR+5           Voltage on +5 volt bus of the TNR                  
+    VOLTAGE_TNR+6           Voltage on +6 volt bus of the TNR                  
+    VOLTAGE_TNR-6           Voltage on -6 volt bus of the TNR                  
+HK          
+  FUNCTION  
+    APC_DAC_VOLTS_R4        The value of the APC DAC (Volts)                   
+    APM_X_DC_VOLTS_R4       The X DC value (Volts)                             
+    APM_X_PEAK_VOLTS_R4     The X peak value (Volts)                           
+    APM_Y_DC_VOLTS_R4       The Y DC value (Volts)                             
+    APM_Y_PEAK_VOLTS_R4     The Y peak value (Volts)                           
+    APM_Z_DC_VOLTS_R4       The Z DC value (Volts)                             
+    CURRENT_A_AMPS_R4       Current on the A side of the converter (Amps)      
+    CURRENT_B_AMPS_R4       Current on the B side of the converter (Amps)      
+    TEMP+EX_DEGC_R4         Temperature of +Ex antenna (in degrees C)          
+    TEMP+EY_DEGC_R4         Temperature of +Ey antenna (in degrees C)          
+    TEMP+EZ_DEGC_R4         Temperature of +Ez antenna (in degrees C)          
+    TEMP-EX_DEGC_R4         Temperature of -Ex antenna (in degrees C)          
+    TEMP-EY_DEGC_R4         Temperature of -Ey antenna (in degrees C)          
+    TEMP-EZ_DEGC_R4         Temperature of -Ez antenna (in degrees C)          
+    TEMP_BX_DEGC_R4         Temperature of Bx antenna (in degrees C)           
+    TEMP_BY_DEGC_R4         Temperature of By antenna (in degrees C)           
+    TEMP_BZ_DEGC_R4         Temperature of Bz antenna (in degrees C)           
+    TEMP_WAVES1_DEGC_R4     Temperature of WAVES1 electronics (in degrees C)   
+    TEMP_WAVES2_DEGC_R4     Temperature of WAVES2 electronics (in degrees C)   
+    TNR+5_VOLTS_R4          TNR +5 volt bus voltage (Volts)                    
+    TNR+6_VOLTS_R4          TNR +6 volt bus voltage (Volts)                    
+    TNR-6_VOLTS_R4          TNR -6 volt bus voltage (Volts)                    
+HK          
+  LOOKUP    
+    TNR_CURRENT_BAND_R4     TNR current band (center frequency)                
+    TNR_INTEGRATE_R4        TNR integration time in seconds                    
+TNRO        
+  CONSTANT  
+    A_TNR                   "TNR offset from start of EVENT"                   
+    CHANS_PER_BAND          " number of channels per spectrum for modes 0 & 1" 
+    CHANS_PER_BAND          " number of channels per spectrum for mode 4"      
+    CHANS_PER_BAND          " number of channels per spectrum for modes 2 & 3" 
+    EVENT_INTEGRAT          "dummy"                                            
+    INSTR_HEADER            "Total length of instrument header "               
+    INSTR_HEADER            "Total length of instrument header"                
+    INTEG_THIS_SPEC         "dummy"                                            
+    INTEG_THIS_SPEC         "dummy"                                            
+    INT_TIME                "Integration time of TNR in msecs: speed 0"        
+    INT_TIME                "Integration time of TNR in msecs: speed 1"        
+    INT_TIME                "Integration time of TNR in msecs: speed 2"        
+    INT_TIME                "Integration time of TNR in msecs: speed 3"        
+    INT_TIME_X2             "Double the integration time of TNR in msecs: speed
+    INT_TIME_X2             "Double the integration time of TNR in msecs: speed
+    INT_TIME_X2             "Double the integration time of TNR in msecs: speed
+    INT_TIME_X2             "Double the integration time of TNR in msecs: speed
+    MAJOR_BITS              "Number of bits in major frame counter"            
+    MEASURE_HEADER          "Total length of measurement header (3rd header)"  
+    MEASURE_HEADER          "Total length of measurement header (3rd header)"  
+    MEASURE_HEADER          "Total length of measurement header (3rd header)"  
+    NN_STATUS_FLAG          "dummy"                                            
+    PACKET_HEADER           "Number of bits in the packet header"              
+    PACKET_HEADER           "Number of bits in the packet header"              
+    PACKET_ID               "Fixed value of TNR ID for the primary header"     
+TNRO        
+  TELEMETRY 
+
+    ACTUAL_SPEC_CT          "Actual number of spectra encoded in event, matches
+    AGC                     "Automatic gain clamped value"                     
+    AGC                     "Automatic gain clamped value"                     
+    AGC                     "Automatic gain clamped value"                     
+    AGC                     "Automatic gain clamped value"                     
+    AGC                     "Automatic gain clamped value"                     
+    AGC                     "Automatic gain clamped value"                     
+    AGC                     "Automatic gain clamped value"                     
+    AGC                     "Automatic gain clamped value"                     
+    AGC                     "Automatic gain clamped value, TM Normal, TNR mode 
+    AGC                     "Automatic gain clamped value, TM Normal, TNR mode 
+    AGC                     "Automatic gain clamped value, TM Fast, TNR mode 2,
+    AGC                     "Automatic gain clamped value, TM Fast, TNR mode 0,
+    AGC_A                   "Automatic gain clamped value, TNR A, TM Normal, TN
+    AGC_A                   "Automatic gain clamped value, TM Fast, TNR A mode 
+    AGC_B                   "Automatic gain clamped value, TNR B, TM Normal, TN
+    AGC_B                   "Automatic gain clamped value, TM Fast, TNR B mode 
+    AGC_SHORT               "Automatic gain clamped value, TM Fast, TNR mode 2,
+    AGC_SHORT               "Automatic gain clamped value, TM Fast, TNR mode 4"
+    AGC_SHORT               "Automatic gain clamped value, TM Fast, TNR mode 0,
+    ANTENNA                 " Antenna currently in use for TNR measurements"   
+    BAND_THIS_SPEC          " 0=A, 1=B 2=C, 3=D, 4=E, 5=E, 0 is lowest"        
+    BAND_THIS_SPEC          " 0=A, 1=B 2=C, 3=D, 4=E, 5=E, 0 is lowest"        
+    BAND_THIS_SPEC          " 0=A, 1=B 2=C, 3=D, 4=E, 5=E, 0 is lowest"        
+    BAND_THIS_SPEC          " 0=A, 1=B 2=C, 3=D, 4=E, 5=E, 0 is lowest"        
+    BAND_THIS_SPEC          " 0=A, 1=B 2=C, 3=D, 4=E, 5=E, 0 is lowest"        
+    BAND_THIS_SPEC          " 0=A, 1=B 2=C, 3=D, 4=E, 5=E, 0 is lowest"        
+    BAND_THIS_SPEC          " 0=A, 1=B 2=C, 3=D, 4=E, 5=E, 0 is lowest"        
+    BAND_THIS_SPEC          " 0=A, 1=B 2=C, 3=D, 4=E, 5=E, 0 is lowest"        
+    BYTES_IN_DATA           "Number of bytes including nn_result, agcs and spec
+    BYTES_IN_DATA           "Number of bytes including nn_result, agcs and spec
+    BYTES_IN_DATA           "Number of bytes including nn_result, agcs and spec
+    BYTES_IN_DATA           "Number of bytes including nn_result, agcs and spec
+    BYTES_IN_DATA           "Number of bytes including nn_result, agcs and spec
+    BYTES_IN_DATA           "Number of bytes including nn_result, agcs and spec
+    BYTES_IN_DATA           "Number of bytes including nn_result, agcs and spec
+    BYTES_IN_DATA           "Number of bytes including nn_result, agcs and spec
+    CAL_FLAG                "Calibration flag, funny that this are not DPU vers
+    DPU_MAJOR_FRAME         "DPU major fram count (low order 16 bits only)"    
+    DPU_MAJOR_FRAME         "DPU major frame counter (low order 8 bits only) at
+    DPU_MINOR_FRAME         "DPU minor frame count at measurement start"       
+    DPU_MINOR_FRAME         "DPU minor frame count at measurement start"       
+    EVENT_BAND              " Current choice of band"                          
+    EVENT_INTEGRAT          "TNR Integration time (0>1.472 seconds, 1>.736, 2>.
+    EVENT_MODE              "TNR MODE FOR EVENT AS A WHOLE"                    
+    EVENT_MODE              "TNR MODE FOR EVENT AS A WHOLE"                    
+    EVENT_STATE             " DPU state controlling TNR"                       
+    EXPECT_SPEC_CT          "NUMBER OF SPECTRA EXPECTED IN THIS EVENT"         
+    INTEG_THIS_SPEC         "TNR Integration time for each spectrum"           
+    INTEG_THIS_SPEC         "TNR Integration time for each spectrum"           
+    MODE_THIS_SPEC          "A mode flag for each spectrum in event"           
+    MODE_THIS_SPEC          "A mode flag for each spectrum in event"           
+    MODE_THIS_SPEC          "A mode flag for each spectrum in event"           
+    MODE_THIS_SPEC          "A mode flag for each spectrum in event"           
+    MODE_THIS_SPEC          "A mode flag for each spectrum in event"           
+    MODE_THIS_SPEC          "A mode flag for each spectrum in event"           
+    MODE_THIS_SPEC          "A mode flag for each spectrum in event"           
+    MODE_THIS_SPEC          "A mode flag for each spectrum in event"           
+    NN_CHANNEL              "TNR neural network channel, TM Fast, TNR mode 2,3"
+    NN_CHANNEL              "TNR neural network channel, TM Fast, TNR mode 0,1"
+    NN_CHANNEL_A            "TNR neural network channel, TM Fast, TNR mode 4"" 
+    NN_CHANNEL_SHORT        "TNR neural network channel, TM Fast, TNR mode 2,3"
+    NN_CHANNEL_SHORT        "TNR neural network channel, TM Fast, TNR mode 4"" 
+    NN_CHANNEL_SHORT        "TNR neural network channel, TM Fast, TNR mode 0,1"
+    NN_QUALITY              "TNR neural network quality value, TM Fast, TNR mod
+    NN_QUALITY              "TNR neural network quality value, TM Fast, TNR mod
+    NN_QUALITY_A            "TNR neural network quality value, TM Fast, TNR mod
+    NN_QUALITY_SHORT        "TNR neural network quality value, TM Fast, TNR mod
+    NN_QUALITY_SHORT        "TNR neural network quality value, TM Fast, TNR mod
+    NN_QUALITY_SHORT        "TNR neural network quality value, TM Fast, TNR mod
+    NN_RESULTS              "neural network results (2 for now)"               
+    NN_RESULTS              "neural network results (2 for now)"               
+    NN_RESULTS              "neural network results (2 for now)"               
+    NN_RESULTS              "Neural network results (2 for now)"               
+    NN_RESULTS              "neural network results (2 for now)"               
+    NN_RESULTS              "neural network results (2 for now)"               
+    NN_RESULTS              "neural network results (2 for now)"               
+    NN_RESULTS              "Neural network results (2 for now)"               
+    NN_STATUS_FLAG          "FLAG SHOWING WHETHER OR NOT NEURAL NETWORK on"    
+    PACKET_COUNT            "Number of this packet within the event"           
+    SPECTRUM                "Spectral vlaues for TM Normal, TNR mode 2,3"      
+    SPECTRUM                "Spectral vlaues for TM Normal, TNR mode 0,1"      
+    SPECTRUM                "Spectral vlaues for TM Fast, TNR mode 2,3"        
+    SPECTRUM                "Spectral vlaues for TM Fast, TNR mode 0,1"        
+    SPECTRUM                "32 spectral values - two spectra in packet "      
+    SPECTRUM                "32 spectral values - two spectra in packet "      
+    SPECTRUM                "32 spectral values - two spectra in packet "      
+    SPECTRUM                "32 spectral values - one spectrum in packet "     
+    SPECTRUM                "32 spectral values - one spectrum in packet "     
+    SPECTRUM                "32 spectral values - one spectrum in packet "     
+    SPECTRUM                "32 spectral values - one spectrum in packet "     
+    SPECTRUM                "32 spectral values - one spectrum in packet "     
+    SPECTRUM_1              "First spectrum in 16-element pair"                
+    SPECTRUM_1              "First spectrum in 16-element pair"                
+    SPECTRUM_1              "First spectrum in 16-element pair"                
+    SPECTRUM_1              "First spectrum in 16-element pair"                
+    SPECTRUM_1              "First spectrum in 16-element pair"                
+    SPECTRUM_1              "First spectrum in 16-element pair"                
+    SPECTRUM_1              "First spectrum in 16-element pair"                
+    SPECTRUM_1              "First spectrum in 16-element pair"                
+    SPECTRUM_2              "Second spectrum in 16-element pair"               
+    SPECTRUM_2              "Second spectrum in 16-element pair"               
+    SPECTRUM_2              "Second spectrum in 16-element pair"               
+    SPECTRUM_2              "Second spectrum in 16-element pair"               
+    SPECTRUM_2              "Second spectrum in 16-element pair"               
+    SPECTRUM_2              "Second spectrum in 16-element pair"               
+    SPECTRUM_2              "Second spectrum in 16-element pair"               
+    SPECTRUM_2              "Second spectrum in 16-element pair"               
+    SPECTRUM_A              "Spectral vlaues for TNR A, TM Normal, TNR mode 4" 
+    SPECTRUM_A              "Spectral vlaues for TM Fast, TNR A mode 4"        
+    SPECTRUM_B              "Spectral vlaues for TNR B, TM Normal, TNR mode 4" 
+    SPECTRUM_B              "Spectral vlaues for TM Fast, TNR B mode 4"        
+    SPECTRUM_SHORT          "Spectral vlaues for TM Fast, TNR mode 2,3"        
+    SPECTRUM_SHORT          "Spectral vlaues for TM Fast, TNR mode 4"          
+    SPECTRUM_SHORT          "Spectral vlaues for TM Fast, TNR mode 0,1"        
+    SPEC_MINOR_START        "Minor frame of the current spectrum START"        
+    SPEC_MINOR_START        "Minor frame of the current spectrum START"        
+    SPEC_MINOR_START        "Minor frame of the current spectrum START"        
+    SPEC_MINOR_START        "Minor frame of the current spectrum START"        
+    SPEC_MINOR_START        "Minor frame of the current spectrum START"        
+    SPEC_MINOR_START        "Minor frame of the current spectrum START"        
+    SPEC_MINOR_STOP         "Minor frame of the current spectrum END"          
+    SPEC_MINOR_STOP         "Minor frame of the current spectrum END"          
+    SPEC_MINOR_STOP         "Minor frame of the current spectrum END"          
+    SPEC_MINOR_STOP         "Minor frame of the current spectrum END"          
+    SPEC_MINOR_STOP         "Minor frame of the current spectrum END"          
+    SPEC_MINOR_STOP         "Minor frame of the current spectrum END"          
+    TUNING                  "KAG"                                              
+    ZZ_BIG_BANANA           "Diagnostic for looking at big chunk of data       
+    ZZ_BIG_INSTR            "Diagnostic for looking at the entire instrument he
+    ZZ_BIG_MEAS             "Diagnostic for looking at the entire measurement h
+
+TNRO        
+  FILE      
+    FREQUENCIES             "File of frequencies"                              
+    FREQUENCIES             "File of frequencies"                              
+TNRO        
+  FUNCTION  
+    SPECTRUM_A_SCET_R8      "TNR SCET'S for SPECTRUM A (Ulysses R8) "          
+    SPECTRUM_B_SCET_R8      "TNR SCET'S for SPECTRUM B (Ulysses R8) "          
+    SPECTRUM_SCET_R8        "TNR SCET'S for individual measurements (Ulysses R8
