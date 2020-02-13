@@ -1,0 +1,51 @@
+	program makearrow
+C
+C	MAKES MONGO COMMANDS FOR AN ARROW
+C
+C	DATA XCENTER,YCENTER,ANGLE /0.,0.,  -90./
+C	DATA SIZE /1./		! MUST BE IN USER COORDINATES
+C VSW	DATA XCENTER,YCENTER,ANGLE /21.9,22.,  180./
+	DATA XCENTER,YCENTER,ANGLE /19.,11.,   135./
+	DATA SIZE /2./		! MUST BE IN USER COORDINATES
+	REAL X(4),Y(4)
+C
+C	makes an arrowhead, tip at xcenter,ycenter in user coords
+C	   at angle ANGLE with x axis, write mongo program to FOR022.DAT
+C
+C	CALCULATE POINTS
+C
+	X(1) = 0.
+	Y(1) = 0.
+	X(2) = -SIZE
+	Y(2) = .333*SIZE
+	X(3) = -.6*SIZE
+	Y(3) = 0.
+	X(4) = -SIZE
+	Y(4) = -.333*SIZE
+C
+C	ROTATE
+C
+	DO N =1,4
+	  XT = X(N)*COSD(ANGLE) + Y(N)*SIND(ANGLE)
+	  Y(N) = Y(N)*COSD(ANGLE) - X(N)*SIND(ANGLE)
+	  X(N) = XT
+	ENDDO
+C
+	DO N =1,4
+	  Y(N) = Y(N) + YCENTER
+	  X(N) = X(N) + XCENTER
+	ENDDO
+C
+C	WRITE OUT MONGO COMMANDS
+C
+ 101	FORMAT('RELOCATE',F10.3,F10.3)
+ 102	FORMAT('DRAW',F10.3,F10.3)
+	WRITE(22,101) X(1),Y(1)
+	DO N = 2,4
+	  WRITE(22,102) X(N),Y(N)
+	ENDDO
+	WRITE(22,102) X(1),Y(1)
+C
+	STOP
+	END
+

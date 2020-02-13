@@ -1,0 +1,367 @@
+	SUBROUTINE FIT_SOL(ICH,WDTH,F1,CENTER,EX1,EY1,TX,TY,RMSF)
+C
+C	FITS A SOLITON TO THE XYDATA.  INPUTS ARE THE WIDTH AND APPARENT
+C	FREQUENCY OF THE WAVE IN KHZ, X(1) = WIDTH, X(2) = FREQ 
+C	THE X AND Y COMPONENTS OF THE IN PHASE AND OUT-OF-PHASE PARTS
+C	THE ELECTRIC VECTORS, X(3) = EX1, EY1, EX2, EY2, 
+C
+	EXTERNAL SOLFIT
+	COMMON /PARTBLK/ X4DATA(2050,4),XRE,YRE,ZRE,SUNCLOCK,SPINRATE
+	COMMON /WAVFIT/ N1,N2
+	COMMON /SUB_CHOOSE/ NVAR
+	COMMON /FREQ_CHOOSE/ FREQMAX
+	COMMON /HNTBLK/ NHUNT(25)
+	COMMON /XYBLOCK/ XSPECT,YSPECT,DPHASE
+	REAL 	XSPECT(1025),YSPECT(1025),DPHASE(1025)
+	REAL 	X(25),DX(25),Y(25),XS(25),XB(25)
+c
+	DATA XLEN,YLEN,ZLEN /.0411, .00379, .00217/             ! KM, FOR mV
+	DATA TWOPI /6.28318531/
+	DATA SPS /120000./      !***************** WARNING ******
+	DATA NTEST /0/
+C
+	print*,'*****************fit_sol'
+	NVAR = 7			! a trick to return x(4)-x(7)
+	NHUNT(4) = 0
+	NHUNT(5) = 0
+	NHUNT(6) = 0
+	NHUNT(7) = 0
+C
+C	FIND MAXIMUM IN SPECTRUM
+C
+	  SMAX = -1000.
+	  DO N = 50,1022
+	    IF(XSPECT(N).GT.SMAX) THEN
+	      SMAX = XSPECT(N)
+	      NSPMAX = N
+	    ENDIF
+	  ENDDO
+	PRINT*,'X SPECTRUM MAX:N,F,SMAX',NSPMAX,(NSPMAX-1)*SPS/2048.,SMAX
+	  FREQMAX = (NSPMAX-1)*SPS/2048.
+C	  AVERAGE OVER ADJACENT POINTS
+	  FTOT = 0.
+	  STOT = 0.
+	  DO NN = -1,1
+	    FNN = (NSPMAX-1+NN)*SPS/2048.
+	    SNN = 10.**(.1*XSPECT(NSPMAX+NN))
+	    FTOT = FTOT+FNN*SNN
+	    STOT = STOT+SNN
+	  ENDDO
+	  FREQMAX = FTOT/STOT
+	  PRINT*,'INTERPOLATED FREQ',FREQMAX
+C
+	PRINT*,'FREQMAX',FREQMAX
+	WRITE(66,*) 'FREQMAX',FREQMAX
+	F1 = .001*FREQMAX		! CHANGE TO KHZ
+	WDTH = 5.		   ! ABOUT ONE THIRD
+C
+	N1 = 1
+	N2 = 2048
+c	print*,'n1,n2,nvar',n1,n2,nvar
+c	WRITE(66,*) 'N1,N2',N1,N2
+C
+C	PRELIMINARY ESTIMATES OF CENTER AND WIDTH, 1 msec is 120 samp
+C				and is fastest expected
+C	Estimate width by fitting parabola through left, center, and right
+C		powers
+C
+C	NOT DONE YET?
+	N1 = 1024-60
+	N2 = 1024+60
+	SUMSQM = 0.
+	SUMSQM = 0.
+	DO N = N1,N2
+	  SUMSQM = SUMSQM + (X4DATA(N,1)/XLEN )**2
+	  SUMSQM = SUMSQM + (X4DATA(N,2)/YLEN )**2
+	ENDDO
+	SM = SUMSQM
+	SUMSQL = 0.
+	SUMSQL = 0.
+	DO N = N1-120,N1
+	  SUMSQL = SUMSQL + (X4DATA(N,1)/XLEN )**2
+	  SUMSQL = SUMSQL + (X4DATA(N,2)/YLEN )**2
+	ENDDO
+	SL = SUMSQL
+	SUMSQR = 0.
+	SUMSQR = 0.
+	DO N = N2,N2+120
+	  SUMSQR = SUMSQR + (X4DATA(N,1)/XLEN )**2
+	  SUMSQR = SUMSQR + (X4DATA(N,2)/YLEN )**2
+	ENDDO
+	SR = SUMSQR
+	BB = .5*(SR - SL)
+	AA = .5*(SR + SL - 2.*SM)
+	CC = SM - .648*SM
+C
+C	AVERAGE WIDTH, AVERAGE BETWEEN THE TWO SIDES
+C
+	print*,'l,m,r',sr,sm,sl
+	CENTER = 1025.
+	WWDD = .5*SQRT(AMAX1(BB**2 - 4.*AA*CC,0.))/AA    
+	WWDD = ABS(WWDD)*90.			 ! WIDTH IN SAMPLES
+	WD_SAMP = WWDD
+	PRINT*,'ESTIMATE OF WIDTH,AA,BB,CC,WWDD',AA,BB,CC,WD_SAMP
+	WWDD = WWDD*17./2048.
+	PRINT*,'ESTIMATE OF WIDTH IN MSEC',WWDD
+C
+	N1 = CENTER - 5.*WD_SAMP
+	N2 = CENTER + 5.*WD_SAMP
+	N1 = MAX0(N1,1)
+	N2 = MIN0(N2,2048)
+	print*,'n1,n2,nvar',n1,n2,nvar
+	WRITE(66,*) 'N1,N2',N1,N2
+	IF(N2.EQ.N1) THEN
+	  WDTH = 0.
+	  RETURN
+	ENDIF
+C
+C	EVALUATE MEAN SQUARE SIGNAL
+C
+	SUMSQX = 0.
+	SUMSQY = 0.
+	DO N = N1,N2
+	  SUMSQX = SUMSQX + (X4DATA(N,1)/XLEN )**2
+	  SUMSQY = SUMSQY + (X4DATA(N,2)/YLEN )**2
+	ENDDO
+	POWER = SUMSQX + SUMSQY
+	RMST = 0.
+	RMST2 = POWER/(2.*(N2-N1+1)-NVAR)
+	IF(RMST2.GT.0.) RMST = SQRT(RMST2)
+	WRITE(66,*) 'TOT WAVE POWER,X,Y,TOT,RMS',SUMSQX,SUMSQY,POWER,RMST
+C
+	CENTER = 1024.
+C
+C	LOAD INITIAL PARAMETERS
+C
+	X(1) = WWDD
+	X(2) = F1
+	X(3) = CENTER
+	X(4) = EX1
+	X(5) = EY1
+	X(6) = TX
+	X(7) = TY
+C
+	WRITE(66,223)(X(I),I=1,7)
+C
+	DO N = 1,NVAR
+	  DX(N) = .1*X(N)
+	ENDDO
+	DX(2) = .004*X(2)
+	DX(3) = 1.
+C
+	IF(1) GO TO 200
+C
+	CALL SOLFIT(X,SUMSQS)
+	  PRINT*,'INITIAL SUMSQ',SUMSQS
+	itotal = 1
+	if(itotal.eq.1) go to 100
+	INTERACT = 0
+	IF(INTERACT.NE.1) GO TO 201
+C
+C****** SPECIAL INTERACTIVE
+C
+ 101	continue
+c
+	CALL SOLFIT(X,SUMSQS)
+	print 223,(X(I),I=1,7),sumsqs
+c
+	WDTH = X(1)
+C	WDTH = 5.		   ! ABOUT ONE THIRD
+	F1 = X(2)
+	EX1 = X(4)
+	EY1 = X(5)
+	TX = X(6)
+	TY = X(7)
+	DELT = 1./120.				! MSEC
+c
+	SUMSQ = 0.
+	DO N = N1,N2
+	if(wdth.eq.0.)   print*,'f1,t,wdth',f1,t,wdth
+	  T = (N-1024)*DELT	
+	  EX = (EX1*SIN(TWOPI*F1*T) + TX*COS(TWOPI*F1*T))/COSH(T/WDTH)
+	  EY = (EY1*SIN(TWOPI*F1*T) + TY*COS(TWOPI*F1*T))/COSH(T/WDTH)
+	  SUMSQ = SUMSQ + (X4DATA(N,1)/XLEN - EX)**2
+     1		+ (X4DATA(N,2)/YLEN - EY)**2
+C	OPEN(unit=86,STATUS='NEW')
+C	write(86,*) n,ex,ey,x4data(n,1)/xlen-ex, x4data(n,2)/ylen-ey 
+	ENDDO
+ 	RMS = SQRT(SUMSQ/(2.*(N2-N1+1)-NVAR))
+	print*,'sumsq,rms',sumsq,rms	
+c	print*,'now go plot fit_wave.mgo'
+ 102	read(5,*) nchg,temp
+	ichg = iabs(nchg)
+	x(ichg) = temp
+	if(nchg.lt.0) go to 102
+	close(unit=86)
+	go to 101
+C
+C******** END OF SPECIAL INTERACTIVE
+C
+ 201	continue
+c	X(2) = F1/64.
+c 	DX(2) = .5*X(2)
+ 200	CONTINUE
+C
+	SUMSQS = 1.E8
+ 100	DO IT = 1,20
+	  CALL HUNTMN(NVAR,X,DX,Y,SOLFIT,SUMSQ)
+	  WRITE(66,223)(X(I),I=1,7),SUMSQ
+	  IF(SUMSQ.GT..999*SUMSQS) GO TO 40
+	  SUMSQS = SUMSQ
+	ENDDO
+ 223	FORMAT(2F8.4,F8.1,4F9.4,E12.4) 
+C
+ 40	RMS = SQRT(SUMSQ/(2.*(N2-N1+1)-NVAR))
+	write(66,*) n1,n2,rms
+C
+C	DO ONE MORE STEP TO DETERMINE RMS ERROR
+C
+	WD_SAMP = 2048.*X(1)/17.
+	CENTER = X(3)
+	N1 = CENTER - 5.3*WD_SAMP
+	N2 = CENTER + 5.3*WD_SAMP
+	N1 = MAX0(N1,1)
+	N2 = MIN0(N2,2048)
+	print*,'LAST n1,n2,nvar',n1,n2,nvar
+	SUMSQX = 0.
+	SUMSQY = 0.
+	DO N = N1,N2
+	  SUMSQX = SUMSQX + (X4DATA(N,1)/XLEN )**2
+	  SUMSQY = SUMSQY + (X4DATA(N,2)/YLEN )**2
+	ENDDO
+	POWER = SUMSQX + SUMSQY
+	RMST2 = POWER/(2.*(N2-N1+1)-NVAR)
+	RMST = 0.
+	IF(RMST2.GE.0.) RMST=SQRT(POWER/(2.*(N2-N1+1)-NVAR))
+	IF(RMST.EQ.0) THEN
+	  RMSF = 0.
+	  RETURN
+	ENDIF
+C	
+c	DO N = 1,NVAR
+c	  DX(N) = X(N)-XS(N)
+c	ENDDO
+C
+	SUMSQS = 1.E10
+	DO IT = 1,10
+	  CALL HUNTMN(NVAR,X,DX,Y,SOLFIT,SUMSQ)
+	  WRITE(76,223)(X(I),I=1,7),SUMSQ
+	  IF(SUMSQ.GT..999*SUMSQS) GO TO 140
+	  SUMSQS = SUMSQ
+	ENDDO
+C	WRITE(66,223)(X(I),I=1,7),SUMSQ
+ 140	RMS = SQRT(SUMSQ/(2.*(N2-N1+1)-NVAR))
+	write(66,*) n1,n2,rms
+	IF(SUMSQS.NE.0.) THEN
+	  WRITE(66,*),'END TEST',SUMSQS,SUMSQ,SUMSQ/SUMSQS
+	ELSE
+	  WRITE(66,*) 'SUMSQS WAS ZERO'
+	ENDIF
+	NTEST = NTEST+1
+C	  IF(SUMSQ.GT..9999*SUMSQS.AND.NTEST.LT.5) GO TO 100
+C
+	WDTH = X(1)
+	F1 = X(2)
+	CENTER = X(3)
+	EX1 = X(4)
+	EY1 = X(5)
+	TX = X(6)
+	TY = X(7)
+	RMSF = 0.
+	IF(RMST.NE.0.)	RMSF = RMS/RMST
+C
+	RETURN
+	END
+	SUBROUTINE SOLFIT(X,SUMSQ)
+C
+	COMMON /PARTBLK/ X4DATA(2050,4),XRE,YRE,ZRE,SUNCLOCK,SPINRATE
+	COMMON /WAVFIT/ N1,N2
+	REAL X(25),WTX(2048),WTY(2048),C(4,4),Y(4),W(4),V(4,4),YOUT(4)
+	REAL U(4,4)
+C	DATA XLEN,YLEN,ZLEN /41.1, 3.79, 2.17/
+	DATA XLEN,YLEN,ZLEN /.0411, .00379, .00217/             ! KM, FOR mV
+	DATA TWOPI /6.28318531/
+C
+	SUMSQ = 0.
+C
+C	print*,'solfit entry, input',x(1),x(2),x(3)
+	WDTH = X(1) 
+	F1  = X(2)
+	CENTER = X(3)
+	EX = X(4)
+	EY = X(5)
+	TX = X(6)
+	TY = X(7)
+	DELT = 1./120.				! MSEC
+C
+	DO I = 1,4
+	  Y(I)= 0.
+	  DO J = 1,4
+	    C(I,J) = 0.
+	  ENDDO
+	ENDDO
+	CONST = 0.
+C
+	DO N = N1,N2
+	  T = (N-1024)*DELT	
+	  TC = (N-CENTER)*DELT	
+C	  if(abs(tc/wdth).gt.70..and.wdth.gt.0.) then
+	  if(abs(tc).gt.70.*wdth.and.wdth.gt.0.) then
+		print*,'n,tc,wdth',n,tc,wdth
+		wdth = abs(tc)/70. 
+	  endif
+	  if(wdth.eq.0.) then
+	    print*,'do solfit f1,t,wdth',f1,t,wdth
+	    return
+	  endif
+	  S1 = SIN(TWOPI*F1*T)/COSH(TC/WDTH)
+	  S2 = COS(TWOPI*F1*T)/COSH(TC/WDTH)
+	  CONST = CONST + (X4DATA(N,1)/XLEN)**2 + (X4DATA(N,2)/YLEN)**2
+	  Y(1) = Y(1) + (X4DATA(N,1)/XLEN)*S1
+	  Y(2) = Y(2) + (X4DATA(N,2)/YLEN)*S1
+	  Y(3) = Y(3) + (X4DATA(N,1)/XLEN)*S2
+	  Y(4) = Y(4) + (X4DATA(N,2)/YLEN)*S2
+	  C(1,1) = C(1,1) + S1*S1
+C	  C(1,2) = 0.				! COEFF OF EX1 IN 2ND EQ
+	  C(1,3) = C(1,3) + S1*S2		! COEFF OF EX1 IN 3RD EQ
+	  C(2,2) = C(2,2) + S1*S1		! COEFF OF EY1 IN 2ND EQ
+	  C(2,4) = C(2,4) + S1*S2
+	  C(3,3) = C(3,3) + S2*S2		! COEFF OF TX  IN 3RD EQ
+	  C(4,4) = C(4,4) + S2*S2
+	ENDDO
+C
+	C(3,1)= C(1,3)
+	C(4,2) = C(2,4)
+c	CALL GAUSSJ(C,4,4,Y,1,1)
+C
+	DO I = 1,4
+	  YOUT(I) = Y(I)
+	  DO J = 1,4
+	    U(I,J) = C(I,J)
+	  ENDDO
+	ENDDO
+	CALL SVDCMP(U,4,4,4,4,W,V)
+	CALL SVBKSB(U,W,V,4,4,4,4,Y,YOUT)
+C
+	EX = YOUT(1)
+	EY = YOUT(2)
+	TX = YOUT(3)
+	TY = YOUT(4)
+c
+	SUMSQ = 0.
+	DO N = N1,N2
+	  T = (N-1024)*DELT	
+	  TC = (N-CENTER)*DELT	
+	if(wdth.eq.0.) print*,'ex solfit,f1,t,wdth',f1,t,wdth
+	  EXT = (EX*SIN(TWOPI*F1*T) + TX*COS(TWOPI*F1*T))/COSH(TC/WDTH)
+	  EYT = (EY*SIN(TWOPI*F1*T) + TY*COS(TWOPI*F1*T))/COSH(TC/WDTH)
+	  SUMSQ = SUMSQ + (X4DATA(N,1)/XLEN - EXT)**2
+     1		+ (X4DATA(N,2)/YLEN - EYT)**2
+	ENDDO
+	DO N = 1,4
+	  X(N+3) = YOUT(N)
+	ENDDO
+C	print*,'exit solfit,x4-7sumsq',x(4),x(5),x(6),x(7),sumsq
+C
+	RETURN
+	END	

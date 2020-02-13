@@ -1,0 +1,310 @@
+
+	subroutine makefile(ch)
+c
+C	THIS IS MAKEFILE28
+c	to make plots of FFT signal amplitudes, 
+c	looking for shock associated turbulence
+c
+C
+	COMMON /PLOTSTUFF/ YYYY,MON,DD,SCETI4,STARTIME,ENDTIME
+	integer*4 ch,ok,okt,OK2,SCETI4(2),NDATA(1025)
+	INTEGER*4 W_CHANNEL_CLOSE,W_EVENT,RET_SIZE,W_MESSAGES_OFF
+	INTEGER*4 W_ITEM_I4,W_ITEM_R4,W_ITEM_R8
+	INTEGER*4 NHICOUNT(9),YYYY,MON,DD
+	CHARACTER*10 FILEDATE
+	REAL*8 SCET8
+	REAL DBSPEC(1024),VDATA(1024),POWERHI(20,2),THRESH(20,2)
+	REAL WSPEC(1024),SPECSAVE(10,2),SIGMAX(9),WT(513),DBLEN(3)
+	REAL RENORM(10)
+	character*32 ITEM
+	character*4 event
+c
+c
+c	    type*,'type name of data file, eg: makefile20.results'
+c	    read(5,1002) eventfile
+C
+C	these thresholds are from 2000/03/04 120442, and are for 	
+C	   nch=10, nlowlim = 22
+	DATA THRESH /-154., -158., -159., -159., -160., -161., -162.,
+     1     -162., -162., -163., 10*0.,
+     2     -141., -143., -146., -147., -150., -151., -151., -152.,
+     2	   -153., -153., 10*0./
+	DATA WT /0.,512*1./
+	DATA RENORM /10*0./
+C
+	RENORM(1) = -162.
+	RENORM(2) = -151.	
+	RENORM(3) = -150.	
+	RENORM(4) = -111.	
+	RENORM(5) = -111.	
+	RENORM(6) = -111.	
+	RENORM(7) = -80.	
+	RENORM(8) = -80.	
+	RENORM(9) = -80.	
+	NDO = 1
+C
+	event = 'FFTH'
+C
+C	ELIMINATE SOME HARMONICS OF 600 HZ INTERFERENCE
+	WT(30) = 0.
+	WT(31) = 0.
+	WT(32) = 0.
+	WT(59) = 0.
+	WT(60) = 0.
+	WT(61) = 0.
+	WT(90) = 0.
+	WT(91) = 0.
+	WT(92) = 0.
+C
+	EFFLEN = 41.1
+C	ITEM = 'EX_LENGTH_EFF'
+C	okt = W_ITEM_R4(ch, item, EFFLEN, 1, ret_size)
+	DBLEN(1) = 20.*ALOG10(EFFLEN)
+	PRINT*,'X LEN',EFFLEN,DBLEN(1)
+C
+	EFFLEN = 3.79
+C	ITEM = 'EY_LENGTH_EFF'
+C	okt = W_ITEM_R4(ch, item, EFFLEN, 1, ret_size)
+	DBLEN(2) = 20.*ALOG10(EFFLEN)
+	PRINT*,'Y LEN',EFFLEN,DBLEN(2)
+	EFFLEN = 2.17
+C	ITEM = 'EZ_LENGTH_EFF'
+C	okt = W_ITEM_R4(ch, item, EFFLEN, 1, ret_size)
+	DBLEN(3) = 20.*ALOG10(EFFLEN)
+	PRINT*,'Z LEN',EFFLEN
+C
+	DO 200 IFFT = 1,3
+	  IF(IFFT.EQ.1) EVENT = 'FFTH'
+	  IF(IFFT.EQ.2) EVENT = 'FFTM'
+	  IF(IFFT.EQ.3) EVENT = 'FFTL'
+	  scet = 0.
+	  call w_channel_position(ch,scet)
+	  ok = w_event(ch,event)
+	  item = 'EVENT_SCET'
+	  if(ok.eq.1) okt = W_ITEM_I4(ch, item, scetI4, 2, ret_size)
+	write(39,*) event,sceti4,startime,endtime
+	  print*,event,sceti4
+	  go to 101
+ 100	  ok = w_event(ch,event)
+ 101	  if (ok.ne.1) then
+		if(ok.eq.82) GO TO 200
+		write(6,*) 'cannot open ',event, ', ok=', ok
+	  endif
+C
+c	  OKT = W_MESSAGES_OFF(ch)
+C
+c	  ITEM = 'DATA'
+c	  ok2 = W_ITEM_I4(ch, item, NDATA, 1024, ret_size)
+c
+          call w_item_i4(ch,'PACKET_SUBTYPE',my_subtype,1,n)
+C
+	  IF(my_subtype.EQ.1) THEN
+	    IRAW = 1
+  	  ELSE
+	    IRAW = 0
+	  ENDIF
+C
+	  item = 'EVENT_SCET_R8'
+	  ok = W_ITEM_R8(ch, item, scet8, 1, ret_size)
+	  ITEM = 'SOURCE'
+	  okt = W_ITEM_I4(ch, item, ISRC, 1, ret_size)
+C	  ITEM = 'SPECTRUM_DB'
+C	  ok2 = W_ITEM_R4(ch, item, WSPEC, 513, ret_size)
+	  IF(IFFT.EQ.1.AND.ISRC.NE.1) GO TO 100
+	  IF(ISRC.EQ.9) GO TO 100		! DON'T PLOT BZ
+C
+C	  IF(ISRCSV.EQ.1.AND.ISRC.NE.2) GO TO 100
+C	  ISRCSV = ISRC
+C
+	  call fft_phys(ch,iraw,vdata,wspec)
+C
+C	  print*,'WSPEC,size,1st vals',ret_size,wspec(2),wspec(3),wspec(30)
+	  ITEM = 'CHANNEL_NUMBER'
+	  okt = W_ITEM_I4(ch, item, ICHNNL, 1, ret_size)
+C	  print*,'src,ch,raw',isrc,ichnnl,iraw
+C
+C	  print*,'dbSPEC,iraw,1st vals',iraw,dbspec(2),dbspec(3),dbspec(30)
+C
+C	  print*,'source,channel,iraw',isrc,ichnnl,iraw
+C
+C	POWERHI(N,ISRC) = 0.
+	AMP = 0.
+	COUNT = 1.E-10
+	N = 1
+	DO NF = 2,511
+	     AMP = AMP + WT(NF)*WSPEC(NF)
+	     COUNT = COUNT + WT(NF)
+	ENDDO
+C	POWERHI(N,ISRC) = POWERHI(N,ISRC)/COUNT
+	  AMP = AMP/COUNT - RENORM(ISRC)
+C
+	NWNDOW = 1
+	IF(IFFT.EQ.1) NWNDOW = 5
+	IF(IFFT.EQ.2.AND.ISRC.LE.6) NWNDOW = 4
+	IF(IFFT.EQ.2.AND.ISRC.GT.6) NWNDOW = 3
+	IF(IFFT.EQ.3.AND.ISRC.LE.6) NWNDOW = 2
+	IF(NWNDOW.EQ.4.AND.ISRC.NE.4) GO TO 100  ! PLOT ONLY EX
+C	AMP = POWERHI(N,ISRC)
+	PTIME = SCET8
+c	print*,'t,a',ptime,isrc,amp,renorm(isrc)
+	CALL TPLOT(NDO,NWNDOW,ISRC,PTIME,AMP)
+C	
+C	   write(s,'(i8.8,i6.6)',iostat=ios) s_scet(1), s_scet(2)
+C	   s_scet = s(1:4)//'/'//s(5:6)//'/'//s(7:8)//' '//
+C	1	s(9:10)//':'//s(11:12)//':'//s(13:14)
+
+	IF(OK.NE.82) GO TO 100
+C
+ 200	CONTINUE
+c
+	return
+	end
+	SUBROUTINE TPLOT(NDO,NWNDOW,ISRC,PTIME,AMP)
+C
+C	MAKES AND PLOTS SPECTRA OF E12/  NDO = 0 IS SETUP, 
+C	NDO = 1 IS MAKE AND ADD A SPECTRUM
+C		NDO = 2 IS FINISH PLOT
+C
+	COMMON /MONGOPAR/
+     1  X1,X2,Y1,Y2,GX1,GX2,GY1,GY2,LX1,LX2,LY1,LY2,
+     1  GX,GY,CX,CY,
+     1  EXPAND,ANGLE,LTYPE,LWEIGHT,
+     1  CHEIGHT,CWIDTH,CXDEF,CYDEF,PSDEF,PYDEF,COFF,
+     1  TERMOUT,XYSWAPPED,NUMDEV,
+     1  PI,USERVAR(10),AUTODOT
+	INTEGER*4 LX1,LX2,LY1,LY2,LTYPE,LWEIGHT,NUMDEV,DDS
+C
+	COMMON /PLOTSTUFF/ YYYY,MON,DD,SCETI4,STARTIME,ENDTIME
+C
+	character*80 file
+	CHARACTER*10 FILEDATE
+	CHARACTER*60 STR
+	CHARACTER*1  DISPOSE
+	REAL*4 PWR(1),WT(512)
+	REAL YTITLESV(10)
+	INTEGER*4 YYYY,MON,DD,HH,MM,SS,MS,SCETI4(2),STARTIME,ENDTIME
+	DIMENSION YMAX(5),YMIN(5)
+C
+	DATA TWOPI /6.2831853/
+C	DATA ITERM /3/
+	DATA EXPSAVE /1./
+C	DATA ITERM /-2/
+	DATA ITERM /-4/
+C
+C
+C	SETUP IF NDO = 0
+C
+	IF(NDO.EQ.0) THEN
+C
+C	  SET UP MONGO
+C
+	  TMIN = PTIME
+	  TMAX = AMP
+	  NFREQ = 512
+	  DO N = 1,5
+	    YMAX(N) = 50.
+	    YMIN(N) = -10.
+	  ENDDO
+	  YMAX(1) = 50.
+	  YMIN(1) = 0.
+	  YMIN(3) = -20.
+	  YMAX(3) = 20.
+	  YMIN(4) = -30.
+	  YMAX(5) = 50.
+	  YMIN(5) = -5.
+c
+	  CALL MGOINIT
+	  CALL MGOSETUP(ITERM)
+	  CALL MGOERASE
+	  IF(ITERM.GT.0) CALL MGOSETLOC(150., 100., 900., 700.)
+	  IF(ITERM.LT.0) CALL MGOSETLOC(500., 350., 3000., 2200.)
+C
+	XRANGE = TMAX - TMIN
+	DO N = 1,5
+	  YRANGE = YMAX(N)-YMIN(N)
+	  CALL MGOWINDOW(1,5,N)
+	  CALL MGOSETLIM(TMIN,YMIN(N),TMAX,YMAX(N))
+C	  CALL MGOTICKSIZE(-1., -1., -1., -1.)
+	  CALL MGOBOX(1,2)
+	  EXPSAVE = EXPAND
+	  IF(N.EQ.1) CALL MGOXLABEL(21,'DAYS SINCE 1982 JAN 1')
+	  IF(N.EQ.5) THEN
+	    CALL MGOSETEXPAND(1.5*EXPSAVE)
+	    WRITE(STR,23) YYYY,MON,DD
+ 23	    FORMAT(I4.4,'/',I2.2,'/',I2.2)
+	    CALL MGORELOCATE(TMIN+.02*XRANGE,YMAX(5)-.3*YRANGE)
+	    CALL MGOLABEL(10,STR)
+	    CALL MGOSETEXPAND(EXPSAVE)
+	  ENDIF
+	  IF(N.EQ.3.OR.N.EQ.1) THEN
+	    CALL MGOYLABEL(9,'dB(nT)\U2')
+	  ELSE
+	    CALL MGOYLABEL(10,'dB(V/m)\U2')
+	  ENDIF
+	ENDDO
+	  XTITLE = TMIN + .5*XRANGE
+	  YTITLE = YMAX(1) - .05*(YMAX(1)-YMIN(1))
+	  TINC = .05*YRANGE
+	  CALL MGORELOCATE(XTITLE,YTITLE)
+C	  CALL MGOLABEL(12,DATAFILE(33:40))
+C	  WRITE(STR,24) FILEDATE(1:4),FILEDATE(5:6),FILEDATE(7:8)
+c	  WRITE(STR,24) DATAFILE(33:36),DATAFILE(37:38),DATAFILE(39:40)
+ 24	  FORMAT(1X,A4,'/',A2,'/',A2)
+C	  CALL MGOLABEL(15,STR)
+	  YTITLE = YTITLE - TINC
+C	  CALL MGORELOCATE(XTITLE,YTITLE)
+C	  WRITE(STR,21) STARTIME,ENDTIME
+C 21	  FORMAT(I5.4,'-',I4.4)
+C	  CALL MGOLABEL(10,STR)
+	  YTITLE = YTITLE - TINC
+	  CALL MGORELOCATE(XTITLE,YTITLE)
+C	  WRITE(STR,22) YYYY,MON,DD,NDOY,SCET(1) 
+ 22	  FORMAT(2X,I5,'/'I2.2,'/'I2.2,' DOY',I4,'   SCET DAY',F8.0)
+C	  CALL MGOSETEXPAND(1.)
+	  RETURN
+	ENDIF
+C
+C	ADD A SPECTRUM IF NDO = 1
+C
+	IF(NDO.EQ.1) THEN
+C
+C	print*,'tplot',ptime,amp
+	  N = NWNDOW
+          CALL MGOWINDOW(1,5,N)
+          CALL MGOSETLIM(TMIN,YMIN(N),TMAX,YMAX(N))
+	  CALL MGORELOCATE(PTIME,AMP) 
+	  CALL MGOSETEXPAND(.5*EXPSAVE)
+	  CALL MGOPOINT(6,0)
+	  CALL MGOSETEXPAND(EXPSAVE)
+	  RETURN
+	ENDIF
+C	
+	IF(NDO.EQ.2) THEN
+C
+C	  CALL MGORELOCATE(XX(4),YTITLESV(4))
+ 1001	  FORMAT(F4.0)
+C	  CALL MGOPUTLABEL(4,STR,5)
+C	  CALL MGORELOCATE(XX(3),YTITLESV(3))
+C	  WRITE(STR,1001) SPCOUNT(2)
+C	  CALL MGOPUTLABEL(4,STR,5)
+C	  CALL MGORELOCATE(XX(2),YTITLESV(2))
+C	  WRITE(STR,1001) SPCOUNT(1)
+C	  CALL MGOPUTLABEL(4,STR,5)
+C
+	  CALL MGOWINDOW(1,5,5)
+	  CALL MGOPLOTID('USER_A:WIND','MAKEFILE28')
+	  IF(ITERM.LT.0) THEN
+	    CALL MGOPRNTPLOT(NVEC)
+C	    PRINT*,' NO. VECTORS PLOTTED',NVEC
+	  ELSE
+C	    CALL MGOTCLOSE
+	    READ(5,1002) DISPOSE 
+	  ENDIF
+	  RETURN
+	ENDIF
+C
+ 1002	FORMAT(A)
+C
+C	iterm = -1
+	RETURN
+	END
