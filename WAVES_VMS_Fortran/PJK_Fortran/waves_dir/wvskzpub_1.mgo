@@ -1,0 +1,29 @@
+Return-Path: kellogg@megasw.obspm.fr
+Received: by waves.space.umn.edu (UCX V4.1-12, OpenVMS V6.2-1H3 Alpha);
+	Tue, 22 Sep 1998 11:08:38 -0500
+Date: Tue, 22 Sep 1998 18:01:46 +0200
+Message-Id: <98092218014658@megasw.obspm.fr>
+From: kellogg@megasw.obspm.fr
+To: kellogg@waves.space.umn.edu
+X-VMS-To: ME
+X-VMS-Cc: KELLOGG
+
+DATA FOR008.DAT
+LINES 4 1000
+XCOLUMN 7
+YCOLUMN 1
+LIMITS 0. 7. 0. 2.
+LWEIGHT 3
+CONNECT
+DATA FOR008.DAT;-1
+LINES 4 1000
+XCOLUMN 7
+YCOLUMN 1
+LWEIGHT 3
+CONNECT
+BOX
+XLABEL Kz * c /\\gwp
+YLABEL \\gw/\\gwp
+ID
+BOX
+HARDCOPY

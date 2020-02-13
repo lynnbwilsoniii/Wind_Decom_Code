@@ -1,0 +1,11 @@
+data for014.dat
+xcolumn 3
+xlogarithm 3
+ycolumn 5
+limits
+connect
+ticksize -1. -1. .1 .5
+box
+xlabel k c /wp
+ylabel QB
+ID

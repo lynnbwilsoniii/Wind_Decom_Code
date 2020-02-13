@@ -1,0 +1,18 @@
+data for008.dat;-2
+lines 4 1000
+xcolumn 7
+ycolumn 1
+limits
+connect
+data for008.dat
+lines 4 1000
+xcolumn 7
+ycolumn 1
+connect
+data for008.dat;-1
+lines 4 1000
+xcolumn 7
+ycolumn 1
+connect
+box
+id

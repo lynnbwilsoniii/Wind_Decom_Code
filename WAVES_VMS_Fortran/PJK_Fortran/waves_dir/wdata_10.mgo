@@ -1,0 +1,37 @@
+data wdatawh.dat
+xcolumn 1
+xlogarithm 1
+ycolumn 2
+limits -4.1  -1.9  -2.  2.
+connect
+ptype 6 0
+points
+data wdataic.dat
+xcolumn 1
+xlogarithm 1
+ycolumn 2
+limits -4.1  -1.9  -2.  2.
+connect
+ptype 5 0
+points
+box
+data wdataia.dat
+xcolumn 1
+xlogarithm 1
+ycolumn 2
+limits -4.1  -1.9  -2.  2.
+connect
+ptype 4 0
+points
+box
+data wdataneg.dat
+xcolumn 1
+xlogarithm 1
+ycolumn 2
+limits -4.1  -1.9  -2.  2.
+ptype 4 0
+points
+box
+xlabel log(Vhalo/c)
+ylabel  \gw x 10\u6
+id
