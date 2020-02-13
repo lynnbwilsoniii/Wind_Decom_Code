@@ -1,0 +1,3 @@
+This directory contains test files used in analysing the problem of balancing 
+the detectors when detector 2 and 3 gains degraded beginning about 01nov97 untill
+the bias levels were raised on 14may98.

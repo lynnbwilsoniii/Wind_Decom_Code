@@ -1,0 +1,363 @@
+
+
+;======================= MAIN: lzshftmap (lzmom) ===========================
+
+
+
+;using same front end as moments program, this procdure reads the lunar eclipse
+;data and computes the shifted energy step-sector indices that corespond to
+;the actual spin phase as computed by Chris Owen from the thermal expansion
+;analysis of the spin up of the spacecraft in the lunar shadow
+
+common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+common m2stuff,hkind,ghk,vblhsp,sblhsp
+common m1stuff,hkm1,vsm1,vdatc,sdatc
+common log_delog,comp_tbl,dcomp_tbl
+common oastuff,atfile,tpb5_at,gse_ra,gse_dec
+common magstuff,magfile,tpb5,bgse
+common wstuff,wst
+common swestuff,swest
+common backgrnd,avgcts_m1,avgcts_m2,bdate
+
+;correct spin rates during eclipse from Chris Owen
+
+cowen_13nov96,msecd,phi
+help,msecd,phi         ;phi=phi required to correct calulated phi's
+;help,msecd,phi,spinrates2,suntimes
+
+for i=0,n_elements(msecd)-1 do print,i,msecd(i),phi(i),phi(i)/!dtor
+msec_ecl0=5528037l        ;begin eclipse
+msec_ecl1=11236016l       ;end eclipse
+
+printcheck2=0
+
+print,'dates to be processed:'
+date='961113'
+print,date
+
+;----------------------- begin ------------------------------------------------- 
+
+;initialize structures
+  structuresw
+
+;set background removal flag (it is initially set to 'Yes' in structuresw.pro)
+  swest.subtrbkg='Yes'
+
+wst.date_file='Date'    
+wst.indate=date  
+
+ctmmode=['u','m','s','e']
+ctmrate=['s','f']
+elecion=['electrons','ions']
+
+max_nsectors=8  
+
+;default case: truncate counts spectra above energy = trnc ev 
+trnc='tr974'         ;trnc='tr507'
+
+lpr=0
+rfill=-1.0e31
+
+;read compress/decompress tables
+  decompress_tbl
+
+;get indices of instrument housekeeping into mjf array, lz.mf   
+  ihkmap,ihk 
+
+;get mode1, mode1 tm map of science and genl hk data offsets into lz.mf
+   mode1map,hkm1,fcblm1,vsm1,vdatc,sdatc
+   mode2map,hkind,ghk,vblhsp,sblhsp
+
+;get mode1 and mode2 sun phase angles of detectors, unit vectors
+   phasem1
+   phasem2
+
+;open LZ data file and read header, 
+;  read mag, orb-att, background data, glint masks
+;  and process first two records to get spin period
+  lzinput_special,err=err
+  if err ne '' then stop,err
+
+print,' '
+print,'scimode ',vsmjf.scimode
+print,'eleion_sweep ',vsmjf.eleion_sweep
+
+if vsmjf.scimode eq 2 or vsmjf.scimode eq 11 and $
+   (vsmjf.eleion_sweep eq 2 or vsmjf.eleion_sweep eq 3) then begin
+  sz=size(vsmjf.veistep)
+  elecstep=intarr(sz(1),sz(2)*sz(3))
+  elecstep(*,*)=vsmjf.veistep
+  welecstep=where(vsmjf.eleion eq 0)
+  max_elec_step=max(elecstep(*,welecstep))
+endif else max_elec_step=max(vsmjf.veistep)
+print,'volt_en(max_elec_step,/en) ',volt_en(max_elec_step,/en)
+if max_elec_step gt 38 and trnc eq 'tr974' then  trnc_label='tr974' else $
+if max_elec_step le 38 then  trnc_label='notrnc'
+
+print,'selected truncation: ',trnc
+print,'first record truncation, trnc_label: ',trnc_label
+
+print,' '
+
+
+last_scimode=-1
+last_atindx=-1
+
+nfill=0l
+spn=-1l
+lastsec=0.d
+
+
+;initialize (nwglint will be set ge 0 and glint searched just once per date)
+nwglint=-1
+
+;recn_range=[1,fh.nmf] ;read entire file testing for eclipse times
+recn_range=[110,fh.nmf]
+
+recn1=recn_range(0)
+recn2=recn_range(1)
+
+print,'date, recn1,recn2 ',date, recn1,recn2
+
+;initialize lunar structure
+klunar=-1
+lunar=replicate({recn:0l,spinbl:0l,timpb5:lonarr(3),dphi:0.,$
+  mshftmap:lonarr(6)},1000)
+ 
+for recn=recn1,recn2 do begin
+
+;process selected lz record (set keyword lpr=1 to turn on print each record)
+  proc_rec_special,date_time,tmmode_ihk=tmmode_ihk,lpr=0,$
+    elec_ion_m1=elec_ion_m1,err=err
+  if err ne '' then begin
+     print,recn,'  ',err & goto,endrecordloop
+  endif
+
+;determine whether in telemetry science mode
+  tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+  if tmmode_ihk ne 2 then begin
+    print,' '&print,'tm not in science mode, tm mode = ',ctmmode(tmmode_ihk)
+    goto,endrecordloop
+  endif
+
+;check data quality; if one mnf flag set, then skip entire record
+  n_mnf=250
+  if total(lz.qlty(0:n_mnf-1)) gt 0 then  goto, endrecordloop 
+
+;check spinperiod
+  if sp.spinp lt 0.9*3.05 or sp.spinp gt 1.1*3.05 then begin 
+    print,'bad spinperiod'
+    goto,endrecordloop
+  endif
+
+;science mode
+  scimode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+  scimode1 = scimode_ihk eq 0 or scimode_ihk eq 1
+  scimode2 = scimode_ihk eq 2 or scimode_ihk eq 11
+  if not float(scimode1 or scimode2) then begin
+    print,'not science mode 1 or science mode 2'
+    goto,endrecordloop
+  endif 
+
+
+;---- ready to process mode1 or mode2 electrons ---------------------------
+     
+ndets=vsmjf.n_vdets
+nvsteps=vsmjf.n_vesteps 
+nsectors=vsmjf.n_sectors
+nspins=vsmjf.n_spins
+  
+;transform unit vectors from payload to gse
+atindx=fix((vsmjf.sec)/600)  ;atfile record number from 10 minute index
+if scimode_ihk ne last_scimode or atindx ne last_atindx then begin 
+   print,'recn, new atindx ',recn,atindx  
+   wc_gse=dblarr(3)
+   vunit_gse=dblarr(ndets,nvsteps,max_nsectors,3)
+   if atfile ne '' then begin
+     for i=0,ndets-1 do for j=0,nvsteps-1 do for k=0,nsectors-1 do begin
+       payload_to_gse,$
+       [vsmjf.vunit(i,j,k,0),vsmjf.vunit(i,j,k,1),vsmjf.vunit(i,j,k,2)],$
+       [gse_ra(atindx),gse_dec(atindx)],pay_gse_mtx,wc_gse  
+       vunit_gse(i,j,k,*)=wc_gse
+     endfor
+   endif else begin
+     if lprnt then $
+     print,'no attitude data; using 180 deg rotation about x-axis instead'
+     lprnt=0     
+     ;(approx transform from payload to gse: SWE spin axis along -zgse)
+      vunit_gse(i,j,k,0)= vsmjf.vunit(i,j,k,0)
+      vunit_gse(i,j,k,1)=-vsmjf.vunit(i,j,k,1)
+      vunit_gse(i,j,k,2)=-vsmjf.vunit(i,j,k,2) 
+   endelse
+endif
+last_scimode=scimode_ihk
+last_atindx=atindx
+
+;print,sp.mfrecn,sp.mfyr,sp.mfdy,sp.mfms,sp.spinp
+
+if nwglint eq -1 then begin
+  wglint=where(vsmjf.xveis(*,*,*,0) eq -1,nwglint)
+  print,' ' & print,'number of glint points = ',nwglint & print,' '
+endif
+
+;start spin loop
+  for ispin=0,nspins-1 do begin
+
+    ;test for all electron mode (every sector in given spin)
+      elemode=0
+      if scimode1 then begin
+        if vsmjf.eleion(0) eq 0 then elemode=1
+      endif
+      if scimode2 then begin
+        if total(vsmjf.eleion(*,ispin)) eq 0 then elemode=1
+      endif      
+      if elemode eq 0 then goto,endspinloop
+      ;print,'not in all electron mode,  ispin ',ispin
+        
+    print,'recn, ispin.... ',recn, ispin, msec_ecl0,msec_ecl1,timpb5(2)
+
+    spn=spn+1
+    timpb5=vsmjf.pb5tim_vsbl(*,ispin) 
+ 
+    sec=double(timpb5(2))/1000.       ;seconds of day
+
+    ;test for eclipse times
+    ;save time record and spin in lunar structure
+    if timpb5(2) ge msec_ecl0 and timpb5(2) le msec_ecl1 then begin
+      klunar=klunar+1 
+      lunar(klunar).recn=recn
+      lunar(klunar).spinbl=ispin
+      lunar(klunar).timpb5=timpb5
+      print,'lunar: ',klunar,recn,ispin,timpb5
+    endif else if timpb5(2) gt msec_ecl1 then goto,endread
+       
+    ;----------------- begin doing moments ---------------------------------
+  
+    ;----------------- end doing moments ---------------------------------
+
+
+    lastsec=vsmjf.sec
+
+    if lpr then $
+        print,recn,ispin,vsmjf.tjd,vsmjf.sec,sec_pb5(vsmjf.suntim_vsbl(ispin))
+
+
+    endspinloop: 
+    if printcheck2 and recn eq 2 then stop
+    
+  endfor  ;end spin loop
+      
+
+  skiprec=10
+  if fix(recn/skiprec)*skiprec eq recn then  begin
+     print,'lztim: recn,lz.recn,lz.yr,lz.dy,lz.ms,vsmjf.suntim_vsbl(0)'
+     print, recn,lz.recn,lz.yr,lz.dy,lz.ms,vsmjf.suntim_vsbl(0)
+  endif
+
+  endrecordloop:
+
+endfor     ;end record loop
+
+endread:
+
+;find interpolated shifted phi's at times of each swe spin 
+lunar=lunar(0:klunar)
+lunar.dphi=interpol(phi,float(msecd),float(lunar.timpb5(2)))
+
+
+nsp=n_elements(lunar)  
+nvs=nvsteps*nsectors
+step=intarr(nvs,ndets)
+sect=intarr(nvs,ndets)
+
+mshftmap=intarr(ndets,nsp)
+
+for isp=0,nsp-1 do begin
+  step_shft=intarr(nvs,ndets)
+  sect_shft=intarr(nvs,ndets)
+  phi_new=dblarr(ndets,nvsteps,nsectors)
+
+  phi_true=dblarr(ndets,nvsteps,nsectors)
+  phi_true(*,*,*)=vsmjf.phiveis(*,*,*)+lunar(isp).dphi/!dtor
+  wg=where(phi_true gt 360.d)
+  if wg(0) ne -1 then phi_true(wg)=phi_true(wg) -360.d
+
+  for idet=0,ndets-1 do begin
+
+    ;find the actual spin phase angle corresponding to 
+    ;    each apparent spin phase angle
+    
+    ;find the actual step-sector at the apparent start of the spin, i.e.,
+    ;  k=isect*nvsteps+istep such that 
+    ;  phi_true(*,istep,isect)=vsmjf.phiveis(*,0,0)
+    ph1=min(abs(phi_true(idet,*,*)-vsmjf.phiveis(idet,0,0)),k1)
+
+    ;number of steps in spin that apparent start of spin is actually shifted
+    mshftmap(idet,isp)=k1
+
+    finetune=0
+    if finetune eq 1 then begin
+    ;************** fine tuning mshftmap *************************************
+    ; the following change to mshftmap(idet) is made to the file
+    mshftmap(idet,isp) = mshftmap(idet,isp) - 3
+    if mshftmap(idet,isp) ge nvs then $
+       mshftmap(idet,isp) = mshftmap(idet,isp) - nvs
+    if mshftmap(idet,isp) lt 0 then $
+       mshftmap(idet,isp) = mshftmap(idet,isp) + nvs
+    endif
+
+    ;step-sector corresponding to actual start of spin  
+    isect1=fix(k1/nvsteps)
+    istep1=k1-isect1*nvsteps
+
+    ;find the actual step-sector from begin to end of apparent spin using
+    ;   the mapping, mshftmap(idet,isp)
+    
+    step=indgen(nvs)-nvsteps*fix(indgen(nvs)/nvsteps)
+    sect=fix(indgen(nvs)/nvsteps)
+    mshft=indgen(nvs) + mshftmap(idet,isp)
+    wnvs=where(mshft ge nvs)
+    if wnvs(0) ne -1 then mshft(wnvs)=mshft(wnvs)-nvs
+    step_shft(*,idet)=mshft-fix(mshft/nvsteps)*nvsteps
+    sect_shft(*,idet)=fix(mshft/nvsteps)
+    for i=0,nvs-1 do phi_new(idet,step(i),sect(i))=$
+      phi_true(idet,step_shft(i,idet),sect_shft(i,idet))
+
+    ;goto,point2
+    iprt=0
+    if iprt then for i=0,nvs-1 do begin
+        print,isp,idet,mshftmap(idet,isp),$
+        i,mshft(i),step(i),sect(i),$
+        vsmjf.phiveis(idet,step(i),sect(i)),$
+        phi_true(idet,step(i),sect(i)),$
+        avgcts_m1(idet,step(i),sect(i)),$
+        step_shft(i,idet),sect_shft(i,idet),phi_new(idet,step(i),sect(i)),$
+        avgcts_m1(idet,step_shft(i,idet),sect_shft(i,idet)),$
+        format='(i3,i2,i3,i4,i4,7x,i3,i2,3f7.1,7x,i3,i2,2f7.1)
+    endfor
+
+    point2:     
+
+  endfor
+  
+endfor    
+
+lunar.mshftmap=mshftmap
+
+stop
+
+;save,filename=getenv('IDLSAV')+'newlunar_13nov96.idlsav',lunar
+
+;version 4 (_v4) :
+;     a) glint obtained by lzoppdet_diff 
+;     c) skip lowest 2 energy channels
+;     d) lchan=6 patch fit points
+       
+print,'lzmom finished for date ',wst.lzdate
+
+
+stop
+end
+
+
+

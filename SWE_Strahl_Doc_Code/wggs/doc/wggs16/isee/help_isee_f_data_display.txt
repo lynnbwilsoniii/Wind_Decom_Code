@@ -1,0 +1,72 @@
+                  Help for ISEE Distribution Function Data Display
+
+----------- Plot panels -------------------------------------
+Top plot panel: The data plotted in the top panel of the GGS Survey Data Display
+is plotted here. Vertical line appears at the time of the distribution function
+being plotted in lower panels.
+
+Bottom three panels: Distribuion functions are plotted here.
+
+
+------- To select time and plot distribution function -------------------------
+There are four ways to select times for plotting ISEE distribution function data:
+1. Click at desired time in the top panel (with left mouse button) and plot 
+will appear in one of three bottom panels. Successive clicks on top panel will 
+cause plots to cycle through the three bottom plot panels.
+2. Click on any of three bottom panels and the plot at currently selected time 
+will appear.
+3. Click on "+" or "-" button to increment the time index; the plot at newly 
+selected time will appear. Successive clicks on "+" or "-" will cause plots to 
+cycle through the three plot panels. 
+4. Return to parent, GGS Survey Data Display, (click "Parent") and select time
+on survey plot. Come back to ISEE f Data Display 
+(click "ISEE f" in GGS Survey Data Display widget) and click on a window.
+
+When a time is selected by one of the above methods, f-data for that time is
+read and stored. Various types of plots as listed below may be selected and
+plotted using the stored f-data. 
+
+
+-------- Buttons to select plot type  -------------------------
+BUTTON			ACTION
+
+f-contours		Contours of f on perpendicular-parallel velocity grid
+			with magnetic field direction along +vparallel.
+ 			Pitch angle bin for averaging = 6 degrees.
+
+Reduced F      		Reduced distribution.
+
+f-cuts			Parallel (solid line) and perpendicular (dashed
+ 		        line) cuts of f and measure data sampled closest to 
+			magnetic field (+/-) direction (triangles).
+
+f, F			Contours of f and reduced f. 
+
+f, f-cuts (default)	Contours and cuts of f.
+
+f, F, f-cuts		Contours of f, reduced f, and cuts of f.
+
+
+------- Other buttons --------------------------------------
+BUTTON			ACTION
+
+Hardcopy		Makes hardcopy and sends to printer set up in startup
+ 			file which can be overridden using "Printer" button
+			on parent widget, GGS Survey Data Display.
+
+Parent			Returns to main or "parent" widget, 
+			GGS Survey Data Display.
+			From GGS Survey Data Display, hit "ISEE f"
+			to get back to this "child" widget.
+			NOTE: In most or all cases, use parent and child buttons
+			to go back and forth between widget displays. Avoid
+			using the windows mouse functions to bring windows
+			forward. 
+
+Quit			Normal exit.
+
+
+
+
+
+ 

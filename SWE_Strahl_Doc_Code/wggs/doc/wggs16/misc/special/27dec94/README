@@ -1,0 +1,29 @@
+I used result of Chris Owen's analysis of computing new spin rate during 
+spin up while in lunar shadow. 
+Chris' result is in '/home/u3rjf/misc/c.owen_moon_27dec94.idlsav'.
+
+
+
+lzshftmap_lunar27dec.pro reads new phi angle vs time while in shadow from the above save file. Then by finding the new phi angle which equals the spin phase angle in first energy step of the first sector of each spin while in shadow, the new (actual) step-sector indices of each spin phase angle sampled by SWE at each spin is found and put in a structure
+
+lunar=replicate({recn:0l,spinbl:0l,timpb5:lonarr(3),dphi:0.,$
+  mshftmap:lonarr(6)},700)
+
+where mshftmap is the shifted index of first step in given recn-spin.
+Structure lunar is saved in file
+getenv('WGGSBASE')+'swe/27dec94/data/newlunar_27dec94.idlsav'.
+
+
+
+lzinput.pro restores this file when processing date='941227'.
+
+
+
+mode1.pro uses structure lunar to compute true spin phase angle indices
+when in shadow for unit vecors, background average counts array, and glint mask.
+
+
+R. J. Fitzenreiter
+
+ 
+ 

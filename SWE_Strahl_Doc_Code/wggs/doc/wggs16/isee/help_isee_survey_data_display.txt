@@ -1,0 +1,30 @@
+                     Help for ISEE Survey Data Display
+
+Both the ISEE moments and distribution function data are in the same .cdf file,
+one record per 3sec spin period of data every 9s or 18s. 
+
+BUTTON/FIELD     	ACTION
+
+
+ISEE moments		Reads data files of ISEE moments. Select a file 
+			from the list. The entire file (one day) will
+			be read and stored, including the time array
+			which serves as an index for finding the record
+			number corresponding to the time selected
+			when plotting distribution function data. 
+			Therefore moments data MUST be read and plotted
+			BEFORE clicking on the "ISEE f" button.
+			File identifier is year and decimal day 
+			(jan 1 =0 dday). After data is read,
+ 			make plot selection from the pop-up list of
+ 			available moments data variables.
+
+ISEE f			Reads and plots distribution function data.
+			Click on "ISEE f" which
+			brings up ISEE f Data Display containing
+			plot windows for distribution function data.
+						
+		
+
+
+				
