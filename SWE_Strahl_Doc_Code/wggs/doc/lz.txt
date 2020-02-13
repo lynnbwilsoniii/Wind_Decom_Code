@@ -1,0 +1,2116 @@
+wggs16/init/define_widgets.pro:  swelz_base_main:0l, $  
+wggs16/init/define_widgets.pro:  swelz_pnlsel:0l, $
+wggs16/init/define_widgets.pro:  swelz_drawsurvey:0l, $
+wggs16/init/define_widgets.pro:  swelz_hmsfld:0l, $
+wggs16/init/define_widgets.pro:  swelz_fpltype:0l, $
+wggs16/init/define_widgets.pro:  swelz_mode:0l, $
+wggs16/init/define_widgets.pro:  swelz_days:0l, $
+wggs16/init/define_widgets.pro:  swelz_pbin:0l, $
+wggs16/init/define_widgets.pro:  swelz_quit:0l, $
+wggs16/init/define_widgets.pro:  swelz_open:0l,$
+wggs16/init/define_widgets.pro:  swelz_spectra:0l, $
+wggs16/init/define_widgets.pro:  swelz_spinincre:0l, $
+wggs16/init/define_widgets.pro:  swelz_spinfld:0l, $
+wggs16/init/define_widgets.pro:  swelz_recincre:0l, $
+wggs16/init/define_widgets.pro:  swelz_recfld:0l, $
+wggs16/init/define_widgets.pro:  swelz_clrs:0l, $
+wggs16/init/define_widgets.pro:  swelz_hcpy:0l, $
+wggs16/init/define_widgets.pro:  swelz_orbit:0l, $
+wggs16/init/define_widgets.pro:  swelz_sav:0l, $
+wggs16/init/define_widgets.pro:  swelz_vstps:0l, $
+wggs16/init/define_widgets.pro:  swelz_surveybase:0l, $
+wggs16/init/define_widgets.pro:  swelz_fevents:0l, $
+wggs16/init/define_widgets.pro:  swelz_draw1:0l, $
+wggs16/init/define_widgets.pro:  swelz_draw2:0l, $
+wggs16/init/define_widgets.pro:  swelz_draw3:0l, $
+wggs16/init/define_widgets.pro:  swelz_vdist:0l, $ ;             New
+wggs16/init/define_widgets.pro:  swelz_special_appl:0l,$
+wggs16/init/define_widgets.pro:  base_special_appl_swelz:0l,$
+wggs16/init/define_widgets.pro:  special_appl_swelz_quit:0l,$
+wggs16/init/define_widgets.pro:  swelzdspl_base:0l, $
+wggs16/init/define_widgets.pro:  swelzdspl_quit:0l, $
+wggs16/init/define_widgets.pro:  swelzdspl_reset:0l, $
+wggs16/init/define_widgets.pro:  swelzdspl_opts:0l, $
+wggs16/init/define_widgets.pro:  swelzdspl_sequence:0l, $
+wggs16/init/define_widgets.pro:  swelzdspl_contrs:0l, $
+wggs16/init/define_widgets.pro:  swelzdspl_specie:0l, $
+wggs16/init/define_widgets.pro:  swelzdspl_speciefld:0l, $
+wggs16/init/define_widgets.pro:  swelzdspl_mode:0l, $
+wggs16/init/define_widgets.pro:  swelzdspl_eleion_sweep:0l, $
+wggs16/init/define_widgets.pro:  swelzc_base:0l,$
+wggs16/init/define_widgets.pro:  swelzc_draw:0l,$
+wggs16/init/define_widgets.pro:  swelzc_win:0l,$
+wggs16/init/define_widgets.pro:  swelzc_quit:0l,$
+wggs16/init/define_widgets.pro:  swelzc_relgain:0l,$
+wggs16/init/define_widgets.pro:  swelzc_pltype:0l,$
+wggs16/init/define_widgets.pro:  swelzc_bckgsubtr:0l,$
+wggs16/init/define_widgets.pro:  swelzc_bckgsubtr_noyes:0l, $  
+wggs16/init/define_widgets.pro:  swelzc_recn_incr:0l,$
+wggs16/init/define_widgets.pro:  swelzc_recn:0l,$
+wggs16/init/define_widgets.pro:  swelzc_spin_incr:0l,$
+wggs16/init/define_widgets.pro:  swelzc_spin:0l,$
+wggs16/init/define_widgets.pro:  swelzc_sect_incr:0l,$
+wggs16/init/define_widgets.pro:  swelzc_sect:0l,$
+wggs16/init/define_widgets.pro:  swelzc_vstep_incr:0l,$
+wggs16/init/define_widgets.pro:  swelzc_vstep:0l,$
+wggs16/init/define_widgets.pro:  swelzc_mode:0l,$
+wggs16/init/define_widgets.pro:  swelzc_eleion:0l,$
+wggs16/init/define_widgets.pro:  swelzc_eleionswp:0l,$
+wggs16/init/define_widgets.pro:  swelzc_glnt:0l,$,
+wggs16/init/define_widgets.pro:  swelzc_glntnum:0l,$
+wggs16/init/define_widgets.pro:  swelzc_glntdate:0l,$
+wggs16/init/define_widgets.pro:  swelzc_mnmx:0l, $ 
+wggs16/init/define_widgets.pro:  swelzc_rgold:0l, $
+wggs16/init/define_widgets.pro:  swelzc_rgnew:0l, $
+wggs16/init/define_widgets.pro:  swelzc_det:0l, $
+wggs16/init/define_widgets.pro:  swelzc_rgincr:0l, $
+wggs16/init/define_widgets.pro:  swelzc_vpotincr:0l, $
+wggs16/init/define_widgets.pro:  swelzc_lchanincr:0l, $
+wggs16/init/define_widgets.pro:  swelzav_base:0l, $
+wggs16/init/define_widgets.pro:  swelzav_quit:0l, $
+wggs16/init/define_widgets.pro:  swelzav_doavg:0l, $
+wggs16/init/define_widgets.pro:  swelzav_detpair:0l, $
+wggs16/init/define_widgets.pro:  swelzav_nrmldet:0l, $
+wggs16/init/define_widgets.pro:  swelzav_getrelgn:0l, $
+wggs16/init/define_widgets.pro:  swelzav_set_d2_d3:0l, $
+wggs16/init/define_widgets.pro:  swelzav_bgnmjf:0l, $
+wggs16/init/define_widgets.pro:  swelzav_spn:0l, $
+wggs16/init/define_widgets.pro:  swelzav_endmjf:0l, $
+wggs16/init/define_widgets.pro:  swelzav_spinbl:0l, $
+wggs16/init/define_widgets.pro:  swelzav_spins:0l, $
+wggs16/init/define_widgets.pro:  swelzav_eleion:0l, $
+wggs16/init/define_widgets.pro:  swelzav_ebias1:0l, $
+wggs16/init/define_widgets.pro:  swelzav_ebias2:0l, $
+wggs16/init/define_widgets.pro:  swelzav_calpwr:0l, $
+wggs16/init/define_widgets.pro:  swelzav_ptchfitdets:0l, $
+wggs16/init/define_widgets.pro:  swelzav_vstep:0l $
+wggs16/init/panelist.pro:;survey types of data, not levelzero, as defined in the startup file
+wggs16/init/panelist.pro:    lzrange:[[0.,4032.],[-32.,-24.]],charthick:1.0,charsize:1.15,horizlin:-1.e31}
+wggs16/init/panelist.pro:   timsel:'lz',$
+wggs16/init/structuresw.pro:   lzindate:'',   $
+wggs16/init/structuresw.pro:   lzdays:strarr(31),  $
+wggs16/init/structuresw.pro:   lzdate:'',     $
+wggs16/init/structuresw.pro:   xyrange_lzwin:fltarr(4),  $
+wggs16/init/structuresw.pro:   xywindow_lzwin:fltarr(4), $
+wggs16/init/structuresw.pro:   xysize_lzwin:fltarr(4),   $
+wggs16/init/structuresw.pro:   ylog_lzwin:0 ,      $
+wggs16/init/structuresw.pro:   timsel:'lz', $
+wggs16/init/structuresw.pro:   lz_is_read:0,  $
+wggs16/init/structuresw.pro:;define SWE levelzero related control structure
+wggs16/init/structuresw.pro:  lzflnm:'',  $
+wggs16/init/structuresw.pro:  lzwin:[1,2,3],  $
+wggs16/init/structuresw.pro:  ilzplt:-1,    $
+wggs16/init/structuresw.pro:  lzsurvey:0,   $
+wggs16/init/structuresw.pro:  lzwfrmt:0  $
+wggs16/isee/readisee_f.pro:wst.lz_is_read=1
+wggs16/survey/get_flnm.pro:'swelz': begin 
+wggs16/survey/input.pro:       wst.lzindate=wst.indate
+wggs16/survey/input.pro:  wst.lzdays(i)=string(pb5_ymd(pb5),format='(i8)') 
+wggs16/survey/input.pro:wst.lzindate=wst.lzdays(0)    
+wggs16/survey/mstruct_old.pro:  if wchg(0) ne -1 then swest.lzsurvey=0
+wggs16/survey/mstruct.pro:  if wchg(0) ne -1 then swest.lzsurvey=0
+wggs16/survey/plt_lzwindow.pro:pro plt_lzwindow,group=group,spikesout=spikesout,idlsave=idlsave,timavg=timavg
+wggs16/survey/plt_lzwindow.pro:common sharelevelzero,pltwin_frmt,oplot_sec
+wggs16/survey/plt_lzwindow.pro:start: ;print,'plt_lzwindow'
+wggs16/survey/plt_lzwindow.pro:  ;plot only PANEL # wst.lzsurvey
+wggs16/survey/plt_lzwindow.pro:    pnlsel=d.pnlsel(wpnl(swest.lzsurvey))
+wggs16/survey/plt_lzwindow.pro:           mn=pm(i).lzrange(0,wst.cf)
+wggs16/survey/plt_lzwindow.pro:           mx=pm(i).lzrange(1,wst.cf)        
+wggs16/survey/plt_lzwindow.pro:          mn=pm(i).lzrange(0,wst.cf)
+wggs16/survey/plt_lzwindow.pro:          mx=wst.newclrmax < pm(i).lzrange(1,wst.cf)
+wggs16/survey/plt_lzwindow.pro:             mn=pm(i).lzrange(0,wst.cf) 
+wggs16/survey/plt_lzwindow.pro:             mx=pm(i).lzrange(1,wst.cf) 
+wggs16/survey/plt_lzwindow.pro:          mn=pm(i).lzrange(0,wst.cf) 
+wggs16/survey/plt_lzwindow.pro:          mx=wst.newclrmax < pm(i).lzrange(1,wst.cf)
+wggs16/survey/plt_lzwindow.pro:           mn=pm(i).lzrange(0,wst.cf) 
+wggs16/survey/plt_lzwindow.pro:           mx=pm(i).lzrange(1,wst.cf) 
+wggs16/survey/plt_lzwindow.pro:          mn=pm(i).lzrange(0,wst.cf)
+wggs16/survey/plt_lzwindow.pro:          mx=wst.newclrmax < pm(i).lzrange(1,wst.cf)
+wggs16/survey/plt_lzwindow.pro:  wst.xyrange_lzwin(*,i)=wst.xyrange(*,i)
+wggs16/survey/plt_lzwindow.pro:  wst.xywindow_lzwin(*,i)=wst.xywindow(*,i)
+wggs16/survey/plt_lzwindow.pro:  wst.xysize_lzwin(*,i)=wst.xysize(*,i)
+wggs16/survey/plt_lzwindow.pro:  wst.ylog_lzwin(i)=wst.ylog(i)
+wggs16/survey/plt_old.pro:lzwin=lzwn,pos_overide=pos_overide
+wggs16/survey/plt_old.pro:  idlsave,lzwin,elaps_spns
+wggs16/survey/plt_old.pro:if keyword_set(lzwn) eq 0 then lzwn=0  & lzwin=lzwn
+wggs16/survey/plt_old.pro:  if lzwin then pnlsel=d.pnlsel(wpnl(swest.lzsurvey)) else $
+wggs16/survey/plt_old.pro:   if npl eq 1 and lzwin eq 0 then $
+wggs16/survey/plt_old.pro:   else if npl gt 1 and lzwin eq 0 then pos,npl,pos,xoff=0.15,xtop=0.84,$
+wggs16/survey/plt_old.pro:   else if lzwin then pos,npl,pos,yoff=0.2,ytop=0.9,xoff=0.1,xtop=0.88
+wggs16/survey/plt_old.pro:   if lzwin and pos_overide(0) gt 0 then pos=pos_overide
+wggs16/survey/plt_old.pro:  xlabl=strarr(npl) & if lzwin eq 0 then xlabl(npl-1)=pm(0).tmlabl
+wggs16/survey/plt_old.pro:  if lzwin eq 0 then ztitle(0)=pm(0).ztitle else ztitle(0)=pm(0).tmlabl
+wggs16/survey/plt_old.pro:  stitle=strarr(npl) & if lzwin eq 0 then stitle(npl-1)=pm(0).subtitle  
+wggs16/survey/plt_old.pro:  if lzwin and pos_overide(0) gt 0 then begin
+wggs16/survey/plt_old.pro:if wst.hardcopy(0) and lzwin eq 0 then begin 
+wggs16/survey/plt_old.pro:if keyword_set(oplot_sec) ne 0 and lzwin then begin
+wggs16/survey/plt_old.pro:  wst.xyrange_lzwin(*)=wst.xyrange(*,i)
+wggs16/survey/plt_old.pro:  wst.xywindow_lzwin(*)=wst.xywindow(*,i)
+wggs16/survey/plt_old.pro:  wst.xysize_lzwin(*)=wst.xysize(*,i)
+wggs16/survey/plt_old.pro:  wst.ylog_lzwin=wst.ylog(i)
+wggs16/survey/plt.pro:lzwin=lzwn,pos_overide=pos_overide
+wggs16/survey/plt.pro:  idlsave,lzwin,elaps_spns
+wggs16/survey/plt.pro:if keyword_set(lzwn) eq 0 then lzwn=0  & lzwin=lzwn
+wggs16/survey/plt.pro:  if lzwin then pnlsel=d.pnlsel(wpnl(swest.lzsurvey)) else $
+wggs16/survey/plt.pro:   if npl eq 1 and lzwin eq 0 then $
+wggs16/survey/plt.pro:   else if npl gt 1 and lzwin eq 0 then pos,npl,pos,xoff=0.15,xtop=0.84,$
+wggs16/survey/plt.pro:   else if lzwin then pos,npl,pos,yoff=0.2,ytop=0.9,xoff=0.1,xtop=0.88
+wggs16/survey/plt.pro:   if lzwin and pos_overide(0) gt 0 then pos=pos_overide
+wggs16/survey/plt.pro:  xlabl=strarr(npl) & if lzwin eq 0 then xlabl(npl-1)=pm(0).tmlabl
+wggs16/survey/plt.pro:  if lzwin eq 0 then ztitle(0)=pm(0).ztitle else ztitle(0)=pm(0).tmlabl
+wggs16/survey/plt.pro:  stitle=strarr(npl) & if lzwin eq 0 then stitle(npl-1)=pm(0).subtitle  
+wggs16/survey/plt.pro:  if lzwin and pos_overide(0) gt 0 then begin
+wggs16/survey/plt.pro:if wst.hardcopy(0) and lzwin eq 0 then begin 
+wggs16/survey/plt.pro:if keyword_set(oplot_sec) ne 0 and lzwin then begin
+wggs16/survey/plt.pro:  wst.xyrange_lzwin(*)=wst.xyrange(*,i)
+wggs16/survey/plt.pro:  wst.xywindow_lzwin(*)=wst.xywindow(*,i)
+wggs16/survey/plt.pro:  wst.xysize_lzwin(*)=wst.xysize(*,i)
+wggs16/survey/plt.pro:  wst.ylog_lzwin=wst.ylog(i)
+wggs16/swelz/chck_hvswp_m1.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/chck_hvswp_m2.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/chck_hvswp_m2.pro:        print,'recn ',recn,'  mjf cnt  ',lz.mf(ihk(1).offs),$
+wggs16/swelz/chck_hvswp_m2.pro:        print,'veis hv tbl: ',lz.mf(hkind(ghk(31).offs))
+wggs16/swelz/chck_hvswp_m2.pro:        print,lz.mf(hkind(ghk(27).offs+indgen(64))),format='(16i4)'
+wggs16/swelz/cts_f.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/cts_f_strl.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/ctspbin_f_strl.pro:;bin averages were created by program lzstrl
+wggs16/swelz/dataqlty.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/dataqlty.pro:if total(lz.qlty(0:n_mnf-1)) gt 0 then begin   ;at least one mnf flag set
+wggs16/swelz/dataqlty.pro:  ;make a qlz array with same dimensions as lz,
+wggs16/swelz/dataqlty.pro:  ;filling bad mf's with lz.qlty
+wggs16/swelz/dataqlty.pro:    qlz=intarr(250*45)
+wggs16/swelz/dataqlty.pro:    for i=0,n_mnf-1 do qlz(i*l_mnf+indgen(l_mnf))=lz.qlty(i)
+wggs16/swelz/dataqlty.pro:      if lpr then print,'qlz : spinbl',j
+wggs16/swelz/dataqlty.pro:      if lpr then print,qlz( vdatc(j).ind(*) ),format='(45i1)'
+wggs16/swelz/dataqlty.pro:      wbad=where(qlz( vdatc(j).ind(*) ) gt 0)
+wggs16/swelz/dataqlty.pro:      if lpr then print,'qlz : spinbl',j
+wggs16/swelz/dataqlty.pro:      if lpr then print,qlz( sdatc(j).ind(*) ),format='(45i1)'
+wggs16/swelz/dataqlty.pro:      wbad=where(qlz( sdatc(j).ind(*) ) gt 0)
+wggs16/swelz/dataqlty.pro:      if lpr then print,'qlz : faraday cup block',j
+wggs16/swelz/dataqlty.pro:      if lpr then print,qlz( fcindx ),format='(45i1)'
+wggs16/swelz/dataqlty.pro:      wbad=where( qlz(fcindx) gt 0 )
+wggs16/swelz/do_lzplot.pro:pro do_lzplot,pltype=pltype,F_integ=F_integ,wid=wid,lsscn=lsscn,vparc=vparc
+wggs16/swelz/do_lzplot.pro:common sharelevelzero,pltwin_frmt,oplot_sec
+wggs16/swelz/do_lzplot.pro:    plt,/lzwin
+wggs16/swelz/do_lzplot.pro:     y_im_sz=x_im_sz  ;wlz.win_ysize(wid)
+wggs16/swelz/fle0_to_half_count.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/fparr.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/fplot_ht.pro:  dtm=strmid(wst.lzdate,0,8)+'_'+$
+wggs16/swelz/fplot.pro:dtm=strmid(wst.lzdate,0,8)+'_'+$
+wggs16/swelz/get_3slzmag.pro:pro get_3slzmag,timpb5,magfld
+wggs16/swelz/get_3slzmag.pro:  ;test whether day of the given time is the same as "lzdate" 
+wggs16/swelz/get_3slzmag.pro:  ;if given time is the same as lzdate, then the correct magfile has already
+wggs16/swelz/get_3slzmag.pro:  ;if given time is NOT the same as lzdate, then the appropriate
+wggs16/swelz/get_3slzmag.pro:  ;magfile that agrees with lzdate..
+wggs16/swelz/get_3slzmag.pro:  ;but will use the first mag vector on the day corresponding to lzdate..
+wggs16/swelz/get_3slzmag.pro:  if ymd(timpb5) eq wst.lzdate then begin 
+wggs16/swelz/get_3slzmag.pro:    wmag=where(wst.magdate eq wst.lzdate)
+wggs16/swelz/get_3slzmag.pro:      print,'ymd(given time), lzdate, magdate ',$
+wggs16/swelz/get_3slzmag.pro:          ymd(timpb5), wst.lzdate, wst.magdate(wmag)
+wggs16/swelz/get_3slzmag.pro:      ; 'first 3sec interval on lzdate will be used: mindx,sindx',mindx,sindx
+wggs16/swelz/get_ensteps.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/get_fblk_counts.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/get_f_cts_lzmom.pro:pro get_f_cts_lzmom,scimode,ispin,fblk,icnts_mb,ndets,nvsteps,nsectors,$
+wggs16/swelz/get_f_cts_lzmom.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/get_f_v_patch.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/get_f_v_patch.pro:common ionkplz,pb5i,ni,ti,ui,useionkp
+wggs16/swelz/get_f_v_patch.pro:;---glint points (lt 0) and  0's are set to 1/2 count level only for lzpatch
+wggs16/swelz/get_f_v_patch.pro:lzpatch,fblk_gt0,icnts_mb,vunit,vel,vpot,ndets,nvsteps,nsectors,$
+wggs16/swelz/get_hvtbl_m2.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/get_hvtbl_m2.pro:tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/swelz/get_hvtbl_m2.pro:scimode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/get_hvtbl_m2.pro:   indx=( (lz.mf(ihk(1).offs) mod 4) + 1) mod 4      
+wggs16/swelz/get_hvtbl_m2.pro:     lz.mf(hkind(ghk(27).offs+indgen(ghk(27).ln)))
+wggs16/swelz/get_hvtbl_m2.pro:   print,'recn, recn,lz.mf(ihk(1).offs) mod 4, mode, tbl ',$
+wggs16/swelz/get_hvtbl_m2.pro:            recn,recn,lz.mf(ihk(1).offs) mod 4,scimode_ihk,tbl
+wggs16/swelz/get_hvtbl_m2.pro:   tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/swelz/get_hvtbl_m2.pro:   scimode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/get_interpltd_swekp.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/get_ionkp_lz.pro:;=========== get_ionkp_lz =================================================
+wggs16/swelz/get_ionkp_lz.pro:pro get_ionkp_lz,err=err
+wggs16/swelz/get_ionkp_lz.pro:common ionkplz,pb5i,ni,ti,ui,useionkp
+wggs16/swelz/get_ionkp_lz.pro:  wst.lzdate,err=err)
+wggs16/swelz/getlzrec.pro:function getlzrec,yymmdd,hhmmss
+wggs16/swelz/getlzrec.pro:;give date (yymmdd) and time (hhmmss), find approximate record nymber of lz file
+wggs16/swelz/getlzrec.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/getlzrec.pro:;get lz datapath
+wggs16/swelz/getlzrec.pro:  lzpath=getenv('LZPATH')
+wggs16/swelz/getlzrec.pro:  lzfltr='*.dat'
+wggs16/swelz/getlzrec.pro:  ;select lz data file
+wggs16/swelz/getlzrec.pro:    arg=lzpath+'*'+string(indate,format='(i6)')+'*'+lzfltr+'*'
+wggs16/swelz/getlzrec.pro:      print,'multiple lz files: modify lz filter'
+wggs16/swelz/getlzrec.pro:      print,'lz file not found'
+wggs16/swelz/getlzrec.pro:    lzfile=result(0)
+wggs16/swelz/getlzrec.pro:    openr,lundat,lzfile,/get_lun
+wggs16/swelz/getlzrec.pro:    fh=read_lzhdr(lundat) ;fh=file header structure 
+wggs16/swelz/getlzrec.pro:    lzrec=lztimrec(pb5)
+wggs16/swelz/getlzrec.pro:return,lzrec
+wggs16/swelz/get_max_elec_step.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/get_recnspin.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/get_recnspin.pro:common sharelevelzero,pltwin_frmt,oplot_sec
+wggs16/swelz/get_recnspin.pro:print,'get_recnspin: wst.lzdate ',wst.lzdate,' wst.timsel ',wst.timsel
+wggs16/swelz/get_recnspin.pro:          recn=lztimrec(sec_pb5(tpoint1))
+wggs16/swelz/get_recnspin.pro: 'lz' : print,'rec, swest.ispinbl ',recn,swest.ispinbl, 'selected'
+wggs16/swelz/get_recnspin.pro: 'lztm' : begin
+wggs16/swelz/get_recnspin.pro:            ;     pb5=ymd_pb5(long(wst.lzdate))
+wggs16/swelz/get_recnspin.pro:            ;     recn=lztimrec(pb5)
+wggs16/swelz/get_recnspin.pro:                recn=lztimrec(wst.pb5)
+wggs16/swelz/get_recnspin.pro:wst.timsel='lz'    ;reset
+wggs16/swelz/get_scpot.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/get_scpot.pro:  if wst.timsel eq 'lz' or wst.timsel eq 'lztm' then  $
+wggs16/swelz/get_special_recn_range.pro:;Redefines record range for lzmom.pro on spaecial dates
+wggs16/swelz/get_spinp.pro:;common lzstuff,infile,lundat,recn,fh,lz,ihk,hkm1,vsm1,vdatc,sdatc,sp,vsmjf
+wggs16/swelz/get_spinp.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/get_spinp.pro:  if lz.telmod ne 1 and lz.telmod ne 5 then begin
+wggs16/swelz/get_spinp.pro:    recn,lz.telmod,md(lz.telmod)
+wggs16/swelz/get_spinp.pro:tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/swelz/get_spinp.pro:     time_utc,lz.mf(hkm1(1).offs:hkm1(1).offs+6),$
+wggs16/swelz/get_spinp.pro:     sp.mfrecn=lz.recn & sp.mfyr=lz.yr & sp.mfdy=lz.dy & sp.mfms=lz.ms
+wggs16/swelz/get_spinp.pro:     sp.mjfcnt=lz.mf(ihk(1).offs)
+wggs16/swelz/get_spinp.pro:  if lz.telmod ne 1 and lz.telmod ne 5 then begin
+wggs16/swelz/get_spinp.pro:     recn,lz.telmod,md(lz.telmod)
+wggs16/swelz/get_spinp.pro:     time_utc,lz.mf(hkm1(1).offs:hkm1(1).offs+6),$
+wggs16/swelz/get_spinp.pro:     sp.mfrecn=lz.recn & sp.mfyr=lz.yr & sp.mfdy=lz.dy & sp.mfms=lz.ms
+wggs16/swelz/get_spinp.pro:     sp.mjfcnt=lz.mf(ihk(1).offs)
+wggs16/swelz/get_spinp.pro:  if lz.telmod ne 1 and lz.telmod ne 5 then $
+wggs16/swelz/get_spinp.pro:    print,'data record header tm mode indicator ',lz.telmod, ' ',md(lz.telmod)
+wggs16/swelz/get_unitvectors_gse.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/get_vsteps.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/lzcounts_vs_time.pro:;======================= MAIN: lzcounts_vs_time ===============================
+wggs16/swelz/lzcounts_vs_time.pro:;reads and process a SWE lz file (RJF Jan95)
+wggs16/swelz/lzcounts_vs_time.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/lzcounts_vs_time.pro:lzctsdates=['20011119','20011120','20011121','20011122','20011123','20011124',$
+wggs16/swelz/lzcounts_vs_time.pro:print,lzctsdates
+wggs16/swelz/lzcounts_vs_time.pro:readlz=0
+wggs16/swelz/lzcounts_vs_time.pro:if readlz then begin
+wggs16/swelz/lzcounts_vs_time.pro:for idate=0,n_elements(lzctsdates)-1 do begin 
+wggs16/swelz/lzcounts_vs_time.pro:date=lzctsdates(idate)
+wggs16/swelz/lzcounts_vs_time.pro:wst.lzindate=wst.indate  
+wggs16/swelz/lzcounts_vs_time.pro:;get indices of instrument housekeeping into mjf array, lz.mf   
+wggs16/swelz/lzcounts_vs_time.pro:;get mode1, mode1 tm map of science and genl hk data offsets into lz.mf
+wggs16/swelz/lzcounts_vs_time.pro:  lzinput,err=err,oknoatt=oknoatt
+wggs16/swelz/lzcounts_vs_time.pro:;process selected lz record (set keyword lpr=1 to turn on print each record)
+wggs16/swelz/lzcounts_vs_time.pro:       goto,endlzfile 
+wggs16/swelz/lzcounts_vs_time.pro:  tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/swelz/lzcounts_vs_time.pro:  if total(lz.qlty(0:n_mnf-1)) gt 0 then  goto, endrecordloop 
+wggs16/swelz/lzcounts_vs_time.pro:  scimode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/lzcounts_vs_time.pro:    ebias1(kspn)=.03918*lz.mf(ihk(18).offs)
+wggs16/swelz/lzcounts_vs_time.pro:    ebias2(kspn)=.03918*lz.mf(ihk(28).offs)
+wggs16/swelz/lzcounts_vs_time.pro:    hvi1(kspn)=1.9531*lz.mf(ihk(12).offs)
+wggs16/swelz/lzcounts_vs_time.pro:    hvi2(kspn)=1.9531*lz.mf(ihk(11).offs)
+wggs16/swelz/lzcounts_vs_time.pro:     print,'lztim: recn,lz.recn,lz.yr,lz.dy,lz.ms,vsmjf.suntim_vsbl(0)'
+wggs16/swelz/lzcounts_vs_time.pro:     print, recn,lz.recn,lz.yr,lz.dy,lz.ms,vsmjf.suntim_vsbl(0)
+wggs16/swelz/lzcounts_vs_time.pro:endlzfile:
+wggs16/swelz/lzdates_to_process.pro:;also, create the necessary script_file 'lz'+datype+'_dates to run 'lz'+datype
+wggs16/swelz/lzdates_to_process.pro:lzpath=getenv('SWE_LZPATH')  
+wggs16/swelz/lzdates_to_process.pro:arg=lzpath+'*.dat'
+wggs16/swelz/lzdates_to_process.pro:lzfiles=findfile(arg,count=count)
+wggs16/swelz/lzdates_to_process.pro:  lzdates=strarr(count)
+wggs16/swelz/lzdates_to_process.pro:    if strmid(lzfiles(i),strlen(lzpath),9) eq 'wi_lz_swe' then $
+wggs16/swelz/lzdates_to_process.pro:      lzdates(i)=strmid(lzfiles(i),strlen(lzpath)+10,8) $
+wggs16/swelz/lzdates_to_process.pro:    else if strmid(lzfiles(i),strlen(lzpath),1) eq '9' then $  
+wggs16/swelz/lzdates_to_process.pro:      lzdates(i)='19'+strmid(lzfiles(i),strlen(lzpath),6) $
+wggs16/swelz/lzdates_to_process.pro:    else if strmid(lzfiles(i),strlen(lzpath),1) eq '0' then $  
+wggs16/swelz/lzdates_to_process.pro:      lzdates(i)='20'+strmid(lzfiles(i),strlen(lzpath),6) 
+wggs16/swelz/lzdates_to_process.pro:  print,'lz dates:'
+wggs16/swelz/lzdates_to_process.pro:  for i=0,count-1 do print,i,'  ',lzdates(i),'  ',lzfiles(i)
+wggs16/swelz/lzdates_to_process.pro:  dates_tobe_processed=lzdates
+wggs16/swelz/lzdates_to_process.pro:  print,number,' days from the lz directory '+lzpath+'  have been selected'
+wggs16/swelz/lzdates_to_process.pro:  dateflnm=getenv('IDLSAV')+'lz'+datype+'_dates'
+wggs16/swelz/lzdates_to_process.pro:    print,' ' & print,'Now you can .r lz'+datype
+wggs16/swelz/lzhdrs.pro:pro lzhdrs
+wggs16/swelz/lzhdrs.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/lzhdrs.pro:  lz=read_lzrcd(lundat,recn,fh.rln,fh.spcid) ;lz=data structure incl header
+wggs16/swelz/lzhdrs.pro:  wbad=where(lz.qlty gt 0,nwbad)
+wggs16/swelz/lzinput.pro:;============================= lzinput =================================
+wggs16/swelz/lzinput.pro:pro lzinput,err=err,oknoatt=oknoatt,sheath=sheath,noorb=noorb,oknomag=oknomag,$
+wggs16/swelz/lzinput.pro:  lzm=lzm
+wggs16/swelz/lzinput.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/lzinput.pro:;get indices of instrument housekeeping into mjf array, lz.mf   
+wggs16/swelz/lzinput.pro:;get mode1, mode1 tm map of science and genl hk data offsets into lz.mf
+wggs16/swelz/lzinput.pro:;select lz data file(s) 
+wggs16/swelz/lzinput.pro:  'File' : lzfile=pickfile(/read,get_path=fdir,path=fdir(0),filter=lzfltr,$
+wggs16/swelz/lzinput.pro:      lzfile=get_flnm('swelz',fdir,nullstr,'*.dat',wst.lzindate,err=err)
+wggs16/swelz/lzinput.pro:      if lzfile eq '' then err='lz file not found'
+wggs16/swelz/lzinput.pro:  print,'lzfile ',lzfile
+wggs16/swelz/lzinput.pro:  ;print,'lz data file selected ',lzfile
+wggs16/swelz/lzinput.pro:  wst.lzdate=''
+wggs16/swelz/lzinput.pro:  char0=strmid(lzfile,strlen(fdir),1)
+wggs16/swelz/lzinput.pro:  'W' : wst.lzdate=strmid(lzfile,strlen(lzfile)-16,8)
+wggs16/swelz/lzinput.pro:  'w' : wst.lzdate=strmid(lzfile,strlen(lzfile)-16,8)
+wggs16/swelz/lzinput.pro:  '9' : wst.lzdate='19'+strmid(lzfile,strlen(lzfile)-12,6)
+wggs16/swelz/lzinput.pro:  '0' : wst.lzdate='20'+strmid(lzfile,strlen(lzfile)-12,6)
+wggs16/swelz/lzinput.pro:  appsunpuls=wst.lzdate eq '20000715' or wst.lzdate eq '20000716'
+wggs16/swelz/lzinput.pro:  wdate=where(long(wst.lzdate) eq datetbl,nwdate)
+wggs16/swelz/lzinput.pro:  if wst.lzdate eq '20001110' then $
+wggs16/swelz/lzinput.pro:if long(wst.lzdate) ge 20011119l and long(wst.lzdate) le 20011130l then begin
+wggs16/swelz/lzinput.pro:endif else if long(wst.lzdate) gt 20011130l then begin
+wggs16/swelz/lzinput.pro:  openr,lundat,lzfile     ;,/get_lun
+wggs16/swelz/lzinput.pro:  fh=read_lzhdr(lundat) ;fh=file header structure 
+wggs16/swelz/lzinput.pro:   prt_flhdr,0,lzfile,fh  ;print file header 
+wggs16/swelz/lzinput.pro:   print,'lz file ',lzfile
+wggs16/swelz/lzinput.pro:   print,'lzdate ',wst.lzdate
+wggs16/swelz/lzinput.pro:  if wst.lzdate eq '19941227' then begin   
+wggs16/swelz/lzinput.pro:  endif else if wst.lzdate eq '19961113' then begin
+wggs16/swelz/lzinput.pro:   magfile=get_flnm('mag3s',magpath,nullstr,'.cdf',wst.lzdate,err=err) 
+wggs16/swelz/lzinput.pro:   if keyword_set(lzm) ne 0 and err ne '' then return
+wggs16/swelz/lzinput.pro:    if wst.magdate ne wst.lzdate then stop       ;checking dates
+wggs16/swelz/lzinput.pro:    print,'lz and mag file dates do not match, or mag file does not exist'
+wggs16/swelz/lzinput.pro:    arg=oapath+'*'+'at_def_'+string(wst.lzdate,format='(i8)')+'*'+'.cdf'
+wggs16/swelz/lzinput.pro:      arg=oapath+'*'+'at_pre_'+string(wst.lzdate,format='(i8)')+'*'+'.cdf'
+wggs16/swelz/lzinput.pro:         ;stop,'lzinput: attitude array has wrong dimension'
+wggs16/swelz/lzinput.pro:      (count eq 0 or wst.atdate ne wst.lzdate) and oknoatt eq 0 then begin
+wggs16/swelz/lzinput.pro:      print,'lz and attitude file dates do not match, ',$
+wggs16/swelz/lzinput.pro:   arg=oapath+'*'+'or_def_'+string(wst.lzdate,format='(i8)')+'*'+'.cdf'
+wggs16/swelz/lzinput.pro:     arg=oapath+'*'+'or_pre_'+string(wst.lzdate,format='(i8)')+'*'+'.cdf'
+wggs16/swelz/lzinput.pro:     print,'lzinput: orbit array time dimension not = 144'
+wggs16/swelz/lzinput.pro:     ;stop,'lzinput: orbit array has wrong dimension'
+wggs16/swelz/lzinput.pro:get_ionkp_lz,err=err
+wggs16/swelz/lzinput.pro:;get the spinperiod for the start of the lz file
+wggs16/swelz/lzinput.pro:;process first lz science record in file
+wggs16/swelz/lzinput.pro:if (total(wst.lzdate eq ['20020721','20020801',$ ;           Mixed-mode days.
+wggs16/swelz/lzinput.pro:   scimode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/lzinput.pro:  ;if wst.lzdate lt '19981026' then backgpath=getenv('BACKGPATH') $
+wggs16/swelz/lzinput.pro:  if wst.lzdate lt '19971026' then backgpath=getenv('BACKGPATH') $
+wggs16/swelz/lzinput.pro:       if wst.lzdate eq backgdate then $
+wggs16/swelz/lzinput.pro:       print,'lzdate, bdate, backgroundfile ',wst.lzdate,' ',bdate,$
+wggs16/swelz/lzinput.pro:        if wst.lzdate eq strmid(strng,0,8) then begin
+wggs16/swelz/lzinput.pro:     arg=getenv('WGGSBASE')+'swelz/swecal/glint/dglint_m1_'+gfn+'.pro'
+wggs16/swelz/lzinput.pro:        if wst.lzdate eq backgdate then $
+wggs16/swelz/lzinput.pro:       print,'lzdate, bdate, backgroundfile ',wst.lzdate,' ',bdate,$
+wggs16/swelz/lzinput.pro:         if wst.lzdate eq strmid(strng,0,8) then begin
+wggs16/swelz/lzinput.pro:       arg=getenv('WGGSBASE')+'swelz/swecal/glint/dglint_m2_'+gfn+'.pro'
+wggs16/swelz/lzmom_lstmjf.pro:;======================= MAIN: lzmom_new =======================================
+wggs16/swelz/lzmom_lstmjf.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/lzmom_lstmjf.pro:openr,lundate,getenv('IDLSAV')+'lzmom_dates',/get_lun
+wggs16/swelz/lzmom_lstmjf.pro:openr,lundate,getenv('IDLSAV')+'lzmom_dates'    
+wggs16/swelz/lzmom_lstmjf.pro:wst.lzindate=wst.indate
+wggs16/swelz/lzmom_lstmjf.pro:lzinput,err=err,oknoatt=oknoatt,sheath=sheath,oknomag=oknomag,/lz
+wggs16/swelz/lzmom_lstmjf.pro:;---read and unpack from telemetry the selected lz record
+wggs16/swelz/lzmom_lstmjf.pro:      goto,endlzfile 
+wggs16/swelz/lzmom_lstmjf.pro:if total(lz.qlty(0:249)) gt 0 then  goto, endrecordloop 
+wggs16/swelz/lzmom_lstmjf.pro:  get_f_cts_lzmom,scimode,ispin,fblk,icnts_mb,ndets,nvsteps,nsectors,$
+wggs16/swelz/lzmom_lstmjf.pro:  ;   see comments in lzinput.pro
+wggs16/swelz/lzmom_lstmjf.pro:  lzpatch,fblk,icnts_mb,vunit,velocity,vpot,ndets,nvsteps,nsectors,$
+wggs16/swelz/lzmom_lstmjf.pro:      lzrec:0l,  $
+wggs16/swelz/lzmom_lstmjf.pro:  file_so=getenv('WGGSBASE')+'swelz/swe_idl_new1.so' ;uses already computed bn
+wggs16/swelz/lzmom_lstmjf.pro:  ;file_so=getenv('WGGSBASE')+'swelz/swe_idl.so';this version computes bn 
+wggs16/swelz/lzmom_lstmjf.pro:    lzpatch,fblk,icnts_mb,vunit,velocity,vpot,ndets,nvsteps,nsectors,$
+wggs16/swelz/lzmom_lstmjf.pro:  mdata.misc(3) = lz.mf(ihk(18).offs)  ;ebias1
+wggs16/swelz/lzmom_lstmjf.pro:  mdata.misc(4) = lz.mf(ihk(28).offs)  ;ebias2
+wggs16/swelz/lzmom_lstmjf.pro:  mdata.lzrec=long(recn)
+wggs16/swelz/lzmom_lstmjf.pro:      data14(n_elements(data)-7+spn).mfrec =mdata.lzrec
+wggs16/swelz/lzmom_lstmjf.pro:     print,'lztim: recn,lz.recn,lz.yr,lz.dy,lz.ms,vsmjf.suntim_vsbl(0)'
+wggs16/swelz/lzmom_lstmjf.pro:     print, recn,lz.recn,lz.yr,lz.dy,lz.ms,vsmjf.suntim_vsbl(0)
+wggs16/swelz/lzmom_lstmjf.pro:endlzfile:
+wggs16/swelz/lzmom_lstmjf.pro:mfl=getenv('MPNEW')+wst.lzdate+'_'+mfltr+'.mom'
+wggs16/swelz/lzmom_lstmjf.pro:print,'lzmom finished for date ',wst.lzdate
+wggs16/swelz/lzmom_lstmjf.pro:;     a) glint obtained by lzoppdet_diff 
+wggs16/swelz/lzmom_new.pro:;======================= MAIN: lzmom_new =======================================
+wggs16/swelz/lzmom_new.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/lzmom_new.pro:openr,lundate,getenv('IDLSAV')+'lzmom_dates',/get_lun
+wggs16/swelz/lzmom_new.pro:openr,lundate,getenv('IDLSAV')+'lzmom_dates'    
+wggs16/swelz/lzmom_new.pro:wst.lzindate=wst.indate
+wggs16/swelz/lzmom_new.pro:lzinput,err=err,oknoatt=oknoatt,sheath=sheath,oknomag=oknomag,/lz
+wggs16/swelz/lzmom_new.pro:;---read and unpack from telemetry the selected lz record
+wggs16/swelz/lzmom_new.pro:      goto,endlzfile 
+wggs16/swelz/lzmom_new.pro:if total(lz.qlty(0:249)) gt 0 then  goto, endrecordloop 
+wggs16/swelz/lzmom_new.pro:  get_f_cts_lzmom,scimode,ispin,fblk,icnts_mb,ndets,nvsteps,nsectors,$
+wggs16/swelz/lzmom_new.pro:  lzpatch,fblk,icnts_mb,vunit,velocity,vpot,ndets,nvsteps,nsectors,$
+wggs16/swelz/lzmom_new.pro:      lzrec:0l,  $
+wggs16/swelz/lzmom_new.pro:  file_so=getenv('WGGSBASE')+'swelz/swe_idl_new1.so' ;uses already computed bn
+wggs16/swelz/lzmom_new.pro:  ;file_so=getenv('WGGSBASE')+'swelz/swe_idl.so';this version computes bn 
+wggs16/swelz/lzmom_new.pro:    lzpatch,fblk,icnts_mb,vunit,velocity,vpot,ndets,nvsteps,nsectors,$
+wggs16/swelz/lzmom_new.pro:  mdata.misc(3) = lz.mf(ihk(18).offs)  ;ebias1
+wggs16/swelz/lzmom_new.pro:  mdata.misc(4) = lz.mf(ihk(28).offs)  ;ebias2
+wggs16/swelz/lzmom_new.pro:  mdata.lzrec=long(recn)
+wggs16/swelz/lzmom_new.pro:     print,'lztim: recn,lz.recn,lz.yr,lz.dy,lz.ms,vsmjf.suntim_vsbl(0)'
+wggs16/swelz/lzmom_new.pro:     print, recn,lz.recn,lz.yr,lz.dy,lz.ms,vsmjf.suntim_vsbl(0)
+wggs16/swelz/lzmom_new.pro:endlzfile:
+wggs16/swelz/lzmom_new.pro:mfl=getenv('MPNEW')+wst.lzdate+'_'+mfltr+'.mom'
+wggs16/swelz/lzmom_new.pro:print,'lzmom finished for date ',wst.lzdate
+wggs16/swelz/lzmom_new.pro:;     a) glint obtained by lzoppdet_diff 
+wggs16/swelz/lzmom.pro:;======================= MAIN: lzmom =======================================
+wggs16/swelz/lzmom.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/lzmom.pro:openr,lundate,getenv('IDLSAV')+'lzmom_dates',/get_lun
+wggs16/swelz/lzmom.pro:openr,lundate,getenv('IDLSAV')+'lzmom_dates'    
+wggs16/swelz/lzmom.pro:wst.lzindate=wst.indate
+wggs16/swelz/lzmom.pro:lzinput,err=err,oknoatt=oknoatt,sheath=sheath,oknomag=oknomag,/lz
+wggs16/swelz/lzmom.pro:;---read and unpack from telemetry the selected lz record
+wggs16/swelz/lzmom.pro:      goto,endlzfile 
+wggs16/swelz/lzmom.pro:if total(lz.qlty(0:249)) gt 0 then  goto, endrecordloop 
+wggs16/swelz/lzmom.pro:  get_f_cts_lzmom,scimode,ispin,fblk,icnts_mb,ndets,nvsteps,nsectors,$
+wggs16/swelz/lzmom.pro:  lzpatch,fblk,icnts_mb,vunit,velocity,vpot,ndets,nvsteps,nsectors,$
+wggs16/swelz/lzmom.pro:      lzrec:0l,  $
+wggs16/swelz/lzmom.pro:  file_so=getenv('WGGSBASE')+'swelz/swe_idl_new1.so' ;uses already computed bn
+wggs16/swelz/lzmom.pro:  ;file_so=getenv('WGGSBASE')+'swelz/swe_idl.so';this version computes bn 
+wggs16/swelz/lzmom.pro:    lzpatch,fblk,icnts_mb,vunit,velocity,vpot,ndets,nvsteps,nsectors,$
+wggs16/swelz/lzmom.pro:  mdata.misc(3) = lz.mf(ihk(18).offs)  ;ebias1
+wggs16/swelz/lzmom.pro:  mdata.misc(4) = lz.mf(ihk(28).offs)  ;ebias2
+wggs16/swelz/lzmom.pro:  mdata.lzrec=long(recn)
+wggs16/swelz/lzmom.pro:     print,'lztim: recn,lz.recn,lz.yr,lz.dy,lz.ms,vsmjf.suntim_vsbl(0)'
+wggs16/swelz/lzmom.pro:     print, recn,lz.recn,lz.yr,lz.dy,lz.ms,vsmjf.suntim_vsbl(0)
+wggs16/swelz/lzmom.pro:endlzfile:
+wggs16/swelz/lzmom.pro:mfl=getenv('MPNEW')+wst.lzdate+'_'+mfltr+'.mom'
+wggs16/swelz/lzmom.pro:print,'lzmom finished for date ',wst.lzdate
+wggs16/swelz/lzmom.pro:;     a) glint obtained by lzoppdet_diff 
+wggs16/swelz/lzpatch.pro:pro lzpatch,fblk,cnts,vunit,velocity,vpot,nd,nv,ns,lchan,bn,chisqr,$
+wggs16/swelz/lzpatch.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl  
+wggs16/swelz/lzpitchavg.pro:;======================= MAIN: lzpitchavg ================================
+wggs16/swelz/lzpitchavg.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/lzpitchavg.pro:openr,lundate,getenv('IDLSAV')+'lzpitchavg_dates',/get_lun
+wggs16/swelz/lzpitchavg.pro:openr,lundate,getenv('IDLSAV')+'lzpitchavg_dates';,/get_lun
+wggs16/swelz/lzpitchavg.pro:wst.lzindate=wst.indate  
+wggs16/swelz/lzpitchavg.pro:;get indices of instrument housekeeping into mjf array, lz.mf   
+wggs16/swelz/lzpitchavg.pro:;get mode1, mode1 tm map of science and genl hk data offsets into lz.mf
+wggs16/swelz/lzpitchavg.pro:  lzinput,err=err,oknoatt=oknoatt
+wggs16/swelz/lzpitchavg.pro:;process selected lz record (set keyword lpr=1 to turn on print each record)
+wggs16/swelz/lzpitchavg.pro:       goto,endlzfile 
+wggs16/swelz/lzpitchavg.pro:  tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/swelz/lzpitchavg.pro:  if total(lz.qlty(0:n_mnf-1)) gt 0 then  goto, endrecordloop 
+wggs16/swelz/lzpitchavg.pro:  scimode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/lzpitchavg.pro:        lzrec:0l,  $
+wggs16/swelz/lzpitchavg.pro:        pdata.lzrec=long(recn)
+wggs16/swelz/lzpitchavg.pro:        lzrec:0l,  $
+wggs16/swelz/lzpitchavg.pro:        ionspctrmdata.lzrec=long(recn)
+wggs16/swelz/lzpitchavg.pro:     print,'lztim: recn,lz.recn,lz.yr,lz.dy,lz.ms,vsmjf.suntim_vsbl(0)'
+wggs16/swelz/lzpitchavg.pro:     print, recn,lz.recn,lz.yr,lz.dy,lz.ms,vsmjf.suntim_vsbl(0)
+wggs16/swelz/lzpitchavg.pro:endlzfile:
+wggs16/swelz/lzpitchavg.pro:;     a) glint obtained by lzoppdet_diff 
+wggs16/swelz/lzpitchavg.pro:    mfl=getenv('MPNEW')+wst.lzdate+'_'+mfltr+'.pitavg'   ;'.pit'
+wggs16/swelz/lzpitchavg.pro:  print,'lzpitch: electron pitch angles finished for date ',wst.lzdate
+wggs16/swelz/lzpitchavg.pro:    mfl=getenv('MPNEW')+strmid(wst.lzdate,2,6)+mfltr+'.ionspctrm'
+wggs16/swelz/lzpitchavg.pro:  print,'lzpitch: ion spectra finished for date ',wst.lzdate
+wggs16/swelz/lzpitch.pro:;======================= MAIN: lzpitch ======================================
+wggs16/swelz/lzpitch.pro:;reads and process a SWE lz file (RJF Jan95)
+wggs16/swelz/lzpitch.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/lzpitch.pro:openr,lundate,getenv('IDLSAV')+'lzpitch_dates',/get_lun
+wggs16/swelz/lzpitch.pro:openr,lundate,getenv('IDLSAV')+'lzpitch_dates';,/get_lun
+wggs16/swelz/lzpitch.pro:wst.lzindate=wst.indate  
+wggs16/swelz/lzpitch.pro:;---get indices of instrument housekeeping into mjf array, lz.mf   
+wggs16/swelz/lzpitch.pro:;---get mode1, mode1 tm map of science and genl hk data offsets into lz.mf
+wggs16/swelz/lzpitch.pro:lzinput,err=err,oknoatt=oknoatt
+wggs16/swelz/lzpitch.pro:  ;---process selected lz record (set keyword lpr=1 to print each record)
+wggs16/swelz/lzpitch.pro:       goto,endlzfile 
+wggs16/swelz/lzpitch.pro:  tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/swelz/lzpitch.pro:  if total(lz.qlty(0:n_mnf-1)) gt 0 then  goto, endrecordloop 
+wggs16/swelz/lzpitch.pro:  scimode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/lzpitch.pro:        lzrec:0l,  $
+wggs16/swelz/lzpitch.pro:    pdata.lzrec=long(recn)
+wggs16/swelz/lzpitch.pro:        lzrec:0l,  $
+wggs16/swelz/lzpitch.pro:      ionspctrmdata.lzrec=long(recn)
+wggs16/swelz/lzpitch.pro:     print,'lztim: recn,lz.recn,lz.yr,lz.dy,lz.ms,vsmjf.suntim_vsbl(0)'
+wggs16/swelz/lzpitch.pro:     print, recn,lz.recn,lz.yr,lz.dy,lz.ms,vsmjf.suntim_vsbl(0)
+wggs16/swelz/lzpitch.pro:endlzfile:
+wggs16/swelz/lzpitch.pro:  ;     a) glint obtained by lzoppdet_diff 
+wggs16/swelz/lzpitch.pro:  mfl=getenv('MPNEW')+wst.lzdate+'_'+mfltr+'.pit'
+wggs16/swelz/lzpitch.pro:  ;mfl=getenv('MPNEW')+wst.lzdate+'_'+mfltr+'.pitch'
+wggs16/swelz/lzpitch.pro:  print,'lzpitch: electron pitch angles finished for date ',wst.lzdate
+wggs16/swelz/lzpitch.pro:  mfl=getenv('MPNEW')+strmid(wst.lzdate,2,6)+mfltr+'.ionspctrm'
+wggs16/swelz/lzpitch.pro:  print,'lzpitch: ion spectra finished for date ',wst.lzdate
+wggs16/swelz/lzredfcuts.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/lzredfcuts.pro:;---process selected lz record
+wggs16/swelz/lzredfcuts.pro:;---test lz record for:
+wggs16/swelz/lzredfcuts.pro:;   for lzdata quality flag
+wggs16/swelz/lzredfcuts.pro:lztest_code_ret,tmmode_ihk=tmmode_ihk,ntest2,retcode,repcode
+wggs16/swelz/lzredfcuts.pro:wst.lz_is_read=1
+wggs16/swelz/lzredfcuts.pro:lzisread:    ;an lz record has been read
+wggs16/swelz/lzredfcuts.pro:get_3slzmag,wst.pb5,magfld
+wggs16/swelz/lzredfcuts.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/lzredfcuts.pro:openr,lundate,getenv('IDLSAV')+'lzredfcuts_dates'
+wggs16/swelz/lzredfcuts.pro:openr,lundate,getenv('IDLSAV')+'lzredfcuts_dates'    
+wggs16/swelz/lzredfcuts.pro:wst.timsel = 'lztm'
+wggs16/swelz/lzredfcuts.pro:wst.lzindate=wst.indate
+wggs16/swelz/lzredfcuts.pro:lzinput,err=err,oknoatt=oknoatt,sheath=sheath,oknomag=oknomag,/lz
+wggs16/swelz/lzredfcuts.pro:;---get lz record #'s corresponding to begin and end times
+wggs16/swelz/lzstrahl.pro:;======================= MAIN: lzstrahl =======================================
+wggs16/swelz/lzstrahl.pro:;reads and process a SWE lz file (RJF Jan95)
+wggs16/swelz/lzstrahl.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/lzstrahl.pro:openr,lundate,getenv('IDLSAV')+'lzstrahl_dates',/get_lun
+wggs16/swelz/lzstrahl.pro:openr,lundate,getenv('IDLSAV')+'lzstrahl_dates',/get_lun
+wggs16/swelz/lzstrahl.pro:wst.lzindate=wst.indate
+wggs16/swelz/lzstrahl.pro:;---get indices of instrument housekeeping into mjf array, lz.mf   
+wggs16/swelz/lzstrahl.pro:;---get tm map of science and genl hk data offsets into lz.mf
+wggs16/swelz/lzstrahl.pro:lzinput,err=err,oknoatt=oknoatt
+wggs16/swelz/lzstrahl.pro:;---process selected lz record (set keyword lpr=1 to turn on print each record)
+wggs16/swelz/lzstrahl.pro:tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/swelz/lzstrahl.pro:if total(lz.qlty(0:n_mnf-1)) gt 0 then  goto, endrecordloop 
+wggs16/swelz/lzstrahl.pro:scimode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/lzstrahl.pro:        lzrec:long(recn),  $
+wggs16/swelz/lzstrahl.pro:    sdata.misc(0)=lz.mf(ihk(22).offs)     ;strahl voltage bias level
+wggs16/swelz/lzstrahl.pro:     print,'lztim: recn,lz.recn,lz.yr,lz.dy,lz.ms,vsmjf.suntim_vsbl(0)'
+wggs16/swelz/lzstrahl.pro:     print, recn,lz.recn,lz.yr,lz.dy,lz.ms,vsmjf.suntim_vsbl(0)
+wggs16/swelz/lzstrahl.pro:endlzfile:
+wggs16/swelz/lzstrahl.pro:  mfl=getenv('MPNEW')+wst.lzdate+version+'.strahl'
+wggs16/swelz/lzstrahl.pro:  print,'lzstrahl: electron strahl (.strl file) finished for date ',wst.lzdate
+wggs16/swelz/lzswenewmode.pro:;=========================== MAIN: lzSWEnewmode ==============================
+wggs16/swelz/lzswenewmode.pro:; Reads and process a SWE lz file (Based on processing code from RJF, Jan95)
+wggs16/swelz/lzswenewmode.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/lzswenewmode.pro:            ;  data (using 'lzinput'), approximation is ALWAYS "ok" here.
+wggs16/swelz/lzswenewmode.pro:openr,dateLUN,getenv('IDLSAV')+'lzpitch_dates',/Get_LUN
+wggs16/swelz/lzswenewmode.pro:close,dateLUN & openr,dateLUN,getenv('IDLSAV')+'lzpitch_dates'
+wggs16/swelz/lzswenewmode.pro:  wst.date_file = 'Date' & wst.indate = date & wst.lzindate = wst.indate  
+wggs16/swelz/lzswenewmode.pro:  ihkmap,ihk ; ---- Get inds. of instrument housekeeping into mjf array, lz.mf
+wggs16/swelz/lzswenewmode.pro:  ; --- Get mode1, mode1 tm map of science and genl hk data offsets into lz.mf
+wggs16/swelz/lzswenewmode.pro:  lzinput,Err=err,OKnoAtt=oknoatt & if (err ne '') then stop,err
+wggs16/swelz/lzswenewmode.pro:    tmmode_ihk = get_bits(lz.mf[ihk[2].offs],ihk[2].bv[1].p,ihk[2].bv[1].n)
+wggs16/swelz/lzswenewmode.pro:    if (total(lz.qlty[0:(n_mnf-1)]) gt 0) then goto,endrecordloop ;  Skip rec.
+wggs16/swelz/lzswenewmode.pro:    if (lz.mf[hkm7[4].offs] eq 7) then scimode_ihk = 7 else begin
+wggs16/swelz/lzswenewmode.pro:      mdata = {lzrec:fix(recn),spectm:fix(ispect),$ ;     Record-and-spectrum.
+wggs16/swelz/lzswenewmode.pro:      pdata = {lzrec:0l,spinbl:0l,tjdsec_spinbl:0.0d0,pb5tim:lonarr(3),$
+wggs16/swelz/lzswenewmode.pro:      pdata.lzrec = long(recn) & pdata.spinbl = long(ispect) ;  Rec-and-spect.
+wggs16/swelz/lzswenewmode.pro:      adata = {lzrec:0l,spinbl:0l,tjdsec_spinbl:0.0d0,pb5tim:lonarr(3),$
+wggs16/swelz/lzswenewmode.pro:      adata.lzrec = long(recn) & adata.spinbl = long(ispect) ;  Rec-and-spect.
+wggs16/swelz/lzswenewmode.pro:      sdata = {lzrec:fix(recn),spectm:fix(ispect),$ ;     Record-and-spectrum.
+wggs16/swelz/lzswenewmode.pro:       print,'lztim: recn,lz.recn,lz.yr,lz.dy,lz.ms,vsmjf.suntim_vsbl[0]'
+wggs16/swelz/lzswenewmode.pro:       print,        recn,lz.recn,lz.yr,lz.dy,lz.ms,vsmjf.suntim_vsbl[0]
+wggs16/swelz/lzswenewmode.pro:     pfl = getenv('MPNEW')+wst.lzdate+'_'+mom_version+'.mom' ;   Product file.
+wggs16/swelz/lzswenewmode.pro:     print,'lzSWEnewmode: electron MOMENTS finished for date ',wst.lzdate
+wggs16/swelz/lzswenewmode.pro:     pfl = getenv('MPNEW')+wst.lzdate+'_'+pit_version+'.pit' ;   Product file.
+wggs16/swelz/lzswenewmode.pro:     print,'lzSWEnewmode: elec. PITCH-ANGLES finished for date ',wst.lzdate
+wggs16/swelz/lzswenewmode.pro:     pfl = getenv('MPNEW')+wst.lzdate+'_'+avg_version+'.pitavg' ;  Prod. file.
+wggs16/swelz/lzswenewmode.pro:     print,'lzSWEnewmode: elec. PITCH-AVERAGES finished for date ',wst.lzdate
+wggs16/swelz/lzswenewmode.pro:     pfl = getenv('MPNEW')+wst.lzdate+'_'+str_version+'.str' ;   Product file.
+wggs16/swelz/lzswenewmode.pro:     print,'lzSWEnewmode: electron STRAHL DATA finished for date ',wst.lzdate
+wggs16/swelz/lztimrec.pro:function lztimrec,timpb5
+wggs16/swelz/lztimrec.pro:;given time (pb5), find lz record number with closest header time
+wggs16/swelz/lztimrec.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/lztimrec.pro:print,lzfile
+wggs16/swelz/lztimrec.pro:lzrec = 1 + long(fix(drec*(seconds-secfst)))
+wggs16/swelz/lztimrec.pro:swest.ispinbl = long(fix((drec*(seconds-secfst)-float(lzrec-1))*(spins)))
+wggs16/swelz/lztimrec.pro:  print,lzrec
+wggs16/swelz/lztimrec.pro:return,lzrec
+wggs16/swelz/mode1_patchangles.pro:restore,getenv('WGGSBASE')+'swe/lz/mode1_patchangles.dat' ;941130
+wggs16/swelz/mode1.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/mode1.pro:tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/swelz/mode1.pro:tmrate_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(2).p,ihk(2).bv(2).n)
+wggs16/swelz/mode1.pro:scimode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/mode1.pro:  time_utc,lz.mf(hkm1(1).offs:hkm1(1).offs+6),$
+wggs16/swelz/mode1.pro:  if tjd eq 0 and lz.yr ne 1995 and lz.dy ne 283 then begin
+wggs16/swelz/mode1.pro:  sp.mfrecn=lz.recn & sp.mfyr=lz.yr & sp.mfdy=lz.dy & sp.mfms=lz.ms
+wggs16/swelz/mode1.pro:  scimode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/mode1.pro:  lzrecn:0l,$
+wggs16/swelz/mode1.pro:  vsmjf.mjfcnt=lz.mf(ihk(1).offs)  ;mjf counter
+wggs16/swelz/mode1.pro:  vsmjf.lzrecn=lz.recn
+wggs16/swelz/mode1.pro:  spincnt_vsbl(0:n_spins-1)=fix(lz.mf((vsm1(0).offs(0:n_spins-1))))
+wggs16/swelz/mode1.pro:  vsmjf.veis(*,*,*,*) = dcomp_tbl(lz.mf((vdatc.ind)))
+wggs16/swelz/mode1.pro:  vsmjf.strl(*,*,*)   = lz.mf((sdatc.ind))
+wggs16/swelz/mode1.pro:  ;strahl_hvtbl=lz.mf(hkm1(25).offs+indgen(hkm1(25).ln))
+wggs16/swelz/mode1.pro:  strahl_hvtbl=lz.mf(hkm1(5).loc)
+wggs16/swelz/mode1.pro:  vsmjf.strlstep =strahl_hvtbl(lz.mf(vsm1(1).offs))
+wggs16/swelz/mode1.pro:  if lz.yr eq 1994 and lz.dy eq 361 then begin  ;27dec94
+wggs16/swelz/mode1.pro:  endif ;else if lz.yr eq 1996 and lz.dy eq 318 then begin      ;13nov96
+wggs16/swelz/mode1.pro:  if lz.yr eq tpb5_lunecl(0,0) and lz.dy eq tpb5_lunecl(1,0)  then begin
+wggs16/swelz/mode1.pro:        ;if lz.yr eq 1996 and lz.dy eq 318 then noglnt=1        
+wggs16/swelz/mode1.pro:  ;vsmjf.veistep=lz.mf(hkm1(24).offs+indgen(n_vesteps))
+wggs16/swelz/mode1.pro:  vsmjf.veistep=lz.mf(hkm1(4).loc(indgen(16)))
+wggs16/swelz/mode1.pro:  elec_ion_m1=get_bits(lz.mf(ihk(6).offs),ihk(6).bv(0).p,ihk(6).bv(0).n)
+wggs16/swelz/mode1.pro:;get relative gains (from date vs rel gain table in lzinput.pro)
+wggs16/swelz/mode2_nxt_blk0.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/mode2_nxt_blk0.pro:common nxtmjf,whspn1,vspncnt,veistep,veis,strl,strlstep,lzrecn
+wggs16/swelz/mode2_nxt_blk0.pro:lzrecn=lz.recn
+wggs16/swelz/mode2_nxt_blk0.pro:  whspn1=where(lz.mf(vblhsp.hdr(3)) mod 16 eq 1)  ;where 2nd half spin
+wggs16/swelz/mode2_nxt_blk0.pro:  vspncnt=lz.mf(vblhsp(whspn1(0)).hdr(0)) else begin
+wggs16/swelz/mode2_nxt_blk0.pro:  w11=lz.mf(vblhsp.hdr(3)) / 16 eq 1 and lz.mf(vblhsp.hdr(3)) mod 16 eq 1
+wggs16/swelz/mode2_nxt_blk0.pro:  w21=lz.mf(vblhsp.hdr(3)) / 16 eq 2 and lz.mf(vblhsp.hdr(3)) mod 16 eq 1
+wggs16/swelz/mode2_nxt_blk0.pro:  veis(*,*,*) = lz.mf((vblhsp(whspn1(0)).ind))
+wggs16/swelz/mode2_nxt_blk0.pro:  strl(*,*)   = lz.mf((sblhsp(whspn1(0)).ind))
+wggs16/swelz/mode2_nxt_blk0.pro:  strlstep =lz.mf(hkind(ghk(28).offs))           
+wggs16/swelz/mode2_patchangles.pro:restore,getenv('WGGSBASE')+'wggs/lz_swe/mode2_patchangles.dat'  ;951216
+wggs16/swelz/mode2.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/mode2.pro:  strl_nxt,strlstep_nxt,lzrecn_nxt
+wggs16/swelz/mode2.pro:tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/swelz/mode2.pro:tmrate_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(2).p,ihk(2).bv(2).n)
+wggs16/swelz/mode2.pro:scimode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/mode2.pro:  time_utc,lz.mf(hkind(ghk(1).offs):hkind(ghk(1).offs)+6),$
+wggs16/swelz/mode2.pro:  sp.mfrecn=lz.recn & sp.mfyr=lz.yr & sp.mfdy=lz.dy & sp.mfms=lz.ms
+wggs16/swelz/mode2.pro:scimode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/mode2.pro:  vspncnt=(lz.mf(vblhsp.hdr(0)) + 1) mod 2
+wggs16/swelz/mode2.pro:    whspn=lz.mf(vblhsp.hdr(3)) mod 16   
+wggs16/swelz/mode2.pro:  ;whspn0=where(lz.mf(vblhsp.hdr(3)) mod 16 eq 0)  ;where 1st half spin
+wggs16/swelz/mode2.pro:  ;whspn1=where(lz.mf(vblhsp.hdr(3)) mod 16 eq 1)  ;where 2nd half spin
+wggs16/swelz/mode2.pro:  whspn0=where(lz.mf(vblhsp.hdr(3)) mod 16 eq 0 and $
+wggs16/swelz/mode2.pro:               lz.mf(vblhsp.hdr(3)) ne 0)  ;where 1st half spin
+wggs16/swelz/mode2.pro:  whspn1=where(lz.mf(vblhsp.hdr(3)) mod 16 eq 1 and $
+wggs16/swelz/mode2.pro:               lz.mf(vblhsp.hdr(3)) ne 0)  ;where 2nd half spin
+wggs16/swelz/mode2.pro:  vspncnt(whspn01)=lz.mf(vblhsp(whspn01).hdr(0))
+wggs16/swelz/mode2.pro:  spincnt_vsbl(whspn01)=float(lz.mf(vblhsp(whspn01).hdr(1)))
+wggs16/swelz/mode2.pro:  sunspncnt(whspn01)=lz.mf(vblhsp(whspn01).hdr(1))
+wggs16/swelz/mode2.pro:  w10=where(lz.mf(vblhsp.hdr(3)) / 16 eq 1 and lz.mf(vblhsp.hdr(3)) mod 16 eq 0)
+wggs16/swelz/mode2.pro:  w11=where(lz.mf(vblhsp.hdr(3)) / 16 eq 1 and lz.mf(vblhsp.hdr(3)) mod 16 eq 1)
+wggs16/swelz/mode2.pro:  w20=where(lz.mf(vblhsp.hdr(3)) / 16 eq 2 and lz.mf(vblhsp.hdr(3)) mod 16 eq 0)
+wggs16/swelz/mode2.pro:  w21=where(lz.mf(vblhsp.hdr(3)) / 16 eq 2 and lz.mf(vblhsp.hdr(3)) mod 16 eq 1)
+wggs16/swelz/mode2.pro:  veis(*,*,*,*) = dcomp_tbl(lz.mf((vblhsp.ind)))
+wggs16/swelz/mode2.pro:  strl(*,*,*)   = lz.mf((sblhsp.ind))
+wggs16/swelz/mode2.pro:  strlstep =lz.mf(sblhsp.hdr(0))
+wggs16/swelz/mode2.pro:    wspin(2,0:1,ispin)=lz.recn
+wggs16/swelz/mode2.pro:     if lpr then print,'last block this mjf,recn,lz.recn= ',lz.recn-1,lz.recn, $
+wggs16/swelz/mode2.pro:     if lpr then print,'first block next mjf, recn, lz.recn= ',$
+wggs16/swelz/mode2.pro:       lzrecn_nxt-1,lzrecn_nxt,whspn1_nxt,'  vspncnt ',vspncnt_nxt,$
+wggs16/swelz/mode2.pro:     lz.recn eq lzrecn_nxt-1 then begin
+wggs16/swelz/mode2.pro:       wspin(2,0,ispin)=lz.recn
+wggs16/swelz/mode2.pro:       wspin(2,1,ispin)=lzrecn_nxt
+wggs16/swelz/mode2.pro:  print,'        half-spin   spin number   lzrecn'
+wggs16/swelz/mode2.pro:  lzrecn:intarr(2,n_spins),$
+wggs16/swelz/mode2.pro:  vsmjf.mjfcnt=lz.mf(ihk(1).offs)  ;mjf counter
+wggs16/swelz/mode2.pro:  vsmjf.hvtbl=lz.mf(hkind(ghk(27).offs+indgen(ghk(27).ln)))
+wggs16/swelz/mode2.pro:      vsmjf.lzrecn(*,jspin)=wspin(2,*,jspin)
+wggs16/swelz/mode2.pro:      vsmjf.lzrecn(*,jspin)=wspin(2,*,jspin)
+wggs16/swelz/mode6.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/mode6.pro:tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/swelz/mode6.pro:tmrate_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(2).p,ihk(2).bv(2).n)
+wggs16/swelz/mode6.pro:scimode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/mode6.pro:  time_utc,lz.mf(hkm6(1).offs:hkm6(1).offs+6),$
+wggs16/swelz/mode6.pro:  if tjd eq 0 and lz.yr ne 1995 and lz.dy ne 283 then begin
+wggs16/swelz/mode6.pro:  sp.mfrecn=lz.recn & sp.mfyr=lz.yr & sp.mfdy=lz.dy & sp.mfms=lz.ms  
+wggs16/swelz/mode6.pro:  bxyz_status=lz.mf(bxyzdat6.ind(1)) ;0=no b tracking  1=yes b tracking
+wggs16/swelz/mode6.pro:  bxyz_ind=lz.mf(bxyzdat6.ind(0))  ;bci index at start of strahl sampling
+wggs16/swelz/mode6.pro:  scimode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/mode6.pro:  lzrecn:0l,$
+wggs16/swelz/mode6.pro:  vsmjf.mjfcnt=lz.mf(ihk(1).offs)  ;mjf counter
+wggs16/swelz/mode6.pro:  vsmjf.lzrecn=lz.recn
+wggs16/swelz/mode6.pro:  vsmjf.numstrlstps=lz.mf(hkm6(6).offs)
+wggs16/swelz/mode6.pro:  vsmjf.bxyz_range=get_bits(lz.mf(bxyzdat6.ind(3)),7,3)
+wggs16/swelz/mode6.pro:  vsmjf.bxyz_phase=long(get_bits(lz.mf(bxyzdat6.ind(3)),3,4))*256l + $
+wggs16/swelz/mode6.pro:    long(lz.mf(bxyzdat6.ind(2))) ;bxyz phase in sunpulse clicks, 0 to 4095
+wggs16/swelz/mode6.pro:    long(lz.mf(bxyzdat6.ind(5)))*256l+long(lz.mf(bxyzdat6.ind(4)))-2048l
+wggs16/swelz/mode6.pro:    long(lz.mf(bxyzdat6.ind(7)))*256l+long(lz.mf(bxyzdat6.ind(6)))-2048l
+wggs16/swelz/mode6.pro:    long(lz.mf(bxyzdat6.ind(9)))*256l+long(lz.mf(bxyzdat6.ind(8)))-2048l
+wggs16/swelz/mode6.pro:  ;   The program nosunpuls_readlz.pro was used with strahl measurements of the
+wggs16/swelz/mode6.pro:  spincnt_vsbl(0:n_spins-1)=fix(lz.mf((vsm6(0:n_spins-1).offs(0))))
+wggs16/swelz/mode6.pro:  vsmjf.veis(*,*,*,*) = dcomp_tbl(lz.mf((vdatc6.ind)))
+wggs16/swelz/mode6.pro:  vsmjf.strl(*,*,*)   = lz.mf((sdatc6.ind))
+wggs16/swelz/mode6.pro:  strlstep_tbloffs=get_bits(lz.mf(vsm6.offs(1)),vsm6.bv0(1).p,vsm6.bv0(1).n)
+wggs16/swelz/mode6.pro:  strahl_hvtbl=lz.mf(hkm6(9).loc)
+wggs16/swelz/mode6.pro:  veis_tbl(*,0)=lz.mf(hkm6(7).loc(indgen(16)))    ;primary veis hv table
+wggs16/swelz/mode6.pro:  veis_tbl(*,1)=lz.mf(hkm6(8).loc(indgen(16)))    ;alternate veis hv table
+wggs16/swelz/mode6.pro:  vsmjf.primalt_tbl=get_bits(lz.mf(vsm6.offs(1)),vsm6.bv2(1).p,vsm6.bv2(1).n)
+wggs16/swelz/mode6.pro:    get_bits(lz.mf(vsm6.offs(1)),vsm6.bv1(1).p,vsm6.bv1(1).n)
+wggs16/swelz/mode6.pro:;get relative gains (from date vs rel gain table in lzinput.pro)
+wggs16/swelz/mode7_old.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/mode7_old.pro:if (lz.mf[hkm7[4].offs] eq 7) then scimode_ihk = 7 else begin
+wggs16/swelz/mode7_old.pro:time_utc,lz.mf[hkm7[1].offs:hkm7[1].offs+6],$ ;      Get time tagged spincnt...
+wggs16/swelz/mode7_old.pro:if ((tjd eq 0) and (lz.yr ne 1995) and (lz.dy ne 283)) then begin
+wggs16/swelz/mode7_old.pro:print,'LZ record number (from lz.recn):  ',long(lz.recn) ;   proc_fw: timsellz.
+wggs16/swelz/mode7_old.pro:sp.mfrecn = lz.recn & sp.mfyr = lz.yr & sp.mfdy = lz.dy & sp.mfms = lz.ms  
+wggs16/swelz/mode7_old.pro:   strl[*,*,*,ispect] = lz.mf[sdatc7[ispect].ind] ;   Read ALL strahl counts...
+wggs16/swelz/mode7_old.pro:endfor ; from lz.mf, using the index list in the 'ind' field of sdatc7[ispect].
+wggs16/swelz/mode7_old.pro:         lzrecn:0l,mjfcnt:0l,scimode:0,spinp:0.d, $
+wggs16/swelz/mode7_old.pro:vsmjf.lzrecn = lz.recn ;                             LZ record number this mjf.
+wggs16/swelz/mode7_old.pro:vsmjf.mjfcnt = lz.mf[ihk[1].offs] ;                 MJF counter value this mjf.
+wggs16/swelz/mode7_old.pro:vsmjf.numstrlstps = lz.mf[hkm7[6].offs] ; Number of strl energy steps this mjf.
+wggs16/swelz/mode7_old.pro:spincnt_vsbl[0:n_strspects-1] = fix(lz.mf[sdatc7.spect_spncnt_offs])
+wggs16/swelz/mode7_old.pro:print,lz.mf[sdatc7.spect_spncnt_offs+1],Format='(7Z4.2)'
+wggs16/swelz/mode7_old.pro:print,lz.mf[sdatc7.spect_spncnt_offs+1],Format='(7I4.3)' & print,''
+wggs16/swelz/mode7_old.pro:is_null = (lz.mf[sdatc7.spect_spncnt_offs+1] eq 255) & print,'null spectra: '
+wggs16/swelz/mode7_old.pro:strahl_hvtbl = lz.mf[hkm7[9].loc[0:n_strensteps-1]] ;      Strahl energy-steps.
+wggs16/swelz/mode7.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/mode7.pro:if (lz.mf[hkm7[4].offs] eq 7) then scimode_ihk = 7 else begin
+wggs16/swelz/mode7.pro:time_utc,lz.mf[hkm7[1].offs:hkm7[1].offs+6],$ ;      Get time tagged spincnt...
+wggs16/swelz/mode7.pro:if ((tjd eq 0) and (lz.yr ne 1995) and (lz.dy ne 283)) then begin
+wggs16/swelz/mode7.pro:;print,'LZ record number (from lz.recn):  ',long(lz.recn) ;   proc_fw: timsellz.
+wggs16/swelz/mode7.pro:sp.mfrecn = lz.recn & sp.mfyr = lz.yr & sp.mfdy = lz.dy & sp.mfms = lz.ms  
+wggs16/swelz/mode7.pro:   strl[*,*,*,ispect] = lz.mf[sdatc7[ispect].ind] ;   Read ALL strahl counts...
+wggs16/swelz/mode7.pro:endfor ; from lz.mf, using the index list in the 'ind' field of sdatc7[ispect].
+wggs16/swelz/mode7.pro:         lzrecn:0l,mjfcnt:0l,scimode:0,spinp:0.d, $
+wggs16/swelz/mode7.pro:vsmjf.lzrecn = lz.recn ;                             LZ record number this mjf.
+wggs16/swelz/mode7.pro:vsmjf.mjfcnt = lz.mf[ihk[1].offs] ;                 MJF counter value this mjf.
+wggs16/swelz/mode7.pro:vsmjf.numstrlstps = lz.mf[hkm7[6].offs] ; Number of strl energy steps this mjf.
+wggs16/swelz/mode7.pro:spincnt_vsbl[0:n_strspects-1] = fix(lz.mf[sdatc7.spect_spncnt_offs])
+wggs16/swelz/mode7.pro:;print,lz.mf[sdatc7.spect_spncnt_offs+1],Format='(7Z4.2)'
+wggs16/swelz/mode7.pro:;print,lz.mf[sdatc7.spect_spncnt_offs+1],Format='(7I4.3)' & print,''
+wggs16/swelz/mode7.pro:is_null = (lz.mf[sdatc7.spect_spncnt_offs+1] eq 255) & ;print,'null spectra: '
+wggs16/swelz/mode7.pro:strahl_hvtbl = lz.mf[hkm7[9].loc[0:n_strensteps-1]] ;      Strahl energy-steps.
+wggs16/swelz/mode7_prt_test.pro:;mode7 strahl map : offsets directly into lz array
+wggs16/swelz/nosunpuls_get_spnphx.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/nosunpuls_readlz.pro:;======================= MAIN: nosunpuls_readlz.pro ===========================
+wggs16/swelz/nosunpuls_readlz.pro:;reads a SWE lz file (RJF Jul2000)
+wggs16/swelz/nosunpuls_readlz.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/nosunpuls_readlz.pro:;             spin phase of X-axis are then used in SWE levelzero processing.
+wggs16/swelz/nosunpuls_readlz.pro:  ;---get indices of instrument housekeeping into mjf array, lz.mf   
+wggs16/swelz/nosunpuls_readlz.pro:  ;---get mode1, mode1 tm map of science and genl hk data offsets into lz.mf
+wggs16/swelz/nosunpuls_readlz.pro:  ;arg=getenv('SWE_LZPATH')+'wi_lz_swe_'+indate+'*'+'.dat'
+wggs16/swelz/nosunpuls_readlz.pro:  lzfile=flnm
+wggs16/swelz/nosunpuls_readlz.pro:  openr,lundat,lzfile,/get_lun
+wggs16/swelz/nosunpuls_readlz.pro:  fh=read_lzhdr(lundat) ;fh=file header structure  
+wggs16/swelz/nosunpuls_readlz.pro:    if recn lt fh.nmf then read_rec,date_time else goto,endlzfile
+wggs16/swelz/nosunpuls_readlz.pro:    if lz.telmod ne 1 and lz.telmod ne 5 then begin
+wggs16/swelz/nosunpuls_readlz.pro:      recn,lz.telmod,rmd(lz.telmod)
+wggs16/swelz/nosunpuls_readlz.pro:    tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/swelz/nosunpuls_readlz.pro:    scimode_ihk_0=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/nosunpuls_readlz.pro:    ;print,'lz.telmod,tmmode_ihk,scimode_ihk_0 ',$
+wggs16/swelz/nosunpuls_readlz.pro:    ;lz.telmod,tmmode_ihk,scimode_ihk_0
+wggs16/swelz/nosunpuls_readlz.pro:    mjfcnt(0)=lz.mf(ihk(1).offs)
+wggs16/swelz/nosunpuls_readlz.pro:    time_utc,lz.mf(hkind(ghk(1).offs):hkind(ghk(1).offs)+6),$
+wggs16/swelz/nosunpuls_readlz.pro:   spincnt_vsbl(0:n_spins-1)=fix(lz.mf((vsm6(0:n_spins-1).offs(0))))
+wggs16/swelz/nosunpuls_readlz.pro:endlzfile:
+wggs16/swelz/patch_vel0.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/pitch_fit_alldet_spin.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/pitch_fit_det_spin_m1.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/pitch_fit_det_spin_m2.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/pitch_fit_det_spinsacc_m1.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/pitch_fit_det_spinsacc_m1.pro:print,wst.lzdate,relativegain,instrhk(0).ebias1,instrhk(0).ebias2,$
+wggs16/swelz/pitch_fit_det_spinsacc_m1.pro:ebias1=lz.mf(ihk(18).offs)
+wggs16/swelz/pitch_fit_det_spinsacc_m1.pro:ebias2=lz.mf(ihk(28).offs)
+wggs16/swelz/pitch_fit_det_spinsacc_m1.pro:  flnm=getenv('WGGSBASE')+'swelz/swecal/gains/gainsrev/add_to_tbl.ascii'
+wggs16/swelz/pitch_fit_det_spinsacc_m1.pro:  printf,lun,wst.lzdate,relativegain,instrhk(0).ebias1,instrhk(0).ebias2,$
+wggs16/swelz/pitch_fit_det_spinsacc_m2.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/plotf_survey_seq.pro:common sharewidglz,wlz
+wggs16/swelz/plotf_survey_seq.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/plotf_survey_seq.pro:common sharelevelzero,pltwin_frmt,oplot_sec
+wggs16/swelz/plotf_survey_seq.pro:  'LZ display': WIDGET_CONTROL, wlz.base(3), /show
+wggs16/swelz/plotf_survey_seq.pro:      plt,/lzwin,pos_overide=pos0
+wggs16/swelz/plotf_survey_seq.pro:        wst.lz_is_read=0
+wggs16/swelz/plotf_survey_seq.pro:      widget_control,wlz.field(11),set_value=swest.ispinbl
+wggs16/swelz/plotf_survey_seq.pro:      widget_control,wlz.field(10),set_value=recn
+wggs16/swelz/plotf_survey_seq.pro:      wst.timsel='lz'
+wggs16/swelz/plotf_survey_seq.pro:      print,'wlz.button(15) ',$
+wggs16/swelz/plotf_survey_seq.pro:      swest.ilzplt=swest.ilzplt+1
+wggs16/swelz/plotf_survey_seq.pro:      pltwin=swest.ilzplt-3*fix(swest.ilzplt/3) + 1
+wggs16/swelz/plotveis.pro:;common lzstuff,infile,lundat,recn,fh,lz,ihk,hkm1,vsm1,vdatc,sdatc,sp,vsmjf
+wggs16/swelz/plotveis.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/plt_cnts_tim.pro:;common lzstuff,infile,lundat,recn,fh,lz,ihk,hkm1,vsm1,vdatc,sdatc,sp,vsmjf
+wggs16/swelz/plt_cnts_tim.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/plt_cnts_tim.pro:;common lzstuff,$
+wggs16/swelz/plt_cnts_tim.pro:;infile,lundat,recn,fh,lz,scindx,ihk,hkm1,fcblm1,vsm1,vdatc,sdatc,sp,vsmjf
+wggs16/swelz/proc_fw_orig.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/proc_fw_orig.pro:;---check to see if an lz record has been read
+wggs16/swelz/proc_fw_orig.pro:if wst.lz_is_read then goto,lzisread
+wggs16/swelz/proc_fw_orig.pro:;---process selected lz record
+wggs16/swelz/proc_fw_orig.pro:;---test lz record for:
+wggs16/swelz/proc_fw_orig.pro:;   for lzdata quality flag
+wggs16/swelz/proc_fw_orig.pro:lztest_code_ret,tmmode_ihk=tmmode_ihk,ntest2,retcode,repcode
+wggs16/swelz/proc_fw_orig.pro:widget_control,WDGT.swelz_mode,set_value=string(vsmjf.scimode,format='(i1)')
+wggs16/swelz/proc_fw_orig.pro:wst.lz_is_read=1
+wggs16/swelz/proc_fw_orig.pro:lzisread:    ;an lz record has been read
+wggs16/swelz/proc_fw_orig.pro:widget_control,WDGT.swelz_recfld,set_value=recn
+wggs16/swelz/proc_fw_orig.pro:spinbl=swest.ispinbl & widget_control,WDGT.swelz_spinfld,set_value=spinbl
+wggs16/swelz/proc_fw_orig.pro:widget_control,WDGT.swelz_hmsfld,set_value=wst.lhms
+wggs16/swelz/proc_fw_orig.pro:get_3slzmag,wst.pb5,magfld
+wggs16/swelz/proc_fw_orig.pro:;---glint points (lt 0) and  0's are set to 1/2 count level only for lzpatch
+wggs16/swelz/proc_fw_orig.pro:lzpatch,fblok_gt0,icnts_mb,vunit,velocity,vpot,ndets,nvsteps,nsectors,$
+wggs16/swelz/proc_fw_orig.pro:  do_lzplot,pltype=pltype,F_integ=F_integ,wid=wid
+wggs16/swelz/proc_fw.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/proc_fw.pro:;---check to see if an lz record has been read
+wggs16/swelz/proc_fw.pro:if wst.lz_is_read then goto,lzisread
+wggs16/swelz/proc_fw.pro:;---process selected lz record
+wggs16/swelz/proc_fw.pro:;---test lz record for:
+wggs16/swelz/proc_fw.pro:;   for lzdata quality flag
+wggs16/swelz/proc_fw.pro:lztest_code_ret,tmmode_ihk=tmmode_ihk,ntest2,retcode,repcode
+wggs16/swelz/proc_fw.pro:widget_control,WDGT.swelz_mode,set_value=string(vsmjf.scimode,format='(i1)')
+wggs16/swelz/proc_fw.pro:wst.lz_is_read=1
+wggs16/swelz/proc_fw.pro:lzisread:    ;an lz record has been read
+wggs16/swelz/proc_fw.pro:widget_control,WDGT.swelz_recfld,set_value=recn
+wggs16/swelz/proc_fw.pro:spinbl=swest.ispinbl & widget_control,WDGT.swelz_spinfld,set_value=spinbl
+wggs16/swelz/proc_fw.pro:widget_control,WDGT.swelz_hmsfld,set_value=wst.lhms
+wggs16/swelz/proc_fw.pro:get_3slzmag,wst.pb5,magfld
+wggs16/swelz/proc_fw.pro:  do_lzplot,pltype=pltype,F_integ=F_integ,wid=wid,lsscn=lsscn,vparc=vparc
+wggs16/swelz/proc_rec_jun2002.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/proc_rec_jun2002.pro:;recn is the current record number in common lzstuff
+wggs16/swelz/proc_rec_jun2002.pro:  if lz.telmod ne 1 and lz.telmod ne 5 then begin
+wggs16/swelz/proc_rec_jun2002.pro:    recn,lz.telmod,md(lz.telmod)
+wggs16/swelz/proc_rec_jun2002.pro:  tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/swelz/proc_rec_jun2002.pro:  scimode_ihk_0=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/proc_rec_jun2002.pro:    hvtbl64(*,0)=lz.mf(hkind(ghk(27).offs+indgen(ghk(27).ln)))  
+wggs16/swelz/proc_rec_jun2002.pro:    hvtbl16_strl(*,0)=lz.mf(hkind(ghk(28).offs+indgen(ghk(28).ln)))
+wggs16/swelz/proc_rec_jun2002.pro:    hvtbl16(*,0)=lz.mf(hkm1(4).loc(indgen(16)))        
+wggs16/swelz/proc_rec_jun2002.pro:  mjfcnt(0)=lz.mf(ihk(1).offs)
+wggs16/swelz/proc_rec_jun2002.pro:  time_utc,lz.mf(hkind(ghk(1).offs):hkind(ghk(1).offs)+6),$
+wggs16/swelz/proc_rec_jun2002.pro:  sp.mfrecn=lz.recn & sp.mfyr=lz.yr & sp.mfdy=lz.dy & sp.mfms=lz.ms
+wggs16/swelz/proc_rec_jun2002.pro:  if lz.telmod ne 1 and lz.telmod ne 5 then begin
+wggs16/swelz/proc_rec_jun2002.pro:    recn,lz.telmod,md(lz.telmod)
+wggs16/swelz/proc_rec_jun2002.pro:  tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/swelz/proc_rec_jun2002.pro:  time_utc,lz.mf(hkind(ghk(1).offs):hkind(ghk(1).offs)+6),$
+wggs16/swelz/proc_rec_jun2002.pro:  sp.mfrecn=lz.recn & sp.mfyr=lz.yr & sp.mfdy=lz.dy & sp.mfms=lz.ms
+wggs16/swelz/proc_rec_jun2002.pro:  sp.mjfcnt=lz.mf(ihk(1).offs)
+wggs16/swelz/proc_rec_jun2002.pro:  scimode_ihk_1=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/proc_rec_jun2002.pro:    hvtbl64(*,1)=lz.mf(hkind(ghk(27).offs+indgen(ghk(27).ln))) 
+wggs16/swelz/proc_rec_jun2002.pro:    hvtbl16_strl(*,1)=lz.mf(hkind(ghk(28).offs+indgen(ghk(28).ln)))
+wggs16/swelz/proc_rec_jun2002.pro:    hvtbl16(*,1)=lz.mf(hkm1(4).loc(indgen(16)))
+wggs16/swelz/proc_rec_jun2002.pro:  mjfcnt(1)=lz.mf(ihk(1).offs)
+wggs16/swelz/proc_rec_jun2002.pro:  if lz.telmod ne 1 and lz.telmod ne 5 then begin
+wggs16/swelz/proc_rec_jun2002.pro:    recn,lz.telmod,md(lz.telmod)
+wggs16/swelz/proc_rec_jun2002.pro:    tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/swelz/proc_rec_jun2002.pro:    scimode_ihk_2=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/proc_rec_jun2002.pro:    mjfcnt(2)=lz.mf(ihk(1).offs)
+wggs16/swelz/proc_rec_jun2002.pro:        hvtbl64(*,2)=lz.mf(hkind(ghk(27).offs+indgen(ghk(27).ln)))
+wggs16/swelz/proc_rec_jun2002.pro:         if lz.telmod ne 1 and lz.telmod ne 5 then begin
+wggs16/swelz/proc_rec_jun2002.pro:                 recn,lz.telmod,md(lz.telmod)
+wggs16/swelz/proc_rec_jun2002.pro:          tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/swelz/proc_rec_jun2002.pro:            get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/proc_rec_jun2002.pro:              hvtbl64(*,3)=lz.mf(hkind(ghk(27).offs+indgen(ghk(27).ln)))
+wggs16/swelz/proc_rec_jun2002.pro:              mjfcnt(3)=lz.mf(ihk(1).offs)
+wggs16/swelz/proc_rec_jun2002.pro:  tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/swelz/proc_rec_jun2002.pro:  scimode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/proc_rec_jun2002.pro:  time_utc,lz.mf(hkind(ghk(1).offs):hkind(ghk(1).offs)+6),$
+wggs16/swelz/proc_rec_jun2002.pro:  sp.mfrecn=lz.recn & sp.mfyr=lz.yr & sp.mfdy=lz.dy & sp.mfms=lz.ms
+wggs16/swelz/proc_rec_jun2002.pro:  elec_ion_m1=get_bits(lz.mf(ihk(6).offs),ihk(6).bv(0).p,ihk(6).bv(0).n)
+wggs16/swelz/proc_rec_old.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/proc_rec_old.pro:;recn is the current record number in common lzstuff
+wggs16/swelz/proc_rec_old.pro:  if lz.telmod ne 1 and lz.telmod ne 5 then begin
+wggs16/swelz/proc_rec_old.pro:    recn,lz.telmod,md(lz.telmod)
+wggs16/swelz/proc_rec_old.pro:  tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/swelz/proc_rec_old.pro:  if lz.mf(hkm7(4).offs) eq 7 then scimode_ihk_0=7 else $
+wggs16/swelz/proc_rec_old.pro:  scimode_ihk_0=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/proc_rec_old.pro:print,'lz.mf(hkm7(4).offs):                                ',lz.mf(hkm7(4).offs)
+wggs16/swelz/proc_rec_old.pro:print,'get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n): ',$
+wggs16/swelz/proc_rec_old.pro:       get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/proc_rec_old.pro:    hvtbl64(*,0)=lz.mf(hkind(ghk(27).offs+indgen(ghk(27).ln)))  
+wggs16/swelz/proc_rec_old.pro:    hvtbl16_strl(*,0)=lz.mf(hkind(ghk(28).offs+indgen(ghk(28).ln)))
+wggs16/swelz/proc_rec_old.pro:    hvtbl16(*,0)=lz.mf(hkm1(4).loc(indgen(16)))        
+wggs16/swelz/proc_rec_old.pro:  mjfcnt(0)=lz.mf(ihk(1).offs)
+wggs16/swelz/proc_rec_old.pro:  time_utc,lz.mf(hkind(ghk(1).offs):hkind(ghk(1).offs)+6),$
+wggs16/swelz/proc_rec_old.pro:  sp.mfrecn=lz.recn & sp.mfyr=lz.yr & sp.mfdy=lz.dy & sp.mfms=lz.ms
+wggs16/swelz/proc_rec_old.pro:  if lz.telmod ne 1 and lz.telmod ne 5 then begin
+wggs16/swelz/proc_rec_old.pro:    recn,lz.telmod,md(lz.telmod)
+wggs16/swelz/proc_rec_old.pro:  tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/swelz/proc_rec_old.pro:  time_utc,lz.mf(hkind(ghk(1).offs):hkind(ghk(1).offs)+6),$
+wggs16/swelz/proc_rec_old.pro:  sp.mfrecn=lz.recn & sp.mfyr=lz.yr & sp.mfdy=lz.dy & sp.mfms=lz.ms
+wggs16/swelz/proc_rec_old.pro:  sp.mjfcnt=lz.mf(ihk(1).offs)
+wggs16/swelz/proc_rec_old.pro:if lz.mf(hkm7(4).offs) eq 7 then scimode_ihk_1=7 else $ 
+wggs16/swelz/proc_rec_old.pro:  scimode_ihk_1=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/proc_rec_old.pro:    hvtbl64(*,1)=lz.mf(hkind(ghk(27).offs+indgen(ghk(27).ln))) 
+wggs16/swelz/proc_rec_old.pro:    hvtbl16_strl(*,1)=lz.mf(hkind(ghk(28).offs+indgen(ghk(28).ln)))
+wggs16/swelz/proc_rec_old.pro:    hvtbl16(*,1)=lz.mf(hkm1(4).loc(indgen(16)))
+wggs16/swelz/proc_rec_old.pro:  mjfcnt(1)=lz.mf(ihk(1).offs)
+wggs16/swelz/proc_rec_old.pro:  if lz.telmod ne 1 and lz.telmod ne 5 then begin
+wggs16/swelz/proc_rec_old.pro:    recn,lz.telmod,md(lz.telmod)
+wggs16/swelz/proc_rec_old.pro:    tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/swelz/proc_rec_old.pro:    scimode_ihk_2=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/proc_rec_old.pro:    mjfcnt(2)=lz.mf(ihk(1).offs)
+wggs16/swelz/proc_rec_old.pro:        hvtbl64(*,2)=lz.mf(hkind(ghk(27).offs+indgen(ghk(27).ln)))
+wggs16/swelz/proc_rec_old.pro:         if lz.telmod ne 1 and lz.telmod ne 5 then begin
+wggs16/swelz/proc_rec_old.pro:                 recn,lz.telmod,md(lz.telmod)
+wggs16/swelz/proc_rec_old.pro:          tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/swelz/proc_rec_old.pro:            get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/proc_rec_old.pro:              hvtbl64(*,3)=lz.mf(hkind(ghk(27).offs+indgen(ghk(27).ln)))
+wggs16/swelz/proc_rec_old.pro:              mjfcnt(3)=lz.mf(ihk(1).offs)
+wggs16/swelz/proc_rec_old.pro:  tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/swelz/proc_rec_old.pro:  if lz.mf(hkm7(4).offs) eq 7 then scimode_ihk=7 else $
+wggs16/swelz/proc_rec_old.pro:  scimode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/proc_rec_old.pro:  time_utc,lz.mf(hkind(ghk(1).offs):hkind(ghk(1).offs)+6),$
+wggs16/swelz/proc_rec_old.pro:  sp.mfrecn=lz.recn & sp.mfyr=lz.yr & sp.mfdy=lz.dy & sp.mfms=lz.ms
+wggs16/swelz/proc_rec_old.pro:  elec_ion_m1=get_bits(lz.mf(ihk(6).offs),ihk(6).bv(0).p,ihk(6).bv(0).n)
+wggs16/swelz/proc_rec_orig.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/proc_rec_orig.pro:;recn is the current record number in common lzstuff
+wggs16/swelz/proc_rec_orig.pro:  if lz.telmod ne 1 and lz.telmod ne 5 then begin
+wggs16/swelz/proc_rec_orig.pro:    recn,lz.telmod,md(lz.telmod)
+wggs16/swelz/proc_rec_orig.pro:  tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/swelz/proc_rec_orig.pro:  scimode_ihk_0=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/proc_rec_orig.pro:    hvtbl64(*,0)=lz.mf(hkind(ghk(27).offs+indgen(ghk(27).ln)))  
+wggs16/swelz/proc_rec_orig.pro:    hvtbl16_strl(*,0)=lz.mf(hkind(ghk(28).offs+indgen(ghk(28).ln)))
+wggs16/swelz/proc_rec_orig.pro:    hvtbl16(*,0)=lz.mf(hkm1(4).loc(indgen(16)))        
+wggs16/swelz/proc_rec_orig.pro:  mjfcnt(0)=lz.mf(ihk(1).offs)
+wggs16/swelz/proc_rec_orig.pro:  time_utc,lz.mf(hkind(ghk(1).offs):hkind(ghk(1).offs)+6),$
+wggs16/swelz/proc_rec_orig.pro:  sp.mfrecn=lz.recn & sp.mfyr=lz.yr & sp.mfdy=lz.dy & sp.mfms=lz.ms
+wggs16/swelz/proc_rec_orig.pro:  if lz.telmod ne 1 and lz.telmod ne 5 then begin
+wggs16/swelz/proc_rec_orig.pro:    recn,lz.telmod,md(lz.telmod)
+wggs16/swelz/proc_rec_orig.pro:  tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/swelz/proc_rec_orig.pro:  time_utc,lz.mf(hkind(ghk(1).offs):hkind(ghk(1).offs)+6),$
+wggs16/swelz/proc_rec_orig.pro:  sp.mfrecn=lz.recn & sp.mfyr=lz.yr & sp.mfdy=lz.dy & sp.mfms=lz.ms
+wggs16/swelz/proc_rec_orig.pro:  sp.mjfcnt=lz.mf(ihk(1).offs)
+wggs16/swelz/proc_rec_orig.pro:  scimode_ihk_1=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/proc_rec_orig.pro:    hvtbl64(*,1)=lz.mf(hkind(ghk(27).offs+indgen(ghk(27).ln))) 
+wggs16/swelz/proc_rec_orig.pro:    hvtbl16_strl(*,1)=lz.mf(hkind(ghk(28).offs+indgen(ghk(28).ln)))
+wggs16/swelz/proc_rec_orig.pro:    hvtbl16(*,1)=lz.mf(hkm1(4).loc(indgen(16)))
+wggs16/swelz/proc_rec_orig.pro:  mjfcnt(1)=lz.mf(ihk(1).offs)
+wggs16/swelz/proc_rec_orig.pro:  if lz.telmod ne 1 and lz.telmod ne 5 then begin
+wggs16/swelz/proc_rec_orig.pro:    recn,lz.telmod,md(lz.telmod)
+wggs16/swelz/proc_rec_orig.pro:    tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/swelz/proc_rec_orig.pro:    scimode_ihk_2=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/proc_rec_orig.pro:    mjfcnt(2)=lz.mf(ihk(1).offs)
+wggs16/swelz/proc_rec_orig.pro:        hvtbl64(*,2)=lz.mf(hkind(ghk(27).offs+indgen(ghk(27).ln)))
+wggs16/swelz/proc_rec_orig.pro:         if lz.telmod ne 1 and lz.telmod ne 5 then begin
+wggs16/swelz/proc_rec_orig.pro:                 recn,lz.telmod,md(lz.telmod)
+wggs16/swelz/proc_rec_orig.pro:          tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/swelz/proc_rec_orig.pro:            get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/proc_rec_orig.pro:              hvtbl64(*,3)=lz.mf(hkind(ghk(27).offs+indgen(ghk(27).ln)))
+wggs16/swelz/proc_rec_orig.pro:              mjfcnt(3)=lz.mf(ihk(1).offs)
+wggs16/swelz/proc_rec_orig.pro:  tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/swelz/proc_rec_orig.pro:  scimode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/proc_rec_orig.pro:  time_utc,lz.mf(hkind(ghk(1).offs):hkind(ghk(1).offs)+6),$
+wggs16/swelz/proc_rec_orig.pro:  sp.mfrecn=lz.recn & sp.mfyr=lz.yr & sp.mfdy=lz.dy & sp.mfms=lz.ms
+wggs16/swelz/proc_rec_orig.pro:  elec_ion_m1=get_bits(lz.mf(ihk(6).offs),ihk(6).bv(0).p,ihk(6).bv(0).n)
+wggs16/swelz/proc_rec.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/proc_rec.pro:;recn is the current record number in common lzstuff
+wggs16/swelz/proc_rec.pro:  if lz.telmod ne 1 and lz.telmod ne 5 then begin
+wggs16/swelz/proc_rec.pro:    recn,lz.telmod,md(lz.telmod)
+wggs16/swelz/proc_rec.pro:  tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/swelz/proc_rec.pro:  if lz.mf(hkm7(4).offs) eq 7 then scimode_ihk_0=7 else $
+wggs16/swelz/proc_rec.pro:  scimode_ihk_0=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/proc_rec.pro:;print,'lz.mf(hkm7(4).offs):                                ',lz.mf(hkm7(4).offs)
+wggs16/swelz/proc_rec.pro:;print,'get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n): ',$
+wggs16/swelz/proc_rec.pro:;       get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/proc_rec.pro:    hvtbl64(*,0)=lz.mf(hkind(ghk(27).offs+indgen(ghk(27).ln)))  
+wggs16/swelz/proc_rec.pro:    hvtbl16_strl(*,0)=lz.mf(hkind(ghk(28).offs+indgen(ghk(28).ln)))
+wggs16/swelz/proc_rec.pro:    hvtbl16(*,0)=lz.mf(hkm1(4).loc(indgen(16)))        
+wggs16/swelz/proc_rec.pro:  mjfcnt(0)=lz.mf(ihk(1).offs)
+wggs16/swelz/proc_rec.pro:  time_utc,lz.mf(hkind(ghk(1).offs):hkind(ghk(1).offs)+6),$
+wggs16/swelz/proc_rec.pro:  sp.mfrecn=lz.recn & sp.mfyr=lz.yr & sp.mfdy=lz.dy & sp.mfms=lz.ms
+wggs16/swelz/proc_rec.pro:  if lz.telmod ne 1 and lz.telmod ne 5 then begin
+wggs16/swelz/proc_rec.pro:    recn,lz.telmod,md(lz.telmod)
+wggs16/swelz/proc_rec.pro:  tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/swelz/proc_rec.pro:  time_utc,lz.mf(hkind(ghk(1).offs):hkind(ghk(1).offs)+6),$
+wggs16/swelz/proc_rec.pro:  sp.mfrecn=lz.recn & sp.mfyr=lz.yr & sp.mfdy=lz.dy & sp.mfms=lz.ms
+wggs16/swelz/proc_rec.pro:  sp.mjfcnt=lz.mf(ihk(1).offs)
+wggs16/swelz/proc_rec.pro:if lz.mf(hkm7(4).offs) eq 7 then scimode_ihk_1=7 else $ 
+wggs16/swelz/proc_rec.pro:  scimode_ihk_1=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/proc_rec.pro:    hvtbl64(*,1)=lz.mf(hkind(ghk(27).offs+indgen(ghk(27).ln))) 
+wggs16/swelz/proc_rec.pro:    hvtbl16_strl(*,1)=lz.mf(hkind(ghk(28).offs+indgen(ghk(28).ln)))
+wggs16/swelz/proc_rec.pro:    hvtbl16(*,1)=lz.mf(hkm1(4).loc(indgen(16)))
+wggs16/swelz/proc_rec.pro:  mjfcnt(1)=lz.mf(ihk(1).offs)
+wggs16/swelz/proc_rec.pro:  if lz.telmod ne 1 and lz.telmod ne 5 then begin
+wggs16/swelz/proc_rec.pro:    recn,lz.telmod,md(lz.telmod)
+wggs16/swelz/proc_rec.pro:    tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/swelz/proc_rec.pro:    scimode_ihk_2=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/proc_rec.pro:    mjfcnt(2)=lz.mf(ihk(1).offs)
+wggs16/swelz/proc_rec.pro:        hvtbl64(*,2)=lz.mf(hkind(ghk(27).offs+indgen(ghk(27).ln)))
+wggs16/swelz/proc_rec.pro:         if lz.telmod ne 1 and lz.telmod ne 5 then begin
+wggs16/swelz/proc_rec.pro:                 recn,lz.telmod,md(lz.telmod)
+wggs16/swelz/proc_rec.pro:          tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/swelz/proc_rec.pro:            get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/proc_rec.pro:              hvtbl64(*,3)=lz.mf(hkind(ghk(27).offs+indgen(ghk(27).ln)))
+wggs16/swelz/proc_rec.pro:              mjfcnt(3)=lz.mf(ihk(1).offs)
+wggs16/swelz/proc_rec.pro:  tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/swelz/proc_rec.pro:  if lz.mf(hkm7(4).offs) eq 7 then scimode_ihk=7 else $
+wggs16/swelz/proc_rec.pro:  scimode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/swelz/proc_rec.pro:  time_utc,lz.mf(hkind(ghk(1).offs):hkind(ghk(1).offs)+6),$
+wggs16/swelz/proc_rec.pro:  sp.mfrecn=lz.recn & sp.mfyr=lz.yr & sp.mfdy=lz.dy & sp.mfms=lz.ms
+wggs16/swelz/proc_rec.pro:  elec_ion_m1=get_bits(lz.mf(ihk(6).offs),ihk(6).bv(0).p,ihk(6).bv(0).n)
+wggs16/swelz/read_lzhdr.pro:FUNCTION read_lzhdr,ifnum
+wggs16/swelz/read_lzrcd.pro:FUNCTION read_lzrcd,ifnum,recn,recl,satid
+wggs16/swelz/read_lzrcd.pro:lz = {lzrcdr, intsn:0l, recn:0l, mfc:0l, spcclk:bytarr(8), yr:0l, dy:0l, $
+wggs16/swelz/read_lzrcd.pro:readu,ifnum,lz
+wggs16/swelz/read_lzrcd.pro:lz = conv_vax_unix(lz)
+wggs16/swelz/read_lzrcd.pro:return,lz
+wggs16/swelz/read_rec.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/read_rec.pro:;read selected lz mjf record num recn (Jim Byrnes' procedure)
+wggs16/swelz/read_rec.pro:  lz=read_lzrcd(lundat,recn,fh.rln,fh.spcid) ;lz=data structure incl header
+wggs16/swelz/read_rec.pro:  ms_hms,lz.ms,h,m,s  ;get hhmmss.ms from msec of day
+wggs16/swelz/read_rec.pro:  date_time=string(lz.yr,format='(i4)') + ' ' + string(lz.dy,format='(i3)') +$
+wggs16/swelz/readstrahlmap.pro:;reads strahlmap.prt to get array of strahl offsets into lz record
+wggs16/swelz/save_f_old.pro:common sharelevelzero,pltwin_frmt,oplot_sec
+wggs16/swelz/save_f_old.pro:;common sharewidglz,wlz
+wggs16/swelz/save_f_old.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/save_f_old.pro:                       wst.lz_is_read=0
+wggs16/swelz/save_f_old.pro:                    ;widget_control,WDGT.swelz_spinfld,set_value=swest.ispinbl
+wggs16/swelz/save_f_old.pro:                    ;widget_control,WDGT.swelz_recfld,set_value=recn
+wggs16/swelz/save_f_old.pro:                    wst.timsel='lz'
+wggs16/swelz/save_f_old.pro:                    pltwin=swest.ilzplt-3*fix(swest.ilzplt/3) + 1
+wggs16/swelz/save_f_old.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/save_f_old.pro:     if wst.timsel eq 'lz' or wst.timsel eq 'lztm' then  $
+wggs16/swelz/save_f_old.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/save_f_old.pro:;common sharewidglz,wlz
+wggs16/swelz/save_f_old.pro:    'Parent' : widget_control,WDGT.swelz_base_main,iconify=0
+wggs16/swelz/save_f_old.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/save_f.pro:common sharelevelzero,pltwin_frmt,oplot_sec
+wggs16/swelz/save_f.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/save_f.pro:                       wst.lz_is_read=0
+wggs16/swelz/save_f.pro:                    ;widget_control,WDGT.swelz_spinfld,set_value=swest.ispinbl
+wggs16/swelz/save_f.pro:                    ;widget_control,WDGT.swelz_recfld,set_value=recn
+wggs16/swelz/save_f.pro:                    wst.timsel='lz'
+wggs16/swelz/save_f.pro:                    pltwin=swest.ilzplt-3*fix(swest.ilzplt/3) + 1
+wggs16/swelz/save_f.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/save_f.pro:     if wst.timsel eq 'lz' or wst.timsel eq 'lztm' then  $
+wggs16/swelz/save_f.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/save_f.pro:    'Parent' : widget_control,WDGT.swelz_base_main,iconify=0
+wggs16/swelz/save_f.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/stepsectmap.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/strahl_veis.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/strlf_veisf.pro:common sharewidglz,wlz
+wggs16/swelz/strlf_veisf.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/strlf_veisf.pro:common sharelevelzero,pltwin_frmt,oplot_sec
+wggs16/swelz/strlf_veisf.pro:wst.lz_is_read=0
+wggs16/swelz/strlf_veisf.pro:if wst.lz_is_read then goto,lzisread
+wggs16/swelz/strlf_veisf.pro:wst.lz_is_read=0
+wggs16/swelz/strlf_veisf.pro:;process selected lz record
+wggs16/swelz/strlf_veisf.pro:   widget_control, wlz.field(14), set_value = swest.subtrbkg
+wggs16/swelz/strlf_veisf.pro:wst.lz_is_read=1
+wggs16/swelz/strlf_veisf.pro:lzisread:    ;an lz record has been read
+wggs16/swelz/strlf_veisf.pro:widget_control,wlz.field(10),set_value=recn
+wggs16/swelz/strlf_veisf.pro:spinbl=swest.ispinbl & widget_control,wlz.field(11),set_value=spinbl
+wggs16/swelz/strlf_veisf.pro:nvmax=swest.nvmax & widget_control,wlz.field(12),set_value=nvmax
+wggs16/swelz/strlf_veisf.pro:widget_control, wlz.field(17), set_value = vsmjf.scimode
+wggs16/swelz/strlf_veisf.pro:widget_control, wlz.field(18), set_value = swpmd(vsmjf.eleion_sweep)
+wggs16/swelz/strlf_veisf.pro:widget_control, wlz.field(19),set_value=swest.pbinselect
+wggs16/swelz/strlf_veisf.pro:  print,'time selected from lz file: '
+wggs16/swelz/strlf_veisf.pro:  print,'lz.recn, swest.ispinbl, vsmjf.suntim_vsbl(swest.ispinbl) (seconds) ',$
+wggs16/swelz/strlf_veisf.pro:      lz.recn,swest.ispinbl,vsmjf.suntim_vsbl(swest.ispinbl)
+wggs16/swelz/strlf_veisf.pro:    ;test whether day of the given time is the same as "lzdate" 
+wggs16/swelz/strlf_veisf.pro:    ;if given time is the same as lzdate, then the correct magfile has already
+wggs16/swelz/strlf_veisf.pro:    ;if given time is NOT the same as lzdate, then the appropriate
+wggs16/swelz/strlf_veisf.pro:    ;magfile that agrees with lzdate..
+wggs16/swelz/strlf_veisf.pro:    ;but will use the first mag vector on the day corresponding to lzdate..
+wggs16/swelz/strlf_veisf.pro:    if ymd(timpb5) eq wst.lzdate then begin 
+wggs16/swelz/strlf_veisf.pro:      wmag=where(wst.magdate eq wst.lzdate)
+wggs16/swelz/strlf_veisf.pro:        print,'ymd(given time), lzdate, magdate ',$
+wggs16/swelz/strlf_veisf.pro:          ymd(timpb5), wst.lzdate, wst.magdate(wmag)
+wggs16/swelz/strlf_veisf.pro:         'first 3sec interval on lzdate will be used: mindx,sindx',mindx,sindx
+wggs16/swelz/strlf_veisf.pro:       string(lz.yr,format='(i4)')+'_'+string(lz.dy,format='(i3)')+'_'+$
+wggs16/swelz/strlf_veisf.pro:       string(lz.ms/1000,format='(f9.3)')
+wggs16/swelz/strlf_veisf.pro:    widget_control,wlz.field(13),set_value=lhms
+wggs16/swelz/strlf_veisf.pro:     if wst.timsel eq 'lz' or wst.timsel eq 'lztm' then  $
+wggs16/swelz/strlf_veisf.pro:  widget_control, wlz.field(15), set_value = swest.delete * swest.ndel
+wggs16/swelz/strlf_veisf.pro:   wset,wlz.win(wid) 
+wggs16/swelz/strlf_veisf.pro:   fplot,wlz.win_xsize(wid),wlz.win_ysize(wid),pltype=pltype,$
+wggs16/swelz/strlf_veisf.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/strl_newmode.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/strl_newmode.pro:common sharelevelzero,pltwin_frmt,oplot_sec
+wggs16/swelz/strl_newmode.pro:;---check to see if an lz record has been read
+wggs16/swelz/strl_newmode.pro:if wst.lz_is_read then goto,lzisread
+wggs16/swelz/strl_newmode.pro:;---process selected lz record
+wggs16/swelz/strl_newmode.pro:;---test lz record for:
+wggs16/swelz/strl_newmode.pro:;   for lzdata quality flag
+wggs16/swelz/strl_newmode.pro:   lztest_code_ret,tmmode_ihk=tmmode_ihk,ntest2,retcode,repcode
+wggs16/swelz/strl_newmode.pro:widget_control,WDGT.swelz_mode,set_value=string(vsmjf.scimode,format='(i1)')
+wggs16/swelz/strl_newmode.pro:wst.lz_is_read=1
+wggs16/swelz/strl_newmode.pro:lzisread:    ; an lz record has been read
+wggs16/swelz/strl_newmode.pro:widget_control,WDGT.swelz_recfld,set_value=recn
+wggs16/swelz/strl_newmode.pro:spinbl=swest.ispinbl & widget_control,WDGT.swelz_spinfld,set_value=spinbl
+wggs16/swelz/strl_newmode.pro:times_labels & widget_control,WDGT.swelz_hmsfld,Set_Value=wst.lhms
+wggs16/swelz/strl_newmode.pro:get_3slzmag,wst.pb5,magfld ;       Get magnetic field (possibly not available).
+wggs16/swelz/strl_newmode.pro:                          Dialog_Parent=WDGT.swelz_hcpy) ; error dialog-widget.
+wggs16/swelz/strl_phi.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/strl_phth_newmode.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl ;     routines.
+wggs16/swelz/strl_phth.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/strl_pit.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/strl_steps.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/test_all_elecs.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/times_labels.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/times_labels.pro:print,'time selected from lz file: '
+wggs16/swelz/times_labels.pro:print,'lz.recn, swest.ispinbl, vsmjf.suntim_vsbl(swest.ispinbl) (seconds) ',$
+wggs16/swelz/times_labels.pro:      lz.recn,swest.ispinbl,vsmjf.suntim_vsbl(swest.ispinbl)
+wggs16/swelz/veis_phi_16.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/veis_phi.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/veis_pit.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/veis_sang_16.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/veis_sectors.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/veis_steps_patchfit.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/veis_steps_patchfit.pro:ebias1=lz.mf(ihk(18).offs)
+wggs16/swelz/veis_steps_patchfit.pro:ebias2=lz.mf(ihk(28).offs)
+wggs16/swelz/veis_steps_patch.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/veis_steps_patch.pro:ebias1=lz.mf(ihk(18).offs)
+wggs16/swelz/veis_steps_patch.pro:ebias2=lz.mf(ihk(28).offs)
+wggs16/swelz/veis_steps_patch.pro:     if wst.timsel eq 'lz' or wst.timsel eq 'lztm' then  $
+wggs16/swelz/veis_steps.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/veis_steps.pro:ebias1=lz.mf(ihk(18).offs)
+wggs16/swelz/veis_steps.pro:ebias2=lz.mf(ihk(28).offs)
+wggs16/swelz/volt_en_strl.pro:;IDL> steps=lz.mf(hkm1(25).offs+indgen(32)) ;strahl steps from housekeeping data
+wggs16/swelz/vsangles.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/swelz/xfrm_unitvectors_sc_gse.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/utilities/cd_swelz.pro:pro cd_swelz
+wggs16/utilities/lzscan_for_mode.pro:;scans lz file for mode
+wggs16/utilities/lzscan_for_mode.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/utilities/lzscan_for_mode.pro:;scans swe lz files for mode, specie, energy range etc
+wggs16/utilities/lzscan_for_mode.pro:;when search = 0, lz file selection is through a pickfile
+wggs16/utilities/lzscan_for_mode.pro:if printfile then openw,lun,getenv('IDLSAV')+'lzmodescan.dat',/get_lun,/append
+wggs16/utilities/lzscan_for_mode.pro:;get indices of instrument housekeeping into mjf array, lz.mf   
+wggs16/utilities/lzscan_for_mode.pro:;get mode1, mode2 tm map of science and genl hk data offsets into lz.mf
+wggs16/utilities/lzscan_for_mode.pro:  lzfltr='*.dat'
+wggs16/utilities/lzscan_for_mode.pro:  fdir='/cdrom/cdrom0/data/wi/swe/lz/'
+wggs16/utilities/lzscan_for_mode.pro:  spawn,'ls '+fdir+lzfltr,result
+wggs16/utilities/lzscan_for_mode.pro:  result=pickfile(/read,get_path=fdir,path=fdir(0),filter=lzfltr,$
+wggs16/utilities/lzscan_for_mode.pro:  lzfile=result(ifl) 
+wggs16/utilities/lzscan_for_mode.pro:  lzdate=''
+wggs16/utilities/lzscan_for_mode.pro:  case strlen(lzfile)-strlen(fdir) of
+wggs16/utilities/lzscan_for_mode.pro:       12: lzdate='19'+strmid(lzfile,strlen(lzfile)-12,6)
+wggs16/utilities/lzscan_for_mode.pro:       13: lzdate='19'+strmid(lzfile,strlen(lzfile)-13,6)
+wggs16/utilities/lzscan_for_mode.pro:       26: lzdate=strmid(lzfile,strlen(lzfile)-16,8)
+wggs16/utilities/lzscan_for_mode.pro:       else:   ;'lzdate undetermined'
+wggs16/utilities/lzscan_for_mode.pro:  print,lzfile,'  ',lzdate
+wggs16/utilities/lzscan_for_mode.pro:  if strmid(lzdate,0,3) ne '199' then goto,endfileloop
+wggs16/utilities/lzscan_for_mode.pro:  ;open lz file
+wggs16/utilities/lzscan_for_mode.pro:    openr,lundat,lzfile,/get_lun
+wggs16/utilities/lzscan_for_mode.pro:      fh=read_lzhdr(lundat) ;fh=file header structure 
+wggs16/utilities/lzscan_for_mode.pro:  print,lzfile
+wggs16/utilities/lzscan_for_mode.pro:    lz=read_lzrcd(lundat,recn,fh.rln,fh.spcid) ;lz=data structure incl header
+wggs16/utilities/lzscan_for_mode.pro:    ms_hms,lz.ms,h,m,s  ;get hhmmss.ms from msec of day
+wggs16/utilities/lzscan_for_mode.pro:    date_time=string(lz.yr,format='(i4)') + ' ' + string(lz.dy,format='(i3)') +$
+wggs16/utilities/lzscan_for_mode.pro:      tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/utilities/lzscan_for_mode.pro:      scimode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/utilities/lzscan_for_mode.pro:        vsteps=lz.mf(hkind(ghk(27).offs+indgen(ghk(27).ln))) $
+wggs16/utilities/lzscan_for_mode.pro:        vsteps=lz.mf(hkm1(4).loc(indgen(16)))  $
+wggs16/utilities/lzscan_for_mode.pro:        vsteps=lz.mf(hkm1(4).loc(indgen(16)))  $
+wggs16/utilities/lzscan_for_mode.pro:        veis_tbl_pri=lz.mf(hkm6(7).loc(indgen(16)))
+wggs16/utilities/lzscan_for_mode.pro:      ebias1=lz.mf(ihk(18).offs)
+wggs16/utilities/lzscan_for_mode.pro:      ebias2=lz.mf(ihk(28).offs)
+wggs16/utilities/lzscan_for_mode.pro:      printf,lun,lzdate,seqno,recn,lz.dy,lz.ms, scimode,max(vsteps),$
+wggs16/utilities/lzscan_for_mode.pro:      print,lzdate,seqno,recn,lz.dy,lz.ms,scimode,max(vsteps),$
+wggs16/utilities/lzscan_for_mode.pro:print,' ' & print,'lzscan finished'
+wggs16/utilities/lzscan.pro:;scans lz file for mode
+wggs16/utilities/lzscan.pro:;pro lzscan,cdsearch=cdsearch
+wggs16/utilities/lzscan.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/utilities/lzscan.pro:;scans swe lz files for mode, specie, energy range etc
+wggs16/utilities/lzscan.pro:;when search = 0, lz file selection is through a pickfile
+wggs16/utilities/lzscan.pro:;get indices of instrument housekeeping into mjf array, lz.mf   
+wggs16/utilities/lzscan.pro:;get mode1, mode1 tm map of science and genl hk data offsets into lz.mf
+wggs16/utilities/lzscan.pro:  lzfltr='*.dat'
+wggs16/utilities/lzscan.pro:  fdir='/cdrom/cdrom0/data/wi/swe/lz/'
+wggs16/utilities/lzscan.pro:  spawn,'ls '+fdir+lzfltr,result
+wggs16/utilities/lzscan.pro:  result=pickfile(/read,get_path=fdir,path=fdir(0),filter=lzfltr,$
+wggs16/utilities/lzscan.pro:  lzfile=result(ifl) 
+wggs16/utilities/lzscan.pro:  lzdate=''
+wggs16/utilities/lzscan.pro:  flstr=strmid(lzfile,strlen(fdir)+1,strlen(lzfile)-strlen(fdir))
+wggs16/utilities/lzscan.pro:  lzdate=strmid(lzfile,strlen(fdir)+beginstr,6)
+wggs16/utilities/lzscan.pro:  print,lzfile,'  ',lzdate
+wggs16/utilities/lzscan.pro:  openw,luns,getenv('IDLSAV')+'lzsearch.dat'
+wggs16/utilities/lzscan.pro:  ;open lz file
+wggs16/utilities/lzscan.pro:    openr,lundat,lzfile
+wggs16/utilities/lzscan.pro:      fh=read_lzhdr(lundat) ;fh=file header structure 
+wggs16/utilities/lzscan.pro:  print,lzfile
+wggs16/utilities/lzscan.pro:    lz=read_lzrcd(lundat,recn,fh.rln,fh.spcid) ;lz=data structure incl header
+wggs16/utilities/lzscan.pro:    ms_hms,lz.ms,h,m,s  ;get hhmmss.ms from msec of day
+wggs16/utilities/lzscan.pro:    date_time=string(lz.yr,format='(i4)') + ' ' + string(lz.dy,format='(i3)') +$
+wggs16/utilities/lzscan.pro:      tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/utilities/lzscan.pro:      scimode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/utilities/lzscan.pro:        vsteps=lz.mf(hkind(ghk(27).offs+indgen(ghk(27).ln))) $
+wggs16/utilities/lzscan.pro:        vsteps=lz.mf(hkm1(4).loc(indgen(16)))
+wggs16/utilities/lzscan.pro:        ;vsteps=lz.mf(hkm1(24).offs+indgen(16))
+wggs16/utilities/lzscan.pro:        print,recn,' ',date_time,' ',md(lz.telmod),$
+wggs16/utilities/lzscan.pro:          '  ',lz.mf(ihk(18).offs),lz.mf(ihk(28).offs)
+wggs16/utilities/lzscan.pro:          printf,luns,recn,' ',date_time,' ',md(lz.telmod),$
+wggs16/utilities/lzscan.pro:          '  ',lz.mf(ihk(18).offs),lz.mf(ihk(28).offs) $
+wggs16/utilities/lzscan.pro:        print,recn,' ',date_time,' ',md(lz.telmod),$
+wggs16/utilities/lzscan.pro:          '  ',lz.mf(ihk(18).offs),lz.mf(ihk(28).offs)
+wggs16/utilities/lzscan.pro:        print,recn,' ',date_time,' ',md(lz.telmod),$
+wggs16/utilities/lzscan.pro:          '  ',lz.mf(ihk(18).offs),lz.mf(ihk(28).offs)
+wggs16/utilities/lzscan.pro:           printf,luns,recn,' ',date_time,' ',md(lz.telmod),$
+wggs16/utilities/lzscan.pro:          '  ',lz.mf(ihk(18).offs),lz.mf(ihk(28).offs)  $
+wggs16/utilities/lzscan.pro:        print,recn,' ',date_time,' ',md(lz.telmod),$
+wggs16/utilities/lzscan.pro:          '  ',lz.mf(ihk(18).offs),lz.mf(ihk(28).offs)
+wggs16/utilities/lzscan.pro: 'cp '+getenv('IDLSAV')+'lzsearch.dat '+bpath+lzdate+'.bckrec'
+wggs16/utilities/lzscan.pro: print,'background test lzrecord file created ',$
+wggs16/utilities/lzscan.pro:  bpath+lzdate+'.bckrec'
+wggs16/utilities/lzscan.pro:print,' ' & print,'lzscan finished'
+wggs16/utilities/move_wind_files.pro:swelz='wi_lz_swe_*.dat' & swelzdir='/data2/swe/lz/'
+wggs16/utilities/move_wind_files.pro:data_type=['swelz','swekp','windorbit','windattitude']
+wggs16/utilities/move_wind_files.pro:filter=[swelz,swekp,wiorb,wiatt]
+wggs16/utilities/move_wind_files.pro:outdir=[swelzdir,swekpdir,wiorbdir,wiattdir]
+wggs16/utilities/read_lzscan_for_mode.pro:;pro read_lzscan_for_mode
+wggs16/utilities/read_lzscan_for_mode.pro:openr,1,getenv('WGGSBASE')+'utilities/lzscan_for_mode.dat'
+wggs16/utilities/read_lzscan_for_mode.pro:openr,1,getenv('WGGSBASE')+'utilities/lzscan_for_mode.dat'
+wggs16/widgets/do_cts_average.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/widgets/do_cts_average.pro:WDGT.swelzav_nrmldet: swest.relgain_nmldet=event.index
+wggs16/widgets/do_cts_average.pro:WDGT.swelzav_ptchfitdets: swest.detslct_list_indx=event.index
+wggs16/widgets/do_cts_average.pro:WDGT.swelzav_vstep : swest.ivstep=event.index
+wggs16/widgets/do_cts_average.pro:     widget_control,WDGT.swelzav_bgnmjf,get_value=recn_begin
+wggs16/widgets/do_cts_average.pro:     widget_control,WDGT.swelzav_endmjf,get_value=recn_end
+wggs16/widgets/do_cts_average.pro:     widget_control,WDGT.swelzav_spn,get_value=spin_begin
+wggs16/widgets/do_cts_average.pro:     widget_control,WDGT.swelzav_spinbl,get_value=spin_end
+wggs16/widgets/do_cts_average.pro:           widget_control,WDGT.swelzc_recn,set_value=recn
+wggs16/widgets/do_cts_average.pro:           widget_control,WDGT.swelzc_spin,set_value=ispin
+wggs16/widgets/do_cts_average.pro:           isector=swest.isector & widget_control,WDGT.swelzc_sect,set_value=isector
+wggs16/widgets/do_cts_average.pro:           ivstep=swest.ivstep & widget_control,WDGT.swelzc_vstep,set_value=ivstep
+wggs16/widgets/do_cts_average.pro:         ;vlvls(*,numspins)=lz.mf(hkm1(24).offs+indgen(swest.nvsteps))
+wggs16/widgets/do_cts_average.pro:           get_bits(lz.mf(ihk(6).offs),ihk(6).bv(0).p,ihk(6).bv(0).n)
+wggs16/widgets/do_cts_average.pro:           get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/widgets/do_cts_average.pro:           get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/widgets/do_cts_average.pro:         instrhk(numspins).ebias1=lz.mf(ihk(18).offs)
+wggs16/widgets/do_cts_average.pro:         instrhk(numspins).ibias1=lz.mf(ihk(19).offs)
+wggs16/widgets/do_cts_average.pro:         instrhk(numspins).ebias2=lz.mf(ihk(28).offs)
+wggs16/widgets/do_cts_average.pro:         instrhk(numspins).ibias2=lz.mf(ihk(29).offs)
+wggs16/widgets/do_cts_average.pro:           get_bits(lz.mf(ihk(3).offs),ihk(3).bv(0).p,ihk(3).bv(0).n)
+wggs16/widgets/do_cts_average.pro:           widget_control,WDGT.swelzav_spins,$
+wggs16/widgets/do_cts_average.pro:           widget_control,WDGT.swelzav_eleion,$
+wggs16/widgets/do_cts_average.pro:           widget_control,WDGT.swelzav_ebias1,$
+wggs16/widgets/do_cts_average.pro:           widget_control,WDGT.swelzav_ebias2,$
+wggs16/widgets/do_cts_average.pro:           widget_control,WDGT.swelzav_calpwr,$
+wggs16/widgets/do_cts_average.pro:           savfile=getenv('BACKGPATH')+wst.lzdate+'_backg.idlsav'
+wggs16/widgets/do_cts_average.pro:       widget_control,WDGT.swelzav_bgnmjf,get_value=recn_begin
+wggs16/widgets/do_cts_average.pro:       widget_control,WDGT.swelzav_endmjf,get_value=recn_end
+wggs16/widgets/do_cts_average.pro:       widget_control,WDGT.swelzav_spn,get_value=spin_begin
+wggs16/widgets/do_cts_average.pro:       widget_control,WDGT.swelzav_spinbl,get_value=spin_end
+wggs16/widgets/do_cts_average.pro:            widget_control,WDGT.swelzc_recn,set_value=recn
+wggs16/widgets/do_cts_average.pro:            widget_control,WDGT.swelzc_spin,set_value=ispin
+wggs16/widgets/do_cts_average.pro:            isector=swest.isector & widget_control,WDGT.swelzc_sect,set_value=isector
+wggs16/widgets/do_cts_average.pro:            ivstep=swest.ivstep & widget_control,WDGT.swelzc_vstep,set_value=ivstep
+wggs16/widgets/do_cts_average.pro:           get_bits(lz.mf(ihk(6).offs),ihk(6).bv(0).p,ihk(6).bv(0).n)
+wggs16/widgets/do_cts_average.pro:           get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/widgets/do_cts_average.pro:           get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/widgets/do_cts_average.pro:         instrhk(numspins).ebias1=lz.mf(ihk(18).offs)
+wggs16/widgets/do_cts_average.pro:         instrhk(numspins).ibias1=lz.mf(ihk(19).offs)
+wggs16/widgets/do_cts_average.pro:         instrhk(numspins).ebias2=lz.mf(ihk(28).offs)
+wggs16/widgets/do_cts_average.pro:         instrhk(numspins).ibias2=lz.mf(ihk(29).offs)
+wggs16/widgets/do_cts_average.pro:           get_bits(lz.mf(ihk(3).offs),ihk(3).bv(0).p,ihk(3).bv(0).n)
+wggs16/widgets/do_cts_average.pro:           widget_control,WDGT.swelzav_spins,$
+wggs16/widgets/do_cts_average.pro:           widget_control,WDGT.swelzav_eleion,$
+wggs16/widgets/do_cts_average.pro:           widget_control,WDGT.swelzav_ebias1,$
+wggs16/widgets/do_cts_average.pro:           widget_control,WDGT.swelzav_ebias2,$
+wggs16/widgets/do_cts_average.pro:           widget_control,WDGT.swelzav_calpwr,$
+wggs16/widgets/do_cts_average.pro:  'Quit' : WIDGET_CONTROL, WDGT.swelzav_base, /DESTROY
+wggs16/widgets/do_cts_average.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/widgets/do_cts_average.pro:  WIDGET_CONTROL, WDGT.swelzav_base,/show
+wggs16/widgets/do_cts_average.pro:  widget_control,WDGT.swelzav_bgnmjf,set_value=recn
+wggs16/widgets/do_cts_average.pro:  widget_control,WDGT.swelzav_spn,set_value=ispin
+wggs16/widgets/do_cts_average.pro:  widget_control,WDGT.swelzav_nrmldet,set_droplist_select=swest.relgain_nmldet
+wggs16/widgets/do_cts_average.pro:  widget_control,WDGT.swelzav_vstep,set_droplist_select=swest.ivstep
+wggs16/widgets/do_cts_average.pro:WDGT.swelzav_base = WIDGET_BASE(TITLE = 'Do counts average', /COLUMN);main base
+wggs16/widgets/do_cts_average.pro:rbase1=widget_base(WDGT.swelzav_base,/column)
+wggs16/widgets/do_cts_average.pro:WDGT.swelzav_quit=cw_bgroup(rbase1,'Quit',/return_name)
+wggs16/widgets/do_cts_average.pro:WDGT.swelzav_detpair=cw_bgroup(rbase1,label_top='', $
+wggs16/widgets/do_cts_average.pro:WDGT.swelzav_nrmldet=widget_droplist(rbase1,title='Normal detector',$
+wggs16/widgets/do_cts_average.pro:widget_control,WDGT.swelzav_nrmldet,set_droplist_select=swest.relgain_nmldet
+wggs16/widgets/do_cts_average.pro:WDGT.swelzav_vstep=widget_droplist(rbase1,title='Energy step (ev)',$
+wggs16/widgets/do_cts_average.pro:widget_control,WDGT.swelzav_vstep,set_droplist_select=swest.ivstep
+wggs16/widgets/do_cts_average.pro:WDGT.swelzav_ptchfitdets=widget_droplist(rbase1,title='Pitch fit: Det''s',$
+wggs16/widgets/do_cts_average.pro:widget_control,WDGT.swelzav_ptchfitdets,$
+wggs16/widgets/do_cts_average.pro:WDGT.swelzav_getrelgn=cw_bgroup(rbase1,label_top='Rel gain determination', $
+wggs16/widgets/do_cts_average.pro:WDGT.swelzav_doavg=cw_bgroup(rbase1,label_top='Background determination', $
+wggs16/widgets/do_cts_average.pro:rbase=widget_base(WDGT.swelzav_base,/column)
+wggs16/widgets/do_cts_average.pro:WDGT.swelzav_set_d2_d3=cw_field(rbase,title='Set det2=det3',/string,xsize=5,/row)
+wggs16/widgets/do_cts_average.pro:WDGT.swelzav_bgnmjf=cw_field(rbase,title='begin: mjf',/long,xsize=5,/row)
+wggs16/widgets/do_cts_average.pro:widget_control,WDGT.swelzav_bgnmjf,set_value=recn
+wggs16/widgets/do_cts_average.pro:WDGT.swelzav_spn=cw_field(rbase,title='spinbl',/long,xsize=2,/row)
+wggs16/widgets/do_cts_average.pro:widget_control,WDGT.swelzav_spn,set_value=ispin
+wggs16/widgets/do_cts_average.pro:WDGT.swelzav_endmjf=cw_field(rbase,title='end: mjf  ',/long,xsize=5,/row)
+wggs16/widgets/do_cts_average.pro:widget_control,WDGT.swelzav_endmjf,set_value=recn+30
+wggs16/widgets/do_cts_average.pro:WDGT.swelzav_spinbl=cw_field(rbase,title='spinbl',/long,xsize=2,/row)
+wggs16/widgets/do_cts_average.pro:WDGT.swelzav_spins=cw_field(rbase1,title='spins',/string,xsize=4,/row)
+wggs16/widgets/do_cts_average.pro:WDGT.swelzav_eleion=cw_field(rbase1,title='elec_ion',/string,xsize=2,/row)
+wggs16/widgets/do_cts_average.pro:WDGT.swelzav_ebias1=cw_field(rbase1,title='ebias1',/string,xsize=3,/row)
+wggs16/widgets/do_cts_average.pro:WDGT.swelzav_ebias2=cw_field(rbase1,title='ebias2',/string,xsize=3,/row)
+wggs16/widgets/do_cts_average.pro:WDGT.swelzav_calpwr=cw_field(rbase1,title='calpwr',/string,xsize=2,/row)
+wggs16/widgets/do_cts_average.pro:WIDGET_CONTROL, WDGT.swelzav_base, /REALIZE
+wggs16/widgets/do_cts_average.pro:XMANAGER, "do_cts_average", WDGT.swelzav_base, GROUP_LEADER = GROUP  ;hand off to manager
+wggs16/widgets/do_cts_average.pro:widget_control,WDGT.swelzav_set_d2_d3,set_value=noyes(vsmjf.set_det2_eq_det3)
+wggs16/widgets/draw_main_ev.pro:     wst.lz_is_read = 0
+wggs16/widgets/f_events.pro:common sharewidglz,wlz
+wggs16/widgets/f_events.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/widgets/f_events.pro:common sharelevelzero,pltwin_frmt,oplot_sec
+wggs16/widgets/f_events.pro:  wlz.button(27) : begin
+wggs16/widgets/f_events.pro:          widget_control,wlz.field(22),set_value=' '
+wggs16/widgets/f_events.pro:      widget_control,wlz.field(22),set_value=' '
+wggs16/widgets/f_events.pro:         wset,wlz.win(0) & erase
+wggs16/widgets/f_events.pro:         plt,/lzwin
+wggs16/widgets/f_events.pro:             if wst.ylog_lzwin then $
+wggs16/widgets/f_events.pro:             yrange= [10.^wst.xyrange_lzwin(1),10.^wst.xyrange_lzwin(3)] else $
+wggs16/widgets/f_events.pro:             yrange= [wst.xyrange_lzwin(1),wst.xyrange_lzwin(3)]              
+wggs16/widgets/f_events.pro:         wst.timsel='lz'
+wggs16/widgets/f_events.pro:         wst.lz_is_read=0
+wggs16/widgets/f_events.pro:        proc_fw,wid=swest.lzwin(0),pltype=pltype, err=err,$
+wggs16/widgets/f_events.pro:         wst.timsel='lz'
+wggs16/widgets/f_events.pro:         wst.lz_is_read=0
+wggs16/widgets/f_events.pro:        proc_fw,wid=swest.lzwin(0),pltype=pltype, err=err,$
+wggs16/widgets/f_events.pro:      'Parent' : widget_control,WDGT.lz_base_main,iconify=0
+wggs16/widgets/f_events.pro:   wlz.button(28) : begin
+wggs16/widgets/f_events.pro:     widget_control,wlz.field(22),$
+wggs16/widgets/f_events.pro:   wlz.button(29): swest.F_integ=event.index
+wggs16/widgets/f_events.pro:   wlz.button(30) : begin
+wggs16/widgets/f_events.pro:common sharewidglz,wlz
+wggs16/widgets/f_events.pro:  widget_control,wlz.base(5),iconify=0
+wggs16/widgets/f_events.pro:wlz.base(5) = WIDGET_BASE(TITLE = 'SWE LZ Data Display', /COLUMN) 
+wggs16/widgets/f_events.pro:cbase=widget_base(wlz.base(5),/column,/FRAME)
+wggs16/widgets/f_events.pro:wlz.button(27)=cw_bgroup(rbase,$
+wggs16/widgets/f_events.pro:  '_fshck' : wlz.button(28)=widget_droplist(rbase,title='Event value',$
+wggs16/widgets/f_events.pro:  ;wlz.button(28)=cw_bgroup(rbase,['  OK  '],row=1,$
+wggs16/widgets/f_events.pro:  '' :  wlz.button(28)=cw_bgroup(rbase,['Event'],row=1,$
+wggs16/widgets/f_events.pro:wlz.field(22)=cw_field(rbase,title=' ',/string,xsize=8,ysize=1,/row)
+wggs16/widgets/f_events.pro:wlz.button(29)=$
+wggs16/widgets/f_events.pro:wlz.button(30)=widget_droplist(rbase,title='Plot f',value=['Off','On'])
+wggs16/widgets/f_events.pro:widget_control,wlz.base(5),/realize
+wggs16/widgets/f_events.pro:XMANAGER, "f_events", wlz.base(5), GROUP_LEADER = GROUP 
+wggs16/widgets/levelzero_nospin.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/widgets/levelzero_nospin.pro:common sharelevelzero,pltwin_frmt,oplot_sec
+wggs16/widgets/levelzero_nospin.pro:print,'get_recnspin: wst.lzdate ',wst.lzdate,' wst.timsel ',wst.timsel
+wggs16/widgets/levelzero_nospin.pro:          recn=lztimrec(sec_pb5(tpoint1))
+wggs16/widgets/levelzero_nospin.pro: 'lz' : print,'rec, swest.ispinbl ',recn,swest.ispinbl, 'selected'
+wggs16/widgets/levelzero_nospin.pro: 'lztm' : begin
+wggs16/widgets/levelzero_nospin.pro:                 pb5=ymd_pb5(long(wst.lzdate))
+wggs16/widgets/levelzero_nospin.pro:                 recn=lztimrec(pb5)
+wggs16/widgets/levelzero_nospin.pro:                recn=lztimrec(wst.pb5)
+wggs16/widgets/levelzero_nospin.pro:wst.timsel='lz'    ;reset
+wggs16/widgets/levelzero_nospin.pro:common sharewidglz,wlz
+wggs16/widgets/levelzero_nospin.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/widgets/levelzero_nospin.pro:common sharelevelzero,pltwin_frmt,oplot_sec
+wggs16/widgets/levelzero_nospin.pro:if wst.lz_is_read then goto,lzisread
+wggs16/widgets/levelzero_nospin.pro:;process selected lz record
+wggs16/widgets/levelzero_nospin.pro:   ;widget_control, wlz.field(14), set_value = swest.subtrbkg
+wggs16/widgets/levelzero_nospin.pro:wst.lz_is_read=1
+wggs16/widgets/levelzero_nospin.pro:lzisread:    ;an lz record has been read
+wggs16/widgets/levelzero_nospin.pro:widget_control,wlz.field(10),set_value=recn
+wggs16/widgets/levelzero_nospin.pro:spinbl=swest.ispinbl & widget_control,wlz.field(11),set_value=spinbl
+wggs16/widgets/levelzero_nospin.pro:nvmax=swest.nvmax ;& widget_control,wlz.field(12),set_value=swest.nvmax
+wggs16/widgets/levelzero_nospin.pro:  print,'time selected from lz file: '
+wggs16/widgets/levelzero_nospin.pro:  print,'lz.recn, swest.ispinbl, vsmjf.suntim_vsbl(swest.ispinbl) (seconds) ',$
+wggs16/widgets/levelzero_nospin.pro:      lz.recn,swest.ispinbl,vsmjf.suntim_vsbl(swest.ispinbl)
+wggs16/widgets/levelzero_nospin.pro:    ;test whether day of the given time is the same as "lzdate" 
+wggs16/widgets/levelzero_nospin.pro:    ;if given time is the same as lzdate, then the correct magfile has already
+wggs16/widgets/levelzero_nospin.pro:    ;if given time is NOT the same as lzdate, then the appropriate
+wggs16/widgets/levelzero_nospin.pro:    ;magfile that agrees with lzdate..
+wggs16/widgets/levelzero_nospin.pro:    ;but will use the first mag vector on the day corresponding to lzdate..
+wggs16/widgets/levelzero_nospin.pro:    if ymd(timpb5) eq wst.lzdate then begin 
+wggs16/widgets/levelzero_nospin.pro:      wmag=where(wst.magdate eq wst.lzdate)
+wggs16/widgets/levelzero_nospin.pro:        print,'ymd(given time), lzdate, magdate ',$
+wggs16/widgets/levelzero_nospin.pro:          ymd(timpb5), wst.lzdate, wst.magdate(wmag)
+wggs16/widgets/levelzero_nospin.pro:         'first 3sec interval on lzdate will be used: mindx,sindx',mindx,sindx
+wggs16/widgets/levelzero_nospin.pro:       string(lz.yr,format='(i4)')+'_'+string(lz.dy,format='(i3)')+'_'+$
+wggs16/widgets/levelzero_nospin.pro:       string(lz.ms/1000,format='(f9.3)')
+wggs16/widgets/levelzero_nospin.pro:    widget_control,wlz.field(13),set_value=lhms
+wggs16/widgets/levelzero_nospin.pro:     if wst.timsel eq 'lz' or wst.timsel eq 'lztm' then  $
+wggs16/widgets/levelzero_nospin.pro:  ;widget_control, wlz.field(15), set_value = swest.delete * swest.ndel
+wggs16/widgets/levelzero_nospin.pro:     wset,wlz.win(0) & erase
+wggs16/widgets/levelzero_nospin.pro:     plt,/lzwin
+wggs16/widgets/levelzero_nospin.pro:     ;plt_lzwindow
+wggs16/widgets/levelzero_nospin.pro:   if pltype(0) eq -1 then redf_integ,xsize=wlz.win_xsize(wid),$
+wggs16/widgets/levelzero_nospin.pro:       ysize=wlz.win_ysize(wid),ion=swest.specie_selct,$
+wggs16/widgets/levelzero_nospin.pro:     wset,wlz.win(wid) 
+wggs16/widgets/levelzero_nospin.pro:     fplot,wlz.win_xsize(wid),wlz.win_ysize(wid),pltype=pltype,$
+wggs16/widgets/levelzero_nospin.pro:     wset,wlz.win(wid)
+wggs16/widgets/levelzero_nospin.pro:     x_im_sz=wlz.win_xsize(wid)
+wggs16/widgets/levelzero_nospin.pro:     y_im_sz=wlz.win_ysize(wid)
+wggs16/widgets/levelzero_nospin.pro:common sharelevelzero,pltwin_frmt,oplot_sec
+wggs16/widgets/levelzero_nospin.pro:common sharewidglz,wlz
+wggs16/widgets/levelzero_nospin.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/widgets/levelzero_nospin.pro:wlz.button(22) : begin
+wggs16/widgets/levelzero_nospin.pro:   widget_control, wlz.field(19),get_value=val
+wggs16/widgets/levelzero_nospin.pro:   widget_control, wlz.field(19),set_value=swest.pbinselect
+wggs16/widgets/levelzero_nospin.pro: wlz.button(19) : begin
+wggs16/widgets/levelzero_nospin.pro:    ;widget_control, wlz.field(14), set_value = swest.subtrbkg
+wggs16/widgets/levelzero_nospin.pro: wlz.button(21) : begin
+wggs16/widgets/levelzero_nospin.pro:    widget_control, wlz.field(16), set_value = specie(swest.specie_selct)
+wggs16/widgets/levelzero_nospin.pro:    widget_control,wlz.field(14),set_value = swest.subtrbkg
+wggs16/widgets/levelzero_nospin.pro:   widget_control, wlz.field(15), set_value = swest.delete * swest.ndel
+wggs16/widgets/levelzero_nospin.pro: wlz.button(18) : begin
+wggs16/widgets/levelzero_nospin.pro:   widget_control, wlz.field(15), set_value = swest.delete * swest.ndel
+wggs16/widgets/levelzero_nospin.pro:wlz.field(12) : begin
+wggs16/widgets/levelzero_nospin.pro:     WIDGET_CONTROL, wlz.field(12), GET_VALUE = val
+wggs16/widgets/levelzero_nospin.pro:     print,'wlz.field(12): en steps',swest.nvmax
+wggs16/widgets/levelzero_nospin.pro:common sharewidglz,wlz
+wggs16/widgets/levelzero_nospin.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/widgets/levelzero_nospin.pro:  widget_control, wlz.field(14), set_value = swest.subtrbkg
+wggs16/widgets/levelzero_nospin.pro:  widget_control, wlz.field(15), set_value = swest.delete * swest.ndel
+wggs16/widgets/levelzero_nospin.pro:  widget_control, wlz.field(16), set_value = specie(swest.specie_selct)
+wggs16/widgets/levelzero_nospin.pro:  widget_control, wlz.field(17), set_value = vsmjf.scimode
+wggs16/widgets/levelzero_nospin.pro:  widget_control, wlz.field(18), set_value = swpmd(vsmjf.eleion_sweep)
+wggs16/widgets/levelzero_nospin.pro:  widget_control, wlz.field(19),set_value=swest.pbinselect
+wggs16/widgets/levelzero_nospin.pro:  widget_control,wlz.field(12),set_value=swest.nvmax
+wggs16/widgets/levelzero_nospin.pro:wlz.button(22)=cw_bgroup(rbase,label_left='',['+/- pitch bin'],row=1)
+wggs16/widgets/levelzero_nospin.pro:wlz.field(19)=cw_field(rbase,/long,xsize=2,ysize=1,title=' ',/row)
+wggs16/widgets/levelzero_nospin.pro:wlz.field(12)=cw_field(rbase,title='Enstps',/return_events,/long,xsize=2,$
+wggs16/widgets/levelzero_nospin.pro:wlz.button(19)=cw_bgroup(rbase,$
+wggs16/widgets/levelzero_nospin.pro:wlz.field(14)=cw_field(rbase,/string,xsize=3,$
+wggs16/widgets/levelzero_nospin.pro:wlz.button(21)=cw_bgroup(rbase,label_left='',['Select'],row=1,/return_name)
+wggs16/widgets/levelzero_nospin.pro:wlz.field(16)=cw_field(rbase,/string,xsize=5,ysize=1,title=' ',/row)
+wggs16/widgets/levelzero_nospin.pro:wlz.field(17)=cw_field(rbase,/integer,xsize=1,ysize=1,title='Mode',/row)
+wggs16/widgets/levelzero_nospin.pro:wlz.field(18)=cw_field(rbase,/string,xsize=9,ysize=1,title=' ',/row)
+wggs16/widgets/levelzero_nospin.pro:wlz.button(18)=cw_bgroup(cbase,$
+wggs16/widgets/levelzero_nospin.pro:wlz.field(15)=cw_field(cbase,/integer,xsize=3,$
+wggs16/widgets/levelzero_nospin.pro:widget_control, wlz.field(14), set_value = swest.subtrbkg
+wggs16/widgets/levelzero_nospin.pro:widget_control, wlz.field(15), set_value = swest.delete * swest.ndel
+wggs16/widgets/levelzero_nospin.pro:widget_control, wlz.field(16), set_value = specie(swest.specie_selct)
+wggs16/widgets/levelzero_nospin.pro:widget_control,wlz.field(12),set_value=swest.nvmax
+wggs16/widgets/levelzero_nospin.pro:widget_control, wlz.field(17), set_value = vsmjf.scimode
+wggs16/widgets/levelzero_nospin.pro:widget_control, wlz.field(18), set_value = swpmd(vsmjf.eleion_sweep)
+wggs16/widgets/levelzero_nospin.pro:widget_control, wlz.field(19),set_value=swest.pbinselect
+wggs16/widgets/levelzero_nospin.pro:;========================== levelzero_event,event ============================
+wggs16/widgets/levelzero_nospin.pro:pro levelzero_event,event
+wggs16/widgets/levelzero_nospin.pro:common sharewidglz,wlz
+wggs16/widgets/levelzero_nospin.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/widgets/levelzero_nospin.pro:common sharelevelzero,pltwin_frmt,oplot_sec
+wggs16/widgets/levelzero_nospin.pro:;print,'levelzero_event :',event.id,event.value
+wggs16/widgets/levelzero_nospin.pro:      if event.id ne wlz.button(14) then return
+wggs16/widgets/levelzero_nospin.pro:      if event.id eq wlz.button(14) and event.value ne 'Quit' and $
+wggs16/widgets/levelzero_nospin.pro:      if event.id eq wlz.draw(1) and keyword_set(fh) eq 0 then return
+wggs16/widgets/levelzero_nospin.pro:  wlz.draw(1) : begin   ;plot in first window 
+wggs16/widgets/levelzero_nospin.pro:         if swest.strlf_veisf eq 1 then strlf_veisf,wid=swest.lzwin(0) $
+wggs16/widgets/levelzero_nospin.pro:           proc_fw,wid=swest.lzwin(0),pltype=pltype, err=err
+wggs16/widgets/levelzero_nospin.pro:  wlz.draw(2) : begin        ;plot in second window
+wggs16/widgets/levelzero_nospin.pro:         if swest.strlf_veisf eq 1 then strlf_veisf,wid=swest.lzwin(1) $
+wggs16/widgets/levelzero_nospin.pro:           proc_fw,wid=swest.lzwin(1),pltype=pltype, err=err
+wggs16/widgets/levelzero_nospin.pro:  wlz.draw(3) : begin      ;plot in third window
+wggs16/widgets/levelzero_nospin.pro:         if swest.strlf_veisf eq 1 then strlf_veisf,wid=swest.lzwin(2) $
+wggs16/widgets/levelzero_nospin.pro:           proc_fw,wid=swest.lzwin(2),pltype=pltype, err=err
+wggs16/widgets/levelzero_nospin.pro: wlz.button(1) : begin
+wggs16/widgets/levelzero_nospin.pro:        wid=swest.lzwin(i)
+wggs16/widgets/levelzero_nospin.pro:          wset,wlz.win(wid) 
+wggs16/widgets/levelzero_nospin.pro:            fplot,wlz.win_xsize(wid),wlz.win_ysize(wid),pltype=pltype,$
+wggs16/widgets/levelzero_nospin.pro:            wset,wlz.win(wid)
+wggs16/widgets/levelzero_nospin.pro:            x_im_sz=wlz.win_xsize(wid)
+wggs16/widgets/levelzero_nospin.pro:            y_im_sz=wlz.win_ysize(wid)
+wggs16/widgets/levelzero_nospin.pro:  wlz.button(13) : begin
+wggs16/widgets/levelzero_nospin.pro:  wlz.button(20) : begin  ;increment f data rec number
+wggs16/widgets/levelzero_nospin.pro:    widget_control,wlz.field(11),set_value=swest.ispinbl
+wggs16/widgets/levelzero_nospin.pro:    widget_control,wlz.field(10),set_value=recn    
+wggs16/widgets/levelzero_nospin.pro:    wst.timsel='lz'
+wggs16/widgets/levelzero_nospin.pro:    wst.lz_is_read=0
+wggs16/widgets/levelzero_nospin.pro:                      swest.ilzplt=swest.ilzplt+1
+wggs16/widgets/levelzero_nospin.pro:                        pltwin=swest.ilzplt-3*fix(swest.ilzplt/3) + 1
+wggs16/widgets/levelzero_nospin.pro:                        pltwin=swest.ilzplt-2*fix(swest.ilzplt/2) + 2
+wggs16/widgets/levelzero_nospin.pro:  wlz.button(15) : begin     ;increment f data spin number
+wggs16/widgets/levelzero_nospin.pro:                       wst.lz_is_read=0
+wggs16/widgets/levelzero_nospin.pro:                    widget_control,wlz.field(11),set_value=swest.ispinbl
+wggs16/widgets/levelzero_nospin.pro:                    widget_control,wlz.field(10),set_value=recn
+wggs16/widgets/levelzero_nospin.pro:                    wst.timsel='lz'
+wggs16/widgets/levelzero_nospin.pro:                    print,'wlz.button(15) ',$
+wggs16/widgets/levelzero_nospin.pro:                      swest.ilzplt=swest.ilzplt+1
+wggs16/widgets/levelzero_nospin.pro:                        pltwin=swest.ilzplt-3*fix(swest.ilzplt/3) + 1
+wggs16/widgets/levelzero_nospin.pro:                        pltwin=swest.ilzplt-2*fix(swest.ilzplt/2) + 2
+wggs16/widgets/levelzero_nospin.pro:                       wst.lz_is_read=0
+wggs16/widgets/levelzero_nospin.pro:                    widget_control,wlz.field(11),set_value=swest.ispinbl
+wggs16/widgets/levelzero_nospin.pro:                    widget_control,wlz.field(10),set_value=recn
+wggs16/widgets/levelzero_nospin.pro:                    wst.timsel='lz'
+wggs16/widgets/levelzero_nospin.pro:                      swest.ilzplt=swest.ilzplt+1
+wggs16/widgets/levelzero_nospin.pro:                        pltwin=swest.ilzplt-3*fix(swest.ilzplt/3) + 1
+wggs16/widgets/levelzero_nospin.pro:                        pltwin=swest.ilzplt-2*fix(swest.ilzplt/2) + 2
+wggs16/widgets/levelzero_nospin.pro:  wlz.button(14) : begin
+wggs16/widgets/levelzero_nospin.pro:          lzinput
+wggs16/widgets/levelzero_nospin.pro:            widget_control,wlz.field(20),$
+wggs16/widgets/levelzero_nospin.pro:            widget_control,wlz.field(21),$
+wggs16/widgets/levelzero_nospin.pro:          wst.timsel='lztm'
+wggs16/widgets/levelzero_nospin.pro:          widget_control,wlz.field(13),set_value=lhms
+wggs16/widgets/levelzero_nospin.pro:          indate=strmid(wst.lzdate,2,6)
+wggs16/widgets/levelzero_nospin.pro:      'Scan LZ file' : swelzw
+wggs16/widgets/levelzero_nospin.pro:  wlz.button(26) : begin
+wggs16/widgets/levelzero_nospin.pro:        xdisplayfile,getenv('WGGSBASE')+'help_swe_lz_data_display.txt',$
+wggs16/widgets/levelzero_nospin.pro:  wlz.button(24) : begin
+wggs16/widgets/levelzero_nospin.pro: wlz.button(25) : begin
+wggs16/widgets/levelzero_nospin.pro:  wlz.field(10) : begin
+wggs16/widgets/levelzero_nospin.pro:     WIDGET_CONTROL, wlz.field(10), GET_VALUE = val
+wggs16/widgets/levelzero_nospin.pro:     wst.timsel='lz'
+wggs16/widgets/levelzero_nospin.pro:     print,'wlz.field(10): selected recn ',recn
+wggs16/widgets/levelzero_nospin.pro:     wst.lz_is_read=0
+wggs16/widgets/levelzero_nospin.pro: wlz.field(11) : begin
+wggs16/widgets/levelzero_nospin.pro:     WIDGET_CONTROL, wlz.field(11), GET_VALUE = val
+wggs16/widgets/levelzero_nospin.pro:     wst.timsel='lz'
+wggs16/widgets/levelzero_nospin.pro:     print,'wlz.field(11): selected spinbl ',swest.ispinbl
+wggs16/widgets/levelzero_nospin.pro:     wst.lz_is_read=0
+wggs16/widgets/levelzero_nospin.pro: wlz.field(13) : begin
+wggs16/widgets/levelzero_nospin.pro:     WIDGET_CONTROL, wlz.field(13), GET_VALUE = val
+wggs16/widgets/levelzero_nospin.pro:     wst.timsel='lztm'
+wggs16/widgets/levelzero_nospin.pro:     wst.pb5=ymd_pb5(long(wst.lzdate))
+wggs16/widgets/levelzero_nospin.pro:     print,'wlz.field(13): selected time ',$
+wggs16/widgets/levelzero_nospin.pro:     wst.lz_is_read=0
+wggs16/widgets/levelzero_nospin.pro: wlz.button(23) : begin
+wggs16/widgets/levelzero_nospin.pro:                      swest.lzsurvey=event.index
+wggs16/widgets/levelzero_nospin.pro:                      WIDGET_CONTROL, wlz.draw(0), GET_VALUE=windw
+wggs16/widgets/levelzero_nospin.pro:                      wlz.win(0)=windw
+wggs16/widgets/levelzero_nospin.pro:                      wset,wlz.win(0) & erase
+wggs16/widgets/levelzero_nospin.pro:                      plt,/lzwin
+wggs16/widgets/levelzero_nospin.pro:                      ;plt_lzwindow   
+wggs16/widgets/levelzero_nospin.pro:                      ;levelzero
+wggs16/widgets/levelzero_nospin.pro:  wlz.button(17) : begin
+wggs16/widgets/levelzero_nospin.pro:  wlz.button(27) : begin
+wggs16/widgets/levelzero_nospin.pro:  wlz.field(22) : begin
+wggs16/widgets/levelzero_nospin.pro:  wlz.button(28) : begin
+wggs16/widgets/levelzero_nospin.pro:  wlz.draw(0) : begin
+wggs16/widgets/levelzero_nospin.pro:           wst.timsel='lztm'    
+wggs16/widgets/levelzero_nospin.pro:                      swest.ilzplt=swest.ilzplt+1
+wggs16/widgets/levelzero_nospin.pro:                        pltwin=swest.ilzplt-3*fix(swest.ilzplt/3) + 1
+wggs16/widgets/levelzero_nospin.pro:                          wset,wlz.win(pltwin)
+wggs16/widgets/levelzero_nospin.pro:                        pltwin=swest.ilzplt-2*fix(swest.ilzplt/2) + 2
+wggs16/widgets/levelzero_nospin.pro:;============================= levelzero ====================================
+wggs16/widgets/levelzero_nospin.pro:pro levelzero,group=group
+wggs16/widgets/levelzero_nospin.pro:common sharewidglz,wlz
+wggs16/widgets/levelzero_nospin.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/widgets/levelzero_nospin.pro:common sharelevelzero,pltwin_frmt,oplot_sec
+wggs16/widgets/levelzero_nospin.pro:;get indices of instrument housekeeping into mjf array, lz.mf   
+wggs16/widgets/levelzero_nospin.pro:;get tm map of science and genl hk data offsets into lz 
+wggs16/widgets/levelzero_nospin.pro:if xregistered('levelzero') then begin
+wggs16/widgets/levelzero_nospin.pro:     widget_control,wlz.button(23),set_value=list
+wggs16/widgets/levelzero_nospin.pro:     if total(d.pnlsel-d.pnlsel_last) ne 0 then swest.lzsurvey=0
+wggs16/widgets/levelzero_nospin.pro:     widget_control,wlz.button(23),set_droplist_select=swest.lzsurvey
+wggs16/widgets/levelzero_nospin.pro:     WIDGET_CONTROL, wlz.draw(0), GET_VALUE=windw
+wggs16/widgets/levelzero_nospin.pro:     wlz.win(0)=windw
+wggs16/widgets/levelzero_nospin.pro:     wset,wlz.win(0) & erase
+wggs16/widgets/levelzero_nospin.pro:     plt,/lzwin
+wggs16/widgets/levelzero_nospin.pro:     WIDGET_CONTROL, wlz.base(3),iconify=0
+wggs16/widgets/levelzero_nospin.pro:   widget_control,wlz.field(20),$
+wggs16/widgets/levelzero_nospin.pro:   widget_control,wlz.field(21),$
+wggs16/widgets/levelzero_nospin.pro:     wst.timsel='lztm'
+wggs16/widgets/levelzero_nospin.pro:     widget_control,wlz.field(13),set_value=lhms
+wggs16/widgets/levelzero_nospin.pro:   widget_control,wlz.button(13),set_value=wst.options_list(0:8,3)
+wggs16/widgets/levelzero_nospin.pro:   widget_control,wlz.button(13),set_droplist_select=swest.pltype_index
+wggs16/widgets/levelzero_nospin.pro:  WIDGET_CONTROL, wlz.base(3),/show
+wggs16/widgets/levelzero_nospin.pro:print,'levelzero: timsel ',wst.timsel
+wggs16/widgets/levelzero_nospin.pro:wlz.base(3) = WIDGET_BASE(TITLE = 'SWE LZ Data Display', /COLUMN)  ;main base
+wggs16/widgets/levelzero_nospin.pro:rbase1=widget_base(wlz.base(3),/row)
+wggs16/widgets/levelzero_nospin.pro:wlz.button(26)=cw_bgroup(rbase,['Parent',$
+wggs16/widgets/levelzero_nospin.pro:wlz.button(14)=widget_droplist(rbase,title='Level zero',$
+wggs16/widgets/levelzero_nospin.pro:wlz.button(13)=widget_droplist(rbase,title='Plot Type',$
+wggs16/widgets/levelzero_nospin.pro:wlz.button(24)=widget_droplist(rbase,title='Colors',$
+wggs16/widgets/levelzero_nospin.pro:wlz.button(25)=widget_droplist(rbase,title='Printers',$
+wggs16/widgets/levelzero_nospin.pro:wlz.button(17)=widget_droplist(rbase,title='Applications',$
+wggs16/widgets/levelzero_nospin.pro:wlz.button(15)=cw_bgroup(rbase,[' + ',' - '],row=1,$
+wggs16/widgets/levelzero_nospin.pro:wlz.field(11)=cw_field(rbase,title=' ',/return_events,/long,xsize=3,$
+wggs16/widgets/levelzero_nospin.pro:wlz.button(20)=cw_bgroup(rbase,[' + ',' - '],row=1,$
+wggs16/widgets/levelzero_nospin.pro:wlz.field(10)=cw_field(rbase,title=' ',/return_events,/long,xsize=4,$
+wggs16/widgets/levelzero_nospin.pro:wlz.field(13)=cw_field(rbase,title='hhmmss',/return_events,/string,xsize=6,$
+wggs16/widgets/levelzero_nospin.pro:wlz.field(20)=cw_field(rbase,title=' ',/string,xsize=15,ysize=1,/row)
+wggs16/widgets/levelzero_nospin.pro:wlz.field(21)=cw_field(rbase,title='to',/string,xsize=15,ysize=1,/row)
+wggs16/widgets/levelzero_nospin.pro:     rbase0=widget_base(wlz.base(3),/row)
+wggs16/widgets/levelzero_nospin.pro:     wlz.base(4)=widget_base(wlz.base(3),/row,/FRAME)
+wggs16/widgets/levelzero_nospin.pro:     rbase0=wlz.base(4)
+wggs16/widgets/levelzero_nospin.pro:     wlz.draw(0) = WIDGET_DRAW(rbase0,/BUTTON_EVENTS,/FRAME, $
+wggs16/widgets/levelzero_nospin.pro:     cbase=widget_base(wlz.base(4),/column )
+wggs16/widgets/levelzero_nospin.pro:     wlz.button(23)=widget_droplist(rbase,title=' ',$
+wggs16/widgets/levelzero_nospin.pro:     rbase=widget_base(wlz.base(4),/column,/FRAME)
+wggs16/widgets/levelzero_nospin.pro:     wlz.button(27)=cw_bgroup(rbase,['Initialize','Save f_time'],row=2,$
+wggs16/widgets/levelzero_nospin.pro:     wlz.field(22)=cw_field(rbase,title=' ',/string,xsize=10,ysize=1,/row)
+wggs16/widgets/levelzero_nospin.pro:     wlz.button(28)=cw_bgroup(rbase,['Save to file','Overplot times'],$
+wggs16/widgets/levelzero_nospin.pro:     rbase0=widget_base(wlz.base(3),/row)
+wggs16/widgets/levelzero_nospin.pro:wlz.draw(1) = WIDGET_DRAW(cbase1,/BUTTON_EVENTS,/FRAME, $
+wggs16/widgets/levelzero_nospin.pro:wlz.draw(2) = WIDGET_DRAW(cbase2,/BUTTON_EVENTS,/FRAME, $
+wggs16/widgets/levelzero_nospin.pro:wlz.draw(3) = WIDGET_DRAW(cbase3,/BUTTON_EVENTS,/FRAME, $
+wggs16/widgets/levelzero_nospin.pro:WIDGET_CONTROL, wlz.base(3), /REALIZE
+wggs16/widgets/levelzero_nospin.pro:  WIDGET_CONTROL, wlz.draw(0), GET_VALUE=windw
+wggs16/widgets/levelzero_nospin.pro:  wlz.win(0)=windw
+wggs16/widgets/levelzero_nospin.pro:  wset,wlz.win(0) & erase
+wggs16/widgets/levelzero_nospin.pro:  plt,/lzwin
+wggs16/widgets/levelzero_nospin.pro:WIDGET_CONTROL, wlz.draw(1), GET_VALUE=windw
+wggs16/widgets/levelzero_nospin.pro:wlz.win(1)=windw
+wggs16/widgets/levelzero_nospin.pro:WIDGET_CONTROL, wlz.draw(2), GET_VALUE=windw
+wggs16/widgets/levelzero_nospin.pro:wlz.win(2)=windw
+wggs16/widgets/levelzero_nospin.pro:WIDGET_CONTROL, wlz.draw(3), GET_VALUE=windw
+wggs16/widgets/levelzero_nospin.pro:wlz.win(3)=windw
+wggs16/widgets/levelzero_nospin.pro:wlz.win_xsize(1:3)=x_size/3
+wggs16/widgets/levelzero_nospin.pro:wlz.win_ysize(1:3)=y_size
+wggs16/widgets/levelzero_nospin.pro:if keyword_set(wst.lzdate) ne 0 then begin
+wggs16/widgets/levelzero_nospin.pro:  widget_control,wlz.field(20),$
+wggs16/widgets/levelzero_nospin.pro:  widget_control,wlz.field(21),$
+wggs16/widgets/levelzero_nospin.pro:     wst.timsel='lztm'
+wggs16/widgets/levelzero_nospin.pro:     widget_control,wlz.field(13),set_value=lhms
+wggs16/widgets/levelzero_nospin.pro:XMANAGER, "levelzero", wlz.base(3), GROUP_LEADER = GROUP  ;hand off to manager
+wggs16/widgets/lzdspl_opt.pro:;================================ lzdspl_opt_event ============================
+wggs16/widgets/lzdspl_opt.pro:pro lzdspl_opt_event,event
+wggs16/widgets/lzdspl_opt.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/widgets/lzdspl_opt.pro:common sharelzdspl,opts_initval
+wggs16/widgets/lzdspl_opt.pro:   WDGT.swelzdspl_quit : begin
+wggs16/widgets/lzdspl_opt.pro:   WDGT.swelzdspl_reset : begin
+wggs16/widgets/lzdspl_opt.pro:     widget_control,WDGT.swelzdspl_opts,set_value=opts_initval
+wggs16/widgets/lzdspl_opt.pro:     widget_control,WDGT.swelzdspl_sequence,set_value=swest.autoseq
+wggs16/widgets/lzdspl_opt.pro:     widget_control,WDGT.swelzdspl_contrs,set_value=swest.c_decade
+wggs16/widgets/lzdspl_opt.pro:     widget_control,WDGT.swelzdspl_speciefld,set_value=specie(swest.specie_selct) 
+wggs16/widgets/lzdspl_opt.pro:   WDGT.swelzdspl_opts : begin
+wggs16/widgets/lzdspl_opt.pro:   WDGT.swelzdspl_sequence : begin
+wggs16/widgets/lzdspl_opt.pro:   WDGT.swelzdspl_contrs :  begin
+wggs16/widgets/lzdspl_opt.pro:   ;WDGT.swelzdspl_specie : begin
+wggs16/widgets/lzdspl_opt.pro:   ;   widget_control, WDGT.swelzdspl_speciefld,$
+wggs16/widgets/lzdspl_opt.pro:widget_control,WDGT.swelzdspl_opts,get_value=val
+wggs16/widgets/lzdspl_opt.pro:;=============================== lzdspl_opt ==================================
+wggs16/widgets/lzdspl_opt.pro:pro lzdspl_opt
+wggs16/widgets/lzdspl_opt.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/widgets/lzdspl_opt.pro:common sharelzdspl,opts_initval
+wggs16/widgets/lzdspl_opt.pro:if xregistered('lzdspl_opt') then return 
+wggs16/widgets/lzdspl_opt.pro:WDGT.swelzdspl_base=$
+wggs16/widgets/lzdspl_opt.pro:base=widget_base(WDGT.swelzdspl_base,/column,/frame)
+wggs16/widgets/lzdspl_opt.pro:WDGT.swelzdspl_quit=widget_button(rbase,value='Quit')
+wggs16/widgets/lzdspl_opt.pro:WDGT.swelzdspl_reset=widget_button(rbase,value='Reset')
+wggs16/widgets/lzdspl_opt.pro:WDGT.swelzdspl_opts=cw_bgroup(rbase,label_top='Options',/return_name,row=2,$
+wggs16/widgets/lzdspl_opt.pro:WDGT.swelzdspl_sequence=$
+wggs16/widgets/lzdspl_opt.pro:WDGT.swelzdspl_contrs=$
+wggs16/widgets/lzdspl_opt.pro:WDGT.swelzdspl_specie=$
+wggs16/widgets/lzdspl_opt.pro:WDGT.swelzdspl_speciefld=$
+wggs16/widgets/lzdspl_opt.pro:WDGT.swelzdspl_mode=$
+wggs16/widgets/lzdspl_opt.pro:WDGT.swelzdspl_eleion_sweep=$
+wggs16/widgets/lzdspl_opt.pro:widget_control, WDGT.swelzdspl_speciefld, set_value = specie(swest.specie_selct)
+wggs16/widgets/lzdspl_opt.pro:widget_control, WDGT.swelzdspl_mode, set_value = vsmjf.scimode
+wggs16/widgets/lzdspl_opt.pro:widget_control, WDGT.swelzdspl_eleion_sweep, $
+wggs16/widgets/lzdspl_opt.pro:widget_control, WDGT.swelzdspl_contrs,set_value=swest.c_decade
+wggs16/widgets/lzdspl_opt.pro:WIDGET_CONTROL, WDGT.swelzdspl_base, /REALIZE
+wggs16/widgets/lzdspl_opt.pro:widget_control,WDGT.swelzdspl_base,set_uvalue=info,/no_copy
+wggs16/widgets/lzdspl_opt.pro:XMANAGER, "lzdspl_opt", WDGT.swelzdspl_base , GROUP_LEADER = GROUP 
+wggs16/widgets/plcnts_strl.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/widgets/plcnts_strl.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/widgets/plcnts_strl.pro:     proc_rec           ;process lz record
+wggs16/widgets/plcnts_strl.pro:      'Parent' : swe_levelzero  ;  WIDGET_CONTROL, WDGT.swelz_base_main, /show
+wggs16/widgets/plcnts_strl.pro:        'swe/lz/help_swe_strahl_lz.txt',width=100
+wggs16/widgets/plcnts_strl.pro:                proc_rec           ;process lz record
+wggs16/widgets/plcnts_strl.pro:                proc_rec           ;process lz record
+wggs16/widgets/plcnts_strl.pro:            proc_rec           ;process lz record
+wggs16/widgets/plcnts_strl.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/widgets/plcnts_strl.pro:  proc_rec           ;process lz record
+wggs16/widgets/plcnts_strl.pro:proc_rec           ;process lz record
+wggs16/widgets/plotcounts.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/widgets/plotcounts.pro:;widget_control,WDGT.swelzc_ptchfitdets,set_droplist_select=swest.detslct_list_indx  
+wggs16/widgets/plotcounts.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/widgets/plotcounts.pro:   WDGT.swelzc_recn : begin
+wggs16/widgets/plotcounts.pro:     widget_control,WDGT.swelzc_recn,get_value=val
+wggs16/widgets/plotcounts.pro:   WDGT.swelzc_spin : begin
+wggs16/widgets/plotcounts.pro:     widget_control,WDGT.swelzc_spin,get_value=val
+wggs16/widgets/plotcounts.pro:   WDGT.swelzc_sect : begin
+wggs16/widgets/plotcounts.pro:     widget_control,WDGT.swelzc_sect,get_value=val
+wggs16/widgets/plotcounts.pro:   WDGT.swelzc_vstep : begin
+wggs16/widgets/plotcounts.pro:     widget_control,WDGT.swelzc_vstep,get_value=val
+wggs16/widgets/plotcounts.pro:   WDGT.swelzc_quit: begin
+wggs16/widgets/plotcounts.pro:                widget_control,WDGT.swelzc_recn,get_value=val & recn=val(0)
+wggs16/widgets/plotcounts.pro:                widget_control,WDGT.swelzc_spin,get_value=val & swest.ispinbl=val(0)
+wggs16/widgets/plotcounts.pro:                widget_control,WDGT.swelzc_sect,get_value=val & swest.isector=val(0)
+wggs16/widgets/plotcounts.pro:                widget_control,WDGT.swelzc_vstep,get_value=val & swest.ivstep=val(0)
+wggs16/widgets/plotcounts.pro:                widget_control,WDGT.swelz_base_main,/show
+wggs16/widgets/plotcounts.pro:  WDGT.swelzc_relgain: begin
+wggs16/widgets/plotcounts.pro:  WDGT.swelzc_pltype: begin
+wggs16/widgets/plotcounts.pro:  WDGT.swelzc_bckgsubtr: begin
+wggs16/widgets/plotcounts.pro:          widget_control, WDGT.swelzc_bckgsubtr_noyes, set_value = swest.subtrbkg
+wggs16/widgets/plotcounts.pro:  WDGT.swelzc_glnt: begin
+wggs16/widgets/plotcounts.pro:    if swest.univgmask then widget_control,WDGT.swelzc_glntdate,set_value=gdate_other $
+wggs16/widgets/plotcounts.pro:    else widget_control,WDGT.swelzc_glntdate,set_value=gdate
+wggs16/widgets/plotcounts.pro:  WDGT.swelzc_sect_incr: begin
+wggs16/widgets/plotcounts.pro:  WDGT.swelzc_vstep_incr: begin
+wggs16/widgets/plotcounts.pro:WDGT.swelzc_spin_incr: begin
+wggs16/widgets/plotcounts.pro:WDGT.swelzc_recn_incr: begin
+wggs16/widgets/plotcounts.pro:;WDGT.swelzc_ptchfitdets: swest.detslct_list_indx=event.index
+wggs16/widgets/plotcounts.pro:;WDGT.swelzc_together: begin
+wggs16/widgets/plotcounts.pro:WDGT.swelzc_mnmx: begin
+wggs16/widgets/plotcounts.pro:WDGT.swelzc_det : swest.chng_gain_det=event.index
+wggs16/widgets/plotcounts.pro:WDGT.swelzc_rgincr : begin
+wggs16/widgets/plotcounts.pro:    widget_control,WDGT.swelzc_rgnew,$
+wggs16/widgets/plotcounts.pro:WDGT.swelzc_vpotincr : begin
+wggs16/widgets/plotcounts.pro:WDGT.swelzc_lchanincr : begin
+wggs16/widgets/plotcounts.pro:widget_control,WDGT.swelzc_vstep,set_value=ivstep
+wggs16/widgets/plotcounts.pro:widget_control,WDGT.swelzc_sect,set_value=isector
+wggs16/widgets/plotcounts.pro:swest.ispinbl=ispin & widget_control,WDGT.swelzc_spin,set_value=ispin
+wggs16/widgets/plotcounts.pro:  widget_control,WDGT.swelzc_recn,set_value=recn
+wggs16/widgets/plotcounts.pro:  ispin=swest.ispinbl & widget_control,WDGT.swelzc_spin,set_value=ispin
+wggs16/widgets/plotcounts.pro:  isector=swest.isector & widget_control,WDGT.swelzc_sect,set_value=isector
+wggs16/widgets/plotcounts.pro:  ivstep=swest.ivstep & widget_control,WDGT.swelzc_vstep,set_value=ivstep
+wggs16/widgets/plotcounts.pro:  ;process lz record
+wggs16/widgets/plotcounts.pro:  widget_control,WDGT.swelzc_mode,set_value=string(vsmjf.scimode,format='(i2)')
+wggs16/widgets/plotcounts.pro:    widget_control,WDGT.swelzc_eleion,set_value=specie(vsmjf.eleion(isector,ispin))
+wggs16/widgets/plotcounts.pro:  then widget_control,WDGT.swelzc_eleion,set_value=specie(vsmjf.eleion(0))
+wggs16/widgets/plotcounts.pro:  widget_control, WDGT.swelzc_eleionswp, set_value = swpmd(vsmjf.eleion_sweep)
+wggs16/widgets/plotcounts.pro:  widget_control, WDGT.swelzc_bckgsubtr_noyes, set_value = swest.subtrbkg
+wggs16/widgets/plotcounts.pro:  widget_control,WDGT.swelzc_glnt,set_droplist_select=swest.univgmask
+wggs16/widgets/plotcounts.pro:  widget_control,WDGT.swelzc_glntnum,$
+wggs16/widgets/plotcounts.pro:  if swest.univgmask then widget_control,WDGT.swelzc_glntdate,set_value=gdate_other $
+wggs16/widgets/plotcounts.pro:  else widget_control,WDGT.swelzc_glntdate,set_value=gdate 
+wggs16/widgets/plotcounts.pro:  wset,WDGT.swelzc_win & if swest.noshow ne 1 then wshow
+wggs16/widgets/plotcounts.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/widgets/plotcounts.pro:if wst.lz_is_read eq 0 then return
+wggs16/widgets/plotcounts.pro:  wset,WDGT.swelzc_win & wshow
+wggs16/widgets/plotcounts.pro:  widget_control,WDGT.swelzc_recn,set_value=recn
+wggs16/widgets/plotcounts.pro:  widget_control,WDGT.swelzc_spin,set_value=swest.ispinbl
+wggs16/widgets/plotcounts.pro:  widget_control,WDGT.swelzc_sect,set_value=swest.isector
+wggs16/widgets/plotcounts.pro:  widget_control,WDGT.swelzc_vstep,set_value=swest.ivstep
+wggs16/widgets/plotcounts.pro:  ;process lz record  
+wggs16/widgets/plotcounts.pro:  widget_control,WDGT.swelzc_mode,set_value=string(vsmjf.scimode,format='(i2)')
+wggs16/widgets/plotcounts.pro:    widget_control,WDGT.swelzc_eleion,$
+wggs16/widgets/plotcounts.pro:     widget_control,WDGT.swelzc_eleion,set_value=specie(vsmjf.eleion(0))
+wggs16/widgets/plotcounts.pro:  widget_control, WDGT.swelzc_eleionswp, set_value = swpmd(vsmjf.eleion_sweep)
+wggs16/widgets/plotcounts.pro:  widget_control, WDGT.swelzc_bckgsubtr_noyes, set_value = swest.subtrbkg
+wggs16/widgets/plotcounts.pro:  widget_control,WDGT.swelzc_glnt,set_droplist_select=swest.univgmask
+wggs16/widgets/plotcounts.pro:  widget_control,WDGT.swelzc_glntnum,$
+wggs16/widgets/plotcounts.pro:  if swest.univgmask then widget_control,WDGT.swelzc_glntdate,set_value=gdate_other $
+wggs16/widgets/plotcounts.pro:  else widget_control,WDGT.swelzc_glntdate,set_value=gdate 
+wggs16/widgets/plotcounts.pro:  widget_control,WDGT.swelzc_rgold,$
+wggs16/widgets/plotcounts.pro:  widget_control,WDGT.swelzc_rgnew,$
+wggs16/widgets/plotcounts.pro:  wset,WDGT.swelzc_win & if swest.noshow ne 1 then wshow
+wggs16/widgets/plotcounts.pro:  widget_control,WDGT.swelzc_base,/show
+wggs16/widgets/plotcounts.pro:;process lz record
+wggs16/widgets/plotcounts.pro:WDGT.swelzc_base = WIDGET_BASE(TITLE = 'SWE VEIS Counts Data  ', /COLUMN)  ;main base
+wggs16/widgets/plotcounts.pro:rbase1=widget_base(WDGT.swelzc_base,/row)
+wggs16/widgets/plotcounts.pro:WDGT.swelzc_draw = WIDGET_DRAW(cbase1,/BUTTON_EVENTS,/FRAME, $
+wggs16/widgets/plotcounts.pro:WDGT.swelzc_quit=cw_bgroup(cbase2,['Parent','Quit',$
+wggs16/widgets/plotcounts.pro:WDGT.swelzc_relgain=cw_bgroup(cbase2,'Relative gain determination; Background',/return_name)
+wggs16/widgets/plotcounts.pro:WDGT.swelzc_pltype=cw_bgroup(cbase2,$
+wggs16/widgets/plotcounts.pro:WDGT.swelzc_bckgsubtr=cw_bgroup(rbase,'BackgSubtr (Cts_step /backg)',$
+wggs16/widgets/plotcounts.pro:WDGT.swelzc_bckgsubtr_noyes=cw_field(rbase,/string,xsize=3,ysize=1,title=' ',/row)
+wggs16/widgets/plotcounts.pro:WDGT.swelzc_mode=cw_field(rbase,title='Mode',/integer,xsize=2,/row)
+wggs16/widgets/plotcounts.pro:WDGT.swelzc_eleion=cw_field(rbase,title=' ',/string,xsize=5,/row)
+wggs16/widgets/plotcounts.pro:WDGT.swelzc_eleionswp=cw_field(rbase,/string,xsize=9,ysize=1,title=' ',/row)
+wggs16/widgets/plotcounts.pro:WDGT.swelzc_mnmx=cw_bgroup(cbase2,$
+wggs16/widgets/plotcounts.pro:WDGT.swelzc_sect_incr=cw_bgroup(rbase,$
+wggs16/widgets/plotcounts.pro:WDGT.swelzc_sect=cw_field(rbase,title=' ',/long,xsize=1,/return_events)
+wggs16/widgets/plotcounts.pro:WDGT.swelzc_vstep_incr=cw_bgroup(rbase,$
+wggs16/widgets/plotcounts.pro:WDGT.swelzc_vstep=cw_field(rbase,title=' ',/long,xsize=2,/return_events)
+wggs16/widgets/plotcounts.pro:WDGT.swelzc_spin_incr=cw_bgroup(rbase,$
+wggs16/widgets/plotcounts.pro:WDGT.swelzc_spin=cw_field(rbase,title=' ',/long,xsize=1,/return_events)
+wggs16/widgets/plotcounts.pro:WDGT.swelzc_recn_incr=cw_bgroup(rbase,$
+wggs16/widgets/plotcounts.pro:WDGT.swelzc_recn=cw_field(rbase,title=' ',/long,xsize=4,/return_events)
+wggs16/widgets/plotcounts.pro:;WDGT.swelzc_ptchfitdets=widget_droplist(rbase,title='Pitch fit: Det''s',$
+wggs16/widgets/plotcounts.pro:;WDGT.swelzc_ptchfitdets=widget_droplist(rbase,value=['together','separately'])
+wggs16/widgets/plotcounts.pro:WDGT.swelzc_glnt=widget_droplist(rbase,title='Glint mask',$
+wggs16/widgets/plotcounts.pro:WDGT.swelzc_glntdate=cw_field(rbase,title=' ',/string,xsize=10,/row)
+wggs16/widgets/plotcounts.pro:WDGT.swelzc_glntnum=cw_field(rbase,title=' ',/string,xsize=2,/row)
+wggs16/widgets/plotcounts.pro:;WDGT.swelzc_rgold=cw_field(cbase,title='Old',/string,xsize=42,/row)
+wggs16/widgets/plotcounts.pro:;WDGT.swelzc_rgnew=cw_field(cbase,title='New',/string,xsize=42,/row)
+wggs16/widgets/plotcounts.pro:;WDGT.swelzc_det=widget_droplist(rbase,title='Det',$
+wggs16/widgets/plotcounts.pro:;WDGT.swelzc_rgincr=cw_bgroup(rbase,label_left= $
+wggs16/widgets/plotcounts.pro:;WDGT.swelzc_vpotincr=cw_bgroup(rbase,label_left= $
+wggs16/widgets/plotcounts.pro:;WDGT.swelzc_lchanincr=cw_bgroup(rbase,label_left= $
+wggs16/widgets/plotcounts.pro:WIDGET_CONTROL, WDGT.swelzc_base, /REALIZE
+wggs16/widgets/plotcounts.pro:WIDGET_CONTROL, WDGT.swelzc_draw, GET_VALUE=windw
+wggs16/widgets/plotcounts.pro:WDGT.swelzc_win=windw
+wggs16/widgets/plotcounts.pro:wset,WDGT.swelzc_win
+wggs16/widgets/plotcounts.pro:widget_control,WDGT.swelzc_recn,set_value=recn
+wggs16/widgets/plotcounts.pro:widget_control,WDGT.swelzc_spin,set_value=swest.ispinbl
+wggs16/widgets/plotcounts.pro:widget_control,WDGT.swelzc_sect,set_value=swest.isector
+wggs16/widgets/plotcounts.pro:widget_control,WDGT.swelzc_vstep,set_value=swest.ivstep
+wggs16/widgets/plotcounts.pro:widget_control,WDGT.swelzc_mode,set_value=string(vsmjf.scimode,format='(i2)')
+wggs16/widgets/plotcounts.pro:    widget_control,WDGT.swelzc_eleion,$
+wggs16/widgets/plotcounts.pro:then widget_control,WDGT.swelzc_eleion,set_value=specie(vsmjf.eleion(0))
+wggs16/widgets/plotcounts.pro:widget_control, WDGT.swelzc_eleionswp, set_value = swpmd(vsmjf.eleion_sweep)
+wggs16/widgets/plotcounts.pro:widget_control, WDGT.swelzc_bckgsubtr_noyes, set_value = swest.subtrbkg
+wggs16/widgets/plotcounts.pro:widget_control,WDGT.swelzc_glnt,set_droplist_select=swest.univgmask
+wggs16/widgets/plotcounts.pro:widget_control,WDGT.swelzc_glntnum,$
+wggs16/widgets/plotcounts.pro:if swest.univgmask then widget_control,WDGT.swelzc_glntdate,$
+wggs16/widgets/plotcounts.pro:  widget_control,WDGT.swelzc_glntdate,set_value=gdate 
+wggs16/widgets/plotcounts.pro:;widget_control,WDGT.swelzc_rgold,$
+wggs16/widgets/plotcounts.pro:;widget_control,WDGT.swelzc_rgnew,$
+wggs16/widgets/plotcounts.pro:;widget_control,WDGT.swelzc_det,set_droplist_select=swest.chng_gain_det
+wggs16/widgets/plotcounts.pro:XMANAGER, "plotcounts", WDGT.swelzc_base, GROUP_LEADER = GROUP  
+wggs16/widgets/readplot_sequence.pro:common sharewidglz,wlz
+wggs16/widgets/readplot_sequence.pro:wst.lzdays=[wst.indate]
+wggs16/widgets/readplot_sequence.pro:wst.lzindate=wst.lzdays(0)
+wggs16/widgets/readplot_sequence.pro:common sharewidglz,wlz
+wggs16/widgets/readplot_sequence.pro:common sharewidglz,wlz
+wggs16/widgets/redf_integ.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/widgets/redf_integ.pro:common sharewidglz,wlz
+wggs16/widgets/redf_integ.pro:                  WIDGET_CONTROL, wlz.base(3), /show
+wggs16/widgets/strl_veis_bffr.pro:common sharewidglz,wlz
+wggs16/widgets/strl_veis_bffr.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/widgets/strl_veis_bffr.pro:common sharelevelzero,pltwin_frmt,oplot_sec
+wggs16/widgets/strl_veis_bffr.pro:if wst.lz_is_read then goto,lzisread
+wggs16/widgets/strl_veis_bffr.pro:;process selected lz record
+wggs16/widgets/strl_veis_bffr.pro:   widget_control, wlz.field(14), set_value = swest.subtrbkg
+wggs16/widgets/strl_veis_bffr.pro:wst.lz_is_read=1
+wggs16/widgets/strl_veis_bffr.pro:lzisread:    ;an lz record has been read
+wggs16/widgets/strl_veis_bffr.pro:widget_control,wlz.field(10),set_value=recn
+wggs16/widgets/strl_veis_bffr.pro:spinbl=swest.ispinbl & widget_control,wlz.field(11),set_value=spinbl
+wggs16/widgets/strl_veis_bffr.pro:nvmax=swest.nvmax & widget_control,wlz.field(12),set_value=nvmax
+wggs16/widgets/strl_veis_bffr.pro:widget_control, wlz.field(17), set_value = vsmjf.scimode
+wggs16/widgets/strl_veis_bffr.pro:widget_control, wlz.field(18), set_value = swpmd(vsmjf.eleion_sweep)
+wggs16/widgets/strl_veis_bffr.pro:  print,'time selected from lz file: '
+wggs16/widgets/strl_veis_bffr.pro:  print,'lz.recn, swest.ispinbl, vsmjf.suntim_vsbl(swest.ispinbl) (seconds) ',$
+wggs16/widgets/strl_veis_bffr.pro:      lz.recn,swest.ispinbl,vsmjf.suntim_vsbl(swest.ispinbl)
+wggs16/widgets/strl_veis_bffr.pro:    ;test whether day of the given time is the same as "lzdate" 
+wggs16/widgets/strl_veis_bffr.pro:    ;if given time is the same as lzdate, then the correct magfile has already
+wggs16/widgets/strl_veis_bffr.pro:    ;if given time is NOT the same as lzdate, then the appropriate
+wggs16/widgets/strl_veis_bffr.pro:    ;magfile that agrees with lzdate..
+wggs16/widgets/strl_veis_bffr.pro:    ;but will use the first mag vector on the day corresponding to lzdate..
+wggs16/widgets/strl_veis_bffr.pro:    if ymd(timpb5) eq wst.lzdate then begin 
+wggs16/widgets/strl_veis_bffr.pro:      wmag=where(wst.magdate eq wst.lzdate)
+wggs16/widgets/strl_veis_bffr.pro:        print,'ymd(given time), lzdate, magdate ',$
+wggs16/widgets/strl_veis_bffr.pro:          ymd(timpb5), wst.lzdate, wst.magdate(wmag)
+wggs16/widgets/strl_veis_bffr.pro:         'first 3sec interval on lzdate will be used: mindx,sindx',mindx,sindx
+wggs16/widgets/strl_veis_bffr.pro:       string(lz.yr,format='(i4)')+'_'+string(lz.dy,format='(i3)')+'_'+$
+wggs16/widgets/strl_veis_bffr.pro:       string(lz.ms/1000,format='(f9.3)')
+wggs16/widgets/strl_veis_bffr.pro:    widget_control,wlz.field(13),set_value=lhms
+wggs16/widgets/strl_veis_bffr.pro:     if wst.timsel eq 'lz' or wst.timsel eq 'lztm' then  $
+wggs16/widgets/strl_veis_bffr.pro:  widget_control, wlz.field(15), set_value = swest.delete * swest.ndel
+wggs16/widgets/strl_veis_bffr.pro:common sharewidglz,wlz
+wggs16/widgets/strl_veis_bffr.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/widgets/strl_veis_bffr.pro:        ;proc_fpitch,wid=swest.lzwin(0),pltype=pltype, err=err
+wggs16/widgets/strl_veis_bffr.pro:  'Parent' : WIDGET_CONTROL, wlz.base(3), iconify=0
+wggs16/widgets/strl_veis_bffr.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/widgets/swe_levelzero.pro:;========================== swe_levelzero_event,event =========================
+wggs16/widgets/swe_levelzero.pro:pro swe_levelzero_event,event
+wggs16/widgets/swe_levelzero.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/widgets/swe_levelzero.pro:common sharelevelzero,pltwin_frmt,oplot_sec
+wggs16/widgets/swe_levelzero.pro:;print,'swe_levelzero_event :',event.id,event.value
+wggs16/widgets/swe_levelzero.pro:      if event.id ne WDGT.swelz_open and event.id ne WDGT.swelz_spectra $
+wggs16/widgets/swe_levelzero.pro:      if (event.id eq WDGT.swelz_open or event.id eq WDGT.swelz_spectra) $
+wggs16/widgets/swe_levelzero.pro:      if event.id eq WDGT.swelz_draw1 and keyword_set(fh) eq 0 then return
+wggs16/widgets/swe_levelzero.pro:  WDGT.swelz_draw1 : begin   ;plot in first window
+wggs16/widgets/swe_levelzero.pro:         if swest.strlf_veisf eq 1 then strlf_veisf,wid=swest.lzwin(0) $
+wggs16/widgets/swe_levelzero.pro:             proc_fw,wid=swest.lzwin(0),pltype=pltype, err=err,$
+wggs16/widgets/swe_levelzero.pro:           else strl_newmode,wid=swest.lzwin(0)  
+wggs16/widgets/swe_levelzero.pro:         proc_fw,wid=swest.lzwin(0),pltype=pltype,lsscn=1,vparc=x_redf
+wggs16/widgets/swe_levelzero.pro:  WDGT.swelz_draw2 : begin        ;plot in second window
+wggs16/widgets/swe_levelzero.pro:         if swest.strlf_veisf eq 1 then strlf_veisf,wid=swest.lzwin(1) $
+wggs16/widgets/swe_levelzero.pro:             proc_fw,wid=swest.lzwin(1),pltype=pltype, err=err,$
+wggs16/widgets/swe_levelzero.pro:         proc_fw,wid=swest.lzwin(1),pltype=pltype,lsscn=1,vparc=x_redf         
+wggs16/widgets/swe_levelzero.pro:  WDGT.swelz_draw3 : begin      ;plot in third window
+wggs16/widgets/swe_levelzero.pro:         if swest.strlf_veisf eq 1 then strlf_veisf,wid=swest.lzwin(2) $
+wggs16/widgets/swe_levelzero.pro:             proc_fw,wid=swest.lzwin(2),pltype=pltype, err=err,$
+wggs16/widgets/swe_levelzero.pro:         proc_fw,wid=swest.lzwin(2),pltype=pltype,lsscn=1,vparc=x_redf         
+wggs16/widgets/swe_levelzero.pro:  WDGT.swelz_fpltype : begin
+wggs16/widgets/swe_levelzero.pro:    widget_control,WDGT.swelz_fpltype,get_uvalue=list
+wggs16/widgets/swe_levelzero.pro:     Widget_CONTROL,WDGT.swelz_hmsfld,Get_Value=val
+wggs16/widgets/swe_levelzero.pro:     Widget_CONTROL,WDGT.swelz_hmsfld,Set_Value=val ; Improves interface.
+wggs16/widgets/swe_levelzero.pro:     hour_hms,wst.xydata(0),hms,lhms=lhms & wst.timsel='lztm'
+wggs16/widgets/swe_levelzero.pro:     wst.hms=hms(0) & wst.pb5=ymd_pb5(long(wst.lzdate))
+wggs16/widgets/swe_levelzero.pro:     print,'WDGT.swelz_hmsfld: selected time ',$
+wggs16/widgets/swe_levelzero.pro:       wst.xydata(0),'  ',wst.hms,'  ',wst.pb5 & wst.lz_is_read=0
+wggs16/widgets/swe_levelzero.pro:     Widget_CONTROL,WDGT.swelz_hmsfld,Get_Value=time_begin ; Get begin time.
+wggs16/widgets/swe_levelzero.pro:     pltype = [0,2] & Widget_CONTROL,WDGT.swelz_fpltype,$ ; Reset f plot type.
+wggs16/widgets/swe_levelzero.pro:    if (swest.veis_on eq 0) then strl_newmode,wid=swest.lzwin(0)
+wggs16/widgets/swe_levelzero.pro:  WDGT.swelz_recincre : begin  ;increment f data rec number
+wggs16/widgets/swe_levelzero.pro:    widget_control,WDGT.swelz_spinfld,set_value=swest.ispinbl
+wggs16/widgets/swe_levelzero.pro:    widget_control,WDGT.swelz_recfld,set_value=recn    
+wggs16/widgets/swe_levelzero.pro:    wst.timsel='lz'
+wggs16/widgets/swe_levelzero.pro:    wst.lz_is_read=0
+wggs16/widgets/swe_levelzero.pro:                      swest.ilzplt=swest.ilzplt+1
+wggs16/widgets/swe_levelzero.pro:                        pltwin=swest.ilzplt-3*fix(swest.ilzplt/3) + 1
+wggs16/widgets/swe_levelzero.pro:                           pltwin=swest.ilzplt-2*fix(swest.ilzplt/2) + 2
+wggs16/widgets/swe_levelzero.pro:  WDGT.swelz_spinincre : begin     ;increment f data spin number
+wggs16/widgets/swe_levelzero.pro:                       wst.lz_is_read=0
+wggs16/widgets/swe_levelzero.pro:                    widget_control,WDGT.swelz_spinfld,set_value=swest.ispinbl
+wggs16/widgets/swe_levelzero.pro:                    widget_control,WDGT.swelz_recfld,set_value=recn
+wggs16/widgets/swe_levelzero.pro:                    wst.timsel='lz'
+wggs16/widgets/swe_levelzero.pro:                    print,'WDGT.swelz_spinincre ',$
+wggs16/widgets/swe_levelzero.pro:                      swest.ilzplt=swest.ilzplt+1
+wggs16/widgets/swe_levelzero.pro:                        pltwin=swest.ilzplt-3*fix(swest.ilzplt/3) + 1
+wggs16/widgets/swe_levelzero.pro:                         pltwin=swest.ilzplt-2*fix(swest.ilzplt/2) + 2
+wggs16/widgets/swe_levelzero.pro:                       wst.lz_is_read=0
+wggs16/widgets/swe_levelzero.pro:                    widget_control,WDGT.swelz_spinfld,set_value=swest.ispinbl
+wggs16/widgets/swe_levelzero.pro:                    widget_control,WDGT.swelz_recfld,set_value=recn
+wggs16/widgets/swe_levelzero.pro:                    wst.timsel='lz'
+wggs16/widgets/swe_levelzero.pro:                      swest.ilzplt=swest.ilzplt+1
+wggs16/widgets/swe_levelzero.pro:                        pltwin=swest.ilzplt-3*fix(swest.ilzplt/3) + 1
+wggs16/widgets/swe_levelzero.pro:                         pltwin=swest.ilzplt-2*fix(swest.ilzplt/2) + 2
+wggs16/widgets/swe_levelzero.pro:  WDGT.swelz_days: wst.lzindate=wst.lzdays(event.index) 
+wggs16/widgets/swe_levelzero.pro:  WDGT.swelz_spectra : begin
+wggs16/widgets/swe_levelzero.pro:  WDGT.swelz_open : begin
+wggs16/widgets/swe_levelzero.pro:          lzinput
+wggs16/widgets/swe_levelzero.pro:          if swest.lzwfrmt eq 0 and swest.veis_on eq 0 then begin
+wggs16/widgets/swe_levelzero.pro:            swest.lzwfrmt = 1 & swest.pltype_index = 0 ; Default style
+wggs16/widgets/swe_levelzero.pro:            swe_levelzero
+wggs16/widgets/swe_levelzero.pro:          if swest.lzwfrmt eq 1 and swest.veis_on eq 1 then begin
+wggs16/widgets/swe_levelzero.pro:            swest.lzwfrmt = 0 & pltype = 0 ; Default type
+wggs16/widgets/swe_levelzero.pro:            swe_levelzero
+wggs16/widgets/swe_levelzero.pro:          widget_control,WDGT.swelz_spectra,sensitive=swest.veis_on
+wggs16/widgets/swe_levelzero.pro:          widget_control,WDGT.swelz_sav,sensitive=swest.veis_on
+wggs16/widgets/swe_levelzero.pro:          widget_control,WDGT.swelz_fevents,sensitive=swest.veis_on
+wggs16/widgets/swe_levelzero.pro:          widget_control,WDGT.swelz_vstps,sensitive=swest.veis_on
+wggs16/widgets/swe_levelzero.pro:          widget_control,WDGT.swelz_pbin,sensitive=swest.veis_on
+wggs16/widgets/swe_levelzero.pro:          wst.timsel='lztm'
+wggs16/widgets/swe_levelzero.pro:          widget_control,WDGT.swelz_hmsfld,set_value=lhms
+wggs16/widgets/swe_levelzero.pro:          wst.indate=wst.lzdate
+wggs16/widgets/swe_levelzero.pro:          widget_control,WDGT.swelz_mode,$
+wggs16/widgets/swe_levelzero.pro:  WDGT.swelz_quit : begin
+wggs16/widgets/swe_levelzero.pro:        'swelz/help_swe_lz.txt',width=100
+wggs16/widgets/swe_levelzero.pro:  WDGT.swelz_clrs : begin
+wggs16/widgets/swe_levelzero.pro:    widget_control,WDGT.swelz_clrs,get_uvalue=list
+wggs16/widgets/swe_levelzero.pro:                               strl_newmode,wid=swest.lzwin(0)
+wggs16/widgets/swe_levelzero.pro: WDGT.swelz_hcpy : begin
+wggs16/widgets/swe_levelzero.pro:    widget_control,WDGT.swelz_hcpy,get_uvalue=list
+wggs16/widgets/swe_levelzero.pro:                 strl_newmode,wid=swest.lzwin(0)
+wggs16/widgets/swe_levelzero.pro:  WDGT.swelz_recfld : begin
+wggs16/widgets/swe_levelzero.pro:     WIDGET_CONTROL, WDGT.swelz_recfld, GET_VALUE = val
+wggs16/widgets/swe_levelzero.pro:     wst.timsel='lz'
+wggs16/widgets/swe_levelzero.pro:     print,'WDGT.swelz_recfld: selected recn ',recn
+wggs16/widgets/swe_levelzero.pro:     wst.lz_is_read=0
+wggs16/widgets/swe_levelzero.pro: WDGT.swelz_spinfld : begin
+wggs16/widgets/swe_levelzero.pro:     WIDGET_CONTROL, WDGT.swelz_spinfld, GET_VALUE = val
+wggs16/widgets/swe_levelzero.pro:     wst.timsel='lz'
+wggs16/widgets/swe_levelzero.pro:     print,'WDGT.swelz_spinfld: selected spinbl ',swest.ispinbl
+wggs16/widgets/swe_levelzero.pro:     wst.lz_is_read=0
+wggs16/widgets/swe_levelzero.pro: WDGT.swelz_hmsfld : begin
+wggs16/widgets/swe_levelzero.pro:     WIDGET_CONTROL, WDGT.swelz_hmsfld, GET_VALUE = val
+wggs16/widgets/swe_levelzero.pro:     Widget_CONTROL,WDGT.swelz_hmsfld,Set_Value=val ; Improves interface.
+wggs16/widgets/swe_levelzero.pro:     wst.timsel='lztm'
+wggs16/widgets/swe_levelzero.pro:     wst.pb5=ymd_pb5(long(wst.lzdate))
+wggs16/widgets/swe_levelzero.pro:     print,'WDGT.swelz_hmsfld: selected time ',$
+wggs16/widgets/swe_levelzero.pro:     wst.lz_is_read=0
+wggs16/widgets/swe_levelzero.pro: WDGT.swelz_pnlsel : begin
+wggs16/widgets/swe_levelzero.pro:                      swest.lzsurvey=event.index
+wggs16/widgets/swe_levelzero.pro:                      plt,/lzwin
+wggs16/widgets/swe_levelzero.pro:  WDGT.swelz_orbit : begin
+wggs16/widgets/swe_levelzero.pro:    widget_control,WDGT.swelz_orbit,get_uvalue=list
+wggs16/widgets/swe_levelzero.pro:      'Display' : lzdspl_opt
+wggs16/widgets/swe_levelzero.pro:      'Scan LZ file' : swelzw 
+wggs16/widgets/swe_levelzero.pro:  WDGT.swelz_pbin : swest.pbinselect=fix(swest.pbins(event.index)) 
+wggs16/widgets/swe_levelzero.pro:  WDGT.swelz_vstps : swest.nvmax=fix(swest.nvmaxlist(event.index))
+wggs16/widgets/swe_levelzero.pro:  WDGT.swelz_sav : begin
+wggs16/widgets/swe_levelzero.pro:    widget_control,WDGT.swelz_sav,get_uvalue=list
+wggs16/widgets/swe_levelzero.pro:  WDGT.swelz_fevents : begin
+wggs16/widgets/swe_levelzero.pro:  widget_control,WDGT.swelz_fevents,get_uvalue=list
+wggs16/widgets/swe_levelzero.pro:  WDGT.swelz_special_appl : call_procedure,getenv('SPECIAL_APPL_SWELZ')
+wggs16/widgets/swe_levelzero.pro:  WDGT.swelz_vdist : begin ; *********************************************New
+wggs16/widgets/swe_levelzero.pro:     Widget_CONTROL,WDGT.swelz_hmsfld,Get_Value=val
+wggs16/widgets/swe_levelzero.pro:     Widget_CONTROL,WDGT.swelz_hmsfld,Set_Value=val ; Improves interface.
+wggs16/widgets/swe_levelzero.pro:     hour_hms,wst.xydata(0),hms,lhms=lhms & wst.timsel='lztm'
+wggs16/widgets/swe_levelzero.pro:     wst.hms=hms(0) & wst.pb5=ymd_pb5(long(wst.lzdate))
+wggs16/widgets/swe_levelzero.pro:     print,'WDGT.swelz_hmsfld: selected time ',$
+wggs16/widgets/swe_levelzero.pro:       wst.xydata(0),'  ',wst.hms,'  ',wst.pb5 & wst.lz_is_read=0
+wggs16/widgets/swe_levelzero.pro:     Widget_CONTROL,WDGT.swelz_hmsfld,Get_Value=time_begin ; Get begin time.
+wggs16/widgets/swe_levelzero.pro:  WDGT.swelz_drawsurvey : begin
+wggs16/widgets/swe_levelzero.pro:           wst.timsel='lztm'    
+wggs16/widgets/swe_levelzero.pro:                      swest.ilzplt=swest.ilzplt+1
+wggs16/widgets/swe_levelzero.pro:                        pltwin=swest.ilzplt-3*fix(swest.ilzplt/3) + 1
+wggs16/widgets/swe_levelzero.pro:                        pltwin=swest.ilzplt-2*fix(swest.ilzplt/2) + 2
+wggs16/widgets/swe_levelzero.pro:;============================= swe_levelzero ====================================
+wggs16/widgets/swe_levelzero.pro:pro swe_levelzero,group=group
+wggs16/widgets/swe_levelzero.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/widgets/swe_levelzero.pro:if xregistered('swe_levelzero') then begin
+wggs16/widgets/swe_levelzero.pro:     widget_control,WDGT.swelz_pnlsel,get_uvalue=list     
+wggs16/widgets/swe_levelzero.pro:     widget_control,WDGT.swelz_pnlsel,set_value=list
+wggs16/widgets/swe_levelzero.pro:     if total(d.pnlsel-d.pnlsel_last) ne 0 then swest.lzsurvey=0
+wggs16/widgets/swe_levelzero.pro:     widget_control,WDGT.swelz_pnlsel,set_droplist_select=swest.lzsurvey
+wggs16/widgets/swe_levelzero.pro:     WIDGET_CONTROL, WDGT.swelz_drawsurvey, GET_VALUE=windw
+wggs16/widgets/swe_levelzero.pro:     plt,/lzwin
+wggs16/widgets/swe_levelzero.pro:     WIDGET_CONTROL, WDGT.swelz_base_main,iconify=0
+wggs16/widgets/swe_levelzero.pro:     wst.timsel='lztm'
+wggs16/widgets/swe_levelzero.pro:     widget_control,WDGT.swelz_hmsfld,set_value=lhms
+wggs16/widgets/swe_levelzero.pro:   widget_control,WDGT.swelz_fpltype,set_droplist_select=swest.pltype_index
+wggs16/widgets/swe_levelzero.pro:   widget_control,WDGT.swelz_mode,set_value=string(vsmjf.scimode,format='(i1)')
+wggs16/widgets/swe_levelzero.pro:   widget_control,WDGT.swelz_days,set_value=wst.lzdays(where(wst.lzdays ne ''))
+wggs16/widgets/swe_levelzero.pro:   wlzdy=where(wst.lzdays eq wst.lzindate)  ;wst.surveydate
+wggs16/widgets/swe_levelzero.pro:   widget_control,WDGT.swelz_days,set_droplist_select=wlzdy(0)
+wggs16/widgets/swe_levelzero.pro:   widget_control,WDGT.swelz_pbin,set_droplist_select=wpbin(0)
+wggs16/widgets/swe_levelzero.pro:  WIDGET_CONTROL, WDGT.swelz_base_main,/show
+wggs16/widgets/swe_levelzero.pro:;get indices of instrument housekeeping into mjf array, lz.mf   
+wggs16/widgets/swe_levelzero.pro:;get tm map of science and genl hk data offsets into lz 
+wggs16/widgets/swe_levelzero.pro:print,'swe_levelzero: timsel ',wst.timsel
+wggs16/widgets/swe_levelzero.pro:WDGT.swelz_base_main = WIDGET_BASE(TITLE = 'SWE LZ Data Display', /COLUMN)  
+wggs16/widgets/swe_levelzero.pro:rbase1=widget_base(WDGT.swelz_base_main,/row)
+wggs16/widgets/swe_levelzero.pro:WDGT.swelz_quit=cw_bgroup(rbase,['Parent',$
+wggs16/widgets/swe_levelzero.pro:WDGT.swelz_days=widget_droplist(rbase,$
+wggs16/widgets/swe_levelzero.pro:  title=' ',value=wst.lzdays(where(wst.lzdays ne '')))
+wggs16/widgets/swe_levelzero.pro:WDGT.swelz_open=cw_bgroup(rbase,[ 'Open LZ'],column=1,/return_name) 
+wggs16/widgets/swe_levelzero.pro:WDGT.swelz_spectra=cw_bgroup(rbase,['Veis data','Strahl data'],$
+wggs16/widgets/swe_levelzero.pro:WDGT.swelz_clrs=widget_droplist(rbase,title=' ',value=list,uvalue=list)
+wggs16/widgets/swe_levelzero.pro:WDGT.swelz_hcpy=widget_droplist(rbase,title=' ',value=list,uvalue=list)
+wggs16/widgets/swe_levelzero.pro:WDGT.swelz_orbit=widget_droplist(rbase,title=' ',value=list,uvalue=list)
+wggs16/widgets/swe_levelzero.pro:;WDGT.swelz_sav=cw_bgroup(rbase,['Save f'],row=1,label_left=' ',/return_name)
+wggs16/widgets/swe_levelzero.pro:WDGT.swelz_sav=widget_droplist(rbase,title='Save f',$
+wggs16/widgets/swe_levelzero.pro:;  WDGT.swelz_special_appl=cw_bgroup(rbase,/row,/return_name,label_left=' ',$
+wggs16/widgets/swe_levelzero.pro:rbase2=widget_base(WDGT.swelz_base_main,/row)
+wggs16/widgets/swe_levelzero.pro:   WDGT.swelz_pnlsel=widget_droplist(rbase,title=' ',value=list,uvalue=list)
+wggs16/widgets/swe_levelzero.pro:widget_control,WDGT.swelz_pnlsel,set_droplist_select=swest.lzsurvey
+wggs16/widgets/swe_levelzero.pro:WDGT.swelz_mode=cw_field(rbase,title='mode',/noedit,/string,xsize=1,ysize=1,/row)
+wggs16/widgets/swe_levelzero.pro:   WDGT.swelz_spinincre = cw_bgroup(rbase,[' + ',' - ','auto'],Row=1,$
+wggs16/widgets/swe_levelzero.pro:   WDGT.swelz_spinincre = cw_bgroup(rbase,[' + ',' - '],Row=1,$ ;      NO VEIS.
+wggs16/widgets/swe_levelzero.pro:WDGT.swelz_spinfld=cw_field(rbase,title=' ',/return_events,/long,xsize=1,$
+wggs16/widgets/swe_levelzero.pro:WDGT.swelz_recincre=cw_bgroup(rbase,[' + ',' - '],row=1,$
+wggs16/widgets/swe_levelzero.pro:WDGT.swelz_recfld=cw_field(rbase,title=' ',/return_events,/long,xsize=4,$
+wggs16/widgets/swe_levelzero.pro:WDGT.swelz_hmsfld=cw_field(rbase,title='hhmmss',/return_events,/string,xsize=6,$
+wggs16/widgets/swe_levelzero.pro:WDGT.swelz_fpltype=widget_droplist(rbase,title=' ',value=list,uvalue=list)
+wggs16/widgets/swe_levelzero.pro:WDGT.swelz_vstps=widget_droplist(rbase,title='vstps',value=swest.nvmaxlist)
+wggs16/widgets/swe_levelzero.pro:widget_control,WDGT.swelz_vstps,set_droplist_select=wnvmx(0)
+wggs16/widgets/swe_levelzero.pro:WDGT.swelz_pbin=widget_droplist(rbase,title='pbin',value=swest.pbins)
+wggs16/widgets/swe_levelzero.pro:widget_control,WDGT.swelz_pbin,set_droplist_select=wpbin(0)
+wggs16/widgets/swe_levelzero.pro:WDGT.swelz_fevents=widget_droplist(rbase,title=' ',value=list,uvalue=list)
+wggs16/widgets/swe_levelzero.pro:;WDGT.swelz_vdist = CW_BGROUP(rbase,Row=1,/Return_Name,Label_Left=' ',$
+wggs16/widgets/swe_levelzero.pro:     WDGT.swelz_surveybase=widget_base(WDGT.swelz_base_main,/row,/FRAME)
+wggs16/widgets/swe_levelzero.pro:     rbase0=WDGT.swelz_surveybase
+wggs16/widgets/swe_levelzero.pro:     WDGT.swelz_drawsurvey = WIDGET_DRAW(rbase0,/BUTTON_EVENTS,/FRAME, $
+wggs16/widgets/swe_levelzero.pro:  rbase0=widget_base(WDGT.swelz_base_main,/row)
+wggs16/widgets/swe_levelzero.pro:  if swest.lzwfrmt eq 0 then $
+wggs16/widgets/swe_levelzero.pro:  WDGT.swelz_draw1 = WIDGET_DRAW(cbase1,/BUTTON_EVENTS,/FRAME, $
+wggs16/widgets/swe_levelzero.pro:  WDGT.swelz_draw1 = WIDGET_DRAW(cbase1,/BUTTON_EVENTS,/FRAME, $
+wggs16/widgets/swe_levelzero.pro:  if swest.lzwfrmt eq 0 then $
+wggs16/widgets/swe_levelzero.pro:  WDGT.swelz_draw2 = WIDGET_DRAW(cbase2,/BUTTON_EVENTS,/FRAME, $
+wggs16/widgets/swe_levelzero.pro:  if swest.lzwfrmt eq 0 then $
+wggs16/widgets/swe_levelzero.pro:  WDGT.swelz_draw3 = WIDGET_DRAW(cbase3,/BUTTON_EVENTS,/FRAME, $
+wggs16/widgets/swe_levelzero.pro:WIDGET_CONTROL, WDGT.swelz_base_main, /REALIZE
+wggs16/widgets/swe_levelzero.pro:  WIDGET_CONTROL, WDGT.swelz_drawsurvey, GET_VALUE=windw
+wggs16/widgets/swe_levelzero.pro:  plt,/lzwin
+wggs16/widgets/swe_levelzero.pro:WIDGET_CONTROL, WDGT.swelz_draw1, GET_VALUE=windw
+wggs16/widgets/swe_levelzero.pro:if swest.lzwfrmt eq 0 then begin
+wggs16/widgets/swe_levelzero.pro:  WIDGET_CONTROL, WDGT.swelz_draw2, GET_VALUE=windw
+wggs16/widgets/swe_levelzero.pro:  WIDGET_CONTROL, WDGT.swelz_draw3, GET_VALUE=windw
+wggs16/widgets/swe_levelzero.pro:if keyword_set(wst.lzdate) ne 0 then begin
+wggs16/widgets/swe_levelzero.pro:     wst.timsel='lztm'
+wggs16/widgets/swe_levelzero.pro:     widget_control,WDGT.swelz_hmsfld,set_value=lhms
+wggs16/widgets/swe_levelzero.pro:widget_control,WDGT.swelz_fpltype,set_droplist_select=swest.pltype_index
+wggs16/widgets/swe_levelzero.pro:wlzdy=where(wst.lzdays eq wst.lzindate)
+wggs16/widgets/swe_levelzero.pro:widget_control,WDGT.swelz_days,set_droplist_select=wlzdy(0)
+wggs16/widgets/swe_levelzero.pro:widget_control,WDGT.swelz_spectra,sensitive=swest.veis_on
+wggs16/widgets/swe_levelzero.pro:widget_control,WDGT.swelz_sav,sensitive=swest.veis_on
+wggs16/widgets/swe_levelzero.pro:widget_control,WDGT.swelz_fevents,sensitive=swest.veis_on
+wggs16/widgets/swe_levelzero.pro:widget_control,WDGT.swelz_vstps,sensitive=swest.veis_on
+wggs16/widgets/swe_levelzero.pro:widget_control,WDGT.swelz_pbin,sensitive=swest.veis_on
+wggs16/widgets/swe_levelzero.pro:XMANAGER, "swe_levelzero", WDGT.swelz_base_main, GROUP_LEADER = GROUP  
+wggs16/widgets/swelzw_m2.pro:common lzstuff,infile,lundat,recn,fh,lz,ihk,hkm1,vsm1,vdatc,sdatc,sp,vsmjf
+wggs16/widgets/swelzw_m2.pro:  widget_control,set_value=string(lz.recn,format='(i5)'),wb.field1(2)
+wggs16/widgets/swelzw_m2.pro:  widget_control,set_value=string(lz.mfc,format='(i5)'),wb.field1(30)
+wggs16/widgets/swelzw_m2.pro:  widget_control,set_value=string(lz.nfill,format='(i5)'),wb.field1(31)
+wggs16/widgets/swelzw_m2.pro:  widget_control,set_value=string(lz.nsync,format='(i5)'),wb.field1(32)
+wggs16/widgets/swelzw_m2.pro:  widget_control,set_value=string(lz.telmod,format='(i3)')+'  '+md(lz.telmod),$
+wggs16/widgets/swelzw_m2.pro:  wqlty=where(lz.qlty ne 0,nwqlty)
+wggs16/widgets/swelzw_m2.pro:  time_utc,lz.mf(hkm1(1).offs:hkm1(1).offs+6),$
+wggs16/widgets/swelzw_m2.pro:  mjf_cntr=lz.mf(ihk(1).offs)
+wggs16/widgets/swelzw_m2.pro:  elec_ion=get_bits(lz.mf(ihk(6).offs),ihk(6).bv(0).p,ihk(6).bv(0).n)
+wggs16/widgets/swelzw_m2.pro:  scimode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/widgets/swelzw_m2.pro:  tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/widgets/swelzw_m2.pro:  tmrate_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(2).p,ihk(2).bv(2).n)
+wggs16/widgets/swelzw_m2.pro:    tm_mode= get_bits(lz.mf(ihk(j*10).offs),ihk(j*10).bv(5).p,ihk(j*10).bv(5).n)
+wggs16/widgets/swelzw_m2.pro:    tm_rate= get_bits(lz.mf(ihk(j*10).offs),ihk(j*10).bv(6).p,ihk(j*10).bv(6).n)
+wggs16/widgets/swelzw_m2.pro:;============================= swelzw_event ================================
+wggs16/widgets/swelzw_m2.pro:PRO swelzw_event, event
+wggs16/widgets/swelzw_m2.pro:common lzstuff,$
+wggs16/widgets/swelzw_m2.pro:infile,lundat,recn,fh,lz,ihk,hkm1,vsm1,vdatc,sdatc,sp,vsmjf
+wggs16/widgets/swelzw_m2.pro:;common lzstuff,$
+wggs16/widgets/swelzw_m2.pro:;infile,lundat,recn,fh,lz,scindx,ihk,hkm1,fcblm1,vsm1,vdatc,sdatc,sp,vsmjf
+wggs16/widgets/swelzw_m2.pro:common shareswelzw,orig_recn
+wggs16/widgets/swelzw_m2.pro:        wb.field1(0): begin  ;run with new input lz file
+wggs16/widgets/swelzw_m2.pro:                swelzw
+wggs16/widgets/swelzw_m2.pro:                proc_rec,lpr=1 ;process lz record 
+wggs16/widgets/swelzw_m2.pro:            proc_rec,lpr=1           ;process lz record
+wggs16/widgets/swelzw_m2.pro:          timsel='lz'
+wggs16/widgets/swelzw_m2.pro:                  ms_hms,lz.ms,h,m,s           ;get hhmmss.ms from msec of day
+wggs16/widgets/swelzw_m2.pro:                  prt_hdr,lunprt,lz,h,m,s           ;print major frame header
+wggs16/widgets/swelzw_m2.pro:             2: prt_mf,lunprt,lz.mf,lz.recn         ;print major frame data
+wggs16/widgets/swelzw_m2.pro:             0: lzhdrs
+wggs16/widgets/swelzw_m2.pro:;======================================swelzw =============================
+wggs16/widgets/swelzw_m2.pro:PRO swelzw, GROUP = GROUP
+wggs16/widgets/swelzw_m2.pro:common lzstuff,$
+wggs16/widgets/swelzw_m2.pro:infile,lundat,recn,fh,lz,ihk,hkm1,vsm1,vdatc,sdatc,sp,vsmjf
+wggs16/widgets/swelzw_m2.pro:common shareswelzw,orig_recn
+wggs16/widgets/swelzw_m2.pro:if xregistered('swelzw') then begin
+wggs16/widgets/swelzw_m2.pro:     proc_rec,lpr=1           ;process lz record
+wggs16/widgets/swelzw_m2.pro:  fh=read_lzhdr(lundat) ;fh=file header structure 
+wggs16/widgets/swelzw_m2.pro:;widget interface to select and read lz records
+wggs16/widgets/swelzw_m2.pro:  wb.field1(0)=cw_field(rbase,title='lz data file',$
+wggs16/widgets/swelzw_m2.pro:  wb.field1(2)=cw_field(rbase,title='lz.recn',/noedit,/long,xsize=10)
+wggs16/widgets/swelzw_m2.pro:  list2=['  lz.mfc  ',' lz.nfill ',' lz.nsync  ',' lz.telmod ','nmf qlty>0']
+wggs16/widgets/swelzw_m2.pro:  [ 'file header',    'record header',     'lz data',$ 
+wggs16/widgets/swelzw_m2.pro:  proc_rec,lpr=1    ;process lz record
+wggs16/widgets/swelzw_m2.pro:XMANAGER, "swelzw", wb.base, GROUP_LEADER = GROUP  ;hand off to manager
+wggs16/widgets/swelzw.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/widgets/swelzw.pro:  widget_control,set_value=string(lz.recn,format='(i5)'),wb.field1(2)
+wggs16/widgets/swelzw.pro:  widget_control,set_value=string(lz.mfc,format='(i5)'),wb.field1(30)
+wggs16/widgets/swelzw.pro:  widget_control,set_value=string(lz.nfill,format='(i5)'),wb.field1(31)
+wggs16/widgets/swelzw.pro:  widget_control,set_value=string(lz.nsync,format='(i5)'),wb.field1(32)
+wggs16/widgets/swelzw.pro:  widget_control,set_value=string(lz.telmod,format='(i3)')+'  '+md(lz.telmod),$
+wggs16/widgets/swelzw.pro:  wqlty=where(lz.qlty ne 0,nwqlty)
+wggs16/widgets/swelzw.pro:  time_utc,lz.mf(hkm1(1).offs:hkm1(1).offs+6),$
+wggs16/widgets/swelzw.pro:  mjf_cntr=lz.mf(ihk(1).offs)
+wggs16/widgets/swelzw.pro:  elec_ion=get_bits(lz.mf(ihk(6).offs),ihk(6).bv(0).p,ihk(6).bv(0).n)
+wggs16/widgets/swelzw.pro:  scimode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(0).p,ihk(2).bv(0).n)
+wggs16/widgets/swelzw.pro:  tmmode_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(1).p,ihk(2).bv(1).n)
+wggs16/widgets/swelzw.pro:  tmrate_ihk=get_bits(lz.mf(ihk(2).offs),ihk(2).bv(2).p,ihk(2).bv(2).n)
+wggs16/widgets/swelzw.pro:    tm_mode= get_bits(lz.mf(ihk(j*10).offs),ihk(j*10).bv(5).p,ihk(j*10).bv(5).n)
+wggs16/widgets/swelzw.pro:    tm_rate= get_bits(lz.mf(ihk(j*10).offs),ihk(j*10).bv(6).p,ihk(j*10).bv(6).n)
+wggs16/widgets/swelzw.pro:;============================= swelzw_event ================================
+wggs16/widgets/swelzw.pro:PRO swelzw_event, event
+wggs16/widgets/swelzw.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/widgets/swelzw.pro:common shareswelzw,orig_recn
+wggs16/widgets/swelzw.pro:        wb.field1(0): begin  ;run with new input lz file
+wggs16/widgets/swelzw.pro:                widget_control,get_value=lzfile,wb.field1(0)
+wggs16/widgets/swelzw.pro:                swelzw
+wggs16/widgets/swelzw.pro:                proc_rec  ;process lz record 
+wggs16/widgets/swelzw.pro:            proc_rec           ;process lz record
+wggs16/widgets/swelzw.pro:          wst.timsel='lz'
+wggs16/widgets/swelzw.pro:             0: prt_flhdr,lunprt,lzfile,fh          ;print file header
+wggs16/widgets/swelzw.pro:                  ms_hms,lz.ms,h,m,s           ;get hhmmss.ms from msec of day
+wggs16/widgets/swelzw.pro:                  prt_hdr,lunprt,lz,h,m,s           ;print major frame header
+wggs16/widgets/swelzw.pro:             2: prt_mf,lunprt,lz.mf,lz.recn         ;print major frame data
+wggs16/widgets/swelzw.pro:             0: lzhdrs
+wggs16/widgets/swelzw.pro:;======================================swelzw =============================
+wggs16/widgets/swelzw.pro:PRO swelzw, GROUP = GROUP
+wggs16/widgets/swelzw.pro:;common lzstuff,$
+wggs16/widgets/swelzw.pro:;infile,lundat,recn,fh,lz,ihk,hkm1,vsm1,vdatc,sdatc,sp,vsmjf
+wggs16/widgets/swelzw.pro:common lzstuff,lzfile,lundat,recn,fh,lz,ihk,sp,vsmjf,veis_hvtbl
+wggs16/widgets/swelzw.pro:common shareswelzw,orig_recn
+wggs16/widgets/swelzw.pro:if xregistered('swelzw') then begin
+wggs16/widgets/swelzw.pro:     proc_rec           ;process lz record
+wggs16/widgets/swelzw.pro:  fh=read_lzhdr(lundat) ;fh=file header structure 
+wggs16/widgets/swelzw.pro:  prt_flhdr,0,lzfile,fh  ;print file header
+wggs16/widgets/swelzw.pro:;widget interface to select and read lz records
+wggs16/widgets/swelzw.pro:  wb.field1(0)=cw_field(rbase,title='lz data file',$
+wggs16/widgets/swelzw.pro:    value=lzfile,xsize=30,/string,/noedit)
+wggs16/widgets/swelzw.pro:  wb.field1(2)=cw_field(rbase,title='lz.recn',/noedit,/long,xsize=10)
+wggs16/widgets/swelzw.pro:  list2=['  lz.mfc  ',' lz.nfill ',' lz.nsync  ',' lz.telmod ','nmf qlty>0']
+wggs16/widgets/swelzw.pro:  [ 'file header',    'record header',     'lz data',$ 
+wggs16/widgets/swelzw.pro:  proc_rec    ;process lz record
+wggs16/widgets/swelzw.pro:XMANAGER, "swelzw", wb.base, GROUP_LEADER = GROUP  ;hand off to manager
+wggs16/widgets/vdist_tser.pro:;        the 'restore colors' selection in the SWE_levelzero SWEDAT widget (or
+wggs16/widgets/vdist_tser.pro:common lzstuff ; Provides access to: 'recn': the "current" record number,
+wggs16/widgets/vdist_tser.pro:      Widget_CONTROL,WDGT.swelz_hmsfld,Get_value=hms_now ; Get "curr." time.
+wggs16/widgets/vdist_tser.pro:   wst.lz_is_read = false ; Indicate that new "current" record not been read.
+wggs16/widgets/vdist_tser.pro:;  'swe_levelzero'-widget plot windows (on the botton of the widget).
+wggs16/widgets/vdist_tser.pro:common lzstuff ; Provides access to: 'fh': the 'file header' structure, and
+wggs16/widgets/vdist_tser.pro:Widget_CONTROL,WDGT.swelz_hmsfld,Get_value=hms_now ; Get "curr." time.
+wggs16/widgets/vdist_tser.pro:         Widget_CONTROL,WDGT.swelz_draw1,Get_Value=drawid1 ; Find window IDs
+wggs16/widgets/vdist_tser.pro:         Widget_CONTROL,WDGT.swelz_draw2,Get_Value=drawid2 ;  for desired
+wggs16/widgets/vdist_tser.pro:         Widget_CONTROL,WDGT.swelz_draw3,Get_Value=drawid3 ;  plot locations.
+wggs16/widgets/vdist_tser.pro:;  distribution time series to the "swe_levelzero" widget.
+wggs16/widgets/vdist_tser.pro:                       Group_Leader=WDGT.swelz_base_main,/Modal,/Floating,$
+wggs16/widgets/vdist_tser.pro:;       survey plot window of the "swe_levelzero" widget.
+wggs16/widgets/wanal.pro:          if xregistered('swe_levelzero') eq 0 then $
+wggs16/widgets/wanal.pro:          swe_levelzero   else $
+wggs16/widgets/wanal.pro:          if xregistered('swe_levelzero') ne 0 then $
+wggs16/widgets/wanal.pro:          swe_levelzero else $
+wggs16/widgets/wanal.pro:          WIDGET_CONTROL, WDGT.swelz_base_main,iconify=0  
