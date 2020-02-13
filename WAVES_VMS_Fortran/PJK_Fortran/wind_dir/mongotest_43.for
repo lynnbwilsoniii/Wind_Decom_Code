@@ -1,0 +1,77 @@
+	program mongotest
+C
+C	TO TRY TO FIGURE OUT HOW TO RUN TDSVIS FROM LAPTOP
+C
+      COMMON /MONGOPAR/
+     1  X1,X2,Y1,Y2,GX1,GX2,GY1,GY2,LX1,LX2,LY1,LY2,
+     1  GX,GY,CX,CY,
+     1  EXPAND,ANGLE,LTYPE,LWEIGHT,
+     1  CHEIGHT,CWIDTH,CXDEF,CYDEF,PSDEF,PYDEF,COFF,
+     1  TERMOUT,XYSWAPPED,NUMDEV,
+     1  PI,USERVAR(10),AUTODOT
+        INTEGER*4 LX1,LX2,LY1,LY2,LTYPE,LWEIGHT,NUMDEV
+C
+	REAL PP(4)
+	REAL YY(4)
+	DATA PP /0., 1., 2., 3./
+	DATA YY /0., 1., 4., 9./
+C
+	ITERM = 7
+	ITERMT = ITERM
+C
+ 100	CONTINUE
+C
+        CALL MGOINIT
+        CALL MGOSETUP(ITERM)
+	GX1SV = GX1
+        GX2SV = GX2
+        GY1SV = GY1
+        GY2SV = GY2
+        CALL MGOERASE
+C
+        WRITE(39,*) 'XY',X1,X2,Y1,Y2
+        WRITE(39,*) 'G',GX1,GX2,GY1,GY2
+        WRITE(39,*) 'G',GX,GY
+        WRITE(39,*) 'L',LX1,LX2,LY1,LY2
+	WRITE(39,*) 'NOW CALLING SETLOC'
+C
+        CALL MGOSETLOC(GX1,GY1,GX2,.38*GY2)
+C        CALL MGOSETLOC(38.,38.,600.,700.)
+C
+        WRITE(39,*) 'XY',X1,X2,Y1,Y2
+        WRITE(39,*) 'G',GX1,GX2,GY1,GY2
+        CALL MGOSETLIM(PP(1),YY(1),PP(4),YY(4))
+        CALL MGOCONNECT(PP,YY,4)
+	CALL MGOBOX(1,2)
+	WRITE(39,*) 'NOW CALLING SETLOC .38*GY2,.76*GY2 '
+	CALL MGOSETLOC(GX1,.38*GY2SV,GX2,.76*GY2SV)
+	CALL MGOBOX(1,2)
+	CALL MGOCONNECT(PP,YY,4)
+        CALL MGOPLOTID('[.WIND]MONGOTEST','ONE ')
+C
+C
+        WRITE(39,*) 'XY',X1,X2,Y1,Y2
+        WRITE(39,*) 'G',GX1,GX2,GY1,GY2
+C
+        IF(ITERMT.LT.0) THEN
+          CALL MGOPRNTPLOT(NVEC)
+          PRINT*,' NO. VECTORS PLOTTED',NVEC
+        ELSE
+	  print*,'type p to plot'
+          READ(5,1023) DISPOSE
+ 1023     FORMAT(A1)
+            IF(DISPOSE.EQ.'P'.OR.DISPOSE.EQ.'p') THEN
+              call mgotclose
+              ITERMT = -1
+              GO TO 100
+            ENDIF
+            IF(DISPOSE.EQ.'S'.OR.DISPOSE.EQ.'s') THEN
+              call mgotclose
+              ITERMT = -3
+              GO TO 100
+            ENDIF
+          CALL MGOTCLOSE
+        ENDIF
+C
+	STOP
+	END

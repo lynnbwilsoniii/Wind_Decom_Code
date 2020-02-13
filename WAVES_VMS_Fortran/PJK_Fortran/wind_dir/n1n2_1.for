@@ -1,0 +1,23 @@
+C	IF N2.LE.N1, PERMUTE THE DATA TO USE POINTS 1 TO SOMETHING
+C
+	DO N = 1,NPT
+	  WT(N) = 1.
+	ENDDO
+C
+	IF(N2.LE.N1) THEN       
+C	  EXCLUDE 1 TO N2 AND N1 TO NPT
+	  DO N = 1,N2
+	    WT(N) = 0.
+	  ENDDO
+	  DO N = N1,NPT
+	    WT(N) = 0.
+	  ENDDO
+C
+	ELSE
+C	  EXCLUDE N1 TO N2 
+	  DO N = N1,N2
+	    WT(N) = 0.
+	  ENDDO
+	ENDIF
+C
+

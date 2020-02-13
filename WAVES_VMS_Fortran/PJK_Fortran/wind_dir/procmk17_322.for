@@ -1,0 +1,1118 @@
+	PROGRAM PROCMK17
+C
+C	READS MAKEFILE17.RESULTS2 AND ADDS SOME INFORMATION
+C		MAKEFILE17.RESULTS2 IS SAME AS MAKEFILE17.RESULTS EXCEPT 
+C		THAT TIMES ARE ACTUAL TIMES OF SHOCK CROSSING.
+C	IF RTEMP LT -1, IT MAKES A PLOT LIKE MAKEFILE17.  IF RTEMP = ACTUAL 
+C	VALUE, IT DOES NOTHING EXCEPT REWRITE	
+C	IF RTEMP = 0, THE TIME IS ACTUAL TIME OF THE SHOCK AND IT CALCULATES 
+C	AND WRITES SSCALE, COORDS, UPSTREAM VEL AND B, RATIO VEL AND B, B.N, V.N
+C	IQUAL = 0 MEANS TIME IS FROM MAKEFILE17 AND NOT ACCURATE
+C	IQUAL = 1 MEANS TIME HAS BEEN DETERMINED FROM SUMMARY PLOTS
+C	IQUAL = 2 MEANS TIME HAS BEEN DETERMINED FROM SPLOT
+C	IQUAL = 3 MEANS ANGBN HAS BEEN DETERMINED MANUALLY
+C	The program also writes a record of TDS events, to for064.dat.  
+C	afterward, running ORDER64 puts them in chronological order into
+C	for065.dat
+C
+	INTEGER YYMMDD,HHMMSS,YYYY,HH,MM,DDW,OK,OKT,TMCHANNEL,CH
+	INTEGER YYYYW,YYMMDDW,HHW,MMW,NDAY
+	INTEGER W_CHANNEL_OPEN
+	integer*4 OK1,OK2,SCETI4(2),TDS_COUNT	
+	INTEGER*4 W_CHANNEL_CLOSE,W_EVENT,RET_SIZE,W_MESSAGES_OFF
+	INTEGER*4 W_ITEM_I4,W_ITEM_R4,W_ITEM_R8
+	REAL BX(50),BY(50),BZ(50),YY3D(50),VX(50),VY(50),VZ(50)
+	REAL VTEMP(3),VTEMP1(3),SHNORM(3)
+	REAL*8 SCET8,SCETSV,RGSE,SCETTEMP,SCETT(50),SCETINT
+	character*32 ITEM
+	character*4 event
+	character*80	STREAM
+	COMMON /FILEDAY/ STREAM
+C
+	DATA NERR /0/
+	DATA INOUT /0/
+	DATA XNOSE,RFLANK/14.6,25.6/
+	DATA RE /6.378E3/
+	DATA TWOPI /6.2831853/
+C	data event /'HK'/
+	data event /'CDF'/
+	DATA INOUT /1/
+	DATA IQUAL /0/
+C
+	OPEN(UNIT=69,FILE='MAKEFILE17.RESULTS',STATUS='OLD',READONLY)
+	WRITE(99,*) ' '
+	WRITE(99,*) ' '
+ 100	CONTINUE
+C
+C	READ A NEW LINE FROM THE SHOCK CROSSING LIST
+C
+C	READ(69,1107,END=300) SCETDAY,YYMMDD,HHMMSS,XTEMP,YTEMP,ZTEMP,
+	READ(69,*,END=300) SCETDAY,YYMMDD,HHMMSS,XTEMP,YTEMP,ZTEMP,
+     1	      RTEMP,INOUT
+     1       ,IQUAL,SCALE,ANGBN,SUMSQ,VALF,ALFMACH,VRAT,BRAT,DELB,
+     2	      TDS_COUNT,TDSM,PWR,ISPS
+C*********
+C	IF(IQUAL.EQ.0.OR.TDS_COUNT.EQ.0) THEN
+c	IF(ISPS.EQ.0.AND.TDS_COUNT.NE.0) THEN
+c	WRITE(99,1107) SCETDAY,YYMMDD,HHMMSS,XTEMP,YTEMP,ZTEMP,RTEMP,INOUT
+c     1       ,IQUAL,SCALE,ANGBN,SUMSQ,VALF,ALFMACH,VRAT,BRAT,DELB,
+c     2	      TDS_COUNT,TDSM,PWR,ISPS
+c	ENDIF
+c	GO TO 100
+C*********
+C	READ(69,*,END=300) SCETDAY,YYMMDD,HHMMSS,XTEMP,YTEMP,ZTEMP,
+C     1		RTEMP,INOUT,IQUAL
+C	IF(SCETDAY.GT.6549.) STOP
+C	rtemp = -1.
+	print*,' '
+	print*,'input time',scetday,yymmdd,hhmmss
+	YYYY = YYMMDD/10000.
+	MON = (YYMMDD - 10000*YYYY)/100
+	NDAY = MOD(YYMMDD,100)
+	HH = HHMMSS/10000.
+	MM = (HHMMSS - 10000.*HH)/100.
+	SS = MOD(HHMMSS,100)
+	SCET8 = DBLE(SCETDAY) + HH/24.D00 + MM/1440.E00 + SS/86400.D00
+	print*,'calc scet8,yymmdd ',scet8,yymmdd
+C	call w_ur8_to_ymd(scet8,yyyyw,monw,ddw,hhw,mmw,ssw,ms)
+C	call w_ur8_from_ymd(scet8,yyyyw,monw,ddw,hhw,mmw,ssw,ms)
+C	PRINT*,'return Y M D H M',YYYYW,MONW,DDW,HHW,MMW
+C	SCET8 = DBLE(SCETDAY) + HHW/24.D00 + MMW/1440.E00 + SSW/86400.D00
+C
+C	OPEN A WIND DATA CHANNEL
+C
+	WRITE(STREAM,30) YYMMDD
+ 30	FORMAT('WI_LZ_WAV_',I8.8,'_V*.DAT')
+	PRINT*,YYMMDD,STREAM
+C
+C	call w_ur8_to_ydoy(scet8,yyyy,idoy,msec)
+C
+	print*,'in main, stream=',stream
+C
+	ok = w_channel_open(tmchannel,stream)
+	ch = tmchannel
+C
+	print*,'open, TMCHANNEL,ch,ok=',TMCHANNEL,ch,ok
+	if (ok.ne.1) then
+	  print*, 'Cannot open t/m channel'
+	endif
+c
+	scetsv = 0.d00
+	print*,'calling channel position 1',scetsv
+	ok = w_channel_position(tmchannel,scet8)
+	scetsv = scet8
+	okt = w_channel_position(tmchannel,scet8)
+C
+ 	ok = w_event(ch,event)
+	ITEM = 'WIND_ORBIT_X(GSE)_R8'
+	ok = W_ITEM_R8(ch, item, RGSE, 1, ret_size)
+	XGSE = RGSE/RE
+	ITEM = 'WIND_ORBIT_Y(GSE)_R8'
+	ok = W_ITEM_R8(ch, item, RGSE, 1, ret_size)
+	YGSE = RGSE/RE
+	ITEM = 'WIND_ORBIT_Z(GSE)_R8'
+	ok = W_ITEM_R8(ch, item, RGSE, 1, ret_size)
+	ZGSE = RGSE/RE
+	RRE = SQRT(XGSE**2 + YGSE**2 + ZGSE**2)
+	RTEST = RTEMP/RE
+C
+	IF(RTEMP.LT.0.) GO TO 200
+C
+	IF(RTEMP.LT..5) THEN
+C
+C
+	  OKT = W_MESSAGES_OFF(ch)
+C
+	  okt = w_channel_position(tmchannel,scet8)
+ 	  ok = w_event(ch,event)
+C
+	  RTEST = RTEMP/RE
+C
+C		CALCULATE A NEW SCALE
+C
+	  CC = (YGSE**2+ZGSE**2)/RFLANK**2
+	  BB = -XGSE/XNOSE
+	  SCALE = .5*(-BB + SQRT(BB**2 + 4.*CC))
+c	  CALL SPLOT(TMCHANNEL,SCET8,SCALE,ANGBN,MINUP,TDS_COUNT,PWR,
+C     1		TDSM,ISPS)
+	ENDIF
+C
+C	IF(1) GO TO 200
+C
+c	  ANGBN = -9.
+c	  SUMSQ = 0.
+c	  ALFMACH = 0.
+c	  VALF = 0.
+	print 1107, scetday,yymmdd,hhmmss,xtemp,ytemp,ztemp,rtemp,inout
+     1		,iqual,scale,angbn,sumsq,VALF,ALFMACH,VRAT,BRAT,DELB,
+     1		TDS_COUNT,TDSM,PWR
+	WRITE(99,1107) SCETDAY,YYMMDD,HHMMSS,XTEMP,YTEMP,ZTEMP,RTEMP,INOUT
+     1       ,IQUAL,SCALE,ANGBN,SUMSQ,VALF,ALFMACH,VRAT,BRAT,DELB,
+     2	      TDS_COUNT,TDSM,PWR,ISPS
+ 1107	FORMAT(F8.0,I9,I7,3F8.2,F7.2,2I3,F6.2,F4.0,F6.3,F6.0,F6.2,3F5.1,
+     1	 I4,F6.1,E9.2,I3)
+c	at present, 128 characters above
+c	endif
+	dds = scet8
+C
+	ok = w_channel_close(TMCHANNEL)
+	if(1) GO TO 100
+C
+c	IF(ABS(RTEST-RRE).LT.1.E-2) GO TO 100
+C
+C	CALCULATE DISTANCE OF MODEL SHOCK AT THIS XGSE
+C
+	SCALE = 1.
+	XPRM = XGSE
+	YPRM = YGSE
+	ZPRM = ZGSE
+C	PUT IN ABBERATION DUE TO SOLAR WIND
+C	SO FAR, I AM ONLY USING AN AVERAGE SOLAR WIND OF 450 KM/SEC, SO 
+C	ANGLE IS 3.8 DEG. SIN = .0665, COS = .9978 
+	XPRM = .9978*XGSE + .0665*YGSE
+	YPRM = .9978*YGSE - .0665*XGSE
+C 
+C
+c	this is just a bank of statements that might be useful
+c	  IF(RTEMP.LT..5) CALL 
+C	SPLOT(TMCHANNEL,SCET8,SCALE,ANGBN,MINUP,TDS_COUNT,PWR,TDSM,ISPS)
+c	if(rtemp.lt..5) stop
+C
+c	IF(RRE.LT.25.) THEN
+c	  SCET8 = SCET8 + .5D00
+c	  call w_channel_position(ch,scet8)
+c	  ITEM = 'WIND_ORBIT_X(GSE)_R8'
+c	  ok = W_ITEM_R8(ch, item, RGSE, 1, ret_size)
+c	  XGSE = RGSE/RE
+c	  ITEM = 'WIND_ORBIT_Y(GSE)_R8'
+c	  ok = W_ITEM_R8(ch, item, RGSE, 1, ret_size)
+c	  YGSE = RGSE/RE
+c	  ITEM = 'WIND_ORBIT_Z(GSE)_R8'
+c	  ok = W_ITEM_R8(ch, item, RGSE, 1, ret_size)
+c	  ZGSE = RGSE/RE
+C	  ITEM = 'EVENT_SCET_R8'
+C	  OK = W_ITEM_R8(ch, item, SCET8, 1, ret_size)
+c	  ITEM = 'EVENT_SCET'
+c	  ok = W_ITEM_I4(ch, item, SCETI4, 2, ret_size)
+c	  RRE = SQRT(XGSE**2 + YGSE**2 + ZGSE**2)
+C
+c	  WRITE(77,1077) SCET8,SCETI4,XGSE,YGSE,ZGSE,RRE
+C
+c	ENDIF
+C
+C	ITEM = 'WIND_MFI_BPHI(GSE)_R4'
+C	ok = W_ITEM_R4(ch, item, AZMAG, 1, ret_size)
+C	ITEM = 'MAG_ELEVATION'
+C	ok = W_ITEM_I4(ch, item, MAGEL, 1, ret_size)
+C	ITEM = 'SUN_ANGLE'
+C	ok = W_ITEM_I4(ch, item, SUNCLOCK, 1, ret_size)
+C	ITEM = 'WIND_3DP_E_TEMP_R4'
+C	ok = W_ITEM_R4(ch, item, TEMPE, 1, ret_size)
+C	ITEM = 'WIND_3DP_ION_TEMP_R4'
+C	ok = W_ITEM_R4(ch, item, TEMPI, 1, ret_size)
+C	ITEM = 'C	  SNX = 1./XNOSE
+C	  SNY = 2.*YGSE/(25.6*SCALE)**2
+C	  SNZ = 2.*ZGSE/(25.6*SCALE)**2
+C	  SNORM = SQRT(SNX**2 + SNY**2 + SNZ**2)
+C	  PRINT*,N,orbtime,SNORM,bMAG(N),BX(N)
+C	  BDOTN = (BX(N)*SNX + BY(N)*SNY + BZ(N)*SNZ)/SNORM/BMAG(N)
+c	WIND_3DP_ION_DENSITY_R4'
+C	ok = W_ITEM_R4(ch, item, DENS, 1, ret_size)
+C	ok = W_ITEM_R4(ch, item, BMAG, 1, ret_size)
+C	ITEM = 'WIND_SPIN_RATE_R4'
+C	ok = W_ITEM_R4(ch, item, SPINRATE, 1, ret_size)
+C	if(ok.ne.1) then
+C	  spinrate = 2.
+C	endif
+C
+ 200	CONTINUE
+C
+C	CALCULATE SCALE FOR THIS SHOCK CROSSING
+C
+	ITEM = 'WIND_ORBIT_X(GSE)_R8'
+	ok = W_ITEM_R8(ch, item, RGSE, 1, ret_size)
+	XGSE = RGSE/RE
+	ITEM = 'WIND_ORBIT_Y(GSE)_R8'
+	ok = W_ITEM_R8(ch, item, RGSE, 1, ret_size)
+	YGSE = RGSE/RE
+	ITEM = 'WIND_ORBIT_Z(GSE)_R8'
+	ok = W_ITEM_R8(ch, item, RGSE, 1, ret_size)
+	ZGSE = RGSE/RE
+	RRE = SQRT(XGSE**2 + YGSE**2 + ZGSE**2)
+	CC = (YGSE**2+ZGSE**2)/RFLANK**2
+	BB = -XGSE/XNOSE
+	SCALE = .5*(-BB + SQRT(BB**2 + 4.*CC))
+C	print*,' scale after 200 ',scale
+	  SNX = 1./XNOSE
+	  SNY = 2.*YGSE/(25.6*SCALE)**2
+	  SNZ = 2.*ZGSE/(25.6*SCALE)**2
+	  SNORM = SQRT(SNX**2 + SNY**2 + SNZ**2)
+C	  PRINT*,N,orbtime,SNORM,bMAG,BX(N)
+C
+C	AVERAGE B FOR MINUP MINUTES UPSTREAM OF SHOCK
+C
+	MINUP = 10
+	UPN = 2*(MINUP+2)*60./46.
+	NPTUPN = UPN
+	BXAVR = 0.
+	BYAVR = 0.
+	BZAVR = 0.
+	DENS = 0.
+	SAMPL = 1.E-9
+	scettemp = scet8
+C
+C	BACKUP IF THIS IS AN INBOUND PASS, LEAVE TWO MINUTES BLANK
+C
+C		INTERVAL FOR MFI DATA IS 46 SEC
+C	IF(inout.eq.1) then
+	  scettemp = scet8 - (minup+2)*1.d00/1440.d00
+C	ELSE
+C	  scettemp = scet8 + 2.d00/1440.d00
+C	ENDIF
+	okt = w_channel_position(tmchannel,scettemp)
+C
+C	GET BOTH DOWNSTREAM AND UPSTREAM DATA
+C
+ 	ok = w_event(ch,event)
+ 	ITEM = 'WIND_MFI_SCET_R8'
+	  ok = W_ITEM_R8(ch, item, SCETT, NPTUPN, ret_size)
+	  IF(OK.NE.1) THEN
+	    PRINT*,'PROGRAM FAILED TO FIND CDF DATA,OK,YYMMDD=',OK,YYMMDD
+	    WRITE(99,1107) SCETDAY,YYMMDD,HHMMSS,XTEMP,YTEMP,ZTEMP,RTEMP,INOUT
+     1       ,IQUAL,SCALE
+	    GO TO 100
+	  ENDIF
+	print*,'after scett item, nptupn,ret_size=', scett(1),scett(RET_SIZE),
+     1   nptupn,ret_size
+	NPTUPN = RET_SIZE
+ 	ITEM = 'WIND_MFI_BX(GSE)_R4'
+	  ok = W_ITEM_R4(ch, item, BX, NPTUPN, ret_size)
+	ITEM = 'WIND_MFI_BY(GSE)_R4'
+	  ok = W_ITEM_R4(ch, item, BY, NPTUPN, ret_size)
+	ITEM = 'WIND_MFI_BZ(GSE)_R4'
+	  ok = W_ITEM_R4(ch, item, BZ, NPTUPN, ret_size)
+	ITEM = 'WIND_3DP_ION_DENSITY_R4'
+	ok = W_ITEM_R4(ch, item, YY3D, NPTUPN, ret_size)
+	ITEM = 'WIND_3DP_ION_VX(GSE)_R4'
+	ok = W_ITEM_R4(ch, item, VX, NPTUPN, ret_size)
+	ITEM = 'WIND_3DP_ION_VY(GSE)_R4'
+	ok = W_ITEM_R4(ch, item, VY, NPTUPN, ret_size)
+	ITEM = 'WIND_3DP_ION_VZ(GSE)_R4'
+	ok = W_ITEM_R4(ch, item, VZ, NPTUPN, ret_size)
+C	print*,'bx',(bx(I),I=1,NPTUPN)
+C	print*,'by',(by(I),I=1,NPTUPN)
+C	print*,'bz',(bz(I),I=1,NPTUPN)
+C	print*,'ST',(scett(I),I=1,NPTUPN)
+C
+C	UPSTREAM AVERAGE
+C
+c	do i = 1,nptupn
+c	print*,i,scett(i),bx(i),by(i),bz(i)
+c	enddo
+	BXAVR = 0.
+	BYAVR = 0.
+	BZAVR = 0.
+	VXAVR = 0.
+	VYAVR = 0.
+	VZAVR = 0.
+	SUMSQ = 0.
+	DENS = 0.
+	COUNT = 1.E-9
+	  IF(INOUT.EQ.0) THEN
+C		IT'S OUTBOUND, AVERAGE FROM SHOCK TIME + 2 MIN TO + MINUP+2 
+	    PPBN1 = DMOD(SCET8,1.d00)*24.D00 + 2.D00/60.D00
+	    PPBN2 = PPBN1 + MINUP/60.D00
+	  ELSE
+	    PPBN2 = DMOD(SCET8,1.D00)*24.D00 - 2.D00/60.D00
+	    PPBN1 = PPBN2 - DFLOAT(MINUP)/60.D00
+	  ENDIF
+	SCETINT = DINT(SCET8)
+	print*,'ppbn',scet8,SCETINT,ppbn1,ppbn2
+	time = DMOD(scet8,1.D00)*24.d00
+	N = 0
+	DOWHILE(TIME.LT.PPBN1.AND.N.LE.NPTUPN)
+	  N = N+1
+	  IF(YY3D(N).GT.0.) DENS0 = YY3D(N)
+	  time = DMOD(scett(n),1.D00)*24.d00
+	ENDDO
+	DO N = 1,NPTUPN
+	  time = DMOD(scett(n),1.D00)*24.d00
+	  IF(TIME.LE.PPBN2.AND.TIME.GE.PPBN1) THEN
+	  print*,'pp check up',time,ppbn2,n,nptupn
+	    COUNT = COUNT+1.
+	    BXAVR = BXAVR + BX(N)
+	    BYAVR = BYAVR + BY(N)
+	    BZAVR = BZAVR + BZ(N)
+	    SUMSQ = SUMSQ + BX(N)**2 + BY(N)**2 + BZ(N)**2
+	print*,n,scett(n),bx(n),by(n),bz(n)
+	    IF(YY3D(N).GT.0.) THEN
+	      DENS = DENS + YY3D(N)
+	      DENS0 = YY3D(N)
+	    ELSE
+	      DENS = DENS + DENS0
+	    ENDIF
+	    VXAVR = VXAVR + VX(N)
+	    VYAVR = VYAVR + VY(N)
+	    VZAVR = VZAVR + VZ(N)
+	  ENDIF
+	ENDDO
+	BXAVR = BXAVR/COUNT
+	BYAVR = BYAVR/COUNT
+	BZAVR = BZAVR/COUNT
+	VXAVR = VXAVR/COUNT
+	VYAVR = VYAVR/COUNT
+	VZAVR = VZAVR/COUNT
+	DENS = DENS/COUNT
+C	IF(DENS.LT.0.) DENS = 7.
+	SQAVR = BXAVR**2 + BYAVR**2 + BZAVR**2
+	SUMSQ = SUMSQ/COUNT - SQAVR
+	print*,'shock normal',snx/snorm,sny/snorm,snz/snorm
+	print*,'bAVR',bXAVR,BYAVR,BZAVR,COUNT
+	IF(SQAVR.NE.0.) SUMSQ = SUMSQ/SQAVR
+	BMAG = SQRT(BXAVR**2+BYAVR**2+BZAVR**2)
+	BDOTN = 0.
+	IF(SNORM*BMAG.NE.0.) 
+     1		BDOTN = (BXAVR*SNX + BYAVR*SNY + BZAVR*SNZ)/SNORM/BMAG
+	BDOTN = ABS(BDOTN)
+	ANGBN = ACOSD(BDOTN)
+	print*,'bmag,angbn,SUMSQ',bmag,angbn,SUMSQ
+	VALF = 0.
+	IF(DENS.GT.0.) VALF = 21.9*BMAG/SQRT(DENS)  !Bmag in nT, dens in cu.cm.
+C
+	VDOTN = (VXAVR*SNX + VYAVR*SNY + VZAVR*SNZ)/SNORM
+	VDOTN = ABS(VDOTN)
+	ALFMACH = 0.
+	IF(VALF.NE.0.) ALFMACH = VDOTN/VALF
+C
+C	DOWNSTREAM AVERAGE
+C
+	BXAVRD = 0.
+	BYAVRD = 0.
+	BZAVRD = 0.
+	VXAVRD = 0.
+	VYAVRD = 0.
+	VZAVRD = 0.
+	SUMSQD = 0.
+	COUNT = 1.E-9
+	  IF(INOUT.EQ.0) THEN
+C		IT'S OUTBOUND, AVERAGE FROM SHOCK TIME MINUP-2 MIN TO -2 
+	    PPBN2 = DMOD(SCET8,1.D00)*24.D00 - 2.D00/60.D00
+	    PPBN1 = PPBN2 - DFLOAT(MINUP)/60.D00
+	  ELSE
+	    PPBN1 = DMOD(SCET8,1.d00)*24.D00 + 2.D00/60.D00
+	    PPBN2 = PPBN1 + MINUP/60.D00
+	  ENDIF
+	SCETINT = DINT(SCET8)
+	print*,'ppbn',scet8,SCETINT,ppbn1,ppbn2
+	DO N = 1,NPTUPN
+	  time = DMOD(scett(n),1.D00)*24.d00
+	  IF(TIME.LE.PPBN2.AND.TIME.GE.PPBN1) THEN
+	  print*,'pp check down',time,ppbn2,n,nptupn
+	    COUNT = COUNT+1.
+	    BXAVRD = BXAVRD + BX(N)
+	    BYAVRD = BYAVRD + BY(N)
+	    BZAVRD = BZAVRD + BZ(N)
+	    SUMSQD = SUMSQ + BX(N)**2 + BY(N)**2 + BZ(N)**2
+	print*,n,scett(n),bx(n),by(n),bz(n)
+	    VXAVRD = VXAVRD + VX(N)
+	    VYAVRD = VYAVRD + VY(N)
+	    VZAVRD = VZAVRD + VZ(N)
+	  ENDIF
+	ENDDO
+	BXAVRD = BXAVRD/COUNT
+	BYAVRD = BYAVRD/COUNT
+	BZAVRD = BZAVRD/COUNT
+	VXAVRD = VXAVRD/COUNT
+	VYAVRD = VYAVRD/COUNT
+	VZAVRD = VZAVRD/COUNT
+C	IF(DENS.LT.0.) DENS = 7.
+	SQAVRD = BXAVRD**2 + BYAVRD**2 + BZAVRD**2
+	SUMSQD = SUMSQD/COUNT - SQAVR
+	print*,'shock normal',snx/snorm,sny/snorm,snz/snorm
+	print*,'bAVRD',bXAVRD,BYAVRD,BZAVRD,COUNT
+	IF(SQAVRD.NE.0.) SUMSQD = SUMSQD/SQAVRD
+	BMAG = SQRT(BXAVRD**2+BYAVRD**2+BZAVRD**2)
+	DELB = SQRT((BXAVRD-BXAVR)**2+(BYAVRD-BYAVR)**2+(BZAVRD-BZAVR)**2)
+C	BDOTN = 0.
+C	IF(SNORM*BMAG.NE.0.) 
+C     1		BDOTN = (BXAVR*SNX + BYAVR*SNY + BZAVR*SNZ)/SNORM/BMAG
+C	BDOTN = ABS(BDOTN)
+C	ANGBN = ACOSD(BDOTN)
+	print*,'bmag,angbn,SUMSQ',bmag,angbn,SUMSQ
+C	VALF = 0.
+C	IF(DENS.GT.0.) VALF = 21.9*BMAG/SQRT(DENS)  !Bmag in nT, dens in cu.cm.
+C
+	VTEMP(1) = BXAVR
+	VTEMP(2) = BYAVR
+	VTEMP(3) = BZAVR
+	SHNORM(1) = SNX/SNORM
+	SHNORM(2) = SNY/SNORM
+	SHNORM(3) = SNZ/SNORM
+	CALL CROSSP(VTEMP,SHNORM,VTEMP1,BTAN)
+C	print*,'up',vtemp
+C	print*,'up',shnorm
+C	print*,'up',vtemp1
+C	print*,'up',btan
+	VTEMP(1) = BXAVRD
+	VTEMP(2) = BYAVRD
+	VTEMP(3) = BZAVRD
+	CALL CROSSP(VTEMP,SHNORM,VTEMP1,BTAND)
+C	print*,'dn',vtemp
+C	print*,'dn',shnorm
+C	print*,'dn',vtemp1
+C	print*,'dn',btand
+	BRAT = 0.
+	IF(BTAN.NE.0.) BRAT = BTAND/BTAN
+C
+	VDOTND = (VXAVRD*SNX + VYAVRD*SNY + VZAVRD*SNZ)/SNORM
+	VDOTND = ABS(VDOTND)
+	VRAT = 0.
+	IF(VDOTND.NE.0.) VRAT = VDOTN/VDOTND
+C
+C	ALFMACH = 0.
+C	IF(VALF.NE.0.) ALFMACH = VDOTN/VALF
+C
+c	IQUAL=1
+C
+	print*,'at rtemp test, rtemp = ',rtemp
+	IF(RTEMP.LT.-.5) CALL 
+     1	 SPLOT(TMCHANNEL,SCET8,SCALE,ANGBN,MINUP,TDS_COUNT,PWR,TDSM,ISPS)
+	print 1107, scetday,yymmdd,hhmmss,XGSE,YGSE,ZGSE,RRE,inout
+     1	  ,iqual,scale,angbn,sumsq,VALF,ALFMACH,VRAT,BRAT,DELB,
+     1		TDS_COUNT,TDSM,PWR,ISPS
+C	print*,'delb',delb
+	WRITE(99,1107) SCETDAY,YYMMDD,HHMMSS,XGSE,YGSE,ZGSE,RRE,INOUT
+     1       ,IQUAL,SCALE,ANGBN,SUMSQ,VALF,ALFMACH,VRAT,BRAT,DELB,
+     2	      TDS_COUNT,TDSM,PWR,ISPS
+c	okt = w_channel_position(tmchannel,scet8)
+C	if(1) stop
+	ok = w_channel_close(TMCHANNEL)
+	GO TO 100
+ 300	CONTINUE
+	STOP
+	END
+	SUBROUTINE SPLOT(CDFCH,SCET,SCALE0,ANGBN,MINUP,TDSC,PWR,TDSM,ISPS)
+C
+C	PLOT THINGS TO IDENTIFY SHOCK POSITION, NAMELY B, DENSITY,
+C		SW VELOCITY
+C
+	COMMON /MONGOPAR/
+     1  X1,X2,Y1,Y2,GX1,GX2,GY1,GY2,LX1,LX2,LY1,LY2,
+     1  GX,GY,CX,CY,
+     1  EXPAND,ANGLE,LTYPE,LWEIGHT,
+     1  CHEIGHT,CWIDTH,CXDEF,CYDEF,PSDEF,PYDEF,COFF,
+     1  TERMOUT,XYSWAPPED,NUMDEV,
+     1  PI,USERVAR(10),AUTODOT
+	INTEGER*4 LX1,LX2,LY1,LY2,LTYPE,LWEIGHT,NUMDEV
+C
+	COMMON /FILEDAY/ TODAY
+	character*32 ITEM
+	character*80 TODAY,STR
+	character*4 event
+	INTEGER*4 CH,NDAY,ret_size,ok,okt
+	INTEGER*4 W_EVENT,W_CHANNEL_OPEN,W_CHANNEL_CLOSE,CDFCH,TDSCH
+	INTEGER*4 NDATA(2050),SCETI4(2),NEVT,TDS_CHANNEL,TDS_COUNT,TDSC
+	INTEGER*4 TDSF_COUNT,FILL_COUNT
+	REAL YY(600),PP(600),YY3D(600),YY3S(600),YYSD(600),YYSS(600)
+	REAL PP1(600),XRE(600),YRE(600),ZRE(600),VDATA(2050),SPECT(1025)
+	REAL SSCALE(600),BDOTN(600),EFFLEN(9)
+	REAL*8 SCET,SCET1,SCET2,SCSV(600),SCETT,RGSE,DNDAY,SCETTDS1,SCETTDS2
+	REAL*8 SCETINT
+	DATA RE /6378./
+	DATA AVRF,UPVSD/ 0., 0./
+	DATA ISIZE /2048/
+	DATA XNOSE,RFLANK/14.6,25.6/
+	DATA RNOSE0,RFLANK0 /14.6,25.6/
+	DATA EFFLEN /41.1, 3.79, 2.17, 41.1, 3.79, 2.17, 3*1./
+	DATA NPLOTS /0/
+C
+	event = 'CDF'
+	ITERM = -1
+C	ITERM = -3
+C	ITERM = 3
+C
+C	PLOT 4 HOURS CENTERED ON SCET
+C
+	NDAY = SCET
+	print*,'at call splot, nday,scet of shock crossing=',nday,scet
+	SCETINT = DINT(SCET)
+	SCET1 = SCET - 2.D00/24.D00
+	DNDAY = DBLE(NDAY)
+	SCET1 = DMAX1(DNDAY,SCET1)
+	SCET2 = SCET1 + 4.D00/24.D00
+	SCET2 = DMIN1(SCET2,DNDAY + .999D00)
+	PRINT*,'SPLOT CALLED, SCET1,SCET,SCET2=',SCET1,SCET,SCET2
+	PRINT*,'TODAY in SPLOT',TODAY
+	PRINT*,'NDAY,SCET1,2',NDAY,SCET1,SCET2
+C
+	CALL MGOINIT
+	CALL MGOSETUP(ITERM)
+	CALL MGOERASE
+	NPLOTS = NPLOTS+1
+C
+C	PLOT MAGNITUDE OF B
+C
+C	NUMBER OF MFI POINTS IN FOUR HOURS
+	NGET = 240./.75
+	YMAX = 5.
+C	SET POSITION TO BEGINNING OF DAY
+	scett = 0.d00
+	call w_channel_position(CDFCH,scett)
+	call w_channel_position(CDFCH,scet1)
+	NP = 0
+C
+ 	  ok = w_event(CDFCH,EVENT)
+	  IF(OK.EQ.1) THEN
+	    ITEM = 'WIND_MFI_SCET_R8'
+	    ok = W_ITEM_R8(cdfch, item, SCSV, NGET, ret_size)
+	    ITEM = 'WIND_MFI_BMAG_R4'
+	    ok = W_ITEM_R4(cdfch, item, YY, NGET, ret_size)
+C	    print*,'load',n,np,ret_size,scsv(np),yy(np)
+	  ELSE
+	    IF(OK.EQ.82) GO TO 100
+	  ENDIF
+C	  DO NP = 1,RET_SIZE
+	    NP = 0
+	  DOWHILE(SCSV(NP).LT.SCET2)
+	    NP = NP+1
+	    PP(NP) = (SCSV(NP) - NDAY)*24.D00
+	    YMAX = AMAX1(YY(NP),YMAX)
+	ENDDO
+	NP = MIN0(NP,NGET,RET_SIZE)
+	NP = NP-1
+C
+ 100 	  print*,'asked for and got, for MFI',nget,NP
+	PRINT*,'1ST,LAST TIME',PP(1),PP(NP)
+	PRINT*,'1ST,LAST BMAG',YY(1),YY(NP)
+	CALL MGOWINDOW(1,6,1)
+	XSTRT = PP(1) - .1
+	XEND = (SCET2-NDAY)*24.D00 + .1
+	CALL MGOSETLIM(XSTRT,0.,XEND,1.1*YMAX)
+	IF(NP.GT.0) CALL MGOCONNECT(PP,YY,NP)
+	PPSH = (SCET - NDAY)*24.D00
+	CALL MGOSETLTYPE(1)
+	CALL MGORELOCATE(PPSH,0.)
+	CALL MGODRAW(PPSH,1.1*YMAX)
+	CALL MGOSETLTYPE(0)
+C	CALL MGOSETEXPAND(.8)
+	CALL MGOBOX(1,2)
+	WRITE(STR,1001) TODAY(11:14),TODAY(15:16),TODAY(17:18)
+ 1001	FORMAT('HOURS OF ',A4,'/',A2,'/',A2)
+	CALL MGOXLABEL(19,STR)
+	CALL MGOYLABEL(3,'|B|')
+C
+C	CALL MGOSETEXPAND(1.)
+C	TRANGE = GY2-GY1
+C	TINC = .07*TRANGE
+C	XTITLE = GX2 +.005*(GX2-GX1)
+C	YTITLE = GY2
+C	CALL MGOSETEXPAND(.8)
+	PRINT*,'TODAY in SPLOT 2',TODAY
+C
+C	PLOT 3DP,SWE DENSITY,SOLARWIND SPEED
+C		SWE IS DOTTED, 3DP IS SOLID
+	scett = 0.d00
+	call w_channel_position(CDFCH,scett)
+	call w_channel_position(CDFCH,scet1)
+	print*,'3DP channel set to',cdfch,scet1
+C	NUMBER OF 3DP POINTS IN FOUR HOURS
+	NGET = 240./.75
+ 	ok = w_event(CDFCH,EVENT)
+        ITEM = 'WIND_SWE_SCET_R8'
+	ok = W_ITEM_R8(cdfch, item, SCSV, NGET, ret_size)
+ 	print*,'asked for SCET8 and got',nget,RET_SIZE
+	ITEM = 'WIND_SWE_DENSITY_R4'
+	ok = W_ITEM_R4(cdfch, item, YY, NGET, ret_size)
+	ITEM = 'WIND_SWE_VX(GSE)_R4'
+	ok = W_ITEM_R4(cdfch, item, YYSS, NGET, ret_size)
+C	PRINT*,'TODAY in SPLOT 3',TODAY
+
+	YMAX = 5.
+C	YSMAX = 1100.
+	YSMAX = -10000.
+	YSMIN = 10000.
+	NP = 0
+	N = 1
+C	DO N = 1,NGET
+	DOWHILE(SCSV(N).LT.SCET2.AND.N.LE.RET_SIZE)
+	  IF(YY(N).GT.0.) THEN
+	    NP = NP+1
+	    PP(NP) = (SCSV(N) - NDAY)*24.D00
+	    YY(NP) = YY(N)
+	    YYSS(NP) = ABS(YYSS(N))
+	    YMAX = AMAX1(YY(NP),YMAX)
+	    YSMAX = AMAX1(YYSS(NP),YSMAX)
+	    YSMIN = AMIN1(YYSS(NP),YSMIN)
+	  ENDIF
+	  N = N+1
+	ENDDO
+ 	print*,'asked for SWE_DENS and got',nget,RET_SIZE,NP
+	NPS = NP
+	IF(NPS.GT.0) THEN
+	  PRINT*,'SWE MIN,MAX',YSMIN,YSMAX
+	  PRINT*,'1ST,LAST TIME',NPS,PP(1),PP(NPS)
+	  PRINT*,'1ST,LAST SWE VX',NPS,YYSS(1),YYSS(NPS)
+	ELSE
+	  PRINT*,'NO SWE DATA'
+	ENDIF
+C
+        ITEM = 'WIND_3DP_SCET_R8'
+	ok = W_ITEM_R8(cdfch, item, SCSV, NGET, ret_size)
+	ITEM = 'WIND_3DP_ION_DENSITY_R4'
+	ok = W_ITEM_R4(cdfch, item, YY3D, NGET, ret_size)
+	ITEM = 'WIND_3DP_ION_VX(GSE)_R4'
+	ok = W_ITEM_R4(cdfch, item, YY3S, NGET, ret_size)
+C
+c***********
+c	IF(ITERM.LT.0) THEN
+c	  CALL MGOPRNTPLOT(NVEC)
+c	  PRINT*,' NO. VECTORS PLOTTED',NVEC
+c	ELSE
+c	  CALL MGOTCLOSE
+c	ENDIF
+c	print*,'nget=',nget
+c	print*,'return from splot'
+c	if(1) return
+c***********
+	NP = 0
+	N = 1
+C	DO N = 1,NGET
+	DOWHILE(SCSV(N).LT.SCET2.AND.N.LE.RET_SIZE)
+	  IF(YY3D(N).GT.0..AND.YY3S(N).GT.-1.E8) THEN
+	    NP = NP+1
+	    PP1(NP) = (SCSV(N) - NDAY)*24.D00
+	    SCSV(NP) = SCSV(N)
+	    YY3D(NP) = YY3D(N)
+	    YY3S(NP) = ABS(YY3S(N))
+	    YMAX  = AMAX1(YY3D(NP),YMAX)
+	    YSMAX = AMAX1(YY3S(NP),YSMAX)
+	    YSMIN = AMIN1(YY3S(NP),YSMIN)
+	  ENDIF
+	  N = N+1
+	ENDDO
+	NP3 = NP-1
+	IF(NP3.GT.0) THEN
+	  PRINT*,'1ST,LAST TIME',NP3,PP1(1),PP1(NP3)
+	  PRINT*,'1ST,LAST 3DP',NP3,YY3D(1),YY3D(NP3)
+	ELSE
+	  PRINT*,'NO 3DP DATA'
+	ENDIF
+C
+	PRINT*,'TODAY in SPLOT 4',TODAY
+	CALL MGOWINDOW(1,6,2)
+	CALL MGOSETLIM(XSTRT,0.,XEND,YMAX)
+	CALL MGOSETLTYPE(1)
+	IF(NPS.GT.0) CALL MGOCONNECT(PP,YY,NPS)		! SWE ION DENSITY
+	CALL MGOSETLTYPE(0)
+	IF(NP3.GT.0) CALL MGOCONNECT(PP1,YY3D,NP3)	! 3DP ION DENSITY
+C	CALL MGOSETEXPAND(.8)
+	CALL MGOBOX(1,2)
+	CALL MGOYLABEL(7,'DENSITY')
+C
+C	PLOT SOLAR WIND SPEED 
+C
+	CALL MGOWINDOW(1,6,3)
+	CALL MGOSETLIM(XSTRT,YSMIN,XEND,YSMAX)
+	CALL MGOSETLTYPE(1)
+	IF(NPS.GT.0) CALL MGOCONNECT(PP,YYSS,NPS)		! SWE VX
+	CALL MGOSETLTYPE(0)
+	IF(NP3.GT.0) CALL MGOCONNECT(PP1,YY3S,NP3)		! 3DP VX
+	CALL MGOBOX(1,2)
+	CALL MGOYLABEL(6,'ION VX')
+C
+C	PLOT B dot N
+C
+C	this is done by expanding the model shock uniformly, by multiplying
+C	RNOSE0 and RFLANKO by a factor SSCALE, so that the expanded model 
+C	shock passes through the orbit point.  This gives a quadratic 
+C	equation for SSCALE, which will be plotted in the next window.
+C	Then, since the equation of the model shock can be written
+C	x/rnose + (y^2 + z^2)/rflank^2 = 1, the normal is the gradient
+C	[1./rnose, 2 y/rflank^2, 2 z/rflank^2]
+C 
+	call w_channel_position(CDFCH,scet)
+ 	ok = w_event(CDFCH,event)
+	ITEM = 'WIND_ORBIT_X(GSE)_R8'
+	ok = W_ITEM_R8(cdfch, item, RGSE, 1, ret_size)
+	XGSE = RGSE/RE
+	ITEM = 'WIND_ORBIT_Y(GSE)_R8'
+	ok = W_ITEM_R8(cdfch, item, RGSE, 1, ret_size)
+	YGSE = RGSE/RE
+	ITEM = 'WIND_ORBIT_Z(GSE)_R8'
+	ok = W_ITEM_R8(cdfch, item, RGSE, 1, ret_size)
+	ZGSE = RGSE/RE
+	SNX = 1./XNOSE
+	SNY = 2.*YGSE/(25.6*SCALE0)**2
+	SNZ = 2.*ZGSE/(25.6*SCALE0)**2
+	SNORM = SQRT(SNX**2 + SNY**2 + SNZ**2)
+C
+	scett = 0.d00
+	call w_channel_position(CDFCH,scett)
+ 	ok = w_event(CDFCH,event)
+c	print*,'channel set to 0.',cdfch,scett
+	call w_channel_position(CDFCH,scet1)
+c 	ok = w_event(CDFCH,event)
+	SSMAX = 0.
+	SSMIN = 100.
+	BDMAX = 90.
+	BDMIN = 0.
+C
+C	calculate times corresponding to 2 min to 2+minup min before shock
+C
+	print*,'going to 1,np3 loop',np3
+	    PPBN1 = (SCET-NDAY)*24.D00 - 2.D00/60.D00
+	    PPBN2 = PPBN1 - MINUP/60.D00
+	DO N = 1,NP3
+  	  ok = w_event(CDFCH,event)
+	  SCETT = SCSV(N)
+	  ITEM = 'WIND_ORBIT_X(GSE)_R8'
+	  ok = W_ITEM_R8(cdfch, item, RGSE, 1, ret_size)
+	  XRE(N) = RGSE/RE
+	  ITEM = 'WIND_ORBIT_Y(GSE)_R8'
+	  ok = W_ITEM_R8(cdfch, item, RGSE, 1, ret_size)
+	  YRE(N) = RGSE/RE
+	  ITEM = 'WIND_ORBIT_Z(GSE)_R8'
+	  ok = W_ITEM_R8(cdfch, item, RGSE, 1, ret_size)
+	  ZRE(N) = RGSE/RE
+	  SSCALE(N) = .5*(XRE(N)/RNOSE0 + SQRT((XRE(N)/RNOSE0)**2
+     1	     + 4.*(YRE(N)**2+ZRE(N)**2)/RFLANK0**2))
+	  SSMAX = AMAX1(SSMAX,SSCALE(N))
+	  SSMIN = AMIN1(SSMIN,SSCALE(N))
+	  ITEM = 'WIND_MFI_BX(GSE)_R4'
+	  ok = W_ITEM_R4(cdfch, item, BX, 1, ret_size)
+	  ITEM = 'WIND_MFI_BY(GSE)_R4'
+	  ok = W_ITEM_R4(cdfch, item, BY, 1, ret_size)
+	  ITEM = 'WIND_MFI_BZ(GSE)_R4'
+	  ok = W_ITEM_R4(cdfch, item, BZ, 1, ret_size)
+	  BNORM = SQRT(BX**2+BY**2+BZ**2)
+	  XNORM = 1./SSCALE(N)/RNOSE0
+	  YNORM = 2.*YRE(N)/(SSCALE(N)*RFLANK0)**2
+	  ZNORM = 2.*ZRE(N)/(SSCALE(N)*RFLANK0)**2
+	  RNORM = SQRT(XNORM**2+YNORM**2+ZNORM**2)
+	  BDOTN(N) = (BX*SNX + BY*SNY + BZ*SNZ)/BNORM/SNORM
+	  dot = bdotn(n)
+	  BDOTN(N) = ACOSD(ABS(BDOTN(N)))
+	write(77,1077) n,bx,by,bz,dot,bdotn(n)
+ 1077	format(i5,6f10.3)
+	  BDMAX = AMAX1(BDMAX,BDOTN(N))
+	  BDMIN = AMIN1(BDMIN,BDOTN(N))
+	  time = (scett-nday)*24.d00
+	ENDDO
+C
+	print*,'end np3 loop'
+C
+C	PLOT THETA BN
+C
+	CALL MGOWINDOW(1,6,4)
+	CALL MGOSETLIM(XSTRT,BDMIN,XEND,BDMAX)
+	IF(NP3.GT.0) CALL MGOCONNECT(PP1,BDOTN,NP3)
+C	  DRAW AVERAGE BN ANGLE
+	IF(ANGBN.GT.0.) THEN
+	  CALL MGOSETLTYPE(1)
+C	  USE SCALE TO DETERMINE INOUT
+	  IF(SSCALE(1).LT.SSCALE(NP3)) THEN
+C		IT'S OUTBOUND, DRAW FROM SHOCK TIME + 2 MIN TO + MINUP+2 
+	    PPBN1 = (SCET-NDAY)*24.D00 + 2.D00/60.D00
+	    PPBN2 = PPBN1 + MINUP/60.D00
+	  ELSE
+	    PPBN1 = (SCET-NDAY)*24.D00 - 2.D00/60.D00
+	    PPBN2 = PPBN1 - MINUP/60.D00
+	  ENDIF
+	  CALL MGORELOCATE(PPBN1,ANGBN)
+	  CALL MGODRAW(PPBN2,ANGBN)
+	  CALL MGOSETLTYPE(0)
+	ENDIF
+	CALL MGOBOX(1,2)
+	CALL MGOYLABEL(10,'ANG(B\u.N)')
+C
+C	PLOT SCALE
+C
+	CALL MGOWINDOW(1,6,5)
+	CALL MGOSETLIM(XSTRT,SSMIN,XEND,SSMAX)
+	IF(NP3.GT.0) CALL MGOCONNECT(PP1,SSCALE,NP3)
+	CALL MGOSETLTYPE(1)
+	CALL MGORELOCATE(PPSH,SSMIN)
+	CALL MGODRAW(PPSH,SSMAX)
+	CALL MGOSETLTYPE(0)
+	CALL MGOBOX(1,2)
+	CALL MGOYLABEL(5,'SCALE')
+	XPR = XSTRT + .02*(XEND-XSTRT)
+	YPR = SSMIN + .5*(SSMAX-SSMIN)
+	CALL MGORELOCATE(XPR,YPR)
+	WRITE(STR,1003) SCALE0
+ 1003	FORMAT('INPUT SCALE',F5.2)
+	CALL MGOLABEL(16,STR)
+C
+C	PLOT TDS EVENTS
+C
+	TDS_COUNT = 0
+	TDSF_COUNT = 0
+	FILL_COUNT = 0
+C	  COUNT EVENTS WITHIN 5 MIN OF CROSSING TIME
+	SCETTDS1 = SCET - 5.D00/1440.D00 
+	SCETTDS2 = SCET + 5.D00/1440.D00 
+	EVENT = 'TDSF'
+	YMAX = 150.
+	CALL MGOWINDOW(1,6,6)
+	CALL MGOSETLIM(XSTRT,0.,XEND,YMAX)
+	CALL MGOBOX(1,2)
+	CALL MGOYLABEL(3,'TDS')
+C
+	tdsch = cdfch
+	EVENT = 'TDSF'
+	scett = 0.d00
+	print*,'going to get TDS events'
+	call w_channel_position(TDSCH,scett)
+	call w_channel_position(TDSCH,scet1)
+	print*,'TDS channel set to',TDSCH,scet1
+	PWR = 0.
+	TDSM = 0.
+ 200	OK = W_EVENT(TDSCH,EVENT)
+	print*,'tds event, event, ok=  ',event,ok
+	IF(OK.EQ.82) GO TO 250
+	IF(OK.NE.1) GO TO 200
+C	ITEM = 'DATA'
+C	ok = W_ITEM_I4(TDSCH, item, NDATA, ISIZE, ret_size)
+	ITEM = 'EVENT_NUMBER'
+	okt = W_ITEM_I4(TDSCH, item, NEVT, 1, ret_size)
+C	print*,'tds event, event, ok, no.=  ',event,ok,nevt
+C	the following was necessary to overcome a problem in tds_phys
+	if(ok.ne.1) go to 200
+	IPRC = 4
+	CALL TDS_PHYS(TDSCH,IPRC,NDATA,VDATA,SPECT)
+	ITEM = 'EVENT_SCET'
+	ok = W_ITEM_I4(TDSCH, item, SCETI4, 2, ret_size)
+	ITEM = 'FAST_RX_SPEED'
+	ok = W_ITEM_I4(cdfch, item, ISPS, 1, ret_size)
+C	ITEM = 'EVENT_TRUE_SCET_R8'
+C	ITEM = 'EVENT_SCET_R8'
+C	ok = W_ITEM_R8(TDSCH, item, SCETT, 1, ret_size)
+C
+	ITEM = 'CHANNEL'
+	ok = W_ITEM_I4(TDSCH, item, TDS_CHANNEL, 1, ret_size)
+	EFL = EFFLEN(TDS_CHANNEL)  
+C
+	ITEM = 'EVENT_NUMBER'
+	ok = W_ITEM_I4(TDSCH, item, NEVT, 1, ret_size)
+C	IF(SCETT.GE.SCETTDS1.AND.SCETT.LE.SCETTDS2) print*,'tds',sceti4,nevt
+	ITEM = 'FAST_RX_SPEED_R4'
+	ok = W_ITEM_R4(TDSCH, item, SPS, 1, ret_size)
+	ITEM = 'FAST_SAMPLER_THRESHOLD'
+	ok = W_ITEM_R4(TDSCH, item, VMIN, 1, ret_size)
+	NVMAX = MAX0(NDATA(1023),NDATA(1024),NDATA(1025))
+	NVMIN = MIN0(NDATA(1023),NDATA(1024),NDATA(1025))
+	VMAX = MAX0(NVMAX-128,128-NVMIN)
+C	ITEM = 'EVENT_CENTER_SCET_R8'
+	ITEM = 'EVENT_SCET_R8'
+	ok = W_ITEM_R8(TDSCH, item, SCETT, 1, ret_size)
+C	print*,'draw check, scet1,T,2',scet1,scett,scet2
+	IF(SCETT.GE.SCET1.AND.SCETT.LE.SCET2) THEN
+	  TDSTIME = (SCETT - NDAY)*24.D00
+	  CALL MGORELOCATE(TDSTIME,VMIN)
+	  CALL MGODRAW(TDSTIME,VMAX)
+C	  CALL TDSDATA(TDSCH,NDATA,SPS,AVRF,UPVSD)
+	  IF(TDS_CHANNEL.EQ.1) THEN
+	    AVRF1 = AVRF
+	    UPVSD1 = UPVSD
+	  ELSE
+	    AVRF2 = AVRF
+	    UPVSD2 = UPVSD
+	  ENDIF
+C
+	  IF(TDS_CHANNEL.EQ.1) WRITE(64,1064) NEVT,SCETI4,'T',TDS_CHANNEL,VMAX
+     1		,AVRF1,UPVSD1,UPVSD2
+ 1064	  FORMAT(I10,I10,I8,A2,I3,F5.0,F7.3,2F6.2)
+	ENDIF
+C
+	IF(SCETT.GE.SCETTDS1.AND.SCETT.LE.SCETTDS2) THEN
+	   TDS_COUNT = TDS_COUNT+1
+	   TDSF_COUNT = TDSF_COUNT + 1
+	   TDSC = TDS_COUNT
+	  DO N = 1,2048
+	    TDSM = AMAX1(TDSM,1000.*ABS(VDATA(N))/EFL)  ! in mV/m	    
+	    PWR = PWR + (VDATA(N)/EFL)**2
+	  ENDDO
+	ENDIF
+C
+	GO TO 200
+C
+ 250	EVENT = 'FILL'
+	scett = 0.d00
+	call w_channel_position(TDSCH,scett)
+	call w_channel_position(TDSCH,scet1)
+	print*,'FILL channel set to',TDSCH,scet1
+ 240	CONTINUE
+ 	OK = W_EVENT(TDSCH,EVENT)
+	print*,'fill event, event, ok=  ',event,ok
+	IF(OK.EQ.82) GO TO 300
+	IF(OK.NE.1) GO TO 240
+C	ITEM = 'DATA'
+C	ok = W_ITEM_I4(TDSCH, item, NDATA, ISIZE, ret_size)
+	ITEM = 'CHANNEL'
+	ok = W_ITEM_I4(TDSCH, item, TDS_CHANNEL, 1, ret_size)
+	EFL = EFFLEN(TDS_CHANNEL)
+	IF(TDS_CHANNEL.GT.2) GO TO 240
+	IPRC = 4
+	CALL TDS_PHYS(TDSCH,IPRC,NDATA,VDATA,SPECT)
+	ITEM = 'EVENT_SCET'
+	ok = W_ITEM_I4(TDSCH, item, SCETI4, 2, ret_size)
+C	print*,'item,val,ok ',item,sceti4,ok
+	ITEM = 'EVENT_SCET_R8'
+	ok = W_ITEM_R8(TDSCH, item, SCETT, 1, ret_size)
+C	FILL CHANNELS ARE IN CHRONOLOGICAL ORDER
+	IF(SCETT.GT.SCET2+1.D-02) GO TO 300
+c	print*,'item,val,ok ',item,scett,ok
+	ITEM = 'EVENT_NUMBER'
+	ok = W_ITEM_I4(TDSCH, item, NEVT, 1, ret_size)
+	ITEM = 'FAST_RX_SPEED_R4'
+	IF(TDS_CHANNEL.GT.2) ITEM = 'SLOW_RX_SPEED_R4'
+	ok = W_ITEM_R4(TDSCH, item, SPS, 1, ret_size)
+	ITEM = 'FAST_SAMPLER_THRESHOLD'
+	IF(TDS_CHANNEL.GT.2) ITEM = 'SLOW_SAMPLER_THRESHOLD'
+	ok = W_ITEM_R4(TDSCH, item, VMIN, 1, ret_size)
+	NVMAX = MAX0(NDATA(1023),NDATA(1024),NDATA(1025))
+	NVMIN = MIN0(NDATA(1023),NDATA(1024),NDATA(1025))
+	VMAX = MAX0(NVMAX-128,128-NVMIN)
+C	ITEM = 'EVENT_CENTER_SCET_R8'
+C	print*,'FILL EVENT AT',TDSCH,scett,nevt,VMAX
+	IF(SCETT.GE.SCET1.AND.SCETT.LE.SCET2) THEN
+	  TDSTIME = (SCETT - NDAY)*24.D00
+	  CALL MGORELOCATE(TDSTIME,VMIN)
+	  CALL MGODRAW(TDSTIME,VMAX)
+	  CALL TDSDATA(TDSCH,NDATA,SPS,AVRF,UPVSD)
+	  IF(TDS_CHANNEL.EQ.1.OR.TDS_CHANNEL.EQ.5) THEN
+	    AVRF1 = AVRF
+	    UPVSD1 = UPVSD
+	  ELSE
+	    AVRF2 = AVRF
+	    UPVSD2 = UPVSD
+	  ENDIF
+C
+C	  print*,'draw check, scettds1,T,2',scettds1,scett,scettds2
+	  IF(SCETT.GE.SCETTDS1.AND.SCETT.LE.SCETTDS2) THEN
+	    TDS_COUNT = TDS_COUNT+1
+	    FILL_COUNT = FILL_COUNT+1
+	    TDSC = TDS_COUNT
+	    DO N = 1,2048
+	      TDSM = AMAX1(TDSM,1000.*ABS(VDATA(N))/EFL)  ! in mV/m	    
+	      PWR = PWR + (VDATA(N)/EFL)**2
+	    ENDDO
+C	    print*,'chk',nevt,fill_count,tdsm,pwr
+	  ENDIF
+C
+	  IF(TDS_CHANNEL.EQ.1) WRITE(64,1064) NEVT,SCETI4,'F',TDS_CHANNEL,VMAX
+     1		,AVRF,UPVSD1,UPVSD2
+	  IF(TDS_CHANNEL.EQ.3) WRITE(64,1064) NEVT,SCETI4,'F',TDS_CHANNEL,VMAX
+     1		,AVRF,UPVSD1,UPVSD2
+	ENDIF
+C
+c	  DO N = 1,2048
+c	    TDSM = AMAX1(TDSM,1000.*VDATA(N)/EFL)  ! in mV/m	    
+c	    PWR = PWR + (VDATA(N)/EFL)**2
+c	  ENDDO
+C
+	IF(TDS_CHANNEL.GT.2) GO TO 240
+C	  IF(SCETT.GE.SCETTDS1.AND.SCETT.LE.SCETTDS2) TDS_COUNT = TDS_COUNT+1
+	GO TO 240			! GET ANOTHER FILL EVENT
+C
+ 300	CONTINUE
+C
+C	ok = w_channel_close(TDSCH)
+	CLOSE(UNIT=64)
+C
+ 301	CALL MGOPLOTID('PROCMK17','SPLOT')
+C
+	RRE = SQRT(XRE(1)**2+YRE(1)**2+ZRE(1)**2)
+	WRITE(STR,1002) XRE(1),YRE(1),ZRE(1),RRE 
+ 1002	FORMAT('X,Y,Z,R=',4F6.1)
+	CALL MGORELOCATE(XSTRT,1.2*YMAX)
+	CALL MGOPUTLABEL(36,STR,9)
+C
+	RRE = SQRT(XRE(NP3)**2+YRE(NP3)**2+ZRE(NP3)**2)
+	STR = 'NO 3DP DATA'
+	IF(NP3.NE.0) WRITE(STR,1002) XRE(NP3),YRE(NP3),ZRE(NP3),RRE 
+	CALL MGORELOCATE(XEND,1.2*YMAX)
+	CALL MGOPUTLABEL(36,STR,7)
+	IF(ITERM.LT.0) THEN
+	  CALL MGOPRNTPLOT(NVEC)
+	  PRINT*,' NO. VECTORS PLOTTED',NVEC
+	ELSE
+c	  CALL MGOTCLOSE
+	ENDIF
+C
+	TDSC = TDS_COUNT
+	IF(TDS_COUNT.NE.0) PWR =  2.*PWR/TDS_COUNT   ! 2 CHANNELS, EVENTS 
+C		APPEAR TWICE
+	print*,' tds,fill counts ',tdsf_count,fill_count
+	RETURN
+	END
+	SUBROUTINE TDSDATA(CH,NDATA,SPS,AVRF,UPVSD)
+C
+C	CALCULATES AVERAGE FREQUENCY AND PERHAPS OTHER THINGS.
+C
+	INTEGER*4 CH,NDATA(1)
+	REAL ZCROSS(1030),DATA(2050),SPECT(1025)
+	REAL SPS,AVRF,UPVSDR
+	
+C
+C	FIND ZERO CROSSINGS, USING ONLY THE CENTER SECTION FROM 512 TO 1536
+C
+	IZCNT = 0
+	IL = 511
+	IZ = IL
+	IPROCESS = 4
+	CALL TDS_PHYS(CH,IPROCESS,NDATA,DATA,SPECT)
+C	  IF(NDATA(IL).EQ.0) PRINT*,'ZERO DATA',IL,NDATA(IL),NDATA(IL+1)
+	IPROCESS = 0
+	DO IL = 512,1536
+	  IZ = IL
+C	  IF(NDATA(IL).EQ.128) PRINT*,'ZERO DATA',IL,NDATA(IL-1),
+C     1   NDATA(IL),NDATA(IL+1)
+C
+C		COUNT ONLY POS TO NEG
+	  IF(NDATA(IL).GT.128.AND.NDATA(IL+1).LE.128) THEN
+	        IZCNT = IZCNT+1
+		IF(IPROCESS.EQ.0) THEN
+		  S1 = NDATA(IL)
+		  S2 = NDATA(IL+1)
+		ELSE
+		  S1 = DATA(IL)
+		  S2 = DATA(IL+1)
+		ENDIF
+	        DELZ = .5
+		IF((S1-S2).NE.0.) DELZ = S1/(S1 - S2)
+		IF(DELZ.LE.1.AND.DELZ.GE.0.) THEN
+			ZCROSS(IZCNT) = IL + DELZ
+		ELSE
+			ZCROSS(IZCNT) = IL + .5
+		ENDIF
+	  ENDIF
+	ENDDO
+C	print*,'ndata',ndata(1023),ndata(1024),ndata(1025),ndata(1026)
+C	print*,'data',data(1023),data(1024),data(1025),data(1026)
+C	print*,'found zero crossings',izcnt
+C
+C	CALCULATE UP VS DOWN
+C
+	VUP = 0.
+	VDWN = 0.
+	DO N = 2,2047
+	  VUP = AMAX1(VUP,DATA(N))
+	  VDWN = AMIN1(VDWN,DATA(N))
+	ENDDO
+	UPVSD = 0.
+	IF(VDWN.NE.0.) UPVSD = ABS(VUP)/ABS(VDWN)
+	IF(UPVSD.LT.1..AND.UPVSD.GT.0.) UPVSD = 1./UPVSD
+C
+	SPSKHZ = .001*SPS
+C	PRINT*,'IZCNT,SPS',IZCNT,SPS
+	AVRPER = 1024.
+	IF(IZCNT.GT.1) THEN
+	  AVRPER = (ZCROSS(IZCNT)-ZCROSS(1))/(IZCNT-1)
+C	  RMS = SQRT(STD/(IZCNT-1) - AVRPER**2)
+C	  IF(IZCNT.NE.0) RMS = SPSKHZ*(1./AVRPER - 1./(AVRPER+RMS))
+	ENDIF
+	AVRF = 1./AVRPER
+C	
+	RETURN
+	END

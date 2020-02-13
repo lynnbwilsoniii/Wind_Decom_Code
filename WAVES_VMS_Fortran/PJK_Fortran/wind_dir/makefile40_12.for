@@ -1,0 +1,133 @@
+	subroutine makefile(ch)
+c
+C	A PROGRAM TO CALCULATE TIME INSIDE 10 AND 5 RE
+C
+C		1996 MAY 19 TO AUG 12   =   5252  to  5336
+C		1997 JAN 12 TO JUL 4    =   5490  to  5663
+C		1997 NOV 2  TO FEB 20   =   5784  to  5893
+C
+	integer*4 ch,ok,okt,OK1,OK2,SCETI4(2)	
+	INTEGER*4 W_CHANNEL_CLOSE,W_EVENT,RET_SIZE,W_MESSAGES_OFF
+	INTEGER*4 W_ITEM_I4,W_ITEM_R4,W_ITEM_R8
+	REAL*8 SCET8,RGSE,SCETINB10,SCETOUTB10,SCETINB5,SCETOUTB5
+	character*32 ITEM
+	character*4 event
+	DATA NERR /0/
+	DATA RE /6.378E3/
+	DATA TWOPI /6.2831853/
+C	data event /'TDSF'/
+C	data event /'FILL'/
+	data event /'HK'/
+	DATA RRE /100./
+	DATA INBOUND /0/
+C
+C
+	OKT = W_MESSAGES_OFF(ch)
+C
+ 100	ok = w_event(ch,event)
+C
+C	CHECK FOR END OF RECORD
+C
+	if (ok.ne.1) then
+	        IF(OK.EQ.82) then
+		  ok = w_channel_close(ch)
+		  RETURN
+		ENDIF
+		write(6,*) 'cannot open ',event, ', ok=', ok
+		NERR = NERR + 1
+	        IF(NERR.LT.10) GO TO 100
+		RETURN
+        ELSE
+	   	NERR = 0
+	endif
+C
+C
+	ITEM = 'EVENT_SCET'
+	ok = W_ITEM_I4(ch, item, SCETI4, 2, ret_size)
+C	CHECK THAT IT IS NOT LEFT OVER FROM PREVIOUS DAY
+C	IF(SCETI4(2).GT.120000) GO TO 100
+C
+	ITEM = 'WIND_ORBIT_X(GSE)_R8'
+	ok = W_ITEM_R8(ch, item, RGSE, 1, ret_size)
+	XGSE = RGSE/RE
+	ITEM = 'WIND_ORBIT_Y(GSE)_R8'
+	ok = W_ITEM_R8(ch, item, RGSE, 1, ret_size)
+	YGSE = RGSE/RE
+	ITEM = 'WIND_ORBIT_Z(GSE)_R8'
+	ok = W_ITEM_R8(ch, item, RGSE, 1, ret_size)
+	ZGSE = RGSE/RE
+	ITEM = 'EVENT_SCET_R8'
+	RRESV = RRE
+	OK = W_ITEM_R8(ch, item, SCET8, 1, ret_size)
+	RRE = SQRT(XGSE**2 + YGSE**2 + ZGSE**2)
+C	PRINT*,'RRE,RRESV',RRE,RRESV
+C
+C	WRITE(77,1077) SCET8,SCETI4,XGSE,YGSE,ZGSE,RRE
+ 1077	FORMAT(F10.2,I10,I8,4F8.2,F9.2,F6.2)
+C
+C	IF WIND IS OUTSIDE 40 RE, ADVANCE BY 1 DAY
+	IF(RRE.GT.40.) THEN
+	  SCET8 = SCET8 + 1.D00
+	  call w_channel_position(ch,scet8)
+	  GO TO 100
+	ENDIF
+C	IF WIND IS OUTSIDE 15 RE, ADVANCE BY 1 HOUR
+	IF(RRE.GT.15.) THEN
+	  SCET8 = SCET8 + 1.D00/24.D00
+	  call w_channel_position(ch,scet8)
+	  GO TO 100
+	ENDIF
+C
+	IF(RRESV.GT.10..AND.RRE.LE.10.) SCETINB10 = SCET8
+	IF(RRESV.LT.10..AND.RRE.GE.10.) THEN
+	  SCETOUTB10 = SCET8
+	  TIME10 = 24.D00*(SCETOUTB10-SCETINB10)
+	  WRITE(77,1077) SCET8,SCETI4,XGSE,YGSE,ZGSE,RRE,TIME10
+	ENDIF
+CC
+	IF(RRESV.GT.5..AND.RRE.LE.5.) THEN
+	  SCETINB5 = SCET8
+	  INBOUND = 1
+	ENDIF
+	IF(INBOUND.EQ.1.AND.RRE.GT.RRESV) THEN
+	  XPERI = XGSE
+	  YPERI = YGSE
+	  ZPERI = ZGSE
+	  RRPERI = RRE
+	  INBOUND = 0
+	ENDIF
+	IF(RRESV.LT.5..AND.RRE.GE.5.) THEN
+	  SCETOUTB5 = SCET8
+	  TIME5 = 24.D00*(SCETOUTB5-SCETINB5)
+	  WRITE(75,1077) SCET8,SCETI4,XPERI,YPERI,ZPERI,RRPERI,TIME5
+	ENDIF
+C
+	IF(OK.NE.82) GO TO 100
+C
+C	ITEM = 'WIND_MFI_BPHI(GSE)_R4'
+C	ok = W_ITEM_R4(ch, item, AZMAG, 1, ret_size)
+C	ITEM = 'MAG_ELEVATION'
+C	ok = W_ITEM_I4(ch, item, MAGEL, 1, ret_size)
+C	ITEM = 'SUN_ANGLE'
+C	ok = W_ITEM_I4(ch, item, SUNCLOCK, 1, ret_size)
+C	ITEM = 'WIND_3DP_E_TEMP_R4'
+C	ok = W_ITEM_R4(ch, item, TEMPE, 1, ret_size)
+C	ITEM = 'WIND_3DP_ION_TEMP_R4'
+C	ok = W_ITEM_R4(ch, item, TEMPI, 1, ret_size)
+C	ITEM = 'WIND_3DP_ION_DENSITY_R4'
+C	ok = W_ITEM_R4(ch, item, DENS, 1, ret_size)
+C	ITEM = 'WIND_3DP_ION_VX(GSE)_R4'
+C	ok = W_ITEM_R4(ch, item, VX, 1, ret_size)
+C	ITEM = 'WIND_3DP_ION_VY(GSE)_R4'
+C	ok = W_ITEM_R4(ch, item, VY, 1, ret_size)
+C	ITEM = 'WIND_MFI_BMAG_R4'
+C	ok = W_ITEM_R4(ch, item, BMAG, 1, ret_size)
+C	ITEM = 'WIND_SPIN_RATE_R4'
+C	ok = W_ITEM_R4(ch, item, SPINRATE, 1, ret_size)
+C	if(ok.ne.1) then
+C	  spinrate = 2.
+C	endif
+C
+	ok = w_channel_close(ch)
+	return
+	end

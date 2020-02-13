@@ -1,0 +1,360 @@
+	SUBROUTINE MAKEFILE(CH)
+
+C	A PROGRAM TO SEARCH FOR LARGE EVENTS IN THE EARTH'S TAIL 
+C		IN TDSF OR FILL.
+C
+C	RESULTS ARE WRITTEN TO MAKEFILE36.RESULTS
+C
+C	    THIS IS MAKEFILE36.  
+C
+	COMMON /TDSF_BACKGROUND/ TDSFBCK(1025,2,4),NBCK(2,4)
+	COMMON /HISTBLK/ HIST(14,2,100),FHIST(14),NHISTST,HISTINT
+	COMMON /XFER/ SPHASE(1025)
+	INTEGER*4 FHIST
+	integer*4 ch,ok,okt,OK1,OK2,SCETI4(2),N1DATA(2048),N2DATA(2048)
+	INTEGER*4 W_CHANNEL_CLOSE,W_EVENT,RET_SIZE,W_MESSAGES_OFF
+	INTEGER*4 W_ITEM_I4,W_ITEM_R4,W_ITEM_R8
+	INTEGER*4 TDS_CHANNEL,ISRC,SUNCLOCK,LIMSPS(4),FLLIMS(4)
+	INTEGER*4 FUPLIM,FLLIM,FUPNEW,FLLNEW,ERT(2),ERTDAY
+	REAL*8 SCET8,XGSM,YGSM,ZGSM,RGSM
+	REAL PWR1(3),PWR2(3),RAWPWR1(3),RAWPWR2(3)
+	REAL DBSPEC1(1025),V1DATA(2048),PHASE1(1025)
+	REAL DBSPEC2(1025),V2DATA(2048),PHASE2(1025)
+	REAL ZCROSS(1024),Z1INT(1024),Z2INT(1024),RESOL(4)
+	REAL FREQ(1024),FCOUNT(2),FAVR(2),FSTD(2),F3MOM(2),FBW(2),SKEW(2)
+	character*32 ITEM
+	character*4 event
+	DATA TWOPI /6.2831853/
+	DATA YXRATIO /11.8/
+	DATA RE /6378./
+	DATA LIMSPS /3,5,20,20/
+	DATA FLLIMS /4,12,42,80/
+C	ABOVE BASED ON LEFFX = 41.1, LEFFY = 3.79
+	EFFLENX = 41.1
+	EFFLENY = 3.79
+	DATA RESOL /118.,30.,8.,2./
+	data event /'TDSF'/
+C	data event /'FILL'/
+C
+	IFOUND = 0
+ 100	ok = w_event(ch,event)
+	if(ok.ne.1) print*,'found event',event
+C
+C	CHECK FOR END OF RECORD
+C
+	if (ok.ne.1) then
+		if(ok.eq.82) then
+		   ok = w_channel_close(ch)
+		   return
+	        endif
+		write(6,*) 'cannot open ',event, ', ok=', ok
+	endif
+C
+C	END OF END OF RECORD CHECK
+C
+	OKT = W_MESSAGES_OFF(ch)
+C
+C
+	ITEM = 'CHANNEL'
+	ok = W_ITEM_I4(ch, item, TDS_CHANNEL, 1, ret_size)
+C
+	IPROS = 4
+	IF(TDS_CHANNEL.EQ.1) THEN
+C	  ITEM = 'DATA'
+C	  ok1 = W_ITEM_I4(ch, item, N1DATA, 2048, ret_size)
+C
+	  CALL TDS_PHYS(CH,IPROS,N1DATA,V1DATA,DBSPEC1)
+C
+	  PWR1(1) = 0.
+	  RAWPWR1(1) = 0.
+	  DO N = 1,1021
+C	    RAWPWR1(1) = RAWPWR1(1) + (N1DATA(N)-128)**2
+	    RAWPWR1(1) = RAWPWR1(1) + (N1DATA(N))**2
+	    PWR1(1) = PWR1(1) + (V1DATA(N))**2
+	  ENDDO	  
+	  PWR1(2) = 0.
+	  RAWPWR1(2) = 0.
+	  DO N = 1022,1026
+C	    PWR1(2) = PWR1(2) + (N1DATA(N)-128)**2
+	    RAWPWR1(2) = RAWPWR1(2) + (N1DATA(N))**2	    
+	    PWR1(2) = PWR1(2) + (V1DATA(N))**2
+	  ENDDO	  
+	  PWR1(3) = 0.
+	  RAWPWR1(3) = 0.
+	  DO N = 1027,2048
+C	    RAWPWR1(1) = RAWPWR1(1) + (N1DATA(N)-128)**2
+	    RAWPWR1(3) = RAWPWR1(3) + (N1DATA(N))**2
+	    PWR1(3) = PWR1(3) + (V1DATA(N))**2
+	  ENDDO	  
+	  ITEM = 'EVENT_NUMBER'
+	  ok = W_ITEM_I4(ch, item, NO_EVT1, 1, ret_size)
+C
+	  GO TO 100
+	ELSEIF(TDS_CHANNEL.EQ.2) THEN
+C	  ITEM = 'DATA'
+C	  ok2 = W_ITEM_I4(ch, item, N2DATA, 2048, ret_size)
+C
+	  CALL TDS_PHYS(CH,IPROS,N2DATA,V2DATA,DBSPEC2)
+C
+	  ITEM = 'EVENT_NUMBER'
+	  ok = W_ITEM_I4(ch, item, NO_EVT2, 1, ret_size)
+	  IF(NO_EVT1.NE.NO_EVT2) THEN
+	    PRINT*,'EVENTS DONT MATCH',NO_EVT1,NO_EVT2
+	    GO TO 100
+	  ENDIF
+	  NO_EVT = NO_EVT2
+C
+	  PWR2(1) = 0.
+	  RAWPWR2(1) = 0.
+	  DO N = 1,1021
+C	    PWR1(2) = PWR1(2) + (N1DATA(N)-128)**2
+	    RAWPWR2(1) = RAWPWR2(1) + (N2DATA(N))**2	    
+	    PWR2(1) = PWR2(1) + (V2DATA(N))**2
+	  ENDDO	  
+	  PWR2(2) = 0.
+	  RAWPWR2(2) = 0.
+	  DO N = 1022,1026
+C	    PWR1(2) = PWR1(2) + (N1DATA(N)-128)**2
+	    RAWPWR2(2) = RAWPWR2(2) + (N2DATA(N))**2	    
+	    PWR2(2) = PWR2(2) + (V2DATA(N))**2
+	  ENDDO	  
+	  PWR2(3) = 0.
+	  RAWPWR2(3) = 0.
+	  DO N = 1027,2048
+C	    PWR1(2) = PWR1(2) + (N1DATA(N)-128)**2
+	    RAWPWR2(3) = RAWPWR2(3) + (N2DATA(N))**2	    
+	    PWR2(3) = PWR2(3) + (V2DATA(N))**2
+	  ENDDO
+C
+	ENDIF
+C
+C	MOST OF THE EVENTS ARE BLOBS.  TO ELIMINATE THEM:
+C	BLOBS START NEAR THE MIDDLE, AND MOSTLY OCCUPY THE
+C	SECOND HALF OF AN EVENT.  SO REQUIRE THAT THE MAXIMUM
+C	INTERVAL BETWEEN ZEROS IN THE SECOND HALF NOT BE 
+C	MORE THAN ?? TIMES THE AVERAGE INTERVAL IN THE FIRST
+C	HALF
+C
+C	THERE ARE ALSO SPIKES.  TO ELIMINATE THEM, CALCULATE THE
+C	NUMBER OF POINTS WHICH ARE LARGER THAN HALF THE PEAK.
+c	IF(TDS_CHANNEL.EQ.1) GO TO 100		! GO GET CHANNEL 2
+c	IF(TDS_CHANNEL.NE.2) GO TO 100
+C
+	ITEM = 'WIND_ORBIT_X(GSE)_R8'
+	ok = W_ITEM_R8(ch, item, XGSM, 1, ret_size)
+	ITEM = 'WIND_ORBIT_Y(GSE)_R8'
+	ok = W_ITEM_R8(ch, item, YGSM, 1, ret_size)
+	ITEM = 'WIND_ORBIT_Z(GSE)_R8'
+	ok = W_ITEM_R8(ch, item, ZGSM, 1, ret_size)
+C	ITEM = 'WIND_ORBIT_X(GSM)_R8'
+C	ok = W_ITEM_R8(ch, item, XGSM, 1, ret_size)
+C	ITEM = 'WIND_ORBIT_Y(GSM)_R8'
+C	ok = W_ITEM_R8(ch, item, YGSM, 1, ret_size)
+C	ITEM = 'WIND_ORBIT_Z(GSM)_R8'
+C	ok = W_ITEM_R8(ch, item, ZGSM, 1, ret_size)
+C	NOTE THAT IT'S REALLY GSE
+	RGSM = DSQRT(XGSM**2+YGSM**2+ZGSM**2)
+	XRE = XGSM/RE
+	YRE = YGSM/RE
+	ZRE = ZGSM/RE
+	RRE = RGSM/RE
+C	ADVANCE ONE DAY IF MORE THAN 20 RE TOWARD THE SUN
+	IF(XRE.GT.20.) RETURN
+	print*,'XRE= ',XRE
+	IF(XRE.GT.0.) GO TO 100		! TAIL REGION ONLY
+C
+	XMAX = 0.
+	YMAX = 0.
+	XMIN = 0.
+	YMIN = 0.
+	DO N = 1,2048
+	  XMAX = AMAX1(XMAX,V1DATA(N))
+	  YMAX = AMAX1(YMAX,V2DATA(N))
+	  XMIN = AMIN1(XMIN,V1DATA(N))
+	  YMIN = AMIN1(YMIN,V2DATA(N))
+	ENDDO
+C****
+	XMAX = AMAX1(XMAX,-XMIN)
+	YMAX = AMAX1(YMAX,-YMIN)
+C****
+C	CHANGE TO mV/m
+	XMAX = 1000.*XMAX/41.1
+	YMAX = 1000.*YMAX/3.79
+	EMAX = SQRT(XMAX**2+YMAX**2)
+C
+C       CRITERIA FOR VALID EVENTS GO HERE
+C 
+C
+C	REQUIRE LARGE SIGNAL IN BOTH HALVES OF EVENT, AND LARGE TOTAL POWER
+C
+	IF(PWR1(1).LT.3.) GO TO 100
+C
+C
+CDIAG	PRINT*,'******START EVENT',NO_EVT1,NO_EVT,' *****'
+	PRINT*,'******START EVENT',NO_EVT1,NO_EVT,' *****'
+C
+	ITEM = 'SOURCE'
+	ok = W_ITEM_I4(ch, item, ISRC, 1, ret_size)
+	ITEM = 'EVENT_NUMBER'
+	ok = W_ITEM_I4(ch, item, NO_EVT, 1, ret_size)
+	ITEM = 'EVENT_SCET'
+	ok = W_ITEM_I4(ch, item, SCETI4, 2, ret_size)
+	ITEM = 'FAST_RX_SPEED_R4'
+	ok = W_ITEM_R4(ch, item, SPS, 1, ret_size)
+	ITEM = 'FAST_RX_SPEED'
+	ok = W_ITEM_I4(ch, item, ISPS, 1, ret_size)
+	ITEM = 'WIND_MFI_BPHI(GSE)_R4'
+	ok = W_ITEM_R4(ch, item, BANGLE, 1, ret_size)
+	ITEM = 'MAG_ELEVATION'
+	ok = W_ITEM_I4(ch, item, MAGEL, 1, ret_size)
+	ITEM = 'SUN_ANGLE'
+	ok = W_ITEM_I4(ch, item, SUNCLOCK, 1, ret_size)
+C	ITEM = 'WIND_3DP_E_TEMP_R4'
+C	ok = W_ITEM_R4(ch, item, TEMPE, 1, ret_size)
+C	ITEM = 'WIND_3DP_ION_TEMP_R4'
+C	ok = W_ITEM_R4(ch, item, TEMPI, 1, ret_size)
+	ITEM = 'WIND_3DP_ION_DENSITY_R4'
+	ok = W_ITEM_R4(ch, item, DENS_3DP, 1, ret_size)
+	ITEM = 'WIND_SWE_DENSITY_R4'
+	ok = W_ITEM_R4(ch, item, DENS_SWE, 1, ret_size)
+C	ITEM = 'WIND_3DP_ION_VX(GSE)_R4'
+C	ok = W_ITEM_R4(ch, item, VX, 1, ret_size)
+C	ITEM = 'WIND_3DP_ION_VY(GSE)_R4'
+C	ok = W_ITEM_R4(ch, item, VY, 1, ret_size)
+	ITEM = 'WIND_MFI_BMAG_R4'
+	ok = W_ITEM_R4(ch, item, BMAG, 1, ret_size)
+	ITEM = 'WIND_SPIN_RATE_R4'
+	ok = W_ITEM_R4(ch, item, SPINRATE, 1, ret_size)
+	if(ok.ne.1) then
+	  spinrate = 2.
+	endif
+        ITEM = 'EVENT_TM_SCET_I4' 
+        ok = W_ITEM_I4(ch, item, ERT, 2, ret_size)
+        ERTDAY = MOD(ERT(1),100) 
+	print*,'check ertday',ert,ertday
+C
+C	Calculate frequency and bandwidth
+C
+	fundfr = SPS/2048.
+	avrf1 = 0.
+	bckpwr = 1.e-20
+	fstd(1) = 0.
+	do nf = 1,1023
+	  freq(nf) = nf*fundfr
+	  IF (FREQ(NF).GT.150.) THEN
+	    V2 = 10.**(.1*DBSPEC1(NF))
+	    BCKPWR = BCKPWR + V2
+	    AVRF1  = AVRF1 + V2*FREQ(NF)
+	    FSTD(1)   = FSTD(1)  + V2*FREQ(NF)**2 
+	  ENDIF
+	enddo
+	AVRF1 = AVRF1/BCKPWR
+	FSTD(1)  = (FSTD(1)/BCKPWR - AVRF1**2)
+C
+C	print*,'fp_3dp',fp_3dp
+
+C	IF(FAVR(1).GT.6.E3) GO TO 100
+	FP_3DP = 2.E4
+	IF(DENS_3DP.GT.0.) FP_3DP = 9.E3*SQRT(DENS_3DP)	  ! PLASMA FREQ IN HZ
+	IF(DENS_SWE.GT.0.) FP_SWE = 9.E3*SQRT(DENS_SWE)	  ! PLASMA FREQ IN HZ
+c	IF(FP_3DP.GT.7.E3.AND.FP_SWE.GT.7.E3) GO TO 100
+c
+c	print*,'frbw',frbw
+C
+C       DETERMINE ANGLE TO B
+C
+        CALL FITSLOPE(V1DATA,V2DATA,2048,SLOPE,RATIO,SUMSQ)
+C       XANG = ATAND(SLOPE*EFFLENX/EFFLENY
+        XANG = ATAND(SLOPE)
+        END_ANGLE =  -360.*(SUNCLOCK-14.)/4096. - 45. ! ANGLE SUN TO +EX AT END
+        IF(END_ANGLE.LT.-180.) END_ANGLE = END_ANGLE + 360.
+        IF(END_ANGLE.GT.180.)  END_ANGLE = END_ANGLE - 360.
+        DANG = SPINRATE*360./SPS/TWOPI
+        ST_ANGLE = END_ANGLE + 3072.*DANG   ! ANGLE SUN TO +EX AT START 16nov99
+        END_ANGLE = END_ANGLE + 1024.*DANG
+c       ST_ANGLE = END_ANGLE + 2048.*DANG         ! ANGLE SUN TO +EX AT START
+C
+        NAVR = 1024
+        CTR_ANGLE = ST_ANGLE - NAVR*DANG  !ANGLE SUN TO +EX AT CENTER,nov 1999
+        PANGLE = CTR_ANGLE - BANGLE - XANG
+        IF(PANGLE.GT.90.)  PANGLE = PANGLE - 180.
+        IF(PANGLE.LT.-90.) PANGLE = PANGLE + 180.
+        IF(PANGLE.GT.90.)  PANGLE = PANGLE - 180.
+        IF(PANGLE.LT.-90.) PANGLE = PANGLE + 180.
+        IF(PANGLE.GT.90.)  PANGLE = PANGLE - 180.
+        IF(PANGLE.LT.-90.) PANGLE = PANGLE + 180.
+        IF(PANGLE.GT.90.)  PANGLE = PANGLE - 180.
+        IF(PANGLE.LT.-90.) PANGLE = PANGLE + 180.
+        PANGLE = ABS(PANGLE)
+C       XBVEC = .2*XMAX*COSD(PANGLE)
+C       YBVEC = .2*XMAX*SIND(PANGLE)
+C
+C       PANGLE IS THE ANGLE BETWEEN THE MAJOR AXIS OF E, AND B
+C       print*,'NO_EVT,bangle,ctr_angle',NO_EVT,bangle,ctr_angle
+c       print*,'slope,angle to x,angle to b',slope,XANG,PANGLE
+C
+C 
+C
+	WRITE(56,1111) SCETI4,NO_EVT,ERTDAY,EVENT(1:1),ISPS,PWR1(1),pwr1(2),
+     1		PWR2(1),pwr2(2),XRE,YRE,ZRE,AVRF1/1000.,PANGLE
+C	1111 IS NOW ??? CHARACTERS
+ 1111	FORMAT(I10,I7,I10,I3,A2,I2,4E9.2,4F7.1,F8.0,F6.0)
+C
+	IF(OK.NE.82) GO TO 100
+C
+	return
+	end
+        SUBROUTINE FITSLOPE(X,Y,N,SLOPE,RATIO,SUMSQ)
+C
+        DIMENSION X(1),Y(1),WT(2048)
+        DATA EFFLENX,EFFLENY /41.1, 3.79/
+C
+C       LEAST SQUARES FIT   (EY - SLOPE * EX)**2
+C
+        SUMSQ = 0.
+        SXX = 0.
+        SXY = 0.
+        SYY = 0.
+        DO J = 1,N
+C         WT(J) = .06 + SQRT(ABS(X(J)*Y(J)))
+          WT(J) = 1.
+C         IF(WT(J).NE.0.) THEN
+C           SXX =SXX + X(J)**2/WT(J)
+            SXX =SXX + (X(J)/EFFLENX)**2
+            SXY =SXY + X(J)*Y(J)/EFFLENX/EFFLENY
+            SYY =SYY + (Y(J)/EFFLENY)**2
+C         ENDIF
+        ENDDO
+C       SLOPE IS Y/X
+        IF(SXX.NE.0.) SLOPE = SXY/SXX
+        SUMSQ = SXX*SLOPE**2 - 2.*SLOPE*SXY + SYY
+C
+C       EIGENVALUES AND EIGENVECTORS
+C
+        TRACE = SXX + SYY               ! SUM OF EIGENVALUES
+        DET = SXX*SYY - SXY**2          ! PRODUCT OF EIGENVALUES
+        EVAL1 = .5*(TRACE + SQRT(TRACE**2 - 4.*DET))
+        EVAL2 = .5*(TRACE - SQRT(TRACE**2 - 4.*DET))
+        IF(EVAL2.GT.EVAL1) THEN
+          EVAL1 = EVAL2
+          EVAL2 = .5*(TRACE + SQRT(TRACE**2 - 4.*DET))
+        ENDIF
+        RATIO = -1.
+        IF(EVAL1.NE.0.) RATIO = SQRT(ABS(EVAL2/EVAL1))
+C       IN EIGENVECTORS, TAKE X = 1. UNLESS IT IS ZERO
+        IF(SXY.NE.0.) THEN
+          Y1 = (EVAL1 - SXX)/SXY
+          Y2 = (EVAL2 - SXX)/SXY
+          SLOPEV = Y1
+        ELSE
+          Y1 = 0.
+          Y2 = 1.
+          X2 = 0.
+          SLOPEV = 1.E8
+        ENDIF
+C       print*,'ev,slope,slopev',eval1,eval2,slope,slopev
+C       print*,'ratio',ratio
+        SLOPE = SLOPEV
+C
+        RETURN
+        END   

@@ -1,0 +1,117 @@
+	SUBROUTINE OLDDIFF(X0,Y0,Z0,BX,BY,BZ,DK,XT,YT,ZT) 
+C
+C	THIS ROUTINE DETERMINES DIFF BY AN INTERATION --  THE SHOCK IS
+C	EXPANDED OR CONTRACTED UNTIL THE MAGNETIC FIELD LINE IS TANGENT
+C	TO THE SHOCK, I.E. WHEN THE DISCRIMINANT OF THE QUADRATIC WHICH
+C	GIVES THE TWO INTERSECTIONS IS ZERO, SO DOUBLE ROOT. 
+C
+	DATA RTA,RTB,C /  25.6, 25.6, 14.6/
+	DATA ALPHA,BETA,GAMMA /0.,1.,0./
+	DATA RE /6.378E3/
+C
+	BMAG = SQRT(BX**2 + BY**2 + BZ**2)
+	ALPHA= BX/BMAG
+	BETA = BY/BMAG
+	GAMMA= BZ/BMAG
+	  B = -RTB**2/C
+	  A = -RTA**2/C
+C
+          DISC = ((2.*Z0*GAMMA/A + 2.*Y0*BETA/B - ALPHA)**2) - 
+     1    4.* (GAMMA**2/A + BETA**2/B)*(Z0**2/A + Y0**2/B + C - X0)
+          XP = -.25*((2.*Z0*GAMMA/A + 2.*Y0*BETA/B - ALPHA)**2)/
+     1     (GAMMA**2/A + BETA**2/B)  + Z0**2/A + Y0**2/B + C
+C	write(42,*) dayfraction,x0,y0,z0,xp
+C
+	  IF(DISC.GE.0.) THEN
+	    EXPANS = 1.
+	    DIFF = ABS(XP-X0)
+	    DIFFN = 0.
+	    print*,'positive disc,xp,x0',xp,x0
+	  ELSE
+	    DIFF = 0.
+	    CS = C
+	    EXPANS = 1.
+	    EXPAND = 1.04
+	    DISCT = DISC
+	    DO N = 1,100
+	      A = A*EXPAND
+	      B = B*EXPAND
+	      C = C*EXPAND
+	      EXPANS = EXPANS*EXPAND
+	      DISCSV = DISCT
+              DISCT = ((2.*Z0*GAMMA/A + 2.*Y0*BETA/B - ALPHA)**2) - 
+     1         4.* (GAMMA**2/A + BETA**2/B)*(Z0**2/A + Y0**2/B + C - X0)
+C              XP = -.25*((2.*Z0*GAMMA/A + 2.*Y0*BETA/B - ALPHA)**2)/
+C     1        (GAMMA**2/A + BETA**2/B)  + Z0**2/A + Y0**2/B + C
+	print*,'n,expans,disct',n,expans,disct
+	      IF(DISCT.GE.0.)  THEN
+		EXPANS = EXPANS/EXPAND - (DISCSV/(DISCT-DISCSV))*EXPANS*
+     1		(1. - 1./EXPAND)
+	        DIFFN = DIFFIN(X0,Y0,Z0,ALPHA,BETA,GAMMA,EXPANS)
+	print*,'final expans,diffn',expans,diffn
+		DIFFN = AMAX1(DIFFN,-14.)  
+		GO TO 120 
+	      ENDIF
+	    ENDDO
+	    DIFFN = -14.2
+	  ENDIF
+C
+ 120	  C = CS
+	  DISCSV = DISC
+	  DK = DISC	!?
+	RETURN
+	END
+	FUNCTION DIFFIN(X0,Y0,Z0,ALPH0,BET0,GAMM0,EXPANS)
+C
+	COMMON /MODEL/ A0,B0,C0 
+C
+	A = A0*EXPANS**2
+	B = B0*EXPANS**2
+	C = C0*EXPANS
+C
+C	CALCULATE T PARAMETER TO EXPANDED SHOCK
+C
+        TT = -.5*(2.*Z0*GAMM0/A + 2.*Y0*BET0/B - ALPH0) / 
+     1   (GAMM0**2/A + BET0**2/B) 
+C
+C	CALCULATE INTERSECTION WITH EXPANDED SHOCK
+C
+	XI = X0 + ALPH0*TT
+	YI = Y0 +  BET0*TT
+	ZI = Z0 + GAMM0*TT
+C
+C	CALCULATE NORMAL
+C
+	ALPHA = 1.
+	BETA = -2.*YI/B
+	GAMMA = -2.*ZI/A
+	DNORM = SQRT(ALPHA**2 + BETA**2 + GAMMA**2)
+	ALPHA = ALPHA/DNORM
+	BETA = BETA/DNORM
+	GAMMA = GAMMA/DNORM
+C
+C	CALCULATE INTERSECTION OF NORMAL WITH ORIGINAL SHOCK
+C
+        DISC = ((2.*ZI*GAMMA/A0 + 2.*YI*BETA/B0 - ALPHA)**2) - 
+     1  4.* (GAMMA**2/A0 + BETA**2/B0)*(ZI**2/A0 + YI**2/B0 + C0 - XI)
+	IF(DISC.LT.0.) THEN
+	  PRINT*,'NEG DISC AT ',EXPANS,XI,YI,ZI
+	  DISC = 0.
+	ENDIF
+        TI = -.5*(2.*ZI*GAMMA/A0 + 2.*YI*BETA/B0 - ALPHA - SQRT(DISC)) / 
+     1   (GAMMA**2/A0 + BETA**2/B0) 
+	X1 = XI + ALPHA*TI
+	Y1 = YI +  BETA*TI
+	Z1 = ZI + GAMMA*TI
+	DIFF1 = SQRT((XI-X1)**2 + (YI-Y1)**2 + (ZI-Z1)**2)
+        TI = -.5*(2.*ZI*GAMMA/A0 + 2.*YI*BETA/B0 - ALPHA + SQRT(DISC)) / 
+     1   (GAMMA**2/A0 + BETA**2/B0) 
+C
+	X2 = XI + ALPHA*TI
+	Y2 = YI +  BETA*TI
+	Z2 = ZI + GAMMA*TI
+	DIFF2 = SQRT((XI-X2)**2 + (YI-Y2)**2 + (ZI-Z2)**2)
+	DIFFIN = -AMIN1(DIFF1,DIFF2)
+	RETURN
+	END
+
