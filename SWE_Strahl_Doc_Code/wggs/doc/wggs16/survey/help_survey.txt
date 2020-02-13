@@ -1,0 +1,206 @@
+                     Help for Survey Data Display Interface
+
+
+BUTTON/FIELD/DROPLIST     	ACTION
+
+
+SWE level zero		Starts/brings forward SWE LZ data display widget.
+			Use this button rather than mouse button on window
+			to bring forward SWE LZ display!
+
+ISEEf			Starts/brings forward ISEE f data display.
+			(ISEE moments MUST have already been read.)
+
+Path                 	Displays the data paths for all of the various 
+			data types and permits changes to be made.
+								
+HELP			On-line documentation.
+
+Quit			Normal exit.
+				
+Date/File		Toggle to File to select from a list of files.
+			Toggle to Date to automatically search files.
+				 				
+yyyymmd			Enter date (yymmd) for file search by date; the date
+			will also appear when file is manually selected.
+			
+Nr days			Select number of days for multiple day plot. 
+			NOTE!! If 5 or more days are selected, then the
+			input data are time averaged.
+
+swe_strahlen		Use the droplists which display the two energies to be 
+			displayed when data type "swe_strahlen" is selected. 
+							
+Button group: "SELECT input data types, then READ" 
+			One or more data types (swe_moments etc) may be 
+			selected. The last selected data types are retained.
+			NOTE: When swe_moments are selected, swe_ionkp is 
+			automatically selected and overplotted on 
+			the electron plots.
+										
+READ			Click to read the data types last selected above.
+			The data interval read is the number of days selected 
+			above beginning with the selected date in yyyymmdd.  
+			After the data is read,a list of available data 
+			variables appears from which to make plot selections. 
+			(See "Select plot variables" button below.)		
+				
+READ/PLOT sequence	A widget appears which permits data to be read and
+			plotted on sequential days with a single button click.
+			The data type will be the current data type selection,
+			and the plot variables will be those stored in the
+			selected plot variable buffer. 
+			(see "Select plot variables" button below)
+			
+Data version		Displays data versions of data types for which multiple
+			version exist. The default in all cases is "Latest", 
+			but other versions may be selected.
+			
+Select plot variables	Widget "Available Data" appears. Select one or more data
+			variables to plot."Do plot" causes data to be plotted.
+			
+			Short cuts:
+			After making a plot variable selection, it may be saved
+			by clicking on one of "Save X" buttons, where X=0,1,2,3.
+			The saved selection is then plotted by the corresponding
+			"Plot X" button. The "Save X" buffers are not reset with
+			a new IDL session, but rather are kept.
+			Default time interval plotted: entire file.
+			SPECIAL CASES: For certain data types, additional 
+			plot parameter choices can be made, For example, when  
+			plotting strahl peak flux,the available energies also 
+			appear in the "Available Data" widget.
+								
+Change plot parameters	Widget "Change preset plot parameters" appears.
+			Plot parameters such as y-axis range, i.e., Y min 
+			and Y max, yaxis labels, tick marks, etc can be 
+			altered from their default preset values for each panel
+			individually. Changes made here are retained during the
+			current IDL session. The "Y-axis" button described below
+			toggles the Y-axis range between the preset and min-max 
+			of the plotted variables for all panels.
+			
+			The vertical size of each panel relative to the other
+			panels is displayed and can be changed. For example, a
+			given panel can be made twice as large as the rest. 			 			
+
+To select time intervals to plot:
+	The default time interval plotted is the entire file.	
+	To "zoom", i.e., to select a time subinterval to plot,
+	click the left and middle mouse buttons at the begin and end 
+	times, respectively, of the desired interval. When the middle 
+	mouse button is clicked, a new widget pops up entitled,
+	"Selected time interval". These are the relevant relevant buttons in the
+	pop-up widget:
+		Click on "Plot" to plot the new time interval.
+		The new time interval becomes the current time interval 
+		and is retained until a different time interval is selected.
+		Click on "Store interval and plot" to store any selected 
+		time interval to be kept for later recall even as the 
+		current interval changes. 
+		
+Button group: 	Time interval. The currently selected variables can be plotted 
+		for various intervals: 	
+
+Current		The current time interval. 
+				
+		The current time selection may be replotted at any time. 
+		In particular, if program "wanal" is restarted in a given IDL 
+		session, data does not have to be re-read, but rather the 
+		plot can be restored by clicking the "Current" button.
+		NOTE: Going back and forth between windows may sometimes cause
+		plot controls to become "unset" and the tool may appear
+		unresponsive.Try clicking on "Current" or "Original" to reset.
+
+Previous	The time interval selected prior to the last (current) 
+		selection is plotted.The current time selection still in memory.
+
+Original     	The input time selection is plotted and becomes 
+		the new current selection. 
+
+Stored		The time interval saved in memory for later recall.
+				
+Array reduction		To keep plot array sizes manageable, procedure CONGRID
+			reduces the array size using an interpolative method.
+			Use of CONGRID is the default. The droplist povides 
+			the option to turn off array reduction. When using the 
+			IDLsave button (described below) to create a file of
+			the plotted data, array reduction should be set to 
+			"off" to retain the full time resolution in the 
+			created data file.
+				
+Smooth		Median smoothing, 3, 5 or 10 points (0 is no smoothing).
+
+Y-axis		Choices for the y axis scale are Preset (default) and Minmax.
+		The Preset values can be changed using button 
+		"Change plot parameters". The original default preset values 
+		can be reset by using button "Select plot variables" and 
+		redoing the plot variable selection or using button 
+		"Change plot parameters" and clicking on "Restore". 
+		These actions do not change the time interval. 
+				  
+Time axis	The "Selected time interval" widget appears.
+
+Y vs X		A widget pops up from which data panels can be selected as 
+		X and Y for plotting Y vs X, either linear or log.
+
+Time mark	When set to "On", a vertical line is drawn on all panels at the 
+		time selected by the left mouse button. Any number of additional
+		time lines may be drawn by clicking the left mouse button as long
+		as the setting is "On".
+		Setting to "Off" does not remove the vertical time line, but 
+		additional vertical lines will not be drawn. 
+		NOTE!! It is advisable to set "Time mark" to 'Off" when going to
+		the "SWE level zero" widget.
+
+Remove time marks	Removes the time marks.
+
+Strahl FOV	When magnetic field is plotted, only times are plotted when the
+		magnetic field is within the strahl instrument field of view.
+		This feature should not be used after 19990125, when the strahl
+		azimuth tracked the magnetic field.
+
+IDLsave		An IDL save file is made of the plotted data which may be 
+		retrieved by IDL restore (line plots only). 
+		NOTE! When the number of days read in as input data is 4 or less,
+		then the saved file contains data arrays which are dimensioned
+		for the full time resolution, i.e., the array reduction CONGRID
+		is not implemented for the saved file even though it may be 
+		implemented for the plotted data.
+		 
+		The saved data files may be accessed as follows:
+			".run idlsav_plot" to plot the data,
+			".run idlsave_to_ascii" to create an ascii file,
+			".run idlsave_to_ascii_cols" to create an ascii file
+			in column format.
+						
+Hardcopy droplist:
+Hrdcpy bw		Makes black and white hardcopy of current plot. 
+
+Hrdcpy clr		Makes color hardcopy.
+
+Printer/file		Pop-up widget displays and allows changes in names of
+			printer and printfile.
+
+									 
+Color scale droplist:
+Color tbl		IDL procedure xloadct is used to display and/or modify
+			the color table (stretching etc).
+
+Restore clrs		Current color table is restored  and the top color 	
+			(plot axes, etc) is set to white. 
+
+WIND orbit		Plots the orbit for the current day.
+
+Application droplist:
+
+
+Local Appl		Local user applications. Executes procedure 
+			"local_appl.pro" if it exists in directory specified by
+			LOCALUSER environment variable in startup file.
+
+				
+
+
+
+
