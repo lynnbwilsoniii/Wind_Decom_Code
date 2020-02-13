@@ -1,0 +1,406 @@
+
+                                                                 7-Nov-2008 12:14:17	Compaq Fortran 77 V6.6-201          Page   1
+                                                                 7-Nov-2008 12:14:04	USER_A:[KELLOGG.WIND]TDS_PHYS.FOR;300       
+
+00001   	SUBROUTINE TDS_PHYS(CH,IPRC,NDATA,VDATA,SPECT)
+00002   C
+00003   C	This routine gets raw TDS data for the event found in the calling
+00004   C		program, and, according to IPRC, corrects it for gain and
+00005   C		calibration, and return VDATA = volts at preamp input, and 
+00006   C		spect = signal in dB above 1 V**2/Hz
+00007   C
+00008   C	FIXBADTDS was added about 1400 on 8 Oct 1995
+00009   C	9 MAY 2007, A PRINT STATEMENT FOR PWR = 0. WAS REMOVED, TOO MUCH
+00010   C	On Sep 15 2006, changed to call FIXBADTDS only for IRX = 1,2
+00011   C	It was much changed on 31 Jan 1997
+00012   C	ON 22 JAN 1997, an error, dividing by gain instead of conjg(gain),
+00013   C	was corrected
+00014   C	In July 1998, and error of bandwidth, was corrected
+00015   C	FIXBADTDS6 was written in the fall of 1997, and works fairly well
+00016   C	AVERAGE REMOVED FOR CORRECTED DATA, 25 OCT 2002
+00017   C		now
+00018   	integer*4	ok,ch
+00019   	integer*4	i,j,k,n,iprc
+00020   	integer*4	w_item_i4
+00021   	character*4	pa(6,4)
+00022   	integer*4	return_size, sunclock
+00023   	integer*4	tds_channel,ifilf,ifils,ifil,ifsps,issps,isps
+00024   	character*32	item
+00025   	real 		ffilter(4),sfilter(4),fsps(4),ssps(4),sps
+00026   	REAL 		DATA(2050),VDATA(1),SPECT(1025)
+00027   	REAL		ZCROSS(2048),ZINT(2048)
+00028   	REAL		ANG(2048),ANGTBL(380)
+00029           INTEGER*4       NDATA(2048),NFDATA(2048),NBGDATA(380)
+00030   !
+00031   C
+00032   	COMPLEX PREAMP,TDSDET,TDS_FILTER
+00033   	COMPLEX FCOEF,FCOEFT,CCORR
+00034   	COMMON /TDS_STATUS/ TDS_CHANNEL,SPS,FILTER,IRX,ISPS
+00035   	COMMON /PUB/ HDATA(4100)
+00036   	COMMON /XFER/ SPHASE(1025)
+00037   	COMMON /FRLIMITS/ FFTMIN,FFTMAX
+00038   	DATA IBGDATA /0/
+00039   	DATA TWOPI /6.2831853/
+00040   c	DATA FFILTER /50000.,12500.,3125.,781./
+00041   c	DATA SFILTER /3125.,781.,195.,49./
+00042   c	DATA FSPS /120.,30.,7.5,1.875/
+00043   c	DATA SSPS /7500.,1875.,468.75,117.2/
+00044   c	DATA PA /'EXAC','EXAC','EXDC',' BX ',' BY ',' BZ ',
+00045   c     1           'EXDC','EYAC','EYDC','EXDC','EYDC','EZDC',
+00046   c     2           '    ','EZAC','EZDC','    ','    ','    ',
+00047   c     3           '    ','EZAC','EZDC','    ','    ','    '/
+00048   C
+00049   	item = 'CHANNEL'
+00050   	ok = W_ITEM_i4(ch, item, tds_channel, 1, return_size)
+00051   	item = 'EVENT_NUMBER'
+00052   	ok = W_ITEM_i4(ch, item, itemp, 1, return_size)
+00053   	item = 'SOURCE'
+00054   	ok = W_ITEM_i4(ch, item, IRX, 1, return_size)
+00055   	ITEM = 'RX_SPEED'
+00056   	OK = W_ITEM_I4(CH,ITEM,ISPS,1,RETURN_SIZE)
+00057   	ITEM = 'RX_SPEED_R4'
+
+TDS_PHYS                                                         7-Nov-2008 12:14:17	Compaq Fortran 77 V6.6-201          Page   2
+                                                                 7-Nov-2008 12:14:04	USER_A:[KELLOGG.WIND]TDS_PHYS.FOR;300       
+
+00058   	OK = W_ITEM_R4(CH,ITEM,SPS,1,RETURN_SIZE)
+00059   	ITEM = 'RX_FILTER'
+00060   	OK = W_ITEM_I4(CH,ITEM,IFIL,1,RETURN_SIZE)
+00061   	ITEM = 'RX_FILTER_R4'
+00062   	OK = W_ITEM_R4(CH,ITEM,FILTER,1,RETURN_SIZE)
+00063   	item = 'WIND_SPIN_RATE_R4'
+00064   	ok = w_item_R4(ch, item, SPINRATE, 1, return_size)
+00065   	item = 'SUN_ANGLE'
+00066   	ok = w_item_I4(ch, item, sunclock, 1, return_size)
+00067   C
+00068   C
+00069   	FUNDFR = SPS/2048.
+00070   	FFTMAX = SPS/2.
+00071   C
+00072   	ITEM = 'DATA'
+00073   	OK = W_ITEM_I4(CH,ITEM,NDATA,2048,RETURN_SIZE)
+00074   C
+00075   C	fix +-127 if in highest bit rate
+00076   C
+00077   	IF(TDS_CHANNEL.LE.2.AND.ISPS.EQ.0) THEN
+00078   	  DO N = 1,2048
+00079   		NFDATA(N) = NDATA(N)
+00080   		IF(NDATA(N).EQ.255) NFDATA(N) = 248
+00081   		IF(NDATA(N).LE.1)  NFDATA(N) = 8
+00082   	  ENDDO
+00083   	ELSE
+00084   	  DO N = 1,2048
+00085   		NFDATA(N) = NDATA(N)
+00086   	  ENDDO
+00087   	ENDIF
+00088   C
+00089   	DO IK = 1,2048
+00090   	    DATA(IK) = TDSCAL(TDS_CHANNEL,ISPS,NFDATA(IK))
+00091   	    VDATA(IK) = DATA(IK)
+00092   	ENDDO
+00093   C
+00094   	IF(IRX.EQ.9) THEN
+00095   	  CALL BZGLITCH(CH,NGL1,IGL,NGL2,DATA)
+00096   	  DO IK = 1,2048
+00097   	    VDATA(IK) = DATA(IK)
+00098   	  ENDDO
+00099   	ENDIF
+00100   C
+00101   C	  RETURN IF UNCORRECTED VOLTS IS REQUESTED
+00102   C
+00103   	IF(IPRC.LT.2) RETURN
+00104   C
+00105   C
+00106   	IF(IPRC.EQ.3) THEN
+00107   C
+00108   C	  CORRECT ALL AMPLITUDES AS IF THE WAVE WERE MONOCHROMATIC AT
+00109   C		THE FREQUENCY OF MAXIMUM POWER
+00110   C
+00111   		CALL REALFT(DATA,1024,1)
+00112   C
+00113   C	  FIND FREQUENCY FOR PEAK POWER
+00114   C
+
+TDS_PHYS                                                         7-Nov-2008 12:14:17	Compaq Fortran 77 V6.6-201          Page   3
+                                                                 7-Nov-2008 12:14:04	USER_A:[KELLOGG.WIND]TDS_PHYS.FOR;300       
+
+00115   	  SUMPWR = 0.
+00116   	  TPWRMAX = 0.
+00117   C
+00118   	  DO IK = 3,2048,2
+00119   	    FREQ = SPS*(IK-1)/4096.
+00120   c june 98	    TPWR = (DATA(IK)**2 + DATA(IK+1)**2)/1024.**2
+00121   	    TPWR = (DATA(IK)**2 + DATA(IK+1)**2)/FUNDFR
+00122   	    IF(TPWR.GT.TPWRMAX) THEN
+00123   		IKMAX = IK
+00124   		FREQMAX = FREQ
+00125   		TPWRMAX = TPWR
+00126   	    ENDIF
+00127   	  ENDDO
+00128   C
+00129   c  	  PRINT*,'PEAK POWER AT',FREQMAX,' HZ, PWR=',TPWRMAX
+00130   C
+00131   	  CCORR = PREAMP(IRX,FREQMAX)*TDSDET(TDS_CHANNEL,FREQMAX)
+00132   	  CCORR = CCORR*TDS_FILTER(TDS_CHANNEL,IFIL+1,FREQMAX)
+00133   	  RCORR = 1./CABS(CCORR)
+00134   	  CJCORR = CONJG(CCORR)
+00135   	  VDATA(1) = VDATA(1)*RCORR
+00136   	  VDATA(2) = VDATA(2)*RCORR
+00137   	  DO IK = 3,2048
+00138   	    VDATA(IK) = VDATA(IK)*RCORR		
+00139   	  ENDDO
+00140   	  DO IK = 3,2048,2
+00141   	    FCOEF = CMPLX(DATA(IK),DATA(IK+1))/CJCORR
+00142   	    DATA(IK) = FCOEF
+00143   	    DATA(IK+1) = AIMAG(FCOEF)
+00144   	  ENDDO
+00145   	  GO TO 100
+00146   	ENDIF
+00147   C
+00148   	IF(IPRC.EQ.4.AND.IRX.LE.2)  THEN
+00149   		CALL FIXBADTDS(IFXB,NFDATA,DATA,TDS_CHANNEL,SPS,ISPS)
+00150   	ENDIF
+00151   C
+00152   C	REMOVE AVERAGE SIGNAL, AS IT SEEMS TO LEAK TO HIGHER FREQS
+00153   C
+00154   	DAVR = 0.
+00155   	COUNT = 1.E-9
+00156   	DO N = 1,2048
+00157   	  DAVR = DAVR + DATA(N)
+00158   	  COUNT = COUNT+1.
+00159   	ENDDO
+00160   	DAVR = DAVR/COUNT
+00161   	DO N = 1,2048
+00162   	  DATA(N) = DATA(N) - DAVR
+00163   	ENDDO
+00164   C	
+00165   C		REALFT IS FROM NUMERICAL RECIPES, CAMBRIDGE U PRESS
+00166   C			FIRST EDITION  --  VERY IMPORTANT
+00167   C
+00168   C	CORRECT FOURIER ANALYSED SIGNAL FOR FREQUENCY RESPONSE AT ALL
+00169   C		FREQUENCIES (IPRC = 4)
+00170   C
+00171   	CALL REALFT(DATA,1024,1)
+
+TDS_PHYS                                                         7-Nov-2008 12:14:17	Compaq Fortran 77 V6.6-201          Page   4
+                                                                 7-Nov-2008 12:14:04	USER_A:[KELLOGG.WIND]TDS_PHYS.FOR;300       
+
+00172   C
+00173   	     FREQMAX = .5*SPS
+00174   	     PAMAX = CABS(PREAMP(IRX,FREQMAX))
+00175   	     IF(IRX.GT.6) PAMAX = CABS(PREAMP(IRX,2000.))	!SEARCH COIL
+00176   	     IF(TDS_CHANNEL.LE.2) THEN
+00177   		IF(IRX.EQ.1) PAMAX = 2.4  		       ! EXAC
+00178   		IF(TDS_CHANNEL.EQ.2.AND.IRX.EQ.2) PAMAX = 6.6  ! EYAC
+00179   		IF(TDS_CHANNEL.EQ.2.AND.IRX.GT.2) PAMAX = 7.   ! EZAC
+00180   	     ENDIF
+00181   	     DO IK = 3,2048,2
+00182   		FCOEF = CMPLX(DATA(IK),DATA(IK+1))
+00183   	        FREQ = SPS*(IK-1)/4096.
+00184   	        CCORR = PREAMP(IRX,FREQ)*TDSDET(TDS_CHANNEL,FREQ)
+00185   		CCORR = CCORR*TDS_FILTER(TDS_CHANNEL,IFIL+1,FREQ)
+00186   		FCOEFT = FCOEF/CONJG(CCORR)
+00187   C
+00188   C		DON'T DO CORRECTION IF CORRECTION IS LARGE, I.E. 
+00189   C			IF GAIN (CCORR) IS SMALL
+00190   C
+00191   C		IF(CABS(CCORR).GT..0316*PAMAX)	THEN		 ! 30 DB
+00192   C			 FCOEF = FCOEFT  
+00193   C		ELSE					 ! LIMIT CORRECTION
+00194   C			 type*,'didnt do',freq  
+00195   C			 CCORR = CCORR/
+00196   C			 FCOEF = FCOEF/CCORR
+00197   C		ENDIF
+00198   c		IF(CABS(CCORR).GT..0316*PAMAX) FCOEF = FCOEFT      ! 30 DB
+00199   C
+00200   C		DO CORRECTION IN ANYCASE
+00201   		FCOEF = FCOEFT
+00202   C
+00203   		DATA(IK) = FCOEF
+00204   		DATA(IK+1) = AIMAG(FCOEF)
+00205   	     ENDDO
+00206   C
+00207   C	NOW DATA CONTAINS FOURIER COEFFS CORRECTED FOR FREQUENCY RESPONSE
+00208   C
+00209    100	CONTINUE
+00210   C
+00211   C	CALCULATE SPECTRUM, IN DB WRT 1 V**2/HZ
+00212   C
+00213   	SNORM = 20.*ALOG10(1024.) + 10.*ALOG10(FUNDFR)
+00214   	IK = 1
+00215   	ISP = 1
+00216   	SPECT(ISP) = -SNORM
+00217   	IF(DATA(IK).NE.0.)SPECT(ISP) = 20.*ALOG10(ABS(DATA(IK)))-SNORM
+00218   	DO IK = 3,2048,2
+00219   	    ISP = ISP+1
+00220   	    TPWR = DATA(IK)**2 + DATA(IK+1)**2
+00221   	    SPECT(ISP) = -50.
+00222   	    IF(TPWR.NE.0.) THEN
+00223   	      SPECT(ISP) = 10.*ALOG10(TPWR)-SNORM
+00224   	      SPHASE(ISP) = 57.296*ATAN2(DATA(IK+1),DATA(IK))
+00225   	    ELSE
+00226   C		print*,'tds_phys',data(ik),data(ik+1),itemp,irx
+00227   	    ENDIF
+00228   	ENDDO
+
+TDS_PHYS                                                         7-Nov-2008 12:14:17	Compaq Fortran 77 V6.6-201          Page   5
+                                                                 7-Nov-2008 12:14:04	USER_A:[KELLOGG.WIND]TDS_PHYS.FOR;300       
+
+00229   C
+00230   C		CHANNELS 1 AND 2 HAVE TDSDET AT 322 HZ, AND POOR
+00231   C		PREAMP RESPONSE BELOW 120. HZ, SO CUT OFF AT 150 HZ.
+00232   C
+00233   		IF(TDS_CHANNEL.LE.2) FFTMIN = AMAX1(150.,FFTMIN)
+00234    
+00235   C		SEARCH COILS SEEM TO HAVE NO REASONABLE RESPONSE BELOW
+00236   C		ABOUT 3 HZ
+00237   C
+00238   		IF(IRX.GE.7) FFTMIN = AMAX1(3.3,FFTMIN)
+00239   C
+00240   	print*,'in tds_phys, freqmin,max ',fftmin,fftmax
+00241   	     DO IK = 3,2048,2
+00242   	        FREQ = SPS*(IK-1)/4096.
+00243   		IF(FREQ.LT.FFTMIN.OR.FREQ.GT.FFTMAX) THEN
+00244   		  DATA(IK) = 0.
+00245   		  DATA(IK+1) = 0.
+00246   		ENDIF
+00247   	     ENDDO
+00248   C
+00249   C	TRANSFER TO PUB FOR MORE DETAIL IN WAVEFORM
+00250   C
+00251   	DO N = 1,2048
+00252   	  HDATA(N) = DATA(N)
+00253   	  HDATA(N+2048) = 0.
+00254   	ENDDO
+00255   C
+00256   	     CALL REALFT(DATA,1024,-1)
+00257   	     DO IK = 1,2048
+00258   	       DATA(IK) = DATA(IK)/1024.
+00259   	       VDATA(IK) = DATA(IK)
+00260   	     ENDDO
+00261   C
+00262    20	CONTINUE
+00263   C
+00264   	RETURN
+00265   	END
+
+TDS_PHYS                                                         7-Nov-2008 12:14:17	Compaq Fortran 77 V6.6-201          Page   6
+01                                                               7-Nov-2008 12:14:04	USER_A:[KELLOGG.WIND]TDS_PHYS.FOR;300       
+
+PROGRAM SECTIONS
+
+    Name				 Bytes   Attributes
+
+  0 $CODE                                 1719   PIC CON REL LCL   SHR   EXE   RD NOWRT QUAD
+  1 $PDATA                                 140   PIC CON REL LCL   SHR NOEXE   RD NOWRT QUAD
+  2 $LOCAL                               17076   PIC CON REL LCL NOSHR NOEXE   RD   WRT QUAD
+  3 TDS_STATUS                              20   PIC OVR REL GBL   SHR NOEXE   RD   WRT QUAD
+  4 PUB                                  16400   PIC OVR REL GBL   SHR NOEXE   RD   WRT QUAD
+  5 XFER                                  4100   PIC OVR REL GBL   SHR NOEXE   RD   WRT QUAD
+  6 FRLIMITS                                 8   PIC OVR REL GBL   SHR NOEXE   RD   WRT QUAD
+
+    Total Space Allocated                39463
+
+
+ENTRY POINTS
+
+    Address  Type  Name          
+
+  0-00000000       TDS_PHYS      
+
+
+VARIABLES
+
+    Address  Type  Name              Address  Type  Name              Address  Type  Name              Address  Type  Name          
+
+  2-00004038  C*8  CCORR          AP-00000004@ I*4  CH                  **      R*4  CJCORR              **      R*4  COUNT         
+      **      R*4  DAVR            2-00004028  C*8  FCOEF           2-00004030  C*8  FCOEFT          6-00000004  R*4  FFTMAX        
+  6-00000000  R*4  FFTMIN          3-00000008  R*4  FILTER          2-00004090  R*4  FREQ            2-00004094  R*4  FREQMAX       
+      **      R*4  FUNDFR              **      I*4  I                   **      I*4  IBGDATA         2-00004078  I*4  IFIL          
+      **      I*4  IFILF               **      I*4  IFILS               **      I*4  IFSPS           2-00004098  I*4  IFXB          
+  2-00004088  I*4  IGL                 **      I*4  IK                  **      I*4  IKMAX          AP-00000008@ I*4  IPRC          
+  3-0000000C  I*4  IRX                 **      I*4  ISP             3-00000010  I*4  ISPS                **      I*4  ISSPS         
+  2-00004008  CHAR ITEM            2-0000407C  I*4  ITEMP               **      I*4  J                   **      I*4  K             
+      **      I*4  N               2-00004084  I*4  NGL1            2-0000408C  I*4  NGL2                **      I*4  OK            
+      **      R*4  PAMAX               **      R*4  RCORR           2-00004070  I*4  RETURN_SIZE         **      R*4  SNORM         
+  2-00004080  R*4  SPINRATE        3-00000004  R*4  SPS                 **      R*4  SUMPWR          2-00004074  I*4  SUNCLOCK      
+  3-00000000  I*4  TDS_CHANNEL         **      R*4  TPWR                **      R*4  TPWRMAX             **      R*4  TWOPI         
+
+
+ARRAYS
+
+    Address  Type  Name                Bytes  Dimensions
+
+      **      R*4  ANG                  8192  (2048)
+      **      R*4  ANGTBL               1520  (380)
+  2-00000000  R*4  DATA                 8200  (2050)
+      **      R*4  FFILTER                16  (4)
+      **      R*4  FSPS                   16  (4)
+  4-00000000  R*4  HDATA               16400  (4100)
+      **      I*4  NBGDATA              1520  (380)
+ AP-0000000C@ I*4  NDATA                8192  (2048)
+  2-00002008  I*4  NFDATA               8192  (2048)
+      **      CHAR PA                     96  (6, 4)
+      **      R*4  SFILTER                16  (4)
+ AP-00000014@ R*4  SPECT                4100  (1025)
+  5-00000000  R*4  SPHASE               4100  (1025)
+
+TDS_PHYS                                                         7-Nov-2008 12:14:17	Compaq Fortran 77 V6.6-201          Page   7
+01                                                               7-Nov-2008 12:14:04	USER_A:[KELLOGG.WIND]TDS_PHYS.FOR;300       
+
+      **      R*4  SSPS                   16  (4)
+ AP-00000010@ R*4  VDATA                   4  (1)
+      **      R*4  ZCROSS               8192  (2048)
+      **      R*4  ZINT                 8192  (2048)
+
+
+LABELS
+
+    Address   Label       Address   Label   
+
+      **      20        0-000004F2  100     
+
+
+FUNCTIONS AND SUBROUTINES REFERENCED
+
+  Type  Name            Type  Name            Type  Name            Type  Name            Type  Name            Type  Name          
+
+   R*4  ABS              R*4  AIMAG            R*4  ALOG10           R*4  AMAX1            R*4  ATAN2                 BZGLITCH      
+   R*4  CABS             C*8  CMPLX            C*8  CONJG                 FIXBADTDS        C*8  PREAMP                REALFT        
+   R*4  TDSCAL           C*8  TDSDET           C*8  TDS_FILTER       I*4  W_ITEM_I4        R*4  W_ITEM_R4     
+
+
+COMMAND QUALIFIERS
+
+  FORT/LIST/WARN TDS_PHYS
+
+  /ALIGN=(COMMONS=(PACKED,NOMULTILANGUAGE),RECORDS=PACKED)
+  /ASSUME=(ACCURACY_SENSITIVE,NOBYTERECL,NODUMMY_ALIASES,NOSOURCE_INCLUDE)
+  /BLAS=(INLINE,MAPPED)
+  /CHECK=(NOALIGNMENT,NOASSERTIONS,NOBOUNDS,OVERFLOW,NOUNDERFLOW)
+  /DEBUG=(PARAMETERS=USED,NOSYMBOLS,TRACEBACK)
+  /DESIGN=(NOCOMMENTS,NOPLACEHOLDERS)
+  /DIRECTIVES=(DEPENDENCE)
+  /MATH_LIBRARY=(ACCURATE,NOV5)
+  /PARALLEL=(NOAUTOMATIC,NOMANUAL)
+  /SHOW=(NODATA_DEPENDENCES,NODICTIONARY,NOINCLUDE,NOLOOPS,MAP,NOPREPROCESSOR,SINGLE)
+  /STANDARD=(NOMIA,NOSEMANTIC,NOSOURCE_FORM,NOSYNTAX)
+  /WARNINGS=(NOALIGNMENT,NOAlpha,NODECLARATIONS,GENERAL,INFORMATIONAL,NOINLINE,NOTRUNCATED_SOURCE,
+             NOULTRIX,UNCALLED,UNINITIALIZED,UNREACHABLE,NOUNUSED,USAGE,NOVAXELN)
+  /CONVERT=NATIVE  /NOCROSS_REFERENCE  /NOD_LINES  /ERROR_LIMIT=30  /NOEXTEND_SOURCE
+  /F77  /NOG_FLOATING  /I4  /NOMACHINE_CODE  /OPTIMIZE=LEVEL=3
+  /NORECURSIVE  /NOSYNCHRONOUS_EXCEPTIONS  /TERMINAL=NOSTATISTICS  /NOVECTOR
+  /NOANALYSIS_DATA
+  /NODIAGNOSTICS
+  /LIST=USER_A:[KELLOGG.WIND]TDS_PHYS.LIS;11                                                                
+  /OBJECT=USER_A:[KELLOGG.WIND]TDS_PHYS.OBJ;15                                                                
+
+
+COMPILER:  Compaq Fortran 77 V6.6-201 for OpenVMS VAX Systems
+
+COMPILATION STATISTICS
+
+  Run Time:           0.45 seconds
+  Elapsed Time:       0.62 seconds
+  Page Faults:        1599
+  Dynamic Memory:     1032 pages

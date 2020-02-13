@@ -1,0 +1,140 @@
+      SUBROUTINE ODEINT(YSTART,NVAR,X1,X2,EPS,H1,HMIN,NOK,NBAD,DERIVS)
+C   	Runge=Kutta driver witrh adaptive stepsize control.  Integrate the
+C	NVAR starting values YSTART from X1 to X2 with accuracy EPS
+C	storing intermediate results in the common block /PATH/
+C	H1 should be set as a guessed first stepsize, HMIN as the minimum
+C	allowed stepsize,(can be zero).  On output NOK and NBAD are the
+C	number of good and bad (but retried and fixed) steps taken, and
+C	YSTART is replaced by values at the end of the integration interval.
+C	DERIVS is the user supplied subroutine for calculating the right-hand
+C	side derivative, while RKQC is the name of the stepper routine to
+C	be used.  PATH contains its own information about how ofter an
+C	intermediate value is to be stored.
+C	This routine calls DERIVS and RKQC.  RKQC calls RK4.
+C
+      PARAMETER (MAXSTP=10000,NMAX=10,TWO=2.0,ZERO=0.0,TINY=1.E-30)
+      COMMON /PATH/ KMAX,KOUNT,DXSAV,XP(200),YP(10,200)
+      DIMENSION YSTART(NVAR),YSCAL(NMAX),Y(NMAX),DYDX(NMAX)
+      X=X1
+      H=SIGN(H1,X2-X1)
+      NOK=0
+      NBAD=0
+      KOUNT=0
+      DO 11 I=1,NVAR
+        Y(I)=YSTART(I)
+11    CONTINUE
+      XSAV=X-DXSAV*TWO
+      DO 16 NSTP=1,MAXSTP
+        CALL DERIVS(X,Y,DYDX)
+        DO 12 I=1,NVAR
+          YSCAL(I)=ABS(Y(I))+ABS(H*DYDX(I))+TINY
+12      CONTINUE
+        IF(KMAX.GT.0)THEN
+          IF(ABS(X-XSAV).GT.ABS(DXSAV)) THEN
+            IF(KOUNT.LT.KMAX-1)THEN
+              KOUNT=KOUNT+1
+              XP(KOUNT)=X
+              DO 13 I=1,NVAR
+                YP(I,KOUNT)=Y(I)
+13            CONTINUE
+              XSAV=X
+            ENDIF
+          ENDIF
+        ENDIF
+        IF((X+H-X2)*(X+H-X1).GT.ZERO) H=X2-X
+        CALL RKQC(Y,DYDX,NVAR,X,H,EPS,YSCAL,HDID,HNEXT,DERIVS)
+        IF(HDID.EQ.H)THEN
+          NOK=NOK+1
+        ELSE
+          NBAD=NBAD+1
+        ENDIF
+        IF((X-X2)*(X2-X1).GE.ZERO)THEN
+          DO 14 I=1,NVAR
+            YSTART(I)=Y(I)
+14        CONTINUE
+          IF(KMAX.NE.0)THEN
+            KOUNT=KOUNT+1
+            XP(KOUNT)=X
+            DO 15 I=1,NVAR
+              YP(I,KOUNT)=Y(I)
+15          CONTINUE
+          ENDIF
+          RETURN
+        ENDIF
+        IF(ABS(HNEXT).LT.HMIN) PAUSE 'Stepsize smaller than minimum.'
+        H=HNEXT
+16    CONTINUE
+      PAUSE 'Too many steps.'
+      RETURN
+      END
+      SUBROUTINE RKQC(Y,DYDX,N,X,HTRY,EPS,YSCAL,HDID,HNEXT,DERIVS)
+C
+C	Fifth order Runge-Kutta step with monitoring of local truncation
+C	error to ensure accuracy and adjust stepsize.
+C
+      PARAMETER (NMAX=10,FCOR=.0666666667,
+     *    ONE=1.,SAFETY=0.9,ERRCON=6.E-4)
+      EXTERNAL DERIVS
+      DIMENSION Y(N),DYDX(N),YSCAL(N),YTEMP(NMAX),YSAV(NMAX),DYSAV(NMAX)
+      PGROW=-0.20
+      PSHRNK=-0.25
+      XSAV=X
+      DO 11 I=1,N
+        YSAV(I)=Y(I)
+        DYSAV(I)=DYDX(I)
+11    CONTINUE
+      H=HTRY
+1     HH=0.5*H
+      CALL RK4(YSAV,DYSAV,N,XSAV,HH,YTEMP,DERIVS)
+      X=XSAV+HH
+      CALL DERIVS(X,YTEMP,DYDX)
+      CALL RK4(YTEMP,DYDX,N,X,HH,Y,DERIVS)
+      X=XSAV+H
+      IF(X.EQ.XSAV)PAUSE 'Stepsize not significant in RKQC.'
+      CALL RK4(YSAV,DYSAV,N,XSAV,H,YTEMP,DERIVS)
+      ERRMAX=0.
+      DO 12 I=1,N
+        YTEMP(I)=Y(I)-YTEMP(I)
+        ERRMAX=MAX(ERRMAX,ABS(YTEMP(I)/YSCAL(I)))
+12    CONTINUE
+      ERRMAX=ERRMAX/EPS
+      IF(ERRMAX.GT.ONE) THEN
+        H=SAFETY*H*(ERRMAX**PSHRNK)
+        GOTO 1
+      ELSE
+        HDID=H
+        IF(ERRMAX.GT.ERRCON)THEN
+          HNEXT=SAFETY*H*(ERRMAX**PGROW)
+        ELSE
+          HNEXT=4.*H
+        ENDIF
+      ENDIF
+      DO 13 I=1,N
+        Y(I)=Y(I)+YTEMP(I)*FCOR
+13    CONTINUE
+      RETURN
+      END
+      SUBROUTINE RK4(Y,DYDX,N,X,H,YOUT,DERIVS)
+      PARAMETER (NMAX=10)
+      DIMENSION Y(N),DYDX(N),YOUT(N),YT(NMAX),DYT(NMAX),DYM(NMAX)
+      HH=H*0.5
+      H6=H/6.
+      XH=X+HH
+      DO 11 I=1,N
+        YT(I)=Y(I)+HH*DYDX(I)
+11    CONTINUE
+      CALL DERIVS(XH,YT,DYT)
+      DO 12 I=1,N
+        YT(I)=Y(I)+HH*DYT(I)
+12    CONTINUE
+      CALL DERIVS(XH,YT,DYM)
+      DO 13 I=1,N
+        YT(I)=Y(I)+H*DYM(I)
+        DYM(I)=DYT(I)+DYM(I)
+13    CONTINUE
+      CALL DERIVS(X+H,YT,DYT)
+      DO 14 I=1,N
+        YOUT(I)=Y(I)+H6*(DYDX(I)+DYT(I)+2.*DYM(I))
+14    CONTINUE
+      RETURN
+      END

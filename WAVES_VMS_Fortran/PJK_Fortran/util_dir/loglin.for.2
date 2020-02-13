@@ -1,0 +1,30 @@
+	FUNCTION FLILO(X,B) 
+C 
+C 
+C       FLILO MEANS LINEAR FUNCTION FOR SMALL ARGUMENT
+C       AND LOGARITHM FOR LARGE ARGUMENT
+C       SIGN IS PRESERVED 
+C       FOR /X/.LT.B   FLILO=X
+C       FOR /X/.GT.B   FLILO=A*LOG(X)+C IN SUCH A WAY 
+C       THAT FLILO AND ITS DERIVATIVE ARE CONTINUOUS AT /X/=/B/ 
+C 
+        XM=ABS(X) 
+        IF(XM.GT.B) GO TO 1 
+	 FLILO=X
+        RETURN
+    1   FT=B*ALOG(XM/B)+B 
+        FLILO=SIGN(FT,X)
+        RETURN          
+	END 
+         FUNCTION AFLILO(X,B) 
+C 
+C       INVERSE OF FLILO
+C 
+        XM=ABS(X) 
+        IF(XM.GT.B) GO TO 1 
+        AFLILO=X
+        RETURN
+    1   FT=B*EXP(XM/B-1.) 
+        AFLILO=SIGN(FT,X) 
+        RETURN
+        END 

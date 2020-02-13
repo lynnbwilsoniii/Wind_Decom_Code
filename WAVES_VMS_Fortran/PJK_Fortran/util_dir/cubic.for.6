@@ -1,0 +1,35 @@
+	SUBROUTINE CUBIC(A,B,C,ROOT)
+
+C
+C	SOLVES A CUBIC X^3 + A*X^2 + B*X + C = 0, ACCORDING TO 
+C	NUMBERICAL RECIPES, 2ND ED., P 179
+C
+	COMPLEX ROOT(3)
+	DATA TWOPI /6.28318531/
+	DATA SQ3 /1.73205081/
+C
+	Q = (A**2 - 3.*B)/9.
+	R = (2.*A**3 - 9.*A*B + 27.*C)/54.
+	Q3 = Q**3
+	R2 = R**2
+	IF(Q3.GT.R2) THEN
+	  Q32 = SQRT(Q3)
+	  Q12 = SQRT(Q)
+	  THETA = ACOS(R/Q32)
+	  ROOT(1) = -2.*Q12*COS(THETA/3.) - A/3.  
+	  ROOT(2) = -2.*Q12*COS(THETA/3. + TWOPI/3.) - A/3.  
+	  ROOT(3) = -2.*Q12*COS(THETA/3. - TWOPI/3.) - A/3.  
+	ELSE
+	  SSQ = SQRT(R2 - Q3)
+	  SSQP = SSQ
+	  IF(R*SSQ.LT.0.) SSQ = -SSQ
+	  AA = (ABS(R) + SSQP)**(1./3.)
+	  AA = -SIGN(AA,R)
+	  BB = 0.
+	  IF(AA.NE.0.) BB = Q/AA
+	  ROOT(1) = AA + BB - A/3.
+	  ROOT(2) = CMPLX((-.5*(AA + BB) - A/3.),(.5*SQ3*(AA-BB)))
+	  ROOT(3) = CMPLX((-.5*(AA + BB) - A/3.),(-.5*SQ3*(AA-BB)))
+	ENDIF
+	RETURN
+	END

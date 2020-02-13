@@ -1,0 +1,214 @@
+,LSQORPY,OUTPUTCOPY 
+      SUBROUTINE LSQORPY (X,F,W,MM,KK,N,P,XNU)                          06JUL77      1
+*                                                                       COPYRIT      1
+*  COPYRIGHT (C) 1980 UNIVERSITY OF MINNESOTA                           COPYRIT      2
+*  SEE WRITEUP(SWPRICE) FOR DETAILS ON SOFTWARE PRICING                 COPYRIT      3
+*                                                                       COPYRIT      4
+      DIMENSION F(1), X(1), W(1), P(1), XNU(1)                          06JUL77      2
+      INTEGER IE(16)                                                    06JUL77      3
+      EQUIVALENCE (IE(4),K), (IE(8),M)                                  06JUL77      4
+      DATA IE/2,5,2HKK,0,2,4,2HMM,0,0,10HMUST HAVE ,10H0 .LE. IAB,10HS(K06JUL77      5
+     1K) .LT.,10H IABS(MM) ,10H.LT. 13107,1H2,0/                        06JUL77      6
+C     IF KK IS NEGATIVE - INDICATES OPTION TO FORCE SOLUTION TO DEGREE N06JUL77      7
+      IF (KK) 20,20,30                                                  06JUL77      8
+   20 L=1                                                               06JUL77      9
+      K=IABS(KK)                                                        06JUL77     10
+      GO TO 40                                                          06JUL77     11
+   30 L=0                                                               06JUL77     12
+      K=KK                                                              06JUL77     13
+C     IF MM IS NEGATIVE - INDICATES OPTION TO PRINT OUT INTERMEDIATE COE06JUL77     14
+   40 IF (MM) 50,50,60                                                  06JUL77     15
+   50 ML=1                                                              06JUL77     16
+      M=IABS(MM)                                                        06JUL77     17
+      GO TO 70                                                          06JUL77     18
+   60 ML=0                                                              06JUL77     19
+      M=MM                                                              06JUL77     20
+   70 IF (K.LT.0.OR.M.LT.K+1.OR.M.GE.131072) CALL PROCER (1,-254,IE)    06JUL77     21
+      IF (L.EQ.20) GO TO 400                                            06JUL77     22
+C     SET POINTERS FOR SCRATCH ARRAY                                    06JUL77     23
+      K1=K+1                                                            06JUL77     24
+      K2=K1+1                                                           06JUL77     25
+      K3=K1+K1                                                          06JUL77     26
+      K4=K3+K1                                                          06JUL77     27
+      K5=K4+K1                                                          06JUL77     28
+      K6=K5+K1                                                          06JUL77     29
+      K7=K6+K1                                                          06JUL77     30
+      K8=K7+K1                                                          06JUL77     31
+      K9=K8+M                                                           06JUL77     32
+      K10=K9+M                                                          06JUL77     33
+      K11=K10+K1                                                        06JUL77     34
+      K12=K11+K1                                                        06JUL77     35
+      K13=K12+K2                                                        06JUL77     36
+C     INITIALIZATION                                                    06JUL77     37
+      DO 80 JJ=1,M                                                      06JUL77     38
+   80   XNU(K13+JJ)=X(JJ)                                               06JUL77     39
+      IJJ=0                                                             06JUL77     40
+      N=0                                                               06JUL77     41
+      DO 90 I=1,K1                                                      06JUL77     42
+   90   XNU(I)=0.                                                       06JUL77     43
+      SIMIN=0.                                                          06JUL77     44
+      LSWX=1                                                            06JUL77     45
+      ILK=-1                                                            06JUL77     46
+      XNU(K1+1)=XNU(K12+1)=0.                                           06JUL77     47
+      XNU(K12+2)=DELSQ=OM=0.                                            06JUL77     48
+      XNU(K4+1)=1.                                                      06JUL77     49
+      TW=0.                                                             06JUL77     50
+      LCOMP=0                                                           06JUL77     51
+      DO 100 I=1,M                                                      06JUL77     52
+        DELSQ=DELSQ+W(I)*F(I)*F(I)                                      06JUL77     53
+        XNU(K9+I)=1.                                                    06JUL77     54
+        XNU(K8+I)=0.                                                    06JUL77     55
+        OM=OM+W(I)*F(I)                                                 06JUL77     56
+        TW=TW+W(I)                                                      06JUL77     57
+  100   CONTINUE                                                        06JUL77     58
+      XNU(K6+1)=XNU(1)=OM/TW                                            06JUL77     59
+      IF (K1.EQ.1) 110,120                                              06JUL77     60
+  110 P(1)=XNU(1)                                                       06JUL77     61
+      RETURN                                                            06JUL77     62
+  120 DELSQ=AMAX1(0.,DELSQ-XNU(K6+1)*OM)                                06JUL77     63
+      XNU(K5+1)=SQRT(DELSQ/MAX0(1,M-1))                                 06JUL77     64
+      IF (ML.EQ.0) GO TO 130                                            06JUL77     65
+      K55=K5+1                                                          06JUL77     66
+      PRINT 420, XNU(K55),XNU(1)                                        06JUL77     67
+C     TRANSFORMATION OF ABSCISSA TO /-2,2/--SEE REFERENCE               06JUL77     68
+  130 A=4./(X(M)-X(1))                                                  06JUL77     69
+      B=-2.-A*X(1)                                                      06JUL77     70
+      DO 140 I=1,M                                                      06JUL77     71
+  140   X(I)=X(I)*A+B                                                   06JUL77     72
+C     MAIN COMPUTATION LOOP--FORM COEFFS OF POLYS,CHECK FIT BY LEAST SQU06JUL77     73
+C     XNU(K5+J) CONTAINS MEASURES OF GOOD FIT                           06JUL77     74
+C     BEST POLY IS CHOSEN OF DEGREE J IF J IS FIRST VALUE FOUND SUCH THA06JUL77     75
+C     XNU(K5+J)<XNU(K5+J+1) PROVIDED THAT .8*XNU(K5+J)<XNU(K5+L)        06JUL77     76
+C        FOR L BETWEEN J+1 AND DEGREE OF POLY OTHERWISE SUCH AN L IS CHO06JUL77     77
+C     AS BEST FIT YET TESTING CONTINUES FOR A BETTER                    06JUL77     78
+C        FIT XNU(K5+N) SUCH THAT XNU(K5+N)< .8*SIMIN WHERE              06JUL77     79
+C        SIMIN IS PREVIOUS BEST FIT                                     06JUL77     80
+C     TESTING CONTINUES THROUGH TWO MORE CALCULATIONS OF XNU(K5+N)      06JUL77     81
+C     IF IT FINDS A BETTER FIT, IT BECOMES SIMIN AND THE PROCESS REPEATS06JUL77     82
+C     IF NONE IS FOUND, IT FINDS FINAL COEFFS USING SAVED ARRAY         06JUL77     83
+C     CORRESPONDING TO SIMIN                                            06JUL77     84
+      DO 400 I=1,K                                                      06JUL77     85
+        DU=0.                                                           06JUL77     86
+        DO 150 J=1,M                                                    06JUL77     87
+          DU=DU+W(J)*X(J)*XNU(K9+J)*XNU(K9+J)                           06JUL77     88
+  150     CONTINUE                                                      06JUL77     89
+        XNU(K3+I+1)=DU/TW                                               06JUL77     90
+        XLW=TW                                                          06JUL77     91
+        TW=OM=0.                                                        06JUL77     92
+        DO 160 J=1,M                                                    06JUL77     93
+          DU=XNU(K1+I)*XNU(K8+J)                                        06JUL77     94
+          XNU(K8+J)=XNU(K9+J)                                           06JUL77     95
+          XNU(K9+J)=(X(J)-XNU(K3+I+1))*XNU(K9+J)-DU                     06JUL77     96
+          TW=TW+W(J)*XNU(K9+J)*XNU(K9+J)                                06JUL77     97
+          OM=OM+W(J)*F(J)*XNU(K9+J)                                     06JUL77     98
+  160     CONTINUE                                                      06JUL77     99
+        XNU(K1+I+1)=TW/XLW                                              06JUL77    100
+        XNU(K6+I+1)=OM/TW                                               06JUL77    101
+        DELSQ=AMAX1(0.,DELSQ-XNU(K6+I+1)*OM)                            06JUL77    102
+        XNU(K5+I+1)=SQRT(DELSQ/MAX0(1,M-I-1))                           06JUL77    103
+        IF (L) 170,170,320                                              06JUL77    104
+C     IF FLAG SET, SAVE COEFFS, CONTINUE--CHECKING FOR BETTER FIT       06JUL77    105
+  170   IF (LCOMP.NE.I) GO TO 190                                       06JUL77    106
+        DO 180 J=1,K1                                                   06JUL77    107
+  180     XNU(K7+J)=XNU(J)                                              06JUL77    108
+  190   IF (I.EQ.ILK+1) 200,260                                         06JUL77    109
+  200   DO 210 J=1,K1                                                   06JUL77    110
+  210     XNU(J)=XNU(K7+J)                                              06JUL77    111
+        IF (ML.EQ.0) 220,250                                            06JUL77    112
+  220   CALL POLYX (XNU,A,B,I,P,K10,K11)                                06JUL77    113
+  230   DO 240 JJ=1,M                                                   06JUL77    114
+  240     X(JJ)=XNU(K13+JJ)                                             06JUL77    115
+        RETURN                                                          06JUL77    116
+  250   K55=K5+I+1                                                      06JUL77    117
+        PRINT 430, I,XNU(K55)                                           06JUL77    118
+        CALL POLYX (XNU,A,B,I,P,K10,K11)                                06JUL77    119
+        GO TO 230                                                       06JUL77    120
+C     CHECK IF FIRST *BEST* FIT HAS BEEN FOUND YET                      06JUL77    121
+  260   IF (LSWX) 300,300,270                                           06JUL77    122
+  270   IF (XNU(K5+I+1).GE.XNU(K5+I)) 280,320                           06JUL77    123
+C     HIGHER POWER APPEARS NOT TO IMPROVE FIT                           06JUL77    124
+  280   LSWX=0                                                          06JUL77    125
+        SIMIN=XNU(K5+I)                                                 06JUL77    126
+        N=I-1                                                           06JUL77    127
+        DO 290 J=1,K1                                                   06JUL77    128
+  290     XNU(K7+J)=XNU(J)                                              06JUL77    129
+        GO TO 320                                                       06JUL77    130
+  300   IF (XNU(K5+I+1).LT.SIMIN*.8) 310,320                            06JUL77    131
+C     FLAG SET IF FIND SUPERIOR FIT TO PREVIOUS ONE                     06JUL77    132
+  310   SIMIN=XNU(K5+I+1)                                               06JUL77    133
+        LCOMP=I+1                                                       06JUL77    134
+        N=I                                                             06JUL77    135
+        ILK=I+2                                                         06JUL77    136
+C     RECURSION TO OBTAIN THE COEFFS OF POLY( TRANSFORMED) OF DEGREE I+106JUL77    137
+  320   DO 330 J=1,I                                                    06JUL77    138
+          DU=XNU(K12+J+1)*XNU(K1+I)                                     06JUL77    139
+          XNU(K12+J+1)=XNU(K4+J)                                        06JUL77    140
+          XNU(K4+J)=XNU(K12+J)-XNU(K3+I+1)*XNU(K4+J)-DU                 06JUL77    141
+          XNU(J)=XNU(J)+XNU(K6+I+1)*XNU(K4+J)                           06JUL77    142
+  330     CONTINUE                                                      06JUL77    143
+        XNU(I+1)=XNU(K6+I+1)                                            06JUL77    144
+        XNU(K4+I+1)=1.                                                  06JUL77    145
+        XNU(K12+I+2)=0.                                                 06JUL77    146
+        IF (LSWX.EQ.1) GO TO 390                                        06JUL77    147
+        IF (I.EQ.K) 340,390                                             06JUL77    148
+  340   IF (LCOMP.EQ.I+1) 390,350                                       06JUL77    149
+  350   DO 360 J=1,K1                                                   06JUL77    150
+  360     XNU(J)=XNU(K7+J)                                              06JUL77    151
+        IF (ML.EQ.0) GO TO 370                                          06JUL77    152
+        K55=K5+I+1                                                      06JUL77    153
+        PRINT 430, I,XNU(K55)                                           06JUL77    154
+  370   CALL POLYX (XNU,A,B,I,P,K10,K11)                                06JUL77    155
+        DO 380 JJ=1,M                                                   06JUL77    156
+  380     X(JJ)=XNU(K13+JJ)                                             06JUL77    157
+        RETURN                                                          06JUL77    158
+  390   IF (ML.EQ.0) GO TO 400                                          06JUL77    159
+        CALL POLYX (XNU,A,B,I,P,K10,K11)                                06JUL77    160
+        I1=I+1                                                          06JUL77    161
+        K55=K5+I1                                                       06JUL77    162
+        PRINT 440, I,XNU(K55),(P(II),II=1,I1)                           06JUL77    163
+  400   CONTINUE                                                        06JUL77    164
+      N=K                                                               06JUL77    165
+      CALL POLYX (XNU,A,B,I,P,K10,K11)                                  06JUL77    166
+      DO 410 JJ=1,M                                                     06JUL77    167
+  410   X(JJ)=XNU(K13+JJ)                                               06JUL77    168
+      RETURN                                                            06JUL77    169
+C                                                                       06JUL77    170
+  420 FORMAT (55X,*POWERS OF X INCREASE FROM TOP TO BOTTOM*,/,1X,*DEGREE06JUL77    171
+     1     0*,5X,*SIGMA*,9X,G20.13,6X,*COEFFICIENT*,3X,G20.13)          06JUL77    172
+  430 FORMAT (/,1X,*DEGREE*,I6,5X,*SIGMA*,9X,G20.13,6X,*COEFFICIENTS NOT06JUL77    173
+     1 CALCULATED BECAUSE BEST FIT DETERMINED*)                         06JUL77    174
+  440 FORMAT (/,1X,*DEGREE*,I6,5X,*SIGMA*,9X,G20.13,6X,*COEFFICIENTS*,2X06JUL77    175
+     1,G20.13,/,(72X,G20.13))                                           06JUL77    176
+      END                                                               06JUL77    177
+      SUBROUTINE POLYX (XNU,A,B,I,P,K10,K11)                            06JUL77    178
+*                                                                       COPYRIT      1
+*  COPYRIGHT (C) 1980 UNIVERSITY OF MINNESOTA                           COPYRIT      2
+*  SEE WRITEUP(SWPRICE) FOR DETAILS ON SOFTWARE PRICING                 COPYRIT      3
+*                                                                       COPYRIT      4
+      DIMENSION P(1), XNU(1)                                            06JUL77    179
+C     TRANSFORM COEFFS TO CORRESPOND TO ORIGINAL ABSCISSA VALUES        06JUL77    180
+      K1=I+1                                                            06JUL77    181
+      XNU(K10+1)=XNU(K11+1)=1.                                          06JUL77    182
+      P(1)=XNU(1)                                                       06JUL77    183
+      DO 20 L=2,K1                                                      06JUL77    184
+        XNU(K10+L)=1.                                                   06JUL77    185
+        XNU(K11+L)=B*XNU(K11+L-1)                                       06JUL77    186
+        P(1)=P(1)+XNU(L)*XNU(K11+L)                                     06JUL77    187
+   20   CONTINUE                                                        06JUL77    188
+      IF (K1.EQ.2) GO TO 50                                             06JUL77    189
+      DO 40 J=2,I                                                       06JUL77    190
+        XNU(K10+1)=XNU(K10+1)*A                                         06JUL77    191
+        P(J)=XNU(J)*XNU(K10+1)                                          06JUL77    192
+        MM=2                                                            06JUL77    193
+        J1=J+1                                                          06JUL77    194
+        DO 30 L=J1,K1                                                   06JUL77    195
+          XNU(K10+MM)=A*XNU(K10+MM)+XNU(K10+MM-1)                       06JUL77    196
+          P(J)=P(J)+XNU(L)*XNU(K10+MM)*XNU(K11+MM)                      06JUL77    197
+   30     MM=MM+1                                                       06JUL77    198
+   40   CONTINUE                                                        06JUL77    199
+   50 XNU(K10+1)=XNU(K10+1)*A                                           06JUL77    200
+      P(K1)=XNU(K1)*XNU(K10+1)                                          06JUL77    201
+      RETURN                                                            06JUL77    202
+      END                                                               06JUL77    203
+ EOI ENCOUNTERED.
+/

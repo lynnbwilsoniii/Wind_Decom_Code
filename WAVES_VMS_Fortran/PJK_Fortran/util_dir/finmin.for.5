@@ -1,0 +1,108 @@
+      SUBROUTINE FINMIN( N, X, DX, Y, FN, FF) 
+      COMMON /HNTBLK/ NHUNT(25)
+      DIMENSION X(25), Y(25), DX(25), DF(25), D2F(10,10), DXS(25) 
+      DIMENSION YY(25)
+      EXTERNAL FN 
+C     THIS IS FINMIN MK III
+C	MODIFIED FROM MK II TO NOT VARY SOME X'S
+C     OUTPUT IS IN Y  
+      DO 1 I = 1,25 
+        DXS(I) = 0. 
+    1 Y(I) = X(I)   
+      CALL FN(Y,F0)  
+      FM = F0 
+      DO 2 I = 1,N   
+        Y(I) = X(I) + DX(I)   
+        CALL FN(Y, F1) 
+        IF(F1 - FM) 3,4,4 
+    3   FM = F1   
+        DO 5 J=1,N  
+    5   DXS(J) = 0.   
+        DXS(I) = DX(I)
+    4   Y(I) = X(I) - DX(I)   
+        CALL FN(Y,F2) 
+        IF(F2 - FM) 6,8,8 
+    6   FM = F2   
+        DO 7 J = 1,N
+    7   DXS(J) = 0.   
+        DXS(I) = -DX(I) 
+    8   DF(I) = .5*(F1 - F2)/DX(I)
+        D2F(I,I) = (F2 + F1 - 2.*F0)/DX(I)**2 
+        IF(D2F(I,I).NE.0. ) GO TO 2    
+        PRINT 501,I
+  501   FORMAT('  VANISHING SECOND DERIVATIVE FOR I = ' , I2) 
+        GO TO 17
+    2   Y(I) = X(I)        
+      NM1 = N-1
+C      PRINT 201, (DF(I),I=1,N)
+C      PRINT 201,(D2F(I,I),I=1,N)
+      DO 10 I = 1,NM1 
+      IL = I+1   
+      DO 10 J = IL,N 
+      S1 = -SIGN(DX(I), DF(I))  
+      S2 = -SIGN(DX(J), DF(J)) 
+      Y(I) = X(I) + S1   
+      Y(J) = X(J) + S2 
+      CALL FN(Y, F1)   
+      IF(F1 - FM) 11,12,12 
+   11 FM = F1   
+      DO 13 K = 1,N 
+   13 DXS(K) = 0.   
+      DXS(I) = S1      
+      DXS(J) = S2
+   12 D2F(I,J) = (F1 - F0 - .5*D2F(I,I)*S1*S1 - .5*D2F(J,J)*S2*S2 
+     1 -DF(I)*S1 - DF(J)*S2)/S1/S2
+      D2F(J,I) = D2F(I,J)   
+      Y(I) = X(I)
+   10 Y(J) = X(J)    
+      DO 20 I = 1,N
+   20 Y(I) = -DF(I) 
+  201 FORMAT( 11E12.4 ) 
+C      PRINT 201, ((D2F(I,J),J=I,N),I=1,N) 
+C      CALL SYMSOLV( D2F, Y, N, 10)
+C
+C	NOW TAKE CARE OF NONVARYING VARIABLES
+C
+      NVAR = N
+      DO I = 1,N
+	YY(I) = Y(I)
+      ENDDO
+      DO I = 1,N
+	IF(NHUNT(I).EQ.0) THEN
+	  NVAR = NVAR-1
+	  DO J = I,NVAR
+	    YY(J) = YY(J+1)
+	    DO K = 1,NVAR
+	      D2F(K,J) = D2F(K,J+1)
+	      D2F(J,K) = D2F(J+1,K)
+	    ENDDO
+	  ENDDO
+	ENDIF
+	ENDDO
+      CALL GAUSSJ( D2F, NVAR, 10, YY, 1, 1)
+C      PRINT 201,(YY(I),I=1,NVAR)
+C
+C	RESTORE
+C
+      IVAR = 0
+      DO I = 1,N
+	IF(NHUNT(I).NE.0) THEN
+	  IVAR = IVAR+1
+	  Y(I) = YY(IVAR)
+	ELSE
+	  Y(I) = 0.
+	ENDIF
+      ENDDO
+      DO 21 I = 1,N 
+   21 Y(I) = Y(I) + X(I)
+      CALL FN(Y,FF) 
+      PRINT 500 
+  500 FORMAT( //// )  
+      IF(FM - FF) 17,18,18
+   17 FF = FM   
+      DO 19 I = 1,N 
+   19 Y(I) = X(I) + DXS(I)
+   18 DO 9 I = 1,N
+    9 DX(I) = .5*(ABS(X(I) - Y(I)) + ABS(DX(I)))
+      RETURN
+      END 

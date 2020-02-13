@@ -1,0 +1,26 @@
+      SUBROUTINE SORTN(IXS,FOLLOW1,FOLLOW2,NS)
+C
+      INTEGER*2 FOLLOW1(1),IXS(1)
+      DIMENSION FOLLOW2(1)
+C
+C     ORDER X COORDS IN INCREASING ORDER
+C
+      DO 11 N = 1,NS-1
+      N1 = N + 1
+      DO 12 M = N1,NS
+      IF((IXS(M)-IXS(N)).GT.0.) GO TO 12
+C     EXCHANGE
+      IXT = IXS(N)
+      IXS(N) = IXS(M)
+      IXS(M) = IXT
+      IXT = FOLLOW1(N)
+      FOLLOW1(N) = FOLLOW1(M)
+      FOLLOW1(M) = IXT
+      XT = FOLLOW2(N)
+      FOLLOW2(N) = FOLLOW2(M)
+      FOLLOW2(M) = XT
+   12 CONTINUE
+   11 CONTINUE
+      RETURN
+      END
+
