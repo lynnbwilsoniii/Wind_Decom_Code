@@ -1,0 +1,92 @@
+/*$Id: simple_vars.c,v 1.1 1998/10/19 20:51:10 beth Exp $
+**	
+**
+** NAME:
+**
+** 	simple_vars.c
+**
+** PURPOSE:
+**	This C function is used to demonstrate how to pass simple
+**	variables from IDL to a C function using the IDL function
+**	CALL_EXTERNAL. The variables values are squared and
+**	returned to show how variable values can be changed.
+**
+** CATEGORY:
+**	Dynamic Link
+**
+** CALLING SEQUENCE:
+**	This function is called in IDL by using the following command
+**
+**	IDL> result = CALL_EXTERNAL(library_name, 'simple_vars',    $
+**	IDL>            byte_var, short_var, long_var, float_var,        $
+**	IDL>		double_var)
+**
+** INPUTS:
+**
+**	Byte_var:	A scalar byte variable
+**
+**	Short_var:	A scalar short integer variable
+**
+**	Long_var:	A scalar long integer variable
+**
+**	Float_var:	A scalar float variable
+**
+**	Double_var:	A scalar float variable
+**
+**
+** OUTPUTS:
+**	The function returns a 1 (long) on success and a 0 otherwise.
+**
+** SIDE EFFECTS:
+**	None.
+**
+** RESTRICTIONS:
+**
+**      None.
+**
+** MODIFICATION HISTORY:
+**	Written October, 1993           KDB
+**	Modified    May, 1998           JJG
+**
+*/
+#include <stdio.h>
+#include "export.h"   /* IDL external definitions */
+
+/* make sure that this routine is exported on the Macintosh */
+#if defined(__POWERPC__)
+__declspec(export) int simple_vars(int argc,void* argv[]);
+#endif
+
+
+int IDL_STDCALL simple_vars(int argc,void* argv[])
+{
+     char 	*byte_var;	
+     short	*short_var;
+     /* IDL long variables don't map cleanly to a C type on
+	all compilers. The IDL_LONG macro gives you a 32bit
+	signed integer on all platforms.  It is defined in export.h  */
+     IDL_LONG	*long_var;
+     float	*float_var;
+     double	*double_var;
+
+     /* Insure that the correct number of arguments were passed in */
+     if(argc != 5) return 0;
+     /* Cast the pointer in argv to the pointer variables */
+     byte_var	= (char *)   argv[0];
+     short_var	= (short *)  argv[1];
+     long_var	= (IDL_LONG *)   argv[2];	
+     float_var	= (float *)  argv[3];
+     double_var	= (double *) argv[4];
+
+     /* Square each variable. */
+     *byte_var 	*= *byte_var;
+     *short_var	*= *short_var;
+     *long_var	*= *long_var;
+     *float_var	*= *float_var;
+     *double_var *= *double_var;
+     return 1;
+}
+
+
+
+

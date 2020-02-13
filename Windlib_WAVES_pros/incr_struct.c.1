@@ -1,0 +1,88 @@
+/*$Id: incr_struct.c,v 1.1 1998/10/19 20:51:10 beth Exp $
+**	
+**
+** NAME:
+**
+** 	incr_struct.c
+**
+** PURPOSE:
+**	This C function is used to demonstrate how to read an IDL
+**      structure or array of IDL structures in a CALL_EXTERNAL routine.
+**      The fields of the IDL structure and the corresponding C structure
+**      must match exactly.
+**
+** CATEGORY:
+**	Dynamic Link
+**
+** CALLING SEQUENCE:
+**	This function is called in IDL by using the following commands:
+**
+**      IDL>s = {ASTRUCTURE,zero:0B,one:0L,two:0.,three:0D,four: intarr(2)}
+**      IDL>r = call_external(library_name,'incr_struct',s,N_ELEMENTS(s))
+**
+**      See incr_struct.pro for a more complete calling sequence.
+**
+** INPUTS:
+**      mystructure - an array of structures of type ASTRUCTURE
+**      n  - number of elements in the array (type is long)
+**
+** OUTPUTS:
+**	The function returns 1 (long) on success and 0 otherwise.
+**
+** SIDE EFFECTS:
+**	None.
+**
+** RESTRICTIONS:
+**
+**      It is important that the IDL structure definition
+**      and the C structure definition match exactly.  Otherwise,
+**      there will be no way to prevent this program from
+**      segfaulting or doing other strange things.
+**
+** MODIFICATION HISTORY:
+**	Written May, 1998 JJG
+**
+*/
+#include <stdio.h>
+#include "export.h"
+/*
+**  C definiton for the structure that this
+**  routine accepts.  The corresponding IDL
+**  structure definition would look like this:
+ s = {zero:0B,one:0L,two:0.,three:0D,four: intarr(2)}
+*/
+typedef struct {
+  unsigned char zero;
+  IDL_LONG one;
+  float two;
+  double three;
+  short four[2];
+} ASTRUCTURE;
+
+/* make sure that this routine is exported on the Macintosh */
+#if defined(__POWERPC__)
+__declspec(export) int incr_struct(int argc,void* argv[]);
+#endif
+
+int IDL_STDCALL incr_struct(int argc, void *argv[])
+{
+    ASTRUCTURE* mystructure;
+    IDL_LONG n;
+
+    int i;
+    if (argc != 2) return 0;
+    mystructure = (ASTRUCTURE*) argv[0]; /* first arg is the structure array */
+    n = *(int*) argv[1];                 /* second is the number of elements */
+
+    /* for each structure in the array, increment every field */
+    for (i = 0;i<n;i++,mystructure++)
+    {
+       mystructure->zero++;
+       mystructure->one++;
+       mystructure->two++;
+       mystructure->three++;
+       mystructure->four[0]++;
+       mystructure->four[1]++;
+    }
+    return 1;
+}

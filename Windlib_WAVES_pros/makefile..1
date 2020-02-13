@@ -1,0 +1,141 @@
+#$Id: makefile,v 1.8 2000/09/07 20:37:22 ali Exp $
+#
+#  Copyright (c) 1988-2000, Research Systems Inc.  All rights reserved.
+#  This software includes information which is proprietary to and a
+#  trade secret of Research Systems, Inc.  It is not to be disclosed
+#  to anyone outside of this organization. Reproduction by any means
+#  whatsoever is  prohibited without express written permission.
+#
+#  makefile for CALL_EXTERNAL examples, UNIX platforms
+#
+#  This is a recursive makefile. The default target "all" detects which
+#  operating system you are on, sets system specific macros, and then
+#  calls make again to build the target "libs".  Specifying a target
+#  other than "all","clean", or "tidy" will NOT set all required macros
+#  and will probably produce incorrect results.
+#
+SHELL=/bin/sh
+# 	The following macro might need to be edited if the location
+#	of IDL is not the standard location on your system.
+IDL_DIR = /usr/local/rsi/idl
+
+
+# The following macros establish general defaults. They are overridden
+# in the "all" rule as needed to satisfy a given platform's requirements.
+
+CC		= cc
+C_FLAGS		= -I$(IDL_DIR)/external -c $(CFLAGS)
+LD 		= ld
+SHELL		= /bin/sh
+#platform specific C compiler flags (redefined below)
+X_CFLAGS	=
+#platform specific linker flags
+X_LD_FLAGS	=
+
+SO_EXT		=so
+
+.c.o :
+	$(CC) $(C_FLAGS) $(X_CFLAGS) $*.c
+
+
+# The following is the default entry point. This section will determine
+# what system we are on, set the correct flags and call this same makefile
+# again with the correct flags.
+
+all :
+	@echo "OS type detected: "`uname`
+	@case `uname` in \
+	"SunOS") if [ \( `/bin/uname -p` != i386 \) \
+                      -a \( -x /bin/isainfo \) ]; then \
+			rm -f $(OBJS) ;\
+			make call_examples.so \
+				"SO_EXT=so" \
+				"CC=cc -xtarget=ultra -xarch=v9" \
+				"LD=cc -xtarget=ultra -xarch=v9" \
+				"X_CFLAGS=-K pic " \
+				"X_LD_FLAGS=-G " ;\
+			mv call_examples.so call_examples_64.so ;\
+			rm -f $(OBJS) ;\
+		fi ;\
+		make call_examples.so \
+			"SO_EXT=so" \
+			"CC=cc" \
+			"LD=cc" \
+			"X_CFLAGS=-K pic " \
+			"X_LD_FLAGS=-G " ;\
+		;; \
+	"AIX") make call_examples.a \
+		"SO_EXT=a" \
+		"CC=cc" \
+		"LD=cc" \
+		"X_LD_FLAGS=-bM:SRE -bnoentry"\
+		"EXPORT_CFLG=-bE:" \
+		"SIMPLE_VARS_EXPORT=simple_vars.export" \
+		"STRING_ARRAY_EXPORT=string_array.export" \
+		"INCR_STRUCT_EXPORT=incr_struct.export" \
+		"SUM_2D_ARRAY_EXPORT=sum_2d_array.export";; \
+	"HP-UX") make call_examples.sl \
+		"SO_EXT=sl" \
+		"CC=cc" \
+		"LD=ld" \
+		"X_CFLAGS=+z -Aa -D_HPUX_SOURCE +e" \
+		"X_LD_FLAGS=-b";; \
+	"IRIX" ) make call_examples.so \
+		"SO_EXT=so" \
+		"CC=cc" \
+		"LD=ld" \
+		"X_CFLAGS=-n32 -mips3 -KPIC" \
+		"X_LD_FLAGS=-shared -n32 -mips3";; \
+	"IRIX64" ) make call_examples.so \
+		"SO_EXT=so" \
+		"CC=cc" \
+		"LD=ld" \
+		"X_CFLAGS=-n32 -mips3 -KPIC" \
+		"X_LD_FLAGS=-shared -n32 -mips3";; \
+	"OSF1" )  make call_examples.so \
+		"SO_EXT=so" \
+		"CC=cc" \
+		"LD=ld" \
+		"X_LD_FLAGS=-S -shared";; \
+	"Linux" ) make call_examples.so \
+		"SO_EXT=so" \
+		"CC=gcc" \
+		"LD=ld" \
+		"X_CFLAGS=-fPIC -g -Wall" \
+		"X_LD_FLAGS=-shared" ;;\
+	*) echo "This system is not supported" ;; \
+	esac
+
+
+
+OBJS = simple_vars.o string_array.o incr_struct.o sum_2d_array.o
+
+AIX_EXPORT = incr_struct.export simple_vars.export \
+	string_array.export sum_2d_array.export
+
+incr_struct.export :
+	echo "incr_struct" > incr_struct.export
+
+simple_vars.export :
+	echo "simple_vars" > simple_vars.export
+
+string_array.export :
+	echo "string_array" > string_array.export
+
+sum_2d_array.export :
+	echo "sum_2d_array" > sum_2d_array.export
+
+call_examples.$(SO_EXT): $(OBJS) $(SIMPLE_VARS_EXPORT) \
+	        $(STRING_ARRAY_EXPORT) $(INCR_STRUCT_EXPORT) \
+		$(SUM_2D_ARRAY_EXPORT)
+	$(LD) $(X_LD_FLAGS) -o call_examples.$(SO_EXT) $(OBJS) \
+	        $(EXPORT_CFLG)$(SIMPLE_VARS_EXPORT) \
+		$(EXPORT_CFLG)$(STRING_ARRAY_EXPORT) \
+	        $(EXPORT_CFLG)$(INCR_STRUCT_EXPORT) \
+	        $(EXPORT_CFLG)$(SUM_2D_ARRAY_EXPORT)
+
+tidy :
+	rm -f *.o
+
+clean : tidy
+	rm -f *.export *.so *.sl *.a

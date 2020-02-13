@@ -1,0 +1,194 @@
+/*
+ * gr_tmpl.c
+ *
+ *	$Id: gr_tmpl.c,v 1.2 1998/05/29 17:21:56 ali Exp $
+ */
+
+/*
+  Copyright (c) 1988-1998, Research Systems Inc.  All rights reserved.
+  This software includes information which is proprietary to and a
+  trade secret of Research Systems, Inc.  It is not to be disclosed
+  to anyone outside of this organization. Reproduction by any means
+  whatsoever is  prohibited without express written permission.
+  */
+
+/*+
+ * This file is a template for an IDL graphics device driver. It
+ * contains the outline, which you need to fill in.
+ *
+ * Choose the IDL name for your device and copy this file to a new file
+ * named graphics_{yourname}.c. For example, if you were writing
+ * an X windows driver, and decided to call the device "X", you'd
+ * copy this file to graphics_X.c.
+ *
+ * This file is written as if the device name was "abc". You will
+ * probably want to change all instances of "abc" to be the name
+ * of your device (For example, the X windows driver uses "x"), in
+ * your copy.
+ * 
+ * The comments in this file delimited by comment delimiters with a "+"
+ * character attached (like this one) are instructions to you on how
+ * to convert this template into a real driver. You will want to remove
+ * them as you progress.
+ +*/
+
+/* Revision History:
+   Feb, 1990    Started keeping track of revisions.
+   Feb, 1990    Added load_rtn to IDL_DEVICE_CORE structure.
+   Feb 29, 1992 Modified for ANSI C
+ */
+
+#include <stdio.h>
+#include "export.h"
+#include "obsolete.h"
+
+
+/* Forward procedure declarations: */
+static void abc_load(void);
+static void abc_draw(IDL_GR_PT *p0, IDL_GR_PT *p1, IDL_ATTR_STRUCT *a);
+static int abc_text(IDL_GR_PT *p, IDL_ATTR_STRUCT *ga, IDL_TEXT_STRUCT *ta, char *text);
+static void abc_erase(IDL_ATTR_STRUCT *a);
+static void abc_cursor(int funct, IDL_MOUSE_STRUCT *status);
+static void abc_polyfill(int *x, int *y, int n, IDL_POLYFILL_ATTR *p);
+static void abc_inter_exit(void);
+static void abc_flush(void);
+static void abc_color(IDL_LONG start, IDL_LONG  n);
+static void abc_rw_pixels(UCHAR *data, int x0, int y0, int nx, int ny,
+			  int dir, IDL_TV_STRUCT *secondary);
+static void abc_device(int argc, IDL_VPTR *argv, char *argk);
+static void abc_help(int argc, IDL_VPTR *argv);
+static void abc_window(int argc, IDL_VPTR *argv, char *argk);
+static void abc_window_delete(int argc, IDL_VPTR *argv);
+static void abc_window_show(int argc, IDL_VPTR *argv, char *argk);
+static void abc_window_set(int argc, IDL_VPTR *argv);
+static IDL_VPTR abc_menu(int argc, IDL_VPTR *argv, char *argk);
+
+/*+
+ * This is the definition of the device interface.
+ * Fill in all fields that apply to your device. See the manual
+ * on adding code to IDL for details on these fields.
++*/
+
+cx_public IDL_DEVICE_DEF abc_dev = {   /* Definition for ABC device */
+  {3,0,"ABC"},			/* IDL_STRING for name */
+  {1000, 1000},			/* Total size in device coordinates */
+  {1000, 1000},			/* Visible area size, device coords */
+  {10, 18},			/* Default character sizes */
+  {13, 13.},			/* Device units / centimeter, x & y. */
+  256,				/* # of possible simultaneous colors */
+  256,				/* Size of color table */
+  1,				/* minimum line spacing for solid fill,
+				   ignored if hardware fill present. */
+  -1,				/* Current window number */
+  0,				/* Unit number of output file */
+				/* Advertise limitations and abilities */
+  D_THICK|D_IMAGE|D_COLOR|D_POLYFILL|D_READ_PIXELS|D_WINDOWS,
+  { 0, 0},			/* Display XY origin */
+  { 1, 1},			/* Display XY zoom */
+  1.0,				/* Aspect ratio = v_size[0] / v_size[1] */
+  {				/* Core routine pointers */
+    abc_draw,			/* ^ to draw routine */
+    abc_text,			/* text output, or NULL */
+    abc_erase,			/* erase */
+    abc_cursor,			/* cursor inquire and set, or NULL */
+    abc_polyfill,		/* Fill irregular polygon, or NULL */
+    abc_inter_exit,		/* Return to interactive mode, or NULL */
+    abc_flush,			/* Flush entry, or NULL */
+    abc_color,			/* Load color tables, or NULL */
+    abc_rw_pixels,		/* Pixel input/output, or NULL */
+    abc_device,			/* Rout. to call from DEVICE proc, or NULL.*/
+    abc_help,			/* Rout. to call for HELP,/DEVICE, or NULL */
+    abc_load			/* Routine called when loaded */
+  },
+  {				/* Window system routines */
+    abc_window,			/* Create a window */
+    abc_window_delete,		/* Delete a window */
+    abc_window_show,		/* Expose a window */
+    abc_window_set,		/* Set the current window */
+    abc_menu,			/* Menu function */
+  },
+  (char *) 0
+};
+
+
+static struct {			/* This structure contains your impure data */
+  int dummy1;
+  int dummy2;
+} abc;
+
+static void abc_load(void)
+     /* This routine is called when driver is loaded or when IDL starts. */
+{
+}
+
+static void abc_draw(IDL_GR_PT *p0, IDL_GR_PT *p1, IDL_ATTR_STRUCT *a)
+{
+}
+
+static int abc_text(IDL_GR_PT *p, IDL_ATTR_STRUCT *ga, IDL_TEXT_STRUCT *ta, char *text)
+{
+  return 10;
+}
+
+static void abc_erase(IDL_ATTR_STRUCT *a)
+{
+}
+
+static void abc_cursor(int funct, IDL_MOUSE_STRUCT *status)
+{
+}
+
+static void abc_polyfill(int *x, int *y, int n, IDL_POLYFILL_ATTR *p)
+{
+}
+
+static void abc_inter_exit(void)
+{
+}
+
+static void abc_flush(void)
+{
+}
+
+static void abc_color(IDL_LONG start, IDL_LONG  n)
+{
+}
+
+static void abc_rw_pixels(UCHAR *data, int x0, int y0, int nx, int ny,
+			  int dir, IDL_TV_STRUCT *secondary)
+{
+}
+
+static void abc_device(int argc, IDL_VPTR *argv, char *argk)
+{
+}
+
+static void abc_help(int argc, IDL_VPTR *argv)
+{
+  printf("ABC (graphics_template) help routine called\r\n");
+}
+
+
+/* *** Window routines, not present for most devices. */
+
+static void abc_window(int argc, IDL_VPTR *argv, char *argk)
+{
+}
+
+static void abc_window_delete(int argc, IDL_VPTR *argv)
+{
+}
+
+static void abc_window_show(int argc, IDL_VPTR *argv, char *argk)
+{
+}
+
+static void abc_window_set(int argc, IDL_VPTR *argv)
+{
+}
+
+static IDL_VPTR abc_menu(int argc, IDL_VPTR *argv, char *argk)
+{
+  return IDL_GettmpLong(1);
+}
+

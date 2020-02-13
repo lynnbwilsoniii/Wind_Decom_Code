@@ -1,0 +1,68 @@
+;;$Id: simple_vars.pro,v 1.1 1998/10/19 20:51:10 beth Exp $	
+;;
+;; NAME:
+;;
+;; 	simple_vars.pro
+;;
+;; PURPOSE:
+;;	This IDL procedure calls a CALL_EXTERNAL routine which demonstrates
+;;      how to pass simple, scalar variables to external code.
+;;      This code:
+;;      1) implements a simple interface to the external code.
+;;      2) check the type of arguments that will be passed to the external code
+;;
+;; CATEGORY:
+;;	Dynamic Link
+;;
+;; CALLING SEQUENCE:
+;;	This routine is called from IDL using the following command:
+;;      IDL>simple_vars
+;;
+;; INPUTS/OUTPUTS:
+;;      b - a scalar of type BYTE
+;;      i - a scalar of type INT
+;;      l - a scalar of type LONG
+;;      f - a scalar of type FLOAT
+;;      d - a scalar of type DOUBLE
+;;
+;;      All of the arguments to this routine will be converted to the proper
+;;      type before they are passed to the external code. On return, all of the
+;;      arguments will be set to the square of their original value.
+;;
+;; KEYWORDS:
+;;      DEBUG - If this keyword is unset, this routine will return to the
+;;              caller on any error. If this keyword is set, this routine will
+;;              stop at the point of the error.
+;;
+;; SIDE EFFECTS:
+;;	None.
+;;
+;; RESTRICTIONS:
+;;      None.
+;;
+;; MODIFICATION HISTORY:
+;;	Written May, 1998 JJG
+;;
+PRO simple_vars,b,i,l,f,d,DEBUG=debug
+   if NOT(KEYWORD_SET(debug)) THEN ON_ERROR,2
+
+   ;type checking:
+   ;any missing (undefined) arguments will be set to a default
+   ;value.  All arguments will be forced to a scalar of the apropriate
+   ;type, which may cause errors to be thrown if structures are passed in.
+   b = (SIZE(b,/TNAME) EQ 'UNDEFINED') ? 2b :  byte(b[0])
+   i = (SIZE(i,/TNAME) EQ 'UNDEFINED') ? 3  :  fix(i[0])
+   l = (SIZE(l,/TNAME) EQ 'UNDEFINED') ? 4L :  long(l[0])
+   f = (SIZE(f,/TNAME) EQ 'UNDEFINED') ? 5.0 : float(f[0])
+   d = (SIZE(d,/TNAME) EQ 'UNDEFINED') ? 6.0D :  double(d[0])
+
+   PRINT,'Calling simple_vars with the following arguments:'
+   HELP,b,i,l,f,d
+   IF (CALL_EXTERNAL(lib_name('call_examples'),'simple_vars',/PORTABLE,$
+                     b,i,l,f,d) EQ 1) then BEGIN
+       PRINT,'After calling simple_vars:'
+       HELP,b,i,l,f,d
+
+   ENDIF ELSE MESSAGE,'External call to simple_vars failed'
+END
+
