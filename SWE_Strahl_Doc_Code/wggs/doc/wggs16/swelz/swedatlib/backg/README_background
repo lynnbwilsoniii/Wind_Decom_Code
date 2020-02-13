@@ -1,0 +1,42 @@
+ 
+For each day when a SWE/VEIS background measurement was made,
+the record numbers of background measurement have been written to a file 
+"yyyymmdd.bckrec".
+
+Level zero CD's for each day between the hours 00:00:00 and 01:30:00
+have been scanned for background measurements
+using program lzscan.pro in WGGS tool package.
+
+The first LZ data scanned in this way was 950725.
+This was done on Sep 13, 1996. All background measurements prior to 950725 
+already existed as of Sep 13, 1996 as .idlsav and .dat files.
+
+     -----------------------------------------------------------------
+
+In order to make the averaged background counts arrays, 
+
+avgcts(ndets, nsteps, nsectors), 
+
+which are to be subtracted from measured counts, do this:
+
+1. Use the WGGS analysis tool and display distribution function data 
+for the day of interest. Then  click on "VEIS cts", then "Background/Rel gain"; choose the LZ record interval of the background measurement, 
+sum counts over all spins in interval, find the average, avgcts,
+and create .idlsav files.
+
+2. Run backg_review.pro to make ( _prt ) listings of 
+avgcts(ndets, nsteps, nsectors). Various avgcts arrays
+may be compared with one another to look for changes in background over time.
+
+3. Run backg.pro to create the binary .dat files of 
+avgcts(ndets, nsteps, nsectors) to be used with analysis of levelzero data.
+The procedure backg.pro also updates the ascii index "bdates" which associates
+every date from WIND launch through 19961231 with the appropriate .dat file
+of avgcts.
+
+   -----------------------------------------------------------------------
+   
+
+LZ data scanned as of Aug 8, 1997:  up to and including 970419.
+
+R. J. Fitzenreiter

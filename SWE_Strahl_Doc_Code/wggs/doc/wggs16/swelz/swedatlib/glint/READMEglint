@@ -1,0 +1,21 @@
+General.....
+
+The file glintdates (ascii) associates every day from 941130 to 961231
+with a glint map identifier, which is the date for which the glint map was made.
+
+The file glintdates is created and updated using procedure glintdates.pro.
+
+The glint map identifier is the file name identifier <yymmdd> for a procedure
+dglint_m1_<yymmdd>.pro (ex: dglint_m1_941130.pro) which idl-restores the 
+appropriate glint map and/or explicitly defines glint map elements.
+
+Glint maps have the form 19<yymmdd>*_m1.glntmap.
+
+
+How to use..... 
+
+In the WGGS analysis tool, procedure phase_m1.pro is executed once for the given
+level zero data date, lzdate. Procedure phasem1 reads file glintdates and finds
+glintdate corresponding to lzdate. Using glintdate as file identifier, the 
+approriate dglint_m1_<lzdate>.pro is executed which in turns reads and stores
+the glint map to be used, ex: 19960715_std2.0_m1.glntmap.
