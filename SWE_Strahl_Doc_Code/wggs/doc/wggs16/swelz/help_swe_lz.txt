@@ -1,0 +1,140 @@
+                  Help for SWE LZ Data Display
+
+The top plot window contains one of survey plots from the parent widget. 
+Which of the survey plot variables that is plotted here can be selected using the 
+droplist to the right of the upper plot window.
+
+The three lower windows are available for distribution function plots at selected times.
+
+The top row of buttons:
+BUTTON			ACTION
+
+Parent			Returns to main or "parent" widget, 
+			GGS Survey Data Display.
+			From GGS Survey Data Display, click "SWE level zero"
+			to get back to this "child" widget.
+			NOTE: Use parent and child buttons to go back and forth 
+			between widget displays. Avoid using the windows mouse functions
+			to bring windows forward. 
+
+HELP			On-line documentation.
+
+Quit			Normal termination.
+
+Dates 			Droplist containing all dates for survey data read in. Any date
+			from this list may be selected and will be read when "Open LZ"
+			is clicked.
+			
+Open LZ			Opens SWE lz file, reads anciliary files,
+ 			orbit-attitude, 3sec magnetic field, sun glint mask,
+			VEIS background counts. Distribution function data can now
+			be plotted directly using data from the opened levelzero file,
+			as discussed below under "Ways to select time".
+			
+Veis data		Brings up the SWE VEIS Counts Data display widget 
+			which has its own HELP button.
+
+Strahl data		Brings up the SWE Strahl Counts Data display widget 
+			which has its own HELP button.
+			
+Color adjustment droplist:
+Xloadct			A widget pops up which allows adjustment of color
+			scale (stretching etc) or changing color table.
+			
+Restore colors		Current color table restored which also sets the 
+			top color (plot axes, etc) to white. 
+
+Hardcopy droplist:			
+Hrdcpy bw		Makes black and white hardcopy of current plot. 
+
+Hrdcpy clr		Makes color hardcopy.	
+
+Applications droplist:
+Orbit			Window appears with orbit plot.
+
+Display options		Pop-up window appears providing various information about 
+			and control of display options. A HELP button is included.
+			
+Scan LZ file		A new widget appears containing various instrument and 
+			data information from the telemetry record.			
+
+Save f			Makes an ASCII file of perpendicular and parallel cuts and 
+			reduced F vs parallel velocity, as well as the measured f
+			closest to parallel, anti-parallel, and perpendicular. 
+
+
+					
+The second row of buttons:
+
+Droplist of survey plot variables. Choose one to plot in upper panel.
+
+mode		The SWE/VEIS instrument mode is displayed: 1, 2, 4, or 6.
+			
+
+------- Ways to select time ---------------------------------------
+There are several ways to select times for plotting distribution function data:
+1. Click at desired time in the top panel (with left mouse button) and plot 
+will appear in one of three bottom panels. Successive clicks on top panel will 
+cause plots to cycle through the three bottom plot panels. 
+(A vertical line at the selected time will appear in the upper panel).
+
+2. Click on any of three bottom panels and the plot at currently selected time 
+will appear.
+
+3. Click on Spin "+" or "-" button or click on Mfrm (major frame=7 spins)
+ "+" or "-" button to increment the time index; the plot at the newly 
+selected time will appear. Successive clicks on "+" or "-" will cause plots to 
+cycle through the three plot panels. The spin (mfrm) number will appear in the field
+to the right.
+
+4. Click on the "auto" button to cause three successive plots to appear, 
+one in each window.
+ 
+5. Enter time explicity into "hhmmss" field.
+
+-------------------------------------------------------------------
+
+
+
+Plot type droplist:
+fcntrs			Contours of f on perpendicular-parallel velocity grid
+			with magnetic field direction along +vparallel.
+
+f(en,pa)		Color-coded pitch angle distribution on 
+			energy-pitch angle grid.
+			
+fcuts			Parallel (solid line) and perpendicular (dashed
+ 		        line) cuts of f and measure data sampled closest to 
+			magnetic field (+/-) direction (triangles). Dotted line is
+			one-count level.
+
+redF			Reduced distribution.
+
+f fcuts			Contours and cuts of f (default).
+
+f F			Contours of f and reduced f. 
+
+fsurface		Perspective 3-D contour map of f.
+
+triangles		The triangulation mesh computed by triangulate.pro to help
+			show the validity of the platewise interpolation used
+			to do contouring.
+
+fpolar			Contours of f on perpendicular-parallel velocity grid
+			with magnetic field direction along +vparallel.
+			
+
+
+vstps			Truncate the upper range of energy steps included in plots of f
+			by selecting a number less than 16.
+			
+pbin			Select the value of the pitch angle bin used for the data in 
+			making the polar plots of f, i.e., contours, etc.		
+
+
+
+
+
+
+
+			

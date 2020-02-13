@@ -1,0 +1,60 @@
+                  Help for SWE Strahl Counts Data Display
+
+
+
+The (default) button, f(phi,theta), plots a color image of the angular distribution in 
+the strahl and anti-strahl directions, where phi, theta are the gse azimuth, elevation 
+of the particle direction (not look angles). There are 14 azimuthal steps at each of
+the 12 detectors in each direction, strahl and anti-strahl. Each color pixel corresponds
+to a single measurement, with a row of interpolated data in the spin plane. 
+
+Beginning 26jan1999, the SWE instrument is in mode 6, in which the strahl azimuthal 
+sampling tracks the onboard magnetic field direction. THis often requires masking the 
+Sun using the "Sun mask" button. 
+Prior to 26jan1999, the azimuthal sampling is fixed along the average magnetic field
+direction and much of the time, the strahl is out of the field of view. Therefore, 
+it is helpful to use the survey plots of peak strahl flux to select times to display 
+the detailed strahl distributions.
+
+When the "Strahl data" button from the SWE LZ DATA Display is clicked, the image of the 
+strahl and anti-strahl distribtions are plotted at the energy corresponding to 
+the currently selected time. See HELP for the SWE LZ DATA Display on seelcting time.
+Any of the other plot options can be selected for the current time.
+
+To change the current time or to plot another energy, increment either the spin or 
+recn (7 spins per recn or major frame). 
+
+To plot the same energy at another time use button, "Search for current strahl step". 
+
+The following group of buttons select the following plot options:
+	Counts vs phi   	f vs phi 
+	Counts vs pa    	f vs pa 
+	Counts vs phi index 	Compare strahl & veis
+where phi is the gse azimuthal look angle, pa is the pitch angle, f is phase density.
+The action of any of the above buttons will plot data from six of the twelve strahl
+detectors, one panel per detector. The buttons labeled [0 2 4 6 8 10] and [1 3 5 7 9 11]
+control which set of detectors are displayed. 
+
+
+
+Other buttons:
+BUTTON			ACTION
+
+Parent			Returns to "parent" widget, SWE LZ DATA Display. 
+			From SWE LZ DATA Display, click "Strahl data"
+			to get back to this "child" widget.
+			NOTE: Use parent and child buttons to go back and forth 
+			between widget displays. Avoid using the windows mouse functions
+			to bring windows forward. 
+
+HELP			On-line documentation.
+
+Quit			Normal termination.
+
+
+
+ 
+
+
+
+			
