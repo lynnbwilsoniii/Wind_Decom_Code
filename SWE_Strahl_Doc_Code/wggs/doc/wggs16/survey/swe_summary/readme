@@ -1,0 +1,25 @@
+****************** Notes on the 'swe_summary' survey data type:
+*************************** Last modified: (02/25/02)
+
+This data type is generated using the SWE_summ_v1_1.pro routine--where data
+ from the 'swe_moments', 'swe_ionkp' and 'swe_strahlen' (energy 0 is 135eV
+ and energy 1 is 251eV) survey data types are collected into yearly files
+ and saved in an IDL-restorable format.  Its purpose is to provide a
+ convenient, unified representation of the contents of the above three
+ survey data types.
+
+The 'interpol' function (from the IDL library) is used to perform LINEAR
+ interpolation from the electron and strahl time resolutions to the ion
+ time resolution.  Ultimately, all variables are represented as functions
+ of ion time; and only the ion (PB5) times are stored.
+
+Since the data for this survey data type is generated within the SWEDAT tool
+ environment by the survey routines for each respective survey data type,
+ there is little to do when performing a READ operation (simply RESTORE and
+ select the data in the interval of interest--discard the rest).
+
+Similarly, the names of the variables are identical to the corresponding
+ members of the survey data types from which each time series takes its
+ values.  In fact, most of the survey routines for this survey data type are
+ derived directly form the corresponding routines of the original three
+ survey data types.
