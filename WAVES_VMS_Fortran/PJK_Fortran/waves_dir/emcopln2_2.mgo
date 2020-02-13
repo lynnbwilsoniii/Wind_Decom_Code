@@ -1,0 +1,9 @@
+data for071.dat
+xcolumn 1
+ycolumn 2
+limits
+connect
+ycolumn 4
+connect
+box 
+xlabel FREQ (hz)

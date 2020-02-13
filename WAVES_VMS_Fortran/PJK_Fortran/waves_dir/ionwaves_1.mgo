@@ -1,0 +1,42 @@
+From:	SMTP%"kellogg@megasw.obspm.fr"  2-DEC-1998 14:33:15.12
+To:	ME
+CC:	KELLOGG
+Subj:	
+
+Return-Path: kellogg@megasw.obspm.fr
+Received: by waves.space.umn.edu (UCX V4.1-12, OpenVMS V6.2-1H3 Alpha);
+	Wed, 2 Dec 1998 14:33:13 -0600
+Date: Wed, 2 Dec 1998 21:42:29 +0200
+Message-Id: <98120221422953@megasw.obspm.fr>
+From: kellogg@megasw.obspm.fr
+To: kellogg@waves.space.umn.edu
+X-VMS-To: ME
+X-VMS-Cc: KELLOGG
+
+PRINTER 2
+LOCATION 700. 2700. 400. 2100.
+DATA FOR008.DAT
+LINES 4 1000
+XCOLUMN 7
+YCOLUMN 1
+LIMITS 0.  .2  0.  4.575E-6
+LWEIGHT 3
+CONNECT
+label ion-hot
+data for075.dat
+xcolumn 5
+ycolumn 2
+limits 0.  .2  0. 1.2 
+relocate .04 .75
+label ion-cold
+LTYPE 2
+connect
+xcolumn 3
+connect
+label whistler-cold
+BOX
+xlabel k c /\gw\dp
+EXPAND 1.2
+Ylabel f/f\dc\di
+HARDCOPY
+id

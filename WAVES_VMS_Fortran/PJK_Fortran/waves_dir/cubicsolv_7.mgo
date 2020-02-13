@@ -1,0 +1,14 @@
+data for026.dat
+xcolumn 1
+xlogarithm 1
+ycolumn 2
+limits -1.8  1.  -.02  .03
+connect
+ycolumn 4
+connect
+ycolumn 6
+connect
+box
+xlabel log (k c /\gw\dp)
+ylabel \gw/\gw\dp - 1
+id

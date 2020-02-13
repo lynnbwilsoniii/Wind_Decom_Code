@@ -1,0 +1,43 @@
+data for089.dat
+lines 10 1000
+window 1 5 1
+xcolumn 1
+ycolumn 3
+ylogarithm 3
+limits
+connect
+box
+ylabel rbar
+window 1 5 2
+xcolumn 1
+ycolumn  4
+ylogarithm 4
+limits
+connect
+box
+ylabel capkr
+window 1 5 3
+xcolumn 1
+ycolumn 5
+ylogarithm 5
+limits
+connect
+box
+ylabel capki
+window 1 5 4
+xcolumn 1
+ycolumn  6
+ylogarithm 6
+limits
+connect
+box
+ylabel sum
+window 1 5 5
+xcolumn 1
+ycolumn 7
+ylogarithm 7
+limits
+connect
+box
+ylabel argmnt
+id

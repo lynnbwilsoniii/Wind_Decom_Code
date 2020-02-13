@@ -1,0 +1,7 @@
+LOCATION 430. 2030. 900. 2500.
+xcolumn 7
+ycolumn 8
+connect
+box
+xlabel -Im(w)/wci
+id

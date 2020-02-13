@@ -1,0 +1,38 @@
+LOCATION 100. 950. 200. 554.
+lweight 2
+data for077.dat
+window 2 1 1
+xcolumn 1
+ycolumn 2
+limits 0. 2.2 0. 2.2
+connect
+box
+xlabel V\dX/V\dA
+ylabel V\dZ/V\dA
+relocate 1.5 1.7
+label V\dA>C\dS
+xcolumn 3
+ycolumn 4
+connect
+xcolumn 5
+ycolumn 6
+connect
+window 2 1 2
+data for077.dat;-1
+xcolumn 1
+ycolumn 2
+limits 0. 2.2 0. 2.2
+connect
+box
+xlabel V\dX/V\dA
+ylabel V\dZ/V\dA
+relocate 1.5 1.7
+label C\dS>V\dA
+xcolumn 3
+ycolumn 4
+connect
+xcolumn 5
+ycolumn 6
+connect
+expand .6
+id

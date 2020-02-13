@@ -1,0 +1,9 @@
+data for008.dat
+lines 4 1000
+xcolumn 6
+ycolumn 7
+limits
+connect 
+box
+xlabel kx c /\gw\dp
+ylabel kz c /\gw\dp

@@ -1,0 +1,10 @@
+data for008.dat
+format (1x,e12.6,1x,e10.3,1x,2f8.3,1x,f6.3,e12.4,1x,e11.4)
+lines 4 300          ! has H+, 2 lines of plasma comps
+xcolumn 7
+ycolumn 3
+limits
+connect
+ylabel ln (Det)
+xlabel Kz c /wpe
+box

@@ -1,0 +1,23 @@
+window 1 2 1
+data for014.dat
+xcolumn 4
+ycolumn 5
+limits 0.  90.  -1.1  1.1
+connect
+box
+relocate 50. .5
+label ion acoustic
+xlabel angle to Bo
+ylabel Stokes QB
+window 1 2 2
+data for014.dat;-1
+xcolumn 4
+ycolumn 5
+limits 0.  90.  -1.1  1.1
+connect
+box
+relocate 50. .5
+label whistler
+xlabel angle to Bo
+ylabel Stokes QB
+id

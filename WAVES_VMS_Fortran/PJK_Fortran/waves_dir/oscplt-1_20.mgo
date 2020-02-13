@@ -1,0 +1,8 @@
+data for009.dat
+format (6e12.4)
+lines 1 100          ! has H+, 3 lines of plasma comps
+xcolumn 1
+ycolumn 5
+limits
+box
+connect

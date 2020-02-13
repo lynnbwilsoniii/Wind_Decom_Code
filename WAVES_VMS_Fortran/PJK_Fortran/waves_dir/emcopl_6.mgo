@@ -1,0 +1,14 @@
+data for069.dat
+xcolumn 1
+xlogarithm 1
+ycolumn 4
+limits
+connect
+ycolumn 3
+connect
+ycolumn 5
+connect
+ycolumn 2
+connect
+box 
+xlabel log (f) (hz)

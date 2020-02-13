@@ -1,0 +1,10 @@
+data for009.dat
+lines 2 1000
+xcolumn 4
+ycolumn 9
+limits
+connect
+box
+xlabel angle to B
+ylabel ni/ne
+id

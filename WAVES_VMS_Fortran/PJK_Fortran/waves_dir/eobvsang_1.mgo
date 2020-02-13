@@ -1,0 +1,9 @@
+data for014.dat
+xcolumn 4
+ycolumn 7
+limits
+connect
+box
+xlabel angle to B
+ylabel E/B
+id

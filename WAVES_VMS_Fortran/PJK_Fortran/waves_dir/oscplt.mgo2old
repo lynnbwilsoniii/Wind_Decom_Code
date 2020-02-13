@@ -1,0 +1,10 @@
+data for009.dat
+format (e13.5,e13.5)
+limits  0.  1.143E-6  0.  1.E-6
+xcolumn 1
+ycolumn 2
+connect
+box
+xlabel Kx c / wpe
+ylabel Kz c / wpe
+id

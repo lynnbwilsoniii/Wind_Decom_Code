@@ -1,0 +1,8 @@
+xcolumn 3
+ycolumn 4
+location 430.  2030. 900.  2500.
+connect
+box
+xlabel Kx c/wpe
+ylabel Kz c/wpe
+id
