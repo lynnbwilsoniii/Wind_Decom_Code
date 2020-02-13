@@ -1,0 +1,25 @@
+Time used is truncated julian day  and milliseconds of day, often given by 
+long array, tjd=[truncated julian day, milliseconds of day] .
+
+Seconds from tjd=[0,0] is also used, often given by double precision floating
+variable, sec.
+
+Truncated julian day for SWE data is taken from telemetry. 
+
+Data times that are always kept are both truncated julian date and pb5 time, 
+given as long array, [year, day number, millisec of day], 
+ex:[1994, 334, 43200000], where jan 1 = day 1.
+
+IMPORTANT! 
+1.Truncated julian date time base rolled over to tjd=[0,0] on 
+Oct 10, 1995 , pb5=[1995 283 0]. The rollover is taken into account 
+in procedure "pb5_tjd.pro" (converts from pb5 to tjd) and 
+in procedure "tjd_pb5.pro" (converts from tjd to pb5). 
+All conversions to (from) tjd must first be from (to) pb5. 
+
+2. Time differences should be computed using procedure "elapsed_seconds.pro", 
+which accounts for the rollover.
+
+Following the above (1. and 2.) will make the tjd rollover transparent 
+to the user.
+
