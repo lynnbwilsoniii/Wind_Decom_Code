@@ -1,0 +1,10 @@
+	PROGRAM TEST
+C
+	DO N = 1,100
+	  Y = (-50. +N)/10.
+	  DL = ALOG(COSH(Y))
+	  PRINT*,N,Y,DL
+	  WRITE(33,*) N,Y,DL
+	ENDDO
+	STOP
+	END

@@ -1,0 +1,3 @@
+	program testswe
+	stop
+	end
