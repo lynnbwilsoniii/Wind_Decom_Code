@@ -1,0 +1,2525 @@
+	PROGRAM TDSEXEY
+C
+C	PLOTS TDS X AND Y AND FREQUENCY SPECTRUM DIFFERENCE
+C
+	include		'wind_examples:wind_tm_routine_def.for'
+	include		'wind_examples:wind_return_code_def.for'
+	integer*4	ok
+	integer*4	i,j,k,n,itemp
+	integer*4	get_stream_name
+	integer*4	wait_for_events			! an entry point
+	integer*4	err_count
+	integer*4	ichpa(6),ipacal(6,4)
+	character*80	stream
+	character*4	event
+	character*4	pa(6,4),parx(9)
+	parameter	size=2048
+	integer*4	return_size
+	integer*4	tds_channel,ifilf,ifils,ifil,ifsps,issps,isps
+	integer*4	temp_waves,iend,n2,sunclock
+	character*32	s
+	integer*4	s_scet(2)
+	real*8		scet,scettds,scetfill
+	real*8		XKM,YKM,ZKM
+	real*4		RE
+	integer*4	major, minor
+	character*80	file
+	character*32	item
+	integer*4	ios,ms,doy,msday,dds
+	integer*4	NREM,NHRMN,IHRMN,yyyy,mon,dd,hh,mm,ss,IFASTSLOW
+	real 		FILTER,ffilter,sfilter,fsps,ssps,sps
+	REAL 		S1,S2,PP(2050),BX,BY,BZ
+	REAL 		XDATA(2050),YDATA(2050),XSPECT(1025),YSPECT(1025)
+	REAL 		XPHASE(1025),YPHASE(1025),DPHASE(1025)
+!
+	common /nrblk/ nrem,NHRMN,IFASTSLOW
+	common /headblk/ major,minor,s_scet
+	common /wavfit/n1wave,n2wave
+	COMMON /XFER/ SPHASE(1025)
+	COMMON /SUB_CHOOSE/ NFITVAR
+	COMMON /FRLIMITS/ FFTMIN,FFTMAX
+C
+	CHARACTER*12 PTITLE(20)
+	INTEGER*4 TDSCH,hkch,fillch,ch
+	COMPLEX CGAIN,FCOEF,FCOEFT,CCORR
+	COMMON /PLTBLK/ IZCNT,IPROCESS,ZCROSS(2048),ZINT(2048),
+     1   NDATA(2048),DATA(2050),SPECT(1025)
+	COMMON /PARTBLK/ X4DATA(2050,4),XRE,YRE,ZRE,SUNCLOCK,SPINRATE
+	COMMON /HEADBL/ PTITLE,EVENT,NUMEVENT,FILE
+	COMMON /GAINBLK/ PHASE,CGAIN                   ! PHASE IS IN RADIANS
+	COMMON /FITBLK/ NPT,VOLTIN(2048),TM(2048)
+	COMMON /TDS_STATUS/ TDS_CHANNEL,SPS,FILTER,IRX,ISPS
+	COMMON /XYBLOCK/ XSPECT,YSPECT,DPHASE
+	COMMON /STATUS/ FFILTER(4),SFILTER(4),FSPS(4),SSPS(4)
+	COMMON /BBLOCK/ BSCET,BX,BY,BZ,BAZ
+	COMMON /ANGLEBLK/ BANGLE,IAANGLE
+	DATA TWOPI /6.2831853/
+	DATA FFILTER /50000.,12500.,3125.,781./
+	DATA SFILTER /3125.,781.,195.,49./
+	DATA FSPS /120.,30.,7.5,1.875/
+	DATA SSPS /7500.,1875.,468.75,117.2/
+	DATA PARX /'EXAC','EYAC','EZAC','EXDC','EYDC','EZDC',
+     1    ' BX ',' BY ',' BZ '/
+	DATA PA /'EXAC','EXAC','EXDC',' BX ',' BY ',' BZ ',
+     1           'EXDC','EYAC','EYDC','EXDC','EYDC','EZDC',
+     2           '    ','EZAC','EZDC','    ','    ','    ',
+     3           '    ','EZAC','EZDC','    ','    ','    '/
+	DATA IPACAL /1,    1,     4,     7,     8,     9,
+     1               4,    2,     5,     4,     5,     6,
+     2               0,    3,     6,     0,     0,     0,
+     3               0,    3,     6,     0,     0,     0/
+	DATA IFASTSLOW /0/		! 0 IS FAST, 1 IS SLOW
+	DATA ICHEOF /0/			! 1 IS EOF ON FILL, 2 ON TDS
+C	DATA XLEN /46./
+C	DATA YLEN /5.4/
+C	DATA ZLEN /2.17/
+	DATA XLEN,YLEN,ZLEN /41.1, 3.79, 2.17/
+C	DATA FFTMIN,FFTMAX /20.E3,6.E4/
+	DATA FFTMIN,FFTMAX /150.,6.E4/
+C	LEVEL = 0 IS JUST PRINT, 1 IS WRITE FILES, 2 IS DO PLOTS
+	DATA LEVEL /2/
+C
+	PTITLE(1) = 'WIND-WAVES'
+	PTITLE(2) = 'TIME DOMAIN'
+	PTITLE(3) = 'SAMPLER'
+	PTITLE(4) = 'EVENT NO.'
+	PTITLE(8) = 'SAMPLE RATE'
+	PTITLE(10) = 'L.P.FILTER'
+C	PTITLE(12) = 'TRIGGERS'
+	PTITLE(15) = 'SCET'
+	PRINT*,' '
+C
+ 1001	FORMAT(I4,1X,20I5)
+ 1002	FORMAT(A)
+C
+C	GET STARTED
+C
+!
+	ok = get_stream_name(stream)
+	if (.not. ok) stop 'no file supplied.'
+C
+        if(stream.ne.'realtime') then
+ 10	  write(6,*)  'type hr,min to start, e.g. 0412'
+	  type*,nhrmn
+	  read(5,3,err=10) iq, NHRMN
+	  type*,NHRMN
+	  HH = NHRMN/100
+	  MM = MOD(NHRMN,100)
+	  write(6,4)
+	  write(6,6)
+	  read(5,*,err=10,end=20)  iend,n2
+	  type*,iend,n2
+	    if(iend.eq.1) then
+		nrem = n2
+	    endif
+	    if(iend.eq.2) then
+		nrem = 2
+			if(ifastslow.eq.1) nrem = 4
+		nevent = n2
+	    endif
+	endif
+	type*,'type desired process level,0=raw,1=raw volts,2=fft,fft-1'
+	read(5,3) iq,iprocess
+	type*,' '
+	if(iprocess.eq.0) type*,'ok, plot data in tm numbers - 128'
+	if(iprocess.eq.1) type*,'ok, plot in volts, unity freq. response.'
+	if(iprocess.ge.2) type*,'ok, plot volts, corrected for freq. response.'
+	if(iprocess.eq.3) type*,'ok, plot volts, corrected for bad TDS data'
+	type*,' '
+c
+  5	format(q,a)
+  4	format(1x,'enter 1, and number of events to find and process')
+  6	format(3x,' or 2, and event number')
+  3	format(q,i10)
+c
+
+	ok = w_channel_open(tdsch,stream)
+	if (.not. ok) stop 'Cannot open tds channel'
+	scettds = 0.
+	call w_channel_position(tdsch,scettds)
+	print*,'tds file starts at scettds',scettds
+	dds = scettds
+	scettds = float(dds) + hh/24. + mm/1440.
+	print*,'set tds channel position to',scettds
+	call w_channel_position(tdsch,scettds)
+	print*,'tds channel position set to',scettds
+
+	ok = w_channel_open(fillch,stream)           
+	if (.not. ok) stop 'Cannot open fill channel'      
+	scetfill = 0.
+	call w_channel_position(fillch,scetfill)
+	print*,'scetfill',scetfill
+	dds = scetfill
+	scetfill = float(dds) + hh/24. + mm/1440.
+	print*,'set channel position to',scetfill
+	call w_channel_position(fillch,scetfill)
+	print*,'fill channel position set to',scetfill
+c
+c	call w_ur8_to_ymd(scetT,yyyy,mon,dd,hh,mm,ss,ms)
+	call w_ur8_to_ydoy(scetfill,yyyy,doy,msday)
+	PRINT*,'RETURN FROM YDOY,SCETFILL,YYYY,DOY',SCETFILL,YYYY,DOY
+C
+	IF(SCETFILL.LT.SCETTDS) THEN   		! DO EARLIEST ONE HERE
+          ok = w_event(fillch,'FILL')
+	  ch = fillch
+	ELSE
+	  IF(IFASTSLOW.EQ.0) THEN
+	    ok = w_event(tdsch,'TDSF')
+	  ELSE
+            ok = w_event(tdsch,'TDSS')
+	  ENDIF
+	  ch = tdsch
+	ENDIF
+	if(ok.eq.82) then
+	   scettds = 10000.       	! artificially large
+	else
+	  item = 'EVENT_SCET'
+	  ok = w_item_i4(tdsch, item, s_scet, 2, return_size)
+	  print*,'initial tdsch time',s_scet
+	endif
+c
+C	  item = 'EX_LENGTH_EFF'
+C	  ok = w_item_R4(tdsch, item, XLEN, 1, return_size)
+C	  item = 'EY_LENGTH_EFF'
+C	  ok = w_item_R4(tdsch, item, YLEN, 1, return_size)
+C	  item = 'EZ_LENGTH_EFF'
+C	  ok = w_item_R4(tdsch, item, ZLEN, 1, return_size)
+	  print*,'EFFECTIVE LENGTHS, X,Y,Z',XLEN,YLEN,ZLEN
+	  print*,'channels',fillch,tdsch,ch
+C
+C        ok = w_event(fillch,'FILL')
+C	if(ok.eq.82) then
+C		icheof = 1
+C		stop 'end of file on tdsch'
+C	endif
+C	if (.not. ok) stop 'cannot get fill event'
+c	item = 'EVENT_SCET_R8'
+c	  ok = w_item_r8(fillch, item, scet, 2, return_size)
+c	item = 'EVENT_SCET'
+c	  ok = w_item_i4(fillch, item, s_scet, 2, return_size)
+c	print*,'initial fillch time',s_scet
+	  
+c
+	ok = w_channel_filename(ch,file)
+	IF(LEVEL.GE.1) write(87,*) file
+	print*,file
+c
+	get_tm_stream = 1
+	GO TO 100
+c
+C	GET NEXT EVENT
+C
+ 110    continue
+C
+	! this is the main program loop
+
+c        if( wind_tm_eof(fillch,major,minor)) stop 'end of file, fillch'
+
+	if(scettds.lt.scetfill) then
+	  event = 'TDSF'
+	  IF(IFASTSLOW.NE.0)event = 'TDSS'
+	  ch = tdsch
+	else
+	  event = 'FILL'
+	  ch = fillch
+	endif
+C
+	type*,'going to get next ',EVENT,' event'
+c
+	if(icheof.eq.1) then
+	  event = 'TDSF'
+	  IF(IFASTSLOW.NE.0)event = 'TDSS'
+	  ch = tdsch
+	elseif(icheof.eq.2) then
+	  event = 'FILL'
+	  ch = fillch
+	else
+	endif
+c
+	type*,'compare scettds,scetfill,evt',scettds,scetfill,event
+
+	ok = w_event(ch,event)
+ 100	if ( ok.ne.1 ) then
+	      type *, char(7), '******** missing packet in event ********'
+              if( ok.eq.82) then
+		 type*,'end of file on ',event
+		 if(event.eq.'fill') then
+			icheof = 1
+		 else
+			icheof = 2
+		 endif
+	      endif
+	else
+C
+	  item = 'EVENT_NUMBER'
+	  ok = wind_tm_get_item(ch, item, itemp, 1, return_size)
+	  print*,'event_number',itemp
+	  item = 'EVENT_SCET'
+	  ok = w_item_i4(ch, item, s_scet, 2, return_size)
+	  ss = mod(s_scet(2),100)
+	  mm = s_scet(2)/100
+	  mm = mod(mm,100)
+	  hh = s_scet(2)/10000
+	  scett = float(dds) + hh/24. + mm/1440. + ss/86400.
+	  if(ch.eq.tdsch) then
+	       scettds = scett
+	  else
+	       scetfill = scett
+	  endif
+	  if(iend.eq.2.and.itemp.ne.nevent) go to 110
+C
+c		PRINT*,'CALL TDS_PHYS'
+	      CALL TDS_PHYS(CH,IPROCESS,NDATA,DATA,SPECT)
+c		PRINT*,'RETURN,CHANN=',TDS_CHANNEL
+	end if
+C
+C
+C
+	     item = 'WIND_MFI_BX(GSE)_R4'
+	     ok = w_item_R4(ch, item, BX, 1, return_size)
+	     item = 'WIND_MFI_BY(GSE)_R4'
+	     ok = w_item_R4(ch, item, BY, 1, return_size)
+	     item = 'WIND_MFI_BZ(GSE)_R4'
+	     ok = w_item_R4(ch, item, BZ, 1, return_size)
+	     IF(RETURN_SIZE.NE.0) THEN
+		BANGLE = ATAN2D(BY,BX)
+		PRINT*,'B,ANG',BX,BY,BZ,BANGLE
+		write(79,*) 'B',BX,BY,BZ,BANGLE
+	     ELSE
+		PRINT*,'NO MFI DATA'
+		write(79,*) 'NO MFI DATA'
+	     ENDIF
+C
+	     item = 'SUN_ANGLE'
+	     ok = w_item_i4(ch, item, SUNCLOCK, 1, return_size)
+		PRINT*,'SUNCLOCK',SUNCLOCK
+	     IAANGLE = SUNCLOCK
+C
+	     item = 'WIND_ORBIT_X(GSE)_R8'
+	     ok = w_item_R8(ch, item, XKM, 1, return_size)
+	     item = 'WIND_ORBIT_Y(GSE)_R8'
+	     ok = w_item_R8(ch, item, YKM, 1, return_size)
+	     item = 'WIND_ORBIT_Z(GSE)_R8'
+	     ok = w_item_R8(ch, item, ZKM, 1, return_size)
+
+C	     item = 'EVENT_SCET_R8'
+c	     ok = w_item_r8(tdsch, item, scet, 1, return_size)
+c	     if (.not. ok) type *, 'cannot get item ', item, ', ok=', ok
+	     call w_ur8_to_ymd(scetT,yyyy,mon,dd,hh,mm,ss,ms)
+c	     call w_ur8_to_ydoy(scetT,yyyy,doy,msday)
+	     ihrmn = 100*hh+mm
+	     TYPE *,s_scet
+	     TYPE *,'scett,doy',scett,doy
+C		write(26,*) itemp,s_scet
+	   ihrmn = 100*hh+mm
+
+	
+	   write(s,'(i8.8,i6.6)',iostat=ios) s_scet(1), s_scet(2)
+C	   s_scet = s(1:4)//'/'//s(5:6)//'/'//s(7:8)//' '//
+C	1	s(9:10)//':'//s(11:12)//':'//s(13:14)
+
+
+
+	   WRITE(PTITLE(16),1016) s(1:4),S(5:6),S(7:8)
+	   WRITE(PTITLE(17),1017) DOY
+	   WRITE(PTITLE(18),1018) s_scet(2)/100, MOD(s_scet(2),100)
+ 1016	   format(A4,'/',A2,'/',A2)
+ 1017	   FORMAT(' DOY ',I4)
+ 1018	   FORMAT(I6.4,I3.2)
+c	   item = 'CHANNEL'
+c	   ok = wind_tm_get_item(ch, item, tds_channel, 1, return_size)
+	   TYPE*,'CHANNEL',tds_channel,'   EVENT = ',EVENT
+	   WRITE(PTITLE(6),1019) TDS_CHANNEL
+ 1019	   FORMAT('CHANNEL',I2)
+	   item = 'EVENT_NUMBER'
+	   ok = wind_tm_get_item(ch, item, itemp, 1, return_size)
+	   type*,'event number',itemp
+	   NUMEVENT = ITEMP
+	   WRITE(PTITLE(5),1012) ITEMP
+ 1012	   FORMAT(I10)
+C
+	   ipa = ichpa(tds_channel)
+C	   WRITE(PTITLE(7),1007) pa(tds_channel,ipa+1)
+	   WRITE(PTITLE(7),1007) PARX(IRX)
+ 1007	   FORMAT('P/A ',A4)
+	   IF(TDS_CHANNEL.LE.2) THEN
+	      WRITE(PTITLE(9),1004) .001*SPS
+	   ELSE
+	      WRITE(PTITLE(9),1008) SPS
+	   ENDIF
+	      WRITE(PTITLE(11),1008) FILTER
+ 1004	   FORMAT(F7.2,' kHZ')
+ 1008	   FORMAT(F7.0,' HZ')
+ 1009	   FORMAT('TDS CHANNEL',I4)
+
+ 222	FORMAT(10I6)
+		IF(IPROCESS.EQ.0) THEN
+	  DO IK = 1,2048
+	    NDATA(IK) = NDATA(IK)-128
+	    MAXDATA = MAX0(MAXDATA,IABS(NDATA(IK)))
+	  ENDDO
+	ELSE
+	  DO IK = 1,2048
+C	    DATA(IK) = TDSCAL(TDS_CHANNEL,ISPS,NDATA(IK))
+	    NDATA(IK) = NDATA(IK)-128
+	    MAXDATA = MAX0(MAXDATA,IABS(NDATA(IK)))
+	  ENDDO
+	ENDIF
+**********************
+	IF(IFASTSLOW.EQ.0.AND.TDS_CHANNEL.GT.2) GO TO 110
+C	write(87,7737) itemp,event,s_scet(2),tds_channel,
+C     1	parx(irx),maxdata,
+C     2	tdscal(tds_channel,isps,maxdata+128)
+ 7737	format(i10,2x,a4,i10,i5,2x,a4,i5,e12.3)
+	IF(IEND.EQ.1.AND.TDS_CHANNEL.EQ.1.AND.MAXDATA.LE.90) GO TO 110
+	IF(IEND.EQ.1.AND.TDS_CHANNEL.EQ.2.AND.MAXDATA.LE.75) GO TO 110
+c	to pick out a specific event
+	if(iend.eq.2.and.itemp.ne.nevent) go to 110
+c
+c	      CALL TDS_PHYS(CH,IPROCESS,NDATA,DATA,SPECT)
+c
+  	IF(TDS_CHANNEL.EQ.1) CALL COMBO(-1,CH)
+	spr = 0.
+	xsq = 0.
+	ysq = 0.
+	NPLOTS=NPLOTS+1
+	IF(TDS_CHANNEL.EQ.1) THEN
+	  DO N = 1,2050
+	    XDATA(N) = DATA(N)
+	    X4DATA(N,1) = DATA(N)
+	  ENDDO
+	  DO N = 1,1025
+	    XSPECT(N) = SPECT(N)
+	    YSPECT(N) = 0.
+	    XPHASE(N) = SPHASE(N)
+	  ENDDO
+	  GO TO 110
+	ELSE
+c*******
+c	IF(LEVEL.GE.1) THEN
+c	  open(unit=71,file='xydata.dat',status='old',access='append')
+c	  write(71,*) file,itemp
+c	ENDIF
+	  DO N = 1,2050
+	    YDATA(N) = DATA(N)
+	    X4DATA(N,2) = DATA(N)
+	    xsq = xsq + xdata(n)**2
+	    ysq = ysq + ydata(n)**2
+	    spr = spr + xdata(n)*ydata(n)
+c	    IF(LEVEL.GE.1) THEN
+c	      IF(YDATA(N).NE.0.) THEN
+c		WRITE(67,*) N,XDATA(N),YDATA(N),XDATA(N)/YDATA(N)
+c	      ELSE
+c		WRITE(67,*) N,XDATA(N),YDATA(N),YDATA(N)
+c	      ENDIF
+c	    ENDIF
+	  ENDDO
+	item = 'R_EARTH_R4'
+	ok = w_item_R4(ch, item, RE, 1, return_size)
+	RE = .001*RE				! CHANGE TO KM
+	XRE= XKM/RE
+	YRE= YKM/RE
+	ZRE= ZKM/RE
+	write(79,*) 'ORBIT X,Y,Z',XRE,YRE,ZRE
+C	slope is vy/vx
+	CALL FITSLOPE(XDATA,YDATA,2048,SLOPE,SUMSQ)
+	IF(XSQ*YSQ.NE.0.) print*,'corr',spr/sqrt(xsq*ysq)
+	ANGLE = ATAND(XLEN*SLOPE/YLEN) + 360.*SUNCLOCK/4096. + 45.
+	ANGLE = -AMOD(ANGLE,180.)
+	IF(XSQ*YSQ.NE.0.) write(79,*)'corr',spr/sqrt(xsq*ysq)
+	IF(XSQ.NE.0.) print*,'slope,sunclock,EANGLE',(XLEN/YLEN)*SLOPE,
+     1	sunclock,angle
+	IF(XSQ.NE.0.) WRITE(79,*) 'EVENT NO.',ITEMP
+	IF(XSQ.NE.0.) WRITE(79,*) 'DATE,TIME',S_SCET
+	IF(XSQ.NE.0.) WRITE(79,*) 'VOLTAGE SLOPE(VY/VX),SUNCLOCK',
+     1		SLOPE,SUNCLOCK
+	IF(XSQ.NE.0.) WRITE(79,*) 'ANGLE SUN TO E,GSE',ANGLE
+	WRITE(79,*) 'xlen,ylen',xlen,ylen
+	  DO N = 1,1025
+	    YSPECT(N) = SPECT(N)
+	    YPHASE(N) = SPHASE(N)
+	    SPSUSE = .001*SPS
+	    PP(N) = N*SPSUSE/2048.
+            DPHASE(N) = AMOD(XPHASE(N)-YPHASE(N)+540.,360.) - 180.
+c	    IF(LEVEL.GE.1) THEN
+c	      WRITE(68,*) PP(N),XSPECT(N),YSPECT(N),XSPECT(N)-YSPECT(N)
+c     1        ,DPHASE(N)
+c	      write(71,*) n,xspect(n),yspect(n),dphase(n)
+c	      write(72,*) n,xspect(n),yspect(n),dphase(n)
+c	    ENDIF
+	  ENDDO
+	ENDIF
+c	close(unit=71)
+c	IF(LEVEL.GE.1) close(unit=72)
+c	if(CH.ne.TDSCH) go to 110
+C*******************
+C
+C	FIND ZERO CROSSING
+C
+	IZCNT = 0
+	IL = 1
+	IZ = IL
+	  IF(NDATA(IL).EQ.0) PRINT*,'ZERO DATA',IL,NDATA(IL),NDATA(IL+1)
+	DO IL = 2,2047
+	  IZ = IL
+	  IF(NDATA(IL).EQ.0) PRINT*,'ZERO DATA',IL,NDATA(IL-1),
+     1   NDATA(IL),NDATA(IL+1)
+c
+C		COUNT ONLY POS TO NEG
+	  IF(NDATA(IL).GT.0.AND.NDATA(IL+1).LE.0) THEN
+	        IZCNT = IZCNT+1
+		S1 = NDATA(IL)
+		S2 = NDATA(IL+1)
+		ZCROSS(IZCNT) = IL + S1/(S1 - S2)
+	  ENDIF
+	ENDDO
+	DO N = 1,IZCNT-1
+	  ZINT(N) = ZCROSS(N+1) - ZCROSS(N)
+	  IF(ZINT(N).EQ.0.) PRINT*,'ZINT=0 AT ',N
+	  IF(ZINT(N).EQ.0.) ZINT(N) = 1.E-6
+	ENDDO
+	print*,'zero crossings found',izcnt
+	print*,'first 5',(zcross(kk),kk=1,5)
+C
+ 20	CONTINUE
+C
+ 1003	FORMAT(3(I9,E11.3,I5))
+C
+	IF(LEVEL.GE.2) THEN
+C  	  CALL PLTDSFR(-2)
+C  	  CALL COMBO(-3,CH)
+	  CALL PLOTHODO4(-3)
+C	  CALL PLOTHODO4(-1)
+	  CALL PLOTPART(-1)
+C	IF(1) STOP
+C	  CALL PLOTHODO(-3,900,1148)
+C	  CALL PLOTHODO(-3,900,1148)
+C	  CALL YLENGTH(CH)
+C	  CALL PARTSPEC(CH,1,512,4,DATA)
+c	  IF(IPROCESS.LE.1) CALL DETAIL(-2,900,1100)
+C	  CALL DETAIL(-2,300,500)
+c	  CALL DETAIL(-2,400,600)
+c	  CALL DETAIL(-2,1200,1400)
+c	  CALL DETAIL(-2,1085,1385)
+c	  CALL DETAIL(-2,1500,1700)
+	ENDIF
+C
+C	THIS MAKES A FILE, FOR068.DAT, OF DATA TO SEND TO OTHERS
+C
+c	DO N = 1,2048
+c  	    PP(N) = 1000.*(N-1)/SPS
+c	    WRITE(68,*) PP(N),X4DATA(N,1)/XLEN,X4DATA(N,2)/YLEN
+c	ENDDO
+C
+C	END OF FILE MAKING
+C
+	  IFITWV = 1
+C	  IFITWV = 0
+	  PRINT*,'IFITWV',IFITWV
+	  IF(IFITWV.EQ.1) THEN
+	    IF(IZCNT.GT.1) THEN
+	      AVRPER = (ZCROSS(IZCNT)-ZCROSS(1))/(IZCNT-1)
+	      AVRFREQ = .001*SPS/AVRPER
+	    ENDIF
+	    F1 = AVRFREQ
+	    EX1 = .5*ABS(X4DATA(1024,1))/XLEN 	    
+	    EX2 = EX1
+	    EY1 = .5*ABS(X4DATA(1024,2))/YLEN
+	    EY2 = EY1
+	    PH1 = 0.
+	    IF(X4DATA(1024,1).LT.0.) PH1 = 1.57
+	    PH2 = 0.
+	    IF(X4DATA(1024,2).LT.0.) PH2 = 1.57
+	    PRINT*,'FIT_WAVE',F1,EX1,EX2,EY1,EY2,PH1,PH2
+	    write(76,*) s_scet,numevent 
+	    WRITE(77,*) S_SCET,NEVENT
+	    CALL FIT_WAVE(F1,F2,EX1,EY1,EX2,EY2,PH1,PH2,
+     1		tx1,ty1,tx2,ty2,RMS)
+	    PRINT*,'FIT_WAVE',F1,EX1,EY1,EX2,EY2,PH1,PH2
+C	   IF(NFITVAR.LT.10) THEN
+c	    OPEN(UNIT=33,FILE='FITWAVE.RESULTS',TYPE='OLD',ACCESS='APPEND')
+c	    WRITE(33,223) S_SCET(1),NUMEVENT,F1,F2,EX1,EY1,EX2,EY2,
+c     1		PH1,PH2,RMS,n1wave,n2wave,bangle,sunclock
+c 223	    FORMAT(2I10,2F7.3,6F7.2,F9.4,2I5,F7.1,I5) 
+c	   ELSE
+c	    OPEN(UNIT=33,FILE='FITWAVE12.RESULTS',TYPE='OLD',ACCESS='APPEND')
+c	    WRITE(33,224)S_SCET(1),NUMEVENT,F1,F2,EX1,EY1,EX2,EY2,
+c     1	      TX1,TY1,TX2,TY2,RMS,n1wave,n2wave,bangle,sunclock
+c 224	    FORMAT(2I10,2F7.3,4F7.2,4F7.2,F9.4,2I5,F7.1,I5) 
+c	   ENDIF
+c	   CLOSE(UNIT=33)
+	  ENDIF
+C	ENDIF
+c
+	IFITSOL = 0
+C	IFITSOL = 1
+	PRINT*,'IFITSOL',IFITSOL
+	IF(IFITSOL.EQ.1) THEN
+	    write(66,*) s_scet,numevent 
+	    CALL FIT_SOL(CH,WDTH,F1,CENTER,EX1,EY1,TX,TY,FRMS)
+C	    PRINT*,'FIT_SOL',F1,EX1,EY1,EX2,EY2,PH1,PH2
+	    OPEN(UNIT=33,FILE='FIT_SOL.RESULTS',TYPE='OLD',ACCESS='APPEND')
+	    AMP = SQRT(EX1**2 + EY1**2 + TX**2 + TY**2)
+	    WRITE(33,323)S_SCET(1),NUMEVENT,WDTH,F1,CENTER,EX1,EY1,TX,TY,
+     1		AMP,FRMS
+ 323	    FORMAT(2I10,2F7.3,F7.1,5F7.2,F9.4) 
+	    CLOSE(UNIT=33)
+	ENDIF
+c
+	IF(NPLOTS.LT.NREM) GO TO 110
+	STOP
+	END
+	SUBROUTINE PLTDSFR(ITERM)
+C
+C	PLOT TDS DATA AND FREQUENCY = .5/(INTERVAL BETWEEN ZEROS)
+C
+	CHARACTER*12 TITLE(20)
+	CHARACTER*120 STR
+	CHARACTER*4 EVENT
+	COMMON /HEADBL/ TITLE,EVENT,NUMEVENT,FILE
+	COMMON /PLTBLK/ IZCNT,IPROCESS,ZCROSS(2048),ZINT(2048),
+     1   NDATA(2048),DATA(2050),SPECT(1025)
+	COMMON /TDS_STATUS/ TDS_CHANNEL,SPS,FILTER,IRX,ISPS
+	COMMON /STATUS/ FFILTER(4),SFILTER(4),FSPS(4),SSPS(4)
+C
+	COMMON /MONGOPAR/
+     1  X1,X2,Y1,Y2,GX1,GX2,GY1,GY2,LX1,LX2,LY1,LY2,
+     1  GX,GY,CX,CY,
+     1  EXPAND,ANGLE,LTYPE,LWEIGHT,
+     1  CHEIGHT,CWIDTH,CXDEF,CYDEF,PSDEF,PYDEF,COFF,
+     1  TERMOUT,XYSWAPPED,NUMDEV,
+     1  PI,USERVAR(10),AUTODOT
+	INTEGER*4 LX1,LX2,LY1,LY2,LTYPE,LWEIGHT,NUMDEV
+C
+	character*80	file
+	DIMENSION YY(2048),PP(2048)
+C
+	CALL MGOINIT
+	CALL MGOSETUP(ITERM)
+	CALL MGOERASE
+C
+C	PLOT TDS DATA
+C
+	XEND = 2750.
+	IF(ITERM.LT.0) THEN
+	  CALL MGOSETLOC(300.,1100.,XEND,2230.)
+	ENDIF
+C
+	  CALL MGOSETEXPAND(.85)
+	  IF(ITERM.GT.0) THEN
+	    CALL MGOGRELOCATE(10.,0.)                      ! maxch, crt
+	  ELSE
+	    CALL MGOGRELOCATE(400.,50.)                      ! hardcopy
+	  ENDIF
+C	  CALL MGOPUTLABEL(53,STR,9)
+	  CALL MGOSETEXPAND(1.)
+C
+	IF(IPROCESS.EQ.0) THEN
+	  DO N = 1,2048
+  	    PP(N) = N
+	    YY(N) = NDATA(N)
+	  ENDDO
+	ELSE
+	  YMAX = 0.
+	  DO N = 1,2048
+  	    PP(N) = N
+	    YY(N) = DATA(N)
+	    YMAX = AMAX1(YY(N),YMAX)
+	    YMAX = AMAX1(-YY(N),YMAX)
+	  ENDDO
+	ENDIF
+C
+	PRINT*,'MAX VOLTS',YMAX
+	IF(IPROCESS.EQ.0) THEN
+		CALL MGOTICKSIZE(0.,0.,5.6,28.)  
+		CALL MGOSETLIM(-2.,-130.,2050.,130.)
+	ELSE
+		CALL MGOTICKSIZE(0.,0.,0.,0.)  
+		CALL MGOSETLIM(-2.,-YMAX,2050.,YMAX)
+	ENDIF
+c	CALL MGOGRID(0)
+C	CALL MGOSETLTYPE(1)
+c	CALL MGOGRID(1)
+	CALL MGOSETLTYPE(0)
+	CALL MGOSETEXPAND(.6)
+	CALL MGOCONNECT(PP,YY,2048)
+	CALL MGOSETEXPAND(.8)
+	CALL MGOBOX(0,2)
+	IF(IPROCESS.EQ.0) THEN
+		CALL MGOYLABEL(14,'T/M NUMBER-128')
+	ELSE
+		CALL MGOYLABEL(14,'VOLTS or nT')
+	ENDIF
+	CALL MGOSETEXPAND(1.)
+	TRANGE = GY2-GY1
+	TINC = .08*TRANGE
+	XTITLE = GX2 +.005*(GX2-GX1)
+	YTITLE = GY2
+	CALL MGOSETEXPAND(.8)
+	AVRFREQ=0.
+	IF(IZCNT.GT.1) THEN
+	  AVRPER = (ZCROSS(IZCNT)-ZCROSS(1))/(IZCNT-1)
+	  AVRFREQ = .001*SPS/AVRPER
+	ENDIF
+	TITLE(19) = 'AVR.FREQ.'
+	WRITE(TITLE(20),1020) AVRFREQ
+ 1020	FORMAT(F8.2,' kHZ')
+	DO N = 1,20
+	  YTITLE = YTITLE - TINC
+	  IF(N.EQ.4) YTITLE = YTITLE - TINC
+	  IF(N.EQ.6) YTITLE = YTITLE - TINC
+	  CALL MGOGRELOCATE(XTITLE,YTITLE)
+	  CALL MGOLABEL(12,TITLE(N))
+	ENDDO
+	CALL MGOSETEXPAND(1.)
+	CALL MGOSETEXPAND(.8)
+	CALL MGOPLOTID(EVENT,'[.WIND]TDSEXEY')
+	CALL MGOSETEXPAND(1.)
+C
+C	PLOT FREQUENCY = .5/(INTERVAL BETWEEN ZEROS)
+C		OR 1./INT FOR POS TO NEG
+C
+	IF(ITERM.LT.0) THEN
+	  CALL MGOSETLOC(300.,200.,XEND,1050.)
+	ENDIF
+	SPSKHZ = .001*SPS
+	YMIN = .5*SPSKHZ
+	YMAX = 0.
+	PRINT*,'IZCNT',IZCNT
+	DO N = 1,IZCNT-1
+	IF(ZINT(N).EQ.0.) PRINT*,'IN PLOT, ZINT=0 AT',N
+C	  YY(N) = .5*SPSKHZ/ZINT(N)
+	  YY(N) = SPSKHZ/ZINT(N)
+	  PP(N) = .5*(ZCROSS(N)+ZCROSS(N+1))
+	  YMIN = AMIN1(YY(N),YMIN)
+	  YMAX = AMAX1(YY(N),YMAX)
+	ENDDO
+  	YMAX = AMIN1(.5*SPSKHZ,1.1*YMAX)
+	PRINT*,'YMIN,YMAX',YMIN,YMAX
+	CALL MGOSETEXPAND(.8)
+	CALL MGOSETLIM(-2.,YMIN,2050.,YMAX)
+	CALL MGOTICKSIZE(0.,0.,0.,0.)  
+	CALL MGOCONNECT(PP,YY,IZCNT-1)
+	CALL MGOBOX(1,2)
+	CALL MGOXLABEL(10,'SAMPLE NO.')
+	CALL MGOYLABEL(10,'FREQ (kHZ)')
+	CALL MGOSETEXPAND(1.)
+C
+	IF(ITERM.LT.0) THEN
+	  CALL MGOPRNTPLOT(NVEC)
+	  PRINT*,' NO. VECTORS PLOTTED',NVEC
+	ELSE
+	  CALL MGOTCLOSE
+	ENDIF
+C
+	RETURN
+C
+	END	
+	SUBROUTINE COMBO(ITERM,CH)
+C
+C	THE FIRST (TOP) PANEL IS THE DATA IN T/M UNITS,
+C	THE SECOND IS IN PHYSICAL UNITS, THE THIRD IS THE FREQ  FROM 
+C	ZERO CROSSINGS, AND THE FOURTH IS THE FOURIER TRANSFORM
+C
+	CHARACTER*12 TITLE(20)
+	CHARACTER*120 STR
+	CHARACTER*4 EVENT
+	CHARACTER*32 ITEM
+	INTEGER*4 TDS_CHANNEL,S_SCET(2),CH,ERT(2)
+	COMMON /HEADBL/ TITLE,EVENT,NUMEVENT,FILE
+	COMMON /XFER/ SPHASE(1025)
+	COMMON /FIXUPBLK/ NBAD3,NBAD1,NBAD2,IFXB
+	common /headblk/ major,minor,s_scet
+	COMMON /PLTBLK/ IZCNT,IPROCESS,ZCROSS(2048),ZINT(2048),
+     1   NDATA(2048),DATA(2050),SPECT(1025)
+	COMMON /TDS_STATUS/ TDS_CHANNEL,SPS,FILTER,IRX,ISPS
+	COMMON /STATUS/ FFILTER(4),SFILTER(4),FSPS(4),SSPS(4)
+	COMMON /FREQ_CHOOSE/ FREQMAX
+C
+	COMMON /MONGOPAR/
+     1  X1,X2,Y1,Y2,GX1,GX2,GY1,GY2,LX1,LX2,LY1,LY2,
+     1  GX,GY,CX,CY,
+     1  EXPAND,ANGLE,LTYPE,LWEIGHT,
+     1  CHEIGHT,CWIDTH,CXDEF,CYDEF,PSDEF,PYDEF,COFF,
+     1  TERMOUT,XYSWAPPED,NUMDEV,
+     1  PI,USERVAR(10),AUTODOT
+	INTEGER*4 LX1,LX2,LY1,LY2,LTYPE,LWEIGHT,NUMDEV
+C
+	character*80	file
+	DIMENSION YY(2048),YYT(2048),PP(2048),ZVCROSS(2048),ZVINT(2048)
+C
+	     item = 'EVENT_TM_SCET_I4'
+	     ok = w_item_I4(ch, item, ERT, 2, return_size)
+C
+	CALL MGOINIT
+	CALL MGOSETUP(ITERM)
+	CALL MGOERASE
+C
+C	PUT LABELS ON RIGHT HAND SIDE
+C
+	XSTART = 350.
+	XEND = 2000.
+	IF(ITERM.LT.0) THEN
+	  CALL MGOSETLOC(XSTART,400.,XEND,3100.)
+	ENDIF
+	AVRFREQ=0.
+	IF(IZCNT.GT.1) THEN
+	  AVRPER = (ZCROSS(IZCNT)-ZCROSS(1))/(IZCNT-1)
+	  AVRFREQ = .001*SPS/AVRPER
+	ENDIF
+	TITLE(19) = ' AVR.FREQ.'
+	WRITE(TITLE(20),1020) AVRFREQ
+ 1020	FORMAT(F8.2,' kHZ')
+C
+C	XTITLE = GX2 +.006*(GX2-GX1)
+	XTITLE = GX2 +.02*(GX2-GX1)
+	YTITLE = GY2
+	TRANGE = GY2-GY1
+	TINC = .03*TRANGE
+	CALL MGOSETEXPAND(.8)
+	DO N = 1,20
+	  YTITLE = YTITLE - TINC
+	  IF(N.EQ.4) YTITLE = YTITLE - TINC
+	  IF(N.EQ.6) YTITLE = YTITLE - TINC
+	  IF(N.EQ.19) YTITLE = YTITLE - TINC
+	  CALL MGOGRELOCATE(XTITLE,YTITLE)
+	  CALL MGOLABEL(12,TITLE(N))
+	ENDDO
+C
+C	PLOT TDS DATA IN TELEMETRY UNITS
+C
+	IF(ITERM.LT.0) THEN
+	  CALL MGOSETLOC(XSTART,2425.,XEND,3100.)
+	ENDIF
+C
+	  CALL MGOSETEXPAND(.85)
+	  IF(ITERM.GT.0) THEN
+	    CALL MGOGRELOCATE(10.,0.)                      ! maxch, crt
+	  ELSE
+	    CALL MGOGRELOCATE(400.,50.)                      ! hardcopy
+	  ENDIF
+C	  CALL MGOPUTLABEL(53,STR,9)
+	  CALL MGOSETEXPAND(1.)
+C
+	  DO N = 1,2048
+  	    PP(N) = 1000.*(N-1)/SPS
+	    YY(N) = NDATA(N)
+	  ENDDO
+	CALL MGOSETLIM(0.,-128.,PP(2048),128.)
+	CALL MGOSETEXPAND(.8)
+	CALL MGOTICKSIZE(0.,0.,0.,0.)  
+	CALL MGOCONNECT(PP,YY,2048)
+	CALL MGOBOX(1,2)
+	CALL MGOSETEXPAND(.7)
+	CALL MGOXLABEL(5,'mSEC.')
+	CALL MGOYLABEL(14,'T/M NUMBER-128')
+	CALL MGOSETEXPAND(.8)
+	CALL MGOPLOTID(EVENT,'[.WIND]TDSEXEY,COMBO')
+	CALL MGOSETEXPAND(1.)
+C
+C	PLOT TDS DATA IN PHYSICAL UNITS
+C
+	IF(ITERM.LT.0) THEN
+	  CALL MGOSETLOC(XSTART,1605.,XEND,2275.)
+	ENDIF
+	  YMAX = 0.
+c	  EFFLEN = 45.				  ! X ANTENNA  18-JUL-95
+c	  IF(IRX.EQ.2.OR.IRX.EQ.5) EFFLEN = 6.    ! Y ANTENNA   "
+c	  IF(IRX.EQ.3.OR.IRX.EQ.6) EFFLEN = 4.    ! Z ANTENNA   "
+	  EFFLEN = 41.1				  ! X ANTENNA  23-SEP-96
+	  IF(IRX.EQ.2.OR.IRX.EQ.5) EFFLEN = 3.79  ! Y ANTENNA   "
+	  IF(IRX.EQ.3.OR.IRX.EQ.6) EFFLEN = 2.17  ! Z ANTENNA   "
+	  ACORR = 1000.
+	  IF(IRX.GE.7) THEN			! SEARCH COILS
+		ACORR=1.
+		EFFLEN = 1.
+	  ENDIF
+C	CHANGE TO mV/meter
+	  DO N = 1,2048
+C 	    PP(N) = N
+	    YY(N) = ACORR*DATA(N)/EFFLEN
+	    YMAX = AMAX1(YY(N),YMAX)
+	    YMAX = AMAX1(-YY(N),YMAX)
+c	write(88,*) n,irx,ndata(n),yy(n)
+	  ENDDO
+C
+	PRINT*,'MAX mV/m',YMAX
+	CALL MGOTICKSIZE(0.,0.,0.,0.)  
+	CALL MGOSETLIM(PP(1),-YMAX,PP(2048),YMAX)
+C
+c	CALL MGOGRID(0)
+C	CALL MGOSETLTYPE(1)
+c	CALL MGOGRID(1)
+	CALL MGOSETLTYPE(0)
+	CALL MGOSETEXPAND(.6)
+	CALL MGOCONNECT(PP,YY,2048)
+	CALL MGOSETEXPAND(.7)
+	CALL MGOBOX(1,2)
+	CALL MGOXLABEL(5,'mSEC.')
+	IF(IRX.LE.6) THEN
+	  CALL MGOYLABEL(4,'mV/m')
+	ELSE
+	  CALL MGOYLABEL(2,'nT')
+	ENDIF
+	CALL MGOSETEXPAND(1.)
+C
+C	REDO ZERO CROSSINGS FROM VOLTAGE DATA
+C	PLOT FREQUENCY FROM ZERO CROSSINGS, ALSO SMOOTH FREQUENCY
+C
+	IF(ITERM.LT.0) THEN
+	  CALL MGOSETLOC(XSTART,1120.,XEND,1455.)
+	ENDIF
+C
+C	FIND ZERO CROSSING
+C
+	IZCNT = 0
+	IL = 1
+	IZ = IL
+	DO IL = 2,2047
+	  IZ = IL
+C		COUNT ONLY POS TO NEG
+	  IF(DATA(IL).GT.0..AND.DATA(IL+1).LE.0.) THEN
+	        IZCNT = IZCNT+1
+		S1 = DATA(IL)
+		S2 = DATA(IL+1)
+		ZVCROSS(IZCNT) = IL + S1/(S1 - S2)
+	  ENDIF
+	ENDDO
+	DO N = 1,IZCNT-1
+	  ZVINT(N) = ZVCROSS(N+1) - ZVCROSS(N)
+	  IF(ZVINT(N).EQ.0.) PRINT*,'ZVINT=0 AT ',N
+	  IF(ZVINT(N).EQ.0.) ZVINT(N) = 1.E-6
+	ENDDO
+C
+C
+	SPSKHZ = .001*SPS
+	YMIN = .5*SPSKHZ
+	YMAX = 0.
+	PRINT*,'IZCNT',IZCNT
+	IF(IZCNT.GT.1) THEN
+	  DO N = 1,IZCNT-1
+	    YY(N) = SPSKHZ/ZVINT(N)
+	    PP(N) = 500.*(ZVCROSS(N)+ZVCROSS(N+1))/SPS
+	    YMIN = AMIN1(YY(N),YMIN)
+	    YMAX = AMAX1(YY(N),YMAX)
+	  ENDDO
+C	
+C	  SMOOTH FREQUENCY
+C
+	  DO N = 2,IZCNT-2
+	    YYT(N) = .5*YY(N) + .25*(YY(N+1)+YY(N-1))
+c*******
+c	   if(pp(n).lt.32.) yyt(n) = 0.
+c	   if(pp(n).gt.35.) yyt(n) = 0.
+	  ENDDO
+	  YYT(1) = YY(1)
+	  YYT(IZCNT-1) = YY(IZCNT-1)
+	ENDIF
+C
+c  	YMAX = AMIN1(.5*SPSKHZ,1.1*YMAX)
+	PRINT*,'YMIN,YMAX',YMIN,YMAX
+c	YMIN =  .9*AVRFREQ
+c	YMAX = 1.1*AVRFREQ
+c	ymin = 8.
+c	ymax = 17.
+c	YMIN =  .5*AVRFREQ
+c	YMAX = 2.*AVRFREQ
+	YRANGE = YMAX-YMIN
+	PRINT*,'SET TO   ',YMIN,YMAX
+	CALL MGOSETEXPAND(.8)
+	CALL MGOSETLIM(0.,YMIN,PP(2048),YMAX)
+	CALL MGOTICKSIZE(0.,0.,0.,0.)  
+c	CALL MGOCONNECT(PP,YYT,IZCNT-1)
+	CALL MGOCONNECT(PP,YYT,IZCNT-1)
+	CALL MGOBOX(1,2)
+	CALL MGOSETEXPAND(.7)
+	CALL MGOXLABEL(5,'mSEC.')
+	CALL MGOYLABEL(10,'FREQ (kHZ)')
+	CALL MGOSETEXPAND(1.)
+C
+C	PLOT FOURIER SPECTRUM
+C
+	IF(ITERM.LT.0) THEN
+	  CALL MGOSETLOC(XSTART,300.,XEND,970.)
+	ENDIF
+C
+C
+	N1 = 3
+	N2 = 2048
+	YMAX = -500.
+	YMIN =  500.
+	XMAX = 0.
+	SPSUSE = SPS
+	IF(TDS_CHANNEL.LE.2) SPSUSE = .001*SPS
+	DO N = N1,N2,2
+	  NP = (N-1)/2
+	  PP(NP) = NP*SPSUSE/2048.
+C	  YY(NP) = 10.*ALOG10(DATA(N)**2 + DATA(N+1)**2)
+	  YY(NP) = SPECT(NP)
+C****
+	if(pp(np).gt.2..and.pp(np).lt.12.) write(37,*) np,pp(np),yy(np)
+c****
+	  XMAX = AMAX1(XMAX,PP(NP))
+	  IF(YY(NP).GT.YMAX) THEN
+	    NPSV = NP
+	    YMAX = YY(NP)
+	  ENDIF
+	  YMIN = AMIN1(YMIN,YY(NP))
+	ENDDO
+C
+C	FIND MAXIMUM IN SPECTRUM
+C
+	SMAX = -1000.
+	SMIN = 1000.
+	DO N = 10,1022
+	  IF(SPECT(N).GT.SMAX) THEN
+	    SMAX = SPECT(N)
+	    NSPMAX = N
+	  ENDIF	  
+	  IF(SPECT(N).LT.SMIN) THEN
+	    SMIN = SPECT(N)
+	    NSPMIN = N
+	  ENDIF
+	ENDDO
+C
+	PRINT*,'SPECTRUM MAX:N,F,SMAX',NSPMAX,(NSPMAX-1)*SPS/2048.,SMAX
+	FREQMAX = (NSPMAX-1)*SPS/2048.
+C	AVERAGE OVER ADJACENT POINTS
+	FTOT = 0.
+	STOT = 0.
+	DO NN = -1,1
+	  FNN = (NSPMAX-1+NN)*SPS/2048.
+	  SNN = 10.**(.1*SPECT(NSPMAX+NN))
+	  FTOT = FTOT+FNN*SNN
+	  STOT = STOT+SNN
+	ENDDO
+	FREQMAX = FTOT/STOT
+	PRINT*,'INTER FREQ',FREQMAX
+C
+	DO N = 10,1022
+	  IF(SPECT(N).GT.(SMAX-20.)) THEN
+	  PRINT*,'OTHER LARGE SIGS:N,F,SMAX',N,(N-1)*SPS/2048.,SPECT(N),
+     1		SPHASE(N)
+	  WRITE(89,*)' CH,EVT#,N,F,SMAX,PH',TDS_CHANNEL,NUMEVENT,N,
+     1		(N-1)*SPS/2048.,SPECT(N),SPHASE(N)
+	  ENDIF
+	ENDDO
+C
+C	CALCULATE 10 DB BANDWIDTH
+C
+	MAXCOUNT = 0
+	LOWCOUNT = 0
+	DO N=NPSV,1024
+	   IF(SPECT(N).GT.(YMAX-10.)) THEN
+		MAXCOUNT = MAXCOUNT+LOWCOUNT+1
+		LOWCOUNT = 0
+	   ELSE
+		LOWCOUNT = LOWCOUNT+1
+	   ENDIF
+	   IF(LOWCOUNT.GT.3) GO TO 410
+	ENDDO
+C 410	MAXCOUNT = MAXCOUNT + LOWCOUNT
+ 410	CONTINUE
+	LOWCOUNT = 0
+	DO N=NPSV-1,1,-1
+	   IF(SPECT(N).GT.(YMAX-10.)) THEN
+		MAXCOUNT = MAXCOUNT+LOWCOUNT+1
+		LOWCOUNT = 0
+	   ELSE
+		LOWCOUNT = LOWCOUNT+1
+	   ENDIF
+	   IF(LOWCOUNT.GT.3) GO TO 420
+	ENDDO
+ 420	PRINT*,'DB,YMAX,YMIN',YMAX,YMIN
+	BW = MAXCOUNT*SPSUSE/2048.
+	PRINT*,'MAXCOUNT, BANDWIDTH',MAXCOUNT,BW
+	XN1 = N1-2
+	XN2 = N2+2
+	YRANGE = YMAX-YMIN
+	YMAX = YMAX + .05*YRANGE
+	YMIN = YMIN - .05*YRANGE
+	YMIN = AMAX1(YMIN,YMAX-70.)
+C	CALL MGOSETLIM(0.,YMIN,XMAX,YMAX)
+	CALL MGOSETLIM(0.,SMIN,XMAX,SMAX)
+c	CALL MGOGRID(0)
+C	CALL MGOSETLTYPE(1)
+c	CALL MGOGRID(1)
+	CALL MGOSETLTYPE(0)
+	CALL MGOSETEXPAND(.6)
+	CALL MGOCONNECT(PP,YY,NP)
+C	CALL MGOPOINTS(60.,1,PP,YY,NP)
+	CALL MGOSETEXPAND(.7)
+	CALL MGOBOX(1,2)
+	CALL MGOYLABEL(17,'POWER, DB V\u2/HZ')
+	IF(TDS_CHANNEL.GT.2) CALL MGOXLABEL(9,'FREQ, HZ')
+	IF(TDS_CHANNEL.LE.2) CALL MGOXLABEL(9,'FREQ, kHZ')
+	YTITLE = GY2
+	TRANGE = GY2-GY1
+	TINC = .1*TRANGE
+	YTITLE = YTITLE-TINC
+	CALL MGOGRELOCATE(XTITLE,YTITLE)
+	CALL MGOLABEL(10,'   10 dB  ')
+	YTITLE = YTITLE-TINC
+	CALL MGOGRELOCATE(XTITLE,YTITLE)
+	CALL MGOLABEL(10,' BANDWIDTH')
+	YTITLE = YTITLE-TINC
+	CALL MGOGRELOCATE(XTITLE,YTITLE)
+	CALL MGOLABEL(10,'  OF PEAK ')
+	IF(TDS_CHANNEL.GT.2) WRITE(STR,1021) .001*BW
+	IF(TDS_CHANNEL.LE.2) WRITE(STR,1022) BW
+ 1021	FORMAT(F7.2,' HZ')
+ 1022	FORMAT(F6.3,' kHZ')
+	YTITLE = YTITLE - TINC
+	CALL MGOGRELOCATE(XTITLE,YTITLE)
+	CALL MGOLABEL(10,STR)
+	CALL MGOSETEXPAND(1.)
+C
+	  YTITLE = YTITLE-2.*TINC
+	  CALL MGOSETEXPAND(.5)
+	  CALL MGOGRELOCATE(XTITLE,YTITLE)
+	  CALL MGOLABEL(12,' RECEIVED AT')
+	  YTITLE = YTITLE-.6*TINC
+	  CALL MGOGRELOCATE(XTITLE,YTITLE)
+C	  FDAY = BEGINEVT - DFLOAT(DDS)
+C          NHR = FDAY*24.
+C	  MIN = FDAY*1440. - (NHR*60)
+C	  SEC = FDAY*86400. - 3600.*NHR - 60.*MIN	  
+	  WRITE(STR,1029) ERT(1)
+C 1028	  FORMAT(1X,I2.2,I2.2,1X,F6.2)
+ 1029	  FORMAT(1X,I8)
+	  CALL MGOLABEL(9,STR)
+	  YTITLE = YTITLE-.6*TINC
+	  CALL MGOGRELOCATE(XTITLE,YTITLE)
+	  WRITE(STR,1029) ERT(2)
+	  CALL MGOLABEL(9,STR)
+C
+	YTITLE = YTITLE-2.*TINC
+	  CALL MGOSETEXPAND(.5)
+	IF(IPROCESS.GE.4) THEN
+	  CALL MGOGRELOCATE(XTITLE,YTITLE)
+	  WRITE(STR,1026) IFXB
+ 1026	  FORMAT(' BAD TDS',I2)
+	  CALL MGOLABEL(10,STR)
+	  YTITLE = YTITLE-.7*TINC
+	  CALL MGOGRELOCATE(XTITLE,YTITLE)
+	  CALL MGOLABEL(9,'CORRECTED')
+	  YTITLE = YTITLE-.7*TINC
+	ENDIF
+C
+	  CALL MGOGRELOCATE(XTITLE,YTITLE)
+	  WRITE(STR,1024) IPROCESS
+ 1024	  FORMAT(' LEVEL',I2)
+	  CALL MGOLABEL(8,STR)
+C
+	IF(IPROCESS.GE.4) THEN
+	  WRITE(STR,1025) NBAD1+NBAD2+NBAD3
+ 1025	  FORMAT(I5,' PTS')
+	  YTITLE = YTITLE-.7*TINC
+	  CALL MGOGRELOCATE(XTITLE,YTITLE)
+	  CALL MGOLABEL(9,STR)
+	ENDIF
+	  CALL MGOSETEXPAND(.8)
+C
+	IF(ITERM.LT.0) THEN
+	  CALL MGOPRNTPLOT(NVEC)
+	  PRINT*,' NO. VECTORS PLOTTED',NVEC
+	ELSE
+	  CALL MGOTCLOSE
+	ENDIF
+C
+	RETURN
+C
+	END	
+	SUBROUTINE DETAIL(ITERM,N1,N2)
+C
+C	PLOT TDS DATA AND FREQUENCY = .5/(INTERVAL BETWEEN ZEROS)
+C
+	CHARACTER*12 TITLE(20)
+	CHARACTER*120 STR
+	CHARACTER*4 EVENT
+	COMMON /HEADBL/ TITLE,EVENT,NUMEVENT,FILE
+	COMMON /PLTBLK/ IZCNT,IPROCESS,ZCROSS(2048),ZINT(2048),
+     1   NDATA(2048),DATA(2050),SPECT(1025)
+	COMMON /TDS_STATUS/ TDS_CHANNEL,SPS,FILTER,IRX,ISPS
+	COMMON /STATUS/ FFILTER(4),SFILTER(4),FSPS(4),SSPS(4)
+C
+	COMMON /MONGOPAR/
+     1  X1,X2,Y1,Y2,GX1,GX2,GY1,GY2,LX1,LX2,LY1,LY2,
+     1  GX,GY,CX,CY,
+     1  EXPAND,ANGLE,LTYPE,LWEIGHT,
+     1  CHEIGHT,CWIDTH,CXDEF,CYDEF,PSDEF,PYDEF,COFF,
+     1  TERMOUT,XYSWAPPED,NUMDEV,
+     1  PI,USERVAR(10),AUTODOT
+	INTEGER*4 LX1,LX2,LY1,LY2,LTYPE,LWEIGHT,NUMDEV
+C
+	character*80	file
+	DIMENSION YY(2048),PP(2048)
+C
+	CALL MGOINIT
+	CALL MGOSETUP(ITERM)
+	CALL MGOERASE
+C
+C	PLOT TDS DATA
+C
+	XEND = 2750.
+	IF(ITERM.LT.0) THEN
+	  CALL MGOSETLOC(300.,400.,XEND,2230.)
+	ENDIF
+C
+	  CALL MGOSETEXPAND(.85)
+	  IF(ITERM.GT.0) THEN
+	    CALL MGOGRELOCATE(10.,0.)                      ! maxch, crt
+	  ELSE
+	    CALL MGOGRELOCATE(400.,50.)                      ! hardcopy
+	  ENDIF
+C	  CALL MGOPUTLABEL(53,STR,9)
+c	  WRITE(STR,704) SAA()
+c 704	  FORMAT('\\tSOLAR ASPECT',F6.1,' DEG.')
+c	  CALL MGOPUTLABEL(55,STR,9)
+	  CALL MGOSETEXPAND(1.)
+C
+	DO N = N1,N2
+	  NP = N
+	  PP(N) = N
+	  YY(N) = NDATA(N)
+	ENDDO
+C
+	CALL MGOTICKSIZE(0.,0.,5.6,28.)  
+	XN1 = N1-2
+	XN2 = N2+2
+	CALL MGOSETLIM(XN1,-130.,XN2,130.)
+c	CALL MGOGRID(0)
+C	CALL MGOSETLTYPE(1)
+c	CALL MGOGRID(1)
+	CALL MGOSETLTYPE(0)
+	CALL MGOSETEXPAND(.6)
+	CALL MGOCONNECT(PP,YY,NP)
+	CALL MGOPOINTS(60.,1,PP,YY,NP)
+	CALL MGOSETEXPAND(.8)
+	  CALL MGOBOX(1,2)
+	  CALL MGOYLABEL(14,'T/M NUMBER-128')
+	  CALL MGOSETEXPAND(1.)
+	TRANGE = GY2-GY1
+	TINC = .04*TRANGE
+	XTITLE = GX2 +.005*(GX2-GX1)
+	YTITLE = GY2
+	CALL MGOSETEXPAND(.8)
+	AVRFREQ=0.
+	IF(IZCNT.GT.1) THEN
+	  AVRPER = (ZCROSS(IZCNT)-ZCROSS(1))/(IZCNT-1)
+	  AVRFREQ = .001*SPS/AVRPER
+	ENDIF
+	TITLE(19) = 'AVR.FREQ.'
+	WRITE(TITLE(20),1020) AVRFREQ
+ 1020	FORMAT(F8.2,' kHZ')
+	DO N = 1,20
+	  YTITLE = YTITLE - TINC
+	  IF(N.EQ.4) YTITLE = YTITLE - TINC
+	  IF(N.EQ.6) YTITLE = YTITLE - TINC
+	  CALL MGOGRELOCATE(XTITLE,YTITLE)
+	  CALL MGOLABEL(12,TITLE(N))
+	ENDDO
+	CALL MGOSETEXPAND(1.)
+	CALL MGOSETEXPAND(.8)
+	CALL MGOPLOTID(EVENT,'[.WIND]TDSEXEY')
+	CALL MGOSETEXPAND(1.)
+C
+	IF(ITERM.LT.0) THEN
+	  CALL MGOPRNTPLOT(NVEC)
+	  PRINT*,' NO. VECTORS PLOTTED',NVEC
+	ELSE
+	  CALL MGOTCLOSE
+	ENDIF
+C
+	RETURN
+C
+	END
+	SUBROUTINE PARTSPEC(CH,NSTART,NVAR,NSPECT,DATA)
+C
+C	THIS ROUTINE DOES FOURIER ANALYSIS ON PART OF AN EVENT.  
+C	NSTART IS THE SAMPLE NUMBER OF THE FIRST SAMPLE, NVAR IS THE
+C	NUMBER OF SAMPLES TO BE FOURIER ANALYSED.  NVAR MUST BE A POWER
+C	OF TWO.  DATA IS THE DATA FROM THE EVENT, USUALLY CORRECTED FOR
+C	FREQUENCY RESPONSE, ETC. 
+C
+	COMMON /TDS_STATUS/ TDS_CHANNEL,SPS,FILTER,IRX,ISPS
+	COMMON /GAINBLK/ PHASE,CGAIN                   ! PHASE IS IN RADIANS
+	COMMON /HEADBL/ TITLE,EVENT,NUMEVENT,FILE
+	COMMON /MONGOPAR/
+     1  X1,X2,Y1,Y2,GX1,GX2,GY1,GY2,LX1,LX2,LY1,LY2,
+     1  GX,GY,CX,CY,
+     1  EXPAND,ANGLE,LTYPE,LWEIGHT,
+     1  CHEIGHT,CWIDTH,CXDEF,CYDEF,PSDEF,PYDEF,COFF,
+     1  TERMOUT,XYSWAPPED,NUMDEV,
+     1  PI,USERVAR(10),AUTODOT
+	INTEGER*4 LX1,LX2,LY1,LY2,LTYPE,LWEIGHT,NUMDEV
+C
+	COMPLEX CGAIN,FCOEF,FCOEFT,CCORR
+	character*80	file
+	character*32	item
+	REAL DATA(2050),SPECT(2050),PDATA(2050)
+	INTEGER CH
+	CHARACTER*12 TITLE(20)
+	CHARACTER*20 STR
+	DIMENSION YY(2048),PP(2048)
+C
+	ITERM = -1
+C	ITERM = 3
+	CALL MGOINIT
+	CALL MGOSETUP(ITERM)
+	CALL MGOERASE
+	IF(ITERM.LT.0) THEN
+	  IF(NSPECT.EQ.1) CALL MGOSETLOC(500.,1300.,2000.,2200.)
+	  IF(NSPECT.EQ.2) CALL MGOSETLOC(500.,850.,2000.,2650.)
+	  IF(NSPECT.GT.2) CALL MGOSETLOC(500.,400.,2000.,3100.)
+	ELSE
+	  CALL MGOSETLOC(75.,150.,900.,700.)
+	ENDIF
+	TRANGE = GY2-GY1
+	TINC = .04*TRANGE
+	XTITLE = GX2 +.03*(GX2-GX1)
+	YTITLE = GY2
+	CALL MGOSETEXPAND(.8)
+	AVRFREQ=0.
+C	IF(IZCNT.GT.1) THEN
+C	  AVRPER = (ZCROSS(IZCNT)-ZCROSS(1))/(IZCNT-1)
+C	  AVRFREQ = .001*SPS/AVRPER
+C	ENDIF
+	TITLE(19) = 'AVR.FREQ.'
+	WRITE(TITLE(20),1020) AVRFREQ
+ 1020	FORMAT(F8.2,' kHZ')
+C
+	DO N = 1,20
+	  YTITLE = YTITLE - TINC
+	  IF(N.EQ.4) YTITLE = YTITLE - TINC
+	  IF(N.EQ.6) YTITLE = YTITLE - TINC
+	  CALL MGOGRELOCATE(XTITLE,YTITLE)
+	  CALL MGOLABEL(12,TITLE(N))
+	ENDDO
+	CALL MGOSETEXPAND(1.)
+	CALL MGOSETEXPAND(.8)
+	YTITLE = GY1 + .3*(GY2-GY1)
+	CALL MGOGRELOCATE(GX1,YTITLE)
+	CALL MGOSETANGLE(90.)
+	CALL MGOLABEL(17,'POWER, DB V\u2/HZ')
+	CALL MGOSETANGLE(0.)
+C
+	NHALF = NVAR/2
+	HALF = NHALF
+	DO NS = 1,NSPECT
+	  NSTT = NSTART + (NS-1)*NVAR
+	  NP = 0
+	  DO N = NSTT, NSTT+NVAR-1
+	    NP = NP+1
+	    PDATA(NP) = DATA(N)
+  	  ENDDO
+	  CALL REALFT(PDATA,NHALF,1)
+C
+C	  CORRECT FOURIER ANALYSED SIGNAL FOR FREQUENCY RESPONSE
+C
+	  IF(TDS_CHANNEL.GT.2) THEN
+	   item = 'SLOW_RX_FILTER'
+	  ELSE
+	   item = 'FAST_RX_FILTER'
+	  ENDIF
+	   ok = W_ITEM_i4(ch, item, ifil, 1, return_size)
+C
+	     DO IK = 3,NVAR,2
+		FCOEF = CMPLX(PDATA(IK),PDATA(IK+1))
+	        FREQ = SPS*(IK-1)/4096.
+	        EJUNK = PREAMP(IRX,FREQ)
+		FCOEFT = FCOEF/CGAIN
+		CCORR = CGAIN
+		EJUNK = TDSDET(TDS_CHANNEL,FREQ)
+		FCOEFT = FCOEFT/CGAIN
+		CCORR = CGAIN*CCORR
+		EJUNK = TDS_FILTER(TDS_CHANNEL,IFIL+1,FREQ)
+		FCOEFT = FCOEFT/CGAIN
+		CCORR = CGAIN*CCORR
+		FCOEF = FCOEFT
+		PDATA(IK) = FCOEF
+		PDATA(IK+1) = AIMAG(FCOEF)
+	     ENDDO
+C
+C	  NOW PDATA CONTAINS FOURIER COEFFS CORRECTED FOR FREQUENCY RESPONSE 
+C
+C	  CALCULATE SPECTRUM, IN DB WRT 1 V**2/HZ
+C
+	  SNORM = 20.*ALOG10(HALF)
+	  IK = 1
+	  ISP = 1
+	  SPECT(ISP) = -SNORM
+	  IF(PDATA(IK).NE.0.)SPECT(ISP) = 20.*ALOG10(ABS(PDATA(IK)))-SNORM
+	  DO IK = 3,NVAR,2
+	      ISP = ISP+1
+	      SPECT(ISP) = 10.*ALOG10(PDATA(IK)**2 + PDATA(IK+1)**2)-SNORM
+	  ENDDO
+C
+C
+C	  PLOT FOURIER SPECTRUM
+C
+	  CALL MGOWINDOW(1,NSPECT,NS)
+C
+C
+	  N1 = 3
+	  N2 = NVAR
+	  YMAX = -500.
+	  YMIN =  500.
+	  XMAX = 0.
+	  SPSUSE = SPS
+	  IF(TDS_CHANNEL.LE.2) SPSUSE = .001*SPS
+	  DO N = N1,N2,2
+	    NP = (N-1)/2
+	    PP(NP) = NP*SPSUSE/NVAR
+	    YY(NP) = SPECT(NP)
+	    XMAX = AMAX1(XMAX,PP(NP))
+	    IF(YY(NP).GT.YMAX) THEN
+	      NPSV = NP
+	      YMAX = YY(NP)
+	    ENDIF
+	    YMIN = AMIN1(YMIN,YY(NP))
+	  ENDDO
+C
+	  XN1 = N1-2
+	  XN2 = N2+2
+	  YRANGE = YMAX-YMIN
+	  YMAX = YMAX + .05*YRANGE
+	  YMIN = YMIN - .05*YRANGE
+	  YMIN = AMAX1(YMIN,YMAX-80.)
+	  PRINT*,'SET YLIMITS',YMIN,YMAX
+	  CALL MGOSETLIM(0.,YMIN,XMAX,YMAX)
+c	  CALL MGOGRID(0)
+C	  CALL MGOSETLTYPE(1)
+c	  CALL MGOGRID(1)
+	  CALL MGOSETLTYPE(0)
+C	  CALL MGOSETEXPAND(.6)
+	  CALL MGOCONNECT(PP,YY,NP)
+C	  CALL MGOPOINTS(60.,1,PP,YY,NP)
+	  CALL MGOSETEXPAND(.7)
+	  CALL MGOBOX(1,2)
+	WRITE(STR,1017)  NSTT, NSTT+NVAR-1
+ 1017	  FORMAT('SAMPLES',I5,' TO',I5)
+	  CALL MGOYLABEL(20,STR)
+	  IF(TDS_CHANNEL.GT.2) CALL MGOXLABEL(9,'FREQ, HZ')
+	  IF(TDS_CHANNEL.LE.2) CALL MGOXLABEL(9,'FREQ, kHZ')
+C	  YTITLE = GY2
+C	  TRANGE = GY2-GY1
+C	  TINC = .1*TRANGE
+C	  YTITLE = YTITLE-TINC
+C	  CALL MGOGRELOCATE(XTITLE,YTITLE)
+C	  CALL MGOLABEL(10,'   10 dB  ')
+C
+	ENDDO
+C
+	CALL MGOPLOTID('PARTSPEC','[.WIND]TDSEXEY')
+	CALL MGOSETEXPAND(1.)
+C
+	IF(ITERM.LT.0) THEN
+	  CALL MGOPRNTPLOT(NVEC)
+	  PRINT*,' NO. VECTORS PLOTTED',NVEC
+	ELSE
+	  CALL MGOTCLOSE
+	  STOP
+	ENDIF
+C
+	RETURN
+	END
+	SUBROUTINE SPPLOT(ITERM)
+C
+C	PLOT TDS DATA AND FREQUENCY = .5/(INTERVAL BETWEEN ZEROS)
+C
+	CHARACTER*12 TITLE(20)
+	CHARACTER*120 STR
+	CHARACTER*4 EVENT
+	COMMON /HEADBL/ TITLE,EVENT,NUMEVENT,FILE
+	COMMON /PLTBLK/ IZCNT,IPROCESS,ZCROSS(2048),ZINT(2048),
+     1   NDATA(2048),DATA(2050),SPECT(1025)
+	COMMON /TDS_STATUS/ TDS_CHANNEL,SPS,FILTER,IRX,ISPS
+	COMMON /STATUS/ FFILTER(4),SFILTER(4),FSPS(4),SSPS(4)
+	common /headblk/ major,minor,s_scet
+C
+	COMMON /MONGOPAR/
+     1  X1,X2,Y1,Y2,GX1,GX2,GY1,GY2,LX1,LX2,LY1,LY2,
+     1  GX,GY,CX,CY,
+     1  EXPAND,ANGLE,LTYPE,LWEIGHT,
+     1  CHEIGHT,CWIDTH,CXDEF,CYDEF,PSDEF,PYDEF,COFF,
+     1  TERMOUT,XYSWAPPED,NUMDEV,
+     1  PI,USERVAR(10),AUTODOT
+	INTEGER*4 LX1,LX2,LY1,LY2,LTYPE,LWEIGHT,NUMDEV
+C
+	character*80	file
+	DIMENSION YY(2048),PP(2048)
+C
+	CALL MGOINIT
+	CALL MGOSETUP(ITERM)
+	CALL MGOERASE
+C
+C	PLOT TDS DATA
+C
+	XEND = 2750.
+	IF(ITERM.LT.0) THEN
+	  CALL MGOSETLOC(300.,400.,XEND,2230.)
+	ENDIF
+C
+	  CALL MGOSETEXPAND(.85)
+	  IF(ITERM.GT.0) THEN
+	    CALL MGOGRELOCATE(10.,0.)                      ! maxch, crt
+	  ELSE
+	    CALL MGOGRELOCATE(400.,50.)                      ! hardcopy
+	  ENDIF
+C
+	  CALL MGOSETEXPAND(1.)
+C
+	N1 = 3
+	N2 = 2048
+	YMAX = -500.
+	YMIN =  500.
+	XMAX = 0.
+	SPSUSE = SPS
+	IF(TDS_CHANNEL.LE.2) SPSUSE = .001*SPS
+	DO N = N1,N2,2
+	  NP = (N-1)/2
+	  PP(NP) = NP*SPSUSE/2048.
+	  YY(NP) = 10.*ALOG10(DATA(N)**2 + DATA(N+1)**2)
+	  XMAX = AMAX1(XMAX,PP(NP))
+	  YMAX = AMAX1(YMAX,YY(NP))
+	  YMIN = AMIN1(YMIN,YY(NP))
+	ENDDO
+C
+	PRINT*,'YMAX,YMIN',YMAX,YMIN
+C	CALL MGOTICKSIZE(10.,10.,5.6,28.)  
+	XN1 = N1-2
+	XN2 = N2+2
+	YRANGE = YMAX-YMIN
+	YMAX = YMAX + .05*YRANGE
+	YMIN = YMIN - .05*YRANGE
+	CALL MGOSETLIM(0.,YMIN,XMAX,YMAX)
+c	CALL MGOGRID(0)
+C	CALL MGOSETLTYPE(1)
+c	CALL MGOGRID(1)
+	CALL MGOSETLTYPE(0)
+	CALL MGOSETEXPAND(.6)
+	CALL MGOCONNECT(PP,YY,NP)
+	CALL MGOPOINTS(60.,1,PP,YY,NP)
+	CALL MGOSETEXPAND(.8)
+	CALL MGOBOX(1,2)
+	CALL MGOYLABEL(14,'POWER, DB')
+	IF(TDS_CHANNEL.GT.2) CALL MGOXLABEL(9,'FREQ, HZ')
+	IF(TDS_CHANNEL.LE.2) CALL MGOXLABEL(9,'FREQ, kHZ')
+	CALL MGOSETEXPAND(1.)
+	TRANGE = GY2-GY1
+	TINC = .04*TRANGE
+	XTITLE = GX2 +.005*(GX2-GX1)
+	YTITLE = GY2
+	CALL MGOSETEXPAND(.8)
+	AVRFREQ=0.
+	IF(IZCNT.GT.1) THEN
+	  AVRPER = (ZCROSS(IZCNT)-ZCROSS(1))/(IZCNT-1)
+	  AVRFREQ = .001*SPS/AVRPER
+	ENDIF
+	TITLE(19) = 'AVR.FREQ.'
+	WRITE(TITLE(20),1020) AVRFREQ
+ 1020	FORMAT(F8.2,' kHZ')
+	DO N = 1,20
+	  YTITLE = YTITLE - TINC
+	  IF(N.EQ.4) YTITLE = YTITLE - TINC
+	  IF(N.EQ.6) YTITLE = YTITLE - TINC
+	  CALL MGOGRELOCATE(XTITLE,YTITLE)
+	  CALL MGOLABEL(12,TITLE(N))
+	ENDDO
+	CALL MGOSETEXPAND(1.)
+	CALL MGOSETEXPAND(.8)
+	CALL MGOPLOTID(EVENT,'[.WIND]TDSEXEY,SPPLOT')
+	CALL MGOSETEXPAND(1.)
+C
+	IF(ITERM.LT.0) THEN
+	  CALL MGOPRNTPLOT(NVEC)
+	  PRINT*,' NO. VECTORS PLOTTED',NVEC
+	ELSE
+	  CALL MGOTCLOSE
+	ENDIF
+C
+	RETURN
+C
+	END
+	options/extend_source
+!------------------------------------------------------------------------------
+	integer*4	function	get_stream_name(stream)
+! This routine gets the user's TM stream type specification.
+!
+	implicit	none
+	character*(*)	stream
+	common /nrblk/ nrem,NHRMN,IFASTSLOW
+	integer*4	iq,NREM,NHRMN,IFASTSLOW
+
+10	  write(6,6)
+	  read(5,5,err=10,end=20) iq, stream
+
+ 	if (iq .lt. 1) then
+	   stream = 'offline'
+	else if (stream(1:1) .eq. 'o' .or. stream(1:1) .eq. 'O') then
+	   stream = 'offline'
+	else if (stream(1:1) .eq. 'r' .or. stream(1:1) .eq. 'R') then
+	   stream = 'realtime'
+	else
+	   ! assume the user entered the name of an offline file
+	end if
+	print*,'in get_stream_name',stream
+
+	get_stream_name = 1
+
+ 20	return
+c
+  5	format(q,a)
+  6	format(1x,'Enter TM stream type [O=offline (default), R=realtime ]: ',$)
+c
+	end
+	SUBROUTINE FITSLOPE(X,Y,N,SLOPE,SUMSQ)
+C
+	DIMENSION X(1),Y(1),WT(2048)
+C
+	SUMSQ = 0.
+	SXX = 0.
+	SXY = 0.
+	SYY = 0.	
+	DO J = 1,N
+	  WT(J) = .06 + SQRT(ABS(X(J)*Y(J)))
+	  IF(WT(J).NE.0.) THEN
+	    SXX =SXX + X(J)**2/WT(J)
+	    SXY =SXY + X(J)*Y(J)/WT(J)
+	    SYY =SYY + Y(J)**2/WT(J)
+	  ENDIF
+	ENDDO
+C	SLOPE IS Y/X
+	IF(SXX.NE.0.) SLOPE = SXY/SXX
+	SUMSQ = SXX*SLOPE**2 - 2.*SLOPE*SXY + SYY
+	RETURN
+	END
+	SUBROUTINE PLOTPART(ITERM)
+C
+C	PLOTS ONE COMPONENT AGAINST ANOTHER FOR A FRACTION OF AN
+C		EVENT TO LOOK FOR POLARIZATION CHANGES
+C
+	CHARACTER*12 title(20)
+	CHARACTER*120 STR
+	CHARACTER*4 EVENT
+	CHARACTER*8 LABEL(4)
+	INTEGER*4 TDS_CHANNEL,S_SCET(2),MAJOR,MINOR,NSYS
+	COMMON /HEADBL/ TITLE,EVENT,NUMEVENT,FILE
+	COMMON /FIXUPBLK/ NBAD3,NBAD1,NBAD2,IFXB
+	common /headblk/ major,minor,s_scet,nsys
+	COMMON /PLTBLK/ IZCNT,IPROCESS,ZCROSS(2048),ZINT(2048),
+     1   NDATA(2048),DATA(2050),SPECT(1025)
+	COMMON /TDS_STATUS/ TDS_CHANNEL,SPS,FILTER,IRX,ISPS
+	COMMON /STATUS/ FFILTER(4),SFILTER(4),FSPS(4),SSPS(4)
+	COMMON /PARTBLK/ XDATA(2050,4),XRE,YRE,ZRE,SUNCLOCK,SPINRATE
+	COMMON /XYBLOCK/ XSPECT,YSPECT,DPHASE
+	COMMON /ANGLEBLK/ BANGLE,IAANGLE
+C
+	COMMON /MONGOPAR/
+     1  X1,X2,Y1,Y2,GX1,GX2,GY1,GY2,LX1,LX2,LY1,LY2,
+     1  GX,GY,CX,CY,
+     1  EXPAND,ANGLE,LTYPE,LWEIGHT,
+     1  CHEIGHT,CWIDTH,CXDEF,CYDEF,PSDEF,PYDEF,COFF,
+     1  TERMOUT,XYSWAPPED,NUMDEV,
+     1  PI,USERVAR(10),AUTODOT
+	INTEGER*4 LX1,LX2,LY1,LY2,LTYPE,LWEIGHT,NUMDEV
+C
+	character*80	file
+	INTEGER*4 SUNCLOCK
+	DIMENSION YY(2048),XX(2048),XD(2048),YD(2048),PP(2048)
+	REAL XSPECT(1025),YSPECT(1025)
+
+	DATA LABEL /'EX mV/m','EY mV/m','EZ mV/m','B nT'/
+	DATA TWOPI /6.2831853/
+C
+		N1 = 1
+		N2 = 2
+C
+	  CALL MGOINIT
+	  CALL MGOSETUP(ITERM)
+	  CALL MGOERASE
+C
+C	  PUT LABELS ON RIGHT HAND SIDE
+C
+	  IF(ITERM.LT.0) THEN
+	    CALL MGOSETLOC(500.,450.,2000.,3050.)
+  	  ENDIF
+C
+c	  XTITLE = GX2 +.05*(GX2-GX1)
+	  XTITLE = GX2 +.1*(GX2-GX1)              ! 3 dec 1996
+	  YTITLE = GY2
+	  TRANGE = GY2-GY1
+	  TINC = .03*TRANGE
+	  CALL MGOSETEXPAND(.6)
+	  TITLE(6) = ' '
+	  TITLE(7) = ' '
+	  DO N = 1,18
+	    YTITLE = YTITLE - TINC
+	    IF(N.EQ.4) YTITLE = YTITLE - TINC
+	    IF(N.EQ.6) YTITLE = YTITLE - TINC
+	    IF(N.EQ.19) YTITLE = YTITLE - TINC
+	    CALL MGOGRELOCATE(XTITLE,YTITLE)
+	    CALL MGOLABEL(12,TITLE(N))
+	  ENDDO
+C
+C	  PLOT TDS DATA 
+	  YMAX = 0.
+	  EFFLENX = 41.1				! X ANTENNA  23-SEP-96
+	  EFFLENY = 3.79  				! Y ANTENNA   "
+	  EFFLENZ = 2.17  				! Z ANTENNA   "
+	  ACORR = 1000.
+	  IF(IRX.GE.7) THEN			! SEARCH COILS
+		ACORR=1.
+		EFFLEN = 1.
+	  ENDIF
+C
+C	CHANGE TO mV/meter
+	  DO N = 1,2048
+	    XD(N) = ACORR*XDATA(N,N1)/EFFLENX
+	    YD(N) = ACORR*XDATA(N,N2)/EFFLENY	
+	    YMAX = AMAX1(YY(N),YMAX)
+	    YMAX = AMAX1(-YY(N),YMAX)
+	    XMAX = AMAX1(XX(N),XMAX)
+	    XMAX = AMAX1(-XX(N),XMAX)
+	  ENDDO
+C
+C************WRITE DATA TO A FILE FOR THE PSSLW PAPER
+	iwrt = 0
+	if(iwrt.eq.1) then
+	  WRITE(32,*) FILE,S_SCET,NUMEVENT,SUNCLOCK,BANGLE
+	  WRITE(33,*) FILE,S_SCET,NUMEVENT,SUNCLOCK,BANGLE
+	  DO N = 1,2048
+  	    PP(N) = 1000.*(N-1)/SPS
+	    PS    = N*SPS/2048.
+ct	    WRITE(32,*) PP(N),XD(N),YD(N)
+	  ENDDO
+C
+	  DO N = 1,1024
+	    PS    = N*SPS/2048.
+ct	    WRITE(33,*) PS,XSPECT(N),YSPECT(N)
+	  ENDDO
+	  CALL INT_E_DT(PP,XD,YD,EDTX,EDTY)
+	  open(unit=47,name='potential.results',type='old',access='append')
+	  write(47,*) s_scet,numevent,edtx,edty
+	  close(unit=47)
+	endif
+C************
+	  CALL MGOSETEXPAND(.85)
+	  IF(ITERM.GT.0) THEN
+c	    CALL MGOGRELOCATE(10.,0.)                      ! maxch, crt
+	  ELSE
+	    CALL MGOGRELOCATE(400.,50.)                      ! hardcopy
+	  ENDIF
+C	  CALL MGOPUTLABEL(53,STR,9)
+	  CALL MGOSETEXPAND(1.)
+C
+	  NXW = 3
+	  NYW = 5
+	  NW = NXW*NYW
+	  DO IW = 1,NW
+	    CALL MGOWINDOW(NXW,NYW,IW)
+	    NPTST = (IW-1)*2048/NW + 1
+	    NPTND = (IW)*2048/NW
+	    NPT = 0	
+	    XMAX = 0.
+	    YMAX = 0.
+	    NPTMAX = NPTST
+    	    DO N = NPTST,NPTND
+	      NPT = NPT+1
+	      XX(NPT) = XD(N)
+	      YY(NPT) = YD(N)
+	      IF(ABS(XX(NPT)).GT.XMAX) NPTMAX = NPT
+	      XMAX = AMAX1(XMAX,ABS(XX(NPT)))
+	      YMAX = AMAX1(YMAX,ABS(YY(NPT)))
+	    ENDDO
+	    XMAX = 1.1*AMAX1(XMAX,YMAX)
+	    YMAX = XMAX
+	    CALL MGOSETLIM(-XMAX,-YMAX,XMAX,YMAX)
+	    CALL MGOSETEXPAND(.7)
+C	    CALL MGOTICKSIZE(0.,0.,0.,0.)  
+	    CALL MGOCONNECT(XX,YY,NPT)
+C	    PUT ON ARROW
+	    SIZE = .03*SQRT(XMAX**2 + YMAX**2)
+	    DX = XX(NPTMAX+1) - XX(NPTMAX)
+	    DY = YY(NPTMAX+1) - YY(NPTMAX)
+	    CALL ARROW(XX(NPTMAX),YY(NPTMAX),DX,DY,SIZE)
+C	if(n2.eq.2) then
+c	  print*,nptmax-1,xx(nptmax-1),yy(nptmax-1)
+C	  print*,nptmax,xx(nptmax),yy(nptmax)
+c	  print*,nptmax+1,xx(nptmax+1),yy(nptmax+1)
+C	ENDIF
+	    CALL MGOSETEXPAND(.6)
+	    CALL MGOBOX(1,2)
+	    CALL MGOSETEXPAND(.6)
+	    CALL MGOXLABEL(7,LABEL(N1))
+	    CALL MGOYLABEL(7,LABEL(N2))
+	    CALL MGORELOCATE(-.95*XMAX,.90*YMAX)
+	    CALL MGOSETEXPAND(.4)
+	    WRITE(STR,1017)  NPTST,NPTND
+ 1017	    FORMAT('SAMPLES',I5,' TO',I5)
+	    CALL MGOLABEL(20,STR)
+C	    CALL MGOSETEXPAND(.8)
+	    CALL MGOSETEXPAND(1.)
+C
+C	PUT ON B VECTOR
+C
+c	on 16 nov 1999 it was found that the sunclock is read 1024
+c	samples after the end of the event, plus about 10.6 msec or
+c	about 14 spin clock counts for message passing time
+c
+	print*,'spinrate,sunclock,sps',spinrate,sunclock,sps
+	END_ANGLE =  -360.*(SUNCLOCK-14.)/4096. - 45. ! ANGLE SUN TO +EX AT END
+	IF(END_ANGLE.LT.-180.) END_ANGLE = END_ANGLE + 360.
+	IF(END_ANGLE.GT.180.)  END_ANGLE = END_ANGLE - 360.
+	DANG = SPINRATE*360./SPS/TWOPI
+	ST_ANGLE = END_ANGLE + 3072.*DANG   ! ANGLE SUN TO +EX AT START 16nov99
+	END_ANGLE = END_ANGLE + 1024.*DANG
+c	ST_ANGLE = END_ANGLE + 2048.*DANG	  ! ANGLE SUN TO +EX AT START
+C	print*,'start angle, end angle, dang',st_angle,end_angle,dang
+C
+	NAVR = (NPTST+NPTND)/2
+	CTR_ANGLE = ST_ANGLE - NAVR*DANG  !ANGLE SUN TO +EX AT CENTER,nov 1999
+	PANGLE = CTR_ANGLE - BANGLE
+	XBVEC = .2*XMAX*COSD(PANGLE)
+	YBVEC = .2*XMAX*SIND(PANGLE)
+c	put in upper left if x,y positive together, otherwise upper right
+	IF(XX(NPTMAX)*YY(NPTMAX).GT.0.) THEN
+	  XX1 = -.7*XMAX
+	  YY1 = .7*XMAX
+	ELSE
+	  XX1 = .7*XMAX
+	  YY1 = .7*XMAX
+	ENDIF
+c	print*,sunclock,ctr_angle,bangle,pangle
+	CALL MGORELOCATE(XX1,YY1)
+	CALL MGODRAW(XX1+XBVEC,YY1+YBVEC)
+	CALL MGOSETEXPAND(.5)
+	CALL MGOLABEL(1,'B')
+	CALL MGOSETEXPAND(.8)
+C		SPSKHZ = .001*SPS
+C
+	  ENDDO
+C
+	  IF(IPROCESS.GE.3) THEN
+	    YTITLE = YTITLE-2.*TINC
+	    CALL MGOSETEXPAND(.5)
+	    CALL MGOGRELOCATE(XTITLE,YTITLE)
+	    CALL MGOLABEL(8,' BAD TDS')
+	    YTITLE = YTITLE-TINC
+	    CALL MGOGRELOCATE(XTITLE,YTITLE)
+	    CALL MGOLABEL(9,'CORRECTED')
+	    YTITLE = YTITLE-TINC
+	    CALL MGOGRELOCATE(XTITLE,YTITLE)
+	    WRITE(STR,1024) IPROCESS
+ 1024	    FORMAT(' LEVEL',I2)
+	    CALL MGOLABEL(8,STR)
+C	    WRITE(STR,1025) NBAD3
+ 1025	    FORMAT(I5,' PTS')
+C	    YTITLE = YTITLE-TINC
+C	    CALL MGOGRELOCATE(XTITLE,YTITLE)
+C	    CALL MGOLABEL(9,STR)
+	    CALL MGOSETEXPAND(.8)
+	  ENDIF
+C
+	  CALL MGOSETEXPAND(.6)
+ 	  CALL MGOPLOTID(' ','[.WIND]TDSEXEY,PLOTPART')
+	  CALL MGOSETEXPAND(.8)
+	  IF(ITERM.LT.0) THEN
+	    CALL MGOPRNTPLOT(NVEC)
+	    PRINT*,' NO. VECTORS PLOTTED',NVEC
+	  ELSE
+	    CALL MGOTCLOSE
+	  ENDIF
+C
+	RETURN
+C
+	END	
+	SUBROUTINE PLOTHODO4(ITERM)
+C
+C	PLOTS ONE COMPONENT AGAINST ANOTHER FOR A FRACTION OF AN
+C		EVENT TO LOOK FOR POLARIZATION CHANGES
+C	  	A SPECIAL VERSION FOR A WHISTLER PAPER
+C		NOTE B HAS BEEN COMMENTED OUT FOR THIS
+C
+	CHARACTER*12 title(20)
+	CHARACTER*120 STR
+	CHARACTER*4 EVENT
+	CHARACTER*8 LABEL(4)
+	INTEGER*4 TDS_CHANNEL,S_SCET(2),MAJOR,MINOR,NSYS
+	COMMON /HEADBL/ TITLE,EVENT,NUMEVENT,FILE
+	COMMON /FIXUPBLK/ NBAD3,NBAD1,NBAD2,IFXB
+	common /headblk/ major,minor,s_scet,nsys
+	COMMON /PLTBLK/ IZCNT,IPROCESS,ZCROSS(2048),ZINT(2048),
+     1   NDATA(2048),DATA(2050),SPECT(1025)
+	COMMON /TDS_STATUS/ TDS_CHANNEL,SPS,FILTER,IRX,ISPS
+	COMMON /STATUS/ FFILTER(4),SFILTER(4),FSPS(4),SSPS(4)
+	COMMON /PARTBLK/ XDATA(2050,4),XRE,YRE,ZRE,SUNCLOCK,SPINRATE
+	COMMON /XYBLOCK/ XSPECT,YSPECT,DPHASE
+	COMMON /ANGLEBLK/ BANGLE,IAANGLE
+C
+	COMMON /MONGOPAR/
+     1  X1,X2,Y1,Y2,GX1,GX2,GY1,GY2,LX1,LX2,LY1,LY2,
+     1  GX,GY,CX,CY,
+     1  EXPAND,ANGLE,LTYPE,LWEIGHT,
+     1  CHEIGHT,CWIDTH,CXDEF,CYDEF,PSDEF,PYDEF,COFF,
+     1  TERMOUT,XYSWAPPED,NUMDEV,
+     1  PI,USERVAR(10),AUTODOT
+	INTEGER*4 LX1,LX2,LY1,LY2,LTYPE,LWEIGHT,NUMDEV
+C
+	character*80	file
+	INTEGER*4 SUNCLOCK
+	DIMENSION YY(2048),XX(2048),XD(2048),YD(2048),PP(2048)
+	REAL XSPECT(1025),YSPECT(1025)
+
+	DATA LABEL /'EX mV/m','EY mV/m','EZ mV/m','B nT'/
+	DATA TWOPI /6.2831853/
+C
+		N1 = 1
+		N2 = 2
+C
+	  CALL MGOINIT
+	  CALL MGOSETUP(ITERM)
+	  CALL MGOERASE
+C
+C	  PUT LABELS ON RIGHT HAND SIDE
+C
+	  IF(ITERM.LT.0) THEN
+	    CALL MGOSETLOC(500.,700.,2000.,2200.)
+  	  ENDIF
+C
+c	  XTITLE = GX2 +.05*(GX2-GX1)
+	  XTITLE = GX2 +.1*(GX2-GX1)              ! 3 dec 1996
+	  YTITLE = GY2
+	  TRANGE = GY2-GY1
+	  TINC = .03*TRANGE
+	  CALL MGOSETEXPAND(.6)
+	  TITLE(6) = ' '
+	  TITLE(7) = ' '
+	  DO N = 1,18
+	    YTITLE = YTITLE - TINC
+	    IF(N.EQ.4) YTITLE = YTITLE - TINC
+	    IF(N.EQ.6) YTITLE = YTITLE - TINC
+	    IF(N.EQ.19) YTITLE = YTITLE - TINC
+	    CALL MGOGRELOCATE(XTITLE,YTITLE)
+	    CALL MGOLABEL(12,TITLE(N))
+	  ENDDO
+C
+C	  CONVERT TO PHYSICAL UNITS 
+	  YMAX = 0.
+	  EFFLENX = 41.1				! X ANTENNA  23-SEP-96
+	  EFFLENY = 3.79  				! Y ANTENNA   "
+	  EFFLENZ = 2.17  				! Z ANTENNA   "
+	  ACORR = 1000.
+	  IF(IRX.GE.7) THEN			! SEARCH COILS
+		ACORR=1.
+		EFFLEN = 1.
+	  ENDIF
+C
+C	CHANGE TO mV/meter
+	  DO N = 1,2048
+	    XD(N) = ACORR*XDATA(N,N1)/EFFLENX
+	    YD(N) = ACORR*XDATA(N,N2)/EFFLENY	
+	    YMAX = AMAX1(YY(N),YMAX)
+	    YMAX = AMAX1(-YY(N),YMAX)
+	    XMAX = AMAX1(XX(N),XMAX)
+	    XMAX = AMAX1(-XX(N),XMAX)
+	  ENDDO
+C
+C************WRITE DATA TO A FILE FOR THE PSSLW PAPER
+	iwrt = 0
+	if(iwrt.eq.1) then
+	  WRITE(32,*) FILE,S_SCET,NUMEVENT,SUNCLOCK,BANGLE
+	  WRITE(33,*) FILE,S_SCET,NUMEVENT,SUNCLOCK,BANGLE
+	  DO N = 1,2048
+  	    PP(N) = 1000.*(N-1)/SPS
+	    PS    = N*SPS/2048.
+ct	    WRITE(32,*) PP(N),XD(N),YD(N)
+	  ENDDO
+C
+	  DO N = 1,1024
+	    PS    = N*SPS/2048.
+ct	    WRITE(33,*) PS,XSPECT(N),YSPECT(N)
+	  ENDDO
+	  CALL INT_E_DT(PP,XD,YD,EDTX,EDTY)
+	  open(unit=47,name='potential.results',type='old',access='append')
+	  write(47,*) s_scet,numevent,edtx,edty
+	  close(unit=47)
+	endif
+C************
+	  CALL MGOSETEXPAND(.85)
+	  IF(ITERM.GT.0) THEN
+c	    CALL MGOGRELOCATE(10.,0.)                      ! maxch, crt
+	  ELSE
+	    CALL MGOGRELOCATE(400.,50.)                      ! hardcopy
+	  ENDIF
+C	  CALL MGOPUTLABEL(53,STR,9)
+	  CALL MGOSETEXPAND(1.)
+C
+	  NXW = 2
+	  NYW = 2
+	  NW = NXW*NYW
+	  DO IW = 1,NW
+	    CALL MGOWINDOW(NXW,NYW,IW)
+	    NPTST = (IW-1)*2048/NW + 1
+	    NPTND = (IW)*2048/NW
+c	    IF(IW.EQ.1) NPTST = 560
+c	    IF(IW.EQ.1) NPTND = 614
+C	    IF(IW.EQ.2) NPTST = 723
+C	    IF(IW.EQ.2) NPTND = 831
+C	    IF(IW.EQ.3) NPTST = 1012
+C	    IF(IW.EQ.3) NPTND = 1072
+C	    IF(IW.EQ.4) NPTST = 1951
+C	    IF(IW.EQ.4) NPTND = 1994
+	    IF(IW.EQ.1) NPTST = 262
+	    IF(IW.EQ.1) NPTND = 315
+	    IF(IW.EQ.2) NPTST = 607
+	    IF(IW.EQ.2) NPTND = 728
+	    IF(IW.EQ.3) NPTST = 975
+	    IF(IW.EQ.3) NPTND = 1073
+	    IF(IW.EQ.4) NPTST = 1815
+	    IF(IW.EQ.4) NPTND = 1897
+		PRINT*,'START,IW,ST,ND',IW,NPTST,NPTND
+	    NPT = 0	
+	    XMAX = 0.
+	    YMAX = 0.
+	    NPTMAX = NPTST
+    	    DO N = NPTST,NPTND
+	      NPT = NPT+1
+	      XX(NPT) = XD(N)
+	      YY(NPT) = YD(N)
+	      IF(ABS(XX(NPT)).GT.XMAX) NPTMAX = NPT
+	      XMAX = AMAX1(XMAX,ABS(XX(NPT)))
+	      YMAX = AMAX1(YMAX,ABS(YY(NPT)))
+	    ENDDO
+	    XMAX = 1.1*AMAX1(XMAX,YMAX)
+	    YMAX = XMAX
+	    CALL MGOSETLIM(-XMAX,-YMAX,XMAX,YMAX)
+	    CALL MGOSETEXPAND(.7)
+C	    CALL MGOTICKSIZE(0.,0.,0.,0.)  
+		PRINT*,' PLOT,IW,ST,ND',IW,NPTST,NPTND
+	    CALL MGOCONNECT(XX,YY,NPT)
+C	    PUT ON ARROW
+C***********
+	    NPTMAX = NPTMAX+1
+            IF(IW.EQ.2) NPTMAX = NPTMAX - 6
+	    SIZE = .05*XMAX
+C	    SIZE = .01*SQRT(XMAX**2 + YMAX**2)
+	    DX = XX(NPTMAX+1) - XX(NPTMAX)
+	    DY = YY(NPTMAX+1) - YY(NPTMAX)
+	    print*,'before arrow coords, SIZE,DX,DY',nptmax,SIZE,DX,DY
+	    CALL ARROW(XX(NPTMAX),YY(NPTMAX),DX,DY,SIZE)
+	    if(n2.eq.2) then
+	       print*,'print arrow coords, SIZE,DX,DY',nptmax,SIZE,DX,DY
+	       print*,nptmax-1,xx(nptmax-1),yy(nptmax-1)
+	       print*,nptmax,xx(nptmax),yy(nptmax)
+	       print*,nptmax+1,xx(nptmax+1),yy(nptmax+1)
+	    ENDIF
+	    CALL MGOSETEXPAND(.8)
+	    CALL MGOBOX(1,2)
+	    CALL MGOSETEXPAND(.6)
+	    CALL MGOXLABEL(7,LABEL(N1))
+	    CALL MGOYLABEL(7,LABEL(N2))
+	    CALL MGORELOCATE(-.95*XMAX,.85*YMAX)
+	    CALL MGOSETEXPAND(.5)
+	    WRITE(STR,1017)  NPTST,NPTND
+ 1017	    FORMAT('SAMPLES',I5,' TO',I5)
+	    CALL MGOLABEL(20,STR)
+C	    CALL MGOSETEXPAND(.8)
+	    CALL MGOSETEXPAND(1.)
+C
+C	    PUT ON B VECTOR
+C
+c	on 16 nov 1999 it was found that the sunclock is read 1024
+c	samples after the end of the event, plus about 10.6 msec or
+c	about 14 spin clock counts for message passing time
+c
+	    print*,'spinrate,sunclock,sps',spinrate,sunclock,sps
+	    END_ANGLE =  -360.*(SUNCLOCK-14.)/4096.-45. !ANGLE SUN TO +EX AT END
+	    IF(END_ANGLE.LT.-180.) END_ANGLE = END_ANGLE + 360.
+	    IF(END_ANGLE.GT.180.)  END_ANGLE = END_ANGLE - 360.
+	    DANG = SPINRATE*360./SPS/TWOPI
+	    ST_ANGLE = END_ANGLE + 3072.*DANG !ANGLE SUN TO +EX AT START 16nov99
+	    END_ANGLE = END_ANGLE + 1024.*DANG
+c	    ST_ANGLE = END_ANGLE + 2048.*DANG	  ! ANGLE SUN TO +EX AT START
+C	    print*,'start angle, end angle, dang',st_angle,end_angle,dang
+C
+	    NAVR = (NPTST+NPTND)/2
+	    CTR_ANGLE = ST_ANGLE - NAVR*DANG !ANGLE SUN TO +EX AT CENTER,nov99
+	    PANGLE = CTR_ANGLE - BANGLE
+	    XBVEC = .2*XMAX*COSD(PANGLE)
+	    YBVEC = .2*XMAX*SIND(PANGLE)
+c	put in upper left if x,y positive together, otherwise upper right
+	    IF(XX(NPTMAX)*YY(NPTMAX).GT.0.) THEN
+	      XX1 = -.7*XMAX
+	      YY1 = .7*XMAX
+	    ELSE
+	      XX1 = .7*XMAX
+	      YY1 = .7*XMAX
+	    ENDIF
+c	print*,sunclock,ctr_angle,bangle,pangle
+C	    CALL MGORELOCATE(XX1,YY1)
+C	    CALL MGODRAW(XX1+XBVEC,YY1+YBVEC)
+C	    CALL MGOSETEXPAND(.5)
+C	    CALL MGOLABEL(1,'B')
+C	    CALL MGOSETEXPAND(.8)
+C	    SPSKHZ = .001*SPS
+C
+	  ENDDO
+C
+	  badpr = 0
+	  IF(IPROCESS.GE.3.and.badpr.eq.1) THEN
+	    YTITLE = YTITLE-2.*TINC
+	    CALL MGOSETEXPAND(.5)
+	    CALL MGOGRELOCATE(XTITLE,YTITLE)
+	    CALL MGOLABEL(8,' BAD TDS')
+	    YTITLE = YTITLE-TINC
+	    CALL MGOGRELOCATE(XTITLE,YTITLE)
+	    CALL MGOLABEL(9,'CORRECTED')
+	    YTITLE = YTITLE-TINC
+	    CALL MGOGRELOCATE(XTITLE,YTITLE)
+	    WRITE(STR,1024) IPROCESS
+ 1024	    FORMAT(' LEVEL',I2)
+	    CALL MGOLABEL(8,STR)
+C	    WRITE(STR,1025) NBAD3
+ 1025	    FORMAT(I5,' PTS')
+C	    YTITLE = YTITLE-TINC
+C	    CALL MGOGRELOCATE(XTITLE,YTITLE)
+C	    CALL MGOLABEL(9,STR)
+	    CALL MGOSETEXPAND(.8)
+	  ENDIF
+C
+	  CALL MGOSETEXPAND(.6)
+ 	  CALL MGOPLOTID(' ','[.WIND]TDSEXEY,PLOTHODO4')
+	  CALL MGOSETEXPAND(.8)
+	  IF(ITERM.LT.0) THEN
+	    CALL MGOPRNTPLOT(NVEC)
+	    PRINT*,' NO. VECTORS PLOTTED',NVEC
+	  ELSE
+	    CALL MGOTCLOSE
+	  ENDIF
+C
+	RETURN
+C
+	END	
+	SUBROUTINE PLOTHODO(ITERM,N1,N2)
+C
+C	PLOTS ONE COMPONENT AGAINST ANOTHER FOR A FRACTION OF AN
+C		EVENT TO LOOK FOR POLARIZATION CHANGES
+C		PLOTS FOR AOGS POSTER
+C
+	CHARACTER*12 title(20)
+	CHARACTER*120 STR
+	CHARACTER*4 EVENT
+	CHARACTER*8 LABEL(4)
+	INTEGER*4 TDS_CHANNEL,S_SCET(2),MAJOR,MINOR,NSYS
+	COMMON /HEADBL/ TITLE,EVENT,NUMEVENT,FILE
+	COMMON /FIXUPBLK/ NBAD3,NBAD1,NBAD2,IFXB
+	common /headblk/ major,minor,s_scet,nsys
+	COMMON /PLTBLK/ IZCNT,IPROCESS,ZCROSS(2048),ZINT(2048),
+     1   NDATA(2048),DATA(2050),SPECT(1025)
+	COMMON /TDS_STATUS/ TDS_CHANNEL,SPS,FILTER,IRX,ISPS
+	COMMON /STATUS/ FFILTER(4),SFILTER(4),FSPS(4),SSPS(4)
+	COMMON /PARTBLK/ XDATA(2050,4),XRE,YRE,ZRE,SUNCLOCK,SPINRATE
+	COMMON /XYBLOCK/ XSPECT,YSPECT,DPHASE
+	COMMON /ANGLEBLK/ BANGLE,IAANGLE
+C
+	COMMON /MONGOPAR/
+     1  X1,X2,Y1,Y2,GX1,GX2,GY1,GY2,LX1,LX2,LY1,LY2,
+     1  GX,GY,CX,CY,
+     1  EXPAND,ANGLE,LTYPE,LWEIGHT,
+     1  CHEIGHT,CWIDTH,CXDEF,CYDEF,PSDEF,PYDEF,COFF,
+     1  TERMOUT,XYSWAPPED,NUMDEV,
+     1  PI,USERVAR(10),AUTODOT
+	INTEGER*4 LX1,LX2,LY1,LY2,LTYPE,LWEIGHT,NUMDEV
+C
+	character*80	file
+	INTEGER*4 SUNCLOCK
+	DIMENSION YY(2048),XX(2048),XD(2048),YD(2048),PP(2048)
+	REAL XSPECT(1025),YSPECT(1025)
+
+	DATA LABEL /'EX mV/m','EY mV/m','EZ mV/m','B nT'/
+	DATA TWOPI /6.2831853/
+C
+	  CALL MGOINIT
+	  CALL MGOSETUP(ITERM)
+	  CALL MGOERASE
+C
+C	  PUT LABELS ON RIGHT HAND SIDE
+C
+	  IF(ITERM.LT.0) THEN
+	    CALL MGOSETLOC(500.,450.,2000.,3050.)
+  	  ENDIF
+C
+c	  XTITLE = GX2 +.05*(GX2-GX1)
+	  XTITLE = GX2 +.1*(GX2-GX1)              ! 3 dec 1996
+	  TRANGE = GY2-GY1
+	  YTITLE = GY2 - .18*TRANGE
+	  TINC = .027*TRANGE
+	  CALL MGOSETEXPAND(.6)
+	  TITLE(6) = ' '
+	  TITLE(7) = ' '
+	  DO N = 1,18
+	    YTITLE = YTITLE - TINC
+	    IF(N.EQ.4) YTITLE = YTITLE - TINC
+	    IF(N.EQ.6) YTITLE = YTITLE - TINC
+	    IF(N.EQ.19) YTITLE = YTITLE - TINC
+	    CALL MGOGRELOCATE(XTITLE,YTITLE)
+	    CALL MGOLABEL(12,TITLE(N))
+	  ENDDO
+C
+C	  PLOT TDS DATA 
+	  YMAX = 0.
+	  EFFLENX = 41.1				! X ANTENNA  23-SEP-96
+	  EFFLENY = 3.79  				! Y ANTENNA   "
+	  EFFLENZ = 2.17  				! Z ANTENNA   "
+	  ACORR = 1000.
+	  IF(IRX.GE.7) THEN			! SEARCH COILS
+		ACORR=1.
+		EFFLEN = 1.
+	  ENDIF
+C
+C	CHANGE TO mV/meter
+	  N1CH = 1
+	  N2CH = 2
+	  DO N = N1,N2
+	    XD(N) = ACORR*XDATA(N,N1CH)/EFFLENX
+	    YD(N) = ACORR*XDATA(N,N2CH)/EFFLENY	
+	    YMAX = AMAX1(YY(N),YMAX)
+	    YMAX = AMAX1(-YY(N),YMAX)
+	    XMAX = AMAX1(XX(N),XMAX)
+	    XMAX = AMAX1(-XX(N),XMAX)
+	  ENDDO
+C
+C************WRITE DATA TO A FILE FOR THE PSSLW PAPER
+	iwrt = 0
+	if(iwrt.eq.1) then
+	  WRITE(32,*) FILE,S_SCET,NUMEVENT,SUNCLOCK,BANGLE
+	  WRITE(33,*) FILE,S_SCET,NUMEVENT,SUNCLOCK,BANGLE
+	  DO N = 1,2048
+  	    PP(N) = 1000.*(N-1)/SPS
+	    PS    = N*SPS/2048.
+ct	    WRITE(32,*) PP(N),XD(N),YD(N)
+	  ENDDO
+C
+	  DO N = N1,N2
+	    PS    = N*SPS/2048.
+ct	    WRITE(33,*) PS,XSPECT(N),YSPECT(N)
+	  ENDDO
+	  CALL INT_E_DT(PP,XD,YD,EDTX,EDTY)
+	  open(unit=47,name='potential.results',type='old',access='append')
+	  write(47,*) s_scet,numevent,edtx,edty
+	  close(unit=47)
+	endif
+C************
+	  CALL MGOSETEXPAND(.85)
+	  IF(ITERM.GT.0) THEN
+c	    CALL MGOGRELOCATE(10.,0.)                      ! maxch, crt
+	  ELSE
+	    CALL MGOGRELOCATE(400.,50.)                      ! hardcopy
+	  ENDIF
+C	  CALL MGOPUTLABEL(53,STR,9)
+	  CALL MGOSETEXPAND(1.5)
+C
+	  IF(ITERM.LT.0) THEN
+	    CALL MGOSETLOC(500.,1000.,2000.,2500.)
+  	  ENDIF
+
+C	  NXW = 3
+C	  NYW = 5
+C	  NW = NXW*NYW
+C	  DO IW = 1,NW
+C	    CALL MGOWINDOW(NXW,NYW,IW)
+C	    NPTST = (IW-1)*2048/NW + 1
+C	    NPTND = (IW)*2048/NW
+	    NPTST = N1
+	    NPTND = N2
+	    NPT = 0	
+	    XMAX = 0.
+	    YMAX = 0.
+	    NPTMAX = NPTST
+    	    DO N = NPTST,NPTND
+	      NPT = NPT+1
+	      XX(NPT) = XD(N)
+	      YY(NPT) = YD(N)
+	      IF(ABS(XX(NPT)).GT.XMAX) NPTMAX = NPT
+	      XMAX = AMAX1(XMAX,ABS(XX(NPT)))
+	      YMAX = AMAX1(YMAX,ABS(YY(NPT)))
+	    ENDDO
+	    XMAX = 1.1*AMAX1(XMAX,YMAX)
+	    YMAX = XMAX
+	    CALL MGOSETLIM(-XMAX,-YMAX,XMAX,YMAX)
+	    CALL MGOSETEXPAND(.7)
+C	    CALL MGOTICKSIZE(0.,0.,0.,0.)  
+	    CALL MGOCONNECT(XX,YY,NPT)
+C	    PUT ON ARROW
+	    SIZE = .01*SQRT(XMAX**2 + YMAX**2)
+	    DX = XX(NPTMAX+1) - XX(NPTMAX)
+	    DY = YY(NPTMAX+1) - YY(NPTMAX)
+C	    CALL ARROW(XX(NPTMAX),YY(NPTMAX),DX,DY,SIZE)
+C	if(n2.eq.2) then
+c	  print*,nptmax-1,xx(nptmax-1),yy(nptmax-1)
+C	  print*,nptmax,xx(nptmax),yy(nptmax)
+c	  print*,nptmax+1,xx(nptmax+1),yy(nptmax+1)
+C	ENDIF
+	    CALL MGOSETEXPAND(1.)
+	    CALL MGOBOX(1,2)
+	    CALL MGOSETEXPAND(1.)
+	    CALL MGOXLABEL(7,LABEL(N1CH))
+	    CALL MGOYLABEL(7,LABEL(N2CH))
+	    CALL MGORELOCATE(-.95*XMAX,.90*YMAX)
+	    CALL MGOSETEXPAND(.6)
+	    WRITE(STR,1017)  NPTST,NPTND
+ 1017	    FORMAT('SAMPLES',I5,' TO',I5)
+	    CALL MGOLABEL(20,STR)
+C	    CALL MGOSETEXPAND(.8)
+	    CALL MGOSETEXPAND(1.)
+C
+C	PUT ON B VECTOR
+C
+c	on 16 nov 1999 it was found that the sunclock is read 1024
+c	samples after the end of the event, plus about 10.6 msec or
+c	about 14 spin clock counts for message passing time
+c
+	print*,'spinrate,sunclock,sps',spinrate,sunclock,sps
+	END_ANGLE =  -360.*(SUNCLOCK-14.)/4096. - 45. ! ANGLE SUN TO +EX AT END
+	IF(END_ANGLE.LT.-180.) END_ANGLE = END_ANGLE + 360.
+	IF(END_ANGLE.GT.180.)  END_ANGLE = END_ANGLE - 360.
+	DANG = SPINRATE*360./SPS/TWOPI
+	ST_ANGLE = END_ANGLE + 3072.*DANG   ! ANGLE SUN TO +EX AT START 16nov99
+	END_ANGLE = END_ANGLE + 1024.*DANG
+c	ST_ANGLE = END_ANGLE + 2048.*DANG	  ! ANGLE SUN TO +EX AT START
+C	print*,'start angle, end angle, dang',st_angle,end_angle,dang
+C
+	NAVR = (NPTST+NPTND)/2
+	CTR_ANGLE = ST_ANGLE - NAVR*DANG  !ANGLE SUN TO +EX AT CENTER,nov 1999
+	PANGLE = CTR_ANGLE - BANGLE
+	XBVEC = .3*XMAX*COSD(PANGLE)
+	YBVEC = .3*XMAX*SIND(PANGLE)
+c	put in upper left if x,y positive together, otherwise upper right
+	IF(XX(NPTMAX)*YY(NPTMAX).GT.0.) THEN
+	  XX1 = -.6*XMAX
+	  YY1 = .6*XMAX
+	ELSE
+	  XX1 = .6*XMAX
+	  YY1 = .6*XMAX
+	ENDIF
+c	print*,sunclock,ctr_angle,bangle,pangle
+	CALL MGORELOCATE(XX1-XBVEC,YY1-YBVEC)
+	CALL MGODRAW(XX1+XBVEC,YY1+YBVEC)
+	CALL MGOSETEXPAND(1.)
+	CALL MGOLABEL(1,'B')
+	CALL MGOSETEXPAND(.8)
+C		SPSKHZ = .001*SPS
+C
+C	  ENDDO
+C
+	  IF(IPROCESS.GE.3) THEN
+	    YTITLE = YTITLE-2.*TINC
+	    CALL MGOSETEXPAND(.5)
+	    CALL MGOGRELOCATE(XTITLE,YTITLE)
+	    CALL MGOLABEL(8,' BAD TDS')
+	    YTITLE = YTITLE-TINC
+	    CALL MGOGRELOCATE(XTITLE,YTITLE)
+	    CALL MGOLABEL(9,'CORRECTED')
+	    YTITLE = YTITLE-TINC
+	    CALL MGOGRELOCATE(XTITLE,YTITLE)
+	    WRITE(STR,1024) IPROCESS
+ 1024	    FORMAT(' LEVEL',I2)
+	    CALL MGOLABEL(8,STR)
+C	    WRITE(STR,1025) NBAD3
+ 1025	    FORMAT(I5,' PTS')
+C	    YTITLE = YTITLE-TINC
+C	    CALL MGOGRELOCATE(XTITLE,YTITLE)
+C	    CALL MGOLABEL(9,STR)
+	    CALL MGOSETEXPAND(.8)
+	  ENDIF
+C
+	  CALL MGOSETEXPAND(.6)
+ 	  CALL MGOPLOTID(' ','[.WIND]TDSEXEY,PLOTHODO')
+	  CALL MGOSETEXPAND(.8)
+	  IF(ITERM.LT.0) THEN
+	    CALL MGOPRNTPLOT(NVEC)
+	    PRINT*,' NO. VECTORS PLOTTED',NVEC
+	  ELSE
+	    CALL MGOTCLOSE
+	  ENDIF
+C
+	RETURN
+C
+	END	
+	SUBROUTINE ARROW(X,Y,DX,DY,SIZE)
+C
+C	makes an arrowhead, near x,y in user coords, size as fraction
+c	of graph size, direction dx,dy  from  x,y
+C	MONGO MUST BE OPENED AND WORKING
+C
+	COMMON /MONGOPAR/
+     1  X1,X2,Y1,Y2,GX1,GX2,GY1,GY2,LX1,LX2,LY1,LY2,
+     1  GX,GY,CX,CY,
+     1  EXPAND,ANGLE,LTYPE,LWEIGHT,
+     1  CHEIGHT,CWIDTH,CXDEF,CYDEF,PSDEF,PYDEF,COFF,
+     1  TERMOUT,XYSWAPPED,NUMDEV,
+     1  PI,USERVAR(10),AUTODOT
+	INTEGER*4 LX1,LX2,LY1,LY2,LTYPE,LWEIGHT,NUMDEV
+C
+C	CALCULATE DXP,DYP PERPENDICULAR TO DX,DY
+C
+	print*,'in arrow',x,y,dx,dy,size
+	XNORM = SQRT(DX**2 + DY**2)
+	IF(XNORM.EQ.0.) RETURN
+C
+C	SET ARROW TIP AT NPTMAX+1
+C
+	XTIP = X+DX
+	YTIP = Y+DY
+C	MAKE A PERPENDICULAR POINT
+	DXP = SIZE*DY/XNORM
+	DYP = -SIZE*DX/XNORM
+C	SET A POINT BACK TOWARD THE PRECEDING POINT
+	DXPR = -3.*SIZE*DX/XNORM
+	DYPR = -3.*SIZE*DY/XNORM
+C	set to the next point after X,Y
+	CALL MGORELOCATE(XTIP,YTIP)
+C	print,'drawing from,to',xtip,ytip,X+DXPR+DXP,Y+DYPR+DYP
+	CALL MGODRAW(XTIP+DXPR+DXP,YTIP+DYPR+DYP)
+	CALL MGORELOCATE(XTIP,YTIP)
+	CALL MGODRAW(XTIP+DXPR-DXP,YTIP+DYPR-DYP)
+C	SET  BACK A DISTANCE .5*SIZE TOWARD X,Y AND DRAW TO SAME TIPS
+	DXL = XTIP + .5*DXPR
+	DYL = YTIP + .5*DYPR
+	CALL MGORELOCATE(DXL,DYL)
+C	print*,'drawing from,to',dxl,dyl,
+	CALL MGODRAW(XTIP+DXPR+DXP,YTIP+DYPR+DYP)
+	CALL MGORELOCATE(DXL,DYL)
+	CALL MGODRAW(XTIP+DXPR-DXP,YTIP+DYPR-DYP)
+	print*,'dx,dy,dxp,dyp',dx,dy,dxp,dyp
+	print*,'dxl,dyl',dxl,dyl
+C
+	RETURN
+	END
+	SUBROUTINE YLENGTH(CH)
+C
+C	WRITES A FILE TO BE USED IN DETERMINING X-Y EFFECTIVE LENGTH RATIO
+C	WRITES YYMMDD, TIME, EVENT NO., CORRECTION LEVEL, FREQ,
+C	SPECTRUM:XMAX,YMAX,RATIO,PHASE
+C
+	CHARACTER*12 title(20)
+	CHARACTER*120 STR
+	CHARACTER*4 EVENT
+	CHARACTER*8 LABEL(4)
+	character*80	file
+	INTEGER*4 TDS_CHANNEL,S_SCET(2),MAJOR,MINOR,NSYS,CH
+	COMMON /HEADBL/ TITLE,EVENT,NUMEVENT,FILE
+	COMMON /FIXUPBLK/ NBAD3,NBAD1,NBAD2,IFXB
+	COMMON /BBLOCK/ BSCET,BX,BY,BZ,BAZ
+	common /headblk/ major,minor,s_scet,nsys
+	COMMON /PLTBLK/ IZCNT,IPROCESS,ZCROSS(2048),ZINT(2048),
+     1   NDATA(2048),DATA(2050),SPECT(1025)
+	COMMON /TDS_STATUS/ TDS_CHANNEL,SPS,FILTER,IRX,ISPS
+	COMMON /STATUS/ FFILTER(4),SFILTER(4),FSPS(4),SSPS(4)
+	COMMON /PARTBLK/ X4DATA(2050,4),XRE,YRE,ZRE,SUNCLOCK,SPINRATE
+	COMMON /XYBLOCK/ XSPECT,YSPECT,DPHASE
+C
+	INTEGER*4 SUNCLOCK
+	CHARACTER*1 DISPOSE
+	REAL*8 BSCET
+	REAL SLOPE(20),SLOPERR(20)
+	REAL 		XDATA(2050),YDATA(2050),XSPECT(1025),YSPECT(1025)
+	REAL 		XPHASE(1025),YPHASE(1025),DPHASE(1025)
+	DIMENSION YY(2048),XX(2048),XD(2048),YD(2048),AMPMAX(20)
+	DATA TWOPI /6.2831853/
+	DATA LABEL /'VX V.','VY V.','EZ mV/m','B nT'/
+C
+	YMAX = -1000.
+	XMAX = -1000.
+C	DO FROM HIGHEST FREQUENCY DOWN
+	  DO N = 1024,4,-1
+	    IF(XSPECT(N).GE.XMAX) THEN
+		XMAX = XSPECT(N)
+		YMAX = YSPECT(N)
+		NMAX = N
+	    ENDIF	
+	  ENDDO
+	IF(NMAX.EQ.0) PRINT*,'NMAX=0 IN YLENGTH, NO XDATA?'
+	IF(NMAX.EQ.0) RETURN
+	  DPH = DPHASE(NMAX)
+	  XMAXS = XMAX
+	  YMAXS = YMAX
+C
+C	AVERAGE A FEW ADJACENT FREQUENCIES
+C
+C	PHASE PROBLEM: IF THE X-Y PHASE IS NEAR 180, THEN AVERAGES
+C	OF + AND - 180 WILL NOT BE WHAT WE WANT.  SO IF DPH, ABOVE,
+C	IS BETWEEN 180 +- 90, ADD 360, AND THE SUBTRACT IT AGAIN
+C
+	IDPH = 0
+	IF(DPH.LT.-90..OR.DPH.GT.90.) IDPH = 1
+	XMAXA = 0.
+	YMAXA = 0.
+	DPHA = 0.
+	COUNT = 0.
+	DO N = NMAX-3,NMAX+3
+	  IF(XSPECT(N).GT.XMAXS-10.) THEN
+	    XMAXA = XMAXA + XSPECT(N)
+	    YMAXA = YMAXA + YSPECT(N)
+	    DPHA = DPHA + DPHASE(N) + 360.*IDPH
+	    COUNT = COUNT+1.
+	    print*,'avr',n,xspect(n),yspect(n),dphase(n)
+	  ENDIF
+	ENDDO
+	XMAXS = XMAXA/COUNT
+	YMAXS = YMAXA/COUNT
+	DPH = DPHA/COUNT
+	IF(DPH.GT.180.) DPH = DPH - 360.
+	FREQ = (NMAX-1)*SPS/2048.
+	FKHZ = .001*FREQ
+	NCOUNT = COUNT+.01
+C
+C	slope is vy/vx
+	CALL FITSLOPE(X4DATA(1,1),X4DATA(1,2),2048,SLOPE(1),SUMSQ)
+c	ANGLE = ATAND(XLEN*SLOPE/YLEN) + 360.*SUNCLOCK/4096. + 45.
+c	ANGLE = -AMOD(ANGLE,180.)
+C
+C		SPSKHZ = .001*SPS
+C
+	END_ANGLE =  -360.*(SUNCLOCK-14)/4096. - 45.   ! ANGLE SUN TO +EX AT END
+	DANG = SPINRATE*360./SPS/TWOPI
+c	PK_ANGLE = END_ANGLE + 1024.*DANG	  ! ANGLE SUN TO +EX AT CENTER
+	PK_ANGLE = END_ANGLE + 2048.*DANG	  ! ANGLE SUN TO +EX AT CENTER
+C
+C	WRITES YYMMDD, TIME, EVENT NO., CORRECTION LEVEL, FREQ,
+C	BAZIMUTH,SPECTRUM:XMAX,YMAX,RATIO,SLOPE,PHASE
+	BAZ = ATAN2(BY,BX)
+	BAZSC = BAZ - PK_ANGLE
+	IF(BAZSC.GT.180.) BAZSC = BAZSC - 360.
+	IF(BAZSC.LT.-180.) BAZSC = BAZSC + 360.
+	XYRATIO = 10.**(.05*(XMAXS-YMAXS))
+	IF(DPH.GT.90.AND.DPH.LT.180.) XYRATIO = -XYRATIO
+	IF(DPH.LT.0.AND.DPH.GT.-90.) XYRATIO = -XYRATIO
+	SLOPINV = 0.
+	IF(SLOPE(1).NE.0.) SLOPINV = 1./SLOPE(1)
+C
+	OPEN(UNIT=66,FILE='YLENGTH.DAT',STATUS='OLD',ACCESS='APPEND')
+	WRITE(66,1011) S_SCET,NUMEVENT,IPROCESS,FKHZ,
+     1		BAZSC,XMAXS,YMAXS,XYRATIO,SLOPINV,DPH,NCOUNT
+	CLOSE(UNIT=66)
+ 1011	FORMAT(1X,I8,I8,I10,I3,F8.2,F8.2,2F7.2,2E12.3,F8.2,I3)
+C
+	RETURN
+C
+	END	
+	SUBROUTINE INT_E_DT(PP,XD,YD,EDTX,EDTY)
+C
+	REAL PP(1),XD(1),YD(1)
+C
+	EDTX = 0.
+	EDTY = 0.
+	DO N = 2,2048
+	  EDTX = EDTX + .5*(PP(N)-PP(N-1))*(XD(N)+XD(N-1))
+	  EDTY = EDTY + .5*(PP(N)-PP(N-1))*(YD(N)+YD(N-1))
+	ENDDO
+	PRINT*,'EDTX,EDTY',EDTX,EDTY
+	RETURN
+	END
+

@@ -1,0 +1,272 @@
+	SUBROUTINE TDS_PHYS_A(CH,IPRC,NDATA,VDATA,SPECT)
+C
+C	FIXBADTDS was added about 1400 on 8 Oct 1995
+C	It was much changed on 31 Jan 1997
+C	ON 22 JAN 1997, an error, dividing by gain instead of conjg(gain),
+C	was corrected
+C	In July 1998, and error of bandwidth, was corrected
+C	FIXBADTDS6 was written in the fall of 1997, and works fairl well
+C	AVERAGE REMOVED FOR CORRECTED DATA, 25 OCT 2002
+C	This version (A) corrects for phase shift and gain of antenna-
+C		plasma impedance
+C		now
+	integer*4	ok,ch
+	integer*4	i,j,k,n,iprc
+	integer*4	w_item_i4
+	character*4	pa(6,4)
+	integer*4	return_size, sunclock
+	integer*4	tds_channel,ifilf,ifils,ifil,ifsps,issps,isps
+	character*32	item
+	real 		ffilter(4),sfilter(4),fsps(4),ssps(4),sps
+	REAL 		DATA(2050),VDATA(1),SPECT(1025)
+	REAL		ZCROSS(2048),ZINT(2048)
+	REAL		ANG(2048),ANGTBL(380)
+        INTEGER*4       NDATA(2048),NFDATA(2048),NBGDATA(380)
+!
+C
+	COMPLEX PREAMP,TDSDET,TDS_FILTER
+	COMPLEX FCOEF,FCOEFT,CCORR
+	COMMON /TDS_STATUS/ TDS_CHANNEL,SPS,FILTER,IRX,ISPS
+	COMMON /PUB/ HDATA(4100)
+	COMMON /XFER/ SPHASE(1025)
+	COMMON /FRLIMITS/ FFTMIN,FFTMAX
+	DATA IBGDATA /0/
+	DATA TWOPI /6.2831853/
+c	DATA FFILTER /50000.,12500.,3125.,781./
+c	DATA SFILTER /3125.,781.,195.,49./
+c	DATA FSPS /120.,30.,7.5,1.875/
+c	DATA SSPS /7500.,1875.,468.75,117.2/
+c	DATA PA /'EXAC','EXAC','EXDC',' BX ',' BY ',' BZ ',
+c     1           'EXDC','EYAC','EYDC','EXDC','EYDC','EZDC',
+c     2           '    ','EZAC','EZDC','    ','    ','    ',
+c     3           '    ','EZAC','EZDC','    ','    ','    '/
+C
+	item = 'CHANNEL'
+	ok = W_ITEM_i4(ch, item, tds_channel, 1, return_size)
+	item = 'EVENT_NUMBER'
+	ok = W_ITEM_i4(ch, item, itemp, 1, return_size)
+	item = 'SOURCE'
+	ok = W_ITEM_i4(ch, item, IRX, 1, return_size)
+	ITEM = 'RX_SPEED'
+	OK = W_ITEM_I4(CH,ITEM,ISPS,1,RETURN_SIZE)
+	ITEM = 'RX_SPEED_R4'
+	OK = W_ITEM_R4(CH,ITEM,SPS,1,RETURN_SIZE)
+	ITEM = 'RX_FILTER'
+	OK = W_ITEM_I4(CH,ITEM,IFIL,1,RETURN_SIZE)
+	ITEM = 'RX_FILTER_R4'
+	OK = W_ITEM_R4(CH,ITEM,FILTER,1,RETURN_SIZE)
+	item = 'WIND_SPIN_RATE_R4'
+	ok = w_item_R4(ch, item, SPINRATE, 1, return_size)
+	item = 'SUN_ANGLE'
+	ok = w_item_I4(ch, item, sunclock, 1, return_size)
+	item = 'WIND_3DP_ION_DENSITY_R4'
+	ok = w_item_r4(ch, item, dens3dp, 1, return_size)
+	ndens = 0
+	dens = 0.
+	if(ok.eq.1.and.dens3dp.gt.0.) then
+	  ndens = ndens+1
+	  dens = dens3dp
+	endif
+	item = 'WIND_SWE_DENSITY_R4'
+	ok = w_item_r4(ch, item densswe, 1, return_size)
+	if(ok.eq.1.and.densswe.gt.0.) then
+	  ndens = ndens+1
+	  dens = dens + densswe
+	endif
+	if(ndens.ne.0) dens = dens/ndens
+C
+	FUNDFR = SPS/2048.
+	FFTMAX = SPS/2.
+C
+	ITEM = 'DATA'
+	OK = W_ITEM_I4(CH,ITEM,NDATA,2048,RETURN_SIZE)
+C
+C	fix +-127 if in highest bit rate
+C
+	IF(TDS_CHANNEL.LE.2.AND.ISPS.EQ.0) THEN
+	  DO N = 1,2048
+		NFDATA(N) = NDATA(N)
+		IF(NDATA(N).EQ.255) NFDATA(N) = 248
+		IF(NDATA(N).LE.1)  NFDATA(N) = 8
+	  ENDDO
+	ELSE
+	  DO N = 1,2048
+		NFDATA(N) = NDATA(N)
+	  ENDDO
+	ENDIF
+C
+	DO IK = 1,2048
+	    DATA(IK) = TDSCAL(TDS_CHANNEL,ISPS,NFDATA(IK))
+	    VDATA(IK) = DATA(IK)
+	ENDDO
+C
+	IF(IRX.EQ.9) THEN
+	  CALL BZGLITCH(CH,NGL1,IGL,NGL2,DATA)
+	  DO IK = 1,2048
+	    VDATA(IK) = DATA(IK)
+	  ENDDO
+	ENDIF
+C
+C	  RETURN IF UNCORRECTED VOLTS IS REQUESTED
+C
+	IF(IPRC.LT.2) RETURN
+C
+C
+	IF(IPRC.EQ.3) THEN
+C
+C	  CORRECT ALL AMPLITUDES AS IF THE WAVE WERE MONOCHROMATIC AT
+C		THE FREQUENCY OF MAXIMUM POWER
+C
+		CALL REALFT(DATA,1024,1)
+C
+C	  FIND FREQUENCY FOR PEAK POWER
+C
+	  SUMPWR = 0.
+	  TPWRMAX = 0.
+C
+	  DO IK = 3,2048,2
+	    FREQ = SPS*(IK-1)/4096.
+c june 98	    TPWR = (DATA(IK)**2 + DATA(IK+1)**2)/1024.**2
+	    TPWR = (DATA(IK)**2 + DATA(IK+1)**2)/FUNDFR
+	    IF(TPWR.GT.TPWRMAX) THEN
+		IKMAX = IK
+		FREQMAX = FREQ
+		TPWRMAX = TPWR
+	    ENDIF
+	  ENDDO
+C
+c  	  PRINT*,'PEAK POWER AT',FREQMAX,' HZ, PWR=',TPWRMAX
+C
+	  CCORR = PREAMP(IRX,FREQMAX)*TDSDET(TDS_CHANNEL,FREQMAX)
+	  CCORR = CCORR*TDS_FILTER(TDS_CHANNEL,IFIL+1,FREQMAX)
+	  RCORR = 1./CABS(CCORR)
+	  CJCORR = CONJG(CCORR)
+	  VDATA(1) = VDATA(1)*RCORR
+	  VDATA(2) = VDATA(2)*RCORR
+	  DO IK = 3,2048
+	    VDATA(IK) = VDATA(IK)*RCORR		
+	  ENDDO
+	  DO IK = 3,2048,2
+	    FCOEF = CMPLX(DATA(IK),DATA(IK+1))/CJCORR
+	    DATA(IK) = FCOEF
+	    DATA(IK+1) = AIMAG(FCOEF)
+	  ENDDO
+	  GO TO 100
+	ENDIF
+C
+	IF(IPRC.EQ.4)  THEN
+		CALL FIXBADTDS(IFXB,NFDATA,DATA,TDS_CHANNEL,SPS,ISPS)
+	ENDIF
+C
+C	REMOVE AVERAGE SIGNAL, AS IT SEEMS TO LEAK TO HIGHER FREQS
+C
+	DAVR = 0.
+	COUNT = 1.E-9
+	DO N = 1,2048
+	  DAVR = DAVR + DATA(N)
+	  COUNT = COUNT+1.
+	ENDDO
+	DAVR = DAVR/COUNT
+	DO N = 1,2048
+	  DATA(N) = DATA(N) - DAVR
+	ENDDO
+C	
+C		REALFT IS FROM NUMERICAL RECIPES, CAMBRIDGE U PRESS
+C
+C	CORRECT FOURIER ANALYSED SIGNAL FOR FREQUENCY RESPONSE AT ALL
+C		FREQUENCIES (IPRC = 4)
+C
+	CALL REALFT(DATA,1024,1)
+C
+	     FREQMAX = .5*SPS
+	     PAMAX = CABS(PREAMP(IRX,FREQMAX))
+	     IF(IRX.GT.6) PAMAX = CABS(PREAMP(IRX,2000.))	!SEARCH COIL
+	     IF(TDS_CHANNEL.LE.2) THEN
+		IF(IRX.EQ.1) PAMAX = 2.4  		       ! EXAC
+		IF(TDS_CHANNEL.EQ.2.AND.IRX.EQ.2) PAMAX = 6.6  ! EYAC
+		IF(TDS_CHANNEL.EQ.2.AND.IRX.GT.2) PAMAX = 7.   ! EZAC
+	     ENDIF
+	     DO IK = 3,2048,2
+		FCOEF = CMPLX(DATA(IK),DATA(IK+1))
+	        FREQ = SPS*(IK-1)/4096.
+	        CCORR = PREAMP(IRX,FREQ)*TDSDET(TDS_CHANNEL,FREQ)
+		CCORR = CCORR*TDS_FILTER(TDS_CHANNEL,IFIL+1,FREQ)
+		FCOEFT = FCOEF/CONJG(CCORR)
+C
+C		DON'T DO CORRECTION IF CORRECTION IS LARGE, I.E. 
+C			IF GAIN (CCORR) IS SMALL
+C
+C		IF(CABS(CCORR).GT..0316*PAMAX)	THEN		 ! 30 DB
+C			 FCOEF = FCOEFT  
+C		ELSE					 ! LIMIT CORRECTION
+C			 type*,'didnt do',freq  
+C			 CCORR = CCORR/
+C			 FCOEF = FCOEF/CCORR
+C		ENDIF
+c		IF(CABS(CCORR).GT..0316*PAMAX) FCOEF = FCOEFT      ! 30 DB
+C
+C		DO CORRECTION IN ANYCASE
+		FCOEF = FCOEFT
+C
+		DATA(IK) = FCOEF
+		DATA(IK+1) = AIMAG(FCOEF)
+	     ENDDO
+C
+C	NOW DATA CONTAINS FOURIER COEFFS CORRECTED FOR FREQUENCY RESPONSE
+C
+ 100	CONTINUE
+C
+C	TRANSFER TO PUB FOR MORE DETAIL IN WAVEFORM
+C
+	DO N = 1,2048
+	  HDATA(N) = DATA(N)
+	  HDATA(N+2048) = 0.
+	ENDDO
+C
+C	CALCULATE SPECTRUM, IN DB WRT 1 V**2/HZ
+C
+	SNORM = 20.*ALOG10(1024.) + 10.*ALOG10(FUNDFR)
+	IK = 1
+	ISP = 1
+	SPECT(ISP) = -SNORM
+	IF(DATA(IK).NE.0.)SPECT(ISP) = 20.*ALOG10(ABS(DATA(IK)))-SNORM
+	DO IK = 3,2048,2
+	    ISP = ISP+1
+	    TPWR = DATA(IK)**2 + DATA(IK+1)**2
+	    SPECT(ISP) = -50.
+	    IF(TPWR.NE.0.) THEN
+	      SPECT(ISP) = 10.*ALOG10(TPWR)-SNORM
+	      SPHASE(ISP) = 57.296*ATAN2(DATA(IK+1),DATA(IK))
+	    ELSE
+		print*,'tds_phys',data(ik),data(ik+1),itemp,irx
+	    ENDIF
+	ENDDO
+C
+C		CHANNELS 1 AND 2 HAVE TDSDET AT 322 HZ, AND POOR
+C		PREAMP RESPONSE BELOW 120. HZ, SO CUT OFF AT 150 HZ.
+C
+		IF(TDS_CHANNEL.LE.2) FFTMIN = AMAX1(150.,FFTMIN)
+
+C		SEARCH COILS SEEM TO HAVE NO REASONABLE RESPONSE BELOW
+C		ABOUT 3 HZ
+C
+		IF(IRX.GE.7) FFTMIN = 3.3
+C
+	     DO IK = 3,2048,2
+	        FREQ = SPS*(IK-1)/4096.
+		IF(FREQ.LT.FFTMIN.OR.FREQ.GT.FFTMAX) THEN
+		  DATA(IK) = 0.
+		  DATA(IK+1) = 0.
+		ENDIF
+	     ENDDO
+C
+	     CALL REALFT(DATA,1024,-1)
+	     DO IK = 1,2048
+	       DATA(IK) = DATA(IK)/1024.
+	       VDATA(IK) = DATA(IK)
+	     ENDDO
+C
+ 20	CONTINUE
+C
+	RETURN
+	END

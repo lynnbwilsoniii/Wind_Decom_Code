@@ -1,0 +1,539 @@
+	PROGRAM SHOCKDIFF
+C
+C	CALCULATES DIFF ACCORDING TO FILBERT AND KELLOGG, JGR 
+C
+	CHARACTER*80 FILENAME,STREAM,FILE
+	CHARACTER*120 HEADER
+	CHARACTER*11 YYMMDD
+	DIMENSION PLDATA(2000,6)
+	CHARACTER*30 COM(20)
+	CHARACTER*32 ITEM
+	REAL*8 SCETORB(2000),SCETMFI(2000)
+	REAL X(2000), Y(2000), Z(2000)
+	REAL BX(2000), BY(2000), BZ(2000), BMAG(2000)
+	INTEGER*4 OK,CH,GET_STREAM_NAME,RETURN_SIZE
+C
+	include		'wind_examples:wind_tm_routine_def.for'
+	include		'wind_examples:wind_return_code_def.for'
+C
+	COMMON /MODEL/ A,B,C 
+	COMMON /MONGOPAR/
+     1  X1,X2,Y1,Y2,GX1,GX2,GY1,GY2,LX1,LX2,LY1,LY2,
+     1  GX,GY,CX,CY,
+     1  EXPAND,ANGLE,LTYPE,LWEIGHT,
+     1  CHEIGHT,CWIDTH,CXDEF,CYDEF,PSDEF,PYDEF,COFF,
+     1  TERMOUT,XYSWAPPED,NUMDEV,
+     1  PI,USERVAR(10),AUTODOT
+	INTEGER*4 LX1,LX2,LY1,LY2,LTYPE,LWEIGHT,NUMDEV
+C
+	DATA RTA,RTB,C /  25.6, 25.6, 14.6/
+	DATA ALPHA,BETA,GAMMA /0.,1.,0./
+	DATA X0,Y0,Z0 /14.6,1.,0./
+	DATA RE /6.378E3/
+	DATA NPLOTS /0/
+C	DATA FILENAME/ '[.STUFF]19950927.MFIPOS'/
+C
+C
+	ok = get_stream_name(stream)
+	if ( ok.ne.1 ) stop 'no file supplied.'
+
+	ok = w_channel_open(ch,stream)
+	if ( ok.ne.1 ) stop 'cannot open tm channel'
+
+	ok = w_channel_filename(ch,FILE)
+	print*,'file',FILE
+c
+	read(5,*) istart,last
+	mm = mod(istart,100)
+	hh = istart/100
+	scetmfi(1) = 0.
+	call w_channel_position(ch,scetmfi(1))
+	print*,'tds file starts at scet',scetmfi(1)
+	NDAY = scetmfi(1)
+	scetmfi(1) = Dfloat(NDAY) + hh/24. + mm/1440.
+	print*,'set tds channel position to',scetmfi(1)
+	call w_channel_position(ch,scetmfi(1))
+	print*,'tds channel position set to',scetmfi(1)
+C
+	CS = C
+	YYMMDD = FILE(31:38)
+	WRITE(46,*) YYMMDD
+ 1002	FORMAT(A)
+ 100	CONTINUE
+C	READ(92,1001,END=300) DAYFRACTION,X,Y,Z,BMAG,BX,BY,BZ
+	ok = w_event(ch,'CDF')
+	if (ok.eq.82) go to 300
+	if (ok.ne.1) type*, 'cannot get CDF event,ok=',ok
+	ITEM = 'WIND_ORBIT_SCET_R8'
+	OK = W_ITEM_R8(CH,ITEM,SCETORB,2000,RETURN_SIZE)
+	ITEM = 'WIND_ORBIT_X(GSE)_R8'
+	OK = W_ITEM_R8(CH,ITEM,X,2000,RETURN_SIZE)
+	NORB = RETURN_SIZE
+	PRINT*,'NUMBER OF ORBIT VALUES',NORB
+	ITEM = 'WIND_ORBIT_Y(GSE)_R8'
+	OK = W_ITEM_R8(CH,ITEM,Y,2000,RETURN_SIZE)
+	ITEM = 'WIND_ORBIT_Z(GSE)_R8'
+	OK = W_ITEM_R8(CH,ITEM,Z,2000,RETURN_SIZE)
+C
+	ITEM = 'WIND_MFI_SCET_R8'
+	OK = W_ITEM_R8(CH,ITEM,SCETMFI,2000,RETURN_SIZE)
+	NDAY = SCETMFI(1)
+	DAYFRACTION = SCETMFI(1) - NDAY
+	ITEM = 'WIND_MFI_BX(GSE)_R4'
+	OK = W_ITEM_R4(CH,ITEM,BX,2000,RETURN_SIZE)
+	NMFI = RETURN_SIZE
+	ITEM = 'WIND_MFI_BY(GSE)_R4'
+	OK = W_ITEM_R4(CH,ITEM,BY,2000,RETURN_SIZE)
+	ITEM = 'WIND_MFI_BZ(GSE)_R4'
+	OK = W_ITEM_R4(CH,ITEM,BZ,2000,RETURN_SIZE)
+	ITEM = 'WIND_MFI_BMAG_R4'
+	OK = W_ITEM_R4(CH,ITEM,BMAG,2000,RETURN_SIZE)
+C	PRINT*,DAYFRACTION
+C	PRINT*,X,X0
+C	PRINT*,BMAG
+C	print*,bx
+ 1001	FORMAT(27X,F9.6,7E15.7)
+C
+	DO I = 1,NMFI	
+	  DAYFRACTION = SCETMFI(I) - NDAY
+	  ALPHA= BX(I)/BMAG(I)
+	  BETA = BY(I)/BMAG(I)
+	  GAMMA= BZ(I)/BMAG(I)
+	  BTIME = SCETMFI(I)
+C	print*,'1st mfi',bx(i),by(i),bz(i),btime
+C	print*,'1st alph...',alpha,beta,gamma,bmag(i)
+	  CALL DINTERP(SCETORB,X,NORB,BTIME,XINT,ERR) 
+	  CALL DINTERP(SCETORB,Y,NORB,BTIME,YINT,ERR)
+	  CALL DINTERP(SCETORB,Z,NORB,BTIME,ZINT,ERR)
+	  X0 = XINT/RE
+	  Y0 = YINT/RE
+	  Z0 = ZINT/RE
+	  B = -RTB**2/C
+	  A = -RTA**2/C
+          DISC = ((2.*Z0*GAMMA/A + 2.*Y0*BETA/B - ALPHA)**2) - 
+     1    4.* (GAMMA**2/A + BETA**2/B)*(Z0**2/A + Y0**2/B + C - X0)
+          XP = -.25*((2.*Z0*GAMMA/A + 2.*Y0*BETA/B - ALPHA)**2)/
+     1     (GAMMA**2/A + BETA**2/B)  + Z0**2/A + Y0**2/B + C
+C	write(42,*) dayfraction,x0,y0,z0,xp
+C
+	  IF(DISC.GE.0.) THEN
+	    EXPANS = 1.
+	    DIFF = ABS(XP-X0)
+	    DIFFN = 0.
+	  ELSE
+	    DIFF = 0.
+	    CS = C
+	    EXPANS = 1.
+	    EXPAND = 1.04
+	    DISCT = DISC
+	    DO N = 1,100
+	      A = A*EXPAND
+	      B = B*EXPAND
+	      C = C*EXPAND
+	      EXPANS = EXPANS*EXPAND
+	      DISCSV = DISCT
+              DISCT = ((2.*Z0*GAMMA/A + 2.*Y0*BETA/B - ALPHA)**2) - 
+     1         4.* (GAMMA**2/A + BETA**2/B)*(Z0**2/A + Y0**2/B + C - X0)
+C              XP = -.25*((2.*Z0*GAMMA/A + 2.*Y0*BETA/B - ALPHA)**2)/
+C     1        (GAMMA**2/A + BETA**2/B)  + Z0**2/A + Y0**2/B + C
+c	print*,'expans,disct',expans,disct
+	      IF(DISCT.GE.0.)  THEN
+		EXPANS = EXPANS/EXPAND - (DISCSV/(DISCT-DISCSV))*EXPANS*
+     1		(1. - 1./EXPAND)
+	        DIFFN = DIFFIN(X0,Y0,Z0,ALPHA,BETA,GAMMA,EXPANS)
+c	print*,'final expans,diffn',expans,diffn
+		DIFFN = AMAX1(DIFFN,-14.)  
+		GO TO 120 
+	      ENDIF
+	    ENDDO
+	    DIFFN = -14.2
+	  ENDIF
+C
+ 120	  C = CS
+	  DISCSV = DISC
+	  CALL DIFFFK(X0,Y0,Z0,BX(I),BY(I),BZ(I),DK,XT,YT,ZT,XI,YI,
+     1		ZI,INSIDE)
+	print*,'input,xyz,t',x0,y0,z0,btime
+	print*,'input,i,B  ',i,bx(i),by(i),bz(i)
+ 	  WRITE(46,1003) 24.*DAYFRACTION,DIFF,DIFFN,DK,XP,DISC,BMAG(I)
+ 1003	  FORMAT(F10.6,6G11.4)
+C	  PRINT*,'DISC,XP,DIFF',DISC,XP,DIFF,DK
+	  PLDATA(I,1) = 24.*DAYFRACTION
+	  PLDATA(I,2) = DIFF
+	  PLDATA(I,3) = DIFFN
+	  PLDATA(I,4) = XP
+	  PLDATA(I,5) = DISC
+	  PLDATA(I,6) = BMAG(I)
+	  IPL = I
+	  NPLOTS = NPLOTS+1
+	  IF(NPLOTS.LE.1) THEN
+	    B = -RTB**2/C
+	    A = -RTA**2/C
+	    CALL VIEW(CH,X0,Y0,Z0,ALPHA,BETA,GAMMA,EXPANS)
+	  ENDIF
+	ENDDO				! END OF MFI(I) LOOP
+C	GO TO 100
+ 300	CONTINUE
+	CLOSE(UNIT=46)
+	PRINT*,'IPL,PLDATA',IPL,PLDATA(IPL,1),PLDATA(IPL,2)
+	PRINT*,'START, ORBIT',SCETORB(1),X(1)/RE,Y(1)/RE,Z(1)/RE
+	PRINT*,'END  , ORBIT',SCETORB(NORB),X(NORB)/RE,Y(NORB)/RE,
+     1		Z(NORB)/RE
+	PRINT*,'AT NORB=',NORB
+	WRITE(COM(4),1004) YYMMDD
+ 1004	FORMAT('LABEL ',A11)
+	WRITE(COM(5),1005) IPL
+ 1005	FORMAT('LINES 1',I6)
+	PRINT*,COM(4)
+	PRINT*,COM(5)
+c	COM(1) = 'PRINTER 2'
+	COM(1) = 'PRINTER 4'
+c	COM(1) = 'terminal 3'
+	COM(2) = 'LOCATION 500 3100 400 2150'
+	CALL MONGO(2,COM,2000,6,PLDATA)
+	COM(1) = 'WINDOW 1 3 1'
+	COM(2) = 'LIMITS -.1 24.1 0. 0.'
+	COM(3) = 'RELOCATE 10.5 -.41'
+C	COM(4) = 'LABEL              '
+C	COM(5) = 'LINES              '
+	COM(6) = 'INPUT SHOCKDIFF.MGO'
+	COM(7) = 'HARDCOPY'
+	COM(8) = 'END'
+	CALL MONGO(8,COM,2000,6,PLDATA)
+	STOP
+	END
+	FUNCTION DIFFIN(X0,Y0,Z0,ALPH0,BET0,GAMM0,EXPANS)
+C
+	COMMON /MODEL/ A0,B0,C0 
+C
+	A = A0*EXPANS**2
+	B = B0*EXPANS**2
+	C = C0*EXPANS
+C
+C	CALCULATE T PARAMETER TO EXPANDED SHOCK
+C
+        TT = -.5*(2.*Z0*GAMM0/A + 2.*Y0*BET0/B - ALPH0) / 
+     1   (GAMM0**2/A + BET0**2/B) 
+C
+C	CALCULATE INTERSECTION WITH EXPANDED SHOCK
+C
+	XI = X0 + ALPH0*TT
+	YI = Y0 +  BET0*TT
+	ZI = Z0 + GAMM0*TT
+C
+C	CALCULATE NORMAL
+C
+	ALPHA = 1.
+	BETA = -2.*YI/B
+	GAMMA = -2.*ZI/A
+	DNORM = SQRT(ALPHA**2 + BETA**2 + GAMMA**2)
+	ALPHA = ALPHA/DNORM
+	BETA = BETA/DNORM
+	GAMMA = GAMMA/DNORM
+C
+C	CALCULATE INTERSECTION OF NORMAL WITH ORIGINAL SHOCK
+C
+        DISC = ((2.*ZI*GAMMA/A0 + 2.*YI*BETA/B0 - ALPHA)**2) - 
+     1  4.* (GAMMA**2/A0 + BETA**2/B0)*(ZI**2/A0 + YI**2/B0 + C0 - XI)
+	IF(DISC.LT.0.) THEN
+	  PRINT*,'NEG DISC AT ',EXPANS,XI,YI,ZI
+	  DISC = 0.
+	ENDIF
+        TI = -.5*(2.*ZI*GAMMA/A0 + 2.*YI*BETA/B0 - ALPHA - SQRT(DISC)) / 
+     1   (GAMMA**2/A0 + BETA**2/B0) 
+	X1 = XI + ALPHA*TI
+	Y1 = YI +  BETA*TI
+	Z1 = ZI + GAMMA*TI
+	DIFF1 = SQRT((XI-X1)**2 + (YI-Y1)**2 + (ZI-Z1)**2)
+        TI = -.5*(2.*ZI*GAMMA/A0 + 2.*YI*BETA/B0 - ALPHA + SQRT(DISC)) / 
+     1   (GAMMA**2/A0 + BETA**2/B0) 
+C
+	X2 = XI + ALPHA*TI
+	Y2 = YI +  BETA*TI
+	Z2 = ZI + GAMMA*TI
+	DIFF2 = SQRT((XI-X2)**2 + (YI-Y2)**2 + (ZI-Z2)**2)
+	DIFFIN = -AMIN1(DIFF1,DIFF2)
+	RETURN
+	END
+	options/extend_source
+!------------------------------------------------------------------------------
+	integer*4	function	get_stream_name(stream)
+! This routine gets the user's TM stream type specification.
+!
+	implicit	none
+	character*(*)	stream
+	common /nrblk/ NHRMN
+	integer*4	iq,NHRMN
+
+  6	format(1x,'Enter TM stream type [O=offline(default), R=realtime ]: ',$)
+  5	format(q,a)
+  3	format(q,i10)
+
+ 10	write(6,6)
+	read(5,5,err=10,end=20) iq, stream
+	PRINT*,'IN GET_STR, GETTING ',STREAM
+
+	if (iq .lt. 1) then
+	   stream = 'offline'
+	else if (stream(1:1) .eq. 'o' .or. stream(1:1) .eq. 'O') then
+	   stream = 'offline'
+	else if (stream(1:1) .eq. 'r' .or. stream(1:1) .eq. 'R') then
+	   stream = 'realtime'
+	else
+	   ! assume the user entered the name of an offline file
+	end if
+
+	get_stream_name = 1
+	PRINT*,'IN GET_STR, GOT=', STREAM
+
+ 20	return
+	end
+	SUBROUTINE VIEW(CH,X0,Y0,Z0,ALPHA,BETA,GAMMA,EXPANS)
+C
+C	MAKE A TOP VIEW AND A SIDE VIEW OF THE SHOCK
+C
+	COMMON /MODEL/ A,B,C 
+C
+	COMMON /MONGOPAR/
+     1  X1,X2,Y1,Y2,GX1,GX2,GY1,GY2,LX1,LX2,LY1,LY2,
+     1  GX,GY,CX,CY,
+     1  EXPAND,ANGLE,LTYPE,LWEIGHT,
+     1  CHEIGHT,CWIDTH,CXDEF,CYDEF,PSDEF,PYDEF,COFF,
+     1  TERMOUT,XYSWAPPED,NUMDEV,
+     1  PI,USERVAR(10),AUTODOT
+	INTEGER*4 LX1,LX2,LY1,LY2,LTYPE,LWEIGHT,NUMDEV
+C
+	INTEGER*4 CH,OK,SCETI4(2),RETURN_SIZE
+	CHARACTER*32 ITEM
+	CHARACTER*32 STR
+	CHARACTER*1 DISPOSE
+C
+	DIMENSION YY(2048),PP(2048)
+	DATA ITERM /-1/
+	DATA ITERM /3/
+	DATA IDONE /0/
+C
+	CALL MGOINIT
+	CALL MGOSETUP(ITERM)
+	CALL MGOERASE
+	IF(ITERM.LT.0) THEN
+	  CALL MGOSETLOC(400.,300.,2150.,3000.)
+	ELSE
+	  CALL MGOSETLOC(70.,150.,1000.,600.)
+	ENDIF
+C
+C	SET UP SIZE OF PLOTS
+C
+	print*,'graph size, idone=',idone
+	print*,'x0,y0,z0',x0,y0,z0
+	IF(IDONE.EQ.0) THEN
+	  YZ0 = AMAX1(ABS(Y0),ABS(Z0))
+	  IF(X0.GT.0.) THEN
+	    XULIM = AMAX1(1.1*X0,15.)
+	    XLLIM = -10.
+	    YLIM = .343*(XULIM - XLLIM)
+	    IF(ABS(YZ0).GT.YLIM) THEN
+		YLIM = 1.1*ABS(YZ0)
+		XULIM = 1.46*YLIM
+		XLLIM = -1.46*YLIM
+	    ENDIF
+	  ELSE
+	    XULIM = 15.
+ 	    XLLIM = 1.1*X0
+	    YLIM = 1.1*ABS(YZ0)
+	    IF(YLIM.GT.ABS(XULIM-XLLIM)) THEN
+		XULIM = 1.46*YLIM
+		XLLIM = -1.46*YLIM
+	    ENDIF
+	  ENDIF
+	  XRANGE = XULIM - XLLIM
+	  EFFY = 2.92*YLIM			! MULT BY SIDES RATIO
+	  IF(XRANGE.GT.EFFY) THEN
+	    YLIM = .343*XRANGE
+	  ELSE
+	    XTRA = .5*(EFFY-XRANGE)
+	    XULIM = XULIM + XTRA
+	    XLLIM = XLLIM - XTRA
+	  ENDIF
+	  CALL MGOSETLIM(XLLIM,-YLIM,XULIM,YLIM)
+	  IDONE = 1
+	ENDIF
+	print*,xllim,-ylim,xulim,ylim
+C
+C	END OF CALCULATION OF LENGTHS OF AXES
+C
+C
+C	CALCULATE INTERSECTION OF FIELD LINE WITH SHOCK, IF THERE IS ONE.
+C		QA,QB AND QC ARE USUAL QUADRATIC COEFFICIENTS
+C
+	QA = GAMMA**2/A + BETA**2/B
+	QB = 2.*GAMMA*Z0/A + 2.*BETA*Y0/B - ALPHA
+	QC = Z0**2/A + Y0**2/B + C - X0
+	DISC = QB**2 - 4.*QA*QC
+	PRINT*,'IN VIEW DISC=',DISC
+	print*,'x0...',x0,y0,z0
+	print*,'alpha....',alpha,beta,gamma
+	print*,'qa..',qa,qb,qc
+	IF(DISC.GE.0.) THEN
+	   T1 = .5*(-QB + SQRT(DISC))/QA
+	   T2 = .5*(-QB - SQRT(DISC))/QA
+	   T = T1
+	   IF(ABS(T2).LT.ABS(T1)) T = T2
+	   XI = X0 + ALPHA*T		! NEAREST INTERSECTION
+	   YI = Y0 + BETA*T
+	   ZI = Z0 + GAMMA*T
+	ENDIF
+	 PRINT*,'IN VIEW, XI,T=',XI,YI,ZI,T
+C
+	IF(ITERM.LT.0) THEN
+	  CALL MGOWINDOW( 1,2,1)
+	ELSE
+	  CALL MGOWINDOW( 2,1,1)
+	ENDIF
+C
+C	PUT ON A CIRCLE FOR EARTH
+C
+	CALL MGORELOCATE(0.,0)
+	EXPSAVE = EXPAND
+C	CALL MGOSETEXPAND(2.)			! TOO BIG
+	CALL MGOPOINT(10,3)
+	CALL MGOSETEXPAND(EXPSAVE)
+C
+C	PUT A SQUARE AT SPACECRAFT POSITION
+C
+	CALL MGORELOCATE(X0,Y0)
+	CALL MGOPOINT(4,0)
+C
+C	DRAW A LINE FOR MAGNETIC FIELD  (A) TO INTERSECTION WITH SHOCK
+C		IF DISC IS POSITIVE, (B) TO EDGE OF GRAPH OTHERWISE
+C
+	IF(DISC.LE.0.) THEN           ! NO INTERSECTION
+	  XP = XLLIM
+	  YP = 0.
+	  IF(ALPHA.NE.0.) YP = XP*BETA/ALPHA
+	  IF(ABS(YP).GT.YLIM) THEN
+	    YP = SIGN(YLIM,YP)
+	    XP = X0
+	    IF(BETA.NE.0.) XP = YP*ALPHA/BETA
+	  ENDIF
+	  CALL MGORELOCATE(X0,Y0)
+	  CALL MGODRAW(XP,YP)
+	  print*,'no intsect',xp,yp
+	ELSE				! DRAW LINE TO INTERSECTION
+	  CALL MGORELOCATE(X0,Y0)
+	  CALL MGODRAW(XI,YI)
+	  print*,' intsect',xi,yi
+	ENDIF
+C
+C	DRAW AVERAGE SHOCK
+C
+	CALL MGORELOCATE(C,0.)
+	YP = 0.
+	DY = YLIM/25.
+	print*,'average shock'
+	print*,'abc',a,b,c
+	print*,'lims',xulim,xllim,ylim
+	print*,'flank',sqrt(-b*c)
+	DOWHILE (YP.LT.YLIM)
+	  YP = YP + DY
+	  XP = C + (YP**2)/B
+	  CALL MGODRAW(XP,YP) 
+	ENDDO 
+	CALL MGORELOCATE(C,0.)
+	YP = 0.
+	DOWHILE (YP.GT.-YLIM)
+	  YP = YP - DY
+	  XP = C + (YP**2)/B
+	  CALL MGODRAW(XP,YP) 
+	ENDDO 
+C	CALL MGOSETEXPAND(.8)
+C	CALL MGOTICKSIZE(0.,0.,0.,0.)  
+	CALL MGOBOX(1,2)
+	CALL MGOSETEXPAND(.7)
+	CALL MGOXLABEL(17,'X GSE earth radii')
+	CALL MGOYLABEL(17,'Y GSE earth radii')
+C	CALL MGOSETEXPAND(.8)
+C
+	IF(ITERM.LT.0) THEN
+	  CALL MGOWINDOW( 1,2,2)
+	ELSE
+	  CALL MGOWINDOW( 2,1,2)
+	ENDIF
+C
+C	PUT ON A CIRCLE FOR EARTH
+C
+	EXPSAVE = EXPAND
+C	CALL MGOSETEXPAND(2.)
+	CALL MGORELOCATE(0.,0)
+	CALL MGOPOINT(10,3)
+C	CALL MGOSETEXPAND(EXPSAVE)
+C
+C	PUT A SQUARE AT SPACECRAFT POSITION
+C
+	CALL MGORELOCATE(X0,Z0)
+	CALL MGOPOINT(4,0)
+C
+C	DRAW A LINE FOR MAGNETIC FIELD
+C
+	IF(DISC.LE.0.) THEN 
+	  XP = XLLIM
+	  YP = 0.
+	  IF(ALPHA.NE.0.) YP = XP*GAMMA/ALPHA
+	  IF(ABS(YP).GT.YLIM) THEN
+	    YP = SIGN(YLIM,YP)
+	    XP = X0
+	    IF(GAMMA.NE.0.) XP = YP*ALPHA/GAMMA  
+	  ENDIF
+	  CALL MGORELOCATE(X0,Z0)
+	  CALL MGODRAW(XP,YP)
+	ELSE
+	  CALL MGORELOCATE(X0,Z0)
+	  CALL MGODRAW(XI,ZI)
+	ENDIF
+C
+C	DRAW AVERAGE SHOCK
+C
+	CALL MGORELOCATE(C,0.)
+	YP = 0.
+	DY = YLIM/25.
+	DOWHILE (YP.LT.YLIM)
+	  YP = YP + DY
+	  XP = C + (YP**2)/A
+	  CALL MGODRAW(XP,YP) 
+	ENDDO 
+	CALL MGORELOCATE(C,0.)
+	YP = 0.
+	DOWHILE (YP.GT.-YLIM)
+	  YP = YP - DY
+	  XP = C + (YP**2)/A
+	  CALL MGODRAW(XP,YP) 
+	ENDDO 
+C	CALL MGOSETEXPAND(.8)
+C	CALL MGOTICKSIZE(0.,0.,0.,0.)  
+	CALL MGOBOX(1,2)
+C	CALL MGOSETEXPAND(.7)
+	CALL MGOXLABEL(17,'X GSE earth radii')
+	CALL MGOYLABEL(17,'Z GSE earth radii')
+C
+	ITEM = 'EVENT_SCET'
+	ok = w_item_i4(ch, item, SCETI4, 2, return_size)
+	TOPLABEL = GY2 + .02*(GY2-GY1)
+	CALL MGOGRELOCATE(GX1,TOPLABEL)
+	WRITE(STR,1001) SCETI4(1),SCETI4(2)
+ 1001	FORMAT(2I9)
+	CALL MGOLABEL(18,STR)
+C	CALL MGOSETEXPAND(.8)
+	CALL MGOPLOTID('[.WIND]SHOCKDIFF','VIEW')
+	CALL MGOSETEXPAND(1.)
+C
+	IF(ITERM.LT.0) THEN
+	  CALL MGOPRNTPLOT(NVEC)
+	  PRINT*,' NO. VECTORS PLOTTED',NVEC
+	ELSE
+	  READ(5,1023) DISPOSE
+ 1023	  FORMAT(A1)
+	  CALL MGOTCLOSE
+	ENDIF
+C
+	RETURN
+	END
