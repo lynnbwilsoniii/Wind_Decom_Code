@@ -1,0 +1,137 @@
+
+#
+# Absoft Developer Tools Interface requires use of this makefile.
+#
+MKDIR=mkdir -p 
+RMDIR=rm -rf 
+
+#
+# Variables for the compiler(s) and linker
+#
+ABSOFT_F95=f95
+ABSOFT_F77=f95
+VAST_PREPROCESSOR=vastfp 
+RC=/Developer/Tools/Rez
+GCC=gcc
+ABSOFT_F95_LINKER=f95
+DUMMY=
+MAKE=amake2
+
+#
+# Flags
+#
+ABSOFT_F95_FLAGS=-m32 -w -W132 -ffixed -s -O2
+ABSOFT_F77_FLAGS=-O2 -s -ffixed -W132 -w -m32 -f77_compat
+RC_FLAGS=
+GCC_FLAGS=-isysroot /Developer/SDKs/MacOSX10.4u.sdk -m32 -O2
+ABSOFT_F95_LINKER_FLAGS=-osxtarget=10.4 -m32 -O2
+
+#
+# Name of the executable
+#
+TARGET=sdf_lister
+OUTDIR=.
+OBJDIR=./Release
+
+#
+# Files for this executable
+#
+VAST_PREPROCESSOR_FILES=
+ABSOFT_F95_FILES="SDF_MASK_SUBROUT.f95" "DERF.f95" "SDF_LISTER.f95" "TRIGGER_EFFIC.f95" "TIME_LIB.f95" "SDF_SUBROUT6.f95" "SDF_SUBROUT5.f95" "SDF_SUBROUT4.f95" "SDF_SUBROUT3.f95" "SDF_SUBROUT2.f95" "SDF_SUBROUT1.f95" "SDF_PHAFLUX_SUBROUT.f95" "SDF_PHA_SUBROUT.f95" "SDF_HIST_SUBROUT.f95" "OPEN_SDF.f95" "DECODE_LIB.f95" "date_time_subr.f95" "CALIB_LIB.f95"
+ABSOFT_F77_FILES=
+GCC_FILES=
+ABSOFT_F95_LINKER_FILES=
+RC_FILES=
+MAKE_FILES=
+
+#
+# Rules and dependencies for the executable
+#
+SRCFILES=$(ABSOFT_F95_FILES)
+OBJFILES="$(OBJDIR)/SDF_MASK_SUBROUT.o" "$(OBJDIR)/DERF.o" "$(OBJDIR)/SDF_LISTER.o" "$(OBJDIR)/TRIGGER_EFFIC.o" "$(OBJDIR)/TIME_LIB.o" "$(OBJDIR)/SDF_SUBROUT6.o" "$(OBJDIR)/SDF_SUBROUT5.o" "$(OBJDIR)/SDF_SUBROUT4.o" "$(OBJDIR)/SDF_SUBROUT3.o" "$(OBJDIR)/SDF_SUBROUT2.o" "$(OBJDIR)/SDF_SUBROUT1.o" "$(OBJDIR)/SDF_PHAFLUX_SUBROUT.o" "$(OBJDIR)/SDF_PHA_SUBROUT.o" "$(OBJDIR)/SDF_HIST_SUBROUT.o" "$(OBJDIR)/OPEN_SDF.o" "$(OBJDIR)/DECODE_LIB.o" "$(OBJDIR)/date_time_subr.o" "$(OBJDIR)/CALIB_LIB.o"
+all: "$(OUTDIR)/$(TARGET)" $(RC_FILES)
+	
+
+"$(OUTDIR)/$(TARGET)": "$(OBJDIR)" $(OBJFILES) $(USER_LIBS) $(MODFILES)
+	$(ABSOFT_F95_LINKER) $(ABSOFT_F95_LINKER_FLAGS) $(LPATHS) $(OBJFILES) $(ABSOFT_F95_LINKER_FILES) $(LIBS) -o "$(OUTDIR)/$(TARGET)"
+
+
+
+"$(OBJDIR)/SDF_MASK_SUBROUT.o": "SDF_MASK_SUBROUT.f95"
+	$(ABSOFT_F95) -c -nowdir $(ABSOFT_F95_FLAGS) -o "$(OBJDIR)/SDF_MASK_SUBROUT.o" "SDF_MASK_SUBROUT.f95"
+
+"$(OBJDIR)/DERF.o": "DERF.f95"
+	$(ABSOFT_F95) -c -nowdir $(ABSOFT_F95_FLAGS) -o "$(OBJDIR)/DERF.o" "DERF.f95"
+
+"$(OBJDIR)/SDF_LISTER.o": "SDF_LISTER.f95"
+	$(ABSOFT_F95) -c -nowdir $(ABSOFT_F95_FLAGS) -o "$(OBJDIR)/SDF_LISTER.o" "SDF_LISTER.f95"
+
+"$(OBJDIR)/TRIGGER_EFFIC.o": "TRIGGER_EFFIC.f95"
+	$(ABSOFT_F95) -c -nowdir $(ABSOFT_F95_FLAGS) -o "$(OBJDIR)/TRIGGER_EFFIC.o" "TRIGGER_EFFIC.f95"
+
+"$(OBJDIR)/TIME_LIB.o": "TIME_LIB.f95"
+	$(ABSOFT_F95) -c -nowdir $(ABSOFT_F95_FLAGS) -o "$(OBJDIR)/TIME_LIB.o" "TIME_LIB.f95"
+
+"$(OBJDIR)/SDF_SUBROUT6.o": "SDF_SUBROUT6.f95"
+	$(ABSOFT_F95) -c -nowdir $(ABSOFT_F95_FLAGS) -o "$(OBJDIR)/SDF_SUBROUT6.o" "SDF_SUBROUT6.f95"
+
+"$(OBJDIR)/SDF_SUBROUT5.o": "SDF_SUBROUT5.f95"
+	$(ABSOFT_F95) -c -nowdir $(ABSOFT_F95_FLAGS) -o "$(OBJDIR)/SDF_SUBROUT5.o" "SDF_SUBROUT5.f95"
+
+"$(OBJDIR)/SDF_SUBROUT4.o": "SDF_SUBROUT4.f95"
+	$(ABSOFT_F95) -c -nowdir $(ABSOFT_F95_FLAGS) -o "$(OBJDIR)/SDF_SUBROUT4.o" "SDF_SUBROUT4.f95"
+
+"$(OBJDIR)/SDF_SUBROUT3.o": "SDF_SUBROUT3.f95"
+	$(ABSOFT_F95) -c -nowdir $(ABSOFT_F95_FLAGS) -o "$(OBJDIR)/SDF_SUBROUT3.o" "SDF_SUBROUT3.f95"
+
+"$(OBJDIR)/SDF_SUBROUT2.o": "SDF_SUBROUT2.f95"
+	$(ABSOFT_F95) -c -nowdir $(ABSOFT_F95_FLAGS) -o "$(OBJDIR)/SDF_SUBROUT2.o" "SDF_SUBROUT2.f95"
+
+"$(OBJDIR)/SDF_SUBROUT1.o": "SDF_SUBROUT1.f95"
+	$(ABSOFT_F95) -c -nowdir $(ABSOFT_F95_FLAGS) -o "$(OBJDIR)/SDF_SUBROUT1.o" "SDF_SUBROUT1.f95"
+
+"$(OBJDIR)/SDF_PHAFLUX_SUBROUT.o": "SDF_PHAFLUX_SUBROUT.f95"
+	$(ABSOFT_F95) -c -nowdir $(ABSOFT_F95_FLAGS) -o "$(OBJDIR)/SDF_PHAFLUX_SUBROUT.o" "SDF_PHAFLUX_SUBROUT.f95"
+
+"$(OBJDIR)/SDF_PHA_SUBROUT.o": "SDF_PHA_SUBROUT.f95"
+	$(ABSOFT_F95) -c -nowdir $(ABSOFT_F95_FLAGS) -o "$(OBJDIR)/SDF_PHA_SUBROUT.o" "SDF_PHA_SUBROUT.f95"
+
+"$(OBJDIR)/SDF_HIST_SUBROUT.o": "SDF_HIST_SUBROUT.f95"
+	$(ABSOFT_F95) -c -nowdir $(ABSOFT_F95_FLAGS) -o "$(OBJDIR)/SDF_HIST_SUBROUT.o" "SDF_HIST_SUBROUT.f95"
+
+"$(OBJDIR)/OPEN_SDF.o": "OPEN_SDF.f95"
+	$(ABSOFT_F95) -c -nowdir $(ABSOFT_F95_FLAGS) -o "$(OBJDIR)/OPEN_SDF.o" "OPEN_SDF.f95"
+
+"$(OBJDIR)/DECODE_LIB.o": "DECODE_LIB.f95"
+	$(ABSOFT_F95) -c -nowdir $(ABSOFT_F95_FLAGS) -o "$(OBJDIR)/DECODE_LIB.o" "DECODE_LIB.f95"
+
+"$(OBJDIR)/date_time_subr.o": "date_time_subr.f95"
+	$(ABSOFT_F95) -c -nowdir $(ABSOFT_F95_FLAGS) -o "$(OBJDIR)/date_time_subr.o" "date_time_subr.f95"
+
+"$(OBJDIR)/CALIB_LIB.o": "CALIB_LIB.f95"
+	$(ABSOFT_F95) -c -nowdir $(ABSOFT_F95_FLAGS) -o "$(OBJDIR)/CALIB_LIB.o" "CALIB_LIB.f95"
+
+"$(OBJDIR)":
+	$(MKDIR) "$(OBJDIR)"
+#
+# Clean Rules
+#
+clean:
+	$(RMDIR) "$(OBJDIR)"
+	$(RMDIR) "$(TARGET)"
+
+#
+# Define necessary macros for dependency scanning.
+#
+MKDEP=amakedepend
+MKDEP_FLAGS= -quiet "-pre$(OBJDIR)/" -Y -modInfo -errdel -f90 -f makefile.amake
+#
+# Generate dependencies for the project
+#
+ScanAll: "$(OUTDIR)" "$(OBJDIR)" MakeDepsAll
+
+#
+# Scan for all F77, F95, and c/c++ dependencies
+#
+MakeDepsAll:
+	$(MKDEP) "@/Volumes/IDL/wind/fortran_vax/sdf_lister/Release/mkdep_F95"

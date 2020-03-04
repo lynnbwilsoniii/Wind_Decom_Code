@@ -1,0 +1,2 @@
+-quiet "-pre./Release/" -Y -modInfo -errdel -f90 -f makefile.amake -a -info -m32 -w -W132 -ffixed -s -O2
+ -info "SDF_MASK_SUBROUT.f95" "DERF.f95" "SDF_LISTER.f95" "TRIGGER_EFFIC.f95" "TIME_LIB.f95" "SDF_SUBROUT6.f95" "SDF_SUBROUT5.f95" "SDF_SUBROUT4.f95" "SDF_SUBROUT3.f95" "SDF_SUBROUT2.f95" "SDF_SUBROUT1.f95" "SDF_PHAFLUX_SUBROUT.f95" "SDF_PHA_SUBROUT.f95" "SDF_HIST_SUBROUT.f95" "OPEN_SDF.f95" "DECODE_LIB.f95" "date_time_subr.f95" "CALIB_LIB.f95" 
