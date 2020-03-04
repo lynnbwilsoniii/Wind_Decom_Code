@@ -1,0 +1,4 @@
+;	command file   sdf_generator_update
+.compile sdf_generator_update
+sdf_generator_update
+exit

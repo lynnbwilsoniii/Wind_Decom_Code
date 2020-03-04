@@ -1,0 +1,66 @@
+#	command script step_update
+#
+#	updates STEP HEX, ROM_SPIKES, and basic data files    /gm   6/19/2008   path updates 6/25/08
+#
+#	set up IDL environment
+	/Applications/rsi/idl/bin/idl_setup.bash
+	export PATH=${PATH}:/Applications/rsi/idl_6.3/bin/
+	leader="\n********************************************\n"
+	
+#	******************************* sdf_generator ***************************************
+#	first find out if there are any new files to update & then run sdf_generator
+	cd /Users/masongm1/Data/Production/STEP/
+
+#	first, create directory listings for the STEP hex files from GSFC/EPACT:
+	ls /Volumes/masongm1-md2-hd2/Data_L0_flight/STEP/step_hex/ > /Users/masongm1/Data/Production/STEP/0_batch_jobs/step_hex_files.txt
+
+		date=$(date +"%r")
+		printf "$leader sdf_generator run starting $date $leader\n"
+	idl -quiet /Users/masongm1/Data/Production/STEP/0_batch_jobs/sdf_generator.batch
+	status=$?
+	if [ $status -ne 0 ]; then
+		printf "$leader sdf_generator: no new daily files to process $leader\n"
+		exit
+	fi
+
+
+#	mail -s "STEP  SDF_generator finished" glenn.mason@jhuapl.edu < /Users/masongm1/Data/Production/STEP/1_sdf_update/sdf_generator/sdf_generator.txt
+
+#	******************************* sdf_rom_spikes ***************************************	
+#	now do the rom spikes
+		date=$(date +"%r")
+		printf "$leader sdf_rom_spikes run starting $date $leader\n"
+	cd /Users/masongm1/Data/Production/STEP/2_sdf_rom_spikes/sdf_rom_spikes_source/
+	/Users/masongm1/Data/Production/STEP/2_sdf_rom_spikes/sdf_rom_spikes_source/sdf_rom_spikes
+#	mail -s "STEP  sdf_rom_spikes finished" glenn.mason@jhuapl.edu < /Users/masongm1/Data/Production/STEP/2_sdf_rom_spikes/sdf_rom_spikes.dat
+	
+#	******************************* merge mask saturation ***************************************	
+#	now merge mask saturation	
+		date=$(date +"%r")
+		printf "$leader merge_mask_saturation run starting $date $leader\n"
+	idl -quiet /Users/masongm1/Data/Production/STEP/0_batch_jobs/merge_mask_saturation.batch
+#	mail -s "STEP  merge_mask_saturation_update" glenn.mason@jhuapl.edu < /Users/masongm1/Data/Production/STEP/3_merge_mask_sat/merge_mask_saturation.txt
+	
+#	******************************* sit_lister basicrates update ***************************************	
+#	now run sit_lister update
+		date=$(date +"%r")
+		printf "$leader sdf_lister updating sit basicrates starting $date $leader\n"
+	cd /Users/masongm1/Data/Production/STEP/4_basicrates_update/
+	/Users/masongm1/Desktop/fortran_vax/STEP/sdf_lister/sdf_lister
+
+	date=$(date +"%r")
+	printf "$leader sit_lister updating sit basicrates finished at $date $leader\n"
+	
+#	mail message with days processed attached
+#	mail -s "SDF lister update is finished" glenn.mason@jhuapl.edu
+
+#	******************************* idl_save file update ***************************************	
+	date=$(date +"%r")	
+	printf "$leader running: sdf_lister IDL files update starting $date $leader\n"
+	cd /Users/masongm1/Data/Production/STEP/5_IDL_sav_file_update/
+	/Users/masongm1/Desktop/fortran_vax/STEP/sdf_lister/sdf_lister
+	printf "$leader running: IDL save file update $leader\n"
+	cd /Users/masongm1/Data/Production/STEP/5_IDL_sav_file_update/IDL_sav_file_update/
+	idl -quiet /Users/masongm1/Data/Production/STEP/0_batch_jobs/main_romsave_step_update.batch
+			
+			

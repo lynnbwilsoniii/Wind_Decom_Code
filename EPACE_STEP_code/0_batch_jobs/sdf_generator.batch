@@ -1,0 +1,4 @@
+;	command file   sdf_generator
+.compile /Users/mdesai/Desktop/IDL/wind/fortran_vax/1_sdf_update/sdf_generator/sdf_generator.pro
+sdf_generator, 1     ; 1=batch job
+exit

@@ -1,0 +1,3 @@
+ merge mask saturation is finished         1409 new lines written out
+ new file written is: 
+/Users/mdesai/Desktop/IDL/wind/fortran_vax/sdf_lister_control/MASK_SATURATION.000;1

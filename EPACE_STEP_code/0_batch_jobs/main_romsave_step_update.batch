@@ -1,0 +1,4 @@
+;	command file   main_romsave_step
+.compile main_romsave_step
+main_romsave_step, 1
+exit

@@ -1,0 +1,59 @@
+	pro sdf_generator_update
+;
+;	routine to find new files for sdf_generator to process
+;
+;	Modification history: 
+;		17-Jun-2008	initial version /gm
+;
+;
+;/Users/masongm1/Data/STEP_data/step_hex/step08_06_03.hex
+		timeCDS = { MJD: 0L , TIME: 0L }
+
+;	find the last day processed by sdf_generator
+
+;		now find the last day processed
+		openr, lun_out, '/Users/masongm1/Desktop/idl_STEP/sdf_generator/sdf_generator.out', /get_lun
+		readf, lun_out, year_proc, doy_proc, format="(2i5)"
+		free_lun, lun_out
+		
+		start_mjd = date2mjdfract(year_proc, doy_proc + 1)
+		mjd = start_mjd
+		
+		err = 0 ;true
+		while( err eq 0 ) do begin
+;		test to see if hex files are present for processing
+			mjd2date, mjd, year, month, day
+			hex_filename = '/Users/masongm1/Data/STEP_data/step_hex/step' + $ ,
+			     string( year mod 100, month, day, format="(i2.2,'_',i2.2,'_',i2.2,'.hex')")
+;			print, hex_filename
+;			see if this file exists by attempting to open:
+			openr, lun, hex_filename, error = err, /get_lun
+;			if( err = 0 ) then free_lun, lun
+;			print, year, month, day, err
+;			if err = 0, then file exists, otherwise leave loop						
+			mjd ++
+		endwhile
+
+;	check to see that there are days to process; if not quit without changing file sdf_generator.cfg
+			if( (mjd - 2 ) le start_mjd ) then begin
+				print, ' no new files to process'
+				stop
+			endif
+			
+			timecds.mjd = start_mjd
+			year_start = mjd2yr(timecds)
+			doy_start = mjd2doy(timecds)
+			timecds.mjd = mjd - 2
+			year_stop = mjd2yr(timecds)
+			doy_stop = mjd2doy(timecds)
+		
+		print, ' processing range: ', year_start, doy_start, year_stop, doy_stop
+		
+;		write out the year and day range to process 
+		openw, lun_cfg, '/Users/masongm1/Desktop/idl_STEP/sdf_generator/sdf_generator.cfg', /get_lun
+		printf, lun_cfg, year_start, doy_start, year_stop, doy_stop, '  sdf_generator_update new dates to process'
+		print, year_start, doy_start, year_stop, doy_stop, '  sdf_generator_update new dates to process'
+		free_lun, lun_cfg
+		end
+		
+		

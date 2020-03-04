@@ -1,0 +1,16 @@
+;  command script uleis_update
+;
+;	sets up processing of hourly averages for daily processing  -- /mid  10/15/08  ; 5/24/07;  6/27/08
+;
+;	use:  type @daily_run from IDL command line
+;
+; resets all variables (in case IDL is already open & common blocks in use, etc)
+; .reset_session   
+!except=2    ; produces detailed error message for floating point errors   4/16/07 /gm
+!quiet = 1L
+
+.r readdata_struct_xdf
+.compile /Users/mdesai/Desktop/IDL/wind/fortran_vax/hourly_control/anisotropy_save.pro 
+anisotropy_save
+
+exit

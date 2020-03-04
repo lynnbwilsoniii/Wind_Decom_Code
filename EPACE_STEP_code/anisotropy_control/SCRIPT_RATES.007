@@ -1,0 +1,77 @@
+c*******************************************
+c     script file for specifying output file format for udf_lister
+c		write flag: 1 = write output, 0 = don't
+c		sector flag: 'SECT' = write sectored output,'AVER'  = write unsectored
+c  		cut flag:  0 = no cuts, 1 = cut on accumulated data, 2 = cut 2-spin data from accumulation, 3 = do both
+c
+c
+c
+c
+c *******************************************
+1       !  output type (1 = standard output, 2 = PHA data, 3 = histogram, 4 = PHA fluxes)
+outputfile prefix (8 characters):
+SCHKTEL2
+accumulate criteria:
+0   ! 0 = output asychronous outputs,1 = only output together when all scripts are ready
+1    600  ! Average matrix rates over following time period (sec). 
+0     1     'He2'      ! accumulate until reach this many counts in this rate 
+-1    ! STEP state A or B  (0 = B; 1 = A; -1 = list both)
+include, write flag, column title, sector flag, telescope flag, cut flag, min value, max value
+1		1	'saturation'	'----'	'TEL1&2'			0	0.00	 10000.0
+1		1	'START'		'AVER'	'TEL1&2'			0	0.00		10000.0
+1		1	'STOP'		'AVER'	'TEL1&2'			0	0.00		10000.0
+1		1	'H1'			'AVER'	'TEL2'			0	0.00		10000.0
+1		1	'H2'			'AVER'	'TEL2'			0	0.00		10000.0                  
+1		1	'H3'			'AVER'	'TEL2'			0	0.00		10000.0                  
+1		1	'H4'			'AVER'	'TEL2'			0	0.00		10000.0                  
+1		1	'H5'			'AVER'	'TEL2'			0	0.00		10000.0                  
+1		1	'H6'			'AVER'	'TEL2'			0	0.00		10000.0                  
+1		1	'H7'			'AVER'	'TEL2'			0	0.00		10000.0                  
+1		1	'H8'			'AVER'	'TEL2'			0	0.00		10000.0                  
+1		1	'H9'			'AVER'	'TEL2'			0	0.00		10000.0                 
+1		1	'H10'			'AVER'	'TEL2'			0	0.00		10000.0                
+1		1	'He1'			'AVER'	'TEL2'			0	0.00		10000.0                
+1		1	'He2'			'AVER'	'TEL2'			0	0.00		10000.0                
+1		1	'He3'			'AVER'	'TEL2'			0	0.00		10000.0                
+1		1	'He4'			'AVER'	'TEL2'			0	0.00		10000.0                
+1		1	'He5'			'AVER'	'TEL2'			0	0.00		10000.0                
+1		1	'He6'			'AVER'	'TEL2'			0	0.00		10000.0                
+1		1	'He7'			'AVER'	'TEL2'			0	0.00		10000.0                
+1		1	'CNO1'		'AVER'	'TEL2'			0	0.00		10000.0               
+1		1	'CNO2'		'AVER'	'TEL2'			0	0.00		10000.0               
+1		1	'CNO3'		'AVER'	'TEL2'			0	0.00		10000.0               
+1		1	'CNO4'		'AVER'	'TEL2'			0	0.00		10000.0               
+1		1	'CNO5'		'AVER'	'TEL2'			0	0.00		10000.0               
+1		1	'CNO6'		'AVER'	'TEL2'			0	0.00		10000.0               
+1		1	'CNO7'		'AVER'	'TEL2'			0	0.00		10000.0               
+1		1	'NeS1'		'AVER'	'TEL2'			0	0.00		10000.0               
+1		1	'NeS2'		'AVER'	'TEL2'			0	0.00		10000.0               
+1		1	'NeS3'		'AVER'	'TEL2'			0	0.00		10000.0               
+1		1	'NeS4'		'AVER'	'TEL2'			0	0.00		10000.0               
+1		1	'NeS5'		'AVER'	'TEL2'			0	0.00		10000.0               
+1		1	'NeS6'		'AVER'	'TEL2'			0	0.00		10000.0               
+1		1	'NeS7'		'AVER'	'TEL2'			0	0.00		10000.0               
+1		1	'Fe1'			'AVER'	'TEL2'			0	0.00		10000.0                
+1		1	'Fe2'			'AVER'	'TEL2'			0	0.00		10000.0                
+1		1	'Fe3'			'AVER'	'TEL2'			0	0.00		10000.0                
+1		1	'Fe4'			'AVER'	'TEL2'			0	0.00		10000.0                
+1		1	'Fe5'			'AVER'	'TEL2'			0	0.00		10000.0                
+1		1	'Fe6'			'AVER'	'TEL2'			0	0.00		10000.0                
+1		1	'JUNK1'		'AVER'	'TEL2'			0	0.00		10000.0            
+1		1	'JUNK2'		'AVER'	'TEL2'			0	0.00		10000.0
+1		1	'JUNK3'		'AVER'	'TEL2'			0	0.00		10000.0              
+1		1	'B (nT)'		'----'	'----'			0	0.00		10000.0
+1		1	'B theta (deg)'	'----'	'----'			0	0.00		10000.0
+1		1	'B phi (deg)'	'----'	'----'			0	0.00		10000.0 
+1		1	'B rms (nT)'	'----'	'----'			0	0.00		10000.0 
+1		1	'R (RE)' 		'----'	'----'			0	0.00		10000.0
+1		1	'Xgse (RE)' 	'----'	'----'			0	0.00		10000.0
+1		1	'Ygse (RE)'	'----'	'----'			0	0.00		10000.0 
+1		1	'Zgse (RE)'	'----'	'----'			0	0.00		10000.0
+1		1	'Vsw (km per sec)'	'----'	'----'			0	0.00		10000.0 
+1		1	'Vx (km per sec)'	'----'	'----'			0	0.00		10000.0
+1		1	'Vy (km per sec)'	'----'	'----'			0	0.00		10000.0 
+1		1	'Vz (km per sec)'	'----'	'----'			0	0.00		10000.0
+1		1	'Np (per cc)'		'----'	'----'			0	0.00		10000.0 
+1		1	'Vth (km per sec)'	'----'	'----'			0	0.00		10000.0
+1		1	'spin rate'		'----'	'----'			0	0.00		10000.0

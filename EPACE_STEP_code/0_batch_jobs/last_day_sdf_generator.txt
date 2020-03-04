@@ -1,0 +1,1 @@
+ 2020   54   last day processed by sdf_generator

@@ -1,0 +1,3762 @@
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20081230_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090113_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090114_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20090830_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090830_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20090830_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20090830_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090113_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090113_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20090528_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20100418_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20110124_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20110403_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20110731_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20110731_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20110731_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20110731_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20110812_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20111210_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20111210_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20111210_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20111210_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20111211_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20111211_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20111211_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20111211_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20111212_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20111213_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20111214_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20111215_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20111216_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20111217_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20111218_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20110812_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20121125_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20130521_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20130521_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20130521_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20130521_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20130521_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20130522_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20130522_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20130522_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20130522_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20130526_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20130526_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20130526_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20130526_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20130526_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20140803_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20140803_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20140803_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20140803_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20140803_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20150130_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20150130_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20150130_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20180708_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20180708_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20180708_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20180708_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190103_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190104_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190105_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190103_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190104_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190626_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190626_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190626_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190626_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190626_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190627_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190627_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190627_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190627_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190627_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190628_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190628_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190628_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190628_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190628_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190629_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190629_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190629_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190629_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190629_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190630_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190630_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190630_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190630_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190630_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190726_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190726_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190726_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190726_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190726_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190727_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190727_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190727_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190727_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190727_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190728_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190728_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190728_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190728_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190728_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190729_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190729_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190729_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190729_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190729_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190730_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190730_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190730_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190730_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190730_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190731_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190731_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190731_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190731_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190731_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190801_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190801_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190801_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190801_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190801_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190802_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190802_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190802_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190802_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190802_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190803_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190803_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190803_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190803_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190803_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190804_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190804_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190804_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190804_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190804_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190805_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190805_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190805_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190805_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190805_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190806_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190806_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190806_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190806_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190806_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190807_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190807_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190807_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190807_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190807_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190808_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190808_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190808_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190808_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190808_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190809_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190809_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190809_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190809_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190809_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190810_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190810_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190810_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190810_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190810_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190811_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190811_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190811_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190811_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190811_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190812_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190812_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190812_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190812_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190812_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190813_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190813_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190813_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190813_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190813_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190814_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190814_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190814_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190814_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190814_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190815_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190815_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190815_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190815_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190815_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190816_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190816_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190816_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190816_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190816_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190817_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190817_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190817_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190817_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190817_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190818_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190818_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190818_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190818_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190818_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190819_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190819_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190819_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190819_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190819_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190820_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190820_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190820_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190820_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190820_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190821_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190821_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190821_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190821_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190821_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190822_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190822_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190822_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190822_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190822_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190823_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190823_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190823_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190823_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190823_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190824_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190824_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190824_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190824_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190824_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190825_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190825_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190825_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190825_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190825_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190826_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190826_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190826_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190826_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190826_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190827_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190827_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190827_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190827_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190827_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190828_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190828_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190828_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190828_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190828_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190829_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190829_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190829_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190829_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190829_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190830_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190830_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190830_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190830_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190830_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190831_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190831_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190831_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190831_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190831_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190901_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190901_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190901_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190901_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190901_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190902_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190902_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190902_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190902_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190902_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190903_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190903_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190903_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190903_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190903_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190904_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190904_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190904_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190904_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190904_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190905_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190905_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190905_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190905_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190905_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190906_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190906_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190906_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190906_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190906_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190907_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190907_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190907_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190907_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190907_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190908_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190908_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190908_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190908_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190908_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190909_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190909_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190909_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190909_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190909_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190910_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190910_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190910_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190910_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190910_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190911_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190911_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190911_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190911_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190911_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190912_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190912_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190912_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190912_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190912_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190913_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190913_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190913_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190913_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190913_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190914_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190914_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190914_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190914_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190914_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190915_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190915_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190915_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190915_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190915_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190916_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190916_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190916_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190916_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190916_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190917_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190917_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190917_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190917_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190917_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190918_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190918_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190918_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190918_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190918_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190919_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190919_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190919_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190919_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190919_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190920_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190920_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190920_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190920_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190920_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190921_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190921_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190921_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190921_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190921_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190922_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190922_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190922_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190922_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190922_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190923_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190923_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190923_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190923_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190923_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190924_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190924_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190924_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190924_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190924_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190925_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190925_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190925_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190925_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190925_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190926_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190926_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190926_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190926_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190926_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190927_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190927_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190927_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190927_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190927_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190928_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190928_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190928_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190928_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190928_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190929_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190929_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190929_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190929_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190929_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190930_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190930_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190930_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20190930_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190930_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191001_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191001_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191001_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191001_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191001_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191002_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191002_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191002_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191002_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191002_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191003_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191003_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191003_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191003_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191003_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191004_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191004_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191004_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191004_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191004_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191005_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191005_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191005_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191005_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191005_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191006_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191006_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191006_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191006_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191006_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191007_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191007_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191007_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191007_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191007_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191008_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191008_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191008_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191008_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191008_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191009_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191009_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191009_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191009_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191009_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191010_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191010_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191010_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191010_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191010_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191011_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191011_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191011_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191011_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191011_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191012_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191012_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191012_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191012_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191012_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191013_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191013_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191013_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191013_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191013_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191014_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191014_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191014_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191014_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191014_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191015_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191015_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191015_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191015_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191015_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191016_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191016_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191016_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191016_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191016_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191017_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191017_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191017_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191017_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191017_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191018_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191018_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191018_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191018_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191018_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191019_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191019_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191019_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191019_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191019_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191020_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191020_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191020_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191020_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191020_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191021_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191021_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191021_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191021_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191021_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191022_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191022_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191022_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191022_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191022_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191023_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191023_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191023_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191023_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191023_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191024_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191024_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191024_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191024_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191024_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191025_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191025_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191025_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191025_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191025_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191026_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191026_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191026_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191026_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191026_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191027_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191027_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191027_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191027_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191027_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191028_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191028_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191028_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191028_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191028_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191029_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191029_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191029_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191029_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191029_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191030_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191030_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191030_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191030_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191030_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191031_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191031_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191031_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191031_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191031_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191101_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191101_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191101_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191101_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191101_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191102_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191102_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191102_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191102_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191102_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191103_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191103_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191103_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191103_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191103_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191104_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191104_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191104_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191104_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191104_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191105_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191105_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191105_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191105_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191105_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191106_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191106_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191106_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191106_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191106_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191107_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191107_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191107_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191107_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191107_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191108_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191108_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191108_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191108_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191108_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191109_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191109_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191109_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191109_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191109_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191110_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191110_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191110_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191110_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191110_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191111_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191111_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191111_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191111_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191111_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191112_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191112_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191112_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191112_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191112_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191113_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191113_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191113_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191113_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191113_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191114_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191114_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191114_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191114_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191114_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191115_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191115_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191115_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191115_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191115_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191116_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191116_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191116_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191116_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191116_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191117_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191117_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191117_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191117_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191117_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191118_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191118_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191118_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191118_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191118_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191119_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191119_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191119_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191119_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191119_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191120_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191120_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191120_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191120_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191120_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191121_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191121_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191121_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191121_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191121_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191122_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191122_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191122_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191122_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191122_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191123_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191123_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191123_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191123_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191123_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191124_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191124_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191124_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191124_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191124_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191125_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191125_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191125_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191125_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191125_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191126_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191126_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191126_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191126_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191126_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191127_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191127_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191127_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191127_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191127_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191128_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191128_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191128_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191128_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191128_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191129_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191129_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191129_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191129_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191129_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191130_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191130_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191130_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191130_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191130_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191201_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191201_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191201_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191201_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191201_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191202_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191202_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191202_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191202_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191202_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191203_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191203_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191203_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191203_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191203_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191204_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191204_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191204_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191204_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191204_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191205_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191205_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191205_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191205_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191205_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191206_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191206_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191206_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191206_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191206_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191207_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191207_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191207_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191207_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191207_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191208_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191208_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191208_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191208_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191208_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191209_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191209_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191209_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191209_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191209_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191210_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191210_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191210_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191210_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191210_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191211_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191211_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191211_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191211_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191211_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191212_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191212_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191212_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191212_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191212_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191213_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191213_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191213_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191213_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191213_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191214_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191214_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191214_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191214_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191214_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191215_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191215_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191215_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191215_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191215_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191216_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191216_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191216_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191216_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191216_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191217_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191217_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191217_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191217_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191217_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191218_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191218_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191218_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191218_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191218_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191219_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191219_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191219_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191219_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191219_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191220_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191220_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191220_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191220_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191220_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191221_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191221_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191221_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191221_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191221_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191222_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191222_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191222_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191222_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191222_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191223_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191223_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191223_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191223_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191223_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191224_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191224_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191224_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191224_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191224_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191225_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191225_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191225_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191225_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191225_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191226_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191226_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191226_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191226_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191226_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191227_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191227_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191227_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191227_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191227_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191228_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191228_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191228_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191228_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191228_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191229_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191229_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191229_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191229_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191229_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191230_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191230_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191230_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191230_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191230_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191231_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191231_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191231_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20191231_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191231_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20200101_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20200101_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200101_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20200101_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20200101_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20200102_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20200102_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200102_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20200102_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20200102_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20200103_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20200103_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200103_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20200103_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20200103_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20200104_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20200104_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200104_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20200104_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20200104_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20200105_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20200105_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200105_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20200105_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20200105_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20200106_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20200106_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200106_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20200106_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20200106_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20200107_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20200107_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200107_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20200107_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20200107_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20200108_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20200108_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200108_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20200108_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20200108_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20200109_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20200109_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200109_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20200109_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20200109_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20200110_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20200110_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200110_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20200110_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20200110_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20200111_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20200111_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200111_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20200111_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20200111_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20200112_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20200112_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200112_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20200112_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20200112_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20200113_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20200113_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200113_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20200113_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20200113_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20200114_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20200114_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200114_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20200114_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20200114_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20200115_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20200115_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200115_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20200115_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20200115_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20200116_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20200116_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200116_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20200116_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20200116_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20200117_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20200117_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200117_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20200117_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20200117_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190726_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190726_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190726_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190726_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190727_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190727_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190727_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190727_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190728_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190728_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190728_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190728_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190729_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190729_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190729_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190729_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190730_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190730_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190730_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190730_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190731_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190731_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190731_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190731_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190801_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190801_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190801_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190801_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190802_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190802_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190802_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190802_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190803_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190803_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190803_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190803_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190804_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190804_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190804_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190804_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190805_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190805_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190805_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190805_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190806_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190806_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190806_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190806_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190807_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190807_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190807_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190807_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190808_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190808_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190808_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190808_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190809_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190809_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190809_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190809_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190810_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190810_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190810_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190810_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190811_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190811_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190811_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190811_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190812_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190812_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190812_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190812_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190813_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190813_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190813_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190813_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190814_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190814_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190814_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190814_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190815_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190815_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190815_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190815_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190816_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190816_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190816_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190816_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190817_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190817_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190817_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190817_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190818_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190818_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190818_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190818_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190819_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190819_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190819_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190819_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190820_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190820_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190820_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190820_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190821_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190821_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190821_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190821_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190822_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190822_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190822_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190822_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190823_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190823_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190823_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190823_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190824_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190824_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190824_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190824_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190825_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190825_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190825_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190825_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190826_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190826_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190826_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190826_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190827_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190827_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190827_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190827_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190828_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190828_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190828_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190828_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190829_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190829_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190829_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190829_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190830_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190830_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190830_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190830_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190831_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190831_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190831_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190831_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190901_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190901_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190901_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190901_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190902_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190902_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190902_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190902_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190903_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190903_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190903_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190903_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190904_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190904_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190904_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190904_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190905_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190905_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190905_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190905_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190906_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190906_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190906_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190906_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190907_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190907_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190907_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190907_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190908_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190908_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190908_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190908_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190909_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190909_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190909_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190909_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190910_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190910_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190910_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190910_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190911_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190911_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190911_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190911_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190912_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190912_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190912_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190912_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190913_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190913_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190913_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190913_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190914_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190914_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190914_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190914_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190915_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190915_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190915_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190915_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190916_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190916_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190916_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190916_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190917_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190917_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190917_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190917_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190918_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190918_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190918_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190918_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190919_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190919_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190919_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190919_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190920_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190920_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190920_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190920_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190921_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190921_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190921_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190921_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190922_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190922_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190922_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190922_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190923_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190923_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190923_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190923_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190924_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190924_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190924_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190924_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190925_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190925_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190925_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190925_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190926_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190926_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190926_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190926_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190927_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190927_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190927_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190927_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190928_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190928_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190928_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190928_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190929_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190929_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190929_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190929_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190930_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20190930_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190930_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20190930_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191001_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191001_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191001_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191001_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191002_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191002_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191002_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191002_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191003_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191003_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191003_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191003_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191004_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191004_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191004_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191004_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191005_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191005_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191005_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191005_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191006_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191006_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191006_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191006_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191007_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191007_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191007_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191007_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191008_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191008_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191008_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191008_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191009_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191009_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191009_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191009_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191010_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191010_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191010_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191010_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191011_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191011_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191011_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191011_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191012_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191012_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191012_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191012_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191013_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191013_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191013_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191013_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191014_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191014_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191014_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191014_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191015_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191015_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191015_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191015_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191016_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191016_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191016_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191016_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191017_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191017_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191017_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191017_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191018_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191018_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191018_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191018_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191019_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191019_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191019_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191019_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191020_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191020_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191020_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191020_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191021_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191021_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191021_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191021_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191022_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191022_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191022_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191022_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191023_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191023_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191023_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191023_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191024_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191024_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191024_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191024_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191025_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191025_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191025_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191025_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191026_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191026_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191026_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191026_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191027_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191027_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191027_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191027_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191028_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191028_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191028_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191028_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191029_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191029_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191029_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191029_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191030_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191030_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191030_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191030_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191031_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191031_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191031_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191031_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191101_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191101_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191101_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191101_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191102_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191102_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191102_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191102_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191103_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191103_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191103_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191103_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191104_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191104_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191104_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191104_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191105_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191105_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191105_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191105_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191106_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191106_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191106_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191106_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191107_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191107_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191107_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191107_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191108_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191108_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191108_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191108_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191109_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191109_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191109_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191109_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191110_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191110_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191110_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191110_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191111_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191111_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191111_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191111_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191112_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191112_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191112_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191112_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191113_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191113_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191113_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191113_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191114_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191114_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191114_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191114_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191115_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191115_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191115_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191115_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191116_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191116_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191116_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191116_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191117_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191117_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191117_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191117_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191118_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20191118_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191118_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20191118_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191119_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191120_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191121_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191122_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191123_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191124_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191125_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191126_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191127_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191128_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191129_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191130_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191201_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191202_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191203_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191204_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191205_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191206_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191207_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191208_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191209_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191210_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191211_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191212_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191213_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191214_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191215_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191216_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191217_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191218_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191219_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191220_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191221_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191222_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191223_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191224_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191225_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191226_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191227_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191228_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191229_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191230_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191231_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200101_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200102_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200103_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200104_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200105_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200106_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200107_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200108_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200109_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200110_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200111_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200112_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200113_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200114_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200115_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200116_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200117_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190726_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190726_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190727_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190727_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190728_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190728_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190729_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190729_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190730_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190730_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190731_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190731_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190801_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190801_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190802_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190802_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190803_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190803_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190804_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190804_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190805_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190805_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190806_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190806_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190807_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190807_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190808_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190808_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190809_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190809_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190810_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190810_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190811_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190811_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190812_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190812_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190813_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190813_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190814_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190814_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190815_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190815_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190816_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190816_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190817_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190817_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190818_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190818_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190819_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190819_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190820_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190820_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190821_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190821_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190822_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190822_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190823_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190823_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190824_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190824_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190825_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190825_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190826_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190826_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190827_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190827_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190828_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190828_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190829_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190829_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190830_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190830_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190831_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190831_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190901_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190901_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190902_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190902_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190903_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190903_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190904_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190904_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190905_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190905_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190906_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190906_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190907_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190907_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190908_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190908_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190909_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190909_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190910_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190910_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190911_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190911_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190912_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190912_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190913_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190913_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190914_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190914_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190915_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190915_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190916_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190916_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190917_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190917_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190918_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190918_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190919_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190919_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190920_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190920_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190921_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190921_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190922_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190922_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190923_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190923_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190924_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190924_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190925_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190925_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190926_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190926_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190927_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190927_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190928_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190928_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190929_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190929_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20190930_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20190930_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191001_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191001_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191002_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191002_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191003_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191003_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191004_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191004_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191005_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191005_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191006_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191006_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191007_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191007_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191008_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191008_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191009_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191009_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191010_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191010_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191011_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191011_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191012_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191012_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191013_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191013_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191014_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191014_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191015_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191015_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191016_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191016_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191017_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191017_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191018_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191018_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191019_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191019_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191020_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191020_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191021_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191021_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191022_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191022_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191023_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191023_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191024_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191024_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191025_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191025_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191026_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191026_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191027_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191027_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191028_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191028_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191029_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191029_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191030_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191030_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191031_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191031_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191101_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191101_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191102_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191102_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191103_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191103_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191104_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191104_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191105_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191105_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191106_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191106_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191107_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191107_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191108_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191108_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191109_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191109_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191110_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191110_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191111_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191111_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191112_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191112_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191113_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191113_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191114_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191114_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191115_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191115_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191116_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191116_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191117_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191117_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20191118_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191118_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191119_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191120_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191121_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191122_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191123_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191124_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191125_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191126_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191127_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191128_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191129_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191130_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191201_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191202_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191203_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191204_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191205_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191206_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191207_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191208_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191209_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191210_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191211_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191212_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191213_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191214_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191215_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191216_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191217_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191218_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191219_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191220_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191221_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191222_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191223_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191224_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191225_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191226_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191227_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191228_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191229_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191230_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20191231_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200101_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200102_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200103_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200104_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200105_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200106_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200107_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200108_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200109_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200110_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200111_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200112_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200113_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200114_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200115_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200116_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200117_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200118_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200119_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200120_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200121_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200122_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200123_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200124_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200125_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200126_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200127_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200128_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200129_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200130_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200131_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200201_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200202_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200203_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200204_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200205_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200206_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200207_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200208_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200209_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200210_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200211_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200212_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200213_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200214_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200215_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200216_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200217_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20200219_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20200219_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200219_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20200219_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20200219_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20200220_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20200220_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200220_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20200220_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20200220_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20200221_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20200221_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200221_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20200221_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20200221_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20200222_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20200222_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200222_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20200222_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20200222_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/spha/wi_k0_spha_20200223_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/mfi/wi_k0_mfi_20200223_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/swe/wi_k0_swe_20200223_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/3dp/wi_k0_3dp_20200223_v01.cdf
+did not find: 
+/Users/mdesai/Desktop/IDL/wind/step_kp_files/epa/wi_k0_epa_20200223_v01.cdf

@@ -1,0 +1,5 @@
+;	command file merge_mask_saturation.batch
+
+.compile /Users/mdesai/Desktop/IDL/wind/fortran_vax/3_merge_mask_sat/merge_mask_saturation.pro
+merge_mask_saturation
+exit
