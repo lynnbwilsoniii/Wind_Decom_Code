@@ -1,0 +1,10 @@
+c ******* Saturation Mask Time Interval File *******
+
+
+c Time intervals that contain saturations in either a ROM box or disc rate
+
+ Run time: 27-Oct-08  07:00:10
+
+
+
+ Start year,Start Day,End Year,End Day,VSE,Matrix data,D1,D2,Stop,Start,VSEbar,ROM spike,
