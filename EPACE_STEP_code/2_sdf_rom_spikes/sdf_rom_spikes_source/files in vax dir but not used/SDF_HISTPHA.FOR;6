@@ -1,0 +1,111 @@
+c    Subroutines for the program sdf_lister
+c    
+c     Contents:
+c
+c             subroutine histPHAdata
+c
+c             subroutine write_output_hist
+c
+c
+c
+c****************************************************
+c
+       subroutine histPHAdata 
+c
+c****************************************************
+c
+c      writes PHA histogram data to output file with file unit=unit_hist
+c
+c     4/22/96 by J. Dwyer
+c            5/6/96 fixed line number bug for loops
+c             5/6/96 added if (data_flag(i)) then  ! O.K. PHA events  
+c
+      include 'sdf_include.for'   ! include type declarations
+      include 'hex_include.for'   ! include type declarations
+c     
+c
+      real   startrate   ! start discriminator rate (cnts/sec)            
+c
+      startrate = start_1mf/(spin_period*nspins)
+c
+      if (NPHA.gt.0) then
+      do 400 k =1,Nhist_start
+        if ((startrate.gt.start_histbins(k)).and.
+     1     (startrate.le.start_histbins(k+1))) then
+      do 300 ii=1, NPHA   ! loop over PHA events
+        if (data_flag(ii)) then  ! O.K. PHA events  
+      do 200 i =1,Nhist_mass
+        if ((mass(ii).gt.mass_histbins(i)).and.
+     1     (mass(ii).le.mass_histbins(i+1))) then
+          do 100 j =1,Nhist_E
+            if ((Einc(ii).gt.E_histbins(j)).and.
+     1     (Einc(ii).le.E_histbins(j+1)).and.    
+     1     ((tel(ii).eq.0).or.
+     1     (tel(ii).eq.1)).and.
+     1     ((slant(ii).eq.0).or.
+     1     (slant(ii).eq.1))) then
+            PHAhist(i,j,k,2-tel(ii),slant(ii)+1) = 
+     1     PHAhist(i,j,k,2-tel(ii),slant(ii)+1)+1.0
+            end if
+100     continue 
+      end if
+200     continue
+      end if
+300     continue
+      end if
+400     continue
+      end if
+c       
+      return
+      end   !  end histPHAdata
+c
+c
+c
+c
+c****************************************************
+c
+       subroutine write_output_hist 
+c
+c****************************************************
+c
+c      writes PHA histogram data to output file with file unit=unit_hist
+c
+c     4/22/96 by J. Dwyer
+c
+      include 'sdf_include.for'   ! include type declarations
+c     
+      integer   unit_hist   ! output file unit
+      character*64   filename
+c
+      unit_hist = 40
+      filename = 'HISTPHA.007'
+      open(unit=unit_hist ,name=outputdir//filename,
+     1     status='NEW',DISP='KEEP',RECL=32766) ! open output data file
+      print *, 'Opened output file: ', filename 
+c
+        write(unit_hist,*) Nhist_mass, Nhist_E, 
+     1              Nhist_start, Nhist_tel, Nhist_tel
+c
+        write(unit_hist,*) 
+c
+        write(unit_hist,*) 
+     1          (mass_histbins(i), i=1,Nhist_mass+1)  
+        write(unit_hist,*) 
+     1          (E_histbins(i), i=1,Nhist_E+1)  
+        write(unit_hist,*) 
+     1          (start_histbins(i), i=1,Nhist_start+1)  
+c
+      write(unit_hist,*) 
+c
+        do 200 i = 1,Nhist_E
+          do 200 j = 1,Nhist_start
+            do 200 k = 1,Nhist_tel
+              do 200 kk = 1,Nhist_tel
+             write(unit_hist,*) 
+     1          (PHAhist(l,i,j,k,kk), l=1,Nhist_mass)  
+200 	   continue
+c
+      close (unit=unit_hist)          
+      return
+      end   ! end write_output_flux
+c

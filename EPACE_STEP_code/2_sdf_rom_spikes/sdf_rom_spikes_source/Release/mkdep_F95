@@ -1,0 +1,2 @@
+-quiet "-pre./Release/" -Y -modInfo -errdel -f90 -f makefile -a -info -m32 -w -W132 -ffixed -s -O2
+ -info "sdf_rom_spikes.f95" 

@@ -1,0 +1,380 @@
+c
+c        subroutine read_spha
+c
+c        subroutine read_mfi
+c
+c        subroutine read_swe
+c
+c        subroutine read_3dp
+c
+c        subroutine read_epa
+c
+c
+c***************************************************
+
+      subroutine read_spha
+
+c***************************************************
+c
+c      read a new cdf record
+c        
+      include 'L0_include.for'   ! include type declarations
+      include 'cdf$inc:cdf.inc'     ! include file for CDF library functions    
+c
+      integer*4   indices(1)  
+      integer*4  year,mon,day,hour,min,sec,msec,doy
+      integer*4   status
+      integer day_of_year
+      real*8    epoch
+c
+      indices(1)=1
+      call cdf_var_get
+     1    (spha_id,vn_spha_epoch,spha_rec,indices(1),
+     1                 epoch,status)
+      if (status.ne.cdf_ok) goto 100
+      call epoch_breakdown
+     1     (epoch,year,mon,day,hour,min,sec,msec)
+      doy =  day_of_year(year,mon,day)
+      call convert_to_sampextime 
+     1     (year,doy,hour,min,sec,spha_time)        
+      call cdf_var_get
+     1     (spha_id,vn_spha_asr,spha_rec,indices(1),
+     1               spha_asr_1mf,status)
+      if (status.ne.cdf_ok) goto 100
+c
+      spha_rec=spha_rec+1
+      spha_read=.true.
+      return
+c
+100       print *,'spha var get failed - advancing record'
+      write(30,*) 'spha var get failed-advancing record'
+      call cdf_error(status,message)
+      print *,message
+      write(30,*) message
+      spha_rec=spha_rec+1
+      spha_read=.false.
+c
+      return
+c
+      end    ! end read_spha
+c
+c
+c
+c
+c***************************************************
+
+      subroutine read_mfi
+
+c***************************************************
+c
+c      read a new cdf record 
+c          
+      include 'L0_include.for'   ! include type declarations
+      include 'cdf$inc:cdf.inc'     ! include file for CDF library functions    
+c
+      integer*4   indices(1)  
+      integer*4  year,mon,day,hour,min,sec,msec,doy
+      integer*4   status
+      integer day_of_year
+      real*8    epoch
+c
+      indices(1)=1
+	    call CDF_lib (SELECT_, CDF_, mfi_id,
+     1			    zVAR_, vn_mfi_epoch,
+     1			    zVAR_RECNUMBER_, mfi_rec,
+     1				  zVAR_DIMINDICES_, indices(1),
+     1		      GET_, zVAR_DATA_, epoch,
+     1			    NULL_, status)
+      if (status.ne.cdf_ok) goto 100
+      call epoch_breakdown
+     1     (epoch,year,mon,day,hour,min,sec,msec)
+      doy =  day_of_year(year,mon,day)
+      call convert_to_sampextime 
+     1     (year,doy,hour,min,sec,mfi_time)     
+      indices(1)=1   
+	    call CDF_lib (SELECT_, CDF_, mfi_id,
+     1			    zVAR_, vn_mfi_bgse,
+     1			    zVAR_RECNUMBER_, mfi_rec,
+     1				  zVAR_DIMINDICES_, indices(1),
+     1		      GET_, zVAR_DATA_, mfi_bgse_1mf(1),
+     1			    NULL_, status)
+      if (status.ne.cdf_ok) goto 100
+      indices(1)=2   
+	    call CDF_lib (SELECT_, CDF_, mfi_id,
+     1			    zVAR_, vn_mfi_bgse,
+     1			    zVAR_RECNUMBER_, mfi_rec,
+     1				  zVAR_DIMINDICES_, indices(1),
+     1		      GET_, zVAR_DATA_, mfi_bgse_1mf(2),
+     1			    NULL_, status)
+      if (status.ne.cdf_ok) goto 100
+      indices(1)=3   
+	    call CDF_lib (SELECT_, CDF_, mfi_id,
+     1			    zVAR_, vn_mfi_bgse,
+     1			    zVAR_RECNUMBER_, mfi_rec,
+     1				  zVAR_DIMINDICES_, indices(1),
+     1		      GET_, zVAR_DATA_, mfi_bgse_1mf(3),
+     1			    NULL_, status)
+      if (status.ne.cdf_ok) goto 100
+      indices(1)=1   
+	    call CDF_lib (SELECT_, CDF_, mfi_id,
+     1			    zVAR_, vn_mfi_rms,
+     1			    zVAR_RECNUMBER_, mfi_rec,
+     1				  zVAR_DIMINDICES_, indices(1),
+     1		      GET_, zVAR_DATA_, mfi_rms_1mf,
+     1			    NULL_, status)
+      if (status.ne.cdf_ok) goto 100
+      indices(1)=1   
+	    call CDF_lib (SELECT_, CDF_, mfi_id,
+     1			    zVAR_, vn_mfi_position,
+     1			    zVAR_RECNUMBER_, mfi_rec,
+     1				  zVAR_DIMINDICES_, indices(1),
+     1		      GET_, zVAR_DATA_, mfi_position_1mf(1),
+     1			    NULL_, status)
+      if (status.ne.cdf_ok) goto 100
+      indices(1)=2   
+	    call CDF_lib (SELECT_, CDF_, mfi_id,
+     1			    zVAR_, vn_mfi_position,
+     1			    zVAR_RECNUMBER_, mfi_rec,
+     1				  zVAR_DIMINDICES_, indices(1),
+     1		      GET_, zVAR_DATA_, mfi_position_1mf(2),
+     1			    NULL_, status)
+      if (status.ne.cdf_ok) goto 100
+      indices(1)=3   
+	    call CDF_lib (SELECT_, CDF_, mfi_id,
+     1			    zVAR_, vn_mfi_position,
+     1			    zVAR_RECNUMBER_, mfi_rec,
+     1				  zVAR_DIMINDICES_, indices(1),
+     1		      GET_, zVAR_DATA_, mfi_position_1mf(3),
+     1			    NULL_, status)
+      if (status.ne.cdf_ok) goto 100
+c
+      mfi_rec=mfi_rec+1
+      mfi_read=.true.
+      return
+c
+100       print *,'mfi var get failed - advancing record'
+      write(30,*) 'mfi var get failed-advancing record'
+      call cdf_error(status,message)
+      print *,message
+      write(30,*) message
+      mfi_rec=mfi_rec+1
+      mfi_read=.false.
+c
+      return
+c
+      end    ! end read_mfi
+c
+c
+c***************************************************
+
+      subroutine read_swe
+
+c***************************************************
+c
+c      read a new cdf record
+c       
+      include 'L0_include.for'   ! include type declarations
+      include 'cdf$inc:cdf.inc'     ! include file for CDF library functions       
+c
+      integer*4   indices(1)  
+      integer*4  year,mon,day,hour,min,sec,msec,doy
+      integer*4   status
+      integer day_of_year
+      real*8    epoch
+c
+      indices(1)=1
+      call cdf_var_get
+     1    (swe_id,vn_swe_epoch,swe_rec,indices(1),
+     1                 epoch,status)
+      if (status.ne.cdf_ok) goto 100
+      call epoch_breakdown
+     1     (epoch,year,mon,day,hour,min,sec,msec)
+      doy =  day_of_year(year,mon,day)
+      call convert_to_sampextime 
+     1     (year,doy,hour,min,sec,swe_time)   
+      call cdf_var_get
+     1     (swe_id,vn_swe_vgse,swe_rec,indices(1),
+     1               swe_vgse_1mf(1),status)
+      if (status.ne.cdf_ok) goto 100
+      indices(1)=2
+      call cdf_var_get
+     1     (swe_id,vn_swe_vgse,swe_rec,indices(1),
+     1               swe_vgse_1mf(2),status)
+      if (status.ne.cdf_ok) goto 100
+      indices(1)=3
+      call cdf_var_get
+     1     (swe_id,vn_swe_vgse,swe_rec,indices(1),
+     1               swe_vgse_1mf(3),status)
+      if (status.ne.cdf_ok) goto 100
+      indices(1)=1
+      call cdf_var_get
+     1     (swe_id,vn_swe_vth,swe_rec,indices(1),
+     1               swe_vth_1mf,status)
+      if (status.ne.cdf_ok) goto 100
+      call cdf_var_get
+     1     (swe_id,vn_swe_protdens,swe_rec,indices(1),
+     1               swe_protdens_1mf,status)
+      if (status.ne.cdf_ok) goto 100
+c
+      swe_rec=swe_rec+1
+      swe_read=.true.
+      return
+c
+100       print *,'swe var get failed - advancing record'
+      write(30,*) 'swe var get failed-advancing record'
+      call cdf_error(status,message)
+      print *,message
+      write(30,*) message
+      swe_rec=swe_rec+1
+      swe_read=.false.
+c
+      return
+c
+      end    ! end read_swe
+c
+c
+c
+c
+c***************************************************
+
+      subroutine read_3dp
+
+c***************************************************
+c
+c      read a new cdf record
+c
+      include 'L0_include.for'   ! include type declarations     
+      include 'cdf$inc:cdf.inc'     ! include file for CDF library functions         
+c
+      integer*4   indices(3)  
+      integer*4  year,mon,day,hour,min,sec,msec,doy
+      integer*4   status
+      integer day_of_year
+      real*8    epoch
+c
+      indices(1)=1
+      indices(2)=1
+      indices(3)=1
+      call cdf_var_get
+     1    (tdp_id,vn_tdp_epoch,tdp_rec,indices,
+     1                 epoch,status)
+      if (status.ne.cdf_ok) goto 100
+      call epoch_breakdown
+     1     (epoch,year,mon,day,hour,min,sec,msec)
+      doy =  day_of_year(year,mon,day)
+      call convert_to_sampextime 
+     1     (year,doy,hour,min,sec,tdp_time)  
+c 
+      do 50 i = 1,7
+        indices(1)=1   
+        indices(2)=i 
+        indices(3)=1  
+        call cdf_var_get
+     1     (tdp_id,vn_tdp_eflux,tdp_rec,indices,
+     1               tdp_eflux_1mf(i),status)
+        if (status.ne.cdf_ok) goto 100
+        indices(1)=1   
+        indices(2)=1 
+        indices(3)=i
+        call cdf_var_get
+     1     (tdp_id,vn_tdp_ionflux,tdp_rec,indices,
+     1               tdp_ionflux_1mf(i),status)
+        if (status.ne.cdf_ok) goto 100
+50      continue
+c
+      tdp_rec=tdp_rec+1
+      tdp_read=.true.
+      return
+100       print *,'3dp var get failed - advancing record'
+      write(30,*) '3dp var get failed-advancing record'
+      call cdf_error(status,message)
+      print *,message
+      write(30,*) message
+      tdp_rec=tdp_rec+1
+      tdp_read=.false.
+c
+      return
+c
+      end    ! end read_3dp
+c
+c
+c
+c
+c***************************************************
+
+      subroutine read_epa
+
+c***************************************************
+c
+c      read a new cdf record
+c       
+      include 'L0_include.for'   ! include type declarations
+      include 'cdf$inc:cdf.inc'     ! include file for CDF library functions       
+c
+      integer*4   indices(1)  
+      integer*4  year,mon,day,hour,min,sec,msec,doy
+      integer*4   status
+      integer day_of_year
+      real*8    epoch
+c
+      indices(1)=1
+      call cdf_var_get
+     1    (epa_id,vn_epa_epoch,epa_rec,indices(1),
+     1                 epoch,status)
+      if (status.ne.cdf_ok) goto 100
+      call epoch_breakdown
+     1     (epoch,year,mon,day,hour,min,sec,msec)
+      doy =  day_of_year(year,mon,day)
+      call convert_to_sampextime 
+     1     (year,doy,hour,min,sec,epa_time)   
+      call cdf_var_get
+     1     (epa_id,vn_epa_apeb1,epa_rec,indices(1),
+     1               epa_apeb1_1mf,status)
+      if (status.ne.cdf_ok) goto 100
+      call cdf_var_get
+     1     (epa_id,vn_epa_apeb2,epa_rec,indices(1),
+     1               epa_apeb2_1mf,status)
+      if (status.ne.cdf_ok) goto 100
+      call cdf_var_get
+     1     (epa_id,vn_epa_apeb3,epa_rec,indices(1),
+     1               epa_apeb3_1mf,status)
+      if (status.ne.cdf_ok) goto 100
+      call cdf_var_get
+     1     (epa_id,vn_epa_apeb4,epa_rec,indices(1),
+     1               epa_apeb4_1mf,status)
+      if (status.ne.cdf_ok) goto 100
+      call cdf_var_get
+     1     (epa_id,vn_epa_apeb5,epa_rec,indices(1),
+     1               epa_apeb5_1mf,status)
+      if (status.ne.cdf_ok) goto 100
+      call cdf_var_get
+     1     (epa_id,vn_epa_lemt1,epa_rec,indices(1),
+     1              epa_lemt1_1mf,status)
+      if (status.ne.cdf_ok) goto 100
+      call cdf_var_get
+     1     (epa_id,vn_epa_lemt2,epa_rec,indices(1),
+     1             epa_lemt2_1mf,status)
+      if (status.ne.cdf_ok) goto 100
+      call cdf_var_get
+     1     (epa_id,vn_epa_lemt3,epa_rec,indices(1),
+     1             epa_lemt3_1mf,status)
+      if (status.ne.cdf_ok) goto 100
+c
+      epa_rec=epa_rec+1
+      epa_read=.true.
+      return
+c
+100       print *,'epa var get failed - advancing record'
+      write(30,*) 'epa var get failed-advancing record'
+      call cdf_error(status,message)
+      print *,message
+      write(30,*) message
+      epa_rec=epa_rec+1
+      epa_read=.false.
+c
+      return
+c
+      end    ! end read_epa
+c
+c
+c

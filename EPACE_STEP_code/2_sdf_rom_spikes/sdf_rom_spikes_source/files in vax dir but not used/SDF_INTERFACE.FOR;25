@@ -1,0 +1,69 @@
+c
+c      Subroutines called by sdf_lister.for
+c      These subroutines are ment to be a simple way to add code to sdf_lister
+c      Summary:
+c              subroutine sdf_initial 
+c                    sdf_lister first calls this subroutine.  Put code to initialize values and
+c                    open files here.  
+c
+c              subroutine sdf_process
+c                    sdf_lister calls this subroutine after each major frame is read, decoded
+c                    and processed.  Put analysis and write code here.
+c
+c              subroutine sdf_final
+c                    Before ending, sdf_lister calls this subroutine.  Close files here
+c
+c
+c
+c********************************************************
+c
+      subroutine sdf_initial
+c
+c********************************************************
+c
+      include 'hex_include.for'   ! include type declarations
+      include 'sdf_include.for'   ! include type declarations
+c 
+        
+
+      return
+      end  ! end sdf_lister
+c
+c
+c
+c
+c********************************************************
+c
+      subroutine sdf_process
+c
+c********************************************************
+c
+      include 'hex_include.for'   ! include type declarations
+      include 'sdf_include.for'   ! include type declarations
+c
+  
+
+
+
+
+      return
+      end  ! end sdf_process
+c
+c
+c
+c
+c********************************************************
+c
+      subroutine sdf_final
+c
+c********************************************************
+c
+      include 'hex_include.for'   ! include type declarations
+      include 'sdf_include.for'   ! include type declarations
+c
+  
+
+
+      return
+      end  ! end sdf_final
+c

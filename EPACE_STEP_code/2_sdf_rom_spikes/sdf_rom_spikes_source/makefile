@@ -1,0 +1,131 @@
+
+#
+# Absoft Developer Tools Interface requires use of this makefile.
+#
+MKDIR=mkdir -p 
+RMDIR=rm -rf 
+
+#
+# Variables for the compiler(s) and linker
+#
+ABSOFT_F95=f95
+ABSOFT_F77=f95
+VAST_PREPROCESSOR=vastfp 
+RC=/Developer/Tools/Rez
+GCC=gcc
+ABSOFT_F95_LINKER=f95
+DUMMY=
+
+#
+# Flags
+#
+ABSOFT_F95_FLAGS=-m32 -w -W132 -ffixed -s -O2
+ABSOFT_F77_FLAGS=-O2 -s -ffixed -W132 -w -m32 -f77_compat
+RC_FLAGS=
+GCC_FLAGS=-isysroot /Developer/SDKs/MacOSX10.4u.sdk -m32 -O2
+ABSOFT_F95_LINKER_FLAGS=-osxtarget=10.4 -m32 -O2
+
+#
+# Name of the executable
+#
+TARGET=sdf_rom_spikes
+OUTDIR=.
+OBJDIR=./Release
+
+#
+# Files for this executable
+#
+VAST_PREPROCESSOR_FILES=
+ABSOFT_F95_FILES="sdf_rom_spikes.f95"
+ABSOFT_F77_FILES=
+GCC_FILES=
+ABSOFT_F95_LINKER_FILES=
+RC_FILES=
+
+#
+# Rules and dependencies for the executable
+#
+SRCFILES=$(ABSOFT_F95_FILES)
+OBJFILES="$(OBJDIR)/sdf_rom_spikes.o"
+all: "$(OUTDIR)/$(TARGET)" $(RC_FILES)
+	
+
+"$(OUTDIR)/$(TARGET)": "$(OBJDIR)" $(OBJFILES) $(USER_LIBS) $(MODFILES)
+	$(ABSOFT_F95_LINKER) $(ABSOFT_F95_LINKER_FLAGS) $(LPATHS) $(OBJFILES) $(ABSOFT_F95_LINKER_FILES) $(LIBS) -o "$(OUTDIR)/$(TARGET)"
+
+
+
+"$(OBJDIR)/sdf_rom_spikes.o": sdf_rom_spikes.f95
+	$(ABSOFT_F95) -c -nowdir $(ABSOFT_F95_FLAGS) -o "$(OBJDIR)/sdf_rom_spikes.o" "sdf_rom_spikes.f95"
+
+"$(OBJDIR)":
+	$(MKDIR) "$(OBJDIR)"
+#
+# Clean Rules
+#
+clean:
+	$(RMDIR) "$(OBJDIR)"
+	$(RMDIR) "$(TARGET)"
+
+#
+# Define necessary macros for dependency scanning.
+#
+MKDEP=amakedepend
+MKDEP_FLAGS= -quiet "-pre$(OBJDIR)/" -Y -modInfo -errdel -f90 -f makefile 
+#
+# Generate dependencies for the project
+#
+ScanAll: "$(OUTDIR)" "$(OBJDIR)" MakeDepsAll
+
+#
+# Scan for all F77, F95, and c/c++ dependencies
+#
+MakeDepsAll:
+	$(MKDEP) "@/Users/mdesai/Desktop/IDL/wind/fortran_vax/2_sdf_rom_spikes/sdf_rom_spikes_source/Release/mkdep_F95"
+# DO NOT DELETE THIS LINE - makedepend depends upon it.
+
+
+"./Release/sdf_rom_spikes.o": calib_lib.f95 include_paths.inc
+"./Release/sdf_rom_spikes.o": include_paths.inc date_time_subr.f95
+"./Release/sdf_rom_spikes.o": decode_lib.f95 sdf_include.inc
+"./Release/sdf_rom_spikes.o": hex_include.inc derf.f95 open_sdf_sl.f95
+"./Release/sdf_rom_spikes.o": include_paths.inc sampex_timcon.f95
+"./Release/sdf_rom_spikes.o": sdf_abr_subrout.f95 sdf_include.inc
+"./Release/sdf_rom_spikes.o": sdf_include.inc hex_include.inc
+"./Release/sdf_rom_spikes.o": sdf_ave_subrout.f95 sdf_include.inc
+"./Release/sdf_rom_spikes.o": sdf_include.inc sdf_include.inc
+"./Release/sdf_rom_spikes.o": hex_include.inc sdf_flux_subrout.f95
+"./Release/sdf_rom_spikes.o": sdf_include.inc sdf_include.inc
+"./Release/sdf_rom_spikes.o": hex_include.inc sdf_include.inc
+"./Release/sdf_rom_spikes.o": sdf_include.inc hex_include.inc
+"./Release/sdf_rom_spikes.o": sdf_mask_subrout.f95 sdf_include.inc
+"./Release/sdf_rom_spikes.o": sdf_include.inc hex_include.inc
+"./Release/sdf_rom_spikes.o": sdf_include.inc sdf_include.inc
+"./Release/sdf_rom_spikes.o": hex_include.inc sdf_matrix.f95
+"./Release/sdf_rom_spikes.o": sdf_include.inc hex_include.inc
+"./Release/sdf_rom_spikes.o": sdf_include.inc sdf_include.inc
+"./Release/sdf_rom_spikes.o": sdf_mdata.f95 hex_include.inc
+"./Release/sdf_rom_spikes.o": sdf_include.inc sdf_omni_subrout.f95
+"./Release/sdf_rom_spikes.o": sdf_include.inc sdf_include.inc
+"./Release/sdf_rom_spikes.o": hex_include.inc sdf_pha_subrout.f95
+"./Release/sdf_rom_spikes.o": sdf_include.inc sdf_include.inc
+"./Release/sdf_rom_spikes.o": hex_include.inc sdf_include.inc
+"./Release/sdf_rom_spikes.o": hex_include.inc sdf_sect_subrout.f95
+"./Release/sdf_rom_spikes.o": sdf_include.inc sdf_include.inc
+"./Release/sdf_rom_spikes.o": hex_include.inc sdf_sect_subrout2.f95
+"./Release/sdf_rom_spikes.o": sdf_include.inc sdf_include.inc
+"./Release/sdf_rom_spikes.o": SDF_STEPKP_SUBROUT.f95 sdf_include.inc
+"./Release/sdf_rom_spikes.o": sdf_include.inc hex_include.inc
+"./Release/sdf_rom_spikes.o": sdf_subrout.f95 sdf_include.inc
+"./Release/sdf_rom_spikes.o": hex_include.inc sdf_include.inc
+"./Release/sdf_rom_spikes.o": hex_include.inc sdf_include.inc
+"./Release/sdf_rom_spikes.o": hex_include.inc sdf_include.inc
+"./Release/sdf_rom_spikes.o": hex_include.inc sdf_include.inc
+"./Release/sdf_rom_spikes.o": hex_include.inc sdf_include.inc
+"./Release/sdf_rom_spikes.o": hex_include.inc sdf_subrout2.f95
+"./Release/sdf_rom_spikes.o": sdf_include.inc hex_include.inc
+"./Release/sdf_rom_spikes.o": sdf_include.inc sdf_include.inc
+"./Release/sdf_rom_spikes.o": sdf_include.inc sdf_include.inc
+"./Release/sdf_rom_spikes.o": time_lib.f95 trigger_effic.f95
+"./Release/sdf_rom_spikes.o": include_paths.inc hex_include.inc
+"./Release/sdf_rom_spikes.o": sdf_include.inc include_paths.inc

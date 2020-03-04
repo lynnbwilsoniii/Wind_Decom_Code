@@ -1,0 +1,2 @@
+-quiet "-pre./Debug/" -Y -modInfo -errdel -f90 -f makefile -a -info -m32 -w -W132 -ffixed -s -g
+ -info "sdf_rom_spikes.f95" 
