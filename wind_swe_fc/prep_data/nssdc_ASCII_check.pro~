@@ -1,0 +1,15 @@
+
+; quick algorithm to check for *'s and NaN's in the ascii data
+
+pro nssdc_ASCII_check
+
+spawn, 'ls /crater/observatories/wind/swe/nssdc/*.txt', files
+
+for i = 0, n_elements(files)-1 do begin &$
+  temp = ascii_read(files[0])
+  badout = where(strpos(temp.field01, '*') gt 0, nbad)
+  nans = where(strpos(temp.field01, 'NaN') gt 0, nnan)
+  if nbad gt 0 or nnan gt 0 then stop 
+enfor
+
+end

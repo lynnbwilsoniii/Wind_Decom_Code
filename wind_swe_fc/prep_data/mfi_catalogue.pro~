@@ -1,0 +1,26 @@
+
+; remove obsolete versions of the mag data
+
+pro mfi_catalogue
+
+dir = '/crater/observatories/wind/mfi/mfi_h0/2012/*'
+fl = file_search(dir)
+
+v5 = strpos(fl, 'v05') gt 0 
+v4 = strpos(fl, 'v04') gt 0 
+v3 = strpos(fl, 'v03') gt 0 
+
+obso1 = (v4 eq 1 and shift(v5, 1) eq 1)
+obso2 = (v3 eq 1 and shift(v4, 1) eq 1)
+obso3 = (v3 eq 1 and shift(v5, 2) eq 1)
+
+tk = where(obso1+obso2+obso3 eq 0)
+
+
+obso1 = v4 eq 1 and (shift(v5, 1) eq 1)
+
+
+
+
+obso = strpos(fl, 'v04')
+

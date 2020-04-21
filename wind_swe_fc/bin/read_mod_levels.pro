@@ -1,0 +1,87 @@
+; procecure read_mod_levels
+
+pro read_mod_levels, velocity1, velocity2, EperQ1, EperQ2
+ 
+
+;
+; This procedure reads in the mod level table given
+; in velocity (km/s).
+;
+;  table is loaded into arrays below.
+;  2 dimensonal arrays carry the window midpoint 
+;  and window width
+;
+; velocity_1d(2,31) - cup 1 double windows  
+; velocity_2d(2,31) - cup 2 double windows 
+; velocity_1s(2,63) - cup 1 single windows 
+; velocity_2s(2,63) - cup 2 single windows 
+;
+; To get energy/charge in volts ...
+; ( (1.6726E-27*(velocity*1000.)^2)/2. )/( 1.602e-19)
+
+;
+
+openr,10, '/crater/observatories/wind/code/cal/calfile_modvel'
+
+dummy = 'dummy'
+readf,10, dummy
+
+data_buffer = fltarr(3,188)
+
+readf,10, data_buffer
+
+velocity_1d = data_buffer(1:2,0:30)
+velocity_2d = data_buffer(1:2,31:61)
+velocity_1s = data_buffer(1:2,62:124)
+velocity_2s = data_buffer(1:2,125:187)
+
+velocity1 = fltarr(2,2,63)
+velocity2 = fltarr(2,2,63)
+EperQ1    = fltarr(2,2,63)
+EperQ2    = fltarr(2,2,63)
+velocity1(*,*,*) = 0.
+velocity2(*,*,*) = 0.
+velocity1(1,*,0:30) = velocity_1d 
+velocity1(0,*,0:62) = velocity_1s 
+velocity2(1,*,0:30) = velocity_2d 
+velocity2(0,*,0:62) = velocity_2s 
+EperQ1 = ((1.6726e-27*(velocity1*1000.)^2)/2.)/1.602e-19
+EperQ2 = ((1.6726e-27*(velocity2*1000.)^2)/2.)/1.602e-19
+
+EperQ1(*,1,*) =  $
+     (1.6726e-27*(                                      $
+     ((velocity1(*,0,*)+velocity1(*,1,*)/2.)*1000.)^2 - $ 
+     ((velocity1(*,0,*)-velocity1(*,1,*)/2.)*1000.)^2   $
+     )/2.)/1.602e-19
+EperQ2(*,1,*) =  $
+     (1.6726e-27*(                                      $
+     ((velocity2(*,0,*)+velocity2(*,1,*)/2.)*1000.)^2 - $ 
+     ((velocity2(*,0,*)-velocity2(*,1,*)/2.)*1000.)^2   $
+     )/2.)/1.602e-19
+
+
+
+
+;
+;***********************************************
+; To get the energy window in terms of velocity:
+;
+;
+; iiii = MIT_spin_count - 2 + (lowest_ML +1)/w_type
+;
+; if ( ( cup is 1) and ( w_type is 2) then
+;   velocity = velocity_1d(0,iiii) 
+;
+; if ( ( cup is 2) and ( w_type is 2) then
+;   velocity = velocity_2d(0,iiii) 
+;
+; if ( ( cup is 1) and ( w_type is 1) then
+;   velocity = velocity_1s(0,iiii) 
+;
+; if ( ( cup is 2) and ( w_type is 1) then
+;   velocity = velocity_2s(0,iiii) 
+;***********************************************
+;
+
+close,10
+end

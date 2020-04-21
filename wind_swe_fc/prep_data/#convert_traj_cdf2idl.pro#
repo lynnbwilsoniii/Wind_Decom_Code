@@ -1,0 +1,18 @@
+
+
+yyyy = '2011'
+cdf_path = '/crater/observatories/wind/traj/pre_or/'+yyyy+'/'
+idl_path = '/crater/observatories/wind/traj/idl/'
+
+spawn, 'ls  '+cdf_path + '*.cdf', fl
+
+test = fl[0]
+
+id = CDF_OPEN(test)
+inc = cdf_inquire(id)
+for i = 0, inc.nvars do begin &$
+  result = cdf_varinq(id, i) &$
+  print, result &$
+  endfor 
+
+variables = CDF_LISTVARS(id)

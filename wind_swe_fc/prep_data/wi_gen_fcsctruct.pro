@@ -1,0 +1,267 @@
+; Project: WIND/SWE Faraday Cup Proton & Alpha Anisotropies
+;
+; IDL Procedure: sub_bimax_loaddata.pro
+;
+; Author:     Justin Kasper (jck@mit.edu)
+;
+; Purpose:    Subroutine for wi_day_an_ap.pro that loads in the 
+;		appropriate raw data files and carries out initial 
+;		calculations.
+;
+; History:  05/01/01	This file created
+;
+; SCCS Info
+;
+;           %Z%%M%   VERSION %I%    %G%  %U% 
+
+PRO wi_gen_fcstruct, year, doy, fdoy_spec, x1_all, x2_all, mag_params, sc_gse, $
+	cup1_angles, cup2_angles, HIRESMAG=HIRESMAG, STATUS=STATUS, $
+	SPEC=SPEC, VERBOSE=VERBOSE, $
+	CURR_JUMP_MAX=CURR_JUMP_MAX
+
+STATUS = 1
+
+CODEVERSION = ' %Z%%M%   VERSION %I%    %G%  %U% '
+
+IF keyword_set(VERBOSE) THEN VERBOSE=VERBOSE ELSE VERBOSE=0
+IF VERBOSE EQ 2 THEN PRINT, CODEVERSION
+
+; ------------------------------------------------------------------------------------------
+; 	Calculate timing information
+; ------------------------------------------------------------------------------------------
+
+year = DOUBLE(year)
+doy  = DOUBLE(doy)
+s_year 	= STRING( year, format='(i4.4)' )
+s_doy 	= STRING( doy, format='(i3.3)' )
+hold	= doy2mdy( year, doy )
+month 	= hold[1]
+day 	= hold[2]
+s_month	= string( month, format='(i2.2)' )
+s_day	= string( day, format='(i2.2)' )
+IF VERBOSE THEN MESSAGE, 'Loading data for '+s_year+'  DOY '+s_doy+'    ' + $
+	s_month+'/'+s_day+'/'+s_year, /INFORM
+
+; ------------------------------------------------------------------------------------------
+; 	Load in magnetic field data - try hires first
+; ------------------------------------------------------------------------------------------
+
+IF VERBOSE THEN PRINT, 'Loading magnetic field data'
+load_hires_mag, year, doy-0.1, doy+1.1, /WIND, DOY=doy_mag, BX=bx_mag, $
+	BY=by_mag, BZ=bz_mag, VERBOSE=(VERBOSE EQ 2)
+HIRESMAG = 1
+n_mag = N_ELEMENTS( doy_mag )
+IF n_mag LT 500 THEN BEGIN
+ HIRESMAG = 0
+ IF VERBOSE THEN PRINT, 'There were only ', n_mag, ' high resolution magnetic field'
+ IF VERBOSE THEN PRINT, '  measurements for this period - loading standard mag data'
+ SPAWN, 'ls /nfs/plas7/d1/wind/kp_files/B'+s_year+s_doy+'.*', fl
+ fl = fl[0]
+ IF fl NE '' THEN BEGIN
+  IF VERBOSE THEN PRINT, 'Reading KP field data from ', fl
+  read_wind_data, fl, 2, mag
+  doy_mag	=	mag.doy + mag.fday
+  bx_mag	=	mag.bx
+  by_mag	=	mag.by
+  bz_mag	=	mag.bz
+ ENDIF ELSE BEGIN
+  HIRESMAG = -1
+  STATUS = 0
+  MESSAGE, 'ERROR: No magnetic field data found for this day', /INFORM
+  RETURN
+ ENDELSE
+ENDIF
+
+; ------------------------------------------------------------------------------------------
+; 	Now load in the spec file
+; ------------------------------------------------------------------------------------------
+
+fspec = '/nfs/plas7/d7/wind/input/ionspec/ionspec'+s_year+s_month+s_day+'.idl'
+IF KEYWORD_SET(SPEC) THEN BEGIN
+ MESSAGE, 'Using provided IONSPEC file', /INFORMATIONAL
+ spec = SPEC
+ENDIF ELSE BEGIN
+ IF VERBOSE THEN PRINT, 'Loading IONSPEC file ', fspec
+ SPAWN, 'ls '+fspec+'*', fl
+ fl = fl[0]
+ IF fl NE fspec THEN BEGIN
+  IF VERBOSE THEN PRINT, 'Uncompressing '+fl
+  SPAWN, 'gzip -d '+fl
+ ENDIF
+
+ restspec_mra, spec, FILE=fspec, STATUS=success
+
+ IF VERBOSE THEN PRINT, 'Recompressing '+fspec
+ SPAWN, 'gzip  '+fspec+' &'
+
+ IF success EQ 0 THEN BEGIN
+  STATUS = 0
+  MESSAGE, 'Error: While restoring IONSPEC file', /INFORMATIONAL
+ ENDIF ELSE BEGIN
+  ; correct angles
+  p = WHERE(spec.cup1_angles LT -180.0 )
+  IF p[0] NE -1 THEN spec.cup1_angles[p] = TEMPORARY(spec.cup1_angles[p]) + 360.0
+  p = WHERE(spec.cup1_angles GT 180.0 )
+  IF p[0] NE -1 THEN spec.cup1_angles[p] = TEMPORARY(spec.cup1_angles[p]) - 360.0
+  p = WHERE(spec.cup2_angles LT -180.0 )
+  IF p[0] NE -1 THEN spec.cup2_angles[p] = TEMPORARY(spec.cup2_angles[p]) + 360.0
+  p = WHERE(spec.cup2_angles GT 180.0 )
+  IF p[0] NE -1 THEN spec.cup2_angles[p] = TEMPORARY(spec.cup2_angles[p]) - 360.0
+
+  ; correct rear currents
+  spec.currents[0:1,*,[1,3],*] = spec.currents[0:1,*,[1,3],*]/4.
+  spec.currents[18:19,*,[0,2],*] = spec.currents[18:19,*,[0,2],*]/4.
+ 
+ ENDELSE
+ENDELSE
+
+; ------------------------------------------------------------------------------------------
+; 	If curr_jump_max is -1 then determinine maximum current jump allowable
+; ------------------------------------------------------------------------------------------
+
+IF curr_jump_max EQ -1 THEN BEGIN
+ IF VERBOSE THEN PRINT, 'Identifying maximum current jump'
+ xhist = 10.0^(findgen(161)/10. - 8.0)
+ 
+ jhist =  histogram(alog10(spec.currents/shift(spec.currents,1)), $
+	bin=0.1,min=-8,max=8)>0.1
+ 
+ p = where( xhist GT 1.0 )
+ q = p[WHERE( jhist[p] LT 1.0 )]
+ curr_jump_max = xhist[q[0]+1]
+
+ IF VERBOSE THEN PRINT, 'Setting CURR_JUMP_MAX to ', curr_jump_max 
+
+ENDIF
+
+
+; now prepare the measurment vectors.
+doy_spec = DOUBLE(spec.day_arr + spec.sec_arr/86400.0)
+nspec = N_ELEMENTS(doy_spec)
+
+; calculate number of valid windows in each spectrum
+nwindow = REPLICATE(0, nspec)
+FOR s=0,(nspec-1) DO BEGIN & $
+ 	n_window = WHERE(spec.cup1_vel[*,s] EQ MAX(spec.cup1_vel[*,s])) + 1 & $
+ 	IF (n_window[0] EQ 0) THEN n_window = 31 ELSE n_window = (n_window[0]>5) & $
+	nwindow[s] = n_window & $
+ENDFOR
+
+; calculate magnetic field parameters for this interval
+IF VERBOSE THEN PRINT, 'Calculating magnetic field properties for each spectrum'
+mag_params = findgen(nspec, 6)
+IF HIRESMAG THEN BEGIN
+ IF VERBOSE THEN PRINT, '   Selecting hires points within measurement'
+ FOR s=0,(nspec-1) DO BEGIN 
+	tk_mag = WHERE( (doy_mag GE (doy_spec[s] + 3.0d/86400.0)) AND $
+			(doy_mag LE (doy_spec[s] + (1.0d + nwindow[s])*3.0d/86400.0)), $
+			n_mag)
+	IF n_mag GE 2 THEN BEGIN
+		bx_sel = bx_mag[tk_mag]
+		by_sel = by_mag[tk_mag]
+		bz_sel = bz_mag[tk_mag]
+		b_sel = SQRT(bx_sel^2. + by_sel^2. + bz_sel^2.)
+		bxn_sel = bx_sel/b_sel
+		byn_sel = by_sel/b_sel
+		bzn_sel = bz_sel/b_sel
+
+		bx_avg = MEAN(bx_sel)
+		by_avg = MEAN(by_sel)
+		bz_avg = MEAN(bz_sel)
+		b_avg  = SQRT(bx_avg^2. + by_avg^2. + bz_avg^2.)
+                b_magdev  = STDEV(b_sel)
+
+		bxn_avg = bx_avg/b_avg
+		byn_avg = by_avg/b_avg
+		bzn_avg = bz_avg/b_avg
+
+		b_angdev = MEDIAN(ABS(ACOS(bxn_avg*bxn_sel + $
+		 byn_avg*byn_sel + bzn_avg*bzn_sel)/!dtor))
+
+		mag_params[s,*] = [bx_avg, by_avg, bz_avg, b_angdev, b_magdev, n_mag]
+	ENDIF ELSE BEGIN
+		IF VERBOSE THEN PRINT, 'Insufficient field data for this spectrum: ', s+1
+		mag_params[s,*] = [-9999.0,-9999.0,-9999.0,-9999.0,-9999.0,-9999.0]
+	ENDELSE
+ ENDFOR
+ENDIF ELSE BEGIN
+ IF VERBOSE THEN PRINT, '   Using nearest KP field measurement'
+ FOR s=0,(nspec-1) DO BEGIN 
+	dt =  doy_mag-doy_spec[s]+(3.0d*(1.0+nwindow[s])/2.0)/86400.0
+	tk_mag = WHERE( ABS(dt) EQ MIN(ABS(dt)) )
+	tk_mag = tk_mag[0]
+	mag_params[s,*] = [bx_mag[tk_mag],by_mag[tk_mag],bz_mag[tk_mag], $
+		-9999.0,86400.0*dt[tk_mag],-1.0]
+ ENDFOR
+ENDELSE
+
+; now prepare x1 and x2 measurement vectors
+IF VERBOSE THEN PRINT, 'Creating measurement vectors'
+n_spec = n_elements(spec.day_arr)
+x1_all = findgen(n_spec, 31*20, 8)*0.0 - 9999.0
+x2_all = findgen(n_spec, 31*20, 8)*0.0 - 9999.0
+cup1_angles = findgen(n_spec, 20)
+cup2_angles = findgen(n_spec, 20)
+
+; Loop through all spectra
+FOR s=0,(nspec-1) DO BEGIN
+	cup1_angles[s,*] = spec.cup1_angles[*,s]*!dtor
+	cup2_angles[s,*] = spec.cup2_angles[*,s]*!dtor
+	w = INDGEN(nwindow[s])
+	n1 = N_ELEMENTS( spec.currents[*,w,0,s] )
+	n2 = N_ELEMENTS( spec.currents[*,w,1,s] )
+	bx = mag_params[s,0]
+	by = mag_params[s,1]
+	bz = mag_params[s,2]
+	b = SQRT(bx^2.+by^2.+bz^2.)
+	bxn = bx/b
+	byn = by/b
+	bzn = bz/b
+
+        v  = REFORM(spec.cup1_vel[w, s])  # ( replicate(1.d, 20 ))
+	dv = REFORM(spec.cup1_vdel[w, s]) # ( replicate(1.d, 20 ))
+	Pc = REPLICATE(1.d, nwindow[s]) # REFORM(spec.cup1_angles[*,s])*!dtor
+	Tc = REPLICATE(15.0*!dtor, nwindow[s]*20)
+	bx_fc =  bxn*SIN(Pc) + byn*COS(Pc)
+	by_fc = -bxn*COS(Pc)*SIN(Tc) + byn*SIN(Pc)*SIN(Tc) + bzn*COS(Tc)
+	bz_fc =  bxn*COS(Pc)*COS(Tc) - byn*SIN(Pc)*COS(Tc) + bzn*SIN(Tc)
+	curr = TRANSPOSE(REFORM( spec.currents[*,w,0,s] + spec.currents[*,w,2,s] ))
+	tk_curr = WHERE( curr / SHIFT(curr, 1) GT CURR_JUMP_MAX, ntk )
+	IF ntk GT 0 THEN curr[tk_curr] = -9999.0
+        x1 = [[v[*]],[dv[*]],[Pc[*]],[Tc[*]], $
+		[bx_fc[*]],[by_fc[*]],[bz_fc[*]], $
+		[curr[*]]]
+
+        v  = REFORM(spec.cup2_vel[w, s])  # ( replicate(1.d, 20 ))
+	dv = REFORM(spec.cup2_vdel[w, s]) # ( replicate(1.d, 20 ))
+	Pc = REPLICATE(1.d, nwindow[s]) # REFORM(spec.cup2_angles[*,s])*!dtor
+	Tc = REPLICATE(-15.0*!dtor, nwindow[s]*20)
+	bx_fc =  bxn*SIN(Pc) + byn*COS(Pc)
+	by_fc = -bxn*COS(Pc)*SIN(Tc) + byn*SIN(Pc)*SIN(Tc) + bzn*COS(Tc)
+	bz_fc =  bxn*COS(Pc)*COS(Tc) - byn*SIN(Pc)*COS(Tc) + bzn*SIN(Tc)
+	curr = TRANSPOSE(REFORM( spec.currents[*,w,1,s] + spec.currents[*,w,3,s] ))
+	tk_curr = WHERE( curr / SHIFT(curr, 1) GT CURR_JUMP_MAX, ntk )
+	IF ntk GT 0 THEN curr[tk_curr] = -9999.0
+        x2 = [[v[*]],[dv[*]],[Pc[*]],[Tc[*]], $
+		[bx_fc[*]],[by_fc[*]],[bz_fc[*]], $
+		[curr[*]]]
+
+	x1_all[s,0:n1-1,*] = x1
+	x2_all[s,0:n1-1,*] = x2
+ENDFOR
+
+
+; timing and location of S/C
+fdoy_spec = DOUBLE(spec.day_arr + spec.sec_arr/86400.0)
+x_gse = fdoy_spec
+y_gse = fdoy_spec
+z_gse = fdoy_spec
+wind_time2traj, year, fdoy_spec, XGSE=x_gse, yGSE=y_gse, ZGSE=z_gse
+sc_gse = [[x_gse],[y_gse],[z_gse]]
+
+; get rid of spec to save space
+spec = -1.0
+
+END
+
+

@@ -1,0 +1,8 @@
+
+
+@'/crater/utilities/idl/mike/idlstartup'
+@'/crater/utilities/idl/cdawlib/compile_cdfx.pro'
+.compile /crater/utilities/idl/cdawlib/IDLmakecdf.pro
+.compile prepare_bimax_cdf.pro
+
+

@@ -1,0 +1,109 @@
+ ;+
+; NAME: wind_time2traj.pro
+;
+;
+;
+; PURPOSE:  Given a list of fractional days of year in a single
+;              year, this procedure returns location information
+;              for the Wind spacecraft
+;
+;
+;
+; CATEGORY:
+;
+;
+;
+; CALLING SEQUENCE: wind_time2traj, year, fdoy
+;
+;
+;
+; INPUTS: 
+;           year           Single value for the year requested
+;           fdoy           The list of fractional days of year for
+;                            which spacecraft locations have been 
+;                            requested.
+;
+;
+;
+; OPTIONAL INPUTS: None.
+;
+;
+;
+; KEYWORD PARAMETERS: 
+;            XGSE=XGSE, YGSE=YGSE, ZGSE=ZGSE  GSE [Re]
+;            YGSM=YGSM, ZGSM=ZGSM             GSM [Re]
+;            BS=BS, NS=NS, MP=MP              Distance to model bow
+;                                             shock, magnetopause
+;                                            
+;
+; OUTPUTS: Through keywords only.
+;
+;
+;
+; OPTIONAL OUTPUTS: None.
+;
+;
+;
+; COMMON BLOCKS: None.
+;
+;
+;
+; SIDE EFFECTS: None.
+;
+;
+;
+; RESTRICTIONS: None.
+;
+;
+;
+; PROCEDURE: None.
+;
+;
+;
+; EXAMPLE:  Get the Xgse location of Wind on days 10,20, and 30 of 2000
+;
+;           wind_time2traj, 2000, [10,20,30], XGSE=xgse
+;
+;
+;
+; MODIFICATION HISTORY:  Created by J. Kasper 01/01/2000
+; 
+;
+;-
+
+PRO wind_time2traj, year, fdoy, XGSE=XGSE, YGSE=YGSE, ZGSE=ZGSE, $
+        YGSM=YGSM, ZGSM=ZGSM, $
+        BS=BS, NS=NS, MP=MP
+
+; initialize in UNIX file system (CFA RAD)
+DATAPATH = '/crater/observatories/wind/traj/idl/'
+
+; get year string and file name
+s_yy = string(year,format='(i4)')
+FILE = DATAPATH + 'wind.traj.'+s_yy+'.idl'
+
+; Check if this is a valid year
+IF FILE_TEST(FILE) EQ 0 THEN BEGIN
+ MESSAGE, 'No trajectory data exists on the system for the requested year', $
+  /INFORM
+ RETURN
+ENDIF
+
+; Restore the appropriate trajectory file
+restore, FILE
+
+xgse = INTERPOL(traj_x, traj_fdoy, fdoy))
+ygse = INTERPOL(traj_y, traj_fdoy, fdoy)
+zgse = INTERPOL(traj_z, traj_fdoy, fdoy)
+ygsm = INTERPOL(traj_ysm, traj_fdoy, fdoy)
+zgsm = INTERPOL(traj_zsm, traj_fdoy, fdoy)
+
+bs = INTERPOL(traj_bs, traj_fdoy, fdoy)
+ns = INTERPOL(traj_ns, traj_fdoy, fdoy)
+mp = INTERPOL(traj_mp, traj_fdoy, fdoy)
+
+END
+
+
+
+        

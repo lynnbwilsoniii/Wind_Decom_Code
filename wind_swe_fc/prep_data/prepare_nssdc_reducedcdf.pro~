@@ -1,0 +1,180 @@
+; Project: WIND/SWE Faraday Cup Reduced Distribution Functions
+;
+; IDL Procedure: prepare_nssdc_reducedCDF.pro
+;
+; Author:     Mike Stevens (mstevens@cfa.harvard.edu)
+;
+; Purpose:    Create CDF data file
+;
+; History:  06/01/12 This file created from prepare_bimax_ascii file
+;
+; SCCS Info
+;
+;           %Z%%M%   VERSION %I%    %G%  %U% 
+;
+; 
+; This routine uses the CDFX package for CDF formatted I/O
+;@'/crater/utilities/idl/mike/idlstartup'
+;@'/crater/utilities/idl/cdawlib/compile_cdfx.pro'
+;.compile '/crater/utilities/idl/cdawlib/IDLmakecdf.pro'
+
+pro prepare_nssdc_reducedcdf, year
+
+; 0.0 Set the calibration array, convert to cm^2 (given in units of cm^3/km)
+swe_getcal, eff_area, i_angle
+eff_area = eff_area*(1e-5)
+
+; 1.0 Get a listing of the ionspec files for this year (they should be zipped)
+yyyy = string(year, format="(I4)")
+spawn, 'ls /crater/observatories/wind/ionspec/ionspec'+yyyy+'*.idl.gz', file_list
+
+; 1.1 Read the calibration files
+read_calfile, reset_angle, num_meas, wintype, numwin, $
+ cups, integrate_num, rmid_time 
+count_to_current, current_lookup; this procedure loads the lookup table converting counts to currents
+
+; 1.2 Identify the CDF skeleton file
+fskeleton = '/crater/observatories/wind/code/prep_data/swe_reducedCDF_skeleton.cdf'
+
+; 2.0 begin the loader loop (adapted from restspec)
+FOR i = 0, n_elements(file_list)-1  do begin 
+
+  ; 2.1 unzip, load, and rezip the file
+  shortname = strmid(file_list[i], 0, strlen(file_list[i])-3)
+  spawn, 'gunzip ' + file_list[i]
+  restore, shortname
+  spawn, 'gzip ' + shortname
+  fsave = strmid(shortname, 0, strlen(shortname)-4) + '.cdf'
+  message, 'Now converting ' + shortname, /inform
+  
+  ; 2.2 set daily number of spectra and maximum number of spin
+  specmax = n_elements(fcspectra) - 1
+  spinmax = 31
+
+  ; 2.3 load the cup azimuth angles for this set of spectra
+  azimuth, cups, reset_angle, rmid_time, fcspectra, specmax, $
+  cup1_angles, cup2_angles
+
+  ; 2.4 convert the range arrays in the fc data blocks, extract the counts
+  get_count, specmax, spinmax, fcspectra, cups, counts, w_type_arr,$
+  windows_arr, tracking_arr, scan_arr, year_arr, day_arr, $
+  sec_arr, spin_cnt_arr, win_index_arr, cup1_vel, cup2_vel,$
+  cup1_EperQ, cup2_EperQ, cup1_vdel, cup2_vdel, cup1_EQdel, $
+  cup2_EQdel, verbose=verbose
+
+  ; 2.5 convert the counts to physical currents, using the lookup table
+  get_current, spinmax, specmax, counts, current_lookup, currents
+
+  ; 2.6 Filter out spectra that are corrupted by out-of-sync spin period or where
+  ;  spectrum does not begin with spin#1
+  ;  This may throw out some good data within partial spectra.
+  bad_day  = 283L  
+  bad_sec  = 0.00000d0 
+  bad_year = 1995L 
+  
+  ii = where ( (fcspectra.spin_period gt 2.7) and (fcspectra.spin_period lt 3.3) $
+   and ( spin_cnt_arr(0,*) eq 1)    $ 
+   AND ( (year_arr EQ bad_year AND day_arr EQ bad_day AND sec_arr EQ bad_sec) EQ 0B    ), cnt_ii   )
+        ;--- 3rd line added by M.A. to bypass persistent 1995, 283.0000 line in each file 
+
+  IF cnt_ii GT 0L THEN BEGIN 
+  
+  ; store the spectrum structure
+  spec={w_type_arr:w_type_arr(ii), tracking_arr:tracking_arr(ii), $
+        scan_arr: scan_arr(ii), year_arr:year_arr(ii), day_arr:day_arr(ii), $
+        sec_arr:sec_arr(ii), cup1_angles:cup1_angles(*,ii), $
+        cup2_angles:cup2_angles(*,ii), cup1_vel:cup1_vel(*,ii), $
+        cup2_vel:cup2_vel(*,ii),  cup1_EperQ:cup1_EperQ(*,ii), $
+        cup2_EperQ:cup2_EperQ(*,ii), cup1_vdel:cup1_vdel(*,ii), $
+        cup2_vdel:cup2_vdel(*,ii), cup1_EQdel:cup1_EQdel(*,ii), $
+        cup2_EQdel:cup2_EQdel(*,ii), counts:counts(*,*,*,ii), $
+        currents:currents(*,*,*,ii)}
+
+  ; calculate the CDF_EPOCH dating
+  epoch = dblarr(cnt_ii)
+  for j = 0, cnt_ii - 1 do begin &$
+    julian = julday(1, 1, spec.year_arr[j], 0, 0, 0) + (spec.day_arr[j]-1.) + spec.sec_arr[j]/(60.*60.*24.) &$
+    caldat, julian, gmonth, gday, gyear, ghour, gminute, gsecond &$
+    gmilli = 1000.*(gsecond - fix(gsecond)) &$
+    cdf_epoch, thisEpoch, gyear, gmonth, gday, ghour, gminute, fix(gsecond), gmilli, /compute_epoch &$
+    epoch[j] = thisepoch &$
+    endfor
+    
+  status = 1L 
+  
+  ; fix any cup angles outside of the [-180, 180] degree branch cut
+  cup1_angles = spec.cup1_angles
+  tk = where(spec.cup1_angles gt 180., ntk)
+  if ntk gt 0 then cup1_angles[tk] = cup1_angles[tk] - 360.
+  tk = where(spec.cup1_angles LE -180., ntk)
+  if ntk gt 0 then cup1_angles[tk] = spec.cup1_angles[tk] + 360.
+  cup2_angles = spec.cup2_angles
+  tk = where(spec.cup2_angles gt 180., ntk)
+  if ntk gt 0 then cup2_angles[tk] = spec.cup2_angles[tk] - 360.
+  tk = where(spec.cup2_angles LE -180., ntk)
+  if ntk gt 0 then cup2_angles[tk] = spec.cup2_angles[tk] + 360.
+  
+
+  ; 2.7 initialize the CDF data structure 
+  struc = read_master_cdf(FSKELETON, FSAVE)
+  message, 'Skeleton file used: ' + fskeleton, /inform
+  ; 2.8 populate the data structure
+  ptr_free, struc.epoch.data
+  struc.epoch.data = ptr_new(epoch)
+  ; calculate cup fluxes- sum the signal from the two sensors in each cup
+  ; The CDF data is row-major, so the (angle, bias) dims must be transposed
+  ptr_free, struc.cup1_qflux.data
+  thisData = transpose(1e12*(REFORM(spec.currents[*,*,0,*] + spec.currents[*,*,2,*])), [1, 0, 2])
+  struc.cup1_qflux.data = ptr_new(thisData)
+  ptr_free, struc.cup2_qflux.data
+  thisData = transpose(1e12*(REFORM(spec.currents[*,*,1,*] + spec.currents[*,*,3,*])), [1, 0, 2])
+  struc.cup2_qflux.data = ptr_new(thisData)
+  ; azimuthal angles of the measurements
+  ptr_free, struc.cup1_azimuth.data
+  struc.cup1_azimuth.data = ptr_new(cup1_angles)
+  ptr_free, struc.cup2_azimuth.data
+  struc.cup2_azimuth.data = ptr_new(cup2_angles)
+  ; A/C bias potential central values (EperQ) and ranges (EperQ_DEL)
+  ptr_free, struc.cup1_EperQ.data
+  struc.cup1_EperQ.data = ptr_new(spec.cup1_EperQ)
+  ptr_free, struc.cup2_EperQ.data
+  struc.cup2_EperQ.data = ptr_new(spec.cup2_EperQ)
+  ptr_free, struc.cup1_EperQ_DEL.data
+  struc.cup1_EperQ_DEL.data = ptr_new(spec.cup1_EQDEL)
+  ptr_free, struc.cup2_EperQ_DEL.data
+  struc.cup2_EperQ_DEL.data = ptr_new(spec.cup2_EQDEL)
+  ; include the effective area calibration table
+  ptr_free, struc.calibration_angle.data
+  struc.calibration_angle.data  = ptr_new(i_angle)
+  ptr_free, struc.calibration_effArea.data
+  struc.calibration_effArea.data  = ptr_new(eff_area)
+  ; set the inclination angle
+  ptr_free, struc.inclination_angle.data
+  struc.inclination_angle.data  = ptr_new([-15, 15])
+  ; set the tracking and full-scan mode flags
+  ptr_free, struc.tracking.data
+  struc.tracking.data = ptr_new(spec.tracking_arr)
+  ptr_free, struc.full_scan.data
+  struc.full_scan.data = ptr_new(spec.scan_arr)
+ 
+
+  ; 2.9 Write the data structure to CDF
+  result = write_data_to_cdf(Fsave, struc)
+  if result eq 1 then MESSAGE, '...CDF file output complete.', /INFORM $
+    else MESSAGE, '...CDF file output NOT complete: an error occured in CDF output formatting.', /INFORM
+
+  ENDIF ELSE BEGIN 
+  ; 2.6b Report the out-of-sync spin or other error
+  print, 'No valid data found in '+shortname   
+  status = -1L  
+;  stop; Check why this day was problematic, use .continue if necessary
+  
+  ENDELSE 
+
+ENDFOR
+
+  message, 'CDF conversion complete for ' + yyyy, /inform
+
+END
+
+
