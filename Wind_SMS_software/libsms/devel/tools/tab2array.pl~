@@ -1,0 +1,12 @@
+#! /usr/bin/perl 
+# tab2array -- convert table to C array
+# Jim Raines, 31Jan00
+
+open(IN, "../ref-data/tdvs2eoq.dat") or die "Cannot open input file.";
+
+while(<IN>){
+  if (/(\d+)\s+(\d+)/) {
+    printf("%d, ",$2);
+  }
+}
+ 

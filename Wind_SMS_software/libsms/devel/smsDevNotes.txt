@@ -1,0 +1,798 @@
+# -*- mode: indented-text -*-
+# smsDevNotes.txt -- Notes on developing WIND/SMS processing routines
+# Started by Jim Raines, 22Oct99
+
+===> Keep-At-Top To Do List
+For usable STICS data:
+ - confirm that right bit is being used for odd/even EDB in fixTcore
+ - check all-zero tcore when first edb in cycle is odd (what was I
+   talking about here?)
+
+Soon, but not req. for usable SWICS/STICS data:
+ - 28Sep2000 - nedbmax returns 62 for a full cycle, shouldn't it be 60?
+ - 17Aug2000 - stop passing doubles to getBits; pass longs instead.
+ And, define getBits byte argument and return type as long
+ - 29Mar00 - reset ncycle in smsOpenFile so it is a per file counter
+ - 27Mar00 - test libsms when keeping incomplete cycles
+   (fixReadoutDelay and fixTcore)
+ - test reset of smsgtdvstab and make it so its still good after an
+   incomplete cycle has been read
+ - figure out about fixed HK data
+ - do MASS
+ - cleanup smsDecommHDB behavior when near EOF and fix bug that causes 
+   a cycle skip in smsDecommHDB is run
+ - figure out why stepping tables now have that sharp peak early on
+ ? rename thmr to breakout into directions, e.g.,
+   thmrd0[0->15]...thmrd5[0->15] or just do this in smsTools function
+ ? don't copy cores of off instruments into structure if they
+   aren't there -- done?
+
+
+Later versions:
+ ? break up decodeNPHA (N=X,T,M) so that only decoding is done there
+ and all other calc. are done in smsTools functions
+ - break out STICS matrix rates (HMR, maybe SMR, BR) by direction and sector
+ ? keep last good cycle -- useful when doing some processing after all
+ cycles have been read; otherwise it could get overwritten by the
+ partial cycle at the end of the file.
+ - Change smsgtdvstab to be more careful that a representative
+ table was being returned, i.e. checking against known tables,
+ checking against a previous table or something.
+ - store decoded PHAs so that don't have to be decoded every time
+ anything is asked for
+ - make an NRT mode with functions like smsOpenNRTConnection and
+ smsusenrt to tell readRecord to get it from the server
+ - be sure all important values from TM are tested before used (e.g. msn)
+ ? optimize memory usage a little by passing pointers to arrays
+   instead of arrays where signifcant, e.g. lBuildWord
+ ? fix redundancy in decoding EDB header between getXDB and
+  decodeEDBheader -- maybe not -- this way it is easier to
+  diag. problems because the low level stuff isn't dependent on a lot
+  of routines
+ - do something about beginning/end of days data (losing some?)
+
+-----------------------End of Keep at Top-----------------------------------
+===> 18Sep2000 worklog -- adding MASS functions
+For 10Jun2000 stepping incident, I added matrix rates for mass.  I'm
+working on adding more mass functions for automated HK mail.
+
+[Aside:  These are the only real differences between this version and
+the committed/installed version.]
+
+First priority:  E/q table.  Unfortunately, this means resurrecting
+decommHDB. So I'll start there.  See smsBugLog.txt.
+
+11Oct2000:  smsDecommHDB doesn't seem to cause any other problems,
+other than dropping the cycle after it is called.  So, I'll use it as
+is for now and fix it later with the high bit rate mode stuff.
+
+Ok, back to E/q table.
+
+
+===> 6Apr00 Alysha getting some different velocities
+
+A small set of velocities (from fit to a cycles' FSR dist.) from a
+June 1999 day range were higher now (ver. 1.1.2) than before
+(ver. 1.0.3) the new version of smsReadCycle (that came out as of
+libsms ver. 1.1.0).
+
+After some careful analysis, it seems that the last FSR in these
+cycles is much larger now (e.g. ~10000) than it was before
+(e.g. ~2500).  Fortunately, the new value makes more sense.  (We
+think; for now!  :-)
+
+The old version did two things (for sure) that could have caused this
+problem.  1) The cycle was not zeroed in any way so that an EDB from
+the previous cycle could fill the spot of a missing EDB in the current
+cycle that was never assembled.  2) It did no bad or EDB sequence
+checking, coupled with fixReadoutDelay moving could have lead to these 
+erroneous values.
+
+We are considering this issue resolved for now.
+
+===> 5Apr00 adding tags to CVS and building old versions
+
+After Alysha wanted to use an old version of libsms (for comparision)
+that I couldn't find, I decided to tag all future installed versions
+in CVS.  I tagged the current version with
+
+% cd ~/wind/libsms
+% cvs tag 'ver1_1_2'
+
+CVS won't allow '.' so I had to use those '_'.  Now, when you show the 
+history of a file, you can see which revision was associated with a
+particular version tag.  If the version tags are always included on an 
+install, then it you can extract a particular version from CVS with:
+
+% cd <some dir. for old source tree>
+% cvs checkout -r <tag> wind/libsms
+
+For example:  I determined rev. 1.1 to by ver 1.0.1, which was before
+the EDB quality crap.  So, to get a source tree for this version, I
+did
+
+% cd /home/winddata/sw/libsms/test-version
+% cvs checkout -r 1.1 wind/libsms
+
+I got the whole source tree from rev. 1.1 (ver 1.0.1).  For future
+reference, I tagged this version too:
+
+% cd /home/winddata/sw/libsms/test-version/wind/libsms
+% cvs tag 'ver1_0_1'
+
+Note:  I had to make pathnames in src/Makefile relative so that I
+could build this in place.
+
+I think I can use 'cvs release' with some flag to tell it to ignore
+mod. files to get rid of this tree.
+
+===> 16Mar00 new smsReadCycle that handles incomplete cycles and bad EDBs
+
+Found a weird behavior where libsms acts differently when called from
+C and perl.  See smsBugLog on 16Mar00.
+
+After finally getting the new smsReadCycle to work and use the proper
+logic for marking EDBs bad, I did some testing:
+
+1. verify-libsms.pl gave no differences when compared with
+libsms.so.1.0.4 and with smssqualover(1).  When run with smssqualover(0)
+the libsms.so.1.0.4 output contained cycles at 18:36:16 and 20:54:16
+that are not present in the new version output.  This is the right
+behavior as skipping cycles with bad EDBs did not work right in the
+older version.  These EDBs are known to be bad.
+
+2.  tpha-c.pl was run then diff-tpha2.pl on the new output.  The
+results are summarized below:
+
+diff-tpha2: Summary -----------------------------------------------------
+diff-tpha2: found 604 data lines in pha.19990618.tpha-c
+diff-tpha2: 601 of 617 TOF matched (97.4%)
+diff-tpha2: 601 of 601 DVS matched (100.0%)
+diff-tpha2: 601 of 601 M matched (100.0%)
+diff-tpha2: 575 of 601 moq matched (95.7%)
+diff-tpha2: average moq difference 3.00e-02 (4.9% of average lsmoq 0.62)
+
+This is certainly in line with what it was before.  (The matched TOF,
+DVS and MASSes are identical.  The old matched moq were not recorded.)
+
+===> 3Mar00 registering with CVS (and intro. usage)
+
+- reorganize directories to take every thing not *directly* related to 
+libsms dev. out of the libsms dir.
+
+- did
+
+% setenv CVSROOT /home/winddata/sw/cvsroot  # I put in ~/.cshrc
+% cd ~/wind/libsms
+% cvs import -m "Imported sources" wind/libsms 
+
+This complained about some directories not existing; I made them and
+it worked find.  I should have done 
+
+% cvs init -d /home/winddata/sw/cvsroot
+
+to avoid having to make a those directories.  I did this afterward
+(docs said ok) to be sure it was set up right.
+
+To get my own copy of sources, I did
+
+% cd ~/
+% cvs checkout wind/libsms
+
+It created the libsms source tree in ~/wind.  CVSROOT was still set;
+but it will work without knowing the CVSROOT once a working directory
+is established.
+
+After making some changes (EDB quality subsystem), I did
+
+($cwd = ~/wind/libsms)
+% cvs commit -m "added EDB quality subsystem"
+
+to commit all changed sources.  (I used 'cvs update' a few times
+before to see which files had changed.)
+
+Later, I added a file in a new directory:
+
+% cd $libsms
+% cvs add tools
+% cd tools
+% cvs add uv.pl
+% cvs commit -m "Imported source" uv.pl
+
+(cvs add does not recurse.)
+===> 3Mar00 EDB quality flag -- design of subsystem
+
+Here's a plan:
+
+Make an array in the cycle
+
+EDBQuality[nedb]
+
+Set bits for
+
+byte explanation(T and X)		cause
+------------------------------------------------------------------------
+   0 bad ER, MR				nedb + 2 is bad
+   1 bad PHA, HRM, BR, SMR, npha 	nedb + 1 is bad)
+...
+   7 bad EDB				bad number subframes
+
+The whole thing bad should be the highest order bit, bit7 to allow for 
+expansion.
+
+Normal operation would be for smsReadCycle to check the quality flag
+for each EDB when it is done and read another cycle if any are bad.
+The user could use
+
+smssqualover(1)
+
+to override this behavior.  They would then be on there own to deal
+with it.  They could run
+
+smsgedbqual(nedb)
+
+To get the quality flag value. (I should wrap getBits into perl so
+they could easily get these individual flags.)  This is not that
+convenient.  Although, since bad EDB is bit 7, those would give a
+qual. value >= 128, which should be easy to recognize.
+
+
+===> 22Feb00 Compression groups
+
+Peter figured out the compression groups for STICS:
+
+----begin included message
+>2)  I've been using code C as the decompression type, but I'd like to
+>verify that this is the right one.  I see in the HDB byte 189 a listing
+>of what code to use for each compression group and instrument.  How can
+>I figure out which compression group everything is in?
+
+
+Good question.  I glanced into one of the UMD programs 
+(STICS_RATE_TABLE.FOR?) and read the comments.  If I am right that the 
+BTEST routine uses 1 to indicate the first bit and 2 to indicate the second 
+(bits I would call 0 and 1), then Compression Group 1 contains:
+
+High-resolution Matrix Rates
+Omnidirectional High-resolution Matrix Rates
+Sectored Matrix Rates
+Basic Rates
+UFSR and URSR, and
+TCR
+
+while Compression Group 2 contains:
+
+Direct sensor rates (FSRs, DCR, SSDs, ...)
+----end included message
+
+I'll have to look into something like this for SWICS and MASS.
+
+===> 22Feb00 STICS Sun Sector 
+
+Both SWICS and MASS have Sun sensors, readout in HDB bytes 86-7 and
+131-2, resp., but STICS does not.  According to Peter, who looked into 
+this before at some length, there does not seem to be an easy way to
+determine the sun sector for STICS.
+
+===> 11Feb00 fixing readout delay
+
+[Test to see if library is all screwed up:  run
+
+tpha-c.pl 19990618                                   
+diff pha.19990618.bfrd.tpha-c pha.19990618.tpha-c
+
+the only difference should be the '# generated on <date/time>' line.]
+
+Some elements are transmitted 1-2 spins later than they are
+accumulated.  I'm referring to this as readout delay.
+
+Ugh!  This is no trivial problem!
+
+Details:
+
+	item			N spins later
+STICS:
+       PHA			1	
+       corHR,SMR,BR		1
+       OMR			2
+       ER			2
+SWICS:
+	PHA			1
+	ER			2
+	(other elements do not work)
+MASS:
+	PHA			1
+	corBR,cor-secER		1
+	MR			2
+	spinER			2
+
+'cor' stands for corrected, as opposed to erroneous (which are?)
+'sec' sector oriented
+'spin' spin oriented
+
+SWICS matrix elements are actually transmitted two cycles later but
+since they don't work it doesn't matter.
+
+I changed fillStructEDB so that it returns the decoded EDB header
+(from decodeEDBheader) so that smsReadCycle can put it in place
+instead of just putting it in place itself.
+
+I was planning to add some new code at the end of smsReadCycle to read 
+two more EDBs and then reset the file pointer.  But, I realized that
+resetting the file pointer won't do it.  It will likely find those two 
+EDBs in the middle of a minor frame.  It would then get messed up if
+the file pointer was moved.  
+
+options:
+1) Read 1 more cycle.  Store it globally.  Make essentially FIFO
+buffer of two cycles, always having the current and next cycle in
+memory.  This requires changing smsReadCycle significantly though
+and/or making two levels of routines out of it.
+
+2) Go back to the original plan and read two more EDBs, but then reset 
+the mf back to what it was.  That would work -- No it won't.  Then,
+I'll have to deal with rolling over mf in multiple places, and what to 
+do if it gets rolled into another data record?  No, this will not
+work.
+
+3)  This sounds good:  Set up a FIFO-like situation with EDBs, always
+having 62 in memory (0-59 + 0 and 1).  BUT, instead of going back to
+re-read 0 and 1, just move them into the current cycle positions 0 and 
+1 and continue reading.
+
+
+===> 4Feb00  HDB time conversion
+
+According to Larry Bleau:  The times in HDB bytes 6-9 are in PB5
+format.  I downloaded a routine that converts these to Epoch format
+and put it in ~/wind/libsms/umd/WIND_PB5_TO_EPOCH.FOR .
+
+===> 1Feb00  Which library names are really needed
+
+I did a test when I first made libsms available on /arch.  
+
+Perl:  Needs libsms.so only.  Does nothing with other versions.
+
+C:  Needs libsmsc.so for run time and libsmsc.so.1.0.0 (or
+libsmsc.so.1) for compilation.
+
+===> 20Jan00 UMD VMS Software
+
+I poked around on umsms.umd.edu as user zurbuchen at some things Arik
+suggested I look at.  Here are some important files/directories:
+
+sms1:[wind.software.stics]	  stics routines
+stx_mmq_table.for		  Arik used to gen. PHA stuff
+wstics_rates.for		  Arik used to gen. rate stuff
+
+smsdisk3:[wind.l1data]		  sms LV1 data
+
+There were some helpful files in sms1:[wind.software.docs].
+
+Also, Peter suggested running sms1:[wind.software.l1]printl1.for .
+I printed it fontified and in color with
+
+a2ps --prologue=color --pretty-print=fortran -P co printl1.for
+
+(You must tell a2ps this is fortran because it has a .for ext. not .f)
+
+===> 20Jan00 Correlating with data from Arik
+
+I am getting way less PHA words on 19990618 than Arik:  109 vs. 614.
+This could account for the fact that I can't find any of my patterns
+in stopId, startIdRng, TOF, etc. in his data.
+
+Possible reasons why libsms doesn't correlate with Arik:
+
+ - wrong ntpha -- unlikely, existing ones should corr.
+ - alignment problem on copying into structure -- possibly copy
+ boundries wrong -- check a easy to guess MASS value
+ - problem with the individual words in decodeTPHA
+
+24Jan00:
+Arik assures me that these days of PHA words are just that, no
+averaging, no filtering, no anything.  He suggested two other days
+which have a good number of counts but not huge:  19990818 and
+19990909.
+
+I compared complete versus incomplete cycles for these days:
+
+[jraines@ionstream examples]% cvic.csh 19990818
+Processing day 19990818
+Complete cycles: 
+52
+Incomplete cycles: 
+387
+
+[jraines@ionstream examples]% cvic.csh 19990909
+argc=1 argv[0]= argv[1]=19990909
+Processing day 19990909
+Complete cycles: 
+50
+Incomplete cycles: 
+403
+
+and 
+
+[jraines@ionstream examples]% cvic.csh 19990618
+Processing day 19990618
+Complete cycles: 
+88
+Incomplete cycles: 
+369
+
+A very small percentage of the cyles are complete, 11.8%, 11.0%,
+19.3%, resp.  This accounts for the huge difference in total STICS pha 
+words on 19990618:  libsms -- 109 ; Arik -- about 614.  (I altered
+smsReadCycle to count all tpha words and came up with 580 ish.)
+
+-----
+Aside: printing these PHA files from Arik -- warning: these are long;
+better to print a few pages
+
+a2ps --columns=1 -l132 --font-size=7point -P lw phat990818.dat.head52
+
+-----
+
+But, why are none of my values the same as his??
+
+Answer:  Because I was assembling the PHA word in the wrong order.  It 
+should be that the first of the four bytes is the high byte and the
+4th is the low byte.  (Of course, this 
+
+7Feb00:  I have now been getting the same TOF, Sector, SSD ID and such 
+as Arik (for about 1 week now) but am often at a different DVS.  It
+may be because of the delay in formatting the PHAs.  I'm writing a
+program, diff-tpha.pl, to investigate.
+
+9Feb00:  
+
+It seems decommHDB causes libsms to miss a cycle.  This has
+been recorded in the bug log.  Unfortunately, this only seems add one
+of the missing PHAs from the tpha-c.pl output (when compared to
+Cham/Arik output).
+
+Oddity -- 'continuity.pl 19990618' reports STICS diagnostic mode after 
+cycle[380].  See smsBugLog.txt and search for 9Feb00 for a discussion
+of this bug.
+
+One set of discrepencies fixed:  I found out that there were errors in 
+tpha-c.pl.  Some of the PHA functions were not given the correct
+arg. for npha so they were reporting values for other PHAs.  I fixed
+this and got much different results out of diff-tpha.c:
+
+diff-tpha: found 604 data lines in /home/jraines/wind/libsms/examples/Perl/pha.19990618.tpha-c.
+diff-tpha: 601 of 617 TOF matched (97.4%)
+diff-tpha: 265 of 601 DVS matched (44.1%)
+
+I fixed diff-tpha.pl as well so that it does a pretty good job of
+counting different TOFs.  This 97.4% number looks reasonable assuming
+Cham keeps incomplete cycles, since I find about 97% of cycles are
+complete.  Implying that the different 2.6% are ones I drop because
+they are in imcomplete cycles.  There are two exceptions to this:  1) 
+TOF=545 is present in tpha-c.pl output but not in Cham's.  Also, the
+last two PHAs in tpha-c.pl output, TOFs=800 and 133, are not in
+Cham's.  (This could just be related to what he does at the end of the 
+day.)
+
+Still, though the DVS are only matching 44.1% of the time, and the
+difference when they don't match ranges from -2...2 (with one -4)
+
+22Feb00:
+
+After moving items around in the EDB with fixReadoutDelay, I get a lot 
+better numbers:
+
+diff-tpha: found 604 data lines in /home/jraines/wind/libsms/examples/Perl/pha.19990618.tpha-c.
+diff-tpha: 601 of 617 TOF matched (97.4%)
+diff-tpha: 601 of 601 DVS matched (100.0%)
+
+The mismatched TOF can easily be accounted for by dropped incomplete
+cycles (and that I can two extra PHA at the end of the day).
+
+The only mismatching quantity now is the m/q.  I'm off by about 3%.
+I've decided to look into Cham's code to try to figure out what
+numbers he's using for the conversion.  Also, I want to check my rates 
+with his, but that requires figuring out what his rates are.  Again I
+will look at the code.
+
+I modified diff-tpha.pl to compare mass and m/q when TOF and DVS match:
+
+diff-tpha2: found 604 data lines in pha.19990618.tpha-c
+diff-tpha2: 601 of 617 TOF matched (97.4%)
+diff-tpha2: 601 of 601 DVS matched (100.0%)
+diff-tpha2: 601 of 601 M matched (100.0%)
+diff-tpha2: 39 of 601 moq matched (6.5%)
+diff-tpha2: average moq difference 1.08e-02 (0.3% of average lsmoq 3.40)
+
+It's great to see M (mass) match 100%.  It is clear that there is a
+systematic difference in moq (m/q) which is small but present in
+almost all PHAs.  According to Cham's code, he is using the DPU
+algorithms for calculating m/q.  When I tried this, in tpha-c2.pl, I
+got numbers which weren't even close to his, although I did not know
+the value of one constant (C1) and used the default (rather than HDB)
+values for the rest.
+
+(If it turns out that I need those constants, I'll have to fix and modify
+smsDecommHDB because they are found in the comutated configuration
+image.)
+
+Geez -- I can't believe my stupidity.  Cham's formula was the the DPU
+manual formula with the ln's taken out.  (See paper notes for 23Feb00.)
+
+27Mar00: (long after this problem is solved)
+
+Different MOQ coeficients were used.  See code for details.  New
+results can be found in this file on 27Mar00.
+
+===> 10Dec99 getting stepping table
+
+This requires reading ahead 64 cycles beyond the current cycle to find 
+the full stepping table.
+
+decommHDB will do this but do avoid duplicating a bunch of code the
+following changes must be made to existing routines
+
+getXDB:
+int getXDB(BYTE abXDB[]){
+  return (abXDB);
+}
+
+smsReadCycle:
+
+dbtype = getXDB(abXDB)
+    if (dbtype == 3) {
+      /* got EDB */
+      nedb++;
+      fillStructEDB(abXDB);
+
+    else if (dbtype == 2){
+      /* got HDB */
+      if (TRACE) printf("%s: got HDB -- ",thisprog);
+      if (nedb == 60){ /* 60 EDB + 1 HDB = 1 cycle */
+	if (TRACE) printf("complete cycle found -- %d EDB 1 HDB\n\n", nedb);
+	got_cycle = TRUE; 
+      }
+      else {
+	if (TRACE) printf("INCOMPLETE cycle found -- %d EDB 1 HDB\n\n",nedb);
+	nedb = 0;
+      }
+    }
+
+
+
+===> 17Nov99 getting data into structure(s)
+
+Problem:  The locations of the core areas and such change because of
+1) telemetry mode 2) number of PHA words for each instrument.
+
+Order:		Low (bytes)	High (bytes)
+header		11		11
+xcore		62		116
+xpha		324 (var)	672 (var)
+tcore		90 (com)	180 
+tpha		296 (var)		608 (var)
+mcore		26		26
+mpha		362		762 (var)
+
+
+Possible Solution #1:
+Union structure (with sizes of maximums) with multiple arrays to leave 
+space.
+
+Possible Solution #2:
+Dave says it is possible to copy into structures without worrying
+about types and such by unioning the structure with an array and
+moving through the array with pointers.
+
+
+===> 16Nov99 EDB at minor frame 249 problem
+
+Sequence of events:
+
+ - getXDB finds EDB at mf 240 and copies out the EDB, incrementing mf
+ to 249
+ - on subsequent call to getXDB if finds EDB at mf 249
+ - mf 249 gets rolled to 0 (line 118) which is wrong because it will
+ make it copy the rest of the EDB out of the the beginning again
+ - a new record read is needed
+
+Possible solution:
+ - instead of rollover, getXDB 
+   - rolls over mf to 0
+   - returns to smsReadCycle with a flag that causes a rec. read
+ - smsReadCycle will read a record (because mf = 0)
+ - when getXDB is called it will need to know that copying terminated
+ in the middle and continue where it left off:
+   - req. static varibles:
+     - to indicate 'continue'
+     - numsf, sfbytes, and last sf copied
+
+Possible Solution #2:
+ - change copying of H/EDB back to original swics-rates way:  an mf is 
+ copied into H/EDB as it is scanned through instead of the "future"
+ mf's being copied when a DB is found.
+
+Fix later.
+
+1Feb00:  The fix is described in smsBugLog.txt
+
+===> 15nov99 sequences of H/EDB's
+
+There seems to be some discontinuity at the beginng and end of files.
+I compared 19990617 with 19990618 and came up with the following:
+
+6/17 ends w/	    		  6/18 begins w/
+HDB 00	  			  HDB 17
+msn 57				  msn 38
+286 minor frames w/o XDB	  5 minor frames w/o XDB
+
+There seem to be 64 (0-63) HDB's and thus (I presume) 64 cycles before 
+the HDB number repeats.
+
+16Nov99:  Around end of day
+
+Q1.  Does the last EDB for a day wrap into the next day file?
+
+Q2.  How common are incomplete cycles?
+
+I sent mail to Peter regarding these Q's.  His answers:
+
+-----begin mail message
+Afraid I'm not much help here, but I could try to ask someone at GSFC maybe...
+
+ >Q1.  Does the last EDB for a day wrap into the next day file?
+
+Good question.  For ACE data we start every daily file with the beginning 
+of the cycle, so often the first few EDBs are from the previous day.  I do 
+not know if this is done on Wind/SMS or not.
+
+ >Q2.  How common are incomplete cycles?
+
+Another good question.  On ACE I believe the data is very good and there 
+are few gaps, but alas, I do not know how good the Wind/SMS data is.
+
+Sorry.  I'll let you know if I get any pertinent info from GSFC.
+
+-pdb
+-----end message
+
+===> 15Nov99 naming scheme for subroutines
+
+ - all routines that are intended to be called by the user (in libsms) 
+ are prefaced with sms, e.g., smsOpenFile, smsReadCycle
+
+ - all other routines tend to have mixed capitalization (for
+ readability) but no names differ only by case
+
+ - they start with LC then have a UC char everywhere the
+ syllable/word/acronym changes
+
+===> 15Nov99 outline 
+
+Keep It Simple, Stupid!
+
+Sequence of calls that will result in useful science data being
+returned to the user:
+
+1. smsOpenfile -- opens file; creates static file pointer
+2. smsReadCycle -- 
+  - pulls info out of FLR to know how to proceed and puts in a static
+  structure so it can be accessed by successive calls to read cycles
+    - spacecraft/instrument ID
+    - major frames present/expected in file
+    - bytes per record
+    - date ( found in DRH for each minor frame, why is this one needed?)
+    - eventually everything in a structure?
+  - 
+
+===> 3Nov99 More Design Notes
+
+After reading the netCDF documentation, it seems that it would be just 
+about as easy to write a sms raw --> netCDF converter after getting
+libsms to work as it would to do it inline.  Considering the time
+pressure to get a working version of libsms, I will delay the netCDF
+issue.
+
+In working on assessing libhef from fortran (lff), I read a lot of the 
+gcc, g77, etc., documentation and discovered that a number of things
+could be (easily) done when developing libsms to make it easy to call
+from a fortran routine, should that be needed:
+
+ - function names are changed to lower case so no names that *only*
+  differ by case
+ - having an internal representation as a structure is fine, but
+ ACE/S3-style short functions to access its elements may be necessary
+ for fortran compatibility
+ - multi-D arrays pose a (fixable) problem for fortran (indiced
+ switched) and maybe one for perl -- avoid if possible
+
+
+===> 26Oct99    More Design Notes
+
+Should I convert to netCDF then read EDB's and such from there?
+ - P: data is self-describing (how much?)
+ - C: have to learn netCDF library stuff to convert and read files
+ - C: no real advantage in short run
+ - P: in long run -- where usage of data is hard to predict -- it may
+ be more useful. But, anyone working with the data will likely by
+ using libsms anyway (unless it can't be ported to their machine).
+ - P: machine independent
+ - C: must have netCDF library installed!
+-----------------------------------------------------------------------------
+Tough call.  It seems that I would be replacing the low-level getEDB
+functionality with some netCDF library stuff.  So, I won't have to
+really write much more code.  But, I will have to learn their library
+(which is supposed to be pretty easy).  I need to look into a netCDF
+file more to see the advantages.
+
+===> 25Oct99    More Design Notes
+
+Structure or big array for the data?
+
+Structure pros (P) and cons (C):
+ - P: well documented by the variable names
+ - ...but essentially the same is true about the #defines -- although
+ not exactly, because the structure can have multiple levels of
+ organization:
+ cycle.edb.x.pha
+ cycle.hdb.fredstring
+ cycle.edb.br0(i)  .br1(i)   .br2a(i)
+
+ or, the structure is a cycle so
+ edb(i).x.pha
+ hdb.tWrongHeadID
+ edb(i).t.br0(j)
+ edb(i).h.
+
+ - C: more code:  declare struct, assign values (after read) -- unless 
+ I can do a union where the variable sizes are guarenteed.  Without
+ this, I'll do all the work of declaring, reading and assigning into
+ the structure just to read it out of the structure again by a
+ function.  It seems that the structure (in some ways) makes more
+ sense if the data were being manipulated in C -- in the structure.
+ (Could I pass the structure to Perl?  If so, it would be more useful, 
+ but less parallel with ACE/S3.)
+ - P: structure could be self-documenting (on variable is a linked
+ list of elements at that level of the structure)
+ - P: wouldn't be any more coding IF a structure is passed out
+ ----------------------------
+ This only seems worth it if the structure is passed out to perl
+ (which I think is what Simon said he would do next time).  For
+ similarity with ACE/S3 I could make the struct. elements names
+ similar to the function names.
+
+Big Array
+ - P: fewer steps: put in all of the ends, read in XDB, functions read 
+ it out (no assignment phase)
+ - C: ...BUT I would have to code all the functions
+ - P: Simon has already worked on a lot of this
+ - C: isolated values are not very convenient; user must make own
+ structure if multiple days (etc.) are being read.  
+ - 
+
+===> 22Oct99	Design Notes
+
+ - smsRead opens data file and reads data into memory (into structure?)
+	- it reads in one cycle which is 1 HDB and 60 (0-59) EDB's
+	- rename to smsReadCycle ?
+ - other programs in smstools need to access that data in memory
+
+*Lots* of functions or functions that group items -- like smsStFsr(i)
+versus smsEngRates(fsr, i)
+
+ - Pdif (perl data interface) routines should not do any text
+   manipulation (since it is not easy in C) and should only take
+   integer args 
+ - above should be balanced with the ability to loop
+   through calls  --- these two seem to be at odds
+
+
+===> 22Oct99	CVS
+
+After reading CVS (Cocurrent Version Control) info docs, it seems like 
+it is easy enough to *import* pre-existing sw projects.  Therefore,
+I'm not going to register the project with CVS until I have at least a
+partially working version.
+
+JR

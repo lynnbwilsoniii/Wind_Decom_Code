@@ -1,0 +1,26 @@
+Data obtained from CDAWeb
+
+https://cdaweb.sci.gsfc.nasa.gov/index.html/
+
+W1_H0_MFI data
+
+Select Wind on Cdaweb website (https://cdaweb.sci.gsfc.nasa.gov/index.html/), and
+then select the W1_HO_MFI data (used 1 min resolution)
+
+Select full year time range
+
+Select List Data (ASCII/CSV)
+
+Pick the following parameters:
+- Magnetic field magnitude (1 min)
+- Magnetic field vector in GSM cartesian coordinates (1 min)
+- Magnetic field vector in GSE cartesian coordinates (1 min)
+- Postition vector in GSM coordinates (Define Re = 6378km) (1 min)
+- Postition vector in GSE coordinates (Define Re = 6378km) (1 min)
+
+Download and unzip combined.tar.gz and move to text file to text_files folder. 
+
+Dont forget to rename file with appropiate year at end of file.
+	(i.e. WI_H0_MFI_12734.txt --> WI_H0_MFI_2017.txt)
+
+

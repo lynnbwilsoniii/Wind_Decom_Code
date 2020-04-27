@@ -1,0 +1,139 @@
+Libsms Design and Maintenance
+-----------------------------
+[Revision history at end.]
+
+This document describes the main modules, program/data flow, variable
+naming conventions and other design decisions important to maintainers
+of the library.  In addition, explict instructions are give for
+certain maintenance tasks, such as adding a function which retrieves a
+new data item.
+
+Additional information, often more detailed, can be found in
+libsms.html (the user/programmer's guide for libsms), and the module
+comments, especially libsmsInit.c .
+
+Libsms overview
+---------------
+
+Libsms is a dual purpose library which decodes level 0 WIND/SMS data
+and provides an application programmer's interface (API) for
+extracting SMS data items in other code.
+
+The decoding process is essentially reading the LV0 file into an array
+and breaking it up into sub arrays corresponding to various headers,
+housekeeping (HK) items and minor frames (containing the EDB/HDB
+data).  These minor frames are then assembled into EDBs and HDBs
+(housekeeping data blocks).  From there, the data items in these
+H/EDBs are copied into data structures and (some are) transformed to
+physical units, ready to be read out by API functions.
+
+Naming Conventions
+------------------
+The various instruments are represented by one letter codes:  x for
+SWICS, t for STICS and m for MASS.  See libsms.html for more naming
+conventions, especially for function names.
+
+Major Module Description
+------------------------
+
+libsms.h  
+
+This header file contains all common definitions.  It defines
+structures for the file label record (FLR), experimental data block
+(EDB, both high and low bitrate versions), tpha, xpha, and the
+aggregate 'cycle' structure from which all API functions read.  It
+also contains the full text of the programmers guide (libsms.html)
+which is processed into an html document by SWIG as part of the perl
+interface generation.  This header contains all global function
+prototypes.  The ones starting with sms are intended as part of the
+API.  It also contains the declarations for the (few) global
+variables.
+
+libsmsInit	 
+
+Initializes global variables and imports version and build date/time
+from make process.
+
+smsOpenFile
+
+Opens LV0 data file, calls libsmsInit (first time) and gets the File
+Label Record, which contains, among other things, the number of major
+frames in the current file and the number of bytes per record.  These
+items are used, esp. the last, for further reading.
+
+smsReadCycle
+
+This is the heart of the library and calls (possibly indirectly)
+everything which reads current cycles into memory and prepares the
+data items for reading out by the API functions in libsms.  The
+details of these calls are presented in the program flow section, below.
+
+Important note: Even though there are only 60 EDBs per cycle, this
+routine reads two EDBs beyond that, for a total of 62 EDBs.  This is
+done because some data items are transmitted in a different EDB than
+they are measured.  Collecting 2 extra EDBs allows moving items back
+to the EDB that they were measured with (with a routine called
+fixReadoutDelay).
+
+In addition to the above, this routine: 1)  keeps track of EDB
+quality flags 2) collects statistics on PHAs lost due to quality 3)
+fixes the STICS core area.  (See fixTcore.)
+
+getXDB
+
+Searches through the minor frame array (mf's 0-249, each of which is X 
+bytes) for H/EDB id characters.  Once found, it decodes the H/EDB
+header information, and copies the bytes from the next several
+subframes into abXDB array.
+
+readRecord
+
+Reads the next record from the LV 0 file and copies various parts into
+subarrays.  It copies out the data record header (DRH) amd CHK data
+while putting the minor frames together into one big array.
+
+
+fillStructEDB
+
+This routine converts the EDB array of bytes into a structure of
+named elements for each data item.  It copies through the structure
+using point incrementing, so it very carefully checks values before
+using them in array indexing.  This reduces memory errors. 
+
+decodeHDB
+
+Decodes HDB array of bytes into a structure of named elements for each 
+data item in the Housekeeping Data Block.
+
+fixTcore
+
+In low bit rate mode, the STICS core area of the EDB comes down in two
+subsequent EDBs.  (The core area is where the multitude of rates for
+STICS are stored.  See big blue book.)  This routine copies the halfs
+into the core area of the EDB structure (which is big enough for the
+whole core area).  This leads to subsequent EDBs (in the cycle
+structure) having the same STICS core area.
+
+fixReadoutDelay
+
+Moves data items from the EDB in which they were transmitted to the
+EDB in which they were measured.  See comments at top of source file
+for details.
+
+smsCloseFile
+
+Closes level 0 file.
+
+Program and Data Flow
+---------------------
+
+See hardcopy.
+
+Maintenance
+-----------
+[This section has not yet been written.  Sorry!  JMR.]
+
+Revision History
+----------------
+  Initial writing.  Jim Raines, 7May2001
+

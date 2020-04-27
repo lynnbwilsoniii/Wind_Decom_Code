@@ -1,0 +1,8 @@
+# smsDataNotes -- File for notes on the SMS Data
+# Jim Raines, 22Oct99
+
+===> 22Oct99 Science Record
+
+60 EDB's (0-59) and 1 HDB
+
+This is what is useful for analysis

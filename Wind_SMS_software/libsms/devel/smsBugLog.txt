@@ -1,0 +1,792 @@
+# -*- mode: indented-text -*-
+# smsBugLog.txt -- Log of bugs and fixes for libsms
+# Started by Jim Raines, 14Jan00
+
+===> 25Jan2001 libsms may crash on 20000108
+
+A segmentation fault and core dump happen (after cycle 184) when
+smstemptrnd.pl is run on 20000108.  This day has a lot of things that
+libsms thinks are bad (and may well be), esp. EDBs out of order.  I
+ran read-day.c on this day with no problems.  It ended with cycle 184, 
+which makes me think this is the end of the file which is not being
+reported correctly causing the crash.  
+
+This is not the only time that perl and C programs have behaved
+differently, although read-day.c wasn't set up to anything besides
+read the cycle, get the time and get the dpu temperature.  However,
+since the crash seems to happen before smsReadCycle returns the next
+cycle (after 184), I kind of doubt that any libsms function calls have 
+any bearing.  More probably, it is one of the following:
+
+1) There is a memory problem which is either in libsms and only shows
+up with the swig stuff in place.
+
+2) There is a memory problem introduced by the swig code.
+
+Either one of these would seem to go along with the other similar bug
+(See 15Feb00 entry about smsgss1970).
+
+So, this may or may not be a real bug with libsms.
+
+===> 3May00 br0[0] has identical rates (always) in subsequent DVS
+
+Symptoms:
+Arik discovered this when first trying to use the pre-LV2 data.  What
+follows are lines from pha19991202.tph:
+
+# The columns are in the following order:
+# sci-rec bitr year doy hh mm ss dvs   e/q stopid st/rng Ed sector ssdId Td start range    m/q   mass  Nm   Nq
+...
+   29076 0    1999 336 01 32 19 16  39.38     03   15   31   01     3  195    05   00    2.94   10.1  34  012
+    29076 0    1999 336 01 32 19 18  49.62     01   08   10   12     1  124    02   02    1.05    1.0  08  006
+
+In the pha data, you can see that the one with DVS=16 should fall into 
+br0 while the DVS=18 pha does not.
+
+In the following lines (truncated) from rates19991202.tra , you can
+see that the first DVS=16 line does not have the rate=1 and the first
+DVS=18 line does have br0[0]=1 where it should not.  The rates for the 
+two lines (spins) of DVS=16 *must* have the same rates since the DPU
+only puts the rate 1/2 of the tcore into every other EDB (and fixTcore 
+copies that into both edbs of each pair).
+
+# The columns are in the following order:
+# sci-rec bitr year doy hh mm ss dvs br0[0] br0[1] br0[2] br0[3] br0[4] br0[5] 
+...
+    29076 0    1999 336 01 32 19 16    00     00     00     00     00     00   
+    29076 0    1999 336 01 32 19 16    01     00     00     00     00     00   
+    29076 0    1999 336 01 32 19 18    01     00     00     00     00     00   
+    29076 0    1999 336 01 32 19 18    00     00     00     00     00     00   
+
+Problem: (I think)  It looks to me like a fixTcore problem.  This
+seems possible since Peter and I couldn't figure exactly what to use
+as the odd/even bit.
+
+===> 6Mar00 spurious reporting of high bit rate mode (tmp. workaround in place)
+
+3May00: Note -- this may be gone now that the new smsReadCycle has
+been put in.
+
+Symptom:  fixTcore reports spontaneous and seemingly spurious high bit 
+rate modes.  This is now tagged as a bad EDB, but otherwise it returns 
+some junk (known at least is huge xnpha).  This is almost certainly a
+corruption of memory somehow because this high bit rate mode EDB does
+not seem to be present when they are read in.  Here is an example for
+19990619, with debug being set up to 3 after reading cycle 198.  The
+stdout was grepped for 'bitrate' to give
+
+getXDB: MF[132] found idents - numsf=6 - EDB - sfbytes=40 - bitrate=0 - msn=2
+getXDB: MF[138] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=3
+getXDB: MF[146] found idents - numsf=9 - EDB - sfbytes=40 - bitrate=0 - msn=4
+getXDB: MF[155] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=5
+getXDB: MF[163] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=6
+getXDB: MF[171] found idents - numsf=9 - EDB - sfbytes=40 - bitrate=0 - msn=7
+getXDB: MF[180] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=8
+getXDB: MF[188] found idents - numsf=9 - EDB - sfbytes=40 - bitrate=0 - msn=9
+getXDB: MF[197] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=10
+getXDB: MF[205] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=11
+getXDB: MF[213] found idents - numsf=9 - EDB - sfbytes=40 - bitrate=0 - msn=12
+getXDB: MF[222] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=13
+getXDB: MF[230] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=14
+getXDB: MF[238] found idents - numsf=9 - EDB - sfbytes=40 - bitrate=0 - msn=15
+getXDB: MF[247] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=16
+getXDB: MF[005] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=17
+getXDB: MF[013] found idents - numsf=9 - EDB - sfbytes=40 - bitrate=0 - msn=18
+getXDB: MF[022] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=19
+getXDB: MF[030] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=20
+getXDB: MF[038] found idents - numsf=9 - EDB - sfbytes=40 - bitrate=0 - msn=21
+getXDB: MF[047] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=22
+getXDB: MF[055] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=23
+getXDB: MF[063] found idents - numsf=9 - EDB - sfbytes=40 - bitrate=0 - msn=24
+getXDB: MF[072] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=25
+getXDB: MF[080] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=26
+getXDB: MF[088] found idents - numsf=9 - EDB - sfbytes=40 - bitrate=0 - msn=27
+getXDB: MF[097] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=28
+getXDB: MF[105] found idents - numsf=9 - EDB - sfbytes=40 - bitrate=0 - msn=29
+getXDB: MF[114] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=30
+getXDB: MF[122] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=31
+getXDB: MF[130] found idents - numsf=9 - EDB - sfbytes=40 - bitrate=0 - msn=32
+getXDB: MF[139] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=33
+getXDB: MF[147] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=34
+getXDB: MF[155] found idents - numsf=9 - EDB - sfbytes=40 - bitrate=0 - msn=35
+getXDB: MF[164] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=36
+getXDB: MF[172] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=37
+getXDB: MF[180] found idents - numsf=9 - EDB - sfbytes=40 - bitrate=0 - msn=38
+getXDB: MF[189] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=39
+getXDB: MF[197] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=40
+getXDB: MF[205] found idents - numsf=9 - EDB - sfbytes=40 - bitrate=0 - msn=41
+getXDB: MF[214] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=42
+getXDB: MF[222] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=43
+getXDB: MF[230] found idents - numsf=9 - EDB - sfbytes=40 - bitrate=0 - msn=44
+getXDB: MF[239] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=45
+getXDB: MF[247] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=46
+getXDB: MF[005] found idents - numsf=9 - EDB - sfbytes=40 - bitrate=0 - msn=47
+getXDB: MF[014] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=48
+getXDB: MF[022] found idents - numsf=9 - EDB - sfbytes=40 - bitrate=0 - msn=49
+getXDB: MF[031] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=50
+getXDB: MF[039] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=51
+getXDB: MF[047] found idents - numsf=9 - EDB - sfbytes=40 - bitrate=0 - msn=52
+getXDB: MF[056] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=53
+getXDB: MF[064] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=54
+getXDB: MF[072] found idents - numsf=9 - EDB - sfbytes=40 - bitrate=0 - msn=55
+getXDB: MF[081] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=56
+getXDB: MF[089] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=57
+getXDB: MF[097] found idents - numsf=9 - EDB - sfbytes=40 - bitrate=0 - msn=58
+getXDB: MF[106] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=59
+getXDB: MF[114] found idents - numsf=7 - HDB - sfbytes=40 - bitrate=0 - HDB#54
+getXDB: MF[127] found idents - numsf=6 - EDB - sfbytes=40 - bitrate=0 - msn=1
+getXDB: MF[133] found idents - numsf=6 - EDB - sfbytes=40 - bitrate=0 - msn=2
+
+You can see that at read time, the bit rate was always 0 (i.e low).
+
+Now, these are the last few lines of output before the calling perl
+program (mass_moq.pl of Alysha's) crashes because of xnpha out of
+range:
+
+fixTcore: de-commuting STICS core area -- subsequent EDB's contain same one
+fixTcore: warning -- called for high bit rate EDB[02]-- STICS core will be junk
+fixReadoutDelay: moving data items back to EDB in which they were coll
+
+So, it looks like EDB[02] has a corrupted h_dc (i.e. cycle.h_dc[2]).
+I fired up ddd, and watched cycle.h_dc[2], it goes crazy while reading 
+cycle 199 of the file.
+
+I checked fillStructEDB by putting checks of the bit rate before and
+after the copying -- no effect on the crashing, i.e. still returns out 
+of range xnpha.
+
+I commented out fixTcore -- same.
+
+I commented out fixReadoutDelay -- same.
+
+Workaround:
+
+I made fixTcore mark this EDB as EQBADTCORE, so that Alysha's filter
+for a non-zero smsgedbqual would fail and the offending EDB would not
+be processed.  
+
+This is *not* a long term solution though.  Particularly, it won't
+work 1) unless the user looks a smsgedbqual and 2) when smsReadCycle
+rejects cycles with 1 or more bad EDBs by default.
+
+===> 9Feb00 smsDecommHDB causes libsms to miss a cycle
+
+Symptom:
+
+Running smsDecommHDB on the first cycle causes the next cycle to be
+missed:
+
+File written by 'tpha-c.pl 19990618' with smsDecommHDB run on first
+time through cycle loop: (first four PHA words only)
+
+# PHA items from WIND/STICS, data date is 19990618
+# generated by tpha-c.pl on Wed Feb  9 08:40:57 2000
+# The columns are in the following order (fill is just 0 filled):
+# sci-rec fill year doy hh:mm:ss dvs   e/q stopid fill Ed sector ssdId Td start range    m/q   mass  Nm   Nq
+    37970 0    1999 169 00:00:00 00   6.19 02     000  00   07     0  271    04   02    0.82    0.0  00  004
+    37970 0    1999 169 00:00:00 15  35.08 01     000  00   13     0  139    02   02    1.00    0.0  00  005
+    37972 0    1999 169 00:06:08 12  24.80 01     000  00   12     0  173    01   02    1.26    0.0  00  007
+    37972 0    1999 169 00:06:08 29 177.05 01     000  00   01     0  280    02   01   33.02    0.0  00  029
+
+TOF go in this sequence: 271 139 173 280
+
+File same as above but without smsDecommHDB running at all: (first
+four PHA words only)
+
+# PHA items from WIND/STICS, data date is 19990618
+# generated by tpha-c.pl on Wed Feb  9 08:29:24 2000
+# The columns are in the following order (fill is just 0 filled):
+# sci-rec fill year doy hh:mm:ss dvs   e/q stopid fill Ed sector ssdId Td start range    m/q   mass  Nm   Nq
+    37970 0    1999 169 00:00:00 00   6.19 02     000  00   07     0  271    04   02    0.82    0.0  00  004
+    37970 0    1999 169 00:00:00 15  35.08 01     000  00   13     0  139    02   02    1.00    0.0  00  005
+    37971 0    1999 169 00:03:04 11  22.09 03     000  00   13     0  146    06   02    0.69    0.0  00  003
+    37972 0    1999 169 00:06:08 12  24.80 01     000  00   12     0  173    01   02    1.26    0.0  00  007
+
+TOF go in this sequence: 271 139 146 173.  The TOF=146 is not present
+when smsDecommHDB is run.  Since 271 and 139 are part of the first
+cycle, 146 is the only PHA in the next cycle and 173 is the first in
+the 3rd cycle, it's easy to see that the second cycle is being
+missed.  This was confirmed with output from continuity.pl (which
+prints info with every EDB).  The EDB stuff from the entire 2nd cycle
+is missing.
+
+11OCt2000:
+
+This problem cropped again when I was adding MASS functions, since I
+need the full set of HDBs to get the stepping table voltages.
+However, besides causing the next cycle to be missed, it doesn't seem
+to cause any other problems.  I'll use it as is for now.
+
+===> 9Feb00 libsms::smsgtmode occasionally wrong
+
+3May00: Note -- this may be gone now that the new smsReadCycle has
+been put in.
+
+Symptom: (examples from day 19990618; first cycle is #1 (not 0))
+
+When called from perl in the following way
+
+    if (libsms::smsgtmode($nedb)){
+      printf("%s: fatal -- STICS in (unsupported) Diagnostic mode\n",
+	     $thisprog);
+      exit(SMSFATAL);
+    }
+
+The program sometimes exits having found diagnostic mode when no
+diagnostic mode was entered.  A warning message was added to
+smsReadCycle to warn (not exit) when smsgtmode returned 1 (so that
+this perl code wouldn't need to be included in all sw).  smsReadCycle
+presented the same warning but it was only one EDB:
+
+continuity: Cycle[396] time is 1999169 20:45:04 UT (74704654 msec 718 usec)
+continuity: Cycle[397] time is 1999169 20:51:12 UT (75072654 msec 703 usec)
+getXDB: warning -- numsf=21 is out of range; EDB not assembled
+fixTcore: warning -- odd edb encountered before even -- thmr[0-89] are junk
+fixTcore: warning -- odd edb encountered before even -- thmr[0-89] are junk
+continuity: Cycle[398] time is 1999169 20:54:16 UT (75256654 msec 687 usec)
+continuity: Cycle[399] time is 1999169 20:57:20 UT (75440654 msec 671 usec)
+smsReadCycle: warning -- STICS in Diagnostic mode -- STICS EDB[54] OMRs and FSRs are re-defined.  See smsgtmode docs for details.
+continuity: Cycle[400] time is 1999169 21:00:24 UT (75624654 msec 671 usec)
+continuity: Cycle[401] time is 1999169 21:03:28 UT (75808654 msec 656 usec)
+
+Could this be related to the preceeding warnings, even though they are 
+for previous cycles?  There is an earlier warning (in Cycle[356]) about 
+numsf being out of range (numsf=22).  But, there is no subsequent
+diag. mode warning, so I doubt they are related.
+
+Could this be an isolated TM hit?  There is no question that STICS
+does not really go into diag. mode for one EDB (about 3s).  It cannot
+switch that fast.  Given that the numsf=21 in a few cycles before is
+likely to be a TM hit, this problem may very well be one also.
+
+Strangely, continuity.c (makes all same libsms calls as perl ver. but
+doesn't actually write to file) was not giving this diag. mode
+warning.  I tried re-making continuity and making libsms clean (I
+don't know if I did a make clean on continuity).  No change.  I
+rebooted the machine, did a libsms make clean and one on continuity.
+Now, continuity.c gives the same output (above) as continuity.pl.
+
+I am curious about why similar C and perl programs were not giving
+same results.  But, still I think this is a TM hit.  But(!),
+diff-tpha.pl does not show this diag. mode.  What is going on?
+
+
+===> Resolved Bugs ------------------------------------------------------
+===> 29Aug2000 libsms crashes in decodeTPHA when debug=2 for 14Jul2000 -- Resolved 30Aug2000
+(Public version may not do this.)
+There was a problem in dumping the decode TPHA.  It was using
+
+printf("%s=%s\n",members[i],*ps); 
+
+which caused a segmentation fault (for no reason obvious to me).
+
+I changed it to
+
+printf("%s=%s\n",members[i],&stpha.ssdName[0]);
+
+which fixed the problem.
+
+===> 2Mar00 libsms crashed on 19990627,8 by smsgxeoq and/or smsgxenergy -- Resolved: 5Mar00
+
+Symtom: (mail from Alysha)
+
+
+Hi Jim,
+  I've found a possible problem with your wind routines.  In the program
+you initially gave me (swics-rates.pl, attached), it core dumps on day
+19990627.  I've narrowed it down to a problem with the voltages (I think),
+the routine libsms::smsgxeoq($nedb,$i) and the energies 
+libsms::smsgxenergy($nedb,$i)).  It doesn't crash if I just get the fsrs,
+times and number of edbs (routines libsms::smsgxfsr($nedb),
+libsms::smsgss1970(), and libsms::smsgxnpha($nedb).
+
+The messages given are:
+
+%perl mass_moq_test.pl
+
+smsReadCycle: fatal -- WIND/SMS in unsupported high bit rate mode.
+smsReadCycle: fatal -- WIND/SMS in unsupported high bit rate mode.
+getXDB: warning -- numsf=21 is out of range; EDB not assembled
+fixTcore: warning -- odd edb encountered before even -- thmr[0-89] are junk
+fixTcore: warning -- odd edb encountered before even -- thmr[0-89] are junk
+Segmentation fault (core dumped)
+
+Let me know if you need any more information or if you figure this out.  
+-Alysha
+
+-----end of message
+
+Problem:
+
+I can reproduce the core dump in Perl or C.  The problem is that in
+the reading of cycle 243, EDB[0] of the next cycle is missing:
+
+getXDB: MF[238] found idents - numsf=7 - HDB - sfbytes=40 - bitrate=0 - HDB#16
+decodeHDB: cycle.hdb.SciRecCount=42512
+smsReadCycle: got HDB -- complete cycle found -- 60 EDB 1 HDB
+
+getXDB: MF[245] idents not found - MinorFrame[245] - count=1
+getXDB: bytes 0-11: 0 0 0 0 0 0 0 0 0 0 0 0 
+getXDB: MF[246] idents not found - MinorFrame[246] - count=2
+getXDB: bytes 0-11: 0 0 0 0 0 0 0 0 0 0 0 0 
+getXDB: MF[247] idents not found - MinorFrame[247] - count=3
+getXDB: bytes 0-11: 0 0 0 0 0 0 0 0 0 0 0 0 
+getXDB: MF[248] idents not found - MinorFrame[248] - count=4
+getXDB: bytes 0-11: 0 0 0 0 0 0 0 0 0 0 0 0 
+getXDB: MF[249] idents not found - MinorFrame[249] - count=5
+getXDB: bytes 0-11: 0 0 0 80 0 161 116 0 32 0 0 36 
+readRecord: 10800 bytes read
+getDRH: record UT -- 1999178 16:41:00 (60060604 msec 718 usec)
+getDRH: TM mode is Science-92s
+getDRH: instrument number is 5 (SMS=5)
+getXDB: MF[000] idents not found - MinorFrame[000] - count=6
+getXDB: bytes 0-11: 0 0 0 0 0 0 0 0 0 0 0 0 
+getXDB: MF[001] found idents - numsf=6 - EDB - sfbytes=40 - bitrate=0 - msn=1
+smsReadCycle: reading ahead, nedb=61, msn=1
+decodeEDBheader: nxpha=000 ntpha=002 nmpha=000 totpha=002
+fillStructEDB: xer: fsr=144 dcr=004 tcr=000 ssd1=007 ssd2=004 ssd3=020 
+fillStructEDB: xhk=122 DPPSstep=058 PHArange=1
+smsReadCycle: got 61 EDB(s) so far
+
+Notice, the first read ahead EDB is 1 not 0.  This means the
+fixReadoutDelay is just not going to work and put some nonsense in the 
+EDBs.  At least one way this is manifested is that nxpha for EDB[2] is 
+huge (after fixReadoutDelay messes it up) and this causes a seg. fault 
+in any program that tries to loop over the number of xphas.
+
+This could be fixed by adding an EDB quality system.
+
+Resolution:
+
+An EDB quality system was added.
+===> 16Mar00 new smsReadcycle caused different C and Perl behavior -- Resolved: 17Mar00:
+
+All was going well, but there is a problem now:  When I set it to drop 
+cycles with bad EDB(s), read-day.pl craps out after Cycle[157] -- the
+problem is that read-day.c does not!  Neither do anything but call
+smsReadCycle and print the cycle time.  Boo.  :-(
+
+I tried make clean -- nope.
+
+Here is a careful analysis.  First output from read-day.c:
+
+smsReadCycle: reading cycle...
+smsReadCycle: got HDB --  SciRecCount=38230 HDB#=22
+fixTcore: de-commuting STICS core area -- subsequent EDB's contain same one
+fixReadoutDelay: moving data items back to EDB in which they were collected.
+smsReadCycle: complete cycle found -- 62 EDB 1 HDB
+smsReadCycle: 130 acceptable cycle(s) found thus far
+read-day: Cycle[130] time is 1999169 13:21:56 UT (48116656 msec 468 usec)
+
+smsReadCycle: reading cycle...
+smsReadCycle: got HDB --  SciRecCount=38231 HDB#=23
+fixTcore: de-commuting STICS core area -- subsequent EDB's contain same one
+fixReadoutDelay: moving data items back to EDB in which they were collected.
+smsReadCycle: cycle has bad EDB(s) ... discarding.
+smsReadCycle: PHA words lost: xnpha=21 tnpha=1 mnpha=19
+smsReadCycle: 130 acceptable cycle(s) found thus far
+smsReadCycle: got HDB --  SciRecCount=38232 HDB#=24
+fixTcore: de-commuting STICS core area -- subsequent EDB's contain same one
+fixReadoutDelay: moving data items back to EDB in which they were collected.
+smsReadCycle: complete cycle found -- 62 EDB 1 HDB
+smsReadCycle: 131 acceptable cycle(s) found thus far
+read-day: Cycle[131] time is 1999169 13:28:04 UT (48484656 msec 437 usec)
+
+Now from read-day.pl:
+
+smsReadCycle: reading cycle...
+smsReadCycle: got HDB --  SciRecCount=38230 HDB#=22
+fixTcore: de-commuting STICS core area -- subsequent EDB's contain same one
+fixReadoutDelay: moving data items back to EDB in which they were collected.
+smsReadCycle: cycle has bad EDB(s) ... discarding.
+smsReadCycle: PHA words lost: xnpha=18 tnpha=1 mnpha=18
+smsReadCycle: 129 acceptable cycle(s) found thus far
+smsReadCycle: got HDB --  SciRecCount=38231 HDB#=23
+fixTcore: de-commuting STICS core area -- subsequent EDB's contain same one
+fixReadoutDelay: moving data items back to EDB in which they were collected.
+smsReadCycle: complete cycle found -- 62 EDB 1 HDB
+smsReadCycle: 130 acceptable cycle(s) found thus far
+read-day: Cycle[130] time is 1999169 13:25:00 UT (48300656 msec 453 usec)
+
+smsReadCycle: reading cycle...
+smsReadCycle: got HDB --  SciRecCount=38232 HDB#=24
+fixTcore: de-commuting STICS core area -- subsequent EDB's contain same one
+fixReadoutDelay: moving data items back to EDB in which they were collected.
+smsReadCycle: cycle has bad EDB(s) ... discarding.
+smsReadCycle: PHA words lost: xnpha=18 tnpha=1 mnpha=19
+smsReadCycle: 130 acceptable cycle(s) found thus far
+smsReadCycle: got HDB --  SciRecCount=38233 HDB#=25
+fixTcore: de-commuting STICS core area -- subsequent EDB's contain same one
+fixReadoutDelay: moving data items back to EDB in which they were collected.
+smsReadCycle: complete cycle found -- 62 EDB 1 HDB
+smsReadCycle: 131 acceptable cycle(s) found thus far
+read-day: Cycle[131] time is 1999169 13:31:08 UT (48668656 msec 437 usec)
+
+Notice that libsms thinks there is a bad EDB in HDB# 22's cycle
+when called from Perl but not from C.  My guess is that this is some
+sort of memory problem that is real in the code, just that Perl
+exacerbates it for some reason while it slips by undetected from C.
+
+17Mar00:
+
+I rebooted.  Then, when ignoring quality, read-day.c, segmentation
+faults after cycle 232.  Without ignorine quality, it reads to end (I
+can't remember which cycle.)  I put in the smsTools functions and
+global flags for incom. cyc. and qual. over.  and rebuilt -- now
+read-day.c finds no more cycles after 159 just like read-day.pl did
+yesterday.  (Or was that 157?!)  Crap.
+
+Later:
+
+Well that problem seemed to be because EDBs were being inserted into
+a place in the cycle that didn't exist because msn + offset (spin)
+wasn't checked as being <= 61 first.  
+
+It seems that these perl/C differences indicate a memory problem
+(likely writing outside array bounds) that just hasn't manifested
+itself completely yet.
+
+===> 15Feb00 repeated calls to smsgss1970 return different values -- Resolved 17Feb00
+
+Symptoms:
+
+Test code from 'swics-rates.pl 19990618':
+
+## read cycle
+$ncycle = 0;
+while ( ($result = libsms::smsReadCycle()) == 0) { # fix: 0 -> SMSSUCCESS
+  $ncycle++;
+
+  # print time string for cycle
+  printf("%s: Cycle[%3.3d] time is %s\n",$thisprog,$ncycle,
+	 libsms::smsgtimes()); 
+  
+  $ss1970 = libsms::smsgss1970();
+  $ss1970 = libsms::smsgss1970();
+
+  printf("%s: seconds since 1970 = %d\n",$thisprog, $ss1970);
+
+}
+
+This prints the following from the first cycle:
+
+swics-rates: seconds since 1970 = 929577600
+
+(This is not the right #.)  However, if one of the
+libsms::smsgss1970() calls is removed the following prints:
+
+swics-rates: seconds since 1970 = 929664000
+
+This number is correct.
+
+Comparing the two numbers
+
+929664000 - 929577600 = 86,400
+
+which is exactly one day!!  (So, 929577600 is midnight on 17Jun99.
+(Verified with tc on web.)  I repeated this test with 'swics-rates
+19990617' and got the correct (verified on web) number for that day
+with only one call to a smsgss1970 and exactly one day prior with more 
+than one.
+
+I tried this with read-day.c -- no effect.  This appears to be a perl
+interfacing problem.
+
+Bizarre 1:  I also discovered that smsgtime, smsgyear, and smsgdoy cause
+this same problem when called before a call to smsgss1970.
+
+Bizarre 2:  These functions do not cause trouble when called
+repeatedly as arguments to printf.  They do cause this problem when 
+
+libsms::smsgtime();
+$time = libsms::smsgtime();
+
+A subsequent call to smsgss1970 will return one day less than actual.
+
+It turns out, even calling smsgxfsr will cause this error (if not used 
+somehow first (besides assignment)).
+
+I put print statements in smsgss1970 itself, hard coded year, doy and
+sec to remove other subroutine dependencies and this still showed up
+-- actually in the output from smsgss1970 itself.  So, I guess it
+isn't exactly a Perl problem, rather, it is probably a memory problem.
+
+Fix:
+
+I made ss1970, the variable that holds the calculation in smsgss1970 a 
+static.  This solved the problem.  
+
+===> 2Feb00  dvs values go to 0 after EOF -- Resolved 2Feb00
+
+Symptoms:  
+
+% tspec 19990909
+...
+tspec: cycle[460] dvstab: 0 0 2 2 4 4 6 6 8 8 10 10 12 12 14 14 16 16 18 18 20 20 22 22 24 24 28 28 30 30 29 29 27 27 25 25 23 23 21 21 19 19 17 17 15 15 13 13 11 11 9 9 7 7 5 5 3 3 1 1 
+readRecord: no characters read; assuming EOF
+tspec: cycle[460] dvstab: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 16 18 18 20 20 22 22 24 24 28 28 30 30 29 29 27 27 25 25 23 23 21 21 19 19 17 17 15 15 13 13 11 11 9 9 7 7 5 5 3 3 1 1 
+ncycle=460
+
+tspec output the first cycle[460] stuff while still in the
+smsReadCycle loop -- everything is fine.  The second cycle[460] is
+output after the loop, which means after readRecord has returned
+SMSEOF to getXDB (which returns it to smsReadCycle which returns it to 
+perl).  Since STICS dvs is far into the EDB, I'm wondering if the
+first 18 EDBs get zeroed somehow.  This needs to be looked at in the debugger.
+
+Solution:
+
+This is not a bug!  It is an artifact of the call to smsReadCycle that 
+produces the SMSEOF needed to exit a cycle loop.  The current cycle
+has gotten zeroed by the cycle that the last call was filling in when
+the file ran out.  There happened to be 17 EDBs so in this
+(incomplete) cycle at the end of the file.
+
+===> 25Jan00 libsms misses EDB that Peter finds -- Resolved 26Jan00
+
+Symptoms:
+
+getXDB: MF[241] found idents - numsf=9 - EDB - sfbytes=40 - bitrate=0 - msn=36
+readRecord: 10800 bytes read
+getDRH: record UT -- 1999169 00:09:12 (552659 msec 578 usec)
+getDRH: TM mode is Science-92s
+getDRH: instrument number is 5 (SMS=5)
+getXDB: EDB spans two records
+decodeEDBheader: nxpha=000 ntpha=000 nmpha=001 totpha=001
+fillStructEDB: xer: fsr=128 dcr=002 tcr=000 ssd1=016 ssd2=018 ssd3=006 
+fillStructEDB: xhk=151 DPPSstep=023 PHArange=2
+smsReadCycle: got 37 EDB(s) so far
+
+getXDB: MF[000] idents not found - MinorFrame[000] - count=1
+getXDB: MF[001] idents not found - MinorFrame[001] - count=2
+getXDB: MF[002] idents not found - MinorFrame[002] - count=3
+getXDB: MF[003] idents not found - MinorFrame[003] - count=4
+getXDB: MF[004] idents not found - MinorFrame[004] - count=5
+getXDB: MF[005] idents not found - MinorFrame[005] - count=6
+getXDB: MF[006] idents not found - MinorFrame[006] - count=7
+getXDB: MF[007] idents not found - MinorFrame[007] - count=8
+getXDB: MF[008] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=38
+decodeEDBheader: nxpha=003 ntpha=000 nmpha=001 totpha=004
+fillStructEDB: xer: fsr=120 dcr=005 tcr=000 ssd1=014 ssd2=019 ssd3=017 
+fillStructEDB: xhk=149 DPPSstep=021 PHArange=2
+smsReadCycle: got 38 EDB(s) so far
+
+Peter finds an EDB there at MF[000].
+
+When I dump those bytes:
+
+getXDB: MF[241] found idents - numsf=9 - EDB - sfbytes=40 - bitrate=0 - msn=36
+readRecord: 10800 bytes read
+getDRH: record UT -- 1999169 00:09:12 (552659 msec 578 usec)
+getDRH: TM mode is Science-92s
+getDRH: instrument number is 5 (SMS=5)
+decodeEDBheader: nxpha=000 ntpha=000 nmpha=001 totpha=001
+fillStructEDB: xer: fsr=128 dcr=002 tcr=000 ssd1=016 ssd2=018 ssd3=006 
+fillStructEDB: xhk=151 DPPSstep=023 PHArange=2
+smsReadCycle: got 37 EDB(s) so far
+
+getXDB: MF[000] idents not found - MinorFrame[000] - count=1
+getXDB: bytes 0-11: 0 0 0 59 0 0 0 0 0 0 0 0 
+getXDB: MF[001] idents not found - MinorFrame[001] - count=2
+getXDB: bytes 0-11: 0 80 0 0 0 0 0 0 0 0 0 47 
+getXDB: MF[002] idents not found - MinorFrame[002] - count=3
+getXDB: bytes 0-11: 0 0 0 0 0 0 0 0 0 110 0 0 
+getXDB: MF[003] idents not found - MinorFrame[003] - count=4
+getXDB: bytes 0-11: 0 0 0 0 0 0 0 0 0 0 0 0 
+getXDB: MF[004] idents not found - MinorFrame[004] - count=5
+getXDB: bytes 0-11: 0 0 0 0 0 0 0 126 82 40 38 2 
+getXDB: MF[005] idents not found - MinorFrame[005] - count=6
+getXDB: bytes 0-11: 0 0 0 0 0 0 0 0 0 0 0 0 
+getXDB: MF[006] idents not found - MinorFrame[006] - count=7
+getXDB: bytes 0-11: 0 0 0 0 0 0 0 0 0 0 0 0 
+getXDB: MF[007] idents not found - MinorFrame[007] - count=8
+getXDB: bytes 0-11: 0 0 0 0 0 0 0 0 0 0 0 0 
+getXDB: MF[008] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=38
+decodeEDBheader: nxpha=003 ntpha=000 nmpha=001 totpha=004
+fillStructEDB: xer: fsr=120 dcr=005 tcr=000 ssd1=014 ssd2=019 ssd3=017 
+fillStructEDB: xhk=149 DPPSstep=021 PHArange=2
+smsReadCycle: got 38 EDB(s) so far
+
+I tried 'make clean' but this didn't solve the problem.  (My nmpha
+didn't match either, but I found that problem right away.  It was a
+stupid mistake.)
+
+I tried rebooting -- no change.
+
+Solution:
+In readRecord, getDRH was being passed the entire abBuffer array
+(which holds the bytes read) instead of copied out subarray like other 
+routines get.  I changed this and the problem went away -- just as
+strangely as it lived!  getDRH did not write to abBuffer and was only
+passed a pointer to it so it should not have been a problem.  But, the 
+problem dissappeared when I made this change so I have little doubt
+this was the cause.
+
+Here's the fixed output:
+
+getXDB: MF[233] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=35
+decodeEDBheader: nxpha=000 ntpha=000 nmpha=000 totpha=000
+fillStructEDB: xer: fsr=124 dcr=005 tcr=000 ssd1=014 ssd2=011 ssd3=016 
+fillStructEDB: xhk=152 DPPSstep=024 PHArange=2
+smsReadCycle: got 36 EDB(s) so far
+
+getXDB: MF[241] found idents - numsf=9 - EDB - sfbytes=40 - bitrate=0 - msn=36
+readRecord: 10800 bytes read
+getDRH: record UT -- 1999169 00:09:12 (552659 msec 578 usec)
+getDRH: TM mode is Science-92s
+getDRH: instrument number is 5 (SMS=5)
+decodeEDBheader: nxpha=000 ntpha=000 nmpha=002 totpha=002
+fillStructEDB: xer: fsr=128 dcr=002 tcr=000 ssd1=016 ssd2=018 ssd3=006 
+fillStructEDB: xhk=151 DPPSstep=023 PHArange=2
+smsReadCycle: got 37 EDB(s) so far
+
+getXDB: MF[000] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=37
+decodeEDBheader: nxpha=000 ntpha=000 nmpha=004 totpha=004
+fillStructEDB: xer: fsr=116 dcr=007 tcr=000 ssd1=017 ssd2=016 ssd3=019 
+fillStructEDB: xhk=150 DPPSstep=022 PHArange=2
+smsReadCycle: got 38 EDB(s) so far
+
+===> 25Jan00 EDB starting at mf=249 gets missed -- Resolved 25Jan00
+
+Symptoms:
+
+getXDB: MF[240] found idents - numsf=9 - EDB - sfbytes=40 - bitrate=0 - msn=36
+readRecord: 10800 bytes read
+getDRH: record UT -- 1999169 00:06:08 (368659 msec 593 usec)
+getDRH: TM mode is Science-92s
+getDRH: instrument number is 5 (SMS=5)
+decodeEDBheader: nxpha=000 ntpha=000 nmpha=003 totpha=003
+fillStructEDB: xer: fsr=124 dcr=003 tcr=001 ssd1=012 ssd2=012 ssd3=010 
+fillStructEDB: xhk=087 DPPSstep=023 PHArange=1
+smsReadCycle: got 37 EDB(s) so far
+
+getXDB: MF[000] idents not found - MinorFrame[000] - count=1
+getXDB: MF[001] idents not found - MinorFrame[001] - count=2
+getXDB: MF[002] idents not found - MinorFrame[002] - count=3
+getXDB: MF[003] idents not found - MinorFrame[003] - count=4
+getXDB: MF[004] idents not found - MinorFrame[004] - count=5
+getXDB: MF[005] idents not found - MinorFrame[005] - count=6
+getXDB: MF[006] idents not found - MinorFrame[006] - count=7
+getXDB: MF[007] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=38
+decodeEDBheader: nxpha=002 ntpha=000 nmpha=001 totpha=003
+fillStructEDB: xer: fsr=136 dcr=004 tcr=001 ssd1=007 ssd2=013 ssd3=003 
+fillStructEDB: xhk=085 DPPSstep=021 PHArange=1
+smsReadCycle: got 38 EDB(s) so far
+
+These 'idents not found' minor frames are part of the EDB that started 
+at mf = 249.
+
+Solution:
+
+The problem was at the end of getXDB where a record was read if mf =
+249.  This is right if idents were not found, because mf=249 would
+already have been checked.  But if idents were found (i.e. a XDB was
+copied out), this should be left alone.  Re-entry into getXDB next
+time will cause the EDB that starts at mf=249 to be found.
+
+This increased # complete cycles on 19990618 from 88 of 457 to 141 of
+459.  (Different total number of cycles because they aren't as
+fragmented.)  It didn't substantially change the number of EDBs in
+incomplete cycles.
+
+===> 21Jan00 Regularly 0 DVS (m, t) -- Resolved 26Jan00
+
+Symptom: DVS seems to be occasionally 0 in the middle of a sequence.
+The zero seems to depend only on the file and moves around.  For MASS
+it is often twice per cycle.
+
+Check by comparing xDVS (no extra 0s) to mDVS.  The are two per cycle
+-- every cycle -- and they are always separated by 30 EDB's:
+
+[output from comp-dvs.c]
+comp-dvs: Cycle[020] time is 1999169 06:03:24 UT (21804658 msec 187 usec)
+comp-dvs: mismatch -- xDVS[23]=36 mDVS[23]=00
+comp-dvs: mismatch -- xDVS[53]=06 mDVS[53]=00
+smsReadCycle: reading cycle...
+comp-dvs: Cycle[021] time is 1999169 06:27:56 UT (23276658 msec 93 usec)
+comp-dvs: mismatch -- xDVS[22]=37 mDVS[22]=00
+comp-dvs: mismatch -- xDVS[52]=07 mDVS[52]=00
+smsReadCycle: reading cycle...
+comp-dvs: Cycle[022] time is 1999169 06:52:28 UT (24748658 msec 0 usec)
+comp-dvs: mismatch -- xDVS[21]=38 mDVS[21]=00
+comp-dvs: mismatch -- xDVS[51]=08 mDVS[51]=00
+smsReadCycle: reading cycle...
+comp-dvs: Cycle[023] time is 1999169 06:55:32 UT (24932657 msec 984 usec)
+comp-dvs: mismatch -- xDVS[21]=38 mDVS[21]=00
+comp-dvs: mismatch -- xDVS[51]=08 mDVS[51]=00
+smsReadCycle: reading cycle...
+comp-dvs: Cycle[024] time is 1999169 07:17:00 UT (26220657 msec 906 usec)
+comp-dvs: mismatch -- xDVS[20]=39 mDVS[20]=00
+comp-dvs: mismatch -- xDVS[50]=09 mDVS[50]=00
+smsReadCycle: reading cycle...
+comp-dvs: Cycle[025] time is 1999169 07:20:04 UT (26404657 msec 890 usec)
+comp-dvs: mismatch -- xDVS[20]=39 mDVS[20]=00
+comp-dvs: mismatch -- xDVS[50]=09 mDVS[50]=00
+smsReadCycle: reading cycle...
+comp-dvs: Cycle[026] time is 1999169 07:44:36 UT (27876657 msec 796 usec)
+comp-dvs: mismatch -- xDVS[19]=40 mDVS[19]=00
+comp-dvs: mismatch -- xDVS[49]=10 mDVS[49]=00
+
+Solution: (partial?)
+
+When I fixed the missing EDB bug of 25Jan00, these mismatches dropped
+off significantly (Down from 2 every cycle (60 EDBs) to 18 for 27120
+EDBs.  These mismatches may actually be real.
+
+===> 14Jan00 Seg. Fault after cycle 66 (about 18hr) in 19990618 -- Resolved 20Jan00
+
+Symptoms:  
+
+1) Loses name of smsReadCycle:
+
+getXDB: MF[151] found idents - numsf=8 - EDB - sfbytes=40 - bitrate=0 - msn=12
+smsReadCycle: got 13 EDB(s) so far
+
+getXDB: MF[159] found idents - numsf=22 - EDB - sfbytes=40 - bitrate=1 - msn=13
+: got 1 EDB(s) so far
+
+This is after ncycle=66 and after 6 recordRecords, between MF[151] and
+MF[159] obviously.  Also, I can't see how nedb's (in smsReadCycle)
+gets reset from 13 to 0.  That should cause an incomplete cycle
+message.  I think a memory location is overwritten around this time.
+Also, ddd crashes when I get close to this location (coincidence?).
+
+20Jan00:
+To get to this place with ddd:  Break at smsReadCycle; set ignore
+count to 66.  Once in smsReadCycle, set break at getXDB.  Manually
+continue through these breaks until MF[151], msn 12.  You are now on
+the doorstep to disaster.  :-)
+
+Note: bitrate mode changes!  Is it real?  If it is, libsms can't
+handle it.  If it isn't, then the header is getting corrupted.  Ugh.
+However, if the header were getting corrupted, numsf and msn may not 
+look good, but they do.
+
+2) causes Segmentation Violation when smsReadCycle exits
+
+Cause:
+numsf was 22, max is 20.  This would make for a 880 byte EDB array,
+when it is dimensioned only to 800.  
+
+The highbitrate mode only persisted for that one EDB as well, so I'm
+guessing both of these were some kind of TM corruption.  
+
+Fix:
+checked that numsf was in bounds and didn't copy EDB if it wasn't.
+
+===> 13Dec99 Weird corruption of minor frames -- Resolved 14Dec99
+
+After a small change & a lot of trouble shooting, I found that the
+MinorFrame array in getXDB was being corrupted in several locations.
+As as symptom, the H/EDBs at mf = 155, 202,208, 214, 222, 230, 247 were
+not recognized.  This was because byte 1 (at least) was not 111 like
+it should have been.  (I ran an old version to confirm that these mf's 
+were actually the start of H/EDBs.)  I found that the change of
+MinorFrame[155][1] occured from between mf=13 and mf=14.  
+
+The only routines which ran were smsReadCycle, fillStructEDB,
+decodeEDBheader.  None of these seemed to have trouble.
+
+Finally, I did a 'make clean' (removed all object files and rebuilt).
+The problem went away!!??!??
+

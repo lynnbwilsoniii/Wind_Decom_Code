@@ -1,0 +1,142 @@
+pwd
+echo 'ARRAY ID = '
+echo $PBS_ARRAYID # $sign indicates "variable" to shell script
+echo 'PBS working directory = '
+echo $PBS_O_WORKDIR
+
+python << EOF
+
+############# Begin of Running Jacob's STICS processor ##########
+##Load in requisite module
+import pickle
+import os
+import subprocess as sub
+import sys
+##Load in list of files
+input_file = open("/shrg1/wind/sw/STICS_data_processing/input_info/input_dir.txt", "r")
+file_lines = input_file.readlines()
+input_file.close()
+temp_names = [x.strip('\n') for x in file_lines]
+
+
+load_dir= temp_names[0] #'/shrg1/wind/LV2_development/STICS_data_batch/input_dateFile_dir/'
+savename='driver_file_list.pkl' #saved python variable
+with open(load_dir+savename) as fp:
+	filenames=pickle.load(fp)
+
+print '\nInput file name: '
+print filenames[$PBS_ARRAYID] 
+sys.stdout.flush() #force this to be output (otherwise there
+####is a delay and it appears after c++ code outputs)
+
+####directory of Jacob's code
+wtdc_dir="/home/kploof/wtdcLV2_Lite/wtdcLV2_Lite_DF_StaticT/"
+#wtdc_dir="/shrg1/wind/sw/wtdcLV2_Lite/wtdcLV2_Lite_DF_StaticT/"
+os.chdir(wtdc_dir) #change to proper directory (so wtdcLV2_Lite_DF_StaticT
+####can find the efficiency files with its relative directory tree)
+
+
+## pipe=sub.Popen(["./wtdcLV2_Lite_DF_StaticT", filenames[$PBS_ARRAYID]]) #? is this the call?
+# #Main issue with using Popen turned out to be that is does not automatically
+# #call a "wait" to pause and wait for the c++ subprocess call to finish.
+# #Thus, the qsub script would just terminate before the subprocess was done
+# #This is why it looked like the c++ code just stopped in a random spot
+## 
+## while pipe.returncode is None: #this part seems to be included in online samples... 
+## 	pipe.poll() #I think I can use this with Popen to similar effect as
+## 				#just using "call" below.  But "call" seems simpler.
+
+##Commenting out for now to test qsub things-------
+pipe=sub.call(["./wtdcLV2_Lite_DF_StaticT", filenames[$PBS_ARRAYID]]) 
+##When the "call" is used it automatically includes that "wait"
+##------------------------------
+
+##remove file
+## os.remove(load_dir+filenames[$PBS_ARRAYID]) #remove file from directory after run
+
+#########End of running Jacob's Program ############
+
+#########Begin running code to reprocess output of Jacob's Program#######
+##want to combine counts, dJ, and DF all in on file
+output_file = open("/shrg1/wind/sw/STICS_data_processing/input_info/wtdc_write_dir.txt", "r")
+file_lines = output_file.readlines()
+output_file.close()
+temp_names = [x.strip('\n') for x in file_lines]
+
+output_dir= temp_names[0] #'/shrg1/wind/LV2_development/STICS_data_batch/output_dir/'
+AFM_ERPA_dir='/shrg1/wind/sw/AFM_ERPA_processor/'
+
+##parse the wtdc output file from the input driver file
+temp1=filenames[$PBS_ARRAYID].split('/')
+temp2=temp1[-1].split('_') #just take file name, without all directories
+
+data_type=temp2[3] #should always be 'DF' in the current scheme
+ion_name=temp2[2]
+file_date=temp2[1]
+wtdc_name=output_dir+'wtdcLV2_Lite_SCFrame_'+ion_name+'_'+data_type+'_3D_M-MOQ_'+file_date+'-'+file_date+'.dat'
+moment_file_name=output_dir+'wtdcLV2_Lite_nvt_'+ion_name+'_M-MOQ_'+file_date+'-'+file_date+'.dat'
+
+##run code to reprocess output from Jacob's code
+print(AFM_ERPA_dir)
+os.chdir(AFM_ERPA_dir)
+import reprocess_wtdcLV2_Lite_DF_output_file as reprocess
+reprocess.write_combined_file(wtdc_name, output_dir=output_dir)
+reprocess.rename_moment_file(moment_file_name, output_dir=output_dir)
+
+#########End of code to reprocess output of Jacob's code#################
+
+#########Begin running AFM/ERPA code ###############
+##example driver file name dateFile_20151231_Fe9+_dJ_f91c5876-cba8-4d7f-8126-171055612fd6.dat
+##example STICS processor file name wtdcLV2_Lite_SCFrame_Fe9+_dJ_3D_TOF_20151231-20151231.dat
+
+##Define directories for the AFM/ERPA code (if not defined above)
+mag_dir='/shrg1/wind/MFI_data/pickled/'
+
+##parse the reprocessed file has same name at original wtdc file,
+##but the data type (counts, dj, df) has been removed (as all data types are now in file)
+print "Producing AFM/ERPA products"
+sys.stdout.flush()
+os.chdir(AFM_ERPA_dir)
+reprocessed_file_name=output_dir+'wstics_LV2_SCFrame_'+ion_name+'_VDF_3D_'+file_date+'-'+file_date+'.dat'
+
+##run code to produce ERPA and AFM products
+import AFM_ERPA_batch
+AFM_ERPA_batch.batch_run(reprocessed_file_name, mag_data_dir=mag_dir, output_dir=output_dir,create_AFM_plot=True, create_ERPA_plot=True)
+
+#########End of running AFM/ERPA code ##############
+
+EOF
+
+##compress the distribution functions before moving
+##gzip ./output_dir/wstics_LV2_SCFrame_*.dat
+##mv wstics_LV2_SCFrame_*.dat "./VDF/" #edited to use this instead of gzipping - Vishnu 10/17/2018
+## gzip -l ./output_dir/wtdcLV2_Lite_SCFrame_*.gz #get compression stats
+
+##Move compressed distribution (count, dJ, DF) file output for STICS processor
+###mv ./output_dir/wstics_LV2_SCFrame_*.gz "./output_dir/$1/VDF/" #commented out to move pre-gzipped files instead of gzipping and moving - Vishnu 10/17/2018
+
+##Move moment file output
+##mv wstics_LV2_nvt*.dat "./moments/"
+
+##Discard "sectored" moment files (don't trust them yet)
+##rm wtdcLV2_Lite_Sectored_Moments*.dat
+
+##Move AFM data
+##mv wstics_afm_*.dat "./AFM/"
+
+##Move ERPA data
+##mv wstics_erpa_*.dat "./ERPA/"
+
+##Move AFM plots
+## mv ./output_dir/afm_plot*.png "./output_dir/$1/AFM_plots/" #doesn't work when we have too many files!
+##echo wstics_afm_*.png | xargs mv -t "./AFM_plots/"
+
+##Move ERPA plots
+## mv ./output_dir/erpa_plot*.png "./output_dir/$1/ERPA_plots/"
+##echo wstics_erpa_*.png | xargs mv -t "./ERPA_plots/"
+
+##sort stuff into msphere and solar wind using python script
+##boundary_file='/shrg1/wind/sw/AFM_ERPA_processor/Wind_shock_crossing_edited_add_final_xing.txt'
+##echo "Separating into Msph and SW"
+##python /shrg1/wind/sw/AFM_ERPA_processor/divide_SW_msphere.py "./" "$boundary_file"
+

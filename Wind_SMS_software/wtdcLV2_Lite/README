@@ -1,0 +1,5 @@
+To install the Wind/STICS processing software and tools, simply run the shell script run_wtdcLV2_install.sh with the command
+
+	> ./run_wtdcLV2_install.sh
+
+This will compile all of the programs onto your computer.

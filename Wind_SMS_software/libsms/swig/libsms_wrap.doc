@@ -1,0 +1,163 @@
+Description of Perl 5 interface to libsms
+
+[ Module : libsms, Package : libsms ]
+
+
+1.  Global functions
+====================
+
+smsOpenFile(char *);
+        [ returns int  ]
+
+smsReadCycle();
+        [ returns int  ]
+        opens data file, returns one of the SMS return codes 
+
+smsDecommHDB();
+        [ returns int  ]
+
+smsDecompress(unsigned char ,int );
+        [ returns long  ]
+
+smssetdbg(int );
+        [ returns int  ]
+        dealing with whole data 
+
+smssettrace(int );
+        [ returns int  ]
+
+smsgtime();
+        [ returns long  ]
+
+smsgtimes();
+        [ returns char * ]
+
+smsdedbhdr(int );
+        [ returns int  ]
+
+2.  Specific instrument functions
+=================================
+******* 
+
+2.1.  SWICS
+-----------
+
+2.1.1.  engineering rates
+
+
+smsgxfsr(int );
+        [ returns long  ]
+
+smsgxdppsstep(int );
+        [ returns int  ]
+
+2.2.  STICS
+-----------
+******* STICS ******* 
+
+2.2.1.  decommuted HDB items
+
+
+smsgtpsteptab(int );
+        [ returns double  ]
+
+smsgtpsteptab_raw(int );
+        [ returns int  ]
+
+smsgtnsteptab(int );
+        [ returns double  ]
+
+smsgtnsteptab_raw(int );
+        [ returns int  ]
+
+2.2.2.  non-engineering rates
+
+
+smsgthmr(int ,int );
+        [ returns long  ]
+
+smsgtsmr(int ,int );
+        [ returns long  ]
+
+smsgtbr0(int ,int );
+        [ returns long  ]
+
+smsgtbr1(int ,int );
+        [ returns long  ]
+
+smsgtbr2(int ,int );
+        [ returns long  ]
+
+smsgtomr(int ,int );
+        [ returns long  ]
+
+2.2.3.  engineering rates
+
+
+smsgtfsr(int ,int );
+        [ returns long  ]
+
+smsgtrsr(int ,int );
+        [ returns long  ]
+
+smsgtdcr(int ,int );
+        [ returns long  ]
+
+smsgttcr(int ,int );
+        [ returns long  ]
+
+smsgtssd(int ,int );
+        [ returns long  ]
+
+smsgtdppsstep(int );
+        [ returns long  ]
+
+smsgtmode(int );
+        [ returns int  ]
+
+smsgtmodes(int );
+        [ returns char * ]
+
+2.2.4.  STICS PHA
+
+
+smsgtnpha(nedb);
+        [ returns int  ]
+        get number pha of words from EDB[nedb] 
+
+smsdtpha(nedb,i);
+        [ returns int  ]
+        dump (print) raw parts of PHA[i] (first is i=0) from EDB[nedb] 
+
+smsgteoq(nedb,i);
+        [ returns double  ]
+        get energy / charge (E/Q) of PHA[i] from EDB[nedb] 
+
+smsgttof(nedb,i);
+        [ returns double  ]
+        get TOF (in physical units of ns) of PHA[i] from EDB[nedb] 
+
+smsgtessd(nedb,i);
+        [ returns double  ]
+        get energy at SSD in keV of PHA[i] from EDB[nedb] 
+
+smsgtmass(nedb,i);
+        [ returns double  ]
+        get mass in ? of PHA[i] from EDB[nedb] 
+
+smsgtmoq(nedb,i);
+        [ returns double  ]
+        get mass/charge in ? of PHA[i] from EDB[nedb] 
+
+3.  MASS
+========
+
+3.1.  engineering rates
+-----------------------
+
+smsgmfsr(int ,int );
+        [ returns long  ]
+
+smsgmfsrb(int );
+        [ returns long  ]
+

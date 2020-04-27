@@ -1,0 +1,6 @@
+# this is a test
+#ion list : H+, H+_D, He+, He2+, C+, C4+, C5+, C6+, O+, O6+, O7+, Ne+, Fe8+, Fe9+, Fe10+, Fe11+, Fe12+, Fe14+, Fe16+, N+
+ion list : H+, He+, He2+, O+, O6+, C5+, Fe10+
+start date : 20150101
+stop date : 20150131
+coincidence : triple
