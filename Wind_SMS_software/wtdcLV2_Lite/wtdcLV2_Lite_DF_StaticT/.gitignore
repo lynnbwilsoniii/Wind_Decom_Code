@@ -1,0 +1,14 @@
+dateFile.dat
+wtdcLV2_Lite_DF_StaticT
+wtdcLV2_Lite_DF_StaticT.o
+wtdcLV2_Lite_SCFrame_Counts_20070101-20070101.dat
+wtdcLV2_Lite_SCFrame_Counts_20070101-20071231.dat
+wtdcLV2_Lite_SCFrame_Counts_WFrame_20090101-20091230.dat
+wtdcLV2_Lite_SCFrame_DF_WFrame_20090101-20091230.dat
+Data/2h/wtdcLV2_Lite_SCFrame_H+_DF_20010101-20010101.dat
+Data/2h/wtdcLV2_Lite_SCFrame_He2+_DF_20010101-20010101.dat
+Data/2h/wtdcLV2_Lite_nvt_H+_20010101-20010101.dat
+Data/2h/wtdcLV2_Lite_nvt_He2+_20010101-20010101.dat
+Tools/IonicRatio_Moments/wtdcLV2_IonicRatio_H+_over_He2+_20010101-20010101.dat
+Tools/IonicRatio_Suprathermal/wtdcLV2_IonicRatio_Suprathermal_H+_over_He2+_20010101-20010101.dat
+driver.dat
