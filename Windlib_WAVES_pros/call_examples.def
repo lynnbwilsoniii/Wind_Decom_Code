@@ -1,7 +1,0 @@
-LIBRARY                 call_examples
-DESCRIPTION             'Demonstrates use of IDL's CALL_EXTERNAL routine'
-
-EXPORTS					incr_struct
-						simple_vars
-						string_array
-						sum_2d_array
