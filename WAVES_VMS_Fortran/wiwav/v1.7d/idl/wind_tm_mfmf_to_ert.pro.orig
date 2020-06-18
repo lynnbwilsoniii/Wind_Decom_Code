@@ -1,6 +1,0 @@
-function wind_tm_mfmf_to_ert, ch, major, minor, ur8ert
-ok = 0L
-ok = call_external('/home/kappler/wind/v1.7d/lib/libIDL_WAVES.so','wind_tm_mfmf_to_ert', $
-   ch, major, minor, ur8ert)
-return, ok
-end
