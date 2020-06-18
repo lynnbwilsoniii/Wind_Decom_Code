@@ -1,0 +1,1953 @@
+! items_hk.db - WIND/WAVES Item Database: item definitions for HK events
+!
+! HK - House Keeping
+!
+ITEM=ITEM_DB_VERSION
+	DATA_TYPE=CHARACTER
+	TEXT=HK   2.0
+	DESC=This is the current item database version number
+	AUTHOR_DATE=19941207
+
+ITEM=ALL_HK_DATA
+	EXTRACT=0,8,8,1,0,AREA:5
+	DESC=Gets the entire HK data area
+	AUTHOR_DATE=19950214
+
+ITEM=PACKET_ID_ARRAY
+	EXTRACT=648,8,-1,25,0,AREA:5
+	DESC=25 element array of 1st byte of packet primary headers for MF
+	AUTHOR_DATE=19950216
+
+ITEM=TM_MODE
+	EXTRACT=848,8,-1,1,0,AREA:5
+	DESC=Spacecraft telemetry mode (CDHF code convention)
+	DESC=Duplicated by global item SC_MODE
+	AUTHOR_DATE=19950314
+	XLATE=1,"Science 1x"
+	XLATE=3,"Maneuver 1x"
+	XLATE=4,"Contingency 1x"
+	XLATE=5,"Science 2x"
+	XLATE=7,"Maneuver 2x"
+	XLATE=8,"Contingency 2x"
+
+ITEM=MINOR_FRAME_QUALITY
+	EXTRACT=856,4,-1,250,0,AREA:5
+	DESC=250 element array of minor frame quality words (CDHF)
+	AUTHOR_DATE=19950314
+
+ITEM=FRAMES_BAD_FILLED
+	EXTRACT=1856,8,-1,1,0,AREA:5
+	DESC=# of minor frames with fill, for cdhf and cdhf-derived streams
+	AUTHOR_DATE=19950216
+ITEM=FRAMES_BAD_SYNCH
+	EXTRACT=1864,8,-1,1,0,AREA:5
+	DESC=# minor frames with synch err, for cdhf and cdhf-derived streams
+	AUTHOR_DATE=19950216
+
+ITEM=DPU_MINOR_FRAME
+	FIXED_VALUE=1:0
+	DESC=DPU minor frame number is always 0 for HK event
+	AUTHOR_DATE=19920901
+
+ITEM=DPU_MAJOR_FRAME_TEST
+	EXTRACT=104,8,-1,1,0,AREA:5
+	COMPOSITE=DPU_MAJOR1
+	DESC=First part of DPU major frame composite (LSB)
+ITEM=DPU_MAJOR_FRAME
+	EXTRACT=104,8,-1,1,0,AREA:5
+	COMPOSITE=DPU_MAJOR1
+	DESC=First part of DPU major frame composite (LSB)
+ITEM=DPU_MAJOR1
+	EXTRACT=96,8,-1,1,0,AREA:5
+	COMPOSITE=DPU_MAJOR2
+	DESC=Second part of DPU major frame composite
+	AUTHOR_DATE=19910901
+ITEM=DPU_MAJOR2
+	EXTRACT=264,8,-1,1,0,AREA:5
+	DESC=Last part of DPU major frame composite (MSB)
+	AUTHOR_DATE=19910901
+
+ITEM=DPU_CLOCK_R4
+	DATA_TYPE=REAL*4
+	FIXED_VALUE=1:DPU_CLOCK*DPU_CLOCK_PERIOD_R4
+	DESC=DPU clock time in seconds (rolls over at 5,368.7!)
+	AUTHOR_DATE=19941017
+ITEM=DPU_CLOCK
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=8,8,-1,1,0,AREA:5
+	COMPOSITE=DPU_CLOCK_2
+	DESC=DPU clock at MF pulse
+	AUTHOR_DATE=19931013
+ITEM=DPU_CLOCK
+	VALIDATION=DPU_VERSION,LE,3
+	EXTRACT=584,8,-1,1,0,AREA:5
+	COMPOSITE=DPU_CLK_2
+	DESC=DPU clock at MF pulse
+	AUTHOR_DATE=19910901
+ITEM=DPU_CLOCK_2
+	EXTRACT=576,8,-1,1,0,AREA:5
+	COMPOSITE=DPU_CLOCK_3
+	DESC=Second part of DPU clock composite
+	AUTHOR_DATE=19910901
+ITEM=DPU_CLOCK_3
+	EXTRACT=248,8,-1,1,0,AREA:5
+	DESC=Third and final part of DPU clock composite (MSB)
+	AUTHOR_DATE=19910901
+
+ITEM=TC_COUNT
+	EXTRACT=40,8,-1,1,0,AREA:5
+	DESC=Telecommand counter (PACK 8 notation)
+	AUTHOR_DATE=19910901
+
+ITEM=TC_VERIFICATION
+	EXTRACT=80,8,-1,1,0,AREA:5
+	COMPOSITE=TC_VER_2
+	DESC=Last received telecommand word (32 bits)
+	AUTHOR_DATE=19910901
+ITEM=TC_VER_2
+	EXTRACT=72,8,-1,1,0,AREA:5
+	COMPOSITE=TC_VER_3
+	DESC=Telecommand verification composite
+	AUTHOR_DATE=19910901
+ITEM=TC_VER_3
+	EXTRACT=56,8,-1,1,0,AREA:5
+	COMPOSITE=TC_VER_4
+	DESC=Telecommand verification composite
+	AUTHOR_DATE=19910901
+ITEM=TC_VER_4
+	EXTRACT=48,8,-1,1,0,AREA:5
+	DESC=Telecommand verification comoposite - last byte
+	AUTHOR_DATE=19910901
+
+ITEM=MAGAZ
+	EXTRACT=568,8,-1,1,0,AREA:5
+	DESC=Temporary MagAz angle in fractional spin counts from sun, 4096 per 360 degrees
+	DESC=Only functions when FFT is off
+	AUTHOR_DATE=19910901
+ITEM=MAGEL
+	EXTRACT=592,8,-1,1,0,AREA:5
+	DESC=Temporary MagEl angle in degrees (0 - 90) - calculated by s/c
+	DESC=Only functions when FFT is off
+	AUTHOR_DATE=19910901
+
+ITEM=CONVERTER_REDUND
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=88,2,-1,1,0,AREA:5
+	DESC=Converter redundancy - Normal = 0, i.e. A and B redundancy off
+!	DESC=Originates in CAL_STATUS (HK byte 11)
+	AUTHOR_DATE=19930421
+	XLATE=0,"Normal"
+	XLATE=1,"B side"
+	XLATE=2,"A side"
+	XLATE=3,"Reverse"
+
+ITEM=CURRENT_A
+	EXTRACT=208,8,-1,1,0,AREA:5
+	DESC=Current on the A side of the converter
+	AUTHOR_DATE=19910901
+ITEM=CURRENT_A_AMPS_R4
+	DATA_TYPE=REAL*4
+	DESC=Current on the A side of the converter (Amps)
+	POLY=7,CURRENT_A,0.,8.016e-3
+	AUTHOR_DATE=19941017
+
+ITEM=CURRENT_B
+	EXTRACT=216,8,-1,1,0,AREA:5
+	DESC=Current on the B side of the converter
+	AUTHOR_DATE=19910901
+ITEM=CURRENT_B_AMPS_R4
+	DATA_TYPE=REAL*4
+	DESC=Current on the B side of the converter (Amps)
+	POLY=7,CURRENT_B,0.,8.016e-3
+	AUTHOR_DATE=19941017
+
+ITEM=VOLTAGE_TNR+5
+	EXTRACT=240,8,-1,1,0,AREA:5
+	DESC=Voltage on +5 volt bus of the TNR
+	AUTHOR_DATE=19910901
+ITEM=TNR+5_VOLTS_R4
+	DATA_TYPE=REAL*4
+	DESC=TNR +5 volt bus voltage (Volts)
+	POLY=7,VOLTAGE_TNR+5,0.,2.73e-2
+	AUTHOR_DATE=19941018
+
+ITEM=VOLTAGE_TNR+6
+	EXTRACT=224,8,-1,1,0,AREA:5
+	DESC=Voltage on +6 volt bus of the TNR
+	AUTHOR_DATE=19910901
+ITEM=TNR+6_VOLTS_R4
+	DATA_TYPE=REAL*4
+	DESC=TNR +6 volt bus voltage (Volts)
+	POLY=7,VOLTAGE_TNR+6,0.,2.73e-2
+	AUTHOR_DATE=19941018
+
+ITEM=VOLTAGE_TNR-6
+	EXTRACT=232,8,-1,1,0,AREA:5
+	DESC=Voltage on -6 volt bus of the TNR
+	AUTHOR_DATE=19910901
+ITEM=TNR-6_VOLTS_R4
+	DATA_TYPE=REAL*4
+	DESC=TNR -6 volt bus voltage (Volts)
+	POLY=7,VOLTAGE_TNR-6, -8.8, 4.93e-2
+	AUTHOR_DATE=19941018
+
+ITEM=TEMP_BX
+	EXTRACT=288,8,-1,1,0,AREA:5
+	DESC=Raw temperature of Bx antenna (corrected for harness error)
+	AUTHOR_DATE=19910901
+ITEM=TEMP_BX_DEGC_R4
+	DATA_TYPE=REAL*4
+	DESC=Temperature of Bx antenna (in degrees C)
+	POLY=7,TEMP_BX, -2.061e+3, 2.5723e+1, -7.7447e-2
+	AUTHOR_DATE=19941018
+
+ITEM=TEMP_BY
+	EXTRACT=272,8,-1,1,0,AREA:5
+	DESC=Raw temperature of By antenna (corrected for harness error)
+	AUTHOR_DATE=19910901
+ITEM=TEMP_BY_DEGC_R4
+	DATA_TYPE=REAL*4
+	DESC=Temperature of By antenna (in degrees C)
+	POLY=7,TEMP_BY, -2.061e+3, 2.5723e+1, -7.7447e-2
+	AUTHOR_DATE=19941018
+
+ITEM=TEMP_BZ
+	EXTRACT=280,8,-1,1,0,AREA:5
+	DESC=Raw temperature of Bz antenna (corrected for harness error)
+	AUTHOR_DATE=19910901
+ITEM=TEMP_BZ_DEGC_R4
+	DATA_TYPE=REAL*4
+	DESC=Temperature of Bz antenna (in degrees C)
+	POLY=7,TEMP_BZ, -2.061e+3, 2.5723e+1, -7.7447e-2
+	AUTHOR_DATE=19941018
+
+ITEM=TEMP_WAVES1
+	EXTRACT=296,8,-1,1,0,AREA:5
+	DESC=Temperature of WAVES1 stack
+	AUTHOR_DATE=19910901
+ITEM=TEMP_WAVES1_DEGC_R4
+	DATA_TYPE=REAL*4
+	DESC=Temperature of WAVES1 electronics (in degrees C)
+	POLY=7,TEMP_WAVES1,1.2157e+2, -2.156, 2.5e-2, -1.79e-4, 6.63e-7
+	AUTHOR_DATE=19941018
+
+ITEM=TEMP_WAVES2
+	EXTRACT=304,8,-1,1,0,AREA:5
+	DESC=Temperature of WAVES2 stack
+	AUTHOR_DATE=19910901
+ITEM=TEMP_WAVES2_DEGC_R4
+	DATA_TYPE=REAL*4
+	DESC=Temperature of WAVES2 electronics (in degrees C)
+	POLY=7,TEMP_WAVES2,6.6171e+1, -2.0054e-2, -6.8106e-3, 4.7519e-5, -1.097e-7
+	AUTHOR_DATE=19941018
+
+ITEM=TEMP+EX
+	EXTRACT=600,8,-1,1,0,AREA:5
+	DESC=Temperature of +Ex antenna motor (valid only in special antenna HK mode)
+	AUTHOR_DATE=19930421
+ITEM=TEMP+EX_DEGC_R4
+	DATA_TYPE=REAL*4
+	DESC=Temperature of +Ex antenna (in degrees C)
+	POLY=7,TEMP+EX, 1.53e+2, -1.47, 7.47e-3, -1.68e-5
+	AUTHOR_DATE=19941018
+
+ITEM=TEMP-EX
+	EXTRACT=608,8,-1,1,0,AREA:5
+	DESC=Temperature of -Ex antenna motor - INCORRECT NOW (valid only in special antenna HK mode)
+	AUTHOR_DATE=19930421
+ITEM=TEMP-EX_DEGC_R4
+	DATA_TYPE=REAL*4
+	DESC=Temperature of -Ex antenna (in degrees C)
+	POLY=7,TEMP-Ex, 1.53e+2, -1.47, 7.47e-3, -1.68e-5
+	AUTHOR_DATE=19941018
+
+ITEM=TEMP+EY
+	EXTRACT=616,8,-1,1,0,AREA:5
+	DESC=Temperature of +Ey antenna motor - INCORRECT NOW (valid only in special antenna HK mode)
+	AUTHOR_DATE=19930421
+ITEM=TEMP+EY_DEGC_R4
+	DATA_TYPE=REAL*4
+	DESC=Temperature of +Ey antenna (in degrees C)
+	POLY=7,TEMP+EY, 1.53e+2, -1.47, 7.47e-3, -1.68e-5
+	AUTHOR_DATE=19941018
+
+ITEM=TEMP-EY
+	EXTRACT=624,8,-1,1,0,AREA:5
+	DESC=Temperature of -Ey antenna motor  -INCORRECT NOW (valid only in special antenna HK mode)
+	AUTHOR_DATE=19930421
+ITEM=TEMP-EY_DEGC_R4
+	DATA_TYPE=REAL*4
+	DESC=Temperature of -Ey antenna (in degrees C)
+	POLY=7,TEMP-EY, 1.53e+2, -1.47, 7.47e-3, -1.68e-5
+	AUTHOR_DATE=19941018
+
+ITEM=TEMP+EZ
+	EXTRACT=632,8,-1,1,0,AREA:5
+	DESC=Temperature of +Ez antenna motor (valid only in special antenna HK mode)
+	AUTHOR_DATE=19930421
+ITEM=TEMP+EZ_DEGC_R4
+	DATA_TYPE=REAL*4
+	DESC=Temperature of +Ez antenna (in degrees C)
+	POLY=7,TEMP+EZ, 1.53e+2, -1.47, 7.47e-3, -1.68e-5
+	AUTHOR_DATE=19941018
+
+ITEM=TEMP-EZ
+	EXTRACT=640,8,-1,1,0,AREA:5
+	DESC=Temperature of -Ez antenna motor (valid only in special antenna HK mode)
+	AUTHOR_DATE=19930421
+ITEM=TEMP-EZ_DEGC_R4
+	DATA_TYPE=REAL*4
+	DESC=Temperature of -Ez antenna (in degrees C)
+	POLY=7,TEMP-EZ, 1.53e+2, -1.47, 7.47e-3, -1.68e-5
+	AUTHOR_DATE=19941018
+
+ITEM=DPU_MODE
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=584,8,-1,1,0,AREA:5
+	DESC=HK quality indication - should be 161 (A1 hex)
+	AUTHOR_DATE=19930901
+ITEM=DPU_MODE
+	VALIDATION=DPU_VERSION,LE,3
+	EXTRACT=8,8,-1,1,0,AREA:5
+	DESC=Current mode of DPU
+	AUTHOR_DATE=19910901
+ITEM=HK_QUALITY
+	VALIDATION=DPU_MODE,EQ,161
+	FIXED_VALUE=1:1
+	DESC=The good/bad quality of the current HK event
+	AUTHOR_DATE=19970303
+	XLATE=1,"Good"
+ITEM=HK_QUALITY
+	VALIDATION=DPU_MODE,NE,161
+	FIXED_VALUE=1:0
+	DESC=The good/bad quality of the current HK event
+	AUTHOR_DATE=19970303
+	XLATE=1,"Bad"
+
+ITEM=DPU_VERSION
+	EXTRACT=32,4,-1,1,0,AREA:5
+	DESC=Version of DPU software
+	AUTHOR_DATE=19910901
+
+ITEM=DPU_SIG_BLOCKS
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=36,4,-1,1,0,AREA:5
+	DESC=Number of DPU signature blocks (ROM & RAM) found, normally 8
+	AUTHOR_DATE=19930421
+
+ITEM=DPU_ERRORS
+	EXTRACT=24,8,-1,1,0,AREA:5
+	DESC=DPU error count (PACK 8 notation)
+	AUTHOR_DATE=19910901
+
+ITEM=DPU_RAM_OK
+	EXTRACT=3,1,-1,1,0,AREA:5
+	DESC=All DPU RAM tested okay at boot, 1 = Yes
+!	DESC=Originates in DPU_STATUS (HK byte 0)
+	AUTHOR_DATE=19930421
+	XLATE=0,"RAM Errors!"
+	XLATE=1,"RAM Ok"
+ITEM=DPU_RAM_MODIFIED
+	EXTRACT=7,1,-1,1,0,AREA:5
+	DESC=DPU RAM has been modified by memory load since last boot
+!	DESC=Originates in DPU_STATUS (HK byte 0)
+	AUTHOR_DATE=19930421
+	XLATE=0,"Unmodified"
+	XLATE=1,"Modified"
+
+ITEM=DPU_ML_STARTED
+	EXTRACT=4,1,-1,1,0,AREA:5
+	DESC=DPU memory load in progress, 1 = Yes
+!	DESC=Originates in DPU_STATUS (HK byte 0)
+	AUTHOR_DATE=19930421
+	XLATE=0,"No ML"
+	XLATE=1,"In progress"
+ITEM=DPU_ML_OK
+	EXTRACT=5,2,-1,1,0,AREA:5
+	DESC=DPU memory load finished.  If checksummed correctly, 1=GOOD
+!	DESC=Originates in DPU_STATUS (HK byte 0)
+	AUTHOR_DATE=19930421
+	XLATE=0,"Normal"
+	XLATE=1,"ML Good"
+	XLATE=2,"ML Bad!"
+	XLATE=3,"Unused"
+ITEM=DPU_ML_BAD
+	EXTRACT=6,1,-1,1,0,AREA:5
+	DESC=DPU memory load finished but did not checksum correctly, 1= BAD
+!	DESC=Originates in DPU_STATUS (HK byte 0)
+	AUTHOR_DATE=19930421
+	XLATE=0,"Normal"
+	XLATE=1,"ML Bad!"
+
+ITEM=DPU_COMMANDED_THISMF
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=256,1,-1,1,0,AREA:5
+	DESC=The DPU received a TC during the previous MF
+!	DESC=Originates in DPU_STATUSB (HK byte 32)
+	AUTHOR_DATE=19931013
+	XLATE=0,"Not TCed"
+	XLATE=1,"TCed this MF"
+ITEM=DPU_COMMANDED_EVER
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=257,1,-1,1,0,AREA:5
+	DESC=0 if no commands have ever been sent
+!	DESC=Originates in DPU_STATUSB (HK byte 32)
+	AUTHOR_DATE=19931013
+	XLATE=0,"Never TC'ed"
+	XLATE=1,"TC'ed"
+ITEM=COMMANDED
+	VALIDATION=DPU_VERSION,GE,2,LE,3
+	EXTRACT=91,1,-1,1,0,AREA:5
+	DESC=0 if no commands have ever been sent (moved, see v4 item at offset=257)
+!	DESC=Originates in CAL_STATUS (HK byte 11)
+	AUTHOR_DATE=19930421
+
+ITEM=TC_HELD
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=258,1,-1,1,0,AREA:5
+	DESC=Any TCs will be held until released (typical of CAL)
+!	DESC=Originates in DPU_STATUSB (HK byte 32)
+	AUTHOR_DATE=19931013
+	XLATE=0,"TCs not held"
+	XLATE=1,"TCs Held"
+ITEM=TC_BUFFERED
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=259,1,-1,1,0,AREA:5
+	DESC=Some TCs are held in the buffer (typical of CAL)
+!	DESC=Originates in DPU_STATUSB (HK byte 32)
+	AUTHOR_DATE=19931013
+	XLATE=0,"No TCs buffered"
+	XLATE=1,"TCs in buffer"
+
+ITEM=DPU_ADC_OK
+	EXTRACT=2,1,-1,1,0,AREA:5
+	DESC=A/D conversion completed this major frame, 1 = Yes
+!	DESC=Originates in DPU_STATUS (HK byte 0)
+	AUTHOR_DATE=19930421
+	XLATE=0,"ADC BAD!"
+	XLATE=1,"ADC Ok"
+
+ITEM=DPU_CLOCK_ON
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=16,1,-1,1,0,AREA:5
+	DESC=DPU clock functional when value is 1
+!	DESC=Originates in DPU_SUBSYSTEMS (HK byte 2)
+	AUTHOR_DATE=19930421
+	XLATE=0,"Off!"
+	XLATE=1,"On"
+
+ITEM=TELEMETRY_OK
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=17,1,-1,1,0,AREA:5
+	DESC=The telemetry FIFO was emptied correctly when value is 1
+!	DESC=Originates in DPU_SUBSYSTEMS (HK byte 2)
+	AUTHOR_DATE=19930421
+	XLATE=0,"Bad!"
+	XLATE=1,"Ok"
+ITEM=TM_BITRATE
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=90,1,-1,1,0,AREA:5
+	DESC=The measured TM bit rate
+!	DESC=Originates in CAL_STATUS (HK byte 11)
+	AUTHOR_DATE=19930421
+	XLATE=0,"Low"
+	XLATE=1,"High"
+
+ITEM=SPIN_PULSES_OK
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=18,1,-1,1,0,AREA:5
+	DESC=Indicates at least one of Sun, MagAz and MagEl was detected in last MF
+!	DESC=Originates in DPU_SUBSYSTEMS (HK byte 2)
+	AUTHOR_DATE=19930421
+	XLATE=0,"Bad!"
+	XLATE=1,"Ok"
+
+ITEM=CAL_ATTENUATOR
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=64,3,-1,1,0,AREA:5
+	DESC=Cal attenuation into PA - higher values = more attenuation
+!	DESC=Originates in CAL_CONTROL (HK byte 8)
+	AUTHOR_DATE=19930421
+	XLATE=0,"TBD dB"
+	XLATE=1,"TBD dB"
+	XLATE=2,"TBD dB"
+	XLATE=3,"TBD dB"
+	XLATE=4,"TBD dB"
+	XLATE=5,"TBD dB"
+	XLATE=6,"TBD dB"
+	XLATE=7,"TBD dB"
+
+ITEM=CAL_FREQUENCY
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=67,1,-1,1,0,AREA:5
+	DESC=Noise generator clock frequency
+!	DESC=Originates in CAL_CONTROL (HK byte 8)
+	AUTHOR_DATE=19930421
+	XLATE=0,"Low"
+	XLATE=1,"High"
+
+ITEM=CAL_PA_ANTENNA
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=68,2,-1,1,0,AREA:5
+	DESC=PA calibration destination
+!	DESC=Originates in CAL_CONTROL (HK byte 8)
+	AUTHOR_DATE=19930421
+	XLATE=0,"--"
+	XLATE=1,"-+"
+	XLATE=2,"+-"
+	XLATE=3,"++"
+
+ITEM=CAL_TARGET
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=70,2,-1,1,0,AREA:5
+	DESC=Indicates where the CAL signal is headed
+!	DESC=Originates in CAL_CONTROL (HK byte 8)
+	AUTHOR_DATE=19941018
+	XLATE=0,"Off"
+	XLATE=1,"On PA"
+	XLATE=2,"On MF"
+	XLATE=3,"On Both - Bad"
+
+ITEM=CAL_MF
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=70,1,-1,1,0,AREA:5
+	DESC=CAL is driving the mid receiver stage when = 1
+!	DESC=Originates in CAL_CONTROL (HK byte 8)
+	AUTHOR_DATE=19930421
+	XLATE=0,"Off"
+	XLATE=1,"On"
+
+ITEM=CAL_PA
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=71,1,-1,1,0,AREA:5
+	DESC=CAL is driving the pre-amps when = 1
+!	DESC=Originates in CAL_CONTROL (HK byte 8)
+	AUTHOR_DATE=19930421
+	XLATE=0,"Off"
+	XLATE=1,"On"
+
+ITEM=CAL_EVER
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=91,1,-1,1,0,AREA:5
+	DESC=WAVES has been calibrated since the most recent reboot
+!	DESC=Originates in CAL_STATUS (HK byte 11)
+	AUTHOR_DATE=19930421
+	XLATE=0,"Never CAL'ed"
+	XLATE=1,"CAL'ed"
+
+ITEM=CAL_GENERATOR
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=92,1,-1,1,0,AREA:5
+	DESC=Internal noise generator status (necessary but not sufficient for a cal)
+!	DESC=Originates in CAL_STATUS (HK byte 11)
+	AUTHOR_DATE=19930421
+	XLATE=0,"Off"
+	XLATE=1,"On"
+
+ITEM=CAL_COMING
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=93,1,-1,1,0,AREA:5
+	DESC=Presages a calibration (reverts to 0 when the cal actually begins)
+!	DESC=Originates in CAL_STATUS (HK byte 11)
+	AUTHOR_DATE=19930421
+	XLATE=0,"Not coming"
+	XLATE=1,"Coming"
+
+ITEM=CAL_ON
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=94,1,-1,1,0,AREA:5
+	DESC=Indicates internal CALibration sequence is in progress
+!	DESC=Originates in CAL_STATUS (HK byte 11)
+	AUTHOR_DATE=19930421
+	XLATE=0,"Off"
+	XLATE=1,"On"
+
+ITEM=CAL_AUTOMATIC
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=95,1,-1,1,0,AREA:5
+	DESC=Automatic CALibration status
+!	DESC=Originates in CAL_STATUS (HK byte 11)
+	AUTHOR_DATE=19930421
+	XLATE=0,"Disabled"
+	XLATE=1,"Enabled"
+
+ITEM=DPU_STATUS
+	EXTRACT=0,8,-1,1,0,AREA:5
+	DESC=Status of DPU - see individual entries
+!	DESC=Includes:	SWE_ACTIVITY,	3DP_ACTIVITY,	DPU_ADC_OK,	DPU_RAM_OK
+!	DESC=		DPU_ML_STARTED,	DPU_ML_OK,	DPU_ML_BAD,	DPU_RAM_MODIFIED
+	AUTHOR_DATE=19930421
+ITEM=DPU_STATUSB
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=256,8,-1,1,0,AREA:5
+	DESC=Status of DPU, part B - see individual entries
+!	DESC=Includes:	DPU_COMMANDED_THISMF,	DPU_COMMANDED_EVER,	TC_HELD
+!	DESC=		TC_BUFFERED,		FFT_ML_LOCKED,		FFT_HK_RECEIVED
+!	DESC=		TDS_ML_LOCKED,		TDS_HK_RECEIVED
+	AUTHOR_DATE=19931013
+ITEM=DPU_SUBSYSTEMS
+	EXTRACT=16,8,-1,1,0,AREA:5
+	DESC=Status of DPU subsystems - see individual entries
+!	DESC=Includes:	DPU_CLOCK_ON,	TELEMETRY_OK,	SPIN_PULSES_OK,	RAD1_ACTIVE,
+!	DESC=		RAD2_ACTIVE,	TNR_ACTIVE,	FFT_ACTIVE,	TDS_ACTIVE
+	AUTHOR_DATE=19930421
+ITEM=CAL_CONTROL
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=64,8,-1,1,0,AREA:5
+	DESC=The CAL control port mirror (encoded) - see bit-by-bit items
+!	DESC=Includes:	CAL_ATTENUATOR,	CAL_FREQUENCY,	CAL_PA_ANTENNA,	CAL_TARGET
+!	DESC=		CAL_MF,		CAL_PA
+	AUTHOR_DATE=19930421
+ITEM=CAL_STATUS
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=88,8,-1,1,0,AREA:5
+	DESC=Overall state of the calibration - see bit-by-bit breakdown items
+!	DESC=Includes:	CONVERTER_REDUND,	TM_BITRATE,	CAL_EVER,
+!	DESC=		CAL_GENERATOR,		CAL_COMING,	CAL_ON
+!	DESC=		CAL_AUTOMATIC
+	AUTHOR_DATE=19930421
+
+ITEM=TDS_VERSION
+	EXTRACT=344,4,-1,1,0,AREA:5
+	DESC=Version of TDS software
+	AUTHOR_DATE=19910901
+
+ITEM=TDS_SIG_BLOCKS
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=348,4,-1,1,0,AREA:5
+	DESC=Number of TDS signature blocks (ROM & RAM) found at boot
+	AUTHOR_DATE=19931030
+
+ITEM=TDS_ACTIVE
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=23,1,-1,1,0,AREA:5
+	DESC=TDS was active in the previous major frame when value is 1
+!	DESC=Originates in DPU_SUBSYSTEMS (HK byte 2)
+	AUTHOR_DATE=19930421
+	XLATE=0,"Inactive"
+	XLATE=1,"Active"
+
+ITEM=TDS_HK_RECEIVED
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=263,1,-1,1,0,AREA:5
+	DESC=A HouseKeeping transfer was received from the TDS susbsystem
+!	DESC=Originates in DPU_STATUSB (HK byte 32)
+	AUTHOR_DATE=19931013
+	XLATE=0,"No HK!"
+	XLATE=1,"HK received"
+
+ITEM=TDS_ERRORS
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=336,8,-1,1,0,AREA:5
+	DESC=TDS processor error count (Pack-8 notation)
+	AUTHOR_DATE=19931030
+
+ITEM=TDS_RAM_OK
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=324,1,-1,1,0,AREA:5
+	DESC=All TDS RAM tested okay at boot, 1 = Yes
+!	DESC=Originates in TDS_STATUS (HK byte 40)
+	AUTHOR_DATE=19931030
+	XLATE=0,"RAM Errors!"
+	XLATE=1,"RAM Ok"
+ITEM=TDS_RAM_MODIFIED
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=323,1,-1,1,0,AREA:5
+	DESC=TDS RAM has been modified by memory load (flag for ever) 1=Yes
+!	DESC=Originates in TDS_STATUS (HK byte 40)
+	AUTHOR_DATE=19931030
+	XLATE=0,"Unmodified"
+	XLATE=1,"Modified"
+
+ITEM=TDS_ML_STARTED
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=320,1,-1,1,0,AREA:5
+	DESC=TDS memory load in progress, 1 = Yes
+!	DESC=Originates in TDS_STATUS (HK byte 40)
+	AUTHOR_DATE=19931030
+	XLATE=0,"No ML"
+	XLATE=1,"In progress"
+ITEM=TDS_ML_LOCKED
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=262,1,-1,1,0,AREA:5
+	DESC=A LOCKED TDS memory load is underway (other TDS activity is suspended)
+!	DESC=Originates in DPU_STATUSB (HK byte 32)
+	AUTHOR_DATE=19931013
+	XLATE=0,"Normal"
+	XLATE=1,"Locked ML"
+ITEM=TDS_ML_OK
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=321,2,-1,1,0,AREA:5
+	DESC=TDS memory load finished.  If checksummed correctly, 1 = GOOD
+!	DESC=Originates in TDS_STATUS (HK byte 40)
+	AUTHOR_DATE=19931030
+	XLATE=0,"Normal"
+	XLATE=1,"ML Good"
+	XLATE=2,"ML Bad!"
+	XLATE=3,"Unused"
+ITEM=TDS_ML_BAD
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=322,1,-1,1,0,AREA:5
+	DESC=TDS memory load finished but did not checksum correctly, 1= BAD
+!	DESC=Originates in TDS_STATUS (HK byte 40)
+	AUTHOR_DATE=19931030
+	XLATE=0,"Normal"
+	XLATE=1,"ML Bad!"
+
+ITEM=TDS_RESET_LAST_MF
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=325,1,-1,1,0,AREA:5
+	DESC=The TDS was reset during the last major frame
+!	DESC=Originates in TDS_STATUS (HK byte 40)
+	AUTHOR_DATE=19931030
+	XLATE=0,"Not reset"
+	XLATE=1,"Reset!"
+ITEM=TDS_TC_THIS_MF
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=326,1,-1,1,0,AREA:5
+	DESC=The TDS received a TC during the last major frame
+!	DESC=Originates in TDS_STATUS (HK byte 40)
+	AUTHOR_DATE=19931030
+	XLATE=0,"Not TC'ed"
+	XLATE=1,"TC'ed this MF"
+ITEM=TDS_TC_EVER
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=327,1,-1,1,0,AREA:5
+	DESC=The TDS received at least one TC since the last reboot
+!	DESC=Originates in TDS_STATUS (HK byte 40)
+	AUTHOR_DATE=19931030
+	XLATE=0,"Never TC'ed"
+	XLATE=1,"TC'ed"
+
+ITEM=TDS_SLOW_ACTIVE
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=328,1,-1,1,0,AREA:5
+	DESC=Indicates TDS slow sampler activity
+!	DESC=Originates in TDS_SS (HK byte 41)
+	AUTHOR_DATE=19941017
+	XLATE=0,"Inactive!"
+	XLATE=1,"Active"
+ITEM=TDS_FAST_ACTIVE
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=329,1,-1,1,0,AREA:5
+	DESC=Indicates TDS fast sampler activity
+!	DESC=Originates in TDS_SS (HK byte 41)
+	AUTHOR_DATE=19941017
+	XLATE=0,"Inactive!"
+	XLATE=1,"Active"
+
+ITEM=TDS_SLOW_WIGGLED
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=330,1,-1,1,0,AREA:5
+	DESC=Indicates TDS slow sampler wiggle status
+!	DESC=Originates in TDS_SS (HK byte 41)
+	AUTHOR_DATE=19941017
+	XLATE=0,"Normal"
+	XLATE=1,"Wiggled"
+ITEM=TDS_FAST_WIGGLED
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=331,1,-1,1,0,AREA:5
+	DESC=Indicates TDS fast sampler wiggle status
+!	DESC=Originates in TDS_SS (HK byte 41)
+	AUTHOR_DATE=19941017
+	XLATE=0,"Normal"
+	XLATE=1,"Wiggled"
+
+ITEM=TDS_SLOW_SCAVENGE
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=332,1,-1,1,0,AREA:5
+	DESC=TDS slow sampler memory buffer recovery
+!	DESC=Originates in TDS_SS (HK byte 41)
+	AUTHOR_DATE=19941017
+	XLATE=0,"Normal"
+	XLATE=1,"Scavenge!"
+ITEM=TDS_FAST_SCAVENGE
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=333,1,-1,1,0,AREA:5
+	DESC=TDS fast sampler memory buffer recovery
+!	DESC=Originates in TDS_SS (HK byte 41)
+	AUTHOR_DATE=19941017
+	XLATE=0,"Normal"
+	XLATE=1,"Scavenge!"
+
+ITEM=TDS_MALLOC
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=335,1,-1,1,0,AREA:5
+	DESC=TDS memory allocation failed for an event (1 = failure)
+!	DESC=Originates in TDS_SS (HK byte 41)
+	AUTHOR_DATE=19941017
+	XLATE=0,"Ok"
+	XLATE=1,"Failure!"
+
+ITEM=TDS_SLOW_SAMPLER_TRIGGER
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=440,1,-1,1,0,AREA:5
+	DESC=The trigger used for the slow sampler channels
+!	DESC=Originates in TDS_TRIGGER (HK byte 55)
+	AUTHOR_DATE=19941018
+	XLATE=0,"Slow"
+	XLATE=1,"Fast"
+ITEM=TDS_FAST_SAMPLER_TRIGGER
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=441,1,-1,1,0,AREA:5
+	DESC=The trigger used for the fast sampler channels
+!	DESC=Originates in TDS_TRIGGER (HK byte 55)
+	AUTHOR_DATE=19941018
+	XLATE=0,"Fast"
+	XLATE=1,"Slow"
+
+ITEM=TDS_FAST_TRIGGER
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=319,1,-1,1,0,AREA:5
+	DESC=The channel used for the fast trigger
+!	DESC=Originates in TDS_FAST_THRESH (HK byte 39)
+	AUTHOR_DATE=19941018
+	XLATE=0,"Channel 1"
+	XLATE=1,"Channel 2"
+ITEM=TDS_SLOW_TRIGGER
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=444,2,-1,1,0,AREA:5
+	DESC=The channel used for the slow trigger
+!	DESC=Originates in TDS_TRIGGER (HK byte 55)
+	AUTHOR_DATE=19941018
+	XLATE=0,"Channel 3"
+	XLATE=1,"Channel 4"
+	XLATE=2,"Channel 5"
+	XLATE=3,"Channel 6"
+
+ITEM=TDS_NOMAX
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=442,1,-1,1,0,AREA:5
+	DESC=Indicates TDS fast and slow MAX/NOMAX mode
+!	DESC=Originates in TDS_TRIGGER (HK byte 55)
+	AUTHOR_DATE=19941018
+	XLATE=0,"Normal"
+	XLATE=1,"No MAX"
+
+ITEM=TDS_TANDEM
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=443,1,-1,1,0,AREA:5
+	DESC=Indicates TDS fast and slow TANDEM mode
+!	DESC=Originates in TDS_TRIGGER (HK byte 55)
+	AUTHOR_DATE=19941018
+	XLATE=0,"Separate"
+	XLATE=1,"Tandem"
+
+ITEM=TDS_SLOW_MODE
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=446,1,-1,1,0,AREA:5
+	DESC=TDS slow sampler MAX next event retention mode
+!	DESC=Originates in TDS_TRIGGER (HK byte 55)
+	AUTHOR_DATE=19941018
+	XLATE=0,"Reset"
+	XLATE=1,"Retain"
+ITEM=TDS_FAST_MODE
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=447,1,-1,1,0,AREA:5
+	DESC=TDS fast sampler MAX next event retention mode
+!	DESC=Originates in TDS_TRIGGER (HK byte 55)
+	AUTHOR_DATE=19941018
+	XLATE=0,"Reset"
+	XLATE=1,"Retain"
+
+ITEM=TDS_FAST_THRESHOLD
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=312,7,-1,1,0,AREA:5
+	DESC=TDS fast threshold value
+	AUTHOR_DATE=19931030
+ITEM=TDS_SLOW_THRESHOLD
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=464,7,-1,1,0,AREA:5
+	DESC=TDS slow threshold value
+	AUTHOR_DATE=19931030
+
+ITEM=TDS_STATUS
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=320,8,-1,1,0,AREA:5
+	DESC=Overall state of the TDS processor - see bit-by-bit breakdown items
+!	DESC=Includes:	TDS_ML_STARTED,		TDS_ML_OK,	TDS_ML_BAD,
+!	DESC=		TDS_RAM_MODIFIED,	TDS_RAM_OK,
+!	DESC=		TDS_RESET_LAST_MF,	TDS_TC_THIS_MF,
+!	DESC=		TDS_TC_EVER
+	AUTHOR_DATE=19931030
+
+ITEM=TDS_SS
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=328,8,-1,1,0,AREA:5
+	DESC=Overall state of TDS processor subsystems - see bit-by-bit descriptions
+!	DESC=Includes:	TDS_SLOW_ACTIVE,	TDS_FAST_ACTIVE,
+!	DESC=		TDS_SLOW_WIGGLED,	TDS_FAST_WIGGLED,	
+!	DESC=		TDS_SLOW_SCAVENGE,	TDS_FAST_SCAVENGE,	
+!	DESC=		unused (bit 334),	TDS_MALLOC
+	AUTHOR_DATE=19931030
+
+ITEM=TDS_TRIGGER
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=440,8,-1,1,0,AREA:5
+	DESC=TDS trigger control word
+!	DESC=Includes:	TDS_SLOW_SAMPLER_TRIGGER,	TDS_FAST_SAMPLER_TRIGGER,	
+!	DESC=Includes:	TDS_NOMAX,	TDS_TANDEM,	TDS_SLOW_TRIGGER,
+!	DESC=Includes:	TDS_SLOW_MODE,	TDS_FAST_MODE
+	AUTHOR_DATE=19931030
+
+ITEM=TDS_INT_MAX_CH1
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=376,8,-1,1,0,AREA:5
+	DESC=TDS interval max channel 1
+	AUTHOR_DATE=19931030
+ITEM=TDS_INT_MAX_CH2
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=384,8,-1,1,0,AREA:5
+	DESC=TDS interval max channel 2
+	AUTHOR_DATE=19931030
+ITEM=TDS_INT_MAX_CH3
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=392,8,-1,1,0,AREA:5
+	DESC=TDS interval max channel 3
+	AUTHOR_DATE=19931030
+ITEM=TDS_INT_MAX_CH4
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=400,8,-1,1,0,AREA:5
+	DESC=TDS interval max channel 4
+	AUTHOR_DATE=19931030
+ITEM=TDS_INT_MAX_CH5
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=408,8,-1,1,0,AREA:5
+	DESC=TDS interval max channel 5
+	AUTHOR_DATE=19931030
+ITEM=TDS_INT_MAX_CH6
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=416,8,-1,1,0,AREA:5
+	DESC=TDS interval max channel 6
+	AUTHOR_DATE=19931030
+
+ITEM=TDS_CHANNEL_SELECT
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=424,8,-1,1,0,AREA:5
+	DESC=TDS channel word
+!	DESC=Includes:	TDS_CHANNEL_1,	TDS_CHANNEL_2,	TDS_CHANNEL_3,	TDS_CHANNEL_4,	
+!	DESC=		TDS_CHANNEL_5,	TDS_CHANNEL_6
+	AUTHOR_DATE=19931030
+ITEM=TDS_CHANNEL_1
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=424,1,-1,1,0,AREA:5
+	DESC=The antenna to which TDS channel 1 is connected
+!	DESC=Originates in TDS_CHANNEL_SELECT (HK byte 53)
+	AUTHOR_DATE=19941018
+	XLATE=0,"ExAC"
+	XLATE=1,"ExDC"
+ITEM=TDS_CHANNEL_2
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=425,2,-1,1,0,AREA:5
+	DESC=The antenna to which TDS channel 2 is connected
+!	DESC=Originates in TDS_CHANNEL_SELECT (HK byte 53)
+	AUTHOR_DATE=19941018
+	XLATE=0,"ExAC"
+	XLATE=1,"EyAC"
+	XLATE=2,"EzAC"
+	XLATE=3,"EzAC"
+ITEM=TDS_CHANNEL_3
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=427,2,-1,1,0,AREA:5
+	DESC=The antenna to which TDS channel 3 is connected
+!	DESC=Originates in TDS_CHANNEL_SELECT (HK byte 53)
+	AUTHOR_DATE=19941018
+	XLATE=0,"ExDC"
+	XLATE=1,"EyDC"
+	XLATE=2,"EzDC"
+	XLATE=3,"EzDC"
+ITEM=TDS_CHANNEL_4
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=429,1,-1,1,0,AREA:5
+	DESC=The antenna to which TDS channel 4 is connected
+!	DESC=Originates in TDS_CHANNEL_SELECT (HK byte 53)
+	AUTHOR_DATE=19941018
+	XLATE=0,"Bx"
+	XLATE=1,"ExDC"
+ITEM=TDS_CHANNEL_5
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=430,1,-1,1,0,AREA:5
+	DESC=The antenna to which TDS channel 5 is connected
+!	DESC=Originates in TDS_CHANNEL_SELECT (HK byte 53)
+	AUTHOR_DATE=19941018
+	XLATE=0,"By"
+	XLATE=1,"EyDC"
+ITEM=TDS_CHANNEL_6
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=431,1,-1,1,0,AREA:5
+	DESC=The antenna to which TDS channel 6 is connected
+!	DESC=Originates in TDS_CHANNEL_SELECT (HK byte 53)
+	AUTHOR_DATE=19941018
+	XLATE=0,"Bz"
+	XLATE=1,"EzDC"
+
+ITEM=TDS_SPEED_SELECT
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=432,8,-1,1,0,AREA:5
+	DESC=TDS speed control word
+!	DESC=Includes:	TDS_SPEED_FAST,		TDS_SPEED_SLOW,	
+!	DESC=Includes:	TDS_FILTER_FAST,	TDS_FILTER_SLOW,	
+	AUTHOR_DATE=19931030
+
+ITEM=TDS_SPEED_FAST
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=432,2,-1,1,0,AREA:5
+	DESC=TDS fast sampler speed selection
+!	DESC=Originates in TDS_SPEED_SELECT (HK byte 54)
+	AUTHOR_DATE=19941018
+	XLATE=0,"120,000s/s"
+	XLATE=1,"30,000s/s"
+	XLATE=2,"7,500s/s"
+	XLATE=3,"1,875s/s"
+ITEM=TDS_SPEED_SLOW
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=434,2,-1,1,0,AREA:5
+	DESC=TDS slow sampler speed selection
+!	DESC=Originates in TDS_SPEED_SELECT (HK byte 54)
+	AUTHOR_DATE=19941018
+	XLATE=0,"7,500s/s"
+	XLATE=1,"1,875s/s"
+	XLATE=2,"478s/s"
+	XLATE=3,"120s/s"
+
+ITEM=TDS_FILTER_FAST
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=436,2,-1,1,0,AREA:5
+	DESC=TDS fast sampler filter selection
+!	DESC=Originates in TDS_SPEED_SELECT (HK byte 54)
+	AUTHOR_DATE=19941018
+	XLATE=0,"50.kHz"
+	XLATE=1,"12.5kHz"
+	XLATE=2,"3.125kHz"
+	XLATE=3,".781kHz"
+ITEM=TDS_FILTER_SLOW
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=438,2,-1,1,0,AREA:5
+	DESC=TDS slow sampler filter selection
+!	DESC=Originates in TDS_SPEED_SELECT (HK byte 54)
+	AUTHOR_DATE=19941018
+	XLATE=0,"3,125Hz"
+	XLATE=1,"781Hz"
+	XLATE=2,"195Hz"
+	XLATE=3,"49Hz"
+
+ITEM=3DP_ACTIVITY
+	EXTRACT=1,1,-1,1,0,AREA:5
+	DESC=3DP word received this major frame, 1 = Yes
+!	DESC=Originates in DPU_STATUS (HK byte 0)
+	AUTHOR_DATE=19930421
+	XLATE=0,"Inactive"
+	XLATE=1,"Active"
+
+ITEM=3DPLASMA
+	EXTRACT=368,8,-1,1,0,AREA:5
+	COMPOSITE=3DPLASMA1
+	DESC=Value of word received from 3DP experiment - electron density (encoded)
+	AUTHOR_DATE=19910901
+ITEM=3DPLASMA1
+	EXTRACT=360,8,-1,1,0,AREA:5
+	DESC=Value of word received from 3DP experiment(cont.) - electron density (encoded)
+	AUTHOR_DATE=19910901
+
+ITEM=SWE_ACTIVITY
+	EXTRACT=0,1,-1,1,0,AREA:5
+	DESC=SWE word received this major frame, 1 = Yes
+!	DESC=Originates in DPU_STATUS (HK byte 0)
+	AUTHOR_DATE=19930421
+	XLATE=0,"Inactive"
+	XLATE=1,"Active"
+
+ITEM=SWE
+	EXTRACT=352,8,-1,1,0,AREA:5
+	DESC=Value of word received from SWE - electron density (encoded)
+	AUTHOR_DATE=19910901
+
+ITEM=FFT_VERSION
+	EXTRACT=496,4,-1,1,0,AREA:5
+	DESC=Version of FFT software
+	AUTHOR_DATE=19910901
+
+ITEM=FFT_SIG_BLOCKS
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=500,4,-1,1,0,AREA:5
+	DESC=Number of FFT signature blocks (ROM & RAM) found at boot
+	AUTHOR_DATE=19931016
+
+ITEM=FFT_ACTIVE
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=22,1,-1,1,0,AREA:5
+	DESC=FFT was active in the previous major frame when value is 1
+!	DESC=Originates in DPU_SUBSYSTEMS (HK byte 2)
+	AUTHOR_DATE=19930421
+	XLATE=0,"Inactive"
+	XLATE=1,"Active"
+
+ITEM=FFT_HK_RECEIVED
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=261,1,-1,1,0,AREA:5
+	DESC=A HouseKeeping transfer was received from the FFT susbsystem
+!	DESC=Originates in DPU_STATUSB (HK byte 32)
+	AUTHOR_DATE=19931013
+	XLATE=0,"No HK!"
+	XLATE=1,"HK received"
+
+ITEM=FFT_ERRORS
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=488,8,-1,1,0,AREA:5
+	DESC=FFT processor error count (Pack 8 notation)
+	AUTHOR_DATE=19931016
+
+ITEM=FFT_RAM_OK
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=476,1,-1,1,0,AREA:5
+	DESC=All FFT RAM tested okay at boot, 1 = Yes
+!	DESC=Originates in FFT_STATUS (HK byte 59)
+	AUTHOR_DATE=19931016
+	XLATE=0,"RAM Errors!"
+	XLATE=1,"RAM Ok"
+ITEM=FFT_RAM_MODIFIED
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=475,1,-1,1,0,AREA:5
+	DESC=FFT RAM has been modified by memory load (flag for ever) 1=Yes
+!	DESC=Originates in FFT_STATUS (HK byte 59)
+	AUTHOR_DATE=19931016
+	XLATE=0,"Unmodified"
+	XLATE=1,"Modified"
+
+ITEM=FFT_ML_STARTED
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=472,1,-1,1,0,AREA:5
+	DESC=FFT memory load in progress, 1 = Yes
+!	DESC=Originates in FFT_STATUS (HK byte 59)
+	AUTHOR_DATE=19931016
+	XLATE=0,"No ML"
+	XLATE=1,"In progress"
+ITEM=FFT_ML_LOCKED
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=260,1,-1,1,0,AREA:5
+	DESC=A LOCKED FFT memory load is underway (other FFT activity is suspended)
+!	DESC=Originates in DPU_STATUSB (HK byte 32)
+	AUTHOR_DATE=19931013
+	XLATE=0,"Normal"
+	XLATE=1,"Locked ML"
+ITEM=FFT_ML_OK
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=473,2,-1,1,0,AREA:5
+	DESC=FFT memory load finished.  If checksummed correctly, 1 = GOOD
+!	DESC=Originates in FFT_STATUS (HK byte 59)
+	AUTHOR_DATE=19931016
+	XLATE=0,"Normal"
+	XLATE=1,"ML Good"
+	XLATE=2,"ML Bad!"
+	XLATE=3,"Unused"
+ITEM=FFT_ML_BAD
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=474,1,-1,1,0,AREA:5
+	DESC=FFT memory load finished but did not checksum correctly, 1= BAD
+!	DESC=Originates in FFT_STATUS (HK byte 59)
+	AUTHOR_DATE=19931016
+	XLATE=0,"Normal"
+	XLATE=1,"ML Bad!"
+
+ITEM=FFT_RESET_LAST_MF
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=477,1,-1,1,0,AREA:5
+	DESC=The FFT was reset during the last major frame
+!	DESC=Originates in FFT_STATUS (HK byte 59)
+	AUTHOR_DATE=19931016
+	XLATE=0,"Not reset"
+	XLATE=1,"Reset!"
+ITEM=FFT_TC_THIS_MF
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=478,1,-1,1,0,AREA:5
+	DESC=The FFT received a TC during the last major frame
+!	DESC=Originates in FFT_STATUS (HK byte 59)
+	AUTHOR_DATE=19931016
+	XLATE=0,"Not TC'ed"
+	XLATE=1,"TC'ed this MF"
+ITEM=FFT_TC_EVER
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=479,1,-1,1,0,AREA:5
+	DESC=The FFT received at least one TC since the last reboot
+!	DESC=Originates in FFT_STATUS (HK byte 59)
+	AUTHOR_DATE=19931016
+	XLATE=0,"Never TC'ed"
+	XLATE=1,"TC'ed"
+
+ITEM=FFT_ADC_OK
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=480,1,-1,1,0,AREA:5
+	DESC=A/D conversion completed this major frame, 1 = Yes
+!	DESC=Originates in FFT_SS (HK byte 60)
+	AUTHOR_DATE=19941018
+	XLATE=0,"ADC BAD!"
+	XLATE=1,"ADC Ok"
+
+ITEM=FFT_LOW_FIFO
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=481,1,-1,1,0,AREA:5
+	DESC=Low frequency FIFOs were active last major frame
+!	DESC=Originates in FFT_SS (HK byte 60)
+	AUTHOR_DATE=19941018
+	XLATE=0,"Inactive"
+	XLATE=1,"Active"
+ITEM=FFT_MID_FIFO
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=482,1,-1,1,0,AREA:5
+	DESC=Middle frequency FIFOs were active last major frame
+!	DESC=Originates in FFT_SS (HK byte 60)
+	AUTHOR_DATE=19941018
+	XLATE=0,"Inactive"
+	XLATE=1,"Active"
+ITEM=FFT_HIGH_FIFO
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=483,1,-1,1,0,AREA:5
+	DESC=High frequency FIFOs were active last major frame
+!	DESC=Originates in FFT_SS (HK byte 60)
+	AUTHOR_DATE=19941018
+	XLATE=0,"Inactive"
+	XLATE=1,"Active"
+
+ITEM=FFT_TM
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=484,1,-1,1,0,AREA:5
+	DESC=Low, Middle or High TM was active last major frame
+!	DESC=Originates in FFT_SS (HK byte 60)
+	AUTHOR_DATE=19941018
+	XLATE=0,"Inactive"
+	XLATE=1,"Active"
+
+ITEM=FFT_ALU
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=487,1,-1,1,0,AREA:5
+	DESC=ALU was active last major frame
+!	DESC=Originates in FFT_SS (HK byte 60)
+	AUTHOR_DATE=19941018
+	XLATE=0,"Inactive"
+	XLATE=1,"Active"
+
+ITEM=FFT_STATUS
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=472,8,-1,1,0,AREA:5
+	DESC=Overall state of the FFT processor - see bit-by-bit breakdown items
+!	DESC=Includes:	FFT_ML_STARTED,		FFT_ML_OK,	FFT_ML_BAD,
+!	DESC=		FFT_RAM_MODIFIED,	FFT_RAM_OK,
+!	DESC=		FFT_RESET_LAST_MF,	FFT_TC_THIS_MF,
+!	DESC=		FFT_TC_EVER
+	AUTHOR_DATE=19931016
+
+ITEM=FFT_SS
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=480,8,-1,1,0,AREA:5
+	DESC=Overall state of FFT processor subsystems - see bit-by-bit breakdown items
+!	DESC=Includes:	FFT_ADC_OK,
+!	DESC=		FFT_LOW_FIFO,	FFT_MID_FIFO,	FFT_HIGH_FIFO
+!	DESC=		FFT_TM,		unused (bitS 485, 486)
+!	DESC=		FFT_ALU
+	AUTHOR_DATE=19931016
+
+ITEM=FFT_CHANNEL_SELECT
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=568,8,-1,1,0,AREA:5
+	COMPOSITE=FFT_CH_SWITCHES1
+	DESC=FFT channel control word (LSB)
+!	DESC=Includes:	FFT_CHANNEL_1,	FFT_CHANNEL_2,	FFT_CHANNEL_3,	FFT_CHANNEL_4,	
+!	DESC=		FFT_CHANNEL_5,	FFT_CHANNEL_6
+	AUTHOR_DATE=19931016
+ITEM=FFT_CH_SWITCHES1
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=592,5,-1,1,0,AREA:5
+	DESC=FFT channel control word (MSB)
+!	DESC=Includes:	FFT_CHANNEL_7,	FFT_CHANNEL_8,	FFT_CHANNEL_9,	FFT_CHANNEL_10,	
+	AUTHOR_DATE=19931016
+ITEM=FFT_CHANNEL_1
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=568,1,-1,1,0,AREA:5
+	DESC=The antenna to which FFT channel 1 is connected
+!	DESC=Originates in FFT_CH_SWITCHES0 (HK byte 71)
+	AUTHOR_DATE=19941018
+	XLATE=0,"ExDC"
+	XLATE=1,"ExAC"
+ITEM=FFT_CHANNEL_2
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=569,2,-1,1,0,AREA:5
+	DESC=The antenna to which FFT channel 2 is connected
+!	DESC=Originates in FFT_CH_SWITCHES0 (HK byte 71)
+	AUTHOR_DATE=19941018
+	XLATE=0,"ExAC"
+	XLATE=1,"EyAC"
+	XLATE=2,"EzAC"
+	XLATE=3,"Ground"
+ITEM=FFT_CHANNEL_3
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=571,2,-1,1,0,AREA:5
+	DESC=The antenna to which FFT channel 3 is connected
+!	DESC=Originates in FFT_CH_SWITCHES0 (HK byte 71)
+	AUTHOR_DATE=19941018
+	XLATE=0,"ExDC"
+	XLATE=1,"EyDC"
+	XLATE=2,"EzDC"
+	XLATE=3,"Ground"
+ITEM=FFT_CHANNEL_4
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=573,1,-1,1,0,AREA:5
+	DESC=The antenna to which FFT channel 4 is connected
+!	DESC=Originates in FFT_CH_SWITCHES0 (HK byte 71)
+	AUTHOR_DATE=19941018
+	XLATE=0,"ExDC"
+	XLATE=1,"Bx"
+ITEM=FFT_CHANNEL_5
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=574,1,-1,1,0,AREA:5
+	DESC=The antenna to which FFT channel 5 is connected
+!	DESC=Originates in FFT_CH_SWITCHES0 (HK byte 71)
+	AUTHOR_DATE=19941018
+	XLATE=0,"EyDC"
+	XLATE=1,"By"
+ITEM=FFT_CHANNEL_6
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=575,1,-1,1,0,AREA:5
+	DESC=The antenna to which FFT channel 6 is connected
+!	DESC=Originates in FFT_CH_SWITCHES0 (HK byte 71)
+	AUTHOR_DATE=19941018
+	XLATE=0,"EzDC"
+	XLATE=1,"Bz"
+ITEM=FFT_CHANNEL_7
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=592,2,-1,1,0,AREA:5
+	DESC=The antenna to which FFT channel 7 is connected
+!	DESC=Originates in FFT_CH_SWITCHES1 (HK byte 74)
+	AUTHOR_DATE=19941018
+	XLATE=0,"ExDC"
+	XLATE=1,"EyDC"
+	XLATE=2,"EzDC"
+	XLATE=3,"Ground"
+ITEM=FFT_CHANNEL_8
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=594,1,-1,1,0,AREA:5
+	DESC=The antenna to which FFT channel 8 is connected
+!	DESC=Originates in FFT_CH_SWITCHES1 (HK byte 74)
+	AUTHOR_DATE=19941018
+	XLATE=0,"ExDC"
+	XLATE=1,"Bx"
+ITEM=FFT_CHANNEL_9
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=595,1,-1,1,0,AREA:5
+	DESC=The antenna to which FFT channel 9 is connected
+!	DESC=Originates in FFT_CH_SWITCHES1 (HK byte 74)
+	AUTHOR_DATE=19941018
+	XLATE=0,"EyDC"
+	XLATE=1,"By"
+ITEM=FFT_CHANNEL_10
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=596,1,-1,1,0,AREA:5
+	DESC=The antenna to which FFT channel 10 is connected
+!	DESC=Originates in FFT_CH_SWITCHES1 (HK byte 74)
+	AUTHOR_DATE=19941018
+	XLATE=0,"EzDC"
+	XLATE=1,"Bz"
+
+ITEM=APM_X_PEAK
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=504,8,-1,1,0,AREA:5
+	DESC=The X peak value sampled at second 'angle' after the last MF pulse
+	AUTHOR_DATE=19931016
+ITEM=APM_X_PEAK_VOLTS_R4
+	VALIDATION=DPU_VERSION,GE,4
+	POLY=7,APM_X_PEAK, -13.781, .087818, -8.7533e-6
+	DESC=The X peak value (Volts)
+	AUTHOR_DATE=19970501
+
+ITEM=APM_Y_PEAK
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=512,8,-1,1,0,AREA:5
+	DESC=The Y peak value sampled at second 'angle' after the last MF pulse
+	AUTHOR_DATE=19931016
+ITEM=APM_Y_PEAK_VOLTS_R4
+	VALIDATION=DPU_VERSION,GE,4
+	POLY=7,APM_Y_PEAK, -16.412, .098714, +2.2748e-5
+	DESC=The Y peak value (Volts)
+	AUTHOR_DATE=19970501
+
+ITEM=APM_X_DC
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=520,8,-1,1,0,AREA:5
+	DESC=The X DC value sampled at 'angle' after the last MF pulse
+	AUTHOR_DATE=19931016
+ITEM=APM_X_DC_VOLTS_R4
+	VALIDATION=DPU_VERSION,GE,4
+	POLY=7,APM_X_DC, -13.526, .083789, +2.3591e-6
+	DESC=The X DC value (Volts)
+	AUTHOR_DATE=19970501
+
+ITEM=APM_Y_DC
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=528,8,-1,1,0,AREA:5
+	DESC=The Y DC value sampled at 'angle' after the last MF pulse
+	AUTHOR_DATE=19931016
+ITEM=APM_Y_DC_VOLTS_R4
+	VALIDATION=DPU_VERSION,GE,4
+	POLY=7,APM_Y_DC, -16.954, .10633, -9.381e-6
+	DESC=The Y DC value (Volts)
+	AUTHOR_DATE=19970501
+
+ITEM=APM_Z_DC
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=536,8,-1,1,0,AREA:5
+	DESC=The Z DC value sampled at 'angle' after the last MF pulse
+	AUTHOR_DATE=19931016
+ITEM=APM_Z_DC_VOLTS_R4
+	VALIDATION=DPU_VERSION,GE,4
+	POLY=7,APM_Z_DC, -13.202, .09728, 7.4466e-6
+	DESC=The Z DC value (Volts)
+	AUTHOR_DATE=19970501
+
+ITEM=APM_ANGLE
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=544,8,-1,1,0,AREA:5
+	DESC=The 'angle' at which DC samples are made (0 for now)
+	AUTHOR_DATE=19931016
+
+ITEM=APC_X
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=552,1,-1,1,0,AREA:5
+	DESC=Indicates the state of the X APC relay
+	AUTHOR_DATE=19931102
+	XLATE=0,"Enabled"
+	XLATE=1,"Disabled"
+ITEM=APC_X_RESISTOR
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=553,3,-1,1,0,AREA:5
+	DESC=The selected value of the X APC resistance
+	AUTHOR_DATE=19931102
+	XLATE=0,"10MOhm"
+	XLATE=1,"350MOhm"
+	XLATE=2,"10MOhm"
+	XLATE=3,"1,000MOhm"
+	XLATE=4,"100MOhm"
+	XLATE=5,"350MOhm"
+	XLATE=6,"100MOhm"
+	XLATE=7,"1,000MOhm"
+ITEM=APC_X_STATE
+	VALIDATION=DPU_VERSION,GE,4
+	VALIDATION=APC_X,EQ,0
+	EXTRACT=553,3,-1,1,0,AREA:5
+	DESC=The current value of the X APC resistance
+	AUTHOR_DATE=19970129
+	XLATE=0,"10M"
+	XLATE=1,"350M"
+	XLATE=2,"10M"
+	XLATE=3,"1,000M"
+	XLATE=4,"100M"
+	XLATE=5,"350M"
+	XLATE=6,"100M"
+	XLATE=7,"1,000M"
+ITEM=APC_X_STATE
+	VALIDATION=DPU_VERSION,GE,4
+	VALIDATION=APC_X,EQ,1
+	FIXED_VALUE=1:8
+	DESC=The current value of the X APC resistance
+	AUTHOR_DATE=19970129
+	XLATE=8,"Open"
+ITEM=APC_X_RESISTANCE
+	VALIDATION=DPU_VERSION,GE,4
+	VALIDATION=APC_X,EQ,0
+	EXTRACT=553,3,-1,1,0,AREA:5
+	DESC=Total X APC resistance (adding 24.8M)
+	AUTHOR_DATE=19970502
+	XLATE=0,"34.8M"
+	XLATE=1,"375M"
+	XLATE=2,"34.8M"
+	XLATE=3,"1,025M"
+	XLATE=4,"124.8M"
+	XLATE=5,"375M"
+	XLATE=6,"124.8M"
+	XLATE=7,"1,025M"
+ITEM=APC_X_RESITANCE
+	VALIDATION=DPU_VERSION,GE,4
+	VALIDATION=APC_X,EQ,1
+	FIXED_VALUE=1:8
+	DESC=Total X APC resistance (adding 24.8M)
+	AUTHOR_DATE=19970502
+	XLATE=8,"Open"
+
+ITEM=APC_Y
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=556,1,-1,1,0,AREA:5
+	DESC=Indicates the state of the Y APC relay
+	AUTHOR_DATE=19931102
+	XLATE=0,"Enabled"
+	XLATE=1,"Disabled"
+ITEM=APC_Y_RESISTOR
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=557,3,-1,1,0,AREA:5
+	DESC=The selected value of the Y APC resistance
+	AUTHOR_DATE=19931102
+	XLATE=0,"50MOhm"
+	XLATE=1,"1,500MOhm"
+	XLATE=2,"50MOhm"
+	XLATE=3,"10,000MOhm"
+	XLATE=4,"500MOhm"
+	XLATE=5,"1,500MOhm"
+	XLATE=6,"500MOhm"
+	XLATE=7,"10,000MOhm"
+ITEM=APC_Y_STATE
+	VALIDATION=DPU_VERSION,GE,4
+	VALIDATION=APC_Y,EQ,0
+	EXTRACT=557,3,-1,1,0,AREA:5
+	DESC=The current value of the Y APC resistance
+	AUTHOR_DATE=19970129
+	XLATE=0,"50M"
+	XLATE=1,"1,500M"
+	XLATE=2,"50M"
+	XLATE=3,"10,000M"
+	XLATE=4,"500M"
+	XLATE=5,"1,500M"
+	XLATE=6,"500M"
+	XLATE=7,"10,000M"
+ITEM=APC_Y_STATE
+	VALIDATION=DPU_VERSION,GE,4
+	VALIDATION=APC_Y,EQ,1
+	FIXED_VALUE=1:8
+	DESC=The current value of the Y APC resistance
+	AUTHOR_DATE=19970129
+	XLATE=8,"Open"
+ITEM=APC_Y_RESISTANCE
+	VALIDATION=DPU_VERSION,GE,4
+	VALIDATION=APC_Y,EQ,0
+	EXTRACT=557,3,-1,1,0,AREA:5
+	DESC=Total Y APC resistance (adding 150M)
+	AUTHOR_DATE=19970502
+	XLATE=0,"200M"
+	XLATE=1,"1,650M"
+	XLATE=2,"200M"
+	XLATE=3,"10,150M"
+	XLATE=4,"650M"
+	XLATE=5,"1,650M"
+	XLATE=6,"650M"
+	XLATE=7,"10,150M"
+ITEM=APC_Y_RESISTANCE
+	VALIDATION=DPU_VERSION,GE,4
+	VALIDATION=APC_Y,EQ,1
+	FIXED_VALUE=1:8
+	DESC=Total Y APC resistance (adding 150M)
+	AUTHOR_DATE=19970502
+	XLATE=8,"Open"
+
+ITEM=APC_Z
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=597,1,-1,1,0,AREA:5
+	DESC=Indicates the state of the Z APC relay
+	AUTHOR_DATE=19931016
+	XLATE=0,"Enabled"
+	XLATE=1,"Disabled"
+ITEM=APC_Z_RESISTOR
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=597,1,-1,1,0,AREA:5
+	DESC=The selected value of the Z APC resistance
+	AUTHOR_DATE=19941018
+	XLATE=0,"50MOhm"
+	XLATE=1,"Open"
+ITEM=APC_Z_STATE
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=597,1,-1,1,0,AREA:5
+	DESC=The current value of the Z APC resistance
+	AUTHOR_DATE=19970129
+	XLATE=0,"50M"
+	XLATE=1,"Open"
+ITEM=APC_Z_RESISTANCE
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=597,1,-1,1,0,AREA:5
+	DESC=Total Z APC resistance (adding 50M)
+	AUTHOR_DATE=19970502
+	XLATE=0,"100M"
+	XLATE=1,"Open"
+
+ITEM=B_CALIBRATE
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=598,1,-1,1,0,AREA:5
+	DESC=Indicates the status of the B calibration loop(s)
+	AUTHOR_DATE=19931016
+	XLATE=0,"Disabled"
+	XLATE=1,"Enabled"
+
+ITEM=APC_DAC
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=560,8,-1,1,0,AREA:5
+	DESC=The value of the APC DAC (counts)
+	AUTHOR_DATE=19931102
+ITEM=APC_DAC_VOLTS_R4
+	DATA_TYPE=REAL*4
+	VALIDATION=DPU_VERSION,GE,4
+!	POLY=7,APC_DAC,-9.9874,0.07955,-5.0168e-5,9.7875e-7,-8.4809e-9,3.3717e-11,-5.016e-14
+	POLY=7,APC_DAC, -9.9874, .07955, -5.0168e-5, 9.7875e-7, -8.4809e-9, 3.3717e-11, -5.016e-14
+	DESC=The value of the APC DAC (Volts)
+	AUTHOR_DATE=19941018
+
+ITEM=TNR_ACTIVE
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=21,1,-1,1,0,AREA:5
+	DESC=TNR was active in the previous major frame when value is 1
+!	DESC=Originates in DPU_SUBSYSTEMS (HK byte 2)
+	AUTHOR_DATE=19930421
+	XLATE=0,"Inactive"
+	XLATE=1,"Active"
+
+ITEM=TNR_ON_OFF
+	EXTRACT=127,1,-1,1,0,AREA:5
+	DESC=Indicates that TNR data collection is enabled
+!	DESC=Originates in TNR_STATUS (HK byte 15)
+	AUTHOR_DATE=19931110
+	XLATE=0,"Off"
+	XLATE=1,"On"
+
+ITEM=TNR_CALIBRATE
+	EXTRACT=120,1,-1,1,0,AREA:5
+	DESC=TNR CAL on or state saved
+	AUTHOR_DATE=19931110
+	XLATE=0,"No CAL"
+	XLATE=1,"CAL"
+
+ITEM=TNR_RAM_MODIFIED
+	EXTRACT=121,1,-1,1,0,AREA:5
+	DESC=Indicates that a TNR memory load may have been done
+	AUTHOR_DATE=19931110
+	XLATE=0,"Unmodified"
+	XLATE=1,"Modified"
+
+ITEM=TNR_INTEGRATE
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=118,2,-1,1,0,AREA:5
+	DESC=TNR integration time
+	AUTHOR_DATE=19931030
+	XLATE=0,"A_1472ms"
+	XLATE=1,"B_736ms"
+	XLATE=2,"C_368ms"
+	XLATE=3,"D_184ms"
+ITEM=TNR_INTEGRATE_R4
+	VALIDATION=DPU_VERSION,GE,4
+	DATA_TYPE=REAL*4
+	DESC=TNR integration time in seconds
+	AUTHOR_DATE=19941122
+	LOOKUP=TNR_INTEGRATE
+		TABLE=0,1.472
+		TABLE=1,.736
+		TABLE=2,.368
+		TABLE=3,.184
+
+ITEM=TNR_MODE
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=115,3,-1,1,0,AREA:5
+	DESC=TNR mode number
+	AUTHOR_DATE=19931030
+
+ITEM=TNR_CURRENT_BAND
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=112,3,-1,1,0,AREA:5
+	DESC=TNR current band (center frequency)
+	AUTHOR_DATE=19931030
+	XLATE=0,"A_8kHz"
+	XLATE=1,"B_16kHz"
+	XLATE=2,"C_32kHz"
+	XLATE=3,"D_64kHz"
+	XLATE=4,"E_128kHz"
+	XLATE=5,"Dummy"
+	XLATE=6,"Dummy"
+	XLATE=7,"Dummy"
+
+ITEM=TNR_CURRENT_BAND_R4
+	DATA_TYPE=REAL*4
+	VALIDATION=DPU_VERSION,GE,4
+	DESC=TNR current band (center frequency)
+	AUTHOR_DATE=19941122
+	LOOKUP=TNR_CURRENT_BAND
+		TABLE=0,8000
+		TABLE=1,16000
+		TABLE=2,32000
+		TABLE=3,64000
+		TABLE=4,128000
+		TABLE=5,0.
+		TABLE=6,0.
+		TABLE=7,0.
+
+ITEM=TNR_ANTENNA
+	EXTRACT=122,2,-1,1,0,AREA:5
+	DESC=Indicates the antenna selection of the TNR
+!	DESC=Originates in TNR_STATUS (HK byte 15)
+	AUTHOR_DATE=19931110
+	XLATE=0,"ExEy"
+	XLATE=1,"ExEz"
+	XLATE=2,"EyEz"
+	XLATE=3,"EyEx"
+
+ITEM=TNR_STATE
+	EXTRACT=124,2,-1,1,0,AREA:5
+	DESC=Coded word indicating TNR state
+!	DESC=Originates in TNR_STATUS (HK byte 15)
+	AUTHOR_DATE=19931110
+	XLATE=0,"Fixed Tune?"
+	XLATE=1,"ABCDE?"
+	XLATE=2,"ACE?"
+	XLATE=3,"Auto tune?"
+
+ITEM=TNR_AUTO_TUNE
+	EXTRACT=126,1,-1,1,0,AREA:5
+	DESC=Indicates that TNR is in NN auto tuning mode
+!	DESC=Originates in TNR_STATUS (HK byte 15)
+	AUTHOR_DATE=19931110
+	XLATE=0,"??"
+	XLATE=1,"??"
+
+ITEM=TNR_HEALTH_DATA
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=128,8,-1,1,0,AREA:5
+	DESC=TNR health data
+	AUTHOR_DATE=19931030
+
+ITEM=TNR_NN_CHANNEL
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=136,5,-1,1,0,AREA:5
+	DESC=TNR neural network channel
+	AUTHOR_DATE=199311117
+
+ITEM=TNR_NN_QUALITY
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=141,3,-1,1,0,AREA:5
+	DESC=TNR neural network quality value
+	AUTHOR_DATE=19931117
+
+ITEM=TNR_STATUS
+	VALIDATION=DPU_VERSION,GE,4
+	EXTRACT=120,8,-1,1,0,AREA:5
+	DESC=TNR status bits, see breakdown of bits in following items
+!	DESC=Includes:	TNR_CALIBRATE,	TNR_RAM_MODIFIED,	TNR_ANTENNA,
+!	DESC=		TNR_STATE,	TNR_AUTO_TUNE,		TNR_ON_OFF
+	AUTHOR_DATE=19931030
+
+ITEM=RAD1_ACTIVE
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=19,1,-1,1,0,AREA:5
+	DESC=RAD1 was active in the previous major frame when value is 1
+!	DESC=Originates in DPU_SUBSYSTEMS (HK byte 2)
+	AUTHOR_DATE=19930421
+	XLATE=0,"Inactive"
+	XLATE=1,"Active"
+
+ITEM=RAD1_ON_OFF
+	EXTRACT=151,1,-1,1,0,AREA:5
+	DESC=RAD1 ON/OFF status,
+!	DESC=Originates in RAD1_STATUS (HK byte 18)
+	AUTHOR_DATE=19931110
+	XLATE=0,"Off"
+	XLATE=1,"On"
+
+ITEM=RAD1_CALIBRATE
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=147,1,-1,1,0,AREA:5
+	DESC=RAD1 is in calibration mode when =1 (not necessarily calibrating)
+!	DESC=Originates in RAD1_STATUS (HK byte 18)
+	AUTHOR_DATE=19930422
+	XLATE=0,"no CAL"
+	XLATE=1,"CAL"
+
+ITEM=RAD1_ANTENNA
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=144,1,-1,1,0,AREA:5
+	DESC=Antenna selected for RAD1 0 = X, 1 = Y 
+!	DESC=Originates in RAD1_STATUS (HK byte 18)
+	AUTHOR_DATE=19930422
+	XLATE=0,"Ex"
+	XLATE=1,"Ey"
+
+ITEM=RAD1_MODE
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=148,3,-1,1,0,AREA:5
+	DESC=RAD1 encoded mode
+!	DESC=Originates in RAD1_STATUS (HK byte 18)
+	AUTHOR_DATE=19930422
+	XLATE=0,"Error"
+	XLATE=1,"Fixed Tune"
+	XLATE=2,"Linear Sweep"
+	XLATE=3,"List"
+	XLATE=4,"??"
+	XLATE=5,"??"
+	XLATE=6,"??"
+	XLATE=7,"??"
+
+ITEM=RAD1_POLARIZATION
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=145,1,-1,1,0,AREA:5
+	DESC=RAD1 polarization, 0=   1= 
+!	DESC=Originates in RAD1_STATUS (HK byte 18)
+	AUTHOR_DATE=19930422
+	XLATE=0,"On"
+	XLATE=1,"Off"
+
+ITEM=RAD1_SUM
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=146,1,-1,1,0,AREA:5
+	DESC=RAD1 summation mode
+!	DESC=Originates in RAD1_STATUS (HK byte 18)
+	AUTHOR_DATE=19930422
+	XLATE=0,"SUM"
+	XLATE=1,"SEP"
+
+ITEM=RAD1_FREQUENCY
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=152,8,-1,1,0,AREA:5
+	DESC=RAD1 frequency number in fixed tune mode only (0-255)
+	AUTHOR_DATE=19930422
+!	Valfield here = RAD1_MODE=Fixed tune
+ITEM=RAD1_STEP
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=152,8,-1,1,0,AREA:5
+	DESC=RAD1 Step size (in frequency number) in linear sweep mode only
+	AUTHOR_DATE=19930422
+!	Valfield here = RAD1_MODE=Linear sweep
+
+ITEM=RAD1_XLAT_TABLE
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=152,4,-1,1,0,AREA:5
+	DESC=RAD1 translation table in frequency stepping mode (measure)
+	AUTHOR_DATE=19930422
+!	Valfield here = RAD1_MODE=List mode
+ITEM=RAD1_FREQ_TABLE
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=156,4,-1,1,0,AREA:5
+	DESC=Choice of frequency table for RAD1 in frequency stepping (measure) mode
+	AUTHOR_DATE=19930422
+!	Valfield here = RAD1_MODE=List mode
+
+ITEM=RAD1_HEALTH_Z
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=160,8,-1,1,0,AREA:5
+	DESC=Representative Z value from RAD1 data stream - sometimes old
+	AUTHOR_DATE=19930422
+ITEM=RAD1_HEALTH_S
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=168,8,-1,1,0,AREA:5
+	DESC=Representative S value from RAD1 data stream sometimes old
+	AUTHOR_DATE=19930422
+
+ITEM=RAD1_VCO
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=176,8,-1,1,0,AREA:5
+	DESC=Voltage of RAD1 Voltage Controlled Oscillator (sometimes old) varies with frequency
+	AUTHOR_DATE=19930422
+
+ITEM=RAD1_STATUS
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=144,8,-1,1,0,AREA:5
+	DESC=RAD1 status, see bit-by-bit items
+!	DESC=Includes:	RAD1_ANTENNA,	RAD1_POLARIZATION,	RAD1_SUM,
+!	DESC=		RAD1_CALIBRATE,	RAD1_MODE,		RAD1_ON_OFF
+	AUTHOR_DATE=19930422
+
+ITEM=RAD2_ACTIVE
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=20,1,-1,1,0,AREA:5
+	DESC=RAD2 was active in the previous major frame when value is 1
+!	DESC=Originates in DPU_SUBSYSTEMS (HK byte 2)
+	AUTHOR_DATE=19930421
+	XLATE=0,"Inactive"
+	XLATE=1,"Active"
+
+ITEM=RAD2_ON_OFF
+	EXTRACT=191,1,-1,1,0,AREA:5
+	DESC=RAD2 ON/OFF status,
+!	DESC=Originates in RAD2_STATUS (HK byte 23)
+	AUTHOR_DATE=19931110
+
+ITEM=RAD2_CALIBRATE
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=187,1,-1,1,0,AREA:5
+	DESC=RAD2 is in calibration mode when =1 (not necessarily calibrating)
+!	DESC=Originates in RAD2_STATUS (HK byte 23)
+	AUTHOR_DATE=19930422
+
+ITEM=RAD2_ANTENNA
+	DESC=Antenna selected for RAD2 (1 = Y)
+!	DESC=Originates in RAD2_STATUS (HK byte 23)
+	FIXED_VALUE=1:1
+	AUTHOR_DATE=19930422
+	XLATE=1,"Ey"
+
+ITEM=RAD2_MODE
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=188,3,-1,1,0,AREA:5
+	DESC=RAD2 encoded mode, 
+!	DESC=Originates in RAD2_STATUS (HK byte 23)
+	AUTHOR_DATE=19930422
+	XLATE=0,"Error"
+	XLATE=1,"Fixed Tune"
+	XLATE=2,"Linear Sweep"
+	XLATE=3,"List"
+	XLATE=4,"??"
+	XLATE=5,"??"
+	XLATE=6,"??"
+	XLATE=7,"??"
+
+ITEM=RAD2_POLARIZATION
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=185,1,-1,1,0,AREA:5
+	DESC=RAD2 polarization, 0=   1=
+!	DESC=Originates in RAD2_STATUS (HK byte 23)
+	AUTHOR_DATE=19930422
+
+ITEM=RAD2_SUM
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=186,1,-1,1,0,AREA:5
+	DESC=RAD2 summation,  0=separated, 1=summed
+!	DESC=Originates in RAD2_STATUS (HK byte 23)
+	AUTHOR_DATE=19930422
+
+ITEM=RAD2_FREQUENCY
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=192,8,-1,1,0,AREA:5
+	DESC=RAD2 frequency number in fixed tune mode only (0-255)
+	AUTHOR_DATE=19930422
+!	Valfield here = **
+ITEM=RAD2_STEP
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=192,8,-1,1,0,AREA:5
+	DESC=RAD2 step size (in frequency number) in linear sweep mode only
+	AUTHOR_DATE=19930422
+!	Val_field here **
+
+ITEM=RAD2_XLAT_TABLE
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=192,4,-1,1,0,AREA:5
+	DESC=RAD2 translation table in frequency stepping mode (measure)
+	AUTHOR_DATE=19930422
+!	Val_field here **
+ITEM=RAD2_FREQ_TABLE
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=196,4,-1,1,0,AREA:5
+	DESC=Choice of frequency table for RAD1 in frequency stepping (measure) mode
+	AUTHOR_DATE=19930422
+!	val_field here **
+
+ITEM=RAD2_HEALTH_Z
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=448,8,-1,1,0,AREA:5
+	DESC=Representative Z value from RAD1 data stream - sometimes old
+	AUTHOR_DATE=19930422
+ITEM=RAD2_HEALTH_S
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=456,8,-1,1,0,AREA:5
+	DESC=Representative S value from RAD2 data stream (sometimes old)
+	AUTHOR_DATE=19930422
+
+ITEM=RAD2_VCO
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=200,8,-1,1,0,AREA:5
+	DESC=Voltage of RAD2 Voltage Controlled Oscillator (sometimes old) varies with frequency
+	AUTHOR_DATE=19930422
+
+ITEM=RAD2_STATUS
+	VALIDATION=DPU_VERSION,GE,2
+	EXTRACT=184,8,-1,1,0,AREA:5
+	DESC=RAD2 status, see bit-by-bit items
+!	DESC=Includes:	RAD2_POLARIZATION,	RAD2_SUM,
+!	DESC=		RAD2_CALIBRATE,		RAD2_MODE,	RAD2_ON_OFF
+	AUTHOR_DATE=19930422

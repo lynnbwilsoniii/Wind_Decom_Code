@@ -1,0 +1,5 @@
+function wind_tm_get_latest_mfmf, ch, major, minor
+ok = 0L
+ok = call_external('/home/kappler/wind/v1.7d/lib/libIDL_WAVES.so','wind_tm_get_latest_mfmf', ch, major, minor)
+return, ok
+end

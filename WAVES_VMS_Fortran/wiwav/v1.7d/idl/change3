@@ -1,0 +1,84 @@
+# change - csh script to edit all *.pro files in current directory such
+# that the library path name in the IDL call_external statement is changed.
+# Up to three command line arguments can specify, in order, the old_string,
+# the new_string, and a file selection mask enclosed in double quotes.
+# Default values are provided for absent command line arguments.  Examine
+# the source below to determine the current default values.
+# Values for old_string and new_string are automatically enclosed with
+# forward slashes (/), so old_string and new_string should be a complete
+# path component.
+#
+#
+set count = 0
+onintr intr_place
+set old = lib_new
+set new = v1.3h/lib
+set mask = "*.pro"
+if ($1 == "-h" || $1 == "h") goto show_help
+if ($#argv >= 1) set old = $1
+if ($#argv >= 2) set new = $2
+if ($#argv >= 3) set mask = "$3"
+#
+# attempt to gracefully check for bad parameters
+#
+egrep -s 'call_external\(.*\/'$old'\/' $mask >&! /dev/null
+set x = $status
+switch ($x)
+case 0:
+   breaksw
+case 1:
+   echo Sorry, the files specified by "$mask" do not contain a line
+   echo with both "call_external" and "/$old/".
+   exit 1
+   breaksw
+case 2:
+   echo Error, "$mask" does not select any files or the files are protected.
+   exit 1
+   breaksw
+default:
+   echo Bad Error, unexpected return code from egrep.
+   exit 1
+   breaksw
+endsw
+echo -n "Substitute $old with $new in call_external for $mask [N]? "
+set answer = $<
+if ($answer != Y && $answer != y) then
+   echo No substitutions performed.
+   exit 0
+endif
+#
+foreach f ($mask)
+   echo Found $f
+   ex -s $f << end_of_file
+/call_external/s:/$old/:/$new/:
+wq
+end_of_file
+   @ count++
+end
+if ($count <= 0) then
+   echo "No $mask files found to change"
+   exit 2
+else
+   echo $count files found.
+   exit 0
+endif
+#
+intr_place:
+echo Script terminated by interrupt.
+exit 1
+#
+show_help:
+echo " "
+echo " Syntax:"
+echo "    change old_string new_string file_mask"
+echo " "
+echo " Example:"
+echo "    change lib lib_old "  \"\*.pro\"
+echo "    [Be sure to enclose file_mask in double quotes.]"
+echo " "
+echo " Current defaults:"
+echo "    old_string:  $old"
+echo "    new_string:  $new"
+echo "     file_mask:  $mask"
+echo " "
+exit 1

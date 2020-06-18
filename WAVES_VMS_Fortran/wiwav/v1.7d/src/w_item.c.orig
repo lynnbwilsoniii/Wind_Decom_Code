@@ -1,0 +1,550 @@
+/* w_item.c - source for w_item_i4, w_item_r4, w_item_r8, and w_item_ch
+   Under VAX/VMS these w_item_* routines expect character strings passed by 
+   string descriptor.  These routines are intended to be called from fortran.
+*/
+#include "wind_os_def.h"
+
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "item.h"
+
+#define	max_channels 8
+#define OK 1
+#define ERR 0
+#define YES 1
+#define NO 0
+
+struct desc {
+   unsigned short len;
+   short kind;
+   char *str;
+};
+
+#if SYSTEM == SUNOS
+#include <memory.h>
+#define FSTR char
+#define FSTRLEN(somestr) strlen(somestr)
+#define XPTR aitem
+#define YPTR achar
+#define wind_supprs_int_msg wind_suppress_internal_msgs_
+#ifndef SUPPLY_TRAILING_UNDERSCORE
+#define SUPPLY_TRAILING_UNDERSCORE
+#endif
+#define MY_W_ITEM_CHAR w_item_char_
+#endif
+
+#if SYSTEM==VMS
+#define FSTR struct desc
+#define FSTRLEN(somestr) somestr->len
+#define XPTR aitem->str
+#define YPTR achar->str
+#define wind_supprs_int_msg wind_suppress_internal_msgs
+#undef SUPPLY_TRAILING_UNDERSCORE
+#define MY_W_ITEM_CHAR w_item_char
+#endif
+
+#define MAX_ITEM_NAME_SIZE 64
+#define MAX_I4_RET_SIZE_OF_ITEM 4096*2
+
+extern int w_really_get_item();           /* C function       */
+extern int wid_do_xlate_cpy();            /* C function       */
+extern int wind_supprs_int_msg();         /* FORTRAN function */
+
+struct same_name_item *apsni_saved[max_channels]=
+       {NULL,NULL, NULL,NULL, NULL,NULL, NULL,NULL};
+char *ev_names[max_channels]=
+       {NULL,NULL, NULL,NULL, NULL,NULL, NULL,NULL};
+
+int w_get_last_psni(ch, ppsni)		/* called from FORTRAN, mostly */
+   int *ch;				/* channel numbers: 1..max_channels */
+   struct same_name_item **ppsni;
+{
+   int i;
+
+   i = *ch - 1;
+   *ppsni = NULL;
+   if (i < 0 || i >= max_channels) return 0;
+
+   *ppsni = apsni_saved[i];
+   return (*ppsni == NULL) ? 0 : 1;
+}
+
+int w_save_this_psni(ch, psni)		/* called from C, mostly */
+   int ch;				/* channel numbers: 1..max_channels */
+   struct same_name_item *psni;
+{
+   if (ch < 0 || ch >= max_channels) return 0;
+
+   apsni_saved[ch] = psni;
+   return 1;
+}
+
+int w_set_event_name(ch, ename)		/* called from FORTRAN, mostly */
+   int *ch;
+   char *ename;
+{
+   int i;
+
+   i = *ch - 1;
+   if (i < 0 || i >= max_channels) return 0;
+
+  ev_names[i] = ename;
+  return 1;
+}
+
+int 
+#ifdef SUPPLY_TRAILING_UNDERSCORE
+w_item_i4_
+#else
+w_item_i4
+#endif
+(ach, aitem, ai4, size, ret_size)
+   int *ach;
+   FSTR *aitem;
+   int *ai4;
+   int *size;
+   int *ret_size;
+{
+   char *rn="W_ITEM_I4";
+   char item[MAX_ITEM_NAME_SIZE];
+   int i,j,k;
+   int bit_start;
+   int ret_type;
+   int ch;
+   int sz;
+   int ok;
+   struct same_name_item *psni;
+
+   k = FSTRLEN(aitem);
+
+   for (j=0; j<k && XPTR[j] > ' ' && j<MAX_ITEM_NAME_SIZE; j++)
+   {
+      item[j] = (XPTR[j] >= 'a' && XPTR[j] <= 'z' ) ? 
+                XPTR[j] - ('a'-'A') : XPTR[j];
+   }
+   if (j >= MAX_ITEM_NAME_SIZE) goto item_name_length_err;
+   item[j] = '\0';
+
+
+   if (*ach < 1 || *ach > max_channels) goto channel_value_err;
+   bit_start = 0;
+   ch = *ach - 1;
+   sz = *size;
+   ret_type = INT_RETURN;
+   *ret_size = 0;
+   for (i=0; i<*size; i++) ai4[i] = 0;
+
+   ok = w_really_get_item(
+        ch,
+        ev_names[ch],
+        item,
+        ai4,                       /* address of caller's buffer */
+	sz,		           /* size in input data type units */
+        ret_size,
+        &bit_start,
+        &ret_type,
+        &(psni));                  /* ptr to item, for auxiliary info */
+   w_save_this_psni(ch, psni);
+   if (ok != 1) goto item_get_err;
+   if (*ret_size < 1) goto ret_size_err;
+   if (ret_type != INT_RETURN) goto ret_type_err;
+
+   return ok;
+
+channel_value_err:
+   printf("%s: invalid channel number or %d.\n", rn, *ach);
+   return ERR;
+
+item_name_length_err:
+   if (!wind_supprs_int_msg())
+      printf("%s: item name too long: %20.20s.\n", rn, item);
+   return ERR;
+
+item_get_err:
+   if (!wind_supprs_int_msg())
+      printf("%s: error getting item %s, ok=%d.\n", rn, item, ok);
+   return ok;
+
+ret_size_err:
+   if (!wind_supprs_int_msg())
+      printf("%s: return size of item is zero: %s.\n", rn, item);
+   return ERR;
+
+ret_type_err:
+   if (!wind_supprs_int_msg())
+      printf("%s: item is not INTEGER: %s.\n", rn, item);
+   return ERR;
+}
+
+int 
+#ifdef SUPPLY_TRAILING_UNDERSCORE
+w_item_r4_
+#else
+w_item_r4
+#endif
+(ach, aitem, ar4, size, ret_size)
+   int *ach;
+   FSTR *aitem;
+   float *ar4;
+   int *size;
+   int *ret_size;
+{
+   char *rn="W_ITEM_R4";
+   char item[MAX_ITEM_NAME_SIZE];
+   int i,j,k;
+   int bit_start;
+   int ret_type;
+   int ch;
+   int sz;
+   int ok;
+   int *pi;
+   float *pf;
+   struct same_name_item *psni;
+
+   k = FSTRLEN(aitem);
+
+   for (j=0; j<k && XPTR[j] > ' ' && j<MAX_ITEM_NAME_SIZE; j++)
+   {
+      item[j] = (XPTR[j] >= 'a' && XPTR[j] <= 'z' ) ? 
+                XPTR[j] - ('a'-'A') : XPTR[j];
+   }
+   if (j >= MAX_ITEM_NAME_SIZE) goto item_name_length_err;
+   item[j] = '\0';
+
+   if (*ach < 1 || *ach > max_channels) goto channel_value_err;
+   bit_start = 0;
+   ch = *ach - 1;
+   sz = *size;
+   ret_type = FLOAT_RETURN;
+   *ret_size = 0;
+   for (i=0; i<*size; i++) ar4[i] = 0.0;
+
+   ok = w_really_get_item(
+        ch,
+        ev_names[ch],
+        item,
+        ar4,                       /* address of caller's buffer */
+	sz,		           /* size in input data type units */
+        ret_size,
+        &bit_start,
+        &ret_type,
+        &(psni));                  /* ptr to item, for auxiliary info */
+   w_save_this_psni(ch, psni);
+   if (ok != 1) goto item_get_err;
+   if (*ret_size < 1) goto ret_size_err;
+   if (ret_type != FLOAT_RETURN)
+      if (ret_type == INT_RETURN)
+      {
+         pi = (int *) ar4;
+         pf = ar4;
+         k = (*size < *ret_size) ? *size : *ret_size;
+         for (j=0; j<k; j++, pi++, pf++) {i = *pi; *pf = (float) i; }
+      }
+      else goto ret_type_err;
+
+   return ok;
+
+channel_value_err:
+   printf("%s: invalid channel number or %d.\n", rn, *ach);
+   return ERR;
+
+item_name_length_err:
+   if (!wind_supprs_int_msg())
+      printf("%s: item name too long: %20.20s.\n", rn, item);
+   return ERR;
+
+item_get_err:
+   if (!wind_supprs_int_msg())
+      printf("%s: error getting item %s, ok=%d.\n", rn, item, ok);
+   return ok;
+
+ret_size_err:
+   if (!wind_supprs_int_msg())
+      printf("%s: return size of item is zero: %s.\n", rn, item);
+   return ERR;
+
+ret_type_err:
+   if (!wind_supprs_int_msg())
+      printf("%s: item not convertable to REAL*4: %s.\n", rn, item);
+   return ERR;
+}
+
+int 
+#ifdef SUPPLY_TRAILING_UNDERSCORE
+w_item_r8_
+#else
+w_item_r8
+#endif
+(ach, aitem, ar8, size, ret_size)
+   int *ach;
+   FSTR *aitem;
+   double *ar8;
+   int *size;
+   int *ret_size;
+{
+   char *rn="W_ITEM_R8";
+   char item[MAX_ITEM_NAME_SIZE];
+   int i,j,k;
+   int bit_start;
+   int ret_type;
+   int ch;
+   int sz;
+   int ok;
+   int *pi;
+   float *pf;
+   double *pd;
+   struct same_name_item *psni;
+
+   k = FSTRLEN(aitem);
+
+   for (j=0; j<k && XPTR[j] > ' ' && j<MAX_ITEM_NAME_SIZE; j++)
+   {
+      item[j] = (XPTR[j] >= 'a' && XPTR[j] <= 'z' ) ? 
+                XPTR[j] - ('a'-'A') : XPTR[j];
+   }
+   if (j >= MAX_ITEM_NAME_SIZE) goto item_name_length_err;
+   item[j] = '\0';
+
+   if (*ach < 1 || *ach > max_channels) goto channel_value_err;
+   bit_start = 0;
+   ch = *ach - 1;
+   sz = *size;
+   ret_type = DOUBLE_RETURN;
+   *ret_size = 0;
+   for (i=0; i<*size; i++) ar8[i] = 0.0;
+
+   ok = w_really_get_item(
+        ch,
+        ev_names[ch],
+        item,
+        ar8,                       /* address of caller's buffer */
+	sz,		           /* size in input data type units */
+        ret_size,
+        &bit_start,
+        &ret_type,
+        &(psni));                  /* ptr to item, for auxiliary info */
+   w_save_this_psni(ch, psni);
+   if (ok != 1) goto item_get_err;
+   if (*ret_size < 1) goto ret_size_err;
+   if (ret_type != DOUBLE_RETURN)
+   {
+      switch(ret_type & TYPE_RETURN_MASK)
+      {
+      case INT_RETURN:
+         pi = (int *) ar8;
+         pd = ar8;
+         j = (*size > *ret_size) ? *ret_size : *size;
+         *ret_size = j;
+         for (--j; j >= 0; j--) { pd[j] = (double) pi[j]; }
+         break;
+      case FLOAT_RETURN:
+         pf = (float *) ar8;
+         pd = ar8;
+         j = (*size > *ret_size) ? *ret_size : *size;
+         *ret_size = j;
+         for (--j; j >= 0; j--) { pd[j] = (double) pf[j]; }
+         break;
+      default:
+         goto ret_type_err;
+         break;
+      }
+   }
+
+   return ok;
+
+channel_value_err:
+   printf("%s: invalid channel number or %d.\n", rn, *ach);
+   return ERR;
+
+item_name_length_err:
+   if (!wind_supprs_int_msg())
+      printf("%s: item name too long: %20.20s.\n", rn, item);
+   return ERR;
+
+item_get_err:
+   if (!wind_supprs_int_msg())
+      printf("%s: error getting item %s, ok=%d.\n", rn, item, ok);
+   return ok;
+
+ret_size_err:
+   if (!wind_supprs_int_msg())
+      printf("%s: return size of item is zero: %s.\n", rn, item);
+   return ERR;
+
+ret_type_err:
+   if (!wind_supprs_int_msg())
+      printf("%s: item not convertable to REAL*8: %s.\n", rn, item);
+   return ERR;
+}
+
+int 
+#ifdef SUPPLY_TRAILING_UNDERSCORE
+w_item_char_
+#else
+w_item_char
+#endif
+(ach, aitem, achar, size, ret_size, len_aitem, len_achar)
+   int *ach;
+   FSTR *aitem;
+   FSTR *achar;
+   int *size;
+   int *ret_size;
+   int len_aitem;
+   int len_achar;
+{
+   char *rn="W_ITEM_CHAR";
+   char item[MAX_ITEM_NAME_SIZE];
+   int i,j,k,n;
+   int bit_start;
+   int ret_type;
+   int ch;
+   int sz;
+   int sz2;
+   int ok;
+   int *pi;
+   char *pc;
+   int pi4[MAX_I4_RET_SIZE_OF_ITEM];
+   int return_code;
+   int sz_one_element;
+   struct same_name_item *psni;
+
+   i = FSTRLEN(aitem);
+   if (i >= MAX_ITEM_NAME_SIZE) goto item_name_length_err;
+
+   for (j=0; j<i && XPTR[j] > ' '; j++)
+   {
+      item[j] = (XPTR[j] >= 'a' && XPTR[j] <= 'z' ) ? 
+                XPTR[j] - ('a'-'A') : XPTR[j];
+   }
+   item[j] = '\0';
+
+   if (*ach < 1 || *ach > max_channels) goto channel_value_err;
+   bit_start = 0;
+   ch = *ach - 1;
+   ret_type = CHAR_RETURN;
+   *ret_size = 0;
+#if SYSTEM==VMS
+   sz_one_element = FSTRLEN(achar);
+#endif
+#if SYSTEM==SUNOS
+   sz_one_element = len_achar;
+#endif
+   sz = *size * sz_one_element;
+
+   k = MAX_I4_RET_SIZE_OF_ITEM * 4;
+   sz2 = sz > k ? k : sz;
+
+   j = sz2 / 4;
+   if ((j%4) != 0) j++;
+   for (i=0; i<j; i++) pi4[i] = 0;
+
+   /* replace nulls and other control chars with spaces */
+   /* IDL chokes bad on nulls... */
+   for (i=0; i<sz; i++) if (YPTR[i] < ' ') YPTR[i] = ' ';
+
+   ok = w_really_get_item(
+        ch,
+        ev_names[ch],
+        item,
+        pi4,                  /* i4 aligned address of caller's buffer */
+	sz2,		      /* size in input data type units (char)  */
+        ret_size,
+        &bit_start,
+        &ret_type,
+        &(psni));             /* ptr to item, for auxiliary info */
+   w_save_this_psni(ch, psni);
+   if (ok != 1) goto item_get_err;
+   if (*ret_size < 1) goto ret_size_err;
+   return_code = OK;
+   switch(ret_type & TYPE_RETURN_MASK)
+   {
+   case CHAR_RETURN:
+      for (i=0, pc = (char *) pi4; i<*ret_size; i++) YPTR[i] = pc[i];
+      for (; i < sz; i++) YPTR[i] = ' ';
+      break;
+   case INT_RETURN:
+      k = *ret_size > *size ? *size : *ret_size;
+      *ret_size = k;
+      for (i=0; i < k; i++)
+      {
+         j = sz_one_element * i;
+         ok = wid_do_xlate_cpy(psni, &(pi4[i]), &(YPTR[j]), 
+                 sz_one_element, 0);
+         if (ok != 1)
+            return_code = ERR;
+         else 
+            for (n=j; n<(j+ sz_one_element); n++) 
+               if (YPTR[n] < ' ') YPTR[n] = ' ';
+      }
+      break;
+   default:
+      goto ret_type_err;
+      break;
+   }
+
+   return return_code;
+
+channel_value_err:
+   printf("%s: invalid channel number or %d.\n", rn, *ach);
+   return ERR;
+
+item_name_length_err:
+   if (!wind_supprs_int_msg())
+      printf("%s: item name too long: %s.\n", rn, item);
+   return ERR;
+
+item_get_err:
+   if (!wind_supprs_int_msg())
+      printf("%s: error getting item %s, ok=%d.\n", rn, item, ok);
+   return ok;
+
+ret_size_err:
+   if (!wind_supprs_int_msg())
+      printf("%s: return size of item is zero: %s.\n", rn, item);
+   return ERR;
+
+ret_type_err:
+   if (!wind_supprs_int_msg())
+      printf("%s: item not convertable to REAL*8: %s.\n", rn, item);
+   return ERR;
+}
+
+/* this routine should only be called from idl, but it should be ok
+   from VMS or SunOS
+*/
+int w_item_char_idl_ary(ach, aitem, achar, size, ret_size, len)
+   int *ach;
+   struct desc *aitem;
+   struct desc *achar;
+   int *size;
+   int *ret_size;
+   int *len;			/* length of one element of the array */
+{
+   char *rn="W_ITEM_CHAR_IDL_ARY";
+   int i,j,k,n;
+   struct desc x;
+   char item[MAX_ITEM_NAME_SIZE];
+   char *buf;
+
+#if SYSTEM==SUNOS
+   /* in this case, idl (or an intermediate wind_lib routine)
+      has passed in the item name and buffer via
+      descriptor, so we convert to normal C arguments to pass
+      to w_item_char
+   */
+   i = aitem->len > MAX_ITEM_NAME_SIZE ? MAX_ITEM_NAME_SIZE : aitem->len;
+   strncpy(item,aitem->str,i);
+   buf = achar->str;
+   j = *len;
+   return MY_W_ITEM_CHAR (ach, item, buf, size, ret_size, i, j);
+#endif
+
+#if SYSTEM==VMS
+   x = *achar;
+   x.len = *len;
+   return MY_W_ITEM_CHAR (ach, aitem, &x, size, ret_size);
+#endif
+
+}

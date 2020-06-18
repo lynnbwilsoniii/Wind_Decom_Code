@@ -1,0 +1,60 @@
+! items_dump.db - WIND/WAVES Item Database: item definitions for DUMP events
+!
+! DUMP
+!
+ITEM=DB_VERSION
+	DATA_TYPE=CHARACTER
+	TEXT=DUMP 1.0
+	DESC="This is the current item database version number"
+	AUTHOR_DATE=19941207
+
+ITEM=PACKET_ID       
+	FIXED_VALUE=1:13   
+	DESC="Number associated with DUMP packets in primary header"
+	AUTHOR_DATE=19931024
+ITEM=INSTR_HEADER    
+	FIXED_VALUE=1:0   
+	DESC="Length of Instrument Header (header #2)"
+	AUTHOR_DATE=19931024
+ITEM=MEASURE_HEADER  
+	FIXED_VALUE=1:112    
+	DESC="Length of Measurement Header (header #3)"
+	AUTHOR_DATE=19931024
+ITEM=PACKET_HEADER   
+	FIXED_VALUE=1:8   
+	DESC="Length of Packet Header (header #4)"
+	AUTHOR_DATE=19931024
+ITEM=STARTING_ADDRESS
+	EXTRACT=0,32,-1,1,0,AREA:3
+	DESC="Starting flight memory address of dump data"
+	AUTHOR_DATE=19931024
+ITEM=ENDING_ADDRESS  
+	EXTRACT=32,32,-1,1,0,AREA:3
+	DESC="Ending flight memory address of dump data"
+	AUTHOR_DATE=19931024
+ITEM=NUMBER_OF_BYTES 
+	EXTRACT=64,16,-1,1,0,AREA:3
+	DESC="Number of bytes in flight memory dump"
+	AUTHOR_DATE=19931024
+ITEM=CHECKSUM        
+	EXTRACT=80,32,-1,1,0,AREA:3
+	DESC="Checksum for flight memory dump"
+	AUTHOR_DATE=19931024
+ITEM=PACKET_COUNT    
+	EXTRACT=0,8,-1,1,0,AREA:4
+	DESC="Packet number of packet within the DUMP event"
+	AUTHOR_DATE=19931024
+ITEM=DATA            
+	EXTRACT=0,32,-1,3304,0,AREA:5
+	!	COUNT#=NUMBER_OF_BYTES
+	DESC="Flight memory dump, max bytes per packet is 413"
+	!	DESC2="max packets per event is 32; 32*413=13216; 13216/4=3304"
+	!	DESC3="could also have a count = field here for byte size elements..."
+	AUTHOR_DATE=19931024
+ITEM=DPU_MAJOR_FRAME 
+	EXTRACT=224,32,1,1,0,AREA:6
+	DESC=From associated HK of encompassing major frame
+ITEM=DPU_MINOR_FRAME 
+	EXTRACT=96,8,-1,1,0,AREA:6
+	DESC=Minor frame number of first minor frame in packet
+

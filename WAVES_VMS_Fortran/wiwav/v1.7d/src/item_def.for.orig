@@ -1,0 +1,184 @@
+! item_def.for - Wind/Waves Item Database FORTRAN structure definitions
+! This file provides the FORTRAN structures corresponding to C structures
+! found in item.h.
+
+	include		'item_flag_def.for'
+
+	structure /extract/
+	   integer*4	startbit
+	   integer*4	length
+	   integer*4	offset
+	   integer*4	rep
+	   integer*4	group_size
+	   integer*4	area
+	   integer*4	flags
+	   integer*4	pchar(5) ! pointers to char
+	end structure
+
+	parameter	max_fixed_value_bytes=64*4
+	structure /fixed_value/
+	   integer*4	value_count
+	   integer*4	data_type
+	   union
+	   map
+	      integer*4	ivals(max_fixed_value_bytes/4)
+	   end map
+	   map
+	      real*4	fvals(max_fixed_value_bytes/4)
+	   end map
+	   map
+	      real*8	dvals(max_fixed_value_bytes/8)
+	   end map
+	   map
+	      byte	bvals(max_fixed_value_bytes)
+	   end map
+	   map
+	      character*(max_fixed_value_bytes) cvals
+	   end map
+	   end union
+	   integer*4	pchar ! pointer to char
+	end structure
+
+	structure /xlate_item/
+	   character*32	str
+	   integer*4	val
+	end structure
+
+	structure /validation/
+	   character*32	name
+	   integer*4	val1
+	   integer*4	val2
+	   integer*4	operation
+	end structure
+
+	structure /function_arg_list/
+	   character*32	str
+	   integer*4	data_type
+	   integer*4	function_number
+	   union
+	   map
+	      integer*4	ivals(2)
+	   end map
+	   map
+	      real*4	fvals(2)
+	   end map
+	   map
+	      real*8	dval
+	   end map
+	   end union
+	end structure
+
+	parameter	max_lookup_tbl_entries=32
+	structure /lookup_table/
+	   character*32 lookup_item_name
+	   integer*4	data_type
+	   union
+	   map
+	      integer*4	itbl(max_lookup_tbl_entries)
+	   end map
+	   map
+	      real*4	ftbl(max_lookup_tbl_entries)
+	   end map
+	   map
+	      real*8	dtbl(max_lookup_tbl_entries/2)
+	   end map
+	   map
+	      character*32 ctbl(max_lookup_tbl_entries)
+	   end map
+	   end union
+	end structure
+
+	structure /procedure/
+	   integer*4	number
+	end structure
+
+	parameter physical_units_proc = 1
+
+	structure /c_item_string_256/
+	   union
+	   map
+	      byte	b(256)
+	   end map
+	   map
+	      character*256 c
+	   end map
+	   end union
+	end structure
+
+	! validation op codes
+	parameter NO_OP          = '0'x		! error, no operation */
+	parameter EQ_OP          = '1'x		! EQ */
+	parameter GE_OP          = '2'x		! GE */
+	parameter GT_OP          = '3'x		! GT */
+	parameter LE_OP          = '4'x		! LE */
+	parameter LT_OP          = '5'x		! LT */
+	parameter NE_OP          = '6'x		! NE */
+	parameter AND_OP         = '7'x		! AND */
+	parameter BETWEEN_OP_INC = '8'x		! BT inclusive */
+	parameter BETWEEN_OP_EXC = '9'x		! BT exclusive */
+	parameter NOT_BETWEEN_OP = 'a'x		! NBT */
+	parameter IS_BIT_SET_OP  = 'b'x		! IBS */
+	parameter OR_OP          = 'c'x		! OR */
+	parameter DATE_LT_OP     = 'd'x		! DLT */
+	parameter DATE_LE_OP     = 'e'x		! DLE */
+	parameter DATE_GT_OP     = 'f'x		! DGT */
+	parameter DATE_GE_OP     = '10'x	! DGE */
+
+	! extract item area locations
+	integer*4	in_primary_header
+	integer*4	in_secondary_header
+	integer*4	in_tertiary_header
+	integer*4	in_quartinary_header
+	integer*4	in_data
+	integer*4	in_extra_info
+	integer*4	in_associated_hk
+	integer*4	in_user_ch_struct
+	integer*4	in_extract_info
+
+	parameter	(in_primary_header=49)	!	'1'
+	parameter	(in_secondary_header=50)!	'2'
+	parameter	(in_tertiary_header=51)	!	'3'
+	parameter	(in_quartinary_header=52) !	'4'
+	parameter	(in_data=53)		!	'5'
+	parameter	(in_extra_info=54)	!	'6'
+	parameter	(in_associated_hk=56)	!	'8'
+	parameter	(in_user_ch_struct=65)	!	'A'
+	parameter	(in_extract_info=66)  	!	'B'
+
+! cdf related stuff
+	integer*4	W_CDF_SEARCH_INTERPOLATE 
+	integer*4	W_CDF_SEARCH_NEAREST     
+	integer*4	W_CDF_SEARCH_EARLIER     
+	integer*4	W_CDF_SEARCH_LATER       
+
+	parameter	(W_CDF_SEARCH_INTERPOLATE = 1)
+	parameter	(W_CDF_SEARCH_NEAREST     = 2)
+	parameter	(W_CDF_SEARCH_EARLIER     = 3)
+	parameter	(W_CDF_SEARCH_LATER       = 4)
+
+	integer*4	max_cdf_files
+	parameter	(max_cdf_files=10)
+	integer*4	max_cdf_indices
+	parameter	(max_cdf_indices=10)
+
+	structure /cdf_item/
+	   character*32	independent_rv			! cdf rVariable name
+	   character*32	independent_rv_match		! wind_lib equivalent
+	   character*32	dependent_rv			! cdf rVariable name
+	   integer*4	dependent_rv_indices(0:max_cdf_indices)
+	   integer*4	use_dependent_rv_ranges
+	   integer*4	dependent_rv_ranges(0:3,0:max_cdf_indices)
+	   integer*4	dependent_rv_range_order(0:max_cdf_indices)
+	   integer*4	independent_rv_indices(0:max_cdf_indices)
+	   integer*4	search_mode
+	   integer*4	search_mode_2nd
+	   integer*4	n_files
+	   union
+	   map
+	      character*256 files(max_cdf_files)
+	   end map
+	   map
+	      byte	b_files(max_cdf_files*256)
+	   end map
+	   end union
+	end structure

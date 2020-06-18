@@ -1,0 +1,17 @@
+! items_tdss.db - WIND/WAVES Item Database: item definitions for TDSS events
+!
+!  TDS SLOW
+!
+ITEM=DB_VERSION
+	DATA_TYPE=CHARACTER
+	TEXT=TDSS 2.0
+	DESC="This is the current item database version number"
+	AUTHOR_DATE=19941207
+ITEM=PACKET_ID       
+	FIXED_VALUE=1:6      
+	DESC="Constant value of TDSs ID number in primary header"
+	AUTHOR_DATE=19910825
+
+#include WIND_DBMS:items_tdsf.inc
+#include WIND_DBMS:items_tdss.inc
+#include WIND_DBMS:items_tds.inc

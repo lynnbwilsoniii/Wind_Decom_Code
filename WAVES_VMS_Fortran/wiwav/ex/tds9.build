@@ -1,0 +1,12 @@
+#!/bin/csh
+# source this script, there is still some lingering LD_LIBRARY_PATH stuff
+# for cdf
+#
+set opts="/home/kappler/wind/v1.6e/lib/libWAVES.so.1.1 -lV77 -lF77 -lM77 -lm -lsunmath"
+#
+set optx="/home/kappler/wind/v1.6e/lib/libWAVES.so.1.1 -lV77 -lF77 -lM77 -L/mydisks/disk3/kappler/wind/v1.6e/cdf/lib/solaris -lcdf -lm -lsunmath"
+#
+set opty="/home/kappler/wind/v1.6e/lib/libWIND.a -lV77 -lF77 -lM77 /home/kappler/wind/v1.6e/cdf/lib/solaris/libcdf.a -lsocket -lnsl -lm -lsunmath"
+#
+wf77 tds9.for -o tds9 $opty
+#

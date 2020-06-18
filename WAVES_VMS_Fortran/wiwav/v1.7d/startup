@@ -1,0 +1,81 @@
+# startup - cshell script to define wind-waves environment
+#
+# This file can be executed from .cshrc by invoking it with the "source"
+# command: "source /home/waves/startup".  The root of the wind-waves tree
+# may be other than /home/waves on your system, make sure the following
+# commands reflect your system's configuration.
+#
+#
+#
+switch (`hostname`)
+case boree:
+   setenv windhome      ~kappler/wind
+   setenv WIND_DATA     ~kappler/wind/data
+   setenv WIND_MFI      ~kappler/wind/data
+   alias wf77 "f77 -C -e -PIC -dalign -cg92"
+   breaksw
+case vela:
+   setenv windhome      ~kappler/wind
+   setenv WIND_DATA     ~kappler/wind/data
+   setenv WIND_MFI      ~kappler/wind/data
+   alias wf77 "f77 -C -e -PIC -dalign -cg92"
+   breaksw
+case ham:
+   setenv windhome      ~kappler/wind
+   setenv WIND_DATA     ~kappler/wind/data
+   setenv WIND_MFI      /data/wind/kp/mfi
+   setenv WIND_SWE      /data/wind/kp/swe
+   setenv WIND_3DP      /data/wind/kp/3dp
+   setenv WIND_ORBIT    /data/wind/oa/orbit
+   setenv WIND_ATTITUDE /data/wind/oa/attitude
+   setenv POLAR_ORBIT   /data/polar/oa/orbit
+   alias wf77 "f77 -C -e -PIC -dalign -cg92"
+   breaksw
+case lepmlk:
+   setenv windhome      /home/wind
+   set xx=/home/waves/lzdata1/cdhf/waves
+   set yy=/home/waves/lzdata2/cdhf/waves
+   setenv WIND_DATA     $xx\:$yy
+   setenv WIND_MFI      /home/waves/kp/mfi
+   setenv WIND_SWE      /home/waves/kp/swe
+   setenv WIND_3DP      /home/waves/kp/3dp
+   setenv WIND_ORBIT    /home/waves/oa/orbit
+   setenv WIND_ATTITUDE /home/waves/oa/attitude
+   alias wf77 "f77 -C -e -PIC -dalign -cg92"
+   breaksw
+case megasr:
+   setenv windhome       /wind1/wind
+   setenv WIND_DATA_ROOT /waves/data
+   setenv WIND_DATA      $WIND_DATA_ROOT/cdhf/lz/waves
+   setenv WIND_KP_ROOT   /wind_kp_root/cdhf
+   setenv WIND_MFI       $WIND_KP_ROOT/kp/mfi
+   setenv WIND_SWE       $WIND_KP_ROOT/kp/swe
+   setenv WIND_3DP       $WIND_KP_ROOT/kp/3dp
+   setenv WIND_ORBIT     $WIND_KP_ROOT/oa/orbit
+   setenv WIND_ATTITUDE  $WIND_KP_ROOT/oa/attitude
+   alias wf77 "f77 -C -e -PIC -dalign -cg89"
+   breaksw
+default:
+   setenv WIND_DATA ~$user
+   breaksw
+endsw
+#
+#
+# Various versions of wind_lib (new, cur, and old) can
+# be selected from the csh after sourcing this procedure.
+set new=v1.6e
+set cur=v1.5c
+set old=v1.4a
+set tst=v1.7d
+# alias's for switching between the current and test versions of wind_lib
+alias wind_old      'setenv WIND_VERSION $old; source $windhome/usever'
+alias wind_current  'setenv WIND_VERSION $cur; source $windhome/usever'
+alias wind_new      'setenv WIND_VERSION $new; source $windhome/usever'
+alias wind_test     'setenv WIND_VERSION $tst; source $windhome/usever'
+# set the default wind_lib environment
+wind_test
+#
+alias wver ${windhome}/bin/wver
+#setenv MANPATH "/usr/man:/home/wind/man"
+setenv LOGICALNAMEMAPPING "wind_examples=${windhome}/ex"
+#

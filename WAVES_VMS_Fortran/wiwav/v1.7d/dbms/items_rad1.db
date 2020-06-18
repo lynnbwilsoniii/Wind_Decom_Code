@@ -1,0 +1,185 @@
+! items_rad1.db - WIND/WAVES Item Database: item definitions for RAD1 events
+!
+ITEM=DB_VERSION
+	DATA_TYPE=CHARACTER
+	TEXT=RAD1 2.0
+	DESC=This is the current item database version number
+	AUTHOR_DATE=19941207
+
+ITEM=PACKET_ID       
+	FIXED_VALUE=1:1      
+	DESC=Number associated with RAD1 packets in primary header
+	AUTHOR_DATE=19910825
+
+ITEM=RAD_ID
+	FIXED_VALUE=1:1
+	DESC=Rad number (RAD1)
+	AUTHOR_DATE=19960403
+	XLATE=1,"RAD1"
+
+ITEM=ANTENNA_FLAG    
+	VALIDATION=PACKET_SUBTYPE,MO,b1110
+	VALIDATION=EVENT_SCET,GT,DATE:19920516-190000
+	EXTRACT=7,1,-1,1,0,AREA:2
+	DESC=Indication of antenna selection
+	AUTHOR_DATE=19920516
+	XLATE=0,"Ex"
+	XLATE=1,"Ey"
+
+#include WIND_DBMS:items_rad.inc
+#include WIND_DBMS:items_rad_phys.inc
+
+!FREQUENCY AND CHANNEL INFORMATION
+!
+!Informational items - simply a list and not related to a particular
+!instrument state.  Could be used instead of a data statement.
+!
+
+ITEM=FREQUENCY_COVERAGE_HZ_R4
+	DATA_TYPE=REAL*4
+	FILE='WIND_DBMS_AUX:rad1_frequencies.hz'
+	DESC=List of frequencies in ascending order by channel (Hertz)
+	AUTHOR_DATE=19941230
+
+ITEM=CHANNEL_COVERAGE
+	FILE='WIND_DBMS_AUX:rad1_frequencies.chan_num'
+	DESC=Trivial list of channel numbers 0-255
+	AUTHOR_DATE=19950120
+
+!Items that are connected with particular instrument states
+
+ITEM=CHANNEL_LIST_FILENAME_CHAR
+	DATA_TYPE=CHARACTER
+	VALIDATION=PACKET_SUBTYPE,MO,b1000
+	VALIDATION=DPU_VERSION,GE,5
+	TEXT=WIND_DBMS_AUX:rad1_list_mode.channels
+	DESC=Filename of frequency/translate channel numbers for list mode
+	AUTHOR_DATE=19941230
+
+ITEM=CHANNEL_LIST
+	VALIDATION=PACKET_SUBTYPE,MO,b1000
+	VALIDATION=DPU_VERSION,GE,5
+	FILE='WIND_DBMS_AUX:rad1_list_mode.channels'   
+	DESC=frequency/translate lists for list mode (channel #)
+	AUTHOR_DATE=19941230
+
+ITEM=FREQUENCY_LIST_HZ_R4
+	DATA_TYPE=REAL*4
+	VALIDATION=PACKET_SUBTYPE,MO,b1000
+	VALIDATION=DPU_VERSION,GE,5
+	FILE='WIND_DBMS_AUX:rad1_list_mode.hz'   
+	DESC=Frequency/translate lists for list mode (Hertz)
+	AUTHOR_DATE=19941230
+
+ITEM=FREQUENCY_LIST_HZ_FILENAME_CHAR
+	DATA_TYPE=CHARACTER
+	VALIDATION=PACKET_SUBTYPE,MO,b1000
+	VALIDATION=DPU_VERSION,GE,5
+	TEXT=WIND_DBMS_AUX:rad1_list_mode.hz
+	DESC=Filename of frequency/translate lists for list mode
+	AUTHOR_DATE=19941230
+
+ITEM=POINTER_LIST
+	VALIDATION=PACKET_SUBTYPE,MO,b1000
+	VALIDATION=DPU_VERSION,GE,5
+	FILE='WIND_DBMS_AUX:rad1_list_mode.pointers'
+	DESC=Pointer lists for list mode
+	AUTHOR_DATE=19941230
+
+ITEM=POINTER_LIST_FILENAME_CHAR
+        DATA_TYPE=CHARACTER
+	VALIDATION=PACKET_SUBTYPE,MO,b1000
+	VALIDATION=DPU_VERSION,GE,5
+	TEXT=WIND_DBMS_AUX:rad1_list_mode.pointers
+	DESC=Filename of pointer lists for list mode
+	AUTHOR_DATE=19941230
+
+! RAD1 integration time items
+!
+ITEM=START_OFFSET_ZS_R4
+	DATA_TYPE=REAL*4
+	DESC=Time between EVENT start and the start of the first measurement
+!	FIXED_VALUE=1:.050		!w/ 50,000.0 clock
+	FIXED_VALUE=1:2500*"50KHZ_CLOCK_PERIOD_R4"
+	AUTHOR_DATE=19940926
+
+ITEM=START_OFFSET_SPRIME_R4
+	DATA_TYPE=REAL*4
+	DESC=Time between EVENT start and the start of the first measurement
+!	FIXED_VALUE=1:.204		!w/ 50,000.0 clock
+	FIXED_VALUE=1:10200*"50KHZ_CLOCK_PERIOD_R4"
+	AUTHOR_DATE=19940926
+
+ITEM=OFFSET_WITHIN_SET_R4
+	DATA_TYPE=REAL*4
+	DESC=Time between measurements in a set (seconds)
+	FIXED_VALUE=1:0
+	AUTHOR_DATE=19940926
+
+ITEM=NUMBER_MEASURES_IN_SET
+!	DATA_TYPE=REAL*4
+	DESC=Number of measurements in a set
+	FIXED_VALUE=1:1
+	AUTHOR_DATE=19940926
+
+ITEM=OFFSET_TO_NEXT_SET_R4
+	DATA_TYPE=REAL*4
+	DESC=.358, the time between consecutive RAD1 sets (seconds)
+!	FIXED_VALUE=1:.358		!w/ 50,000.0 clock
+	FIXED_VALUE=1:17900*"50KHZ_CLOCK_PERIOD_R4"
+	AUTHOR_DATE=19940926
+
+ITEM=INTEGRATION_TIME_S_R4
+	DATA_TYPE=REAL*4
+        DESC=.154, the RAD1 S integration time (seconds)
+!	FIXED_VALUE=1:.154		!w/ 50,000.0 clock
+	FIXED_VALUE=1:7700*"50KHZ_CLOCK_PERIOD_R4"
+	AUTHOR_DATE=19940926
+
+ITEM=INTEGRATION_TIME_Z_R4
+	DATA_TYPE=REAL*4
+        DESC=.308, the RAD1 Z integration time (seconds)
+!	FIXED_VALUE=1:.308		!w/ 50,000.0 clock
+	FIXED_VALUE=1:15400*"50KHZ_CLOCK_PERIOD_R4"
+	AUTHOR_DATE=19940926
+
+ITEM=TRANSLATION_CHAR
+	FIXED_VALUE=1:TRANSLATION
+	XLATE=0,"16 frequency log"
+	XLATE=1,"16 frequency linear"
+	XLATE=2,"16 frequency Ulysses"
+	XLATE=3,"16 frequency TKR"
+	XLATE=4,"32 frequency log A"
+	XLATE=5,"32 frequency log B"
+	XLATE=6,"32 frequency linear A" 
+	XLATE=7,"32 frequency linear B"
+	XLATE=8,"Reiner 32 frequency log A"
+	XLATE=9,"Reiner 32 frequency log B"
+	XLATE=10,"RAM based"
+	XLATE=11,"RAM based"
+	XLATE=12,"RAM based"
+	XLATE=13,"RAM based"
+	XLATE=14,"RAM based"
+	XLATE=15,"RAM based"
+	DESC=RAD1 Translation table in frequency stepping mode
+	AUTHOR_DATE=19970102
+ITEM=PROGRAM_LIST_CHAR
+	FIXED_VALUE=1:PROGRAM_LIST
+	XLATE=0,"Solar Survey - 16"
+	XLATE=1,"Planetary Survey - 16"
+	XLATE=2,"Solar Survey - 32"
+	XLATE=3,"Solar Survey SUM/SEP"
+	XLATE=4,"Illegal"
+	XLATE=5,"Illegal"
+	XLATE=6,"Illegal"
+	XLATE=7,"Illegal"
+	XLATE=8,"RAM based"
+	XLATE=9,"RAM based"
+	XLATE=10,"RAM based"
+	XLATE=11,"RAM based"
+	XLATE=12,"RAM based"
+	XLATE=13,"RAM based"
+	XLATE=14,"RAM based"
+	XLATE=15,"RAM based"
+	DESC=RAD1 Choice of program table in frequency stepping (list) mode
+	AUTHOR_DATE=19970102

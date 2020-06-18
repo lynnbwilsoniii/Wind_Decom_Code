@@ -1,0 +1,240 @@
+
+State of WIND WIWAVEs port from Solaris to MacOSX:
+-------------------------------------------------
+
+In August 2007, Berkeley made an attempt to port the WIWAVE's software
+to MacOSX.   At that time, the port was completed in the sense that the
+compilation of modules and libraries was successfully completed, but
+the code was NEVER tested IN ANY WAY, not by calling IDL, Fortran or
+C programs.
+
+Here are some notes about the port:
+
+1.  The ported code is on "vert", under user "sdt", in:
+
+      /users/sdt/fprog/wiwave/v1.7d
+
+2.  The WIWAVE's code is in Fortran and C.   The Fortran code makes use
+    of VMS extensions (e.g. structures, unions, etc.) which are also
+    supported by Sun Solaris Fortran compilers.   However, none of the
+    GNU fortran compilers, apparently, support these extensions, so we
+    have to procure a commercial Fortran, for MacOSX, which does.  We
+    chose the compiler from "Absoft" and it worked out, after some code
+    modifications (see below).  Note that "Absoft"'s compiler is
+    installed in:
+
+	/Applications/Absoft
+
+3.  Code Modification 1:
+
+      The original code made use of the fact that the "C" compiler
+      could to find a linked-in Fortran routine by appending a "_"
+      to the name.  Therefore, both the Fortran funcion, and the
+      C function calling it from:
+
+	  sun_idl_interface.c
+
+      could have exactly the same name.   For instance, there is a
+      C routine in "sun_idl_interface.c", named:
+
+	  wind_tm_mfmf_to_ert
+
+      which, in turn, references by the name:
+
+	  wind_tm_mfmf_to_ert_
+
+      the Fortran routine of the same name:
+
+	  wind_tm_mfmf_to_ert
+
+      in Fortran source file:
+
+	  wind_time_lib.for
+
+      This does NOT work in Absoft, which does not append "_" to its
+      link names.   I was not able to find an Absoft compiler option
+      to do this.
+
+
+      So, the following Fortran subroutine/function's have been name-
+      changed so that there is a "_f" appended:
+
+	  wind_tm_open_channel
+	  wind_tm_close_channel
+	  wind_tm_get_filename
+	  wind_tm_set_messages_off
+	  wind_tm_set_messages_on
+	  wind_tm_version
+	  wind_tm_eof
+	  wind_tm_get_event
+	  wind_tm_get_next_event
+	  wind_tm_get_previous_event
+	  wind_tm_get_item
+	  wind_tm_xlate_item
+	  wind_tm_get_mfmf
+	  wind_tm_get_stream_mfmf
+	  wind_tm_get_next_mfmf
+	  wind_tm_get_earliest_mfmf
+	  wind_tm_get_latest_mfmf
+	  wind_tm_decrement_packet
+	  wind_tm_increment_packet
+	  wind_tm_decrement_mfmf
+	  wind_tm_increment_mfmf
+	  wind_tm_delta_mfmf
+	  wind_tm_bit_rate
+	  wind_tm_get_word
+	  wind_tm_get_minor_frame
+	  wind_tm_get_major_frame
+	  wind_tm_get_packet
+	  wind_tm_get_hk
+	  wind_tm_get_test
+	  wind_tm_get_step
+	  wind_tm_scet_to_mfmf
+	  wind_tm_mfmf_to_scet
+	  wind_tm_ert_to_mfmf
+	  wind_tm_ert_to_mfmf
+	  w_channel_open
+	  w_channel_position
+	  w_channel_filename
+	  w_channel_close
+	  w_messages_off
+	  w_messages_off
+	  w_version
+	  w_item_r4
+
+    Anywhere that these routines are referenced (in C or Fortran code),
+    the source has been changed to refer to them with "_f" appended.
+
+4.  Code Modification 2:
+
+    The C-source file:
+
+	c_interface.c
+
+    was changed so that the C routines that it defines have "_c"
+    appended to their names:
+      
+
+5.  Building:
+
+    On February 26, 2008, I was able to fix the "Makefile" and "qdb.c"
+    so that the entire build succeeded.   You enter:
+
+	make all
+
+    It builds:
+
+       ../lib/libIDL_WAVES.so
+       ../lib/libWAVES.so
+       ../lib/llibWIND.a
+
+    and:
+
+       ../bin/qdb
+
+
+--------------------------------------------------------------------
+Installation of WIWAV at a new site, involving compilation:
+
+Since the MacOSX version of WIWAV requires the ABSOFT Fortran compiler,
+the site will require a licensed ABSOFT installation.  The build also
+requires the GNU gcc compiler.
+
+1. Choose where the package will be installed.  For the purposes of
+   these instructions, assume that you will be building the release
+   in:
+
+	/Users/software/wiwav
+
+   In the following instructions, replace "/Users/software/wiwav"
+   with the installation directory that you choose.
+
+   Make sure this directory exists.  The "tar" file containing the
+   release requires about 20 MBytes of space and, briefly during
+   the installation procedure will require twice that amount of
+   space.  So the file system must have at least 40 MBytes of space.
+
+2. Copy the "tar" file:
+
+     wiwav_macosx.tar
+
+   into "/Users/software/wiwav".
+
+3. "cd" into "/Users/software/wiwav", then untar the release:
+
+        tar xvf wiwav_macosx.tar
+
+    This will create subdirectories:
+
+	 cdf3.1
+	 ex
+	 v1.7d
+
+    If you wish, you can now delete "wiwav_macosx.tar", but if you have
+    sufficient disk space, it might be safest to leave it here, at least
+    for now.
+
+4.  Go into:
+
+       /Users/software/wiwav/v1.7d/src
+
+    and edit the "Makefile" so that line 67 reads:
+
+	BASEDIR = /Users/software/wiwav
+
+    Also edit lines 7-9 so that the ABSOFT variables correctly point
+    to the appropriate ABSOFT installation directories.
+
+5.  Your environment should be set up so that the ABSOFT compilers are
+    in your path.  For instance, if ABSOFT is installed in the usual
+    place:
+
+	/Applications/Absoft
+
+    then:
+
+	/Applications/Absoft/bin
+
+    must be in your path.   If your default shell is "sh", or "bash", then
+    you can put the following two lines in your ".profile":
+
+	ABSOFT=/Applications/Absoft
+	PATH=$PATH:$ABSOFT/bin
+
+    If your default shell is "csh" or "tcsh", you can put the following
+    two lines in your ".cshrc":
+
+	setenv ABSOFT /Applications/Absoft
+	set path=($ABSOFT/bin $path)
+
+    Similarly, your path must also know where to find "gcc".
+
+6.  Build the release, by entering:
+
+	make all
+
+    When this finishes, you should now have the following files:
+
+	in "v1.7d/lib":
+
+	    libIDL_WAVES.so
+	    libWAVES.so.1.1
+	    libWIND.a
+
+	in "v1.7d/bin":
+
+	    qdb
+
+7.  I'm not certain if this is absolutely necessary, but it is probably
+    a good idea to create the following symbolic links:
+
+    "cd" into:
+
+        /Users/software/wiwav/v1.7d/lib
+
+    and enter:
+
+	ln -s libWAVES.so.1.1 libWAVES.so
+
+	ln -s ../cdf/lib/libcdf.so libcdf.so
+

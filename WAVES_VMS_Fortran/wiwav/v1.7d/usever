@@ -1,0 +1,79 @@
+#!/bin/csh
+# This script must be sourced.  Based on the environment variables
+# windhome, WIND_VERSION, LD_LIBRARY_PATH, and IDL_PATH, 
+# this script sets the following environment variables:
+#
+#	LD_LIBRARY_PATH (modified if set)
+#	IDL_PATH        (modified if set)
+#	WIND_DBMS
+#	WIND_DBMS_AUX
+#	wind_lib        (requires LD_LIBRARY_PATH)
+#	cdf_lib         (requires LD_LIBRARY_PATH)
+#	windlib		(fully qualified library references)
+#	cdflib          (fully qualified library references)
+#
+if ($?WIND_VERSION == "") then
+   echo Environment variable WIND_VERSION not defined (e.g.: v1.4a).
+   exit 1
+endif
+set ver=$WIND_VERSION
+set aa=$windhome
+set pat="v[1-9][0-9]*\.[0-9][a-z]"
+set yy=`echo $ver | sed -n -e "s=${pat}=jk=p"`
+if ($yy != jk) then
+   echo Invalid format for version number: $ver, use something like v1.4a
+   exit 1
+endif
+#
+if ( ! -d $aa/$ver ) then
+   echo Version $ver cannot be found in $aa.
+   exit 1
+endif
+#
+setenv WIND_DBMS $windhome/$ver/dbms
+#setenv WIND_DBMS_AUX $WIND_DBMS/auxiliary_files
+setenv WIND_DBMS_AUX $WIND_DBMS/aux
+#
+if $?LD_LIBRARY_PATH then
+   set xx=$LD_LIBRARY_PATH
+   set yy=`echo $xx | sed -n -e "s=${aa}/${pat}=${aa}/${ver}=p"`
+   if $yy == "" set yy="${LD_LIBRARY_PATH}:$aa/$ver/lib:$aa/$ver/cdf/lib/solaris"
+else
+   set yy=$aa/$ver/lib:$aa/$ver/cdf/lib/solaris
+endif
+setenv LD_LIBRARY_PATH $yy
+#echo LD PATH: $yy
+#
+if $?IDL_PATH then
+   set xx=$IDL_PATH
+   set yy=`echo $xx | sed -n -e "s=${aa}/v[1-9]\.[0-9][a-z]=${aa}/${ver}=p"`
+   if $yy == "" set yy="${IDL_PATH}:$aa/$ver/idl"
+else
+   set yy=$aa/$ver/idl
+endif
+setenv IDL_PATH $yy
+#echo IDL_PATH: $yy
+#
+# if you use LD_LIBRARY_PATH, then it should contain the wind.waves
+# and cdf library directories, otherwise the f77 command must fully
+# specify the paths and file names
+#
+# use these symbols with LD_LIBRARY_PATH including the wind.waves and cdf stuff
+set wind_lib = "-xl -lWAVES -lV77"
+set cdf_lib = "-lcdf"
+#
+# use these symbols to resolve wind.waves library refs without LD_LIBRARY_PATH
+set OS=solaris
+set windlib  = "-xl -L$aa/$ver/lib -lWAVES         -lV77"
+set windlib2 = "-xl   $aa/$ver/lib/libWAVES.so.1.1 -lV77"
+set cdflib   = "-L$aa/$ver/cdf/lib/$OS -lcdf"
+set cdflib2  = "  $aa/$ver/cdf/lib/$OS/libcdf.so"
+#
+alias qdb $aa/$ver/bin/qdb
+#
+unset xx
+unset yy
+unset aa
+unset ver
+unset pat
+#

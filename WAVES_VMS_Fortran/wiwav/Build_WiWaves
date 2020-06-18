@@ -1,0 +1,173 @@
+
+Building the Wind WAVES Software for MacOS:
+------------------------------------------
+
+1. Choose where your wish to install.  For the purposes of this example,
+   assume that you will install in directory:
+
+       /wind/software
+
+   In these instructions, replace this directory name with your
+   own installation directory name.
+
+   This will result in a Wind WAVES installation directory:
+
+       /wind/software/wiwav
+
+2. Get the tar-file of the release, which is:
+
+       wind_wav_macosx.tar
+
+   and copy it into "/wind/software".
+
+3. Extract the release:
+
+      cd /wind/software
+
+      tar xvf wind_wav_macosx.tar
+
+   This will result in the creation of the installation directory:
+
+      /wind/software/wiwav
+
+4. Go to the "src" directory:
+
+      cd /wind/software/wiwav/v1.7d/src
+
+5. If this is a MacOS-Intel build, enter:
+
+      cp  Makefile.macos_intel  Makefile
+
+   If this is a MacOS-PPC build, enter:
+
+      cp  Makefile.macos_ppc  Makefile
+
+6. Edit the "Makefile" and, at about line 76, change the "BASEDIR"
+   line to equal your choice in step (1).
+
+       BASEDIR = /wind/software/wiwav
+
+   (i.e. "BASEDIR" is the name of your installation directory)
+
+   Also, line 7, indicating the location of your local ABSOFT
+   Fortran installation should be set as required.   Typically,
+   ABSOFT is installed in:
+
+   For PPC:
+
+      /Applications/Absoft
+
+   For Intel:
+
+      /Applications/Absoft10
+
+7. Note:  if we are every dealing with a version higher than v1.7d,
+   then you will also have to change line 4:
+
+       WIND_VERSION = v1.7d
+
+   to reflect that.
+
+8. Make certain that the correct version of:
+
+       wind_os_def.for
+
+   is being used.
+
+   For Intel:
+
+       cp  wind_os_def.for.macos_intel  wind_os_def.for
+
+   For PPC:
+
+       cp  wind_os_def.for.macos_ppc  wind_os_def.for
+
+9. "make" the libraries (and "qdb" program), by entering::
+
+       make all
+
+   This will result in the creation of the following:
+
+      In "/wind/software/wiwav/v1.7d/lib":
+
+	  libIDL_WAVES.so
+	  libWAVES.so.1.1
+	  libWIND.a
+
+      In "/wind/software/wiwav/v1.7d/bin":
+
+	  qdb
+       
+10. Create a symbolic link for "libWAVES.so.1.1":
+
+      cd /wind/software/wiwav/v1.7d/lib
+
+      ln -s libWAVES.so.1.1 libWAVES.so
+
+11. Go to the "wiwav/v1.7d/lib" directory, and establish a
+    symbolic link to the CDF libraries, which were included
+    in the tar-package:
+
+      cd  /wind/software/wiwav/v1.7d/lib
+
+      ln -s ../cdf/lib/libcdf.a .
+      ln -s ../cdf/lib/libcdf.so .
+
+    These are CDF 3.1 libraries.
+
+12. You may want to edit the file:
+
+       /wind/software/wiwav/v1.7d/idl/wind_idl.pro
+
+    and replace the use of the environment variable:
+
+	WIWAV_IDL_LIB
+
+    with another more suitable to your site.
+
+13. To set a user's environment to make use of the WAVES library, the
+    following lines should be included, for those using "bash" or "sh",
+    in "$HOME/.profile":
+
+	export WIND_WAV_BASE; WIND_WAV_BASE=/wind/software/wiwav/v1.7d
+	export WIND_WAV_IDL; WIND_WAV_IDL=$WIND_WAV_BASE/idl
+	export WIND_WAV_SRC; WIND_WAV_SRC=$WIND_WAV_BASE/src
+	export WIND_DATA; WIND_DATA=<where_ever_your_wind_data_is_stored>
+	export WIND_DBMS; WIND_DBMS=$WIND_WAV_BASE/dbms
+	export WIND_DBMS_AUX; WIND_DBMS_AUX=$WIND_DBMS/aux
+	export WIWAV_IDL_LIB; WIWAV_IDL_LIB=$WIND_WAV_BASE/lib/libIDL_WAVES.so
+	IDL_PATH=$WIND_WAV_IDL:$IDL_PATH
+
+    For those using "csh", tcsh", put the following lines in '$HOME/.cshrc":
+
+	setenv WIND_WAV_BASE /wind/software/wiwav/v1.7d
+	setenv WIND_WAV_IDL $WIND_WAV_BASE/idl
+	setenv WIND_WAV_SRC $WIND_WAV_BASE/src
+	setenv WIND_DATA <where_ever_your_wind_data_is_stored>
+	setenv WIND_DBMS $WIND_WAV_BASE/dbms
+	setenv WIND_DBMS_AUX $WIND_DBMS/aux
+	setenv WIWAV_IDL_LIB $WIND_WAV_BASE/lib/libIDL_WAVES.so
+	setenv IDL_PATH  "${WIND_WAV_IDL}:+${IDL_PATH}"
+
+14. "WIND_DATA", "WIND_DBMS", and "WIND_DBMS_AUX" have been, and
+     continue to be used by Windlib users.  The following environment
+     variables:
+
+	WIND_WAV_BASE
+	WIND_WAV_IDL
+	WIND_WAV_SRC
+	WINDWAV_IDL_LIB
+
+    may already been defined by pre-existing variables that current
+    users have set.   In that case, the "Makefile" edits, specified
+    in (6), can be modified to make use of that, and the file:
+
+       v1.7d/idl/wind_idl.pro
+
+    can be edited to make use of that as well.   You would change
+    all cases of the string:
+
+       WIWAV_IDL_LIB
+
+    to make use of the older environment variable(s).
+
