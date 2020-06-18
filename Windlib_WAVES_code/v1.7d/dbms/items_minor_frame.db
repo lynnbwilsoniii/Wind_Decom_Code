@@ -1,0 +1,22 @@
+! items_minor_frame.db - WIND/WAVES Item Database: item definitions 
+! for MINOR_FRAME events
+!
+! MINOR_FRAME - 256 byte minor frame
+!
+
+ITEM=DB_VERSION
+	DATA_TYPE=CHARACTER
+	TEXT=MINOR_FRAME   1.0
+	DESC="This is the current item database version number"
+	AUTHOR_DATE=19950526
+
+ITEM=ALL_WORDS
+	EXTRACT=0,8,8,1,0,AREA:m
+	DESC="Gets entire MINOR_FRAME data substream however defined "
+	DESC="such that each byte is returned as a 32-bit integer."
+	AUTHOR_DATE=19950526
+
+ITEM=WORD_$1
+	DESC="Any minor frame word (byte) between 0 and 255" 
+	EXTRACT=($1 * 8),8,-1,1,0,AREA:m
+	AUTHOR_DATE=19950925

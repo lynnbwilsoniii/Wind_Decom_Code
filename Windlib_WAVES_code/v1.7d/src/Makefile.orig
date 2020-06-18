@@ -1,0 +1,410 @@
+# makefile - for wind_lib, a WIND/WAVES FORTRAN and C library
+#
+# -lV77 is used on a per-module basis
+#
+WIND_VERSION = v1.7d
+LIBDIR = ../lib
+BINDIR = ../bin
+OBJ_LIB = $(LIBDIR)/libWIND.a
+SHR_LIB = $(LIBDIR)/libWAVES.so.1.1
+IDL_LIB = $(LIBDIR)/libIDL_WAVES.so
+QDB     = $(BINDIR)/qdb
+qdbobjs = qdb_args.o qdb_main.o qdb.o
+cwd :sh = pwd
+host :sh = hostname
+absbindir = $(cwd:/src=/bin)
+abslibdir = $(cwd:/src=/lib)
+abscdfdir = $(cwd:/src=/cdf)
+WIND_HOME = $(cwd:/$(WIND_VERSION)/src=)
+LNM=LOGICALNAMEMAPPING='CDF_INC=../cdf/include'  export LOGICALNAMEMAPPING
+CDF_objs = wind_cdf.o 
+USE_CDF  = -DCDF_LIB_USEABLE
+ALIGN =
+cc2 = $(cc:-c=)
+CDF_LIB_DIR = $(abscdfdir)/lib/$(OS)
+CDF_LIB = -L$(CDF_LIB_DIR) -lcdf 
+NO_LDPATH = unset LD_LIBRARY_PATH
+#LDPATH = LD_LIBRARY_PATH=$(SYSLIB):/usr/openwin/lib:/usr/lib:$(CDF_LIB_DIR)
+#LDPATH += ; export LD_LIBRARY_PATH
+
+
+#
+# host specific 
+#
+env_vela  = SYSLIB=/opt/SUNWspro/SC3.0.1/lib ; export SYSLIB
+env_ham   = SYSLIB=/opt/SUNWspro/SC3.0/lib ; export SYSLIB ; \
+            unset LD_LIBRARY_PATH
+#env_boree = SYSLIB=/opt/SUNWspro/SC4.0/lib ; export SYSLIB
+env_lepmlk = \
+ ff="f77 -C -e -xl -PIC -c -dalign -cg92" ; export ff ; \
+ IDL_REFS="\
+    /usr/lang/SC3.0.1/lib/values-Xa.o \
+    /usr/lang/SC3.0.1/lib/libV77.a \
+    /usr/lang/SC3.0.1/lib/libF77.a \
+    /usr/lang/SC3.0.1/lib/libM77.a \
+    /usr/lang/SC3.0.1/lib/libcx.a \
+    /usr/lang/SC3.0.1/lib/libansi.a \
+    /usr/lang/SC3.0.1/lib/libsunmath.a \
+    /usr/lang/SC3.0.1/lib/libm.a " ; export IDL_REFS ; \
+ ALIGN="\
+  -align _wind_user_blk0_ \
+  -align _wind_user_blk1_ \
+  -align _wind_user_blk2_ \
+  -align _wind_user_blk4_ " ; export ALIGN \
+ LD_OPTS = -Bdynamic -assert pure-text " ; export LD_OPTS ;
+
+env_megasr = \
+ ff="f77 -C -e -xl -PIC -c -dalign -cg89" ; export ff ; \
+ CDF_LIB="-L/usr/local/cdf24-dist/lib -lcdf" ; export CDF_LIB ; \
+ OTHERS="/usr/lang/SC1.0/libF77.a \
+         /usr/lang/SC1.0/libV77.a \
+         /usr/lang/SC1.0/libm.a \
+         /usr/lib/libc.a*" ; export OTHERS; \
+ IDL_REFS=$$(OTHERS) ; export IDL_REFS ;
+
+
+
+#
+# Solaris
+#
+# xxxxx jk, -lV77 doesn't seem to stick for libWAVES.so
+# xxxxx jk, cannot seem to find this -lfast on ham
+SOLARIS_OTHERS = ../cdf/lib/solaris/libcdf.a \
+           $$(SYSLIB)/libfast.a \
+           $$(SYSLIB)/libF77.a \
+           $$(SYSLIB)/libM77.a \
+           $$(SYSLIB)/libV77.a \
+           $$(SYSLIB)/libsunmath.a \
+           -lsocket -lnsl -lc -lm 
+macros_solaris = \
+"OS = solaris" \
+"ranlib = sleep 1" \
+"ff = f77 -e -xl -PIC -c -dalign -xcg92" \
+"cc = /opt/SUNWspro/bin/cc -c -K PIC -dalign -fsingle -DSPARC" \
+"LD_OPTS = -dy -G" \
+"LD_OPTS2 = -lsocket -L$(SYSLIB) -lfast -L$(SYSLIB) -lV77" \
+"QDB_REFS = $(SOLARIS_OTHERS)" \
+"IDL_REFS = $(SOLARIS_OTHERS)" \
+"OTHERS = $(SOLARIS_OTHERS)" 
+
+#
+# SunOS
+#
+macros_sunos= \
+"OS=sunos" \
+"ranlib=ranlib" \
+"cc = cc -c -PIC -dalign -fsingle -DSPARC" 
+
+one: ; @$(MAKE) $(host)
+
+# vela, solaris 5.4
+vela: vela.all
+vela.qdb: ; $(env_vela) ; $(MAKE) qdb $(macros_solaris)
+vela.shr: ; $(env_vela) ; $(MAKE) shr $(macros_solaris)
+vela.idl: ; $(env_vela) ; $(MAKE) idl $(macros_solaris)
+vela.all: ; $(env_vela) ; $(MAKE) all $(macros_solaris)
+
+# ham, solaris 5.5.1
+ham: ham.all
+ham.qdb: ; $(env_ham) ; $(MAKE) qdb $(macros_solaris)
+ham.shr: ; $(env_ham) ; $(MAKE) shr $(macros_solaris)
+ham.idl: ; $(env_ham) ; $(MAKE) idl $(macros_solaris)
+ham.all: ; $(env_ham) ; $(MAKE) all $(macros_solaris)
+
+# megasr, SunOS 3.1.4
+megasr: megasr.all
+megasr.qdb: ; $(env_megasr) ; $(MAKE) qdb $(macros_sunos)
+megasr.shr: ; $(env_megasr) ; $(MAKE) shr $(macros_sunos)
+megasr.idl: ; $(env_megasr) ; $(MAKE) idl $(macros_sunos)
+megasr.all: ; $(env_megasr) ; $(MAKE) all $(macros_sunos)
+
+# lepmlk, SunOS 3.1.4
+lepmlk: lepmlk.all
+lepmlk.qdb: ; $(env_lepmlk) ; $(MAKE) qdb $(macros_sunos)
+lepmlk.shr: ; $(env_lepmlk) ; $(MAKE) shr $(macros_sunos)
+lepmlk.idl: ; $(env_lepmlk) ; $(MAKE) idl $(macros_sunos)
+lepmlk.all: ; $(env_lepmlk) ; $(MAKE) all $(macros_sunos)
+
+#
+#
+#
+
+#
+# more definitions...
+#
+
+S1 = \
+ c_interface.o \
+ wind_tm_lib.o 
+S4 = \
+ wind_event_lib.o \
+ wind_item_lib.o 
+S6 = \
+ wind_wnd_lib.o \
+ wind_cdhf_lib.o \
+ wind_nrt.o nrt_rtc_lib.o
+S7 = \
+ wind_time_lib.o \
+ rad_list_mode.o \
+ $(CDF_objs) \
+ tnr.o rad.o fft.o fft_lib.o master_cylinder.o waves2.o
+S2 = \
+ item_get.o item_functions.o item.o rb_tree.o w_item.o 
+S5 = \
+ block_file_size.o sun_file_select.o sun_win_sz.o eval.o errmsg.o endian_lib.o
+S3 = \
+ sun_only.o \
+ wind_version.o \
+ wind_misc_lib.o \
+ megaint2.o wind_time2_lib.o \
+ string.o wind_string_lib.o
+OBJECTS = $(S1) $(S6) $(S4) $(S7) $(S2) $(S3) $(S5)
+
+#
+# targets, final products: the wind libraries
+#
+
+all: $(OBJ_LIB) $(SHR_LIB) $(IDL_LIB) $(QDB)
+idl: $(IDL_LIB)
+shr: $(SHR_LIB)
+qdb: $(QDB)
+
+del:
+	/bin/rm $(OBJ_LIB)
+	/bin/rm $(SHR_LIB)
+	/bin/rm $(IDL_LIB)
+	@make all
+
+# regular object library
+$(OBJ_LIB): $(OBJECTS) sun_idl_interface.o
+	ar cr $(OBJ_LIB) $(OBJECTS)
+	$(ranlib) $(OBJ_LIB)
+	chmod 644 $(OBJ_LIB)
+
+# shareable object library (preferred for FORTRAN applications to link with)
+$(SHR_LIB): $(OBJECTS)
+	ld -o $(SHR_LIB) \
+  $(LD_OPTS) $(OBJECTS) \
+  $(CDF_LIB) \
+  $(LD_OPTS2) \
+  $(ALIGN)
+	chmod 644 $(SHR_LIB)
+	@if [ ! -h ../lib/libWAVES.so ]; then \
+            (cd ../lib; ln -s libWAVES.so.1.1 libWAVES.so; )\
+        fi
+	@if [ ! -h ../lib/libcdf.so ]; then \
+            (cd ../lib; ln -s ../cdf/lib/$(OS)/libcdf.so libcdf.so; )\
+        fi
+
+# IDL-callable shareable object library
+$(IDL_LIB): $(OBJECTS) sun_idl_interface.o
+	ld -o $(IDL_LIB) \
+    $(LD_OPTS) \
+    sun_idl_interface.o \
+    $(OBJ_LIB) \
+    $(IDL_REFS)
+	chmod 644 $(IDL_LIB)
+
+#
+# item database stuff
+#
+item_get.o: item_get.c wind_tm_event_def.h item.h extract.c wind_os_def.h
+	$(cc) $(USE_CDF) item_get.c
+
+item_functions.o: item_functions.c
+	$(cc) item_functions.c
+
+rb_tree.o: rb_tree.c item.h
+	$(cc) rb_tree.c
+
+w_item.o: w_item.c item.h 
+	$(cc) w_item.c
+
+item.o: item.c item.h 
+	$(cc) item.c
+
+errmsg.o: errmsg.c
+	$(cc) errmsg.c
+
+eval.o: eval.c
+	$(cc) eval.c
+
+rad_list_mode.o: rad_list_mode.for
+	$(ff) rad_list_mode.for
+
+#
+# misc modules
+#
+wind_nrt.o: wind_nrt.c
+	$(cc) -DUSE_SUN wind_nrt.c
+nrt_rtc_lib.o: nrt_rtc_lib.c
+	$(cc) -DUSE_SUN nrt_rtc_lib.c
+
+wind_cdf.o: wind_cdf.for
+	$(LNM); $(ff) wind_cdf.for $(CDF_LIB)
+
+endian_lib.o: endian_lib.for
+	$(ff) endian_lib.for
+
+sun_idl_interface.o: sun_idl_interface.c
+	$(cc) sun_idl_interface.c
+
+sun_file_select.o: sun_file_select.c
+	$(cc) sun_file_select.c
+
+sun_win_sz.o: sun_win_sz.c
+	$(cc) sun_win_sz.c 
+
+wind_misc_lib.o: wind_misc_lib.for
+	$(ff) wind_misc_lib.for
+
+wind_version.o: wind_version.for
+	$(ff) wind_version.for
+
+wind_time_lib.o: wind_time_lib.for
+	$(ff) wind_time_lib.for
+
+megaint2.o: megaint2.c
+	$(cc) megaint2.c
+
+wind_time2_lib.o: wind_time2_lib.for \
+ vms_time_constants_def.for \
+ ui8_def.for \
+ parm_def.for
+	$(ff) wind_time2_lib.for -lm
+
+wind_string_lib.o: wind_string_lib.for
+	$(ff) wind_string_lib.for
+
+string.o: string.c
+	$(cc) string.c
+
+block_file_size.o: block_file_size.c
+	$(cc) block_file_size.c
+
+sun_only.o: sun_only.for
+	$(ff) sun_only.for
+
+#
+# physical units modules
+#
+master_cylinder.o: master_cylinder.for
+	$(ff) master_cylinder.for
+rad.o: rad.for
+	$(ff) rad.for
+fft_lib.o: fft_lib.for
+	$(ff) fft_lib.for
+fft.o: fft.for
+	$(ff) fft.for
+tnr.o: tnr.for
+	$(ff) tnr.for
+waves2.o: waves2.for
+	$(ff) waves2.for
+
+#
+# .wnd access library
+#
+wind_wnd_lib.o: wind_wnd_lib.for \
+ wind_os_def.for \
+ wind_wnd_def.for \
+ parm_def.for \
+ c_string_def.for \
+ wind_tm_user_def.for \
+ wind_tm_event_def.for \
+ wind_record_def.for \
+ wind_return_code_def.for \
+ wind_hk_addr_def.for \
+ wind_packet_addresses_def.for
+	$(ff) wind_wnd_lib.for
+
+#
+# CDHF access library
+#
+wind_cdhf_lib.o: wind_cdhf_lib.for \
+ wind_os_def.for \
+ wind_cdhf_def.for \
+ wind_cdhf_rec_def.for \
+ wind_cdhf_alloc_def.for \
+ wind_tm_user_def.for \
+ ui8_def.for \
+ vms_time_constants_def.for\
+ wind_record_def.for \
+ parm_def.for \
+ wind_return_code_def.for \
+ wind_tm_event_def.for \
+ wind_hk_addr_def.for \
+ wind_packet_addresses_def.for
+	$(ff) wind_cdhf_lib.for
+
+#
+# wind_tm_lib
+#
+wind_tm_lib.o: wind_tm_lib.for \
+ wind_os_def.for \
+ wind_record_def.for \
+ parm_def.for \
+ c_string_def.for \
+ wind_tm_user_def.for \
+ vms_time_constants_def.for\
+ wind_return_code_def.for \
+ wind_tm_event_def.for \
+ item_def.for \
+ wind_tm_routine_def.for \
+ wind_hk_addr_def.for
+	$(ff) wind_tm_lib.for -lV77
+
+#
+# wind_item_lib
+#
+wind_item_lib.o: wind_item_lib.for \
+ wind_os_def.for \
+ parm_def.for \
+ c_string_def.for \
+ item_def.for \
+ wind_tm_user_def.for \
+ wind_tm_event_def.for \
+ vms_time_constants_def.for\
+ wind_return_code_def.for \
+ wind_tm_routine_def.for
+	$(ff) wind_item_lib.for
+
+#
+# wind_event_lib
+#
+wind_event_lib.o: wind_event_lib.for \
+ wind_os_def.for \
+ parm_def.for \
+ c_string_def.for \
+ item_def.for \
+ wind_tm_user_def.for \
+ wind_tm_event_def.for \
+ ui8_def.for \
+ wind_return_code_def.for \
+ wind_hk_def.for \
+ wind_tm_routine_def.for
+	$(ff) wind_event_lib.for
+#
+# qdb - query item data base
+#
+$(QDB): $(qdbobjs) item_get.o item.o
+	@echo " "
+	@echo "Making qdb"
+	@echo WIND_HOME is $(WIND_HOME)
+#	echo $(cwd) $(absbindir)
+	@echo " "
+	$(LDPATH); echo $$LD_LIBRARY_PATH
+	@echo " "
+#	$(cc2) $(qdbobjs) -o $(QDB) $(OBJ_LIB) $(OTHERS) $(qdb_refs) 
+# works
+	$(LDPATH); $(cc2) $(qdbobjs) -o $(QDB) $(SHR_LIB) $(QDB_REFS)
+#	$(NO_LDPATH); $(cc2) $(qdbobjs) -o $(QDB) $(OBJ_LIB) $(QDB_REFS)
+
+qdb.o: qdb.c
+	$(cc) -c qdb.c
+
+qdb_args.o: qdb_args.c
+	$(cc) -c qdb_args.c
+
+qdb_main.o: qdb_main.c
+	$(cc) -c qdb_main.c
+

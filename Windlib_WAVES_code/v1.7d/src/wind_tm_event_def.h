@@ -1,0 +1,173 @@
+/* wind_tm_event_def.h - data structures and declarations for working with 
+   WIND/WAVES telemetry events using the FORTRAN common blocks and data
+   structures defined in wind_tm_event_def.for
+*/
+#include "wind_os_def.h"
+
+#define	max_channels 8
+#define	max_packets_per_event 32
+#define	size_of_packet 431
+#define	perfect_event 1
+#define	truncated_event 3
+#define	gapped_event 5
+
+/*
+this is the event built by the event builder and operated on
+by wind_tm_get_item
+*/
+#define	max_len_h1  4
+#define max_len_h2 72
+#define max_len_h3 72
+#define max_len_h4 32
+#define max_len_hk 81+25+125+5
+#define n_extra_info_lws 32
+
+#ifdef USE_MACOSX
+#define eb wind_user_blk1_
+#endif
+
+#if SYSTEM == VMS
+#define eb wind_user_blk1
+#elif SYSTEM == SUNOS
+#define eb wind_user_blk1_
+#endif
+
+struct wind_packet_headers {
+   char	h1[max_len_h1];			 	/* primary header	*/
+   char	h2[max_len_h2];			 	/* instrument header	*/
+   char	h3[max_len_h3];			 	/* measurement header	*/
+   char	h4[max_len_h4];		 		/* packet header	*/
+   int	got_1st;
+   int	got_2nd;
+   int	got_3rd;
+   int	got_4th;
+   int	got_data;
+};
+
+extern struct wind_event_buffer {
+   int	  event_completion_status;
+   int	  cpn;				/* current_packet_number*/
+   int	  num_packets_to_build_this_event;
+   struct wind_packet_headers ph[max_packets_per_event];
+   char	  data[max_packets_per_event*size_of_packet];
+   int	  last_data_byte;
+   int    extra_info[n_extra_info_lws];
+   int    hk_major;
+   char   hk[max_len_hk];
+};
+
+
+/*
+this is the internal structure filled by wind_tm_get_event
+in order to extract the event from the packet(s)
+*/
+
+#ifdef USE_MACOSX
+#define eei wind_user_blk2_
+extern struct wind_event_extract_info {
+   char	event_type[8];
+   int	event_subtype;
+   int	event_status;
+   int	dbms_date_time[2];
+   int	last_date_time[2];
+   int	h1_start_bit;
+   int  h1_bit_size;
+   int  h2_bit_size;
+   int  h3_bit_size;
+   int  h4_bit_size;
+
+   /* packet id information, constant for every packet in event */
+   int	packet_id_start_bit;
+   int	packet_id_bit_size;
+   int	packet_id;
+
+   int	h1_start_byte,   h1_byte_size,   h1_end_byte;
+   int	h2_start_byte,   h2_byte_size,   h2_end_byte;
+   int	h3_start_byte,   h3_byte_size,   h3_end_byte;
+   int	h4_start_byte,   h4_byte_size,   h4_end_byte;
+   int	data_start_byte, data_byte_size, data_end_byte;
+   int	tds_start_byte,  tds_byte_size,  tds_end_byte;
+
+   /* flag bits */
+   int	first_packet_flag_bit;
+   int	last_packet_flag_bit;
+
+   /* values calculated from first packet in event	*/
+   /* constant for every packet in event		*/
+   int	got_a_first_packet;
+   int	got_a_last_packet;
+
+};
+#endif
+
+#if SYSTEM == VMS
+#define eei wind_user_blk2
+struct wind_event_extract_info {
+#elif SYSTEM == SUNOS
+#define eei wind_user_blk2_
+extern struct wind_event_extract_info {
+#endif
+   char	event_type[8];
+   int	event_subtype;
+   int	event_status;
+   int	dbms_date_time[2];
+   int	last_date_time[2];
+   int	h1_start_bit;
+   int  h1_bit_size;
+   int  h2_bit_size;
+   int  h3_bit_size;
+   int  h4_bit_size;
+
+   /* packet id information, constant for every packet in event */
+   int	packet_id_start_bit;
+   int	packet_id_bit_size;
+   int	packet_id;
+
+   int	h1_start_byte,   h1_byte_size,   h1_end_byte;
+   int	h2_start_byte,   h2_byte_size,   h2_end_byte;
+   int	h3_start_byte,   h3_byte_size,   h3_end_byte;
+   int	h4_start_byte,   h4_byte_size,   h4_end_byte;
+   int	data_start_byte, data_byte_size, data_end_byte;
+   int	tds_start_byte,  tds_byte_size,  tds_end_byte;
+
+   /* flag bits */
+   int	first_packet_flag_bit;
+   int	last_packet_flag_bit;
+
+   /* values calculated from first packet in event	*/
+   /* constant for every packet in event		*/
+   int	got_a_first_packet;
+   int	got_a_last_packet;
+
+};
+
+#ifdef USE_MACOSX
+extern struct wind_event_buffer eb[max_channels];
+extern struct wind_event_extract_info eei[max_channels];
+#endif
+
+#if SYSTEM == VMS
+
+/*extern struct wind_event_buffer _align(page) eb[max_channels];*/
+/*extern struct wind_event_extract_info _align(page) eei[max_channels];*/
+
+#ifdef __DECC
+ #pragma extern_model save
+ #pragma extern_model common_block noshr
+ #pragma message disable ALIGNEXT
+#endif
+
+extern struct wind_event_buffer _align(page) eb[max_channels];
+extern struct wind_event_extract_info _align(page) eei[max_channels];
+
+#ifdef __DECC
+ #pragma message enable ALIGNEXT
+ #pragma extern_model restore
+#endif
+
+#elif SYSTEM == SUNOS
+
+extern struct wind_event_buffer eb[max_channels];
+extern struct wind_event_extract_info eei[max_channels];
+
+#endif

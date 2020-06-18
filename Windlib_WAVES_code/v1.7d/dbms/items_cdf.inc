@@ -1,0 +1,1722 @@
+! items_cdf.inc - WIND/WAVES Item Database include file for use in accessing
+! Common Data Format variable values
+!
+! CDF-specific keyword clause definitions:
+! ---------------------------------------
+!
+!   CDF_FILE=file_specification
+!	Field is terminated by whitespace.  Value "filename" should be of the
+!	form logical_name:file_name for maximum portability.  Under
+!	VMS "logical_name" is used exactly like a normal VMS logical name.
+!	Under Unix, "logical_name" is taken to be an environment variable
+!	whose value is concatenated with "file_name" to build a complete Unix
+!	filename with path.
+!
+!	Eg.: CDF_FILE=WIND_MFI:wi_k0_mfi_$YYYYMMDD_v$VER.cdf
+!
+!	At run time wind_lib substitutes appropriate values for the symbols
+!	$YYYYMMDD and $VER when found in the "file_name".  $YYYYMMDD is of 
+!	the form YYYYMMDD and is taken from the SpaceCraft Event Time (SCET)
+!	of the associated WIND/WAVES native instrument event.
+!
+!	$VER is used to conform to the WIND/WAVES key parameters CDF version
+!	numbering convention (which is inherited from the WIND/WAVES CDHF LZ
+!	version numbering convention).  Specifically, after any $YYYYMMDD 
+!	symbol resolution has been made, wind_lib performs a wild card search 
+!	of the directory specified in "logical_name" (including the entire
+!	subdirectory tree) to obtain the lexically greatest matching filename.
+!	$VER is used to match exaclty two characters during the search.
+!
+!	Multiple CDF_FILE= clauses may appear in any single item definition.
+!	Each file_specification is stored in a linked list in the order
+!	in which the CDF_FILE= clauses appear.  Wind_lib sequentially attempts
+!	to find the first matching file_spefication.  In this way the 
+!	item definition provides wind_lib with the flexibility to search
+!	a variety of locations (i.e.: different hard disks, CD-roms) that
+!	may use various naming conventions.
+!
+!   CDF_INDEPENDENT_RV=name
+!	Field is terminated by white space.  RV is an acronymn for "real
+!	variable", which is a CDF term.  The value for "name" is case
+!	sensitive and must exactly match the name of a rVariable defined
+!	in the target CDF file.  Most commonly the value of "name" is
+!	anticipated to be "Epoch" (without the quotation marks).  The
+!	chosen independent rVariable is assumed to uniformly increase 
+!	throughout the CDF file with increasing record number, and it's
+!	CDF indices are {1,0,0,0,...}.  The value of the CDF_INDEPENDENT_RV
+!	is used to correctly position the caller in the target CDF file.
+!
+!   CDF_INDEPENDENT_RV_MATCH=name
+!	Field is terminated by white space.  This clause specifies the
+!	native WIND/WAVES item associated with the target cdf independent
+!	rVariable (usually Epoch).  Most commonly the value of name is 
+!	anticipated to be "EVENT_SCET_R8" (which marks the start of an event)
+!	or "CONTEXT_SCET_R8" (which indicates the position as defined with 
+!	the channel position command)(both without the quotation marks).
+!	The wind_lib cdf access code executes a w_item_* call to get the
+!	value of, for example, EVENT_SCET_R8.  Wind_lib then converts
+!	the UR8 EVENT_SCET_R8 value to cdf Epoch time format (assuming this
+!	item contains a CDF_INDEPENDENT_RV=Epoch clause).  The cdf file
+!	is searched to find the cdf record whose Epoch value is closest to
+!	the converted EVENT_SCET_R8 value.  Although the relationship between
+!	SCET and Epoch is recognized by wind_lib, not all such WIND/WAVES-CDF
+!	variable relationships are known.
+!
+!   CDF_DEPENDENT_RV=name
+!	Field is terminated by white space.  The value for "name" is case
+!	sensitive and must exactly match the name of a rVariable defined
+!	in the target CDF file.  In particular, it is the value of this
+!	CDF rVariable that is the ultimate goal of the wind_lib CDF quest
+!	
+!   CDF_DEPENDENT_RV_INDICES=n0,n1[,n2,n3,...,nN]
+!	Field is terminated by white space.  n0 through nN are comma delimited
+!	integer values.  These values compose the array of indices used to 
+!	access the CDF dependent rVariable value in a cdf_var_get() subroutine
+!	call.  Only the leftmost non-zero indices must be specified as all
+!	unspecified indices are zero by default.  The zero-th dimension, n0,
+!	corresponds to CDF record number.
+!
+!	Alternate form of indices clause specifing looping instructions for
+!	acquiring array entities (this is the only way to return multiple
+!	values to the caller):
+!   CDF_DEPENDENT_RV_INDICES=[n0,(n0a,n0b,n0c:n0d)],[n1,(n1a,n1b,n1c:n1d)],...
+!	Where
+!	   n.a = lower bound (use -1 to match file position of independ. rvar)
+!	   n.b = upper bound (use * to take dimension size as upper boundry)
+!	   n.c = increment value
+!	   n.d = loop sequence number (highest number is innermost loop)
+!	For example, "..._INDICES=(-1,*,1:1),1,(5,85,10:3),4,(1,*,7:2),0,0..."
+!	results in a loop similar to:
+!
+!          FOR i=irv_match TO default_upper_limit_a STEP 1
+!	      FOR j=1 TO default_upper_limit_b STEP 7
+!	         FOR k=5 TO 85 STEP 10
+!	             CALL get_cdf_valu(...)
+!
+!
+!   CDF_INDEPENDENT_RV_INDICES=n0,n1[,n2,n3,...,nN]
+!	Field is terminated by white space.  n0 through nN are comma delimited
+!	integer values.  These values compose the array of indices used to 
+!	access the CDF independent rVariable value in a cdf_var_get() subroutine
+!	call.  Only the leftmost non-zero indices must be specified as all
+!	unspecified indices are zero by default.  The zero-th dimension, n0,
+!	corresponds to CDF record number.
+!
+!   CDF_SEARCH_MODE=[LATER,EARLIER,NEAREST,LINEAR]
+!	Field is terminated by white space.  One of the keywords between the
+!	square brackets must be specified in all capital letters.  This
+!	clause specifies the arithmetic mechanism by which the CDF independent 
+!	rVariable is matched to the corresponding wind_lib item.  For the
+!	discussion below assume that a WIND/WAVES SCET value has been used
+!	to index into a CDF file using Epoch as the independent variable and
+!	the dependent rVariable value to obtain is named BGSEc:
+!
+!	NEAREST -  The WIND/WAVES SCET falls between two successive CDF file
+!	Epoch values.  The BGSEc value associated with the Epoch value closest
+!	to the WIND/WAVES SCET is returned.
+!	
+!	LATER -  The WIND/WAVES SCET falls between two successive CDF file
+!	Epoch values.  The BGSEc value associated with the greater (later in
+!	time) of the two Epoch reference records is returned.  For an SCET
+!	value greater than the last Epoch value in the file (EOF) the BGSEc
+!	value associated with the last Epoch value is returned.
+!	
+!	EARLIER -  The WIND/WAVES SCET falls between two successive CDF file
+!	Epoch values.  The BGSEc value associated with the lesser (earlier in
+!	time) of the two Epoch reference records is returned.  For an SECT
+!	value less than the first Epoch value in the file (BOF) the BGSEc
+!	value associated with the first Epoch value is returned.
+!	
+!	LINEAR - The WIND/WAVES SCET falls between two successive CDF file
+!	Epoch values.  The BGSEc value returned is a calculated value
+!	determined by linear interpolation.
+
+!	WIND WAV CDF information is in a rank 2 .CDF (1+2 dimensions)
+!
+ITEM=WIND_WAV_SCET_R8
+	DATA_TYPE=UR8
+	CDF_FILE=WIND_WAV:wi_k0_wav_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,0,0,0
+	CDF_DEPENDENT_RV=		Epoch
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,1,0,0,0
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Time values to match various WAVes values (UR8)
+	AUTHOR_DATE=19960611
+
+ITEM=WIND_WAV_NE_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_WAV:wi_k0_wav_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,0,0,0
+	CDF_DEPENDENT_RV=		Ne
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,1,0,0,0
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Electron density from NN on TNR (#/cm^3)
+	AUTHOR_DATE=19960611
+ITEM=WIND_WAV_NEQ
+	DATA_TYPE=INTEGER*4
+	CDF_FILE=WIND_WAV:wi_k0_wav_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,0,0,0
+	CDF_DEPENDENT_RV=		Ne_Quality
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,1,0,0,0
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Quality of Ne from NN on TNR (0=bad to 255=good)
+	AUTHOR_DATE=19960611
+
+ITEM=WIND_WAV_TRANSIENT_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_WAV:wi_k0_wav_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,0,0,0
+	CDF_DEPENDENT_RV=		E_transient
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,1,0,0,0
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Transient electric field from TDS (dB)
+	AUTHOR_DATE=19960611
+
+ITEM=WIND_SA_SCET_R8
+	DATA_TYPE=UR8
+	CDF_FILE=WIND_WAV:wi_k0_wav_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,0,0,0
+	CDF_DEPENDENT_RV=		Epoch
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,1,0,0,0
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Time values to match various Solar Array values (UR8)
+	AUTHOR_DATE=19970201
+ITEM=WIND_SA_MAX_AMPS_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_WAV:wi_k0_wav_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,0,0,0
+	CDF_DEPENDENT_RV=		Sol_max
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,1,0,0,0
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Maximum Solar Array Current (Amps)
+	AUTHOR_DATE=19960611
+ITEM=WIND_SA_MIN_AMPS_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_WAV:wi_k0_wav_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,0,0,0
+	CDF_DEPENDENT_RV=		Sol_min
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,1,0,0,0
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Minimum Solar Array Current (Amps)
+	AUTHOR_DATE=19960611
+
+ITEM=MOON_ORBIT_SCET_R8
+	DATA_TYPE=UR8
+	CDF_FILE=WIND_WAV:wi_k0_wav_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,0,0,0
+	CDF_DEPENDENT_RV=		Epoch
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,1,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) Times to match interpolated WAVes/MOON values (UR8)
+	AUTHOR_DATE=19960611
+ITEM=MOON_ORBIT_X(GSE)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=WIND_WAV:wi_k0_wav_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,0,0,0
+	CDF_DEPENDENT_RV=		Moon_pos
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,1,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) X MOON position in GSE coordinates (km)
+	AUTHOR_DATE=19960611
+ITEM=MOON_ORBIT_Y(GSE)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=WIND_WAV:wi_k0_wav_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,0,0,0
+	CDF_DEPENDENT_RV=		Moon_pos
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),2,1,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) Y MOON position in GSE coordinates (km)
+	AUTHOR_DATE=19960611
+ITEM=MOON_ORBIT_Z(GSE)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=WIND_WAV:wi_k0_wav_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,0,0,0
+	CDF_DEPENDENT_RV=		Moon_pos
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),3,1,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) Z MOON position in GSE coordinates (km)
+	AUTHOR_DATE=19960611
+
+ITEM=MOON_ORBIT_XYZ_SCET_R8
+	DATA_TYPE=UR8
+	CDF_FILE=WIND_WAV:wi_k0_wav_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,0,0,0
+	CDF_DEPENDENT_RV=		Epoch
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),(1,3,1:2),1,0,0,0
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Times to match WAVes/MOON vector values (UR8)
+	AUTHOR_DATE=19970422
+ITEM=MOON_ORBIT_XYZ(GSE)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=WIND_WAV:wi_k0_wav_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,0,0,0
+	CDF_DEPENDENT_RV=		Moon_pos
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),(1,3,1:2),1,0,0,0
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) MOON position vector in GSE coordinates (km)
+	AUTHOR_DATE=19960807
+!
+! jk test item
+!
+ITEM=MOON_ORBIT_Z_ALL(GSE)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=WIND_WAV:wi_k0_wav_$YYYYMMDD_v$VER.cdf
+	CDF_DEPENDENT_RV=		Moon_pos
+	CDF_DEPENDENT_RV_INDICES=	(1,*,1:1),3,1,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) Z MOON positions in GSE coordinates (km) for entire day
+	AUTHOR_DATE=19960812
+
+!	WIND MFI CDF information is in a rank 1 .CDF (1+1 dimensions)
+!
+!!   WIND_my_longest_name_R4		!for query_dbms
+ITEM=WIND_MFI_SCET_R8
+	DATA_TYPE=UR8
+	CDF_FILE=WIND_MFI:wi_k0_mfi_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		Epoch
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Time values to match various MFI values (UR8)
+	AUTHOR_DATE=19951001
+
+ITEM=WIND_MFI_B_RMS_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_MFI:wi_k0_mfi_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		RMS
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,1,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Component RMS (change in magnetic field) (nT)
+	AUTHOR_DATE=19951023
+
+ITEM=WIND_MFI_BX(GSE)_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_MFI:wi_k0_mfi_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		BGSEc
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,1,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) X magnetic field component in GSE (nT)
+	AUTHOR_DATE=19951001
+ITEM=WIND_MFI_BY(GSE)_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_MFI:wi_k0_mfi_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		BGSEc
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),2,1,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Y magnetic field component in GSE (nT)
+	AUTHOR_DATE=19951001
+ITEM=WIND_MFI_BZ(GSE)_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_MFI:wi_k0_mfi_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		BGSEc
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),3,1,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Z magnetic field component in GSE (nT)
+	AUTHOR_DATE=19951001
+
+ITEM=WIND_MFI_BMAG_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_MFI:wi_k0_mfi_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		BGSEa
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,1,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Magnetic (B) field's vector magnitude (nT)
+	AUTHOR_DATE=19951001
+ITEM=WIND_MFI_BTHETA(GSE)_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_MFI:wi_k0_mfi_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		BGSEa
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),2,1,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) B latitude in spherical GSE (-90 to +90 deg)
+	AUTHOR_DATE=19951001
+ITEM=WIND_MFI_BPHI(GSE)_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_MFI:wi_k0_mfi_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		BGSEa
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),3,1,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) B longitude in spherical GSE (0 to 360 deg)
+	AUTHOR_DATE=19951001
+
+!	WIND SWE CDF information is in a rank 1 .CDF (1+1 dimensions)
+!
+ITEM=WIND_SWE_SCET_R8
+	DATA_TYPE=UR8
+	CDF_FILE=WIND_SWE:wi_k0_swe_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		Epoch
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Time values to match various SWE values (UR8)
+	AUTHOR_DATE=19951001
+
+!!   WIND_my_longest_name_R4
+ITEM=WIND_SWE_THERMAL_SPD_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_SWE:wi_k0_swe_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		THERMAL_SPD
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,1,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Most likely proton thermal speed (km/s)
+	AUTHOR_DATE=19951001
+
+ITEM=WIND_SWE_DENSITY_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_SWE:wi_k0_swe_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		Np
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,1,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Solar wind proton number density (number/cc)
+	AUTHOR_DATE=19951001
+
+ITEM=WIND_SWE_VX(GSE)_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_SWE:wi_k0_swe_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		V_GSE
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,1,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) X solar wind velocity in GSE coordinates (km/s)
+	AUTHOR_DATE=19951001
+ITEM=WIND_SWE_VY(GSE)_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_SWE:wi_k0_swe_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		V_GSE
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),2,1,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Y solar wind velocity in GSE coordinates (km/s)
+	AUTHOR_DATE=19951001
+ITEM=WIND_SWE_VZ(GSE)_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_SWE:wi_k0_swe_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		V_GSE
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),3,1,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Z solar wind velocity in GSE coordinates (km/s)
+	AUTHOR_DATE=19951001
+
+ITEM=WIND_SWE_VMAG_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_SWE:wi_k0_swe_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		V_GSE_p
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,1,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Solar wind (SW) bulk flow speed in GSE (km/s)
+	AUTHOR_DATE=19951001
+
+ITEM=WIND_SWE_V_EW(GSE)_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_SWE:wi_k0_swe_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		V_GSE_p
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),2,1,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) SW bulk flow direction +E/W from W of sun (deg)
+	AUTHOR_DATE=19951013
+
+ITEM=WIND_SWE_V_NS(GSE)_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_SWE:wi_k0_swe_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		V_GSE_p
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),3,1,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) SW bulk flow direction +N/S from S of sun (deg)
+	AUTHOR_DATE=19951013
+
+
+!	WIND 3dP CDF information is in a rank 3 .CDF (1+3 dimensions)
+!
+ITEM=WIND_3DP_SCET_R8
+	DATA_TYPE=UR8
+	CDF_FILE=WIND_3DP:wi_k0_3dp_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,0,0
+	CDF_DEPENDENT_RV=		Epoch
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,1,1,0,0
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Time values to match various 3dP values (UR8)
+	AUTHOR_DATE=19951001
+
+ITEM=WIND_3DP_E_DENSITY_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_3DP:wi_k0_3dp_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		elect_density
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,1,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Electron density at all energies (number/cc)
+	AUTHOR_DATE=19951001
+
+ITEM=WIND_3DP_E_TEMP_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_3DP:wi_k0_3dp_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		elect_temp
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,1,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Electron temperature (eV)
+	AUTHOR_DATE=19951001
+
+ITEM=WIND_3DP_E_QDOTB_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_3DP:wi_k0_3dp_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		elect_qdotb
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,1,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Electron heat flux along B (eV/cm^2-s)
+	AUTHOR_DATE=19960419
+
+!!   WIND_my_longest_name_R4
+ITEM=WIND_3DP_EF_250EV_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_3DP:wi_k0_3dp_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		elect_flux
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,1,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Electron flux at .25keV (pfu (1/(cm^2-s-sr-keV))
+	AUTHOR_DATE=19960419
+ITEM=WIND_3DP_EF_1KEV_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_3DP:wi_k0_3dp_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		elect_flux
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,2,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Electron flux at 1.1keV (pfu (1/(cm^2-s-sr-keV))
+	AUTHOR_DATE=19960419
+ITEM=WIND_3DP_EF_5KEV_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_3DP:wi_k0_3dp_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		elect_flux
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,3,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Electron flux at 5keV (pfu (1/(cm^2-s-sr-keV))
+	AUTHOR_DATE=19960419
+ITEM=WIND_3DP_EF_20KEV_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_3DP:wi_k0_3dp_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		elect_flux
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,4,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Electron flux at 20keV (pfu (1/(cm^2-s-sr-keV))
+	AUTHOR_DATE=19960419
+ITEM=WIND_3DP_EF_34KEV_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_3DP:wi_k0_3dp_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		elect_flux
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,5,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Electron flux at 34keV (pfu (1/(cm^2-s-sr-keV))
+	AUTHOR_DATE=19960419
+ITEM=WIND_3DP_EF_90KEV_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_3DP:wi_k0_3dp_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		elect_flux
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,6,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Electron flux at 90keV (pfu (1/(cm^2-s-sr-keV))
+	AUTHOR_DATE=19960419
+ITEM=WIND_3DP_EF_176KEV_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_3DP:wi_k0_3dp_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		elect_flux
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,7,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Electron flux at 176keV (pfu (1/(cm^2-s-sr-keV))
+	AUTHOR_DATE=19960419
+
+ITEM=WIND_3DP_ION_DENSITY_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_3DP:wi_k0_3dp_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		ion_density
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,1,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Ion density for all energies (number/cc)
+	AUTHOR_DATE=19951001
+
+ITEM=WIND_3DP_ION_TEMP_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_3DP:wi_k0_3dp_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		ion_temp
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,1,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Ion temperature (eV)
+	AUTHOR_DATE=19951001
+
+ITEM=WIND_3DP_IONF_140EV_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_3DP:wi_k0_3dp_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		ion_flux
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,1,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Ion flux at .14keV (pfu (1/(cm^2-s-sr-keV))
+	AUTHOR_DATE=19960419
+ITEM=WIND_3DP_IONF_700EV_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_3DP:wi_k0_3dp_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		ion_flux
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,2,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Ion flux at .7keV (pfu (1/(cm^2-s-sr-keV))
+	AUTHOR_DATE=19960419
+ITEM=WIND_3DP_IONF_4KEV_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_3DP:wi_k0_3dp_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		ion_flux
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,3,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Ion flux at 4keV (pfu (1/(cm^2-s-sr-keV))
+	AUTHOR_DATE=19960419
+ITEM=WIND_3DP_IONF_19KEV_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_3DP:wi_k0_3dp_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		ion_flux
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,4,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Ion flux at 19keV (pfu (1/(cm^2-s-sr-keV))
+	AUTHOR_DATE=19960419
+ITEM=WIND_3DP_IONF_39KEV_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_3DP:wi_k0_3dp_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		ion_flux
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,5,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Ion flux at 39keV (pfu (1/(cm^2-s-sr-keV))
+	AUTHOR_DATE=19960419
+ITEM=WIND_3DP_IONF_92KEV_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_3DP:wi_k0_3dp_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		ion_flux
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,6,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Ion flux at 92keV (pfu (1/(cm^2-s-sr-keV))
+	AUTHOR_DATE=19960419
+!!   WIND_my_longest_name_R4
+ITEM=WIND_3DP_IONF_257KEV_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_3DP:wi_k0_3dp_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		ion_flux
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,7,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Ion flux at 257keV (pfu (1/(cm^2-s-sr-keV))
+	AUTHOR_DATE=19960419
+
+ITEM=WIND_3DP_E_VX(GSE)_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_3DP:wi_k0_3dp_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		elect_vel
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,1,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) X electron velocity in GSE? (km/s)
+	AUTHOR_DATE=19951001
+ITEM=WIND_3DP_E_VY(GSE)_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_3DP:wi_k0_3dp_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		elect_vel
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),2,1,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Y electron velocity in GSE? (km/s)
+	AUTHOR_DATE=19951001
+ITEM=WIND_3DP_E_VZ(GSE)_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_3DP:wi_k0_3dp_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		elect_vel
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),3,1,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Z electron velocity in GSE? (km/s)
+	AUTHOR_DATE=19951001
+
+ITEM=WIND_3DP_ION_VX(GSE)_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_3DP:wi_k0_3dp_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		ion_vel
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,1,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) X ion velocity component in GSE? (km/s)
+	AUTHOR_DATE=19951001
+ITEM=WIND_3DP_ION_VY(GSE)_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_3DP:wi_k0_3dp_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		ion_vel
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),2,1,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Y ion velocity component in GSE? (km/s)
+	AUTHOR_DATE=19951001
+ITEM=WIND_3DP_ION_VZ(GSE)_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_3DP:wi_k0_3dp_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		ion_vel
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),3,1,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Z ion velocity component in GSE? (km/s)
+	AUTHOR_DATE=19951001
+
+!	WIND ORbit CDF information is in a rank 1 .CDF (1+1 dimensions)
+!
+ITEM=WIND_ORBIT_SCET_R8
+	DATA_TYPE=UR8
+	CDF_FILE=WIND_ORBIT:wi_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=WIND_ORBIT:wi_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		Epoch
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) Time values to match various WIND ORBIT values (UR8)
+	AUTHOR_DATE=19951001
+
+ITEM=WIND_ORBIT_X(GSE)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=WIND_ORBIT:wi_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=WIND_ORBIT:wi_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GSE_POS
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) X WIND position in GSE coordinates (km)
+	AUTHOR_DATE=19951001
+ITEM=WIND_ORBIT_Y(GSE)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=WIND_ORBIT:wi_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=WIND_ORBIT:wi_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GSE_POS
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),2,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) Y WIND position in GSE coordinates (km)
+	AUTHOR_DATE=19951023
+ITEM=WIND_ORBIT_Z(GSE)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=WIND_ORBIT:wi_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=WIND_ORBIT:wi_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GSE_POS
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),3,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) Z WIND position in GSE coordinates (km)
+	AUTHOR_DATE=19951023
+
+ITEM=WIND_ORBIT_R2_R8
+	DATA_TYPE=REAL*8
+	DESC=(+) WIND radial distance squared (km^2)
+	FIXED_VALUE=1:("WIND_ORBIT_X(GSE)_R8"^2 + "WIND_ORBIT_Y(GSE)_R8"^2 + "WIND_ORBIT_Z(GSE)_R8"^2)
+	AUTHOR_DATE=19960115
+ITEM=WIND_ORBIT_R_R8
+	DATA_TYPE=REAL*8
+	DESC=(+) WIND radial distance from earth (km)
+	FIXED_VALUE=1:WIND_ORBIT_R2_R8^0.5
+	AUTHOR_DATE=19960115
+
+ITEM=WIND_ORBIT_VX(GSE)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=WIND_ORBIT:wi_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=WIND_ORBIT:wi_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GSE_VEL
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) X WIND velocity in GSE (km/sec)
+	AUTHOR_DATE=19951023
+ITEM=WIND_ORBIT_VY(GSE)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=WIND_ORBIT:wi_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=WIND_ORBIT:wi_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GSE_VEL
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),2,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) Y WIND velocity in GSE (km/sec)
+	AUTHOR_DATE=19951023
+ITEM=WIND_ORBIT_VZ(GSE)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=WIND_ORBIT:wi_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=WIND_ORBIT:wi_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GSE_VEL
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),3,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) Z WIND velocity in GSE (km/sec)
+	AUTHOR_DATE=19951023
+
+ITEM=WIND_ORBIT_SPD2_R8
+	DATA_TYPE=REAL*8
+	DESC=(+) WIND speed squared (km^2/sec^2)
+	FIXED_VALUE=1:("WIND_ORBIT_VX(GSE)_R8"^2 + "WIND_ORBIT_VY(GSE)_R8"^2 + "WIND_ORBIT_VZ(GSE)_R8"^2)
+	AUTHOR_DATE=19960115
+ITEM=WIND_ORBIT_SPD_R8
+	DATA_TYPE=REAL*8
+	DESC=(+) WIND speed (km/sec)
+	FIXED_VALUE=1:WIND_ORBIT_SPD2_R8^0.5
+	AUTHOR_DATE=19960115
+
+ITEM=WIND_ORBIT_X(GSM)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=WIND_ORBIT:wi_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=WIND_ORBIT:wi_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GSM_POS
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) X WIND position in GSM coordinates (km)
+	AUTHOR_DATE=19951001
+ITEM=WIND_ORBIT_Y(GSM)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=WIND_ORBIT:wi_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=WIND_ORBIT:wi_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GSM_POS
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),2,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) Y WIND position in GSM coordinates (km)
+	AUTHOR_DATE=19951023
+ITEM=WIND_ORBIT_Z(GSM)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=WIND_ORBIT:wi_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=WIND_ORBIT:wi_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GSM_POS
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),3,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) Z WIND position in GSM coordinates (km)
+	AUTHOR_DATE=19951023
+
+ITEM=WIND_ORBIT_X(GCI)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=WIND_ORBIT:wi_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=WIND_ORBIT:wi_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GCI_POS
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) X WIND position in GCI coordinates (km)
+	AUTHOR_DATE=19951001
+ITEM=WIND_ORBIT_Y(GCI)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=WIND_ORBIT:wi_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=WIND_ORBIT:wi_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GCI_POS
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),2,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) Y WIND position in GCI coordinates (km)
+	AUTHOR_DATE=19951023
+ITEM=WIND_ORBIT_Z(GCI)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=WIND_ORBIT:wi_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=WIND_ORBIT:wi_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GCI_POS
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),3,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) Z WIND position in GCI coordinates (km)
+	AUTHOR_DATE=19951023
+
+ITEM=WIND_ORBIT_HELIOLONG_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=WIND_ORBIT:wi_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=WIND_ORBIT:wi_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		LONG_SPACE
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+!! certain wrap problem !!
+	DESC=(I) WIND heliographic longitude (0 to 6.28 rad)
+	DESC=    This item is only known after 19950502
+	AUTHOR_DATE=19960418
+ITEM=WIND_ORBIT_HELIOLAT_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=WIND_ORBIT:wi_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=WIND_ORBIT:wi_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		LAT_SPACE
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+!! potential wrap problem !!
+	DESC=(I) WIND heliographic latitude (-1.6 to 1.6 rad)
+	DESC=    This item is only known after 19950502
+	AUTHOR_DATE=19960418
+
+ITEM=EARTH_HELIOLONG_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=WIND_ORBIT:wi_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=WIND_ORBIT:wi_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		LONG_EARTH
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+!! certain wrap problem !!
+	DESC=(I) Earth heliographic longitude (0 to 6.28 rad)
+	DESC=    This item is only known after 19950502
+	AUTHOR_DATE=19960418
+ITEM=EARTH_HELIOLAT_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=WIND_ORBIT:wi_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=WIND_ORBIT:wi_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		LAT_EARTH
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+!! potential wrap problem !!
+	DESC=(I) Earth heliographic latitude (-1.6 to 1.6 rad)
+	DESC=    This item is only known after 19950502
+	AUTHOR_DATE=19960418
+
+!	WIND ATtitude CDF information is in a rank 1 .CDF (1+1 dimensions)
+!
+ITEM=WIND_ATT_SCET_R8
+	DATA_TYPE=UR8
+	CDF_FILE=WIND_ATTITUDE:wi_at_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=WIND_ATTITUDE:wi_at_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		Epoch
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Time values to match WIND ATTitude values (UR8)
+	AUTHOR_DATE=19951023
+
+ITEM=WIND_ATT_SPIN_RATE_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_ATTITUDE:wi_at_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=WIND_ATTITUDE:wi_at_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		BODY_SPIN_RATE
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) WIND body spin rate from FDF/O&A (rpm)
+	AUTHOR_DATE=19951023
+
+ITEM=WIND_ATT_RA(GSE)_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_ATTITUDE:wi_at_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=WIND_ATTITUDE:wi_at_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GSE_R_ASCENSION
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) WIND right ascension in GSE from FDF/O&A (rad)
+	AUTHOR_DATE=19951023
+
+ITEM=WIND_ATT_DEC(GSE)_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_ATTITUDE:wi_at_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=WIND_ATTITUDE:wi_at_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GSE_DECLINATION
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) WIND declination in GSE from FDF/O&A (rad)
+	AUTHOR_DATE=19951023
+
+
+!	WIND Spin PHAse CDF information is in a rank 1 .CDF (1+1 dimensions)
+!
+ITEM=WIND_SPIN_SCET_R8
+	DATA_TYPE=UR8
+	CDF_FILE=WIND_SPIN:wi_k0_spha_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		Epoch
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Times to match WIND SPIN phase values (UR8)
+	AUTHOR_DATE=19951023
+
+ITEM=WIND_SPIN_PHASE_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_SPIN:wi_k0_spha_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		SPIN_PHASE
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) WIND body spin phase angle (from KP) (rads)
+	AUTHOR_DATE=19951023
+
+ITEM=WIND_SPIN_RATE_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_SPIN:wi_k0_spha_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		AVG_SPIN_RATE
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) WIND average spin rate (from KP) (rad/sec)
+	AUTHOR_DATE=19951023
+
+ITEM=WIND_SPIN_JITTER_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=WIND_SPIN:wi_k0_spha_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		STNDEV_SPIN_RATE
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) WIND standard deviation of spin rate (rad/sec)
+	AUTHOR_DATE=19951023
+
+!	POLAR ORbit CDF information is in a rank 1 .CDF (1+1 dimensions)
+!
+ITEM=POLAR_ORBIT_SCET_R8
+	DATA_TYPE=UR8
+	CDF_FILE=POLAR_ORBIT:po_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=POLAR_ORBIT:po_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		Epoch
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) Time values to match various POLAR ORBIT values (UR8)
+	AUTHOR_DATE=19960418
+
+ITEM=POLAR_ORBIT_X(GSE)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=POLAR_ORBIT:po_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=POLAR_ORBIT:po_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GSE_POS
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) X POLAR position in GSE coordinates (km)
+	AUTHOR_DATE=19960418
+ITEM=POLAR_ORBIT_Y(GSE)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=POLAR_ORBIT:po_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=POLAR_ORBIT:po_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GSE_POS
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),2,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) Y POLAR position in GSE coordinates (km)
+	AUTHOR_DATE=19960418
+ITEM=POLAR_ORBIT_Z(GSE)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=POLAR_ORBIT:po_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=POLAR_ORBIT:po_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GSE_POS
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),3,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) Z POLAR position in GSE coordinates (km)
+	AUTHOR_DATE=19960418
+
+ITEM=POLAR_ORBIT_R2_R8
+	DATA_TYPE=REAL*8
+	DESC=(+) POLAR radial distance squared (km^2)
+	FIXED_VALUE=1:("POLAR_ORBIT_X(GSE)_R8"^2 + "POLAR_ORBIT_Y(GSE)_R8"^2 + "POLAR_ORBIT_Z(GSE)_R8"^2)
+	AUTHOR_DATE=19960418
+ITEM=POLAR_ORBIT_R_R8
+	DATA_TYPE=REAL*8
+	DESC=(+) POLAR radial distance from earth (km)
+	FIXED_VALUE=1:POLAR_ORBIT_R2_R8^0.5
+	AUTHOR_DATE=19960418
+
+ITEM=POLAR_ORBIT_VX(GSE)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=POLAR_ORBIT:po_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=POLAR_ORBIT:po_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GSE_VEL
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) X POLAR velocity in GSE (km/sec)
+	AUTHOR_DATE=19960418
+ITEM=POLAR_ORBIT_VY(GSE)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=POLAR_ORBIT:po_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=POLAR_ORBIT:po_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GSE_VEL
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),2,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) Y POLAR velocity in GSE (km/sec)
+	AUTHOR_DATE=19960418
+ITEM=POLAR_ORBIT_VZ(GSE)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=POLAR_ORBIT:po_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=POLAR_ORBIT:po_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GSE_VEL
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),3,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) Z POLAR velocity in GSE (km/sec)
+	AUTHOR_DATE=19960418
+
+ITEM=POLAR_ORBIT_SPD2_R8
+	DATA_TYPE=REAL*8
+	DESC=(+) POLAR speed squared (km^2/sec^2)
+	FIXED_VALUE=1:("POLAR_ORBIT_VX(GSE)_R8"^2 + "POLAR_ORBIT_VY(GSE)_R8"^2 + "POLAR_ORBIT_VZ(GSE)_R8"^2)
+	AUTHOR_DATE=19960418
+ITEM=POLAR_ORBIT_SPD_R8
+	DATA_TYPE=REAL*8
+	DESC=(+) POLAR speed (km/sec)
+	FIXED_VALUE=1:POLAR_ORBIT_SPD2_R8^0.5
+	AUTHOR_DATE=19960418
+
+ITEM=POLAR_ORBIT_X(GSM)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=POLAR_ORBIT:po_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=POLAR_ORBIT:po_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GSM_POS
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) X POLAR position in GSM coordinates (km)
+	AUTHOR_DATE=19960418
+ITEM=POLAR_ORBIT_Y(GSM)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=POLAR_ORBIT:po_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=POLAR_ORBIT:po_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GSM_POS
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),2,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) Y POLAR position in GSM coordinates (km)
+	AUTHOR_DATE=19960418
+ITEM=POLAR_ORBIT_Z(GSM)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=POLAR_ORBIT:po_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=POLAR_ORBIT:po_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GSM_POS
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),3,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) Z POLAR position in GSM coordinates (km)
+	AUTHOR_DATE=19960418
+
+ITEM=POLAR_ORBIT_X(GCI)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=POLAR_ORBIT:po_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=POLAR_ORBIT:po_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GCI_POS
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) X POLAR position in GCI coordinates (km)
+	AUTHOR_DATE=19960418
+ITEM=POLAR_ORBIT_Y(GCI)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=POLAR_ORBIT:po_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=POLAR_ORBIT:po_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GCI_POS
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),2,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) Y POLAR position in GCI coordinates (km)
+	AUTHOR_DATE=19960418
+ITEM=POLAR_ORBIT_Z(GCI)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=POLAR_ORBIT:po_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=POLAR_ORBIT:po_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GCI_POS
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),3,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) Z POLAR position in GCI coordinates (km)
+	AUTHOR_DATE=19960418
+
+ITEM=POLAR_ORBIT_HELIOLONG_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=POLAR_ORBIT:po_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=POLAR_ORBIT:po_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		LONG_SPACE
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+!! certain wrap problem !!
+	DESC=(I) POLAR heliographic longitude (0 to 6.28 rad)
+	AUTHOR_DATE=19960418
+ITEM=POLAR_ORBIT_HELIOLAT_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=POLAR_ORBIT:po_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=POLAR_ORBIT:po_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		LAT_SPACE
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+!! potential wrap problem !!
+	DESC=(I) POLAR heliographic latitude (-1.6 to 1.6 rad)
+	AUTHOR_DATE=19960418
+
+ITEM=POLAR_ORBIT_MAGLAT_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=POLAR_ORBIT:po_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=POLAR_ORBIT:po_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		MAG_LATITUDE
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+!! certain wrap problem !!
+	DESC=(I) POLAR magnetic latitude (-90 to 90 deg)
+	AUTHOR_DATE=19960419
+ITEM=POLAR_ORBIT_LSHELL_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=POLAR_ORBIT:po_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=POLAR_ORBIT:po_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		L_SHELL
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) POLAR spacecraft L-shell value (Re)
+	AUTHOR_DATE=19960419
+
+!	POLAR Spin PHAse CDF information is in a rank 1 .CDF (1+1 dimensions)
+!
+ITEM=POLAR_SPIN_SCET_R8
+	DATA_TYPE=UR8
+	CDF_FILE=POLAR_SPIN:po_k0_spha_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		Epoch
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Times to match POLAR SPIN phase values (UR8)
+	AUTHOR_DATE=19960418
+
+ITEM=POLAR_SPIN_PHASE_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=POLAR_SPIN:po_k0_spha_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		SPIN_PHASE
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) POLAR body spin phase angle (from KP) (rads)
+	AUTHOR_DATE=19960418
+
+ITEM=POLAR_SPIN_RATE_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=POLAR_SPIN:po_k0_spha_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		AVG_SPIN_RATE
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) POLAR mean body spin rate (from KP) (rad/sec)
+	AUTHOR_DATE=19960418
+
+ITEM=POLAR_SPIN_JITTER_R4
+	DATA_TYPE=REAL*4
+	CDF_FILE=POLAR_SPIN:po_k0_spha_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		STNDEV_SPIN_RATE
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) POLAR standard deviation of spin rate (rad/sec)
+	AUTHOR_DATE=19960418
+
+!	GEOTAIL ORbit CDF information is in a rank 1 .CDF (1+1 dimensions)
+!
+ITEM=GEOTAIL_ORBIT_SCET_R8
+	DATA_TYPE=UR8
+	CDF_FILE=GEOTAIL_ORBIT:ge_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=GEOTAIL_ORBIT:ge_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		Epoch
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) Time values to match various GEOTAIL ORBIT values (UR8)
+	AUTHOR_DATE=19960418
+
+ITEM=GEOTAIL_ORBIT_X(GSE)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=GEOTAIL_ORBIT:ge_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=GEOTAIL_ORBIT:ge_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GSE_POS
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) X GEOTAIL position in GSE coordinates (km)
+	AUTHOR_DATE=19960418
+ITEM=GEOTAIL_ORBIT_Y(GSE)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=GEOTAIL_ORBIT:ge_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=GEOTAIL_ORBIT:ge_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GSE_POS
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),2,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) Y GEOTAIL position in GSE coordinates (km)
+	AUTHOR_DATE=19960418
+ITEM=GEOTAIL_ORBIT_Z(GSE)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=GEOTAIL_ORBIT:ge_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=GEOTAIL_ORBIT:ge_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GSE_POS
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),3,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) Z GEOTAIL position in GSE coordinates (km)
+	AUTHOR_DATE=19960418
+
+ITEM=GEOTAIL_ORBIT_R2_R8
+	DATA_TYPE=REAL*8
+	DESC=(+) GEOTAIL radial distance squared (km^2)
+	FIXED_VALUE=1:("GEOTAIL_ORBIT_X(GSE)_R8"^2 + "GEOTAIL_ORBIT_Y(GSE)_R8"^2 + "GEOTAIL_ORBIT_Z(GSE)_R8"^2)
+	AUTHOR_DATE=19960418
+ITEM=GEOTAIL_ORBIT_R_R8
+	DATA_TYPE=REAL*8
+	DESC=(+) GEOTAIL radial distance from earth (km)
+	FIXED_VALUE=1:GEOTAIL_ORBIT_R2_R8^0.5
+	AUTHOR_DATE=19960418
+
+ITEM=GEOTAIL_ORBIT_VX(GSE)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=GEOTAIL_ORBIT:ge_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=GEOTAIL_ORBIT:ge_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GSE_VEL
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) X GEOTAIL velocity in GSE (km/sec)
+	AUTHOR_DATE=19960418
+ITEM=GEOTAIL_ORBIT_VY(GSE)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=GEOTAIL_ORBIT:ge_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=GEOTAIL_ORBIT:ge_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GSE_VEL
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),2,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) Y GEOTAIL velocity in GSE (km/sec)
+	AUTHOR_DATE=19960418
+ITEM=GEOTAIL_ORBIT_VZ(GSE)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=GEOTAIL_ORBIT:ge_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=GEOTAIL_ORBIT:ge_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GSE_VEL
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),3,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) Z GEOTAIL velocity in GSE (km/sec)
+	AUTHOR_DATE=19960418
+
+ITEM=GEOTAIL_ORBIT_SPD2_R8
+	DATA_TYPE=REAL*8
+	DESC=(+) GEOTAIL speed squared (km^2/sec^2)
+	FIXED_VALUE=1:("GEOTAIL_ORBIT_VX(GSE)_R8"^2 + "GEOTAIL_ORBIT_VY(GSE)_R8"^2 + "GEOTAIL_ORBIT_VZ(GSE)_R8"^2)
+	AUTHOR_DATE=19960418
+ITEM=GEOTAIL_ORBIT_SPD_R8
+	DATA_TYPE=REAL*8
+	DESC=(+) GEOTAIL speed (km/sec)
+	FIXED_VALUE=1:GEOTAIL_ORBIT_SPD2_R8^0.5
+	AUTHOR_DATE=19960418
+
+ITEM=GEOTAIL_ORBIT_X(GSM)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=GEOTAIL_ORBIT:ge_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=GEOTAIL_ORBIT:ge_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GSM_POS
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) X GEOTAIL position in GSM coordinates (km)
+	AUTHOR_DATE=19960418
+ITEM=GEOTAIL_ORBIT_Y(GSM)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=GEOTAIL_ORBIT:ge_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=GEOTAIL_ORBIT:ge_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GSM_POS
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),2,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) Y GEOTAIL position in GSM coordinates (km)
+	AUTHOR_DATE=19960418
+ITEM=GEOTAIL_ORBIT_Z(GSM)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=GEOTAIL_ORBIT:ge_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=GEOTAIL_ORBIT:ge_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GSM_POS
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),3,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) Z GEOTAIL position in GSM coordinates (km)
+	AUTHOR_DATE=19960418
+
+ITEM=GEOTAIL_ORBIT_X(GCI)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=GEOTAIL_ORBIT:ge_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=GEOTAIL_ORBIT:ge_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GCI_POS
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) X GEOTAIL position in GCI coordinates (km)
+	AUTHOR_DATE=19960418
+ITEM=GEOTAIL_ORBIT_Y(GCI)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=GEOTAIL_ORBIT:ge_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=GEOTAIL_ORBIT:ge_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GCI_POS
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),2,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) Y GEOTAIL position in GCI coordinates (km)
+	AUTHOR_DATE=19960418
+ITEM=GEOTAIL_ORBIT_Z(GCI)_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=GEOTAIL_ORBIT:ge_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=GEOTAIL_ORBIT:ge_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		GCI_POS
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),3,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+	DESC=(I) Z GEOTAIL position in GCI coordinates (km)
+	AUTHOR_DATE=19960418
+
+ITEM=GEOTAIL_ORBIT_HELIOLONG_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=GEOTAIL_ORBIT:ge_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=GEOTAIL_ORBIT:ge_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		LONG_SPACE
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+!! certain wrap problem !!
+	DESC=(I) GEOTAIL heliographic longitude (0 to 6.28 rad)
+	AUTHOR_DATE=19960418
+ITEM=GEOTAIL_ORBIT_HELIOLAT_R8
+	DATA_TYPE=REAL*8
+	CDF_FILE=GEOTAIL_ORBIT:ge_or_def_$YYYYMMDD_v$VER.cdf
+	CDF_FILE=GEOTAIL_ORBIT:ge_or_pre_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		LAT_SPACE
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=LINEAR,NEAREST
+!! potential wrap problem !!
+	DESC=(I) GEOTAIL heliographic latitude (-1.6 to 1.6 rad)
+	AUTHOR_DATE=19960418
+
+!	GEOTAIL MGF CDF information is in a rank 1 .CDF (1+1 dimensions)
+!
+!!   WIND_my_longest_name_R4		!for query_dbms
+ITEM=GEOTAIL_MGF_SCET_R8
+	DATA_TYPE=UR8
+	CDF_FILE=GEOTAIL_MGF:ge_k0_mgf_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,0,0,0,0
+	CDF_DEPENDENT_RV=		Epoch
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,0,0,0,0
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Time values to match various MGF values (UR8)
+	AUTHOR_DATE=19960422
+
+ITEM=GEOTAIL_MGF_BX(GSE)_R4
+	DATA_TYPE=REAL*4
+	FIXED_VALUE=1:"GEOTAIL_MGF_BX(GSE)"/10.0
+	DESC=(+) X magnetic field component in GSE (nT)
+	AUTHOR_DATE=19960422
+ITEM=GEOTAIL_MGF_BY(GSE)_R4
+	DATA_TYPE=REAL*4
+	FIXED_VALUE=1:"GEOTAIL_MGF_BY(GSE)"/10.0
+	DESC=(+) Y magnetic field component in GSE (nT)
+	AUTHOR_DATE=19960422
+ITEM=GEOTAIL_MGF_BZ(GSE)_R4
+	DATA_TYPE=REAL*4
+	FIXED_VALUE=1:"GEOTAIL_MGF_BZ(GSE)"/10.0
+	DESC=(+) Z magnetic field component in GSE (nT)
+	AUTHOR_DATE=19960422
+
+ITEM=GEOTAIL_MGF_BX(GSE)
+	CDF_FILE=GEOTAIL_MGF:ge_k0_mgf_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		IB_vector
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,1,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) X magnetic field component in GSE (.1 nT)
+	AUTHOR_DATE=19960422
+ITEM=GEOTAIL_MGF_BY(GSE)
+	CDF_FILE=GEOTAIL_MGF:ge_k0_mgf_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		IB_vector
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),2,1,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Y magnetic field component in GSE (.1 nT)
+	AUTHOR_DATE=19960422
+ITEM=GEOTAIL_MGF_BZ(GSE)
+	CDF_FILE=GEOTAIL_MGF:ge_k0_mgf_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		IB_vector
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),3,1,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Z magnetic field component in GSE (.1 nT)
+	AUTHOR_DATE=19960422
+
+ITEM=GEOTAIL_MGF_BMAG
+	CDF_FILE=GEOTAIL_MGF:ge_k0_mgf_$YYYYMMDD_v$VER.cdf
+	CDF_INDEPENDENT_RV_MATCH=CONTEXT_SCET_R8
+	CDF_INDEPENDENT_RV=		Epoch
+	CDF_INDEPENDENT_RV_INDICES=	-1,1,1,1,1,1
+	CDF_DEPENDENT_RV=		IB
+	CDF_DEPENDENT_RV_INDICES=	(-1,*,1:1),1,1,1,1,1
+	CDF_SEARCH_MODE=NEAREST
+	DESC=(N) Magnetic field vector magnitude (.1 nT)
+	AUTHOR_DATE=19960422

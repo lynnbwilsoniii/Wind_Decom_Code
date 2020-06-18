@@ -1,0 +1,93 @@
+# .cshrc file for Marc Pulupa
+
+# # Macports environment variables # #
+
+setenv PATH /opt/local/bin:/opt/local/sbin:$PATH 
+setenv MANPATH /opt/local/share/man:$MANPATH
+
+# # IDL Path # #
+
+setenv IDL_PATH "<IDL_DEFAULT>"
+setenv IDL_DLM_PATH /Applications/itt/idl64/bin/bin.darwin.i386
+
+setenv IDL_PATH /Users/pulupa/Documents/idlpro/modified':'$IDL_PATH
+setenv IDL_PATH $IDL_PATH':'+/disks/socware/idl
+setenv IDL_PATH $IDL_PATH':'+/Users/pulupa/Documents/idlpro
+
+# STEREO IMPACT
+# source ~peters/stereo/idl/stereo_source
+# source /home/peters/stereo/idl/stereo_source_clean
+# source /home/pulupa/stereo/stereo_source
+setenv IDL_PATH $IDL_PATH':'/home/peters/stereo/idl
+
+#source /home/wind/source/idl/idl_3dp.init
+
+# # Aliases # #
+
+alias emacs '/Applications/Emacs.app/Contents/MacOS/Emacs'
+alias idl '/Applications/itt/idl64/bin/idl'
+alias xfig 'xfig -nosplash'
+
+# # Use nano for simple editing # #
+
+setenv EDITOR nano
+setenv CVSEDITOR nano
+
+# # fix for XFIG # #
+
+setenv XAPPLRESDIR /opt/local/lib/X11/app-defaults
+
+setenv WIND_HOME /Users/pulupa/wind
+setenv WIND_DATA_DIR /home/wind/index
+setenv IDL_PATH $IDL_PATH':'/home/bale/wind/waves/idl/tplot
+############### Start WindWAVES #############
+#setenv ABSOFT /Applications/Absoft10
+#set path= ($path $ABSOFT/bin)
+
+#setenv WIND_DATA /Users/bale/test_wind_data
+#setenv WIND_DATA /Users/bale/junk
+#setenv WIND_DATA /disks/winddata
+set stage=/disks/enlil/home/ftp/pub/staging
+set stage2=/disks/apollo/ftp/pub/incoming
+set x1=/disks/winddata/wi/lz/wav
+set x2=/disks/winddata2/wi/lz/wav
+set x3=/disks/winddata3/wi/lz/wav
+set x4=/disks/winddata4/wi/lz/wav
+set x5=/disks/winddata5/wi/lz/wav
+set x6=/disks/winddata6/wi/lz/wav
+set x7=/disks/winddata7/wi/lz/wav
+set x8=/disks/winddata8/wi/lz/wav
+set x9=/disks/winddata9/wi/lz/wav
+set x10=/disks/winddata10/wi/lz/wav
+set x11=/disks/winddata11/wi/lz/wav
+set x12=/disks/winddata12/wi/lz/wav
+#   setenv WIND_DATA     $x5\:$x7\:$x9\:$x10\:$x11\:$x12\:$stage
+setenv WIND_DATA     $x11\:$x5\:$x7\:$x9\:$x10\:$x12\:$stage\:$stage2
+setenv WIND_WAV_BASE /Users/pulupa/Documents/wind/wiwav/v1.7d
+setenv WIND_WAV_IDL $WIND_WAV_BASE/idl
+setenv WIND_WAV_SRC $WIND_WAV_BASE/src
+setenv WIND_DBMS $WIND_WAV_BASE/dbms
+setenv WIND_DBMS_AUX $WIND_DBMS/aux
+setenv WIWAV_IDL_LIB $WIND_WAV_BASE/lib/libIDL_WAVES.so
+setenv IDL_PATH  "${WIND_WAV_IDL}:+${IDL_PATH}"
+############### End WindWAVES #############
+
+
+############### Start STEREO WAVES Client Configuration #############
+# The following lines were written by the postflight script 
+# of the package maker that installed the STEREO/WAVES Clients. 
+# Software installed on:  21May2009 14:01  
+ 
+if ($?prompt && ! $?STEREO_CLIENT_CONFIG) then 
+      setenv STEREO_TMlib_Client_Home /Applications/STEREO/TMlib_Client
+      # 
+      if ( -e $STEREO_TMlib_Client_Home/bin/TMlib_Startup.csh) then  
+           source $STEREO_TMlib_Client_Home/bin/TMlib_Startup.csh 
+      endif 
+      setenv STEREO_CLIENT_CONFIG done 
+endif  
+############### End STEREO WAVES Client Configuration   #############
+
+# Redefine sidl alias to my startup file (which calls TMlib_Startup)
+
+alias sidl 'idl /Users/pulupa/.idl_startup.crib'

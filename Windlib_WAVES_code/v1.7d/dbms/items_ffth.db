@@ -1,0 +1,23 @@
+! items_ffth.db - WIND/WAVES Item Database: item definitions for FFTH events
+!
+! FFT High
+!
+ITEM=DB_VERSION
+	DATA_TYPE=CHARACTER
+	TEXT=FFTH 1.2
+	DESC="This is the current item database version number"
+	AUTHOR_DATE=19941207
+
+ITEM=PACKET_ID       
+	FIXED_VALUE=1:9   
+	DESC="Number associated with FFTH packets in primary header"
+	AUTHOR_DATE=19931124
+
+ITEM=SAMPLE_FREQUENCY_R4
+	DATA_TYPE=REAL*4
+	FIXED_VALUE=1:21860.0
+	AUTHOR_DATE=19951017
+	DESC=Time domain sampling frequency for FFTH (samples/second)
+
+#include WIND_DBMS:items_fft.inc
+#include WIND_DBMS:items_fft_phys.inc

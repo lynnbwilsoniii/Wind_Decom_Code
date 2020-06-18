@@ -1,0 +1,6 @@
+function wind_tm_delta_mfmf, major1, minor1, major2, minor2, diff
+ok = 0L
+ok = call_external('/home/kappler/wind/v1.7d/lib/libIDL_WAVES.so','wind_tm_delta_mfmf', $
+             major1, minor1, major2, minor2, diff)
+return, ok
+end
